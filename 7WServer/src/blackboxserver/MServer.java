@@ -17,13 +17,13 @@ public class MServer {
 	
 	private Server server;
 	ArrayList<Object> list;
-	ArrayList<Object> matchList;
+	ArrayList<Match> matchList;
 	Scanner scanner = new Scanner(System.in);
 	
 	public MServer() throws IOException{
 		server = new Server();
 		list = new ArrayList<Object>();
-		matchList = new ArrayList<Object>();
+		matchList = new ArrayList<Match>();
 		
 		registerPackets();
 		
@@ -46,10 +46,16 @@ public class MServer {
 		kryo.register(Packet1LoginAnswer.class);
 		kryo.register(Packet2Message.class);
 		kryo.register(Packet3Connection.class);
+		kryo.register(Packet4Object.class);
+		kryo.register(java.util.ArrayList.class);
+		kryo.register(Match.class);
 	}
 	
 	public ArrayList<Object> getConnected(){
 		return list;
+	}
+	public ArrayList<Match> getMatchList(){
+		return matchList;
 	}
 	
 	
