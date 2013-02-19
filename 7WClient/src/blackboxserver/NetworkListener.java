@@ -1,5 +1,7 @@
 package blackboxserver;
 
+import java.util.ArrayList;
+
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
@@ -8,6 +10,7 @@ import com.esotericsoftware.minlog.Log;
 
 
 import blackboxserver.Packet.*;
+
 
 public class NetworkListener extends Listener{
 	Client c;
@@ -18,7 +21,7 @@ public class NetworkListener extends Listener{
 	public void connected(Connection arg0) {
 		Log.info("[CLIENT] Connected");
 		// TODO Auto-generated method stub
-		c.sendTCP(new Packet0LoginRequest());
+		//c.sendTCP(new Packet0LoginRequest());
 		//super.connected(arg0);
 	}
 	@Override
@@ -29,33 +32,15 @@ public class NetworkListener extends Listener{
 	}
 	@Override
 	public void received(Connection c, Object o) {
-		Log.info("[CLIENT] PewPew");
-		if(o instanceof Packet1LoginAnswer){
-			boolean answer = ((Packet1LoginAnswer) o).getAccepted();
-			if(answer){
-				System.out.println("Please enter your first message for the server!");
-				while(true){
-					if(MClient.scanner.hasNext()){
-						Packet2Message mpacket = new Packet2Message();
-						mpacket.setObject(MClient.scanner.nextLine());
-						c.sendTCP(mpacket);
-						Log.info("Please enter another message");
-					}
-				}
-			}else{
-				System.out.println("OUCH");
-				c.close();
+		Log.info("[CLIENT] ");
+		if(o instanceof Packet4Object){
+			if(((Packet4Object) o).getID()==1){
+				ArrayList l = (ArrayList)((Packet4Object)o).getObject();
+				for(Object e: l)
+					System.out.println(e);
 			}
-		
 		}
 		
-		
-		//modify connectivity
-		if(o instanceof Packet3Connection){
-			Packet1LoginAnswer loginAnswer = new Packet1LoginAnswer();
-			loginAnswer.setAccepted(true);
-			c.sendTCP(loginAnswer);
-		}
 		// TODO Auto-generated method stub
 		//super.received(arg0, arg1);
 	}

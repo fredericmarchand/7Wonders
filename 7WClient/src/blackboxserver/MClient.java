@@ -8,6 +8,8 @@ import blackboxserver.Packet.Packet0LoginRequest;
 import blackboxserver.Packet.Packet1LoginAnswer;
 import blackboxserver.Packet.Packet2Message;
 import blackboxserver.Packet.Packet3Connection;
+import blackboxserver.Packet.Packet4Object;
+import blackboxserver.*;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
@@ -24,25 +26,13 @@ public class MClient {
     public MClient(){
     	scanner = new Scanner(System.in);
     	client = new Client();
-    	connectedList = new ArrayList<Object>();
+    	NetworkListener nl = new NetworkListener();
+    	
+    	client.addListener(nl);
     	client.start();
     	register();
+    	
 
-    	client.addListener(new Listener() {
-
-            public void connected (Connection connection) {
-                System.out.println("[Client]connected");
-                
-            }
-
-            public void disconnected (Connection connection) {
-                System.out.println("[Client]disconnected");
-            }
-
-            public void received (Connection connection, Object object) {
-               // System.out.println("received: " + object);
-            }
-        });
     	
     	
     	try {
@@ -54,11 +44,9 @@ public class MClient {
 			  Scanner s = new Scanner(System.in);
 		        while(GAME_ALIVE){
 		        	String m = s.next();
-		        	if(m.equals("CREATE")){
-			        	Packet2Message mpackage = new Packet2Message();
-			        	mpackage.setObject(m);
-			        	client.sendTCP(mpackage);
-		        	}
+		            Packet2Message mpackage = new Packet2Message();
+			        mpackage.setObject(m);
+			        client.sendTCP(mpackage);		        	
 		        }
 		    
 		} catch (IOException e) {
@@ -74,6 +62,9 @@ public class MClient {
     	kryo.register(Packet1LoginAnswer.class);
     	kryo.register(Packet2Message.class);
     	kryo.register(Packet3Connection.class);
+    	kryo.register(Packet4Object.class);
+    	kryo.register(java.util.ArrayList.class);
+    	kryo.register(Match.class);
     }
     
     
