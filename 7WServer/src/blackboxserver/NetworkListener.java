@@ -46,10 +46,21 @@ public class NetworkListener extends Listener{
 		}
 		//modify to handle objects from game
 		if(o instanceof Packet2Message){
-
-			Log.info("[SERVER ---------- CREATE] Received packet" );
-			mserver.createMatch();
+			
+			
+			
 			String message = (String)((Packet2Message)o).getObject();
+			if(message.equals("CREATE")){
+				Log.info("[SERVER ---------- CREATE Received packet" );
+				mserver.createMatch();
+			}
+			else if(message.equals("JOIN")){
+				Log.info("[SERVER ---------- JOIN Received packet" );
+				Packet4Object l = new Packet4Object();
+				l.setID(1);
+				l.setObject(mserver.getMatchList());
+				c.sendTCP(l);
+			}
 			Log.info(message);
 		}	
 		//modify connectivity
