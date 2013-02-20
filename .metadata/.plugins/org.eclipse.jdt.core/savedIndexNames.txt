@@ -1,4 +1,0 @@
-INDEX VERSION 1.126+C:\Users\Fred\Dropbox\Comp3004\secret-ironman\COMP3004\.metadata\.plugins\org.eclipse.jdt.core
-4145437426.index
-3825938442.index
-1782549329.index
