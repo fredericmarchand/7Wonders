@@ -1,6 +1,7 @@
 package Structures;
 
 import Resources.Resources;
+import WonderBoards.WonderBoard;
 
 public class Dispensary extends Structure {
 
@@ -11,6 +12,11 @@ public class Dispensary extends Structure {
 		super(new Resources(2, 0, 0, 0, 1, 0, 0, 0), DispensaryID, "Dispensary", GREEN_CARD, 2);
 	}
 
+	public boolean CanBuildForFree(WonderBoard wb)
+	{
+		return wb.ContainsCard(Apothecary.ApothecaryID);
+	}
+	
 	/**
 	 * @param args
 	 */

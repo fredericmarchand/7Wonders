@@ -18,9 +18,9 @@ public class TheTempleOfArtemisInEphesus extends WonderBoard {
 	public TheTempleOfArtemisInEphesus(int side)
 	{
 		super(3, side);
-		stage1 = new WonderBoardStage((Side == 1 ? new Resources(0, 2, 0, 0, 0, 0, 0, 0) : new Resources(0, 2, 0, 0, 0, 0, 0, 0)));
-		stage2 = new WonderBoardStage((Side == 1 ? new Resources(0, 0, 2, 0, 0, 0, 0, 0) : new Resources(0, 0, 2, 0, 0, 0, 0, 0)));
-		stage3 = new WonderBoardStage((Side == 1 ? new Resources(0, 0, 0, 0, 0, 0, 0, 0) : new Resources(0, 0, 0, 0, 1, 1, 0, 0)));
+		stage1 = new WonderBoardStage((Side == SIDE_A ? new Resources(0, 2, 0, 0, 0, 0, 0, 0) : new Resources(0, 2, 0, 0, 0, 0, 0, 0)));
+		stage2 = new WonderBoardStage((Side == SIDE_A ? new Resources(0, 0, 2, 0, 0, 0, 0, 0) : new Resources(0, 0, 2, 0, 0, 0, 0, 0)));
+		stage3 = new WonderBoardStage((Side == SIDE_A ? new Resources(0, 0, 0, 0, 0, 0, 0, 0) : new Resources(0, 0, 0, 0, 1, 1, 0, 0)));
 	}
 	
 	public boolean isBuilt()

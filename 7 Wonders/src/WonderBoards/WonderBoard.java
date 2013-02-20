@@ -1,5 +1,8 @@
 package WonderBoards;
 
+import java.util.ArrayList;
+import Structures.Structure;
+
 public class WonderBoard {
 
 	protected static final int NO_BOARD = 0;
@@ -19,6 +22,8 @@ public class WonderBoard {
 	protected int BoardID;
 	protected int Side;
 	protected String BoardName;
+	protected ArrayList<Structure> RedCards, BlueCards, GreenCards, YellowCards, PurpleCards, BrownGreyCards;
+	
 	
 	//Constructors
 	public WonderBoard()
@@ -90,6 +95,94 @@ public class WonderBoard {
 				break;
 			default: BoardName = BOARD0;
 		}
+	}
+	
+	//builds a structure on this wonderboard
+	public void BuildStructure(Structure s)
+	{
+		switch ( s.GetColor() )
+		{
+			case Structure.RED_CARD:
+				RedCards.add(s);
+			case Structure.BLUE_CARD:
+				BlueCards.add(s);
+				break;
+			case Structure.BROWN_CARD:
+			case Structure.GREY_CARD:
+				BrownGreyCards.add(s);
+				break;
+			case Structure.YELLOW_CARD:
+				YellowCards.add(s);
+				break;
+			case Structure.GREEN_CARD:
+				GreenCards.add(s);
+				break;
+			case Structure.PURPLE_CARD:
+				PurpleCards.add(s);
+				break;
+		}
+	}
+	
+	//returns whether the structure is contained in any of the stacks of the wonderboard by the id of the card
+	public boolean ContainsCard(int id)
+	{
+		boolean retValue = false;
+		
+		for( int i = 0; i < RedCards.size(); ++i )
+		{
+			if ( RedCards.get(i).GetID() == id )
+			{
+				retValue = true;
+				break;
+			}
+		}
+		if ( retValue ) return retValue;
+		for( int i = 0; i < BlueCards.size(); ++i )
+		{
+			if ( BlueCards.get(i).GetID() == id )
+			{
+				retValue = true;
+				break;
+			}
+		}
+		if ( retValue ) return retValue;
+		for( int i = 0; i < BrownGreyCards.size(); ++i )
+		{
+			if ( BrownGreyCards.get(i).GetID() == id )
+			{
+				retValue = true;
+				break;
+			}
+		}
+		if ( retValue ) return retValue;
+		for( int i = 0; i < YellowCards.size(); ++i )
+		{
+			if ( YellowCards.get(i).GetID() == id )
+			{
+				retValue = true;
+				break;
+			}
+		}
+		if ( retValue ) return retValue;
+		for( int i = 0; i < GreenCards.size(); ++i )
+		{
+			if ( GreenCards.get(i).GetID() == id )
+			{
+				retValue = true;
+				break;
+			}
+		}
+		if ( retValue ) return retValue;
+		for( int i = 0; i < PurpleCards.size(); ++i )
+		{
+			if ( PurpleCards.get(i).GetID() == id )
+			{
+				retValue = true;
+				break;
+			}
+		}
+
+		return retValue;
 	}
 	
 	

@@ -1,6 +1,7 @@
 package Structures;
 
 import Resources.Resources;
+import WonderBoards.WonderBoard;
 
 public class Academy extends Structure {
 
@@ -9,6 +10,11 @@ public class Academy extends Structure {
 	public Academy()
 	{
 		super(new Resources(0, 3, 0, 0, 1, 0, 0, 0), AcademyID, "Academy", GREEN_CARD, 3);
+	}
+	
+	public boolean CanBuildForFree(WonderBoard wb)
+	{
+		return wb.ContainsCard(School.SchoolID);
 	}
 
 	/**

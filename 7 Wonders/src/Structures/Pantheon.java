@@ -1,6 +1,7 @@
 package Structures;
 
 import Resources.Resources;
+import WonderBoards.WonderBoard;
 
 public class Pantheon extends Structure {
 
@@ -9,6 +10,11 @@ public class Pantheon extends Structure {
 	public Pantheon()
 	{
 		super(new Resources(1, 0, 0, 2, 1, 1, 1, 0), PantheonID, "Pantheon", BLUE_CARD, 3);
+	}
+	
+	public boolean CanBuildForFree(WonderBoard wb)
+	{
+		return wb.ContainsCard(Temple.TempleID);
 	}
 	
 	/**

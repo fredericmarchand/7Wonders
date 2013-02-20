@@ -18,9 +18,9 @@ public class TheStatueOfZeusInOlympia extends WonderBoard {
 	public TheStatueOfZeusInOlympia(int side)
 	{
 		super(5, side);
-		stage1 = new WonderBoardStage((Side == 1 ? new Resources(0, 0, 2, 0, 0, 0, 0, 0) : new Resources(0, 0, 2, 0, 0, 0, 0, 0)));
-		stage2 = new WonderBoardStage((Side == 1 ? new Resources(0, 2, 0, 0, 0, 0, 0, 0) : new Resources(0, 2, 0, 0, 0, 0, 0, 0)));
-		stage3 = new WonderBoardStage((Side == 1 ? new Resources(2, 0, 0, 0, 0, 0, 0, 0) : new Resources(2, 0, 0, 0, 0, 1, 0, 0)));
+		stage1 = new WonderBoardStage((Side == SIDE_A ? new Resources(0, 0, 2, 0, 0, 0, 0, 0) : new Resources(0, 0, 2, 0, 0, 0, 0, 0)));
+		stage2 = new WonderBoardStage((Side == SIDE_A ? new Resources(0, 2, 0, 0, 0, 0, 0, 0) : new Resources(0, 2, 0, 0, 0, 0, 0, 0)));
+		stage3 = new WonderBoardStage((Side == SIDE_A ? new Resources(2, 0, 0, 0, 0, 0, 0, 0) : new Resources(2, 0, 0, 0, 0, 1, 0, 0)));
 	}
 	
 	public boolean isBuilt()

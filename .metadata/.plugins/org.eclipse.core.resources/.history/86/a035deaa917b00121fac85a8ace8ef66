@@ -1,0 +1,38 @@
+package Structures;
+
+import java.util.ArrayList;
+
+import Resources.Resources;
+
+public class Stables extends Structure {
+
+	public static final int StablesID = 0x15;
+	
+	public Stables()
+	{
+		super(new Resources(1, 0, 1, 1, 0, 0, 0, 0), StablesID, "Stables", RED_CARD, 2);
+	}
+	
+	public boolean CanBuildForFree(ArrayList<Structure> cards)
+	{
+		boolean retValue = false;
+		for ( Structure s: cards )
+		{
+			if ( s.GetID() == Apothecary.ApothecaryID )
+			{
+				retValue = true;
+				break;
+			}
+		}
+		return retValue;
+	}
+	
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

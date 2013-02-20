@@ -1,6 +1,7 @@
 package Structures;
 
 import Resources.Resources;
+import WonderBoards.WonderBoard;
 
 public class Haven extends Structure {
 
@@ -10,6 +11,12 @@ public class Haven extends Structure {
 	{
 		super(new Resources(1, 0, 1, 0, 0, 1, 0, 0), HavenID, "Haven", YELLOW_CARD, 3);
 	}
+	
+	public boolean CanBuildForFree(WonderBoard wb)
+	{
+		return wb.ContainsCard(Forum.ForumID);
+	}
+
 
 	/**
 	 * @param args

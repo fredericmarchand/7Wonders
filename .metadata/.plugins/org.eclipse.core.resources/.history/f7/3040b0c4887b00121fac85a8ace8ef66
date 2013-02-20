@@ -1,0 +1,67 @@
+package Tokens;
+
+public class ScientificSymbols {
+
+	private int gears, compass, tablets;
+	
+	public ScientificSymbols()
+	{
+		gears = 0;
+		compass = 0;
+		tablets = 0;
+	}
+	
+	public int GetGears()
+	{
+		return gears;
+	}
+	
+	public int GetCompass()
+	{
+		return compass;
+	}
+	
+	public int GetTablets()
+	{
+		return tablets;
+	}
+	
+	public int GetTotalSymbols()
+	{
+		return (gears + compass + tablets);
+	}
+	
+	public int VictoryPointsValue()
+	{
+		return (1*OneTokens + 3*ThreeTokens + 5*FiveTokens + -1*MinusOneTokens);
+	}
+	
+	public void AddOneTokens(int amount)
+	{
+		OneTokens += amount;
+	}
+	
+	public void AddThreeTokens(int amount)
+	{
+		ThreeTokens += amount;
+	}
+	
+	public void AddFiveTokens(int amount)
+	{
+		FiveTokens += amount;
+	}
+	
+	public void AddMinusOneTokens(int amount)
+	{
+		MinusOneTokens += amount;
+	}
+	
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

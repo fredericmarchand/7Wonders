@@ -1,0 +1,129 @@
+package Player;
+
+import WonderBoards.WonderBoard;
+import Structures.Structure;
+import java.util.ArrayList;
+
+public class Player {
+
+	private Statistics stats, toAdd;
+	private String username;
+	private int ID;
+	private WonderBoard wonderBoard;
+	private ArrayList<Structure> cards;
+	private Structure chosenCard;
+	
+	//constructors
+	public Player()
+	{
+		username = "noob";
+		ID = 0;
+		stats = new Statistics();
+		toAdd = new Statistics();
+		wonderBoard = new WonderBoard();
+		cards = new ArrayList<Structure>();
+		chosenCard = null;
+	}
+	
+	public Player(String uname, int id)
+	{
+		username = uname;
+		ID = id;
+		stats = new Statistics();
+		toAdd = new Statistics();
+		wonderBoard = new WonderBoard();
+		cards = new ArrayList<Structure>();
+		chosenCard = null;
+	}
+	
+	//getters
+	public Statistics GetStats()
+	{
+		return stats;
+	}
+	
+	public String GetUsername()
+	{
+		return username;
+	}
+	
+	public int GetID()
+	{
+		return ID;
+	}
+	
+	public ArrayList<Structure> GetCards()
+	{
+		return cards;
+	}
+	
+	public WonderBoard GetWonderBoard()
+	{
+		return wonderBoard;
+	}
+	
+	public Structure GetChosenCard()
+	{
+		return chosenCard;
+	}
+	
+	
+	//setters
+	public void AssignWonderBoard(WonderBoard wb)
+	{
+		wonderBoard = wb;
+	}
+		
+	
+	//actions
+	public void AddStats(Statistics stats)
+	{
+		toAdd.AddStats(stats);
+	}
+	
+	public void AssignCard(Structure s)
+	{
+		if ( cards.size() < 7 ) cards.add(s);
+	}
+	
+	public void AssignCards(ArrayList<Structure> newCards)
+	{
+		cards = newCards;
+	}
+	
+	public void ChooseCard(int index)
+	{
+		chosenCard = cards.remove(index);
+	}
+	
+
+	public void ActionPhase(int choice)
+	{
+		switch ( choice )
+		{
+		case 1://build the structure
+			if ( chosenCard.GetResourceCost().CanAfford(stats.GetResources()) && !wonderBoard.ContainsCard(chosenCard) )
+				wonderBoard.BuildStructure(chosenCard);
+			break;
+			
+		case 2://Build Wonderboard stage
+			if ( )
+			break;
+			
+		case 3://discard the card
+			
+			break;
+		}
+	}
+	
+	
+	
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

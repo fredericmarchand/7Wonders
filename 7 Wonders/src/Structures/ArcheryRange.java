@@ -1,6 +1,7 @@
 package Structures;
 
 import Resources.Resources;
+import WonderBoards.WonderBoard;
 
 public class ArcheryRange extends Structure {
 
@@ -10,6 +11,11 @@ public class ArcheryRange extends Structure {
 	public ArcheryRange()
 	{
 		super(new Resources(1, 0, 2, 0, 0, 0, 0, 0), ArcheryRangeID, "Archery Range", RED_CARD, 2);
+	}
+	
+	public boolean CanBuildForFree(WonderBoard wb)
+	{
+		return wb.ContainsCard(Workshop.WorkshopID);
 	}
 	
 	/**

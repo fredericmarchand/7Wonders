@@ -1,6 +1,7 @@
 package Structures;
 
 import Resources.Resources;
+import WonderBoards.WonderBoard;
 
 public class Temple extends Structure {
 
@@ -9,6 +10,11 @@ public class Temple extends Structure {
 	public Temple()
 	{
 		super(new Resources(0, 0, 1, 1, 1, 0, 0, 0), TempleID, "Temple", BLUE_CARD, 2);
+	}
+	
+	public boolean CanBuildForFree(WonderBoard wb)
+	{
+		return wb.ContainsCard(Altar.AltarID);
 	}
 	
 	/**

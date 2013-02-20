@@ -1,6 +1,7 @@
 package Structures;
 
 import Resources.Resources;
+import WonderBoards.WonderBoard;
 
 public class Lodge extends Structure {
 
@@ -9,6 +10,11 @@ public class Lodge extends Structure {
 	public Lodge()
 	{
 		super(new Resources(0, 0, 0, 2, 0, 1, 1, 0), LodgeID, "Lodge", GREEN_CARD, 3);
+	}
+	
+	public boolean CanBuildForFree(WonderBoard wb)
+	{
+		return wb.ContainsCard(Dispensary.DispensaryID);
 	}
 
 	/**

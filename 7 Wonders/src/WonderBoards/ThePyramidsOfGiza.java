@@ -19,17 +19,17 @@ public class ThePyramidsOfGiza extends WonderBoard {
 	public ThePyramidsOfGiza(int side)
 	{
 		super(7, side);
-		stage1 = new WonderBoardStage((Side == 1 ? new Resources(0, 2, 0, 0, 0, 0, 0, 0) : new Resources(0, 0, 2, 0, 0, 0, 0, 0)));
-		stage2 = new WonderBoardStage((Side == 1 ? new Resources(0, 0, 3, 0, 0, 0, 0, 0) : new Resources(0, 3, 0, 0, 0, 0, 0, 0)));
-		stage3 = new WonderBoardStage((Side == 1 ? new Resources(0, 4, 0, 0, 0, 0, 0, 0) : new Resources(0, 0, 0, 3, 0, 0, 0, 0)));
-		if ( Side == 2 )
+		stage1 = new WonderBoardStage((Side == SIDE_A ? new Resources(0, 2, 0, 0, 0, 0, 0, 0) : new Resources(0, 0, 2, 0, 0, 0, 0, 0)));
+		stage2 = new WonderBoardStage((Side == SIDE_A ? new Resources(0, 0, 3, 0, 0, 0, 0, 0) : new Resources(0, 3, 0, 0, 0, 0, 0, 0)));
+		stage3 = new WonderBoardStage((Side == SIDE_A ? new Resources(0, 4, 0, 0, 0, 0, 0, 0) : new Resources(0, 0, 0, 3, 0, 0, 0, 0)));
+		if ( Side == SIDE_B )
 			stage4 = new WonderBoardStage(new Resources(0, 4, 0, 0, 0, 0, 1, 0));
 			
 	}
 	
 	public boolean isBuilt()
 	{
-		if ( Side == 1 )
+		if ( Side == SIDE_A )
 			return (stage1.isBuilt() & stage2.isBuilt() & stage3.isBuilt());
 		return (stage1.isBuilt() & stage2.isBuilt() & stage3.isBuilt() & stage4.isBuilt());
 	}
@@ -57,7 +57,7 @@ public class ThePyramidsOfGiza extends WonderBoard {
 	
 	public boolean BuildStage4(Structure card, Resources funds)
 	{
-		if ( (Side == 2) && stage1.isBuilt() && stage2.isBuilt() && stage3.isBuilt() && !stage4.isBuilt() )
+		if ( (Side == SIDE_B) && stage1.isBuilt() && stage2.isBuilt() && stage3.isBuilt() && !stage4.isBuilt() )
 			return stage4.Build(card, funds);
 		return false;
 	}

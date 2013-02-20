@@ -1,6 +1,7 @@
 package Structures;
 
 import Resources.Resources;
+import WonderBoards.WonderBoard;
 
 public class Aqueduct extends Structure {
 
@@ -9,6 +10,11 @@ public class Aqueduct extends Structure {
 	public Aqueduct()
 	{
 		super(new Resources(0, 3, 0, 0, 0, 0, 0, 0), AqueductID, "Aqueduct", BLUE_CARD, 2);
+	}
+	
+	public boolean CanBuildForFree(WonderBoard wb)
+	{
+		return wb.ContainsCard(Baths.BathsID);
 	}
 	
 	/**

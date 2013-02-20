@@ -1,6 +1,7 @@
 package Player;
 
 import java.util.ArrayList;
+import Resources.Resources;
 
 public class PlayerInteraction {
 	
@@ -11,23 +12,23 @@ public class PlayerInteraction {
 	//handles the conflict between two players in the given age
 	public static void SettleMilitaryConflict(Player p1, Player p2, int age)
 	{
-			if ( p1.GetStats().GetMilitaryStrength() > p2.GetStats().GetMilitaryStrength() )
+			if ( p1.GetShields() > p2.GetShields() )
 			{
-				if ( age == 1 ) p1.GetStats().GetMilitaryVictoryTokens().AddOneTokens(1);
-				if ( age == 2 ) p1.GetStats().GetMilitaryVictoryTokens().AddThreeTokens(1);
-				if ( age == 3 ) p1.GetStats().GetMilitaryVictoryTokens().AddFiveTokens(1);
-				p2.GetStats().GetMilitaryVictoryTokens().AddMinusOneTokens(1);
+				if ( age == 1 ) p1.GetMilitaryVictoryTokens().AddOneTokens(1);
+				if ( age == 2 ) p1.GetMilitaryVictoryTokens().AddThreeTokens(1);
+				if ( age == 3 ) p1.GetMilitaryVictoryTokens().AddFiveTokens(1);
+				p2.GetMilitaryVictoryTokens().AddMinusOneTokens(1);
 			}
-			else if ( p1.GetStats().GetMilitaryStrength() < p2.GetStats().GetMilitaryStrength() )
+			else if ( p1.GetShields() < p2.GetShields() )
 			{
-				if ( age == 1) p2.GetStats().GetMilitaryVictoryTokens().AddOneTokens(1);
-				if ( age == 2) p2.GetStats().GetMilitaryVictoryTokens().AddThreeTokens(1);
-				if ( age == 3) p2.GetStats().GetMilitaryVictoryTokens().AddFiveTokens(1);				
-				p1.GetStats().GetMilitaryVictoryTokens().AddMinusOneTokens(1);
+				if ( age == 1) p2.GetMilitaryVictoryTokens().AddOneTokens(1);
+				if ( age == 2) p2.GetMilitaryVictoryTokens().AddThreeTokens(1);
+				if ( age == 3) p2.GetMilitaryVictoryTokens().AddFiveTokens(1);				
+				p1.GetMilitaryVictoryTokens().AddMinusOneTokens(1);
 			}
 	}
 	
-	//handles the militaryconflicts for every player in the match for the given age
+	//handles the military conflicts for every player in the match for the given age
 	public static void SettleMilitaryConflicts(ArrayList<Player> players, int age)
 	{
 		for ( int i = 0; i < players.size()-1; ++i )
@@ -35,6 +36,12 @@ public class PlayerInteraction {
 			SettleMilitaryConflict(players.get(i), players.get(i+1), age);
 		}
 		SettleMilitaryConflict(players.get(0), players.get(players.size()-1), age);
+	}
+	
+	
+	public static void Trade(Player buyer, Player leftNeighbor, Player rightNeighbor, Resources lookingFor)
+	{
+		
 	}
 
 	
@@ -52,14 +59,14 @@ public class PlayerInteraction {
 		
 		for ( int i = 0; i < players.size(); ++i )
 		{
-			players.get(i).GetStats().AddShields(rand.nextInt());
+			players.get(i).AddShields(rand.nextInt());
 		}
 		SettleMilitaryConflicts(players, 1);
 		SettleMilitaryConflicts(players, 2);
 		SettleMilitaryConflicts(players, 3);
 		for ( int i = 0; i < players.size(); ++i )
 		{
-			System.out.println(players.get(i).GetStats().GetMilitaryVictoryTokens().GetTotal());
+			System.out.println(players.get(i).GetMilitaryVictoryTokens().GetTotal());
 		}
 	}
 }

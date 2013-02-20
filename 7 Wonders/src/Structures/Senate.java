@@ -1,6 +1,7 @@
 package Structures;
 
 import Resources.Resources;
+import WonderBoards.WonderBoard;
 
 public class Senate extends Structure {
 	
@@ -9,6 +10,11 @@ public class Senate extends Structure {
 	public Senate()
 	{
 		super(new Resources(1, 1, 2, 0, 0, 0, 0, 0), SenateID, "Senate", BLUE_CARD, 3);
+	}
+	
+	public boolean CanBuildForFree(WonderBoard wb)
+	{
+		return wb.ContainsCard(Library.LibraryID);
 	}
 	
 	/**

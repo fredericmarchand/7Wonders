@@ -1,6 +1,7 @@
 package Structures;
 
 import Resources.Resources;
+import WonderBoards.WonderBoard;
 
 public class Fortifications extends Structure {
 
@@ -11,7 +12,10 @@ public class Fortifications extends Structure {
 		super(new Resources(3, 1, 0, 0, 0, 0, 0, 0), FortificationsID, "Fortifications", RED_CARD, 3);
 	}
 
-	
+	public boolean CanBuildForFree(WonderBoard wb)
+	{
+		return wb.ContainsCard(Walls.WallsID);
+	}
 	
 	/**
 	 * @param args

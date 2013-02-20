@@ -1,6 +1,7 @@
 package Structures;
 
 import Resources.Resources;
+import WonderBoards.WonderBoard;
 
 public class Caravansery extends Structure {
 
@@ -9,6 +10,11 @@ public class Caravansery extends Structure {
 	public Caravansery()
 	{
 		super(new Resources(0, 0, 2, 0, 0, 0, 0, 0), CaravanseryID, "Caravansery", YELLOW_CARD, 2);
+	}
+	
+	public boolean CanBuildForFree(WonderBoard wb)
+	{
+		return wb.ContainsCard(Marketplace.MarketplaceID);
 	}
 
 	/**
