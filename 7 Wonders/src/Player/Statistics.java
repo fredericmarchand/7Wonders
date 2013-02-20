@@ -9,8 +9,7 @@ public class Statistics {
 	private int Shields;
 	private MilitaryVictoryTokens militaryVictoryPoints;
 	private Resources resources;
-	
-	
+		
 	
 	//Constructors
 	public Statistics()
@@ -37,8 +36,6 @@ public class Statistics {
 		resources = new Resources(ore, stone, wood, clay, glass, loom, papyrus, coins);
 		militaryVictoryPoints = new MilitaryVictoryTokens();
 	}
-	
-	
 	
 	
 	//Getters
