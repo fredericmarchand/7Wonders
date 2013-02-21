@@ -1,8 +1,15 @@
-package Cards;
+package Controls;
 
 import Structures.*;
 import Structures.Cards.*;
 import WonderBoards.*;
+import WonderBoards.Boards.TheColossusOfRhodes;
+import WonderBoards.Boards.TheHangingGardensOfBabylon;
+import WonderBoards.Boards.TheLighthouseOfAlexandria;
+import WonderBoards.Boards.TheMausoleumOfHalicarnassus;
+import WonderBoards.Boards.ThePyramidsOfGiza;
+import WonderBoards.Boards.TheStatueOfZeusInOlympia;
+import WonderBoards.Boards.TheTempleOfArtemisInEphesus;
 import Player.Player;
 import java.util.ArrayList;
 import java.util.Collections;
