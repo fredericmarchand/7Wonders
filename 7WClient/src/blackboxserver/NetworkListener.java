@@ -14,6 +14,12 @@ import blackboxserver.Packet.*;
 
 public class NetworkListener extends Listener{
 	Client c;
+	MClient mclient;
+	ArrayList list;
+	
+	public NetworkListener(MClient m){
+		mclient = m;
+	}
 	
 	public void init(Client c){
 		this.c = c;
@@ -33,11 +39,13 @@ public class NetworkListener extends Listener{
 	@Override
 	public void received(Connection c, Object o) {
 		Log.info("[CLIENT] ");
+		if(o instanceof Packet3Connection){
+			Log.info("Packet3Connection Received");
+		}
 		if(o instanceof Packet4Object){
 			if(((Packet4Object) o).getID()==1){
-				ArrayList l = (ArrayList)((Packet4Object)o).getObject();
-				for(Object e: l)
-					System.out.println(e);
+				list = (ArrayList)((Packet4Object)o).getObject();
+				mclient.joinMatch(list);
 			}
 		}
 		
