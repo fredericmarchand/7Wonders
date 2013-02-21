@@ -86,7 +86,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CardFiltering {
-
+	//Im writing this comment for the sake of testing.
 	public static ArrayList<Structure> FilterCards(int numPlayers, int age)
 	{
 		ArrayList<Structure> deck = new ArrayList<Structure>();
