@@ -20,7 +20,9 @@ public class Packet {
 		//id ::
 		// 0 = null
 		// 1 = matchlist
-		// 2 = client info
+		// 2 = client match id
+		// 3 = client move
+		// 4 = client card
 		
 		private Object o;
 		private int id = 0;

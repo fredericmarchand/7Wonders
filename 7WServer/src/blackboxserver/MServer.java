@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
@@ -16,8 +17,9 @@ import blackboxserver.Packet.*;
 public class MServer {
 	
 	private Server server;
-	ArrayList<Object> list;
-	ArrayList<Match> matchList;
+	private ArrayList<Object> list;
+	private ArrayList<Match> matchList;
+	private long counter = 1000;
 	Scanner scanner = new Scanner(System.in);
 	
 	public MServer() throws IOException{
@@ -36,10 +38,30 @@ public class MServer {
 		
 	}
 	public void createMatch(){
-		matchList.add(new Match());
+		matchList.add(new Match(counter));
+		counter++;
 		for(Object m: matchList)
 			System.out.println(m);
 	}
+	
+	
+	/********************************
+	 * bridgeClient
+	 * given a connect and match id
+	 * add client to the match list
+	 * @param c
+	 * @param m_id
+	 */
+	
+	
+	public void bridgeClient(Connection c, long m_id){
+		for(Match m : matchList){
+			if(m.getMatch_ID()==m_id){
+				m.addConnection(c);
+			}
+		}
+	}
+	
 	public void registerPackets() throws IOException{
 		Kryo kryo = server.getKryo();
 		kryo.register(Packet0LoginRequest.class);

@@ -69,6 +69,25 @@ public class NetworkListener extends Listener{
 			loginAnswer.setAccepted(true);
 			c.sendTCP(loginAnswer);
 		}
+		
+		if(o instanceof Packet4Object){
+			
+			switch(((Packet4Object) o).getID()){
+			case 0: ;
+			case 1: ;
+			case 2: 
+			{
+				mserver.bridgeClient(c, ((Match)o).getMatch_ID());
+				c.sendTCP(new Packet3Connection());					 
+			};
+					
+			case 3: ;
+			case 4: ;
+					break;
+			default: break;
+			}
+			//add client to match list
+		}
 		// TODO Auto-generated method stub
 		//super.received(arg0, arg1);
 		Log.info("[SERVER] Received packet");
