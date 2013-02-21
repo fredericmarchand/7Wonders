@@ -2,14 +2,16 @@ package Resources;
 
 public class Resources {
 
-	private int Ore;
-	private int Stone;
-	private int Wood;
-	private int Clay;
-	private int Glass;
-	private int Loom;
-	private int Papyrus;
-	private int Coins;
+	public static final int ORE_ID = 1;
+	public static final int STONE_ID = 2;
+	public static final int WOOD_ID = 3;
+	public static final int CLAY_ID = 4;
+	public static final int GLASS_ID = 5;
+	public static final int LOOM_ID = 6;
+	public static final int PAPYRUS_ID = 7;
+	public static final int COINS_ID = 8;
+	
+	private int Ore, Stone, Wood, Clay, Glass, Loom, Papyrus, Coins;
 	
 	public Resources()
 	{
@@ -161,6 +163,26 @@ public class Resources {
 		Glass += resources.Glass;
 		Loom += resources.Loom;
 		Papyrus += resources.Papyrus;
+	}
+	
+	public static Resources AddResources(Resources a, Resources b)
+	{
+		Resources r = new Resources();
+		r.Clay    = a.Clay + b.Clay;
+		r.Coins   = a.Coins + b.Coins;
+		r.Ore     = a.Ore + b.Ore;
+		r.Stone   = a.Stone + b.Stone;
+		r.Wood    = a.Wood + b.Wood;
+		r.Glass   = a.Glass + b.Glass;
+		r.Loom    = a.Loom + b.Loom;
+		r.Papyrus = a.Papyrus + b.Papyrus;
+		return r;
+	}
+	
+	
+	public String toString()
+	{
+		return ("Ore: " + Ore + "\nStone: " + Stone + "\nWood: " + Wood + "\nClay: " + Clay + "\nGlass: " + Glass + "\nLoom: " + Loom + "\nPapyrus: " + Papyrus + "\nCoins: " + Coins);
 	}
 	
 	/**

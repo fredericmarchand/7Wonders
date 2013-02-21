@@ -13,7 +13,7 @@ public class Player {
 	private WonderBoard wonderBoard;
 	private ArrayList<Structure> cards;
 	private Structure chosenCard;
-	private Resources resources;
+	private Resources resources, purchased, unavailableResources;
 	private int shields;
 	private MilitaryVictoryTokens militaryVictoryPoints;
 	
@@ -26,6 +26,8 @@ public class Player {
 		cards = new ArrayList<Structure>();
 		chosenCard = null;
 		resources = new Resources(0, 0, 0, 0, 0, 0, 0, 3);
+		purchased = new Resources();
+		unavailableResources = new Resources();
 		militaryVictoryPoints = new MilitaryVictoryTokens();
 		shields = 0;
 	}
@@ -38,6 +40,8 @@ public class Player {
 		cards = new ArrayList<Structure>();
 		chosenCard = null;
 		resources = new Resources();
+		purchased = new Resources();
+		unavailableResources = new Resources();
 		militaryVictoryPoints = new MilitaryVictoryTokens();
 		shields = 0;
 	}
@@ -73,6 +77,11 @@ public class Player {
 		return shields;
 	}
 	
+	public Resources GetResources()
+	{
+		return resources;
+	}
+	
 	public MilitaryVictoryTokens GetMilitaryVictoryTokens()
 	{
 		return militaryVictoryPoints;
@@ -105,6 +114,8 @@ public class Player {
 		shields += s;
 	}
 	
+	
+	
 	public boolean ActionPhase(int choice)
 	{
 		switch ( choice )
@@ -122,14 +133,20 @@ public class Player {
 			
 			break;
 			
-		case 3://discard the card
-			resources.AddCoins(3);
+		case 3://discard the card for coins
+			resources.AddCoins(3); 
 			chosenCard = null;
 			return true;
 		}
 		return false;
 	}
 	
+	public void BuyResources(Player neighbor)
+	{
+		//check for cards with trading perks
+		//2 coins per resource purchased
+		//added resources are put in the purchased resources variable
+	}
 	
 	
 	

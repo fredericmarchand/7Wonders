@@ -1,7 +1,5 @@
 package Structures;
 
-//import java.util.ArrayList;
-import WonderBoards.WonderBoard;
 import Resources.Resources;
 
 public class Structure {
@@ -75,10 +73,6 @@ public class Structure {
 		return Age;
 	}
 	
-	public boolean CanBuildForFree(WonderBoard wb)
-	{		
-		return false;
-	}
 	
 	
 	/**

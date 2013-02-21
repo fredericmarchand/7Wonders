@@ -1,6 +1,7 @@
-package Player;
+package Controls;
 
 import java.util.ArrayList;
+import Player.Player;
 import Resources.Resources;
 
 public class PlayerInteraction {

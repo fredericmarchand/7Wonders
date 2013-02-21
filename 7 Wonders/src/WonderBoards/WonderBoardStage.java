@@ -6,6 +6,7 @@ import Resources.Resources;
 public class WonderBoardStage {
 
 	private Resources resourceCost;
+	@SuppressWarnings("unused")
 	private Structure card;
 	private boolean built;
 	

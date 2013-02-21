@@ -185,6 +185,53 @@ public class WonderBoard {
 		return retValue;
 	}
 	
+	public int GetRedCardAmount()
+	{
+		return RedCards.size();
+	}
+	
+	public int GetBlueCardAmount()
+	{
+		return BlueCards.size();
+	}
+	
+	public int GetBrownCardAmount()
+	{
+		int count = 0;
+		for ( Structure s : BrownGreyCards )
+		{
+			if ( s.GetColor() == Structure.BROWN_CARD )
+				++count;
+		}
+		return count;
+	}
+	
+	public int GetGreyCardAmount()
+	{
+		int count = 0;
+		for ( Structure s : BrownGreyCards )
+		{
+			if ( s.GetColor() == Structure.GREY_CARD )
+				++count;
+		}
+		return count;
+	}
+	
+	public int GetYellowCardAmount()
+	{
+		return YellowCards.size();
+	}
+	
+	public int GetPurpleCardAmount()
+	{
+		return PurpleCards.size();
+	}
+	
+	public int GetGreenCardAmount()
+	{
+		return GreenCards.size();
+	}
+	
 	
 	/**
 	 * @param args
