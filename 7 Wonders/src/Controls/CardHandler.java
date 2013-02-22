@@ -14,6 +14,28 @@ public class CardHandler {
 	{
 	}
 	
+	//builds a deck according to the amount of players participating in the game
+	public static ArrayList<Structure> BuildAge1Deck(int numPlayers)
+	{
+		ArrayList<Structure> deck = new ArrayList<Structure>();
+		deck.addAll(FilterCards(numPlayers, 1));
+		return deck;
+	}
+	
+	public static ArrayList<Structure> BuildAge2Deck(int numPlayers)
+	{
+		ArrayList<Structure> deck = new ArrayList<Structure>();
+		deck.addAll(FilterCards(numPlayers, 2));
+		return deck;
+	}
+	
+	public static ArrayList<Structure> BuildAge3Deck(int numPlayers)
+	{
+		ArrayList<Structure> deck = new ArrayList<Structure>();
+		deck.addAll(FilterCards(numPlayers, 3));
+		return deck;
+	}
+	
 	//This creates a deck with all the proper cards for the current age and the number of players in the match
 	public static ArrayList<Structure> FilterCards(int numPlayers, int age)
 	{
@@ -229,9 +251,8 @@ public class CardHandler {
 	}
 	
 	//This assigns a hand of cards to each player from the proper deck corresponding to the age
-	public static void DistributeCards(ArrayList<Player> players, int age)
+	public static void DistributeCards(ArrayList<Player> players, ArrayList<Structure> deck)
 	{
-		ArrayList<Structure> deck = FilterCards(players.size(), age);
 		int index = 0;
 		for ( Structure s: deck )
 		{
@@ -304,11 +325,12 @@ public class CardHandler {
 		players.add(new Player());
 		players.add(new Player());
 		players.add(new Player());
+		ArrayList<Structure> deck = BuildAge1Deck(7);
 		DistributeRandomWonderBoards(players, 1);
-		DistributeCards(players, 2);
+		DistributeCards(players, deck);
 		for ( Player p : players )
 		{
-			System.out.println("\n" + p.getWonderBoard().GetBoardName());
+			System.out.println("\n" + p.getWonderBoard().getBoardName());
 			for ( Structure s: p.getCards() )
 			{
 				System.out.println(s.getName());
@@ -319,7 +341,7 @@ public class CardHandler {
 		
 		for ( Player p : players )
 		{
-			System.out.println("\n" + p.getWonderBoard().GetBoardName());
+			System.out.println("\n" + p.getWonderBoard().getBoardName());
 			for ( Structure s: p.getCards() )
 			{
 				System.out.println(s.getName());

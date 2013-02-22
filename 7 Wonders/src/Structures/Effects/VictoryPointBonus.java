@@ -5,18 +5,18 @@ import Player.Player;
 public class VictoryPointBonus extends SpecialEffects {
 
 	public static final int VictoryPointBonusID = 0x05;
-	private int amountOfCoins;
+	private int amountOfPoints;
 	
-	public VictoryPointBonus(int coins)
+	public VictoryPointBonus(int points)
 	{
-		super(VictoryPointBonusID, true, NO_RELOAD);
-		amountOfCoins = coins;
+		super(VictoryPointBonusID, false, NO_RELOAD);
+		amountOfPoints = points;
 	}
 	
 	public void acquireVictoryPoints(Player p)
 	{
 		if ( !usedUp )
-			p.addVictoryPoints(amountOfCoins);
+			p.addVictoryPoints(amountOfPoints);
 		usedUp = true;
 	}
 	

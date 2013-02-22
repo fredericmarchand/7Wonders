@@ -16,7 +16,7 @@ public class Fortifications extends Structure {
 
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return wb.ContainsCard(Walls.WallsID);
+		return wb.containsCard(Walls.WallsID);
 	}
 	
 	/**

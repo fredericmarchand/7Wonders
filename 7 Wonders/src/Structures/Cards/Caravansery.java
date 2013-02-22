@@ -15,7 +15,7 @@ public class Caravansery extends Structure {
 	
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return wb.ContainsCard(Marketplace.MarketplaceID);
+		return wb.containsCard(Marketplace.MarketplaceID);
 	}
 
 	/**

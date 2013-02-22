@@ -16,7 +16,7 @@ public class Aqueduct extends Structure {
 	
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return wb.ContainsCard(Baths.BathsID);
+		return wb.containsCard(Baths.BathsID);
 	}
 	
 	/**

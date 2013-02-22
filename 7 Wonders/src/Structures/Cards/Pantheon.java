@@ -16,7 +16,7 @@ public class Pantheon extends Structure {
 	
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return wb.ContainsCard(Temple.TempleID);
+		return wb.containsCard(Temple.TempleID);
 	}
 	
 	/**

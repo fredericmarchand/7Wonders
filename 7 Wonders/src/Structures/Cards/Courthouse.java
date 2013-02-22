@@ -15,7 +15,7 @@ public class Courthouse extends Structure {
 	
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return wb.ContainsCard(Scriptorium.ScriptoriumID);
+		return wb.containsCard(Scriptorium.ScriptoriumID);
 	}
 	
 	/**

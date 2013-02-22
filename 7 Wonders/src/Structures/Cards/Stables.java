@@ -16,7 +16,7 @@ public class Stables extends Structure {
 	
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return wb.ContainsCard(Apothecary.ApothecaryID);
+		return wb.containsCard(Apothecary.ApothecaryID);
 	}
 	
 	/**

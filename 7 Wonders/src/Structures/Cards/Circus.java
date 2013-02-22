@@ -15,7 +15,7 @@ public class Circus extends Structure {
 
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return wb.ContainsCard(TrainingGround.TrainingGroundID);
+		return wb.containsCard(TrainingGround.TrainingGroundID);
 	}
 	
 	/**

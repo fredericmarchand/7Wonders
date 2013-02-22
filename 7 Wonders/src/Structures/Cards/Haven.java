@@ -16,7 +16,7 @@ public class Haven extends Structure {
 	
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return wb.ContainsCard(Forum.ForumID);
+		return wb.containsCard(Forum.ForumID);
 	}
 
 

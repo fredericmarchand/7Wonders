@@ -16,7 +16,7 @@ public class Temple extends Structure {
 	
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return wb.ContainsCard(Altar.AltarID);
+		return wb.containsCard(Altar.AltarID);
 	}
 	
 	/**

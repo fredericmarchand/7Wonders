@@ -16,7 +16,7 @@ public class Statue extends Structure {
 	
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return wb.ContainsCard(Theater.TheaterID);
+		return wb.containsCard(Theater.TheaterID);
 	}
 	
 	/**

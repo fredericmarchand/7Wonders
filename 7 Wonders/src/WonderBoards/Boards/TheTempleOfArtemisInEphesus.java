@@ -15,14 +15,20 @@ public class TheTempleOfArtemisInEphesus extends WonderBoard {
 		stage1 = new WonderBoardStage(new Resources(0, 2, 0, 0, 0, 0, 0, 0));
 		stage2 = new WonderBoardStage(new Resources(0, 0, 2, 0, 0, 0, 0, 0));
 		stage3 = new WonderBoardStage(new Resources(0, 0, 0, 0, 0, 0, 0, 0));
+		stages.add(stage1);
+		stages.add(stage2);
+		stages.add(stage3);
 	}
 	
 	public TheTempleOfArtemisInEphesus(int side)
 	{
 		super(3, side);
-		stage1 = new WonderBoardStage((Side == SIDE_A ? new Resources(0, 2, 0, 0, 0, 0, 0, 0) : new Resources(0, 2, 0, 0, 0, 0, 0, 0)));
-		stage2 = new WonderBoardStage((Side == SIDE_A ? new Resources(0, 0, 2, 0, 0, 0, 0, 0) : new Resources(0, 0, 2, 0, 0, 0, 0, 0)));
-		stage3 = new WonderBoardStage((Side == SIDE_A ? new Resources(0, 0, 0, 0, 0, 0, 0, 0) : new Resources(0, 0, 0, 0, 1, 1, 0, 0)));
+		stage1 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 2, 0, 0, 0, 0, 0, 0) : new Resources(0, 2, 0, 0, 0, 0, 0, 0)));
+		stage2 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 0, 2, 0, 0, 0, 0, 0) : new Resources(0, 0, 2, 0, 0, 0, 0, 0)));
+		stage3 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 0, 0, 0, 0, 0, 0, 0) : new Resources(0, 0, 0, 0, 1, 1, 0, 0)));
+		stages.add(stage1);
+		stages.add(stage2);
+		stages.add(stage3);
 	}
 	
 	public boolean isBuilt()

@@ -16,7 +16,7 @@ public class Forum extends Structure {
 	
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return (wb.ContainsCard(EastTradingPost.EastTradingPostID) | wb.ContainsCard(WestTradingPost.WestTradingPostID));
+		return (wb.containsCard(EastTradingPost.EastTradingPostID) | wb.containsCard(WestTradingPost.WestTradingPostID));
 	}
 
 	/**

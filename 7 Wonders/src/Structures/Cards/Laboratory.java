@@ -16,7 +16,7 @@ public class Laboratory extends Structure {
 
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return wb.ContainsCard(Workshop.WorkshopID);
+		return wb.containsCard(Workshop.WorkshopID);
 	}
 	
 	/**

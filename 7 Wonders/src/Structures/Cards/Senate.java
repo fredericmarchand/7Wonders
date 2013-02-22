@@ -16,7 +16,7 @@ public class Senate extends Structure {
 	
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return wb.ContainsCard(Library.LibraryID);
+		return wb.containsCard(Library.LibraryID);
 	}
 	
 	/**

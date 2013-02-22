@@ -4,7 +4,7 @@ import WonderBoards.WonderBoard;
 import Structures.Structure;
 import Resources.Resources;
 import java.util.ArrayList;
-import Tokens.MilitaryVictoryTokens;
+import Tokens.*;
 
 public class Player {
 
@@ -18,6 +18,7 @@ public class Player {
 	private int shields;
 	private MilitaryVictoryTokens militaryVictoryPoints;
 	private int victoryPoints;
+	private ScientificSymbols scientificSymbols;
 	
 	//constructors
 	public Player()
@@ -33,6 +34,7 @@ public class Player {
 		militaryVictoryPoints = new MilitaryVictoryTokens();
 		shields = 0;
 		victoryPoints = 0;
+		scientificSymbols = new ScientificSymbols();
 	}
 	
 	public Player(String uname, int id)
@@ -48,6 +50,7 @@ public class Player {
 		militaryVictoryPoints = new MilitaryVictoryTokens();
 		shields = 0;
 		victoryPoints = 0;
+		scientificSymbols = new ScientificSymbols();
 	}
 
 	//getters
@@ -96,6 +99,10 @@ public class Player {
 		return militaryVictoryPoints;
 	}
 	
+	public ScientificSymbols getScientificSymbols()
+	{
+		return scientificSymbols;
+	}
 	
 	//actions
 	public void assignWonderBoard(WonderBoard wb)
@@ -135,9 +142,9 @@ public class Player {
 		switch ( choice )
 		{
 		case 1://build the structure
-			if ( chosenCard.getResourceCost().canAfford(resources) && !wonderBoard.ContainsCard(chosenCard.getID()) )
+			if ( chosenCard.getResourceCost().canAfford(resources) && !wonderBoard.containsCard(chosenCard.getID()) )
 			{
-				wonderBoard.BuildStructure(chosenCard);
+				wonderBoard.buildStructure(chosenCard);
 				chosenCard = null;
 				return true;
 			}

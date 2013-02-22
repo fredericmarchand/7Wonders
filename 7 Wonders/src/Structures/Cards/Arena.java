@@ -15,7 +15,7 @@ public class Arena extends Structure {
 	
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return wb.ContainsCard(Dispensary.DispensaryID);
+		return wb.containsCard(Dispensary.DispensaryID);
 	}
 
 

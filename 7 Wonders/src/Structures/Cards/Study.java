@@ -16,7 +16,7 @@ public class Study extends Structure {
 
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return wb.ContainsCard(School.SchoolID);
+		return wb.containsCard(School.SchoolID);
 	}
 	
 	/**

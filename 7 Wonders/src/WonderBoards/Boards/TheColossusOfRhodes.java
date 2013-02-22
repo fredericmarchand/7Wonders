@@ -15,6 +15,9 @@ public class TheColossusOfRhodes extends WonderBoard {
 		stage1 = new WonderBoardStage(new Resources(0, 0, 2, 0, 0, 0, 0, 0));
 		stage2 = new WonderBoardStage(new Resources(0, 0, 0, 3, 0, 0, 0, 0));
 		stage3 = new WonderBoardStage(new Resources(4, 0, 0, 0, 0, 0, 0, 0));
+		stages.add(stage1);
+		stages.add(stage2);
+		stages.add(stage3);
 	}
 	
 	public TheColossusOfRhodes(int side)
@@ -24,11 +27,14 @@ public class TheColossusOfRhodes extends WonderBoard {
 		stage2 = new WonderBoardStage((side == SIDE_A? new Resources(0, 0, 0, 3, 0, 0, 0, 0) : new Resources(4, 0, 0, 0, 0, 0, 0, 0)));
 		if ( side == SIDE_A ) stage3 = new WonderBoardStage(new Resources(4, 0, 0, 0, 0, 0, 0, 0));
 		else stage3 = null;
+		stages.add(stage1);
+		stages.add(stage2);
+		if ( side == SIDE_A ) stages.add(stage3);
 	}
 	
 	public boolean isBuilt()
 	{
-		if ( Side == SIDE_A )
+		if ( side == SIDE_A )
 			return (stage1.isBuilt() & stage2.isBuilt() & stage3.isBuilt());
 		return (stage1.isBuilt() & stage2.isBuilt());
 	}
@@ -49,7 +55,7 @@ public class TheColossusOfRhodes extends WonderBoard {
 	
 	public boolean BuildStage3(Structure card, Resources funds)
 	{
-		if ( (Side == SIDE_A) && stage1.isBuilt() && stage2.isBuilt() && !stage3.isBuilt() )
+		if ( (side == SIDE_A) && stage1.isBuilt() && stage2.isBuilt() && !stage3.isBuilt() )
 			return stage3.Build(card, funds);
 		return false;
 	}

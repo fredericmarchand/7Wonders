@@ -19,163 +19,183 @@ public class WonderBoard {
 	protected static final int SIDE_A = 1;
 	protected static final int SIDE_B = 2;
 
-	protected int BoardID;
-	protected int Side;
-	protected String BoardName;
-	protected ArrayList<Structure> RedCards, BlueCards, GreenCards, YellowCards, PurpleCards, BrownGreyCards;
+	protected int boardID;
+	protected int side;
+	protected String boardName;
+	protected ArrayList<Structure> redCards, blueCards, greenCards, yellowCards, purpleCards, brownGreyCards;
+	protected ArrayList<WonderBoardStage> stages;
 	
 	
 	//Constructors
 	public WonderBoard()
 	{
-		BoardID = NO_BOARD;
-		Side = NO_BOARD;
-		BoardName = BOARD0;
+		boardID = NO_BOARD;
+		side = NO_BOARD;
+		boardName = BOARD0;
+		redCards = new ArrayList<Structure>();
+		blueCards = new ArrayList<Structure>();
+		greenCards = new ArrayList<Structure>();
+		yellowCards = new ArrayList<Structure>();
+		purpleCards = new ArrayList<Structure>();
+		brownGreyCards = new ArrayList<Structure>();
+		stages = new ArrayList<WonderBoardStage>();
 	}
 	
 	public WonderBoard(int boardID, int side)
 	{
-		BoardID = boardID;
-		Side = side;
-		SetBoardName(boardID);
+		this.boardID = boardID;
+		this.side = side;
+		setBoardName(boardID);
+		redCards = new ArrayList<Structure>();
+		blueCards = new ArrayList<Structure>();
+		greenCards = new ArrayList<Structure>();
+		yellowCards = new ArrayList<Structure>();
+		purpleCards = new ArrayList<Structure>();
+		brownGreyCards = new ArrayList<Structure>();
+		stages = new ArrayList<WonderBoardStage>();
 	}
 	
 	//getters
-	public int GetBoardID()
+	public int getBoardID()
 	{
-		return BoardID;
+		return boardID;
 	}
 	
-	public int GetSide()
+	public int getSide()
 	{
-		return Side;
+		return side;
 	}
 	
-	public String GetBoardName()
+	public String getBoardName()
 	{
-		return BoardName;
+		return boardName;
+	}
+	
+	public ArrayList<WonderBoardStage> getStages()
+	{
+		return stages;
 	}
 	
 	//setters
-	public void SetBoardID(int id)
+	public void setBoardID(int id)
 	{
-		BoardID = id;
-		SetBoardName(id);
+		boardID = id;
+		setBoardName(id);
 	}
 	
-	public void SetSide(int side)
+	public void setSide(int side)
 	{
-		Side = side;
+		this.side = side;
 	}
 	
-	private void SetBoardName(int boardID)
+	private void setBoardName(int boardID)
 	{
 		switch ( boardID )
 		{
 			case 1:
-				BoardName = BOARD1;
+				boardName = BOARD1;
 				break;
 			case 2:
-				BoardName = BOARD2;
+				boardName = BOARD2;
 				break;
 			case 3:
-				BoardName = BOARD3;
+				boardName = BOARD3;
 				break;
 			case 4:
-				BoardName = BOARD4;
+				boardName = BOARD4;
 				break;
 			case 5:
-				BoardName = BOARD5;
+				boardName = BOARD5;
 				break;
 			case 6:
-				BoardName = BOARD6;
+				boardName = BOARD6;
 				break;
 			case 7:
-				BoardName = BOARD7;
+				boardName = BOARD7;
 				break;
-			default: BoardName = BOARD0;
+			default: boardName = BOARD0; break;
 		}
 	}
 	
 	//builds a structure on this wonderboard
-	public void BuildStructure(Structure s)
+	public void buildStructure(Structure s)
 	{
 		switch ( s.getColor() )
 		{
 			case Structure.RED_CARD:
-				RedCards.add(s);
+				redCards.add(s);
 			case Structure.BLUE_CARD:
-				BlueCards.add(s);
+				blueCards.add(s);
 				break;
 			case Structure.BROWN_CARD:
 			case Structure.GREY_CARD:
-				BrownGreyCards.add(s);
+				brownGreyCards.add(s);
 				break;
 			case Structure.YELLOW_CARD:
-				YellowCards.add(s);
+				yellowCards.add(s);
 				break;
 			case Structure.GREEN_CARD:
-				GreenCards.add(s);
+				greenCards.add(s);
 				break;
 			case Structure.PURPLE_CARD:
-				PurpleCards.add(s);
+				purpleCards.add(s);
 				break;
 		}
 	}
 	
 	//returns whether the structure is contained in any of the stacks of the wonderboard by the id of the card
-	public boolean ContainsCard(int id)
+	public boolean containsCard(int id)
 	{
 		boolean retValue = false;
 		
-		for( int i = 0; i < RedCards.size(); ++i )
+		for( int i = 0; i < redCards.size(); ++i )
 		{
-			if ( RedCards.get(i).getID() == id )
+			if ( redCards.get(i).getID() == id )
 			{
 				retValue = true;
 				break;
 			}
 		}
 		if ( retValue ) return retValue;
-		for( int i = 0; i < BlueCards.size(); ++i )
+		for( int i = 0; i < blueCards.size(); ++i )
 		{
-			if ( BlueCards.get(i).getID() == id )
+			if ( blueCards.get(i).getID() == id )
 			{
 				retValue = true;
 				break;
 			}
 		}
 		if ( retValue ) return retValue;
-		for( int i = 0; i < BrownGreyCards.size(); ++i )
+		for( int i = 0; i < brownGreyCards.size(); ++i )
 		{
-			if ( BrownGreyCards.get(i).getID() == id )
+			if ( brownGreyCards.get(i).getID() == id )
 			{
 				retValue = true;
 				break;
 			}
 		}
 		if ( retValue ) return retValue;
-		for( int i = 0; i < YellowCards.size(); ++i )
+		for( int i = 0; i < yellowCards.size(); ++i )
 		{
-			if ( YellowCards.get(i).getID() == id )
+			if ( yellowCards.get(i).getID() == id )
 			{
 				retValue = true;
 				break;
 			}
 		}
 		if ( retValue ) return retValue;
-		for( int i = 0; i < GreenCards.size(); ++i )
+		for( int i = 0; i < greenCards.size(); ++i )
 		{
-			if ( GreenCards.get(i).getID() == id )
+			if ( greenCards.get(i).getID() == id )
 			{
 				retValue = true;
 				break;
 			}
 		}
 		if ( retValue ) return retValue;
-		for( int i = 0; i < PurpleCards.size(); ++i )
+		for( int i = 0; i < purpleCards.size(); ++i )
 		{
-			if ( PurpleCards.get(i).getID() == id )
+			if ( purpleCards.get(i).getID() == id )
 			{
 				retValue = true;
 				break;
@@ -185,20 +205,20 @@ public class WonderBoard {
 		return retValue;
 	}
 	
-	public int GetRedCardAmount()
+	public int getRedCardAmount()
 	{
-		return RedCards.size();
+		return redCards.size();
 	}
 	
-	public int GetBlueCardAmount()
+	public int getBlueCardAmount()
 	{
-		return BlueCards.size();
+		return blueCards.size();
 	}
 	
-	public int GetBrownCardAmount()
+	public int getBrownCardAmount()
 	{
 		int count = 0;
-		for ( Structure s : BrownGreyCards )
+		for ( Structure s : brownGreyCards )
 		{
 			if ( s.getColor() == Structure.BROWN_CARD )
 				++count;
@@ -206,10 +226,10 @@ public class WonderBoard {
 		return count;
 	}
 	
-	public int GetGreyCardAmount()
+	public int getGreyCardAmount()
 	{
 		int count = 0;
-		for ( Structure s : BrownGreyCards )
+		for ( Structure s : brownGreyCards )
 		{
 			if ( s.getColor() == Structure.GREY_CARD )
 				++count;
@@ -217,19 +237,19 @@ public class WonderBoard {
 		return count;
 	}
 	
-	public int GetYellowCardAmount()
+	public int getYellowCardAmount()
 	{
-		return YellowCards.size();
+		return yellowCards.size();
 	}
 	
-	public int GetPurpleCardAmount()
+	public int getPurpleCardAmount()
 	{
-		return PurpleCards.size();
+		return purpleCards.size();
 	}
 	
-	public int GetGreenCardAmount()
+	public int getGreenCardAmount()
 	{
-		return GreenCards.size();
+		return greenCards.size();
 	}
 	
 	

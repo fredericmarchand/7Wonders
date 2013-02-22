@@ -15,7 +15,7 @@ public class Gardens extends Structure {
 	
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return wb.ContainsCard(Statue.StatueID);
+		return wb.containsCard(Statue.StatueID);
 	}
 	
 	/**

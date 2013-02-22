@@ -16,7 +16,7 @@ public class Lighthouse extends Structure {
 	
 	public boolean canBuildForFree(WonderBoard wb)
 	{
-		return wb.ContainsCard(Caravansery.CaravanseryID);
+		return wb.containsCard(Caravansery.CaravanseryID);
 	}
 
 
