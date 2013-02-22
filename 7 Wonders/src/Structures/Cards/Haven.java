@@ -1,3 +1,4 @@
+
 package Structures.Cards;
 
 import Resources.Resources;
@@ -28,3 +29,4 @@ public class Haven extends Structure {
 	}
 
 }
+

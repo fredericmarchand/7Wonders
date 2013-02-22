@@ -11,6 +11,10 @@
 *.lai
 *.la
 *.a
+<<<<<<< HEAD
+*.metadata*
+=======
 
 .metadata*
 *.class
+>>>>>>> 1006b3efef1e642fd987685228f98c0421a6e65a

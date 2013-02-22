@@ -1,3 +1,4 @@
+
 package Structures.Cards;
 
 import Resources.Resources;
@@ -27,3 +28,4 @@ public class Stables extends Structure {
 	}
 
 }
+
