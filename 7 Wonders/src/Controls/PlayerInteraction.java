@@ -2,7 +2,6 @@ package Controls;
 
 import java.util.ArrayList;
 import Player.Player;
-import Resources.Resources;
 
 public class PlayerInteraction {
 	
@@ -13,19 +12,19 @@ public class PlayerInteraction {
 	//handles the conflict between two players in the given age
 	public static void SettleMilitaryConflict(Player p1, Player p2, int age)
 	{
-			if ( p1.GetShields() > p2.GetShields() )
+			if ( p1.getShields() > p2.getShields() )
 			{
-				if ( age == 1 ) p1.GetMilitaryVictoryTokens().AddOneTokens(1);
-				if ( age == 2 ) p1.GetMilitaryVictoryTokens().AddThreeTokens(1);
-				if ( age == 3 ) p1.GetMilitaryVictoryTokens().AddFiveTokens(1);
-				p2.GetMilitaryVictoryTokens().AddMinusOneTokens(1);
+				if ( age == 1 ) p1.getMilitaryVictoryTokens().addOneTokens(1);
+				if ( age == 2 ) p1.getMilitaryVictoryTokens().addThreeTokens(1);
+				if ( age == 3 ) p1.getMilitaryVictoryTokens().addFiveTokens(1);
+				p2.getMilitaryVictoryTokens().addMinusOneTokens(1);
 			}
-			else if ( p1.GetShields() < p2.GetShields() )
+			else if ( p1.getShields() < p2.getShields() )
 			{
-				if ( age == 1) p2.GetMilitaryVictoryTokens().AddOneTokens(1);
-				if ( age == 2) p2.GetMilitaryVictoryTokens().AddThreeTokens(1);
-				if ( age == 3) p2.GetMilitaryVictoryTokens().AddFiveTokens(1);				
-				p1.GetMilitaryVictoryTokens().AddMinusOneTokens(1);
+				if ( age == 1 ) p2.getMilitaryVictoryTokens().addOneTokens(1);
+				if ( age == 2 ) p2.getMilitaryVictoryTokens().addThreeTokens(1);
+				if ( age == 3 ) p2.getMilitaryVictoryTokens().addFiveTokens(1);				
+				p1.getMilitaryVictoryTokens().addMinusOneTokens(1);
 			}
 	}
 	
@@ -54,14 +53,14 @@ public class PlayerInteraction {
 		
 		for ( int i = 0; i < players.size(); ++i )
 		{
-			players.get(i).AddShields(rand.nextInt());
+			players.get(i).addShields(rand.nextInt());
 		}
 		SettleMilitaryConflicts(players, 1);
 		SettleMilitaryConflicts(players, 2);
 		SettleMilitaryConflicts(players, 3);
 		for ( int i = 0; i < players.size(); ++i )
 		{
-			System.out.println(players.get(i).GetMilitaryVictoryTokens().GetTotal());
+			System.out.println(players.get(i).getMilitaryVictoryTokens().getTotal());
 		}
 	}
 }

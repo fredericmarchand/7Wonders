@@ -33,17 +33,17 @@ public class TradingPerks extends SpecialEffects {
 		this.price = price;
 	}
 	
-	public int GetPartner()
+	public int getPartner()
 	{
 		return partner;
 	}
 	
-	public Resources GetPossibilities()
+	public Resources getPossibilities()
 	{
 		return possibilities;
 	}
 	
-	public int GetPrice()
+	public int getPrice()
 	{
 		return price;
 	}

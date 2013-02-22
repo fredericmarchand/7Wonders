@@ -19,27 +19,27 @@ public class ScientificSymbols {
 		tablets = t;
 	}
 	
-	public int GetGears()
+	public int getGears()
 	{
 		return gears;
 	}
 	
-	public int GetCompass()
+	public int getCompass()
 	{
 		return compass;
 	}
 	
-	public int GetTablets()
+	public int getTablets()
 	{
 		return tablets;
 	}
 	
-	public int GetTotalSymbols()
+	public int getTotalSymbols()
 	{
 		return (gears + compass + tablets);
 	}
 	
-	public int VictoryPointsValue()
+	public int victoryPointsValue()
 	{
 		int min;
 		if ( gears < compass ) min = Math.min(gears, tablets);
@@ -50,17 +50,17 @@ public class ScientificSymbols {
 		return ((int)Math.pow(gears, 2) + (int)Math.pow(compass, 2) + (int)Math.pow(tablets,  2));
 	}
 	
-	public void AddGears(int amount)
+	public void addGears(int amount)
 	{
 		gears += amount;
 	}
 	
-	public void AddCompass(int amount)
+	public void addCompass(int amount)
 	{
 		compass += amount;
 	}
 	
-	public void AddTablets(int amount)
+	public void addTablets(int amount)
 	{
 		tablets += amount;
 	}
@@ -72,7 +72,7 @@ public class ScientificSymbols {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ScientificSymbols sym = new ScientificSymbols(3, 4, 2);
-		System.out.println(sym.VictoryPointsValue());
+		System.out.println(sym.victoryPointsValue());
 	}
 
 }

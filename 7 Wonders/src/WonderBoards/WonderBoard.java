@@ -100,7 +100,7 @@ public class WonderBoard {
 	//builds a structure on this wonderboard
 	public void BuildStructure(Structure s)
 	{
-		switch ( s.GetColor() )
+		switch ( s.getColor() )
 		{
 			case Structure.RED_CARD:
 				RedCards.add(s);
@@ -130,7 +130,7 @@ public class WonderBoard {
 		
 		for( int i = 0; i < RedCards.size(); ++i )
 		{
-			if ( RedCards.get(i).GetID() == id )
+			if ( RedCards.get(i).getID() == id )
 			{
 				retValue = true;
 				break;
@@ -139,7 +139,7 @@ public class WonderBoard {
 		if ( retValue ) return retValue;
 		for( int i = 0; i < BlueCards.size(); ++i )
 		{
-			if ( BlueCards.get(i).GetID() == id )
+			if ( BlueCards.get(i).getID() == id )
 			{
 				retValue = true;
 				break;
@@ -148,7 +148,7 @@ public class WonderBoard {
 		if ( retValue ) return retValue;
 		for( int i = 0; i < BrownGreyCards.size(); ++i )
 		{
-			if ( BrownGreyCards.get(i).GetID() == id )
+			if ( BrownGreyCards.get(i).getID() == id )
 			{
 				retValue = true;
 				break;
@@ -157,7 +157,7 @@ public class WonderBoard {
 		if ( retValue ) return retValue;
 		for( int i = 0; i < YellowCards.size(); ++i )
 		{
-			if ( YellowCards.get(i).GetID() == id )
+			if ( YellowCards.get(i).getID() == id )
 			{
 				retValue = true;
 				break;
@@ -166,7 +166,7 @@ public class WonderBoard {
 		if ( retValue ) return retValue;
 		for( int i = 0; i < GreenCards.size(); ++i )
 		{
-			if ( GreenCards.get(i).GetID() == id )
+			if ( GreenCards.get(i).getID() == id )
 			{
 				retValue = true;
 				break;
@@ -175,7 +175,7 @@ public class WonderBoard {
 		if ( retValue ) return retValue;
 		for( int i = 0; i < PurpleCards.size(); ++i )
 		{
-			if ( PurpleCards.get(i).GetID() == id )
+			if ( PurpleCards.get(i).getID() == id )
 			{
 				retValue = true;
 				break;
@@ -200,7 +200,7 @@ public class WonderBoard {
 		int count = 0;
 		for ( Structure s : BrownGreyCards )
 		{
-			if ( s.GetColor() == Structure.BROWN_CARD )
+			if ( s.getColor() == Structure.BROWN_CARD )
 				++count;
 		}
 		return count;
@@ -211,7 +211,7 @@ public class WonderBoard {
 		int count = 0;
 		for ( Structure s : BrownGreyCards )
 		{
-			if ( s.GetColor() == Structure.GREY_CARD )
+			if ( s.getColor() == Structure.GREY_CARD )
 				++count;
 		}
 		return count;

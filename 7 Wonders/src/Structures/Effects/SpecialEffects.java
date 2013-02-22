@@ -24,7 +24,7 @@ public class SpecialEffects {
 		this.type = type;
 	}
 	
-	public int GetType()
+	public int getType()
 	{
 		return type;
 	}
@@ -34,7 +34,7 @@ public class SpecialEffects {
 		return usedUp;
 	}
 	
-	public void Reset()
+	public void reset()
 	{
 		if ( type == RELOAD_EVERY_TURN || type == RELOAD_EVERY_AGE )
 		{

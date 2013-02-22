@@ -11,178 +11,178 @@ public class Resources {
 	public static final int PAPYRUS_ID = 7;
 	public static final int COINS_ID = 8;
 	
-	private int Ore, Stone, Wood, Clay, Glass, Loom, Papyrus, Coins;
+	private int ore, stone, wood, clay, glass, loom, papyrus, coins;
 	
 	public Resources()
 	{
-		Ore = 0;
-		Stone = 0;
-		Wood = 0;
-		Clay = 0;
-		Glass = 0;
-		Loom = 0;
-		Papyrus = 0;
-		Coins = 0;
+		ore = 0;
+		stone = 0;
+		wood = 0;
+		clay = 0;
+		glass = 0;
+		loom = 0;
+		papyrus = 0;
+		coins = 0;
 	}
 	
 	public Resources(int ore, int stone, int wood, int clay, int glass, int loom, int papyrus, int coins)
 	{
-		Ore = ore;
-		Stone = stone;
-		Wood = wood;
-		Clay = clay;
-		Glass = glass;
-		Loom = loom;
-		Papyrus = papyrus;
-		Coins = coins;
+		this.ore = ore;
+		this.stone = stone;
+		this.wood = wood;
+		this.clay = clay;
+		this.glass = glass;
+		this.loom = loom;
+		this.papyrus = papyrus;
+		this.coins = coins;
 	}
 	
-	public boolean CanAfford(Resources funds)
+	public boolean canAfford(Resources funds)
 	{
 		//If any of these cases are not satisfied return false;
-		if ( funds.Clay < Clay )
+		if ( funds.clay < clay )
 			return false;
-		if ( funds.Glass < Glass )
+		if ( funds.glass < glass )
 			return false;
-		if ( funds.Loom < Loom )
+		if ( funds.loom < loom )
 			return false;
-		if ( funds.Ore < Ore )
+		if ( funds.ore < ore )
 			return false;
-		if ( funds.Papyrus < Papyrus )
+		if ( funds.papyrus < papyrus )
 			return false;
-		if ( funds.Stone < Stone )
+		if ( funds.stone < stone )
 			return false;
-		if ( funds.Wood < Wood )
+		if ( funds.wood < wood )
 			return false;
-		if ( funds.Coins < Coins )
+		if ( funds.coins < coins )
 			return false;
 		
 		//otherwise return true;
 		return true;
 	}
 	
-	public int GetCoins()
+	public int getCoins()
 	{
-		return Coins;
+		return coins;
 	}
 	
-	public int GetOre()
+	public int getOre()
 	{
-		return Ore;
+		return ore;
 	}
 	
-	public int GetStone()
+	public int getStone()
 	{
-		return Stone;
+		return stone;
 	}
 	
-	public int GetWood()
+	public int getWood()
 	{
-		return Wood;
+		return wood;
 	}
 	
-	public int GetClay()
+	public int getClay()
 	{
-		return Clay;
+		return clay;
 	}
 	
-	public int GetGlass()
+	public int getGlass()
 	{
-		return Glass;
+		return glass;
 	}
 	
-	public int GetLoom()
+	public int getLoom()
 	{
-		return Loom;
+		return loom;
 	}
 	
-	public int GetPapyrus()
+	public int getPapyrus()
 	{
-		return Papyrus;
+		return papyrus;
 	}
 	
-	public void AddCoins(int coins)
+	public void addCoins(int coins)
 	{
-		Coins += coins;
+		coins += coins;
 	}
 	
-	public void AddOre(int ore)
+	public void addOre(int ore)
 	{
-		Ore += ore;
+		ore += ore;
 	}
 	
-	public void AddStone(int stone)
+	public void addStone(int stone)
 	{
-		Stone += stone;
+		stone += stone;
 	}
 	
-	public void AddWood(int wood)
+	public void addWood(int wood)
 	{
-		Wood += wood;
+		wood += wood;
 	}
 	
-	public void AddClay(int clay)
+	public void addClay(int clay)
 	{
-		Clay += clay;
+		clay += clay;
 	}
 	
-	public void AddGlass(int glass)
+	public void addGlass(int glass)
 	{
-		Glass += glass;
+		glass += glass;
 	}
 	
-	public void AddLoom(int loom)
+	public void addLoom(int loom)
 	{
-		Loom += loom;
+		loom += loom;
 	}
 	
-	public void AddPapyrus(int papyrus)
+	public void addPapyrus(int papyrus)
 	{
-		Papyrus += papyrus;
+		papyrus += papyrus;
 	}
 	
-	public void AddResources(int ore, int stone, int wood, int clay, int glass, int loom, int papyrus, int coins)
+	public void addResources(int ore, int stone, int wood, int clay, int glass, int loom, int papyrus, int coins)
 	{
-		Coins += coins;
-		Ore += ore;
-		Stone += stone;
-		Wood += wood;
-		Clay += clay;
-		Glass += glass;
-		Loom += loom;
-		Papyrus += papyrus;
+		this.coins += coins;
+		this.ore += ore;
+		this.stone += stone;
+		this.wood += wood;
+		this.clay += clay;
+		this.glass += glass;
+		this.loom += loom;
+		this.papyrus += papyrus;
 	}
 	
-	public void AddResources(Resources resources)
+	public void addResources(Resources resources)
 	{
-		Coins += resources.Coins;
-		Ore += resources.Ore;
-		Stone += resources.Stone;
-		Wood += resources.Wood;
-		Clay += resources.Clay;
-		Glass += resources.Glass;
-		Loom += resources.Loom;
-		Papyrus += resources.Papyrus;
+		coins += resources.coins;
+		ore += resources.ore;
+		stone += resources.stone;
+		wood += resources.wood;
+		clay += resources.clay;
+		glass += resources.glass;
+		loom += resources.loom;
+		papyrus += resources.papyrus;
 	}
 	
-	public static Resources AddResources(Resources a, Resources b)
+	public static Resources addResources(Resources a, Resources b)
 	{
 		Resources r = new Resources();
-		r.Clay    = a.Clay + b.Clay;
-		r.Coins   = a.Coins + b.Coins;
-		r.Ore     = a.Ore + b.Ore;
-		r.Stone   = a.Stone + b.Stone;
-		r.Wood    = a.Wood + b.Wood;
-		r.Glass   = a.Glass + b.Glass;
-		r.Loom    = a.Loom + b.Loom;
-		r.Papyrus = a.Papyrus + b.Papyrus;
+		r.clay    = a.clay + b.clay;
+		r.coins   = a.coins + b.coins;
+		r.ore     = a.ore + b.ore;
+		r.stone   = a.stone + b.stone;
+		r.wood    = a.wood + b.wood;
+		r.glass   = a.glass + b.glass;
+		r.loom    = a.loom + b.loom;
+		r.papyrus = a.papyrus + b.papyrus;
 		return r;
 	}
 	
 	
 	public String toString()
 	{
-		return ("Ore: " + Ore + "\nStone: " + Stone + "\nWood: " + Wood + "\nClay: " + Clay + "\nGlass: " + Glass + "\nLoom: " + Loom + "\nPapyrus: " + Papyrus + "\nCoins: " + Coins);
+		return ("Ore: " + ore + "\nStone: " + stone + "\nWood: " + wood + "\nClay: " + clay + "\nGlass: " + glass + "\nLoom: " + loom + "\nPapyrus: " + papyrus + "\nCoins: " + coins);
 	}
 	
 	/**

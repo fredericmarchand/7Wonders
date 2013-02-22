@@ -18,55 +18,55 @@ public class ResourceChoice extends SpecialEffects {
 		purchaseable = bought;
 	}
 	
-	public boolean ChooseResource(int id)
+	public boolean chooseResource(int id)
 	{
 		if ( usedUp ) return false;
 		switch ( id )
 		{
 			case Resources.ORE_ID:
-				if ( possible.GetOre() > 0 )
+				if ( possible.getOre() > 0 )
 				{
 					choice = new Resources(1, 0, 0, 0, 0, 0, 0, 0);
 					return true;
 				}
 				break;
 			case Resources.STONE_ID:
-				if ( possible.GetStone() > 0 )
+				if ( possible.getStone() > 0 )
 				{
 					choice = new Resources(0, 1, 0, 0, 0, 0, 0, 0);
 					return true;
 				}
 				break;
 			case Resources.WOOD_ID:
-				if ( possible.GetWood() > 0 )
+				if ( possible.getWood() > 0 )
 				{
 					choice = new Resources(0, 0, 1, 0, 0, 0, 0, 0);
 					return true;
 				}
 				break;
 			case Resources.CLAY_ID:
-				if ( possible.GetClay() > 0 )
+				if ( possible.getClay() > 0 )
 				{
 					choice = new Resources(0, 0, 0, 1, 0, 0, 0, 0);
 					return true;
 				}
 				break;
 			case Resources.GLASS_ID:
-				if ( possible.GetGlass() > 0 )
+				if ( possible.getGlass() > 0 )
 				{
 					choice = new Resources(0, 0, 0, 0, 1, 0, 0, 0);
 					return true;
 				}
 				break;
 			case Resources.LOOM_ID:
-				if ( possible.GetLoom() > 0 )
+				if ( possible.getLoom() > 0 )
 				{
 					choice = new Resources(0, 0, 0, 0, 0, 1, 0, 0);
 					return true;
 				}
 				break;
 			case Resources.PAPYRUS_ID:
-				if ( possible.GetPapyrus() > 0 )
+				if ( possible.getPapyrus() > 0 )
 				{
 					choice = new Resources(0, 0, 0, 0, 0, 0, 1, 0);
 					return true;
@@ -77,17 +77,17 @@ public class ResourceChoice extends SpecialEffects {
 		return false;
 	}
 	
-	public Resources GetPossibilities()
+	public Resources getPossibilities()
 	{
 		return possible;
 	}
 	
-	public Resources GetChoice()
+	public Resources getChoice()
 	{
 		return choice;
 	}
 
-	public boolean CanBeBought()
+	public boolean canBeBought()
 	{
 		return purchaseable;
 	}
@@ -96,9 +96,9 @@ public class ResourceChoice extends SpecialEffects {
 	public static void main(String args[])
 	{
 		ResourceChoice c = new ResourceChoice(1, 0, 0, 1, 0, 0, 0, true);
-		System.out.println(c.GetPossibilities().toString());
-		if ( c.ChooseResource(4) )
-			System.out.println("\n" + c.GetChoice().toString());
+		System.out.println(c.getPossibilities().toString());
+		if ( c.chooseResource(4) )
+			System.out.println("\n" + c.getChoice().toString());
 		else System.out.println("\nInvalid");
 	}
 	

@@ -5,7 +5,10 @@ import Player.Player;
 
 public class Match {
 
+	
+	@SuppressWarnings("unused")
 	private ArrayList<Player> players;
+	@SuppressWarnings("unused")
 	private int age, turn;
 	
 	
@@ -18,6 +21,7 @@ public class Match {
 	
 	public static void RunGame()
 	{
+		@SuppressWarnings("unused")
 		Match newMatch = new Match();
 		
 	}

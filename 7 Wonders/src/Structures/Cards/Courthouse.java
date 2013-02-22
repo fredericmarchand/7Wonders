@@ -13,7 +13,7 @@ public class Courthouse extends Structure {
 		super(new Resources(0, 0, 0, 2, 0, 1, 0, 0), CourthouseID, "Courthouse", BLUE_CARD, 2);
 	}
 	
-	public boolean CanBuildForFree(WonderBoard wb)
+	public boolean canBuildForFree(WonderBoard wb)
 	{
 		return wb.ContainsCard(Scriptorium.ScriptoriumID);
 	}

@@ -13,7 +13,7 @@ public class Caravansery extends Structure {
 		super(new Resources(0, 0, 2, 0, 0, 0, 0, 0), CaravanseryID, "Caravansery", YELLOW_CARD, 2);
 	}
 	
-	public boolean CanBuildForFree(WonderBoard wb)
+	public boolean canBuildForFree(WonderBoard wb)
 	{
 		return wb.ContainsCard(Marketplace.MarketplaceID);
 	}

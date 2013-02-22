@@ -14,7 +14,7 @@ public class Fortifications extends Structure {
 		super(new Resources(3, 1, 0, 0, 0, 0, 0, 0), FortificationsID, "Fortifications", RED_CARD, 3);
 	}
 
-	public boolean CanBuildForFree(WonderBoard wb)
+	public boolean canBuildForFree(WonderBoard wb)
 	{
 		return wb.ContainsCard(Walls.WallsID);
 	}

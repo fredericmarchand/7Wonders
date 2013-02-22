@@ -13,10 +13,10 @@ public class CoinBonus extends SpecialEffects {
 		amountOfCoins = coins;
 	}
 	
-	public void AcquireCoins(Resources funds)
+	public void acquireCoins(Resources funds)
 	{
 		if ( !usedUp )
-			funds.AddCoins(amountOfCoins);
+			funds.addCoins(amountOfCoins);
 		usedUp = true;
 	}
 	
@@ -25,7 +25,7 @@ public class CoinBonus extends SpecialEffects {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

@@ -14,7 +14,7 @@ public class Statue extends Structure {
 		super(new Resources(2, 0, 1, 0, 0, 0, 0, 0), StatueID, "Statue", BLUE_CARD, 2);
 	}
 	
-	public boolean CanBuildForFree(WonderBoard wb)
+	public boolean canBuildForFree(WonderBoard wb)
 	{
 		return wb.ContainsCard(Theater.TheaterID);
 	}

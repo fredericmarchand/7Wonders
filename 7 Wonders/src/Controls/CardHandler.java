@@ -3,13 +3,7 @@ package Controls;
 import Structures.*;
 import Structures.Cards.*;
 import WonderBoards.*;
-import WonderBoards.Boards.TheColossusOfRhodes;
-import WonderBoards.Boards.TheHangingGardensOfBabylon;
-import WonderBoards.Boards.TheLighthouseOfAlexandria;
-import WonderBoards.Boards.TheMausoleumOfHalicarnassus;
-import WonderBoards.Boards.ThePyramidsOfGiza;
-import WonderBoards.Boards.TheStatueOfZeusInOlympia;
-import WonderBoards.Boards.TheTempleOfArtemisInEphesus;
+import WonderBoards.Boards.*;
 import Player.Player;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -241,7 +235,7 @@ public class CardHandler {
 		int index = 0;
 		for ( Structure s: deck )
 		{
-			players.get(index).AssignCard(s);
+			players.get(index).assignCard(s);
 			++index;
 			if ( index == players.size() )
 				index = 0;
@@ -265,7 +259,7 @@ public class CardHandler {
 		
 		for ( Player p: players )
 		{
-			p.AssignWonderBoard(boards.get(index));
+			p.assignWonderBoard(boards.get(index));
 			++index;
 		}
 	}
@@ -277,21 +271,21 @@ public class CardHandler {
 		//cards are passed to the right in age 2
 		if ( age == 2 )
 		{
-			hold.addAll(players.get(players.size()-1).GetCards());
+			hold.addAll(players.get(players.size()-1).getCards());
 			for ( int i = players.size()-1; i > 0; --i )
 			{
-				players.get(i).AssignCards(players.get(i-1).GetCards());
+				players.get(i).assignCards(players.get(i-1).getCards());
 			}
-			players.get(0).AssignCards(hold);
+			players.get(0).assignCards(hold);
 		}
 		else //cards are passed to the left in ages 1 and 3
 		{
-			hold.addAll(players.get(0).GetCards());
+			hold.addAll(players.get(0).getCards());
 			for ( int i = 0; i < players.size()-1; ++i )
 			{
-				players.get(i).AssignCards(players.get(i+1).GetCards());
+				players.get(i).assignCards(players.get(i+1).getCards());
 			}
-			players.get(players.size()-1).AssignCards(hold);
+			players.get(players.size()-1).assignCards(hold);
 		}	
 	}
 	
@@ -314,10 +308,10 @@ public class CardHandler {
 		DistributeCards(players, 2);
 		for ( Player p : players )
 		{
-			System.out.println("\n" + p.GetWonderBoard().GetBoardName());
-			for ( Structure s: p.GetCards() )
+			System.out.println("\n" + p.getWonderBoard().GetBoardName());
+			for ( Structure s: p.getCards() )
 			{
-				System.out.println(s.GetName());
+				System.out.println(s.getName());
 			}
 		}
 		
@@ -325,10 +319,10 @@ public class CardHandler {
 		
 		for ( Player p : players )
 		{
-			System.out.println("\n" + p.GetWonderBoard().GetBoardName());
-			for ( Structure s: p.GetCards() )
+			System.out.println("\n" + p.getWonderBoard().GetBoardName());
+			for ( Structure s: p.getCards() )
 			{
-				System.out.println(s.GetName());
+				System.out.println(s.getName());
 			}
 		}
 		

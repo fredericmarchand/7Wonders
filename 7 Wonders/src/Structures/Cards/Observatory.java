@@ -14,7 +14,7 @@ public class Observatory extends Structure {
 		super(new Resources(2, 0, 0, 0, 1, 1, 0, 0), ObservatoryID, "Observatory", GREEN_CARD, 3);
 	}
 	
-	public boolean CanBuildForFree(WonderBoard wb)
+	public boolean canBuildForFree(WonderBoard wb)
 	{
 		return wb.ContainsCard(Laboratory.LaboratoryID);
 	}

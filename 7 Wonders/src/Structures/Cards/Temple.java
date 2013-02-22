@@ -14,7 +14,7 @@ public class Temple extends Structure {
 		super(new Resources(0, 0, 1, 1, 1, 0, 0, 0), TempleID, "Temple", BLUE_CARD, 2);
 	}
 	
-	public boolean CanBuildForFree(WonderBoard wb)
+	public boolean canBuildForFree(WonderBoard wb)
 	{
 		return wb.ContainsCard(Altar.AltarID);
 	}

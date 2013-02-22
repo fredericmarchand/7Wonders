@@ -13,9 +13,11 @@ public class Player {
 	private WonderBoard wonderBoard;
 	private ArrayList<Structure> cards;
 	private Structure chosenCard;
+	@SuppressWarnings("unused")
 	private Resources resources, purchased, unavailableResources;
 	private int shields;
 	private MilitaryVictoryTokens militaryVictoryPoints;
+	private int victoryPoints;
 	
 	//constructors
 	public Player()
@@ -30,6 +32,7 @@ public class Player {
 		unavailableResources = new Resources();
 		militaryVictoryPoints = new MilitaryVictoryTokens();
 		shields = 0;
+		victoryPoints = 0;
 	}
 	
 	public Player(String uname, int id)
@@ -44,84 +47,95 @@ public class Player {
 		unavailableResources = new Resources();
 		militaryVictoryPoints = new MilitaryVictoryTokens();
 		shields = 0;
+		victoryPoints = 0;
 	}
 
 	//getters
-	public String GetUsername()
+	public String getUsername()
 	{
 		return username;
 	}
 	
-	public int GetID()
+	public int getID()
 	{
 		return ID;
 	}
 	
-	public ArrayList<Structure> GetCards()
+	public ArrayList<Structure> getCards()
 	{
 		return cards;
 	}
 	
-	public WonderBoard GetWonderBoard()
+	public WonderBoard getWonderBoard()
 	{
 		return wonderBoard;
 	}
 	
-	public Structure GetChosenCard()
+	public Structure getChosenCard()
 	{
 		return chosenCard;
 	}
 	
-	public int GetShields()
+	public int getShields()
 	{
 		return shields;
 	}
 	
-	public Resources GetResources()
+	public Resources getResources()
 	{
 		return resources;
 	}
 	
-	public MilitaryVictoryTokens GetMilitaryVictoryTokens()
+	public int getVictoryPoints()
+	{
+		return victoryPoints;
+	}
+	
+	public MilitaryVictoryTokens getMilitaryVictoryTokens()
 	{
 		return militaryVictoryPoints;
 	}
 	
 	
 	//actions
-	public void AssignWonderBoard(WonderBoard wb)
+	public void assignWonderBoard(WonderBoard wb)
 	{
 		wonderBoard = wb;
 	}
 		
-	public void AssignCard(Structure s)
+	public void assignCard(Structure s)
 	{
 		if ( cards.size() < 7 ) cards.add(s);
 	}
 	
-	public void AssignCards(ArrayList<Structure> newCards)
+	public void assignCards(ArrayList<Structure> newCards)
 	{
 		cards = newCards;
 	}
 	
-	public void ChooseCard(int index)
+	public void chooseCard(int index)
 	{
 		chosenCard = cards.remove(index);
 	}
 	
-	public void AddShields(int s)
+	public void addShields(int s)
 	{
 		shields += s;
 	}
 	
+	public void addVictoryPoints(int points)
+	{
+		victoryPoints = points;
+	}
 	
 	
-	public boolean ActionPhase(int choice)
+	
+	public boolean actionPhase(int choice)
 	{
 		switch ( choice )
 		{
 		case 1://build the structure
-			if ( chosenCard.GetResourceCost().CanAfford(resources) && !wonderBoard.ContainsCard(chosenCard.GetID()) )
+			if ( chosenCard.getResourceCost().canAfford(resources) && !wonderBoard.ContainsCard(chosenCard.getID()) )
 			{
 				wonderBoard.BuildStructure(chosenCard);
 				chosenCard = null;
@@ -134,14 +148,14 @@ public class Player {
 			break;
 			
 		case 3://discard the card for coins
-			resources.AddCoins(3); 
+			resources.addCoins(3); 
 			chosenCard = null;
 			return true;
 		}
 		return false;
 	}
 	
-	public void BuyResources(Player neighbor)
+	public void buyResources(Player neighbor)
 	{
 		//check for cards with trading perks
 		//2 coins per resource purchased

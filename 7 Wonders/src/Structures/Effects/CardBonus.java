@@ -1,6 +1,5 @@
 package Structures.Effects;
 
-import Resources.Resources;
 import Structures.Structure;
 import Player.Player;
 
@@ -18,32 +17,32 @@ public class CardBonus extends SpecialEffects {
 		cardColor = color;
 	}
 	
-	public void AcquireCoins(Player you, Player rightNeighbor, Player leftNeighbor)
+	public void acquireCoins(Player you, Player rightNeighbor, Player leftNeighbor)
 	{
 		if ( !usedUp )
 		{
 			switch ( cardColor )
 			{
 				case Structure.RED_CARD:
-					you.GetResources().AddCoins(amountOfCoins * (you.GetWonderBoard().GetRedCardAmount() + rightNeighbor.GetWonderBoard().GetRedCardAmount() + leftNeighbor.GetWonderBoard().GetRedCardAmount()));
+					you.getResources().addCoins(amountOfCoins * (you.getWonderBoard().GetRedCardAmount() + rightNeighbor.getWonderBoard().GetRedCardAmount() + leftNeighbor.getWonderBoard().GetRedCardAmount()));
 					break;
 				case Structure.BLUE_CARD:
-					you.GetResources().AddCoins(amountOfCoins * (you.GetWonderBoard().GetBlueCardAmount() + rightNeighbor.GetWonderBoard().GetBlueCardAmount() + leftNeighbor.GetWonderBoard().GetBlueCardAmount()));
+					you.getResources().addCoins(amountOfCoins * (you.getWonderBoard().GetBlueCardAmount() + rightNeighbor.getWonderBoard().GetBlueCardAmount() + leftNeighbor.getWonderBoard().GetBlueCardAmount()));
 					break;
 				case Structure.BROWN_CARD:
-					you.GetResources().AddCoins(amountOfCoins * (you.GetWonderBoard().GetBrownCardAmount() + rightNeighbor.GetWonderBoard().GetBrownCardAmount() + leftNeighbor.GetWonderBoard().GetBrownCardAmount()));
+					you.getResources().addCoins(amountOfCoins * (you.getWonderBoard().GetBrownCardAmount() + rightNeighbor.getWonderBoard().GetBrownCardAmount() + leftNeighbor.getWonderBoard().GetBrownCardAmount()));
 					break;
 				case Structure.GREY_CARD:
-					you.GetResources().AddCoins(amountOfCoins * (you.GetWonderBoard().GetGreyCardAmount() + rightNeighbor.GetWonderBoard().GetGreyCardAmount() + leftNeighbor.GetWonderBoard().GetGreyCardAmount()));
+					you.getResources().addCoins(amountOfCoins * (you.getWonderBoard().GetGreyCardAmount() + rightNeighbor.getWonderBoard().GetGreyCardAmount() + leftNeighbor.getWonderBoard().GetGreyCardAmount()));
 					break;
 				case Structure.GREEN_CARD:
-					you.GetResources().AddCoins(amountOfCoins * (you.GetWonderBoard().GetGreenCardAmount() + rightNeighbor.GetWonderBoard().GetGreenCardAmount() + leftNeighbor.GetWonderBoard().GetGreenCardAmount()));
+					you.getResources().addCoins(amountOfCoins * (you.getWonderBoard().GetGreenCardAmount() + rightNeighbor.getWonderBoard().GetGreenCardAmount() + leftNeighbor.getWonderBoard().GetGreenCardAmount()));
 					break;
 				case Structure.YELLOW_CARD:
-					you.GetResources().AddCoins(amountOfCoins * (you.GetWonderBoard().GetYellowCardAmount() + rightNeighbor.GetWonderBoard().GetYellowCardAmount() + leftNeighbor.GetWonderBoard().GetYellowCardAmount()));
+					you.getResources().addCoins(amountOfCoins * (you.getWonderBoard().GetYellowCardAmount() + rightNeighbor.getWonderBoard().GetYellowCardAmount() + leftNeighbor.getWonderBoard().GetYellowCardAmount()));
 					break;
 				case Structure.PURPLE_CARD:
-					you.GetResources().AddCoins(amountOfCoins * (you.GetWonderBoard().GetPurpleCardAmount() + rightNeighbor.GetWonderBoard().GetPurpleCardAmount() + leftNeighbor.GetWonderBoard().GetPurpleCardAmount()));
+					you.getResources().addCoins(amountOfCoins * (you.getWonderBoard().GetPurpleCardAmount() + rightNeighbor.getWonderBoard().GetPurpleCardAmount() + leftNeighbor.getWonderBoard().GetPurpleCardAmount()));
 					break;
 			}
 		}
