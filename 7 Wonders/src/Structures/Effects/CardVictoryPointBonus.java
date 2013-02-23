@@ -12,7 +12,7 @@ public class CardVictoryPointBonus extends SpecialEffects {
 	
 	public CardVictoryPointBonus(int vPoints, boolean neighbors, int color)
 	{
-		super(CardVictoryPointBonusID, false, NO_RELOAD);
+		super(CardVictoryPointBonusID, false, NO_RELOAD, END_OF_GAME);
 		amountOfPoints = vPoints;
 		onlyNeighbors = neighbors;
 		cardColor = color;

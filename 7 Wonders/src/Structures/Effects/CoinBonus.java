@@ -9,7 +9,7 @@ public class CoinBonus extends SpecialEffects {
 	
 	public CoinBonus(int coins)
 	{
-		super(CoinBonusID, false, NO_RELOAD);
+		super(CoinBonusID, false, NO_RELOAD, END_OF_TURN);
 		amountOfCoins = coins;
 	}
 	

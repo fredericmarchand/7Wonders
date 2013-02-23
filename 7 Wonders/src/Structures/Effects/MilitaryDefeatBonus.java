@@ -8,7 +8,7 @@ public class MilitaryDefeatBonus extends SpecialEffects {
 	
 	public MilitaryDefeatBonus()
 	{
-		super(MilitaryDefeatBonusID, false, NO_RELOAD);
+		super(MilitaryDefeatBonusID, false, NO_RELOAD, END_OF_GAME);
 	}
 	
 	public void acquireVictoryPoints(Player you, Player leftNeighbor, Player rightNeighbor)

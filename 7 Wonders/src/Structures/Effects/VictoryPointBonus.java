@@ -9,7 +9,7 @@ public class VictoryPointBonus extends SpecialEffects {
 	
 	public VictoryPointBonus(int points)
 	{
-		super(VictoryPointBonusID, false, NO_RELOAD);
+		super(VictoryPointBonusID, false, NO_RELOAD, END_OF_GAME);
 		amountOfPoints = points;
 	}
 	

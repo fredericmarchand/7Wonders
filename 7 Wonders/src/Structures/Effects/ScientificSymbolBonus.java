@@ -10,14 +10,14 @@ public class ScientificSymbolBonus extends SpecialEffects {
 	
 	public ScientificSymbolBonus()
 	{
-		super(ShieldBonusID, false, NO_RELOAD);
+		super(ShieldBonusID, false, NO_RELOAD, END_OF_GAME);
 		symbolType = 0;
 		choose = true;
 	}
 	
 	public ScientificSymbolBonus(int symbol)
 	{
-		super(ShieldBonusID, false, NO_RELOAD);
+		super(ShieldBonusID, false, NO_RELOAD, END_OF_GAME);
 		symbolType = symbol;
 		choose = false;
 	}

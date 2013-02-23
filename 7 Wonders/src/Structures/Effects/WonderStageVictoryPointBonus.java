@@ -11,7 +11,7 @@ public class WonderStageVictoryPointBonus extends SpecialEffects {
 	
 	public WonderStageVictoryPointBonus(int vPoints, boolean neighbors)
 	{
-		super(WonderStageCoinBonusID, false, NO_RELOAD);
+		super(WonderStageCoinBonusID, false, NO_RELOAD, END_OF_GAME);
 		amountOfPoints = vPoints;
 		includeNeighbors = neighbors;
 	}

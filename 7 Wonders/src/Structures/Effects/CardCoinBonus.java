@@ -13,7 +13,7 @@ public class CardCoinBonus extends SpecialEffects {
 	
 	public CardCoinBonus(int coins, int color, boolean neighbors)
 	{
-		super(CardBonusID, false, NO_RELOAD);
+		super(CardBonusID, false, NO_RELOAD, END_OF_TURN);
 		amountOfCoins = coins;
 		cardColor = color;
 		includeNeighbors = neighbors;

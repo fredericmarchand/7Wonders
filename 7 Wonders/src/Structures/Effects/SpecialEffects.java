@@ -6,22 +6,30 @@ public class SpecialEffects {
 	protected static final int RELOAD_EVERY_TURN = 1;
 	protected static final int RELOAD_EVERY_AGE = 2;
 	
+	protected static final int END_OF_TURN = 0;
+	protected static final int START_OF_TURN = 1;
+	protected static final int IN_TURN = 2;
+	protected static final int END_OF_GAME = 3;
+	
 	protected int ID;
 	protected boolean usedUp;
 	protected int type;
+	protected int activation;
 	
 	public SpecialEffects()
 	{
 		ID = 0;
 		usedUp = true;
 		type = NO_RELOAD;
+		activation = 2;
 	}
 	
-	public SpecialEffects(int id, boolean used, int type)
+	public SpecialEffects(int id, boolean used, int type, int act)
 	{
 		ID = id;
 		usedUp = used;
 		this.type = type;
+		activation = act;
 	}
 	
 	public int getType()
@@ -32,6 +40,11 @@ public class SpecialEffects {
 	public boolean isUsedUp()
 	{
 		return usedUp;
+	}
+	
+	public int activate()
+	{
+		return activation;
 	}
 	
 	public void reset()

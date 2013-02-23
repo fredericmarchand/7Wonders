@@ -25,7 +25,7 @@ public class TradingPerks extends SpecialEffects {
 	
 	public TradingPerks(int partner, boolean resourceType, int price)
 	{
-		super(TradingPerksID, true, RELOAD_EVERY_TURN);
+		super(TradingPerksID, true, RELOAD_EVERY_TURN, IN_TURN);
 		this.partner = partner;
 		if ( resourceType == Primary )
 			possibilities = new Resources(1, 1, 1, 1, 0, 0, 0, 0);

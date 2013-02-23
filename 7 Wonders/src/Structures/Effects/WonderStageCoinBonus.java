@@ -10,7 +10,7 @@ public class WonderStageCoinBonus extends SpecialEffects {
 	
 	public WonderStageCoinBonus(int coins)
 	{
-		super(WonderStageCoinBonusID, false, NO_RELOAD);
+		super(WonderStageCoinBonusID, false, NO_RELOAD, END_OF_TURN);
 		amountOfCoins = coins;
 	}
 	

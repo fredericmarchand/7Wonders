@@ -12,7 +12,7 @@ public class ResourceChoice extends SpecialEffects {
 	
 	public ResourceChoice(int ore, int stone, int wood, int clay, int glass, int loom, int papyrus, boolean bought)
 	{
-		super(ResourceChoiceID, true, RELOAD_EVERY_TURN);
+		super(ResourceChoiceID, true, RELOAD_EVERY_TURN, START_OF_TURN);
 		possible = new Resources(ore, stone, wood, clay, glass, loom, papyrus, 0);
 		choice = null;
 		purchaseable = bought;
