@@ -37,7 +37,7 @@ public class NetworkListener extends Listener{
 	public void received(Connection c, Object o) {
 		
 		Log.info("[SERVER] Received packet" );
-		System.out.println(o);
+		//System.out.println(o);
 		
 		if(o instanceof Packet0LoginRequest){
 			Packet1LoginAnswer loginAnswer = new Packet1LoginAnswer();
@@ -45,23 +45,29 @@ public class NetworkListener extends Listener{
 			c.sendTCP(loginAnswer);
 		}
 		//modify to handle objects from game
-		if(o instanceof Packet2Message){
-			
-			
-			
+		if(o instanceof Packet2Message){			
 			String message = (String)((Packet2Message)o).getObject();
+			System.out.println(message);
 			if(message.equals("CREATE")){
 				Log.info("[SERVER ---------- CREATE Received packet" );
 				mserver.createMatch();
 			}
-			else if(message.equals("JOIN")){
+			if(message.equals("JOIN")){
 				Log.info("[SERVER ---------- JOIN Received packet" );
 				Packet4Object l = new Packet4Object();
 				l.setID(1);
 				l.setObject(mserver.getMatchList());
 				c.sendTCP(l);
 			}
-			Log.info(message);
+			if(message.equals("LIST")){
+				System.out.println("[SERVER ---------- LIST Received packet" );
+				Packet4Object l = new Packet4Object();
+				l.setID(1);
+				l.setObject(mserver.getMatchList());
+				
+				c.sendTCP(l);
+			}
+			
 		}	
 		//modify connectivity
 		if(o instanceof Packet3Connection){

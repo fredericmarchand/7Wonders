@@ -19,7 +19,6 @@ public class MServer {
 	private Server server;
 	private ArrayList<Object> list;
 	private ArrayList<Match> matchList;
-	private long counter = 1000;
 	Scanner scanner = new Scanner(System.in);
 	
 	public MServer() throws IOException{
@@ -37,11 +36,10 @@ public class MServer {
 		server.start();
 		
 	}
-	public void createMatch(){
-		matchList.add(new Match(counter));
-		counter++;
-		for(Object m: matchList)
-			System.out.println(m);
+	public void createMatch(){		
+		matchList.add(new Match());
+		for(Match m: matchList)
+			System.out.println(m.getMatch_ID());
 	}
 	
 	

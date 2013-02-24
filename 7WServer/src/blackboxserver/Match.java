@@ -7,12 +7,17 @@ import com.esotericsoftware.kryonet.Connection;
 public class Match {
 	
 	ArrayList<Connection> connected;
-    private static long match_id;
-
-	public Match(long i){
-		connected = new ArrayList<Connection>();
-		match_id = i;
-	}
+    private long match_id;
+    private static long counter = 1000;
+    
+    public Match(){
+    	connected = new ArrayList<Connection>();
+		match_id = ++counter;
+    }
+//	public Match(long i){
+//		connected = new ArrayList<Connection>();
+//		match_id = i;
+//	}
 
 	public ArrayList<Connection> getConnections(){return connected;}	
 	public void addConnection(Connection c){ connected.add(c);}

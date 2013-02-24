@@ -46,14 +46,17 @@ public class MClient {
 			int p = Integer.parseInt(scanner.next());
 			//given 50 seconds to input connect
 			//connection fails if no input
-			client.connect(50000,x,p);
+			//send request to server
+			client.connect(5000,x,p);
+			client.sendTCP(new Packet0LoginRequest());
+			
 			Scanner s = new Scanner(System.in);
-		        while(GAME_ALIVE){
-		        	String m = s.next();
-		            Packet2Message mpackage = new Packet2Message();
-			        mpackage.setObject(m);
-			        client.sendTCP(mpackage);		        	
-		        }
+	        while(GAME_ALIVE){
+	        	String m = s.next();
+	            Packet2Message mpackage = new Packet2Message();
+		        mpackage.setObject(m);
+		        client.sendTCP(mpackage);		        	
+	        }
 		    
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -69,27 +72,34 @@ public class MClient {
     	kryo.register(Packet2Message.class);
     	kryo.register(Packet3Connection.class);
     	kryo.register(Packet4Object.class);
-//    	kryo.register(java.util.ArrayList.class);
-//    	kryo.register(Match.class);
+    	kryo.register(java.util.ArrayList.class);
+    	kryo.register(Match.class);
+    	
+    	
     }
         
     public void joinMatch(ArrayList<Match> l){
-    	ArrayList<Object> id_list = new ArrayList<Object>();
-    	for(Match e : l){
-    		System.out.println(e.getMatch_ID());
-    		id_list.add(e.getMatch_ID());
-    	}
+    	Log.info("[CLIENT] Listing matches");
+    	if(!l.isEmpty()){
+	    	ArrayList<Long> id_list = new ArrayList<Long>();
+	    	for(Match e : l){
+	    		System.out.println(e.getMatch_ID());
+	    		id_list.add(e.getMatch_ID());
+	    	}
+    	
    
-    	Scanner s = new Scanner(System.in);
-    	long input = (long)(Integer.parseInt(s.next()));
-    	while(!id_list.contains(input)){
-    		Log.info("Match not found");
-    		input = (long)(Integer.parseInt(s.next()));
+	    	Scanner s = new Scanner(System.in);
+	    	long input = (long)(Integer.parseInt(s.next()));
+	    	while(!id_list.contains(input)){
+	    		Log.info("Match not found");
+	    		input = (long)(Integer.parseInt(s.next()));
+	    	}
+	    	//sendTCP of game ID
+	    	Packet4Object client_match_id = new Packet4Object();
+	    	client_match_id.setID(2);
+	    	client_match_id.setObject(input);
+	    	client.sendTCP(client_match_id);
     	}
-    	//sendTCP of game ID
-    	Packet4Object client_match_id = new Packet4Object();
-    	client_match_id.setID(2);
-    	client.sendTCP(client_match_id);
     }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

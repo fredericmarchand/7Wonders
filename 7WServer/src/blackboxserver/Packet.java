@@ -23,7 +23,6 @@ public class Packet {
 		// 2 = client match id
 		// 3 = client move
 		// 4 = client card
-		
 		private Object o;
 		private int id = 0;
 		public Object getObject(){ return o;}
