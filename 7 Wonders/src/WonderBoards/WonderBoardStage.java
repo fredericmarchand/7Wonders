@@ -6,6 +6,7 @@ import Resources.Resources;
 public class WonderBoardStage {
 
 	private Resources resourceCost;
+	@SuppressWarnings("unused")
 	private Structure card;
 	private boolean built;
 	
@@ -36,7 +37,7 @@ public class WonderBoardStage {
 	
 	public boolean Build(Structure card, Resources resources)
 	{
-		if ( resourceCost.CanAfford(resources) )
+		if ( resourceCost.canAfford(resources) )
 		{
 			this.card = new Structure(card);
 			built = true;

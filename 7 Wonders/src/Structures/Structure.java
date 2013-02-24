@@ -15,62 +15,62 @@ public class Structure {
 	
 	protected Resources resourceCost;
 	protected int ID;
-	protected String Name;
-	protected int Color;
-	protected int Age;
+	protected String name;
+	protected int color;
+	protected int age;
 	
 	//Constructors
 	public Structure()
 	{
 		resourceCost = new Resources();
 		ID = 0;
-		Name = "";
-		Color = INVALID;
-		Age = 0;
+		name = "";
+		color = INVALID;
+		age = 0;
 	}
 	
 	public Structure(Resources resourceCost, int id, String name, int color, int age)
 	{
 		this.resourceCost = resourceCost;
 		ID = id;
-		Name = name;
-		Color = color;
-		Age = age;
+		this.name = name;
+		this.color = color;
+		this.age = age;
 	}
 	
 	public Structure(Structure s)
 	{
 		resourceCost = s.resourceCost;
 		ID = s.ID;
-		Name = s.Name;
-		Color = s.Color;
-		Age = s.Age;
+		this.name = s.name;
+		this.color= s.color;
+		this.age = s.age;
 	}
 	
 	//getters
-	public Resources GetResourceCost()
+	public Resources getResourceCost()
 	{
 		return resourceCost;
 	}
 	
-	public int GetID()
+	public int getID()
 	{
 		return ID;
 	}
 	
-	public String GetName()
+	public String getName()
 	{
-		return Name;
+		return name;
 	}
 	
-	public int GetColor()
+	public int getColor()
 	{
-		return Color;
+		return color;
 	}
 	
-	public int GetAge()
+	public int getAge()
 	{
-		return Age;
+		return age;
 	}
 	
 	

@@ -2,59 +2,59 @@ package Tokens;
 
 public class MilitaryVictoryTokens {
 
-	private int OneTokens, ThreeTokens, FiveTokens, MinusOneTokens;
+	private int oneTokens, threeTokens, fiveTokens, minusOneTokens;
 	
 	public MilitaryVictoryTokens()
 	{
-		OneTokens = 0;
-		ThreeTokens = 0;
-		FiveTokens = 0;
-		MinusOneTokens = 0;
+		oneTokens = 0;
+		threeTokens = 0;
+		fiveTokens = 0;
+		minusOneTokens = 0;
 	}
 	
-	public int GetOneTokens()
+	public int getOneTokens()
 	{
-		return OneTokens;
+		return oneTokens;
 	}
 	
-	public int GetThreeTokens()
+	public int getThreeTokens()
 	{
-		return ThreeTokens;
+		return threeTokens;
 	}
 	
-	public int GetFiveTokens()
+	public int getFiveTokens()
 	{
-		return FiveTokens;
+		return fiveTokens;
 	}
 	
-	public int GetMinusOneTokens()
+	public int getMinusOneTokens()
 	{
-		return MinusOneTokens;
+		return minusOneTokens;
 	}
 	
-	public int GetTotal()
+	public int getTotal()
 	{
-		return (1*OneTokens + 3*ThreeTokens + 5*FiveTokens + -1*MinusOneTokens);
+		return (1*oneTokens + 3*threeTokens + 5*fiveTokens + -1*minusOneTokens);
 	}
 	
-	public void AddOneTokens(int amount)
+	public void addOneTokens(int amount)
 	{
-		OneTokens += amount;
+		oneTokens += amount;
 	}
 	
-	public void AddThreeTokens(int amount)
+	public void addThreeTokens(int amount)
 	{
-		ThreeTokens += amount;
+		threeTokens += amount;
 	}
 	
-	public void AddFiveTokens(int amount)
+	public void addFiveTokens(int amount)
 	{
-		FiveTokens += amount;
+		fiveTokens += amount;
 	}
 	
-	public void AddMinusOneTokens(int amount)
+	public void addMinusOneTokens(int amount)
 	{
-		MinusOneTokens += amount;
+		minusOneTokens += amount;
 	}
 	
 	/**
