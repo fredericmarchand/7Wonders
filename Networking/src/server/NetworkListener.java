@@ -86,13 +86,15 @@ public class NetworkListener extends Listener{
 			case 1: ;
 			case 2: 
 			{
-				mserver.bridgeClient(c, ((Match)o).getMatch_ID());
-				c.sendTCP(new Packet3Connection());					 
+				System.out.println(Long.parseLong((String) ((Packet4Object)o).getObject()));
+				System.out.println(c.getRemoteAddressTCP());
+				//mserver.bridgeClient(c, ((Match)o).getMatch_ID());
+//				c.sendTCP(new Packet3Connection());					 
 			};
 					
 			case 3: ;
 			case 4: ;
-					break;
+					 break;
 			default: break;
 			}
 			//add client to match list

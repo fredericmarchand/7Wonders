@@ -54,7 +54,7 @@ public class MServer {
 	 * @param m_id
 	 */
 	
-	
+	//To be modified
 	public void bridgeClient(Connection c, long m_id){
 		for(Match m : matchList){
 			if(m.getMatch_ID()==m_id){
@@ -62,7 +62,8 @@ public class MServer {
 			}
 		}
 	}
-	
+	//any class type sent over the network must be registered to the kryo
+	//generic types are implicitly registered
 	public void registerPackets() throws IOException{
 		Kryo kryo = server.getKryo();
 		kryo.register(Packet0LoginRequest.class);

@@ -22,7 +22,7 @@ public class MClient {
     private Client client;
     public static Scanner scanner;
     private ArrayList<Object> connectedList;
-    private boolean GAME_ALIVE = true;
+    public boolean GAME_ALIVE = true;
     
     public MClient(){
     	scanner = new Scanner(System.in);
@@ -54,9 +54,17 @@ public class MClient {
 			Scanner s = new Scanner(System.in);
 	        while(GAME_ALIVE){
 	        	String m = s.next();
-	            Packet2Message mpackage = new Packet2Message();
-		        mpackage.setObject(m);
-		        client.sendTCP(mpackage);		        	
+	        	if(!m.equals("JOIN")){
+		            Packet2Message mpackage = new Packet2Message();
+			        mpackage.setObject(m);
+			        client.sendTCP(mpackage);
+		        }else if(m.equals("JOIN")){
+		        	Packet4Object game_id = new Packet4Object();
+		        	game_id.setID(2);
+		        	game_id.setObject(s.next());
+		        	client.sendTCP(game_id);
+		        	
+		        }
 	        }
 		    
 		} catch (IOException e) {
@@ -66,6 +74,8 @@ public class MClient {
 		}
     }
     
+  //any class type sent over the network must be registered to the kryo
+  	//generic types are implicitly registered
     public void register(){
     	Kryo kryo = client.getKryo();
     	kryo.register(Packet0LoginRequest.class);
