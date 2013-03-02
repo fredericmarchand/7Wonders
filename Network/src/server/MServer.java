@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-import Resources.Match;
-import Resources.Packet.*;
+import network_resources.Match;
+import network_resources.Packet.*;
 
 import com.esotericsoftware.kryo.Kryo;
 
@@ -24,7 +24,6 @@ public class MServer {
 	Scanner scanner = new Scanner(System.in);
 	
 	public MServer() throws IOException{
-		
 		server = new Server();
 		list = new ArrayList<Object>();
 		matchList = new ArrayList<Match>();
@@ -35,7 +34,6 @@ public class MServer {
 		NetworkListener nl = new NetworkListener();
 		nl.init(server, this);
 		server.addListener(nl);
-		System.out.println("Input ");
 		server.bind(Integer.parseInt((scanner.next())));
 		server.start();
 		
@@ -59,7 +57,7 @@ public class MServer {
 	public void bridgeClient(Connection c, long m_id){
 		for(Match m : matchList){
 			if(m.getMatch_ID()==m_id){
-				m.addConnection(c);
+				//m.addConnection(c);
 			}
 		}
 	}
@@ -74,8 +72,6 @@ public class MServer {
 		kryo.register(Packet4Object.class);
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match.class);
-		
-	
 	}
 	
 	public ArrayList<Object> getConnected(){
@@ -88,9 +84,8 @@ public class MServer {
 	
 	public static void main(String[] args){
 		try {
-			
 			new MServer();
-			
+			Log.set(Log.LEVEL_TRACE);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -98,4 +93,5 @@ public class MServer {
 		}
 	
 	}
+
 

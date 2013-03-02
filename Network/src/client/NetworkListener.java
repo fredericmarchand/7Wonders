@@ -3,8 +3,8 @@ package client;
 import java.util.ArrayList;
 
 
-import Resources.Match;
-import Resources.Packet.*;
+import network_resources.Match;
+import network_resources.Packet.*;
 
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
@@ -25,7 +25,7 @@ public class NetworkListener extends Listener{
 	}
 	
 	public void connected(Connection arg0) {
-		System.out.println("[CLIENT] Connected");
+		Log.info("[CLIENT] Connected");
 		// TODO Auto-generated method stub
 		//c.sendTCP(new Packet0LoginRequest());
 		//super.connected(arg0);
@@ -34,7 +34,7 @@ public class NetworkListener extends Listener{
 	@Override
 	public void disconnected(Connection arg0) {
 		// TODO Auto-generated method stub
-		System.out.println("[CLIENT] Disconnected");
+		Log.info("[CLIENT] Disconnected");
 		//super.disconnected(arg0);
 	}
 	
@@ -47,14 +47,14 @@ public class NetworkListener extends Listener{
 				c.close();
 		}
 		if(o instanceof Packet3Connection){
-			System.out.println("Packet3Connection Received");
+			Log.info("Packet3Connection Received");
 		}
 		if(o instanceof Packet4Object){
-			System.out.println("[CLIENT] PACKET 4");
+			Log.info("[CLIENT] PACKET 4");
 			if(((Packet4Object) o).getID()==1){
 				list = (ArrayList<Match>)((Packet4Object)o).getObject();
 				for(Match e : list)
-					System.out.println(Long.toString(e.getMatch_ID()));
+					Log.info(Long.toString(e.getMatch_ID()));
 //				mclient.joinMatch(list);
 			}
 		}

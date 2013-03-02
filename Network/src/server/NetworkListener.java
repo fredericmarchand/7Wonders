@@ -2,8 +2,8 @@ package server;
 
 
 
-import Resources.*;
-import Resources.Packet.*;
+import network_resources.*;
+import network_resources.Packet.*;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
@@ -40,10 +40,10 @@ public class NetworkListener extends Listener{
 	}
 	@Override
 	public void received(Connection c, Object o) {
-		try{
-		Log.info("[SERVER] Received packet" );
 		
-		//System.out.println(o);
+		System.out.println("[SERVER] Received packet" );
+		
+		System.out.println(o);
 		
 		if(o instanceof Packet0LoginRequest){
 			Packet1LoginAnswer loginAnswer = new Packet1LoginAnswer();
@@ -58,13 +58,13 @@ public class NetworkListener extends Listener{
 				Log.info("[SERVER ---------- CREATE Received packet" );
 				mserver.createMatch();
 			}
-//			if(message.equals("JOIN")){
-//				Log.info("[SERVER ---------- JOIN Received packet" );
-//				Packet4Object l = new Packet4Object();
-//				l.setID(1);
-//				l.setObject(mserver.getMatchList());
-//				c.sendTCP(l);
-//			}
+			if(message.equals("JOIN")){
+				Log.info("[SERVER ---------- JOIN Received packet" );
+				Packet4Object l = new Packet4Object();
+				l.setID(1);
+				l.setObject(mserver.getMatchList());
+				c.sendTCP(l);
+			}
 			if(message.equals("LIST")){
 				System.out.println("[SERVER ---------- LIST Received packet" );
 				Packet4Object l = new Packet4Object();
@@ -91,8 +91,8 @@ public class NetworkListener extends Listener{
 			{
 				System.out.println(Long.parseLong((String) ((Packet4Object)o).getObject()));
 				System.out.println(c.getRemoteAddressTCP());
-				mserver.bridgeClient(c, Long.parseLong((String)((Packet4Object)o).getObject()));
-				//c.sendTCP(new Packet3Connection());					 
+				//mserver.bridgeClient(c, ((Match)o).getMatch_ID());
+//				c.sendTCP(new Packet3Connection());					 
 			};
 					
 			case 3: ;
@@ -105,9 +105,6 @@ public class NetworkListener extends Listener{
 		// TODO Auto-generated method stub
 		//super.received(arg0, arg1);
 		Log.info("[SERVER] Received packet");
-		}catch(Exception e){
-			System.out.println(e);
-		}
 	}
 
 }

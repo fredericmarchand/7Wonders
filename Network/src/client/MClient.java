@@ -6,12 +6,8 @@ import java.util.Scanner;
 
 
 
-import Resources.Match;
-import Resources.Packet.Packet0LoginRequest;
-import Resources.Packet.Packet1LoginAnswer;
-import Resources.Packet.Packet2Message;
-import Resources.Packet.Packet3Connection;
-import Resources.Packet.Packet4Object;
+import network_resources.Match;
+import network_resources.Packet.*;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.*;
@@ -40,9 +36,9 @@ public class MClient {
     	//while the game is still alive the server will continue
     	//to except user input
     	try {
-			System.out.println("Please enter the specified IP!");
+			Log.info("Please enter the specified IP!");
 			String x = s.next();
-			System.out.println("Please enter the specified Port!");
+			Log.info("Please enter the specified Port!");
 			int p = Integer.parseInt(s.next());
 			//given 50 seconds to input connect
 			//connection fails if no input
@@ -89,7 +85,7 @@ public class MClient {
     }
         
     public void joinMatch(ArrayList<Match> l){
-    	System.out.println("[CLIENT] Listing matches");
+    	Log.info("[CLIENT] Listing matches");
     	if(!l.isEmpty()){
 	    	ArrayList<Long> id_list = new ArrayList<Long>();
 	    	for(Match e : l){
@@ -101,7 +97,7 @@ public class MClient {
 	    	s = new Scanner(System.in);
 	    	long input = (long)(Integer.parseInt(s.next()));
 	    	while(!id_list.contains(input)){
-	    		System.out.println("Match not found");
+	    		Log.info("Match not found");
 	    		input = (long)(Integer.parseInt(s.next()));
 	    	}
 	    	//sendTCP of game ID
