@@ -62,15 +62,27 @@ public class MClient {
 		        	game_id.setID(2);
 		        	game_id.setObject(s.next());
 		        	client.sendTCP(game_id);
-		        	
+		        	GAME_ALIVE=false;
 		        }
 	        }
+	        //immitate turn taking
+	        while(GAME_ALIVE){
+	        	turn();
+	        }
+	        
+	    
+	        
+	        
 		    
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			client.stop();
 		}
+    }
+    
+    public void turn(){
+    	Queue<Object> queue = new Queue<Object>();
     }
     
   //any class type sent over the network must be registered to the kryo

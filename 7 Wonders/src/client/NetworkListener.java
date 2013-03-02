@@ -52,9 +52,9 @@ public class NetworkListener extends Listener{
 		if(o instanceof Packet4Object){
 			System.out.println("[CLIENT] PACKET 4");
 			if(((Packet4Object) o).getID()==1){
-				list = (ArrayList<Match>)((Packet4Object)o).getObject();
-				for(Match e : list)
-					System.out.println(Long.toString(e.getMatch_ID()));
+				//list = (ArrayList<Long>)((Packet4Object)o).getObject();
+				for(Long e : (ArrayList<Long>)((Packet4Object)o).getObject())
+					System.out.println(Long.toString(e));
 //				mclient.joinMatch(list);
 			}
 		}

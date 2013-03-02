@@ -42,8 +42,8 @@ public class MServer {
 	}
 	public void createMatch(){		
 		matchList.add(new Match());
-		for(Match m: matchList)
-			System.out.println(m.getMatch_ID());
+//		for(Match m: matchList)
+//			System.out.println(m.getMatch_ID());
 	}
 	
 	
@@ -73,9 +73,7 @@ public class MServer {
 		kryo.register(Packet3Connection.class);
 		kryo.register(Packet4Object.class);
 		kryo.register(java.util.ArrayList.class);
-		kryo.register(Match.class);
-		
-	
+		kryo.register(Match.class);	
 	}
 	
 	public ArrayList<Object> getConnected(){
@@ -84,6 +82,14 @@ public class MServer {
 	public ArrayList<Match> getMatchList(){
 		return matchList;
 	}
+	
+	public ArrayList<Long> getMatchID_List(){
+		ArrayList<Long> idList = new ArrayList<Long>();
+		for(Match e: matchList)
+			idList.add(e.getMatch_ID());
+		return idList;
+	}
+			
 	
 	
 	public static void main(String[] args){

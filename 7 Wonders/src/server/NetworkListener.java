@@ -69,8 +69,7 @@ public class NetworkListener extends Listener{
 				System.out.println("[SERVER ---------- LIST Received packet" );
 				Packet4Object l = new Packet4Object();
 				l.setID(1);
-				l.setObject(mserver.getMatchList());
-				
+				l.setObject(mserver.getMatchID_List());
 				c.sendTCP(l);
 			}
 			
