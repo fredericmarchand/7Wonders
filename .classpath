@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="7 Wonders/src"/>
-	<classpathentry kind="src" path="7WClient/src"/>
-	<classpathentry kind="src" path="7WServer/src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="output" path="7WServer/bin"/>
+	<classpathentry kind="src" path="7 Wonders/src"/>	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>
