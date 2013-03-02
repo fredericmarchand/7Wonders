@@ -11,10 +11,6 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.minlog.Log;
 
-
-
-
-
 public class NetworkListener extends Listener{
 	Client c;
 	MClient mclient;
@@ -27,18 +23,22 @@ public class NetworkListener extends Listener{
 	public void init(Client c){
 		this.c = c;
 	}
+	
 	public void connected(Connection arg0) {
 		Log.info("[CLIENT] Connected");
 		// TODO Auto-generated method stub
 		//c.sendTCP(new Packet0LoginRequest());
 		//super.connected(arg0);
 	}
+	
 	@Override
 	public void disconnected(Connection arg0) {
 		// TODO Auto-generated method stub
 		Log.info("[CLIENT] Disconnected");
 		//super.disconnected(arg0);
 	}
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void received(Connection c, Object o) {
 		System.out.println("[CLIENT] RECEIVED PACKET");
@@ -55,7 +55,7 @@ public class NetworkListener extends Listener{
 				list = (ArrayList<Match>)((Packet4Object)o).getObject();
 				for(Match e : list)
 					Log.info(Long.toString(e.getMatch_ID()));
-			//	mclient.joinMatch(list);
+//				mclient.joinMatch(list);
 			}
 		}
 		

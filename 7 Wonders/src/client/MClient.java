@@ -14,19 +14,17 @@ import Resources.Packet.Packet3Connection;
 import Resources.Packet.Packet4Object;
 
 import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryonet.Client;
-import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.Listener;
+import com.esotericsoftware.kryonet.*;
 import com.esotericsoftware.minlog.Log;
 
 public class MClient {
     private Client client;
-    public static Scanner scanner;
-    private ArrayList<Object> connectedList;
+    private static Scanner s;
+    //private ArrayList<Object> connectedList;
     public boolean GAME_ALIVE = true;
     
     public MClient(){
-    	scanner = new Scanner(System.in);
+    	s = new Scanner(System.in);
     	client = new Client();
     	NetworkListener nl = new NetworkListener(this);
     	
@@ -43,16 +41,16 @@ public class MClient {
     	//to except user input
     	try {
 			Log.info("Please enter the specified IP!");
-			String x = scanner.next();
+			String x = s.next();
 			Log.info("Please enter the specified Port!");
-			int p = Integer.parseInt(scanner.next());
+			int p = Integer.parseInt(s.next());
 			//given 50 seconds to input connect
 			//connection fails if no input
 			//send request to server
 			client.connect(5000,x,p);
 			client.sendTCP(new Packet0LoginRequest());
 			
-			Scanner s = new Scanner(System.in);
+			s = new Scanner(System.in);
 	        while(GAME_ALIVE){
 	        	String m = s.next();
 	        	if(!m.equals("JOIN")){
@@ -100,7 +98,7 @@ public class MClient {
 	    	}
     	
    
-	    	Scanner s = new Scanner(System.in);
+	    	s = new Scanner(System.in);
 	    	long input = (long)(Integer.parseInt(s.next()));
 	    	while(!id_list.contains(input)){
 	    		Log.info("Match not found");

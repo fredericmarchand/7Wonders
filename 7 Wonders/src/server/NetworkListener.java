@@ -2,7 +2,7 @@ package server;
 
 
 
-import Resources.Match;
+import Resources.*;
 import Resources.Packet.*;
 
 import com.esotericsoftware.kryonet.Connection;
@@ -12,6 +12,7 @@ import com.esotericsoftware.minlog.Log;
 
 
 
+@SuppressWarnings("unused")
 public class NetworkListener extends Listener{
 
 	Server server;

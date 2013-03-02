@@ -11,9 +11,7 @@ import Resources.Packet.*;
 
 import com.esotericsoftware.kryo.Kryo;
 
-import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.Listener;
-import com.esotericsoftware.kryonet.Server;
+import com.esotericsoftware.kryonet.*;
 import com.esotericsoftware.minlog.Log;
 
 
