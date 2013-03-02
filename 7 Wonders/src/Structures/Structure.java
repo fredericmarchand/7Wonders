@@ -1,6 +1,7 @@
 package Structures;
 
-import Resources.Resources;
+import Tokens.Resources;
+
 
 public class Structure {
 

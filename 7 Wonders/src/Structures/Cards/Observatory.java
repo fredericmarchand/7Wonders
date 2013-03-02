@@ -1,8 +1,8 @@
 
 package Structures.Cards;
 
-import Resources.Resources;
 import Structures.Structure;
+import Tokens.Resources;
 import WonderBoards.WonderBoard;
 
 public class Observatory extends Structure {

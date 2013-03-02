@@ -1,6 +1,6 @@
 package Structures.Effects;
 
-import Resources.Resources;
+import Tokens.Resources;
 
 public class CoinBonus extends SpecialEffects {
 

@@ -1,7 +1,7 @@
 package WonderBoards;
 
 import Structures.Structure;
-import Resources.Resources;
+import Tokens.Resources;
 
 public class WonderBoardStage {
 

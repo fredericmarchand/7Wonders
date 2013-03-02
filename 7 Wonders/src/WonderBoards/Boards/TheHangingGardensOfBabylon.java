@@ -1,9 +1,9 @@
 package WonderBoards.Boards;
 
 import Structures.Structure;
+import Tokens.Resources;
 import WonderBoards.WonderBoard;
 import WonderBoards.WonderBoardStage;
-import Resources.Resources;
 
 public class TheHangingGardensOfBabylon extends WonderBoard{
 
