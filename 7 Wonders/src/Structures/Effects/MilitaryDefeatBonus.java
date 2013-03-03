@@ -14,7 +14,7 @@ public class MilitaryDefeatBonus extends SpecialEffects {
 	public void acquireVictoryPoints(Player you, Player leftNeighbor, Player rightNeighbor)
 	{
 		if ( !usedUp )
-			you.addVictoryPoints(leftNeighbor.getMilitaryVictoryTokens().getMinusOneTokens() + rightNeighbor.getMilitaryVictoryTokens().getMinusOneTokens());
+			you.addVictoryPoints(leftNeighbor.getConflictTokens().getMinusOneTokens() + rightNeighbor.getConflictTokens().getMinusOneTokens());
 		usedUp = true;
 	}
 	

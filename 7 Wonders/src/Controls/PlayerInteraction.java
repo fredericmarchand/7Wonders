@@ -14,17 +14,17 @@ public class PlayerInteraction {
 	{
 			if ( p1.getShields() > p2.getShields() )
 			{
-				if ( age == 1 ) p1.getMilitaryVictoryTokens().addOneTokens(1);
-				if ( age == 2 ) p1.getMilitaryVictoryTokens().addThreeTokens(1);
-				if ( age == 3 ) p1.getMilitaryVictoryTokens().addFiveTokens(1);
-				p2.getMilitaryVictoryTokens().addMinusOneTokens(1);
+				if ( age == 1 ) p1.getConflictTokens().addOneTokens(1);
+				if ( age == 2 ) p1.getConflictTokens().addThreeTokens(1);
+				if ( age == 3 ) p1.getConflictTokens().addFiveTokens(1);
+				p2.getConflictTokens().addMinusOneTokens(1);
 			}
 			else if ( p1.getShields() < p2.getShields() )
 			{
-				if ( age == 1 ) p2.getMilitaryVictoryTokens().addOneTokens(1);
-				if ( age == 2 ) p2.getMilitaryVictoryTokens().addThreeTokens(1);
-				if ( age == 3 ) p2.getMilitaryVictoryTokens().addFiveTokens(1);				
-				p1.getMilitaryVictoryTokens().addMinusOneTokens(1);
+				if ( age == 1 ) p2.getConflictTokens().addOneTokens(1);
+				if ( age == 2 ) p2.getConflictTokens().addThreeTokens(1);
+				if ( age == 3 ) p2.getConflictTokens().addFiveTokens(1);				
+				p1.getConflictTokens().addMinusOneTokens(1);
 			}
 	}
 	
@@ -60,7 +60,7 @@ public class PlayerInteraction {
 		SettleMilitaryConflicts(players, 3);
 		for ( int i = 0; i < players.size(); ++i )
 		{
-			System.out.println(players.get(i).getMilitaryVictoryTokens().getTotal());
+			System.out.println(players.get(i).getConflictTokens().getTotal());
 		}
 	}
 }
