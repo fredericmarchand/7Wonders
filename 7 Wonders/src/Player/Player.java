@@ -15,7 +15,7 @@ public class Player {
 	@SuppressWarnings("unused")
 	private Resources resources, purchased, unavailableResources;
 	private int shields;
-	private MilitaryVictoryTokens militaryVictoryPoints;
+	private ConflictTokens conflictTokens;
 	private int victoryPoints;
 	private ScientificSymbols scientificSymbols;
 	
@@ -30,7 +30,7 @@ public class Player {
 		resources = new Resources(0, 0, 0, 0, 0, 0, 0, 3);
 		purchased = new Resources();
 		unavailableResources = new Resources();
-		militaryVictoryPoints = new MilitaryVictoryTokens();
+		conflictTokens = new ConflictTokens();
 		shields = 0;
 		victoryPoints = 0;
 		scientificSymbols = new ScientificSymbols();
@@ -46,7 +46,7 @@ public class Player {
 		resources = new Resources();
 		purchased = new Resources();
 		unavailableResources = new Resources();
-		militaryVictoryPoints = new MilitaryVictoryTokens();
+		conflictTokens = new ConflictTokens();
 		shields = 0;
 		victoryPoints = 0;
 		scientificSymbols = new ScientificSymbols();
@@ -93,9 +93,9 @@ public class Player {
 		return victoryPoints;
 	}
 	
-	public MilitaryVictoryTokens getMilitaryVictoryTokens()
+	public ConflictTokens getConflictTokens()
 	{
-		return militaryVictoryPoints;
+		return conflictTokens;
 	}
 	
 	public ScientificSymbols getScientificSymbols()

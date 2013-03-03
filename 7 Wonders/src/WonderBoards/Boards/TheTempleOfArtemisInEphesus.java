@@ -39,21 +39,21 @@ public class TheTempleOfArtemisInEphesus extends WonderBoard {
 	public boolean BuildStage1(Structure card, Resources funds)
 	{
 		if ( !stage1.isBuilt() )
-			return stage1.Build(card, funds);
+			return stage1.build(card, funds);
 		return false;
 	}
 	
 	public boolean BuildStage2(Structure card, Resources funds)
 	{
 		if ( stage1.isBuilt() && !stage2.isBuilt() )
-			return stage2.Build(card, funds);
+			return stage2.build(card, funds);
 		return false;
 	}
 	
 	public boolean BuildStage3(Structure card, Resources funds)
 	{
 		if ( stage1.isBuilt() && stage2.isBuilt() && !stage3.isBuilt() )
-			return stage3.Build(card, funds);
+			return stage3.build(card, funds);
 		return false;
 	}
 	
