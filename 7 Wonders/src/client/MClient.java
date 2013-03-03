@@ -85,6 +85,17 @@ public class MClient {
 
     }
     
+    //get/set host values
+    public void setHost(boolean h){host = h;}
+    public boolean getHost(){return host;}
+    
+    //get/set ID values
+    public void setID(long _ID){ ID = _ID;}
+    public long getID(){return ID;}
+    
+    public void setAlive(boolean a){ GAME_ALIVE = a;}
+    public boolean getAlive(){return GAME_ALIVE;}
+    
     public void ClientWait(){
     	while(true){
     		
@@ -95,16 +106,7 @@ public class MClient {
     	//Queue<Object> queue = new Queue<Object>();
     }
     
-  //get/set host values
-    public void setHost(boolean h){host = h;}
-    public boolean getHost(){return host;}
-    
-    //get/set ID values
-    public void setID(long _ID){ ID = _ID;}
-    public long getID(){return ID;}
-    
-    public void setAlive(boolean a){ GAME_ALIVE = a;}
-    public boolean getAlive(){return GAME_ALIVE;}
+
     
     public void chat(){
 
@@ -127,29 +129,7 @@ public class MClient {
     	
     }
         
-    public void joinMatch(ArrayList<Match> l){
-    	System.out.println("[CLIENT] Listing matches");
-    	if(!l.isEmpty()){
-	    	ArrayList<Long> id_list = new ArrayList<Long>();
-	    	for(Match e : l){
-	    		System.out.println(e.getMatch_ID());
-	    		id_list.add(e.getMatch_ID());
-	    	}
-    	
-   
-	    	s = new Scanner(System.in);
-	    	long input = (long)(Integer.parseInt(s.next()));
-	    	while(!id_list.contains(input)){
-	    		System.out.println("Match not found");
-	    		input = (long)(Integer.parseInt(s.next()));
-	    	}
-	    	//sendTCP of game ID
-	    	Packet4Object client_match_id = new Packet4Object();
-	    	client_match_id.setID(2);
-	    	client_match_id.setObject(input);
-	    	client.sendTCP(client_match_id);
-    	}
-    }
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new MClient();
