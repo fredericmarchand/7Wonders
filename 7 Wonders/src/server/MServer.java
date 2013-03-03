@@ -21,6 +21,7 @@ public class MServer {
 	private Server server;
 	private ArrayList<Object> list;
 	private ArrayList<Match> matchList;
+	private static long client_ID = 100000;
 	Scanner scanner = new Scanner(System.in);
 	
 	public MServer() throws IOException{
@@ -56,12 +57,16 @@ public class MServer {
 	 */
 	
 	//To be modified
-	public void bridgeClient(Connection c, long m_id){
+	public boolean bridgeClient(Connection c, long m_id){
 		for(Match m : matchList){
 			if(m.getMatch_ID()==m_id){
-				m.addConnection(c);
+				if(m.getConnectionCount()<Match.MAX_PLAYER_COUNT){
+					m.addConnection(c);
+					return true;
+				}
 			}
 		}
+		return false;
 	}
 	//any class type sent over the network must be registered to the kryo
 	//generic types are implicitly registered
@@ -76,12 +81,10 @@ public class MServer {
 		kryo.register(Match.class);	
 	}
 	
-	public ArrayList<Object> getConnected(){
-		return list;
-	}
-	public ArrayList<Match> getMatchList(){
-		return matchList;
-	}
+	public ArrayList<Object> getConnected(){return list;}
+	public ArrayList<Match> getMatchList(){return matchList;}
+	public long getID(){return client_ID;}
+	public void incID(){++client_ID;}
 	
 	public ArrayList<Long> getMatchID_List(){
 		ArrayList<Long> idList = new ArrayList<Long>();

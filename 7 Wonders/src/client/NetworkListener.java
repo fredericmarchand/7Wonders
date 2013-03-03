@@ -45,19 +45,46 @@ public class NetworkListener extends Listener{
 		if(o instanceof Packet1LoginAnswer){
 			if(!((Packet1LoginAnswer)o).getAccepted())
 				c.close();
+			mclient.setID(((Packet1LoginAnswer)o).getIDValue());
 		}
+		//check if client has been able to join game
+		//if yes, join lobby
+		//if no stay at match list screen
+		//
 		if(o instanceof Packet3Connection){
 			System.out.println("Packet3Connection Received");
-		}
-		if(o instanceof Packet4Object){
-			System.out.println("[CLIENT] PACKET 4");
-			if(((Packet4Object) o).getID()==1){
-				//list = (ArrayList<Long>)((Packet4Object)o).getObject();
-				for(Long e : (ArrayList<Long>)((Packet4Object)o).getObject())
-					System.out.println(Long.toString(e));
-//				mclient.joinMatch(list);
+			if(((Packet3Connection)o).getAccepted()){
+				//join match lobby
+				System.out.println("[CLIENT] JOINED GAME SUCCESSFULLY");
+				while(true){}
+			}
+			else{
+				System.out.println("GAME IS FULL");
+				mclient.command();
 			}
 		}
+		if(o instanceof Packet4Object){			
+			switch(((Packet4Object) o).getID()){
+				case 0: ;
+				case 1: {
+							for(Long e : (ArrayList<Long>)((Packet4Object)o).getObject())
+								System.out.println(Long.toString(e));
+							break;
+						}
+				case 2: ;					
+				case 3: ;
+				case 4: ;
+				case 5: 
+							System.out.println("This is fucked");
+							mclient.setHost((boolean)((Packet4Object)o).getObject());
+							System.out.println("[CLIENT] SET TO HOST");
+							
+						 break;
+			default: break;
+			}
+			//add client to match list
+		}
+
 		
 		// TODO Auto-generated method stub
 		//super.received(arg0, arg1);

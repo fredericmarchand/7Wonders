@@ -9,15 +9,25 @@ public class Packet {
 	public static class Packet0LoginRequest{}
 	public static class Packet1LoginAnswer{
 		private boolean accepted = false;
+		private long idvalue;
 		public boolean getAccepted(){return accepted;}
 		public void setAccepted(boolean b){accepted = b;}
+		public void setIDValue(long id){idvalue = id;}
+		public long getIDValue(){return idvalue;}		
 	}
 	public static class Packet2Message{
 		private Object o;
 		public Object getObject(){ return o;}
 		public void setObject(Object ob){ o = ob;}
 	}
-	public static class Packet3Connection{}
+	public static class Packet3Connection{
+		private boolean accepted = false;
+		private long idvalue;
+		public boolean getAccepted(){return accepted;}
+		public void setAccepted(boolean b){accepted = b;}
+		public void setIDValue(long id){idvalue = id;}
+		public long getIDValue(){return idvalue;}				
+	}
 	public static class Packet4Object{
 		//id ::
 		// 0 = null
@@ -25,6 +35,7 @@ public class Packet {
 		// 2 = client match id
 		// 3 = client move
 		// 4 = client card
+		// 5 = host responsibilies
 		private Object o;
 		private int id = 0;
 		public Object getObject(){ return o;}

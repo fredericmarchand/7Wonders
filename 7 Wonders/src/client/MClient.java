@@ -22,6 +22,11 @@ public class MClient {
     private static Scanner s;
     //private ArrayList<Object> connectedList;
     public boolean GAME_ALIVE = true;
+    private boolean host = false;
+    //if client has yet to join a game 
+    //match ID is 0
+    private long matchID = 0000;
+    private long ID;
     
     public MClient(){
     	s = new Scanner(System.in);
@@ -31,26 +36,34 @@ public class MClient {
     	client.addListener(nl);
     	client.start();
     	register();
+    	System.out.println("Please enter the specified IP!");
+		String x = s.next();
+		System.out.println("Please enter the specified Port!");
+		int p = Integer.parseInt(s.next());
+		//given 50 seconds to input connect
+		//connection fails if no input
+		//send request to server
+		try {
+			client.connect(5000,x,p);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			client.stop();
+		}
+		client.sendTCP(new Packet0LoginRequest());
     	
-
+    	command();
     	
+    }
+    
+    public void command(){
     	//Test code
     	//user inputs ip address as well as forwarded port
     	//exchanges exception packet 
     	//while the game is still alive the server will continue
     	//to except user input
-    	try {
-			System.out.println("Please enter the specified IP!");
-			String x = s.next();
-			System.out.println("Please enter the specified Port!");
-			int p = Integer.parseInt(s.next());
-			//given 50 seconds to input connect
-			//connection fails if no input
-			//send request to server
-			client.connect(5000,x,p);
-			client.sendTCP(new Packet0LoginRequest());
-			
-			s = new Scanner(System.in);
+
+
 	        while(GAME_ALIVE){
 	        	String m = s.next();
 	        	if(!m.equals("JOIN")){
@@ -62,28 +75,28 @@ public class MClient {
 		        	game_id.setID(2);
 		        	game_id.setObject(s.next());
 		        	client.sendTCP(game_id);
-		        	GAME_ALIVE=false;
+		        	//GAME_ALIVE=false;
+		        	
+		        	//figure out fix
 		        }
 	        }
 	        //immitate turn taking
 	        while(GAME_ALIVE){
 	        	turn();
-	        }
-	        
-	    
-	        
-	        
-		    
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			client.stop();
-		}
+	        }	
     }
     
     public void turn(){
-    	Queue<Object> queue = new Queue<Object>();
+    	//Queue<Object> queue = new Queue<Object>();
     }
+    
+  //get/set host values
+    public void setHost(boolean h){host = h;}
+    public boolean getHost(){return host;}
+    
+    //get/set ID values
+    public void setID(long _ID){ ID = _ID;}
+    public long getID(){return ID;}
     
   //any class type sent over the network must be registered to the kryo
   	//generic types are implicitly registered

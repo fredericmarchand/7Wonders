@@ -10,6 +10,7 @@ public class Match {
     private long match_id;
     private static long counter = 1000;
     public static final int MAX_PLAYER_COUNT = 7;
+    private int connection_count;
     
     public Match(){
     	connected = new ArrayList<Connection>();
@@ -17,8 +18,17 @@ public class Match {
     }
 
 	public ArrayList<Connection> getConnections(){return connected;}	
-	public void addConnection(Connection c){ connected.add(c);}
-	public void removeConnection(Connection c) { connected.remove(c);}
+	public void addConnection(Connection c){
+		connected.add(c);
+		update();
+	}
+	public void removeConnection(Connection c) { 
+		connected.remove(c);
+		update();
+	}
 	public long getMatch_ID(){return match_id;}
-	
+	public int getConnectionCount(){return connection_count;}
+	public void update(){
+		connection_count = connected.size();
+	}
 }
