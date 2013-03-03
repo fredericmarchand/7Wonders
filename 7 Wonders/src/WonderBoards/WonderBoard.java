@@ -117,6 +117,7 @@ public class WonderBoard {
 		}
 	}
 	
+	
 	//builds a structure on this wonderboard
 	public void buildStructure(Structure s)
 	{
