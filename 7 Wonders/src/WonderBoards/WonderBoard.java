@@ -2,7 +2,7 @@ package WonderBoards;
 
 import java.util.ArrayList;
 import Structures.Structure;
-
+import Tokens.Resources;;
 public class WonderBoard {
 
 	protected static final int NO_BOARD = 0;
@@ -117,6 +117,7 @@ public class WonderBoard {
 		}
 	}
 	
+	public boolean buildStage(Structure cards, Resources funds){ return false; }
 	
 	//builds a structure on this wonderboard
 	public void buildStructure(Structure s)
