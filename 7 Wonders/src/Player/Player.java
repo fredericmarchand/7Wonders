@@ -134,18 +134,20 @@ public class Player {
 		victoryPoints = points;
 	}
 	
-	public void buildStructure()
+	public boolean buildStructure()
 	{
 		if ( chosenCard.getResourceCost().canAfford(resources) && !wonderBoard.containsCard(chosenCard.getID()) )
 		{
 			wonderBoard.buildStructure(chosenCard);
 			chosenCard = null;
+			return true;
 		}
+		return false;
 	}
 	
-	public void buildStage()
+	public boolean buildStage()
 	{
-		
+		return wonderBoard.buildStage(chosenCard, resources);
 	}
 	
 	public void discard()

@@ -41,8 +41,7 @@ public class TheLighthouseOfAlexandria extends WonderBoard {
 		{
 			if (!s.isBuilt())
 			{
-				s.build(card, funds);
-				return true;
+				return s.build(card, funds);
 			}
 		}
 		return false;

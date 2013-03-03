@@ -117,7 +117,7 @@ public class WonderBoard {
 		}
 	}
 	
-	public boolean buildStage(Structure cards, Resources funds){ return false; }
+	public boolean buildStage(Structure card, Resources funds){ return false; }
 	
 	//builds a structure on this wonderboard
 	public void buildStructure(Structure s)
