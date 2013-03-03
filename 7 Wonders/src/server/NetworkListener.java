@@ -33,7 +33,7 @@ public class NetworkListener extends Listener{
 	
 	}
 	@Override
-	public void disconnected(Connection arg0) {
+	public void disconnected(Connection c) {
 		// TODO Auto-generated method stub
 		System.out.println("[SERVER] User has disconnected");
 		//super.disconnected(arg0);
@@ -61,7 +61,7 @@ public class NetworkListener extends Listener{
 			System.out.println(message);
 			if(message.equals("CREATE")){
 				System.out.println("[SERVER ---------- CREATE Received packet" );
-				mserver.createMatch();
+				mserver.bridgeClient(c,mserver.createMatch());
 				Packet4Object P = new Packet4Object();
 				P.setID(5);
 				P.setObject(true);
@@ -73,6 +73,9 @@ public class NetworkListener extends Listener{
 				l.setID(1);
 				l.setObject(mserver.getMatchID_List());
 				c.sendTCP(l);				
+			}
+			if(message.equals("QUIT")){
+				
 			}
 			
 		}	
@@ -94,14 +97,17 @@ public class NetworkListener extends Listener{
 				//test if the game is viable to join
 				//if not return false
 				//state failed to join game
+				
 				System.out.println(Long.parseLong((String) ((Packet4Object)o).getObject()));
 				System.out.println(c.getRemoteAddressTCP());
 				//mserver.bridgeClient(c, Long.parseLong((String)((Packet4Object)o).getObject()))){
+				boolean join = mserver.bridgeClient(c, Long.parseLong((String)((Packet4Object)o).getObject()));
 				Packet3Connection joinResponse = new Packet3Connection();
-				joinResponse.setAccepted(mserver.bridgeClient(c, Long.parseLong((String)((Packet4Object)o).getObject())));
-				joinResponse.setIDValue( Long.parseLong((String)((Packet4Object)o).getObject()));
-				c.sendTCP(joinResponse);					 
-			};
+				joinResponse.setAccepted(join);
+				joinResponse.setIDValue(Long.parseLong((String)((Packet4Object)o).getObject()));
+				c.sendTCP(joinResponse);
+				break;
+			}
 					
 			case 3: ;
 			case 4: ;

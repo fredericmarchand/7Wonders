@@ -56,11 +56,10 @@ public class NetworkListener extends Listener{
 			if(((Packet3Connection)o).getAccepted()){
 				//join match lobby
 				System.out.println("[CLIENT] JOINED GAME SUCCESSFULLY");
-				while(true){}
 			}
 			else{
 				System.out.println("GAME IS FULL");
-				mclient.command();
+				//mclient.command();
 			}
 		}
 		if(o instanceof Packet4Object){			
@@ -75,9 +74,10 @@ public class NetworkListener extends Listener{
 				case 3: ;
 				case 4: ;
 				case 5: 
-							System.out.println("This is fucked");
 							mclient.setHost((boolean)((Packet4Object)o).getObject());
-							System.out.println("[CLIENT] SET TO HOST");
+							if(mclient.getHost())System.out.println("[CLIENT] SET TO HOST");
+							mclient.setAlive(false);
+							mclient.chat();
 							
 						 break;
 			default: break;

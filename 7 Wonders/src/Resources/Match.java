@@ -30,5 +30,25 @@ public class Match {
 	public int getConnectionCount(){return connection_count;}
 	public void update(){
 		connection_count = connected.size();
+		System.out.println(connection_count);
+		if(connection_count==MAX_PLAYER_COUNT){
+			countDown();
+		}
 	}
+	public boolean countDown(){
+		System.out.println("[MATCH] STARTING IN T-MINUS 30 SECONDS");
+		for(int i = 30; i > 0;i--){
+			if(connection_count!=MAX_PLAYER_COUNT){
+				System.out.println("Someone has disconnected");
+				return false;
+			}
+			System.out.println(i);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		return true;
+	}	
 }

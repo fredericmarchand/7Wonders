@@ -41,10 +41,12 @@ public class MServer {
 		server.start();
 		
 	}
-	public void createMatch(){		
-		matchList.add(new Match());
+	public long createMatch(){		
+		Match m = new Match();
+		matchList.add(m);
 //		for(Match m: matchList)
 //			System.out.println(m.getMatch_ID());
+		return m.getMatch_ID();
 	}
 	
 	
