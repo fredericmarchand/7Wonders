@@ -12,6 +12,7 @@ public class Altar extends Structure {
 		super(new Resources(), AltarID, "Altar", BLUE_CARD, 1);
 	}
 
+
 	/**
 	 * @param args
 	 */
