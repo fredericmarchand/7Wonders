@@ -46,6 +46,8 @@ public class Packet {
 	public static class Packet5Disconnect{
 		//if client sends one of these
 		//eliminate from any current game
-		
+		private long matchID;
+		public long getMID(){return matchID;}
+		public void setMID(long id){matchID = id;}		
 	}
 }

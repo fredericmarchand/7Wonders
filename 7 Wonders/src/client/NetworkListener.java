@@ -55,6 +55,7 @@ public class NetworkListener extends Listener{
 			System.out.println("Packet3Connection Received");
 			if(((Packet3Connection)o).getAccepted()){
 				//join match lobby
+				mclient.setMID(((Packet3Connection)o).getIDValue());
 				System.out.println("[CLIENT] JOINED GAME SUCCESSFULLY");
 			}
 			else{

@@ -116,6 +116,12 @@ public class NetworkListener extends Listener{
 			}
 			//add client to match list
 		}
+		if(o instanceof Packet5Disconnect){
+			//disconnect player from game
+			System.out.println("[SERVER] CLIENT HAS BEEN REMOVED" +
+					mserver.removeClient(c, ((Packet5Disconnect)o).getMID()));
+			
+		}
 		// TODO Auto-generated method stub
 		//super.received(arg0, arg1);
 		System.out.println("[SERVER] Received packet");

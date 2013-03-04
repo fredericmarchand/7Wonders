@@ -70,6 +70,16 @@ public class MServer {
 		}
 		return false;
 	}
+	
+	public boolean removeClient(Connection c, long m_id){
+		for(Match m : matchList){
+			if(m.getMatch_ID()==m_id){
+				m.removeConnection(c);
+				return true;
+			}
+		}
+		return false;		
+	}
 	//any class type sent over the network must be registered to the kryo
 	//generic types are implicitly registered
 	public void registerPackets() throws IOException{
@@ -79,6 +89,7 @@ public class MServer {
 		kryo.register(Packet2Message.class);
 		kryo.register(Packet3Connection.class);
 		kryo.register(Packet4Object.class);
+		kryo.register(Packet5Disconnect.class);
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match.class);	
 	}

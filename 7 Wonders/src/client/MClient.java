@@ -12,6 +12,7 @@ import Resources.Packet.Packet1LoginAnswer;
 import Resources.Packet.Packet2Message;
 import Resources.Packet.Packet3Connection;
 import Resources.Packet.Packet4Object;
+import Resources.Packet.Packet5Disconnect;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.*;
@@ -20,13 +21,13 @@ import com.esotericsoftware.minlog.Log;
 public class MClient {
     private Client client;
     private static Scanner s = new Scanner(System.in);
-    //private ArrayList<Object> connectedList;
     public boolean GAME_ALIVE;
     private boolean host = false;
+    
     //if client has yet to join a game 
     //match ID is 0
     private long matchID = 0000;
-    private long ID;
+    private long ID = 0000;
     
     public MClient(){
     	
@@ -67,7 +68,10 @@ public class MClient {
 
 	        while(GAME_ALIVE){
 	        	String m = s.next();
-	        	if(!m.equals("JOIN")){
+	        	if(m.equals("QUIT")){
+		        	System.out.println("MAGIC");
+		        	quitMatch();
+		        }else if(!m.equals("JOIN")){
 		            Packet2Message mpackage = new Packet2Message();
 			        mpackage.setObject(m);
 			        client.sendTCP(mpackage);
@@ -75,8 +79,7 @@ public class MClient {
 		        	Packet4Object game_id = new Packet4Object();
 		        	game_id.setID(2);
 		        	game_id.setObject(s.next());
-		        	client.sendTCP(game_id);
-		        	
+		        	client.sendTCP(game_id);      	
 		        	
 		        	//figure out fix
 		        }
@@ -95,6 +98,10 @@ public class MClient {
     
     public void setAlive(boolean a){ GAME_ALIVE = a;}
     public boolean getAlive(){return GAME_ALIVE;}
+    
+    //set match id to which client has joined
+    public void setMID(long id){matchID = id;}
+    public long getMID(){return matchID;}
     
     public void ClientWait(){
     	while(true){
@@ -123,10 +130,20 @@ public class MClient {
     	kryo.register(Packet2Message.class);
     	kryo.register(Packet3Connection.class);
     	kryo.register(Packet4Object.class);
+    	kryo.register(Packet5Disconnect.class);
     	kryo.register(java.util.ArrayList.class);
     	kryo.register(Match.class);
-    	
-    	
+   }
+    
+    public void quitMatch(){
+    	System.out.println(matchID);
+    	if(matchID>0){
+    		System.out.println("QUIT called");
+    		Packet5Disconnect quit = new Packet5Disconnect();
+    		quit.setMID(matchID);
+    		client.sendTCP(quit);
+    		matchID = 0000; //no longer in a game
+    	}
     }
         
 
