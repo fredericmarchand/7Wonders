@@ -286,7 +286,7 @@ public class CardHandler {
 	}
 	
 	//the set of cards of each player is assigned to the neighbor on the left or on the right depending on the age
-	public static void PassCardsToNeighbours(ArrayList<Player> players, int age)
+	public static void PassCardsToNeighbors(ArrayList<Player> players, int age)
 	{
 		ArrayList<Structure> hold = new ArrayList<Structure>();
 		//cards are passed to the right in age 2
@@ -337,7 +337,7 @@ public class CardHandler {
 			}
 		}
 		
-		PassCardsToNeighbours(players, 2);
+		PassCardsToNeighbors(players, 2);
 		
 		for ( Player p : players )
 		{
