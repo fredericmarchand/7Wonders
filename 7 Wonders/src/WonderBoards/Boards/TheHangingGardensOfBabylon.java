@@ -7,14 +7,14 @@ import WonderBoards.WonderBoardStage;
 
 public class TheHangingGardensOfBabylon extends WonderBoard{
 
-	private WonderBoardStage stage1, stage2, stage3;
+	
 	
 	public TheHangingGardensOfBabylon()
 	{
 		super(4, 1);
-		stage1 = new WonderBoardStage(new Resources(0, 0, 0, 2, 0, 0, 0, 0));
-		stage2 = new WonderBoardStage(new Resources(0, 0, 3, 0, 0, 0, 0, 0));
-		stage3 = new WonderBoardStage(new Resources(0, 0, 0, 4, 0, 0, 0, 0));
+		WonderBoardStage stage1 = new WonderBoardStage(new Resources(0, 0, 0, 2, 0, 0, 0, 0));
+		WonderBoardStage stage2 = new WonderBoardStage(new Resources(0, 0, 3, 0, 0, 0, 0, 0));
+		WonderBoardStage stage3 = new WonderBoardStage(new Resources(0, 0, 0, 4, 0, 0, 0, 0));
 		stages.add(stage1);
 		stages.add(stage2);
 		stages.add(stage3);
@@ -23,9 +23,9 @@ public class TheHangingGardensOfBabylon extends WonderBoard{
 	public TheHangingGardensOfBabylon(int side)
 	{
 		super(4, side);
-		stage1 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 0, 0, 2, 0, 0, 0, 0) : new Resources(0, 0, 0, 1, 0, 1, 0, 0)));
-		stage2 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 0, 3, 0, 0, 0, 0, 0) : new Resources(0, 0, 2, 0, 1, 0, 0, 0)));
-		stage3 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 0, 0, 4, 0, 0, 0, 0) : new Resources(0, 0, 0, 3, 0, 0, 1, 0)));
+		WonderBoardStage stage1 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 0, 0, 2, 0, 0, 0, 0) : new Resources(0, 0, 0, 1, 0, 1, 0, 0)));
+		WonderBoardStage stage2 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 0, 3, 0, 0, 0, 0, 0) : new Resources(0, 0, 2, 0, 1, 0, 0, 0)));
+		WonderBoardStage stage3 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 0, 0, 4, 0, 0, 0, 0) : new Resources(0, 0, 0, 3, 0, 0, 1, 0)));
 		stages.add(stage1);
 		stages.add(stage2);
 		stages.add(stage3);
@@ -33,29 +33,21 @@ public class TheHangingGardensOfBabylon extends WonderBoard{
 	
 	public boolean isBuilt()
 	{
-		return (stage1.isBuilt() & stage2.isBuilt() & stage3.isBuilt());
+		return (stages.get(1).isBuilt() & stages.get(2).isBuilt() & stages.get(3).isBuilt());
 	}
 	
-	public boolean BuildStage1(Structure card, Resources funds)
+	public boolean buildStage(Structure card, Resources funds)
 	{
-		if ( !stage1.isBuilt() )
-			return stage1.build(card, funds);
+		for (WonderBoardStage s : stages)
+		{
+			if (!s.isBuilt())
+			{
+				return s.build(card, funds);
+			}
+		}
 		return false;
 	}
 	
-	public boolean BuildStage2(Structure card, Resources funds)
-	{
-		if ( stage1.isBuilt() && !stage2.isBuilt() )
-			return stage2.build(card, funds);
-		return false;
-	}
-	
-	public boolean BuildStage3(Structure card, Resources funds)
-	{
-		if ( stage1.isBuilt() && stage2.isBuilt() && !stage3.isBuilt() )
-			return stage3.build(card, funds);
-		return false;
-	}
 	
 	/**
 	 * @param args

@@ -134,31 +134,26 @@ public class Player {
 		victoryPoints = points;
 	}
 	
-	
-	
-	public boolean actionPhase(int choice)
+	public boolean buildStructure()
 	{
-		switch ( choice )
+		if ( chosenCard.getResourceCost().canAfford(resources) && !wonderBoard.containsCard(chosenCard.getID()) )
 		{
-		case 1://build the structure
-			if ( chosenCard.getResourceCost().canAfford(resources) && !wonderBoard.containsCard(chosenCard.getID()) )
-			{
-				wonderBoard.buildStructure(chosenCard);
-				chosenCard = null;
-				return true;
-			}
-			break;
-			
-		case 2://Build wonderboard stage
-			
-			break;
-			
-		case 3://discard the card for coins
-			resources.addCoins(3); 
+			wonderBoard.buildStructure(chosenCard);
 			chosenCard = null;
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean buildStage()
+	{
+		return wonderBoard.buildStage(chosenCard, resources);
+	}
+	
+	public void discard()
+	{
+		resources.addCoins(3); 
+		chosenCard = null;
 	}
 	
 	public void buyResources(Player neighbor)
