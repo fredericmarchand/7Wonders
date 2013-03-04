@@ -150,9 +150,10 @@ public class Player {
 		return wonderBoard.buildStage(chosenCard, resources);
 	}
 	
-	public void discard()
+	public void discard(ArrayList<Structure> discardedCards)
 	{
 		resources.addCoins(3); 
+		discardedCards.add(chosenCard);
 		chosenCard = null;
 	}
 	

@@ -103,42 +103,42 @@ public class Resources {
 	
 	public void addCoins(int coins)
 	{
-		coins += coins;
+		this.coins += coins;
 	}
 	
 	public void addOre(int ore)
 	{
-		ore += ore;
+		this.ore += ore;
 	}
 	
 	public void addStone(int stone)
 	{
-		stone += stone;
+		this.stone += stone;
 	}
 	
 	public void addWood(int wood)
 	{
-		wood += wood;
+		this.wood += wood;
 	}
 	
 	public void addClay(int clay)
 	{
-		clay += clay;
+		this.clay += clay;
 	}
 	
 	public void addGlass(int glass)
 	{
-		glass += glass;
+		this.glass += glass;
 	}
 	
 	public void addLoom(int loom)
 	{
-		loom += loom;
+		this.loom += loom;
 	}
 	
 	public void addPapyrus(int papyrus)
 	{
-		papyrus += papyrus;
+		this.papyrus += papyrus;
 	}
 	
 	public void addResources(int ore, int stone, int wood, int clay, int glass, int loom, int papyrus, int coins)

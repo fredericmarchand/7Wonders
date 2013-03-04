@@ -77,11 +77,11 @@ public class WonderBoard {
 	}
 	
 	//setters
-	public void setBoardID(int id)
-	{
-		boardID = id;
-		setBoardName(id);
-	}
+	//public void setBoardID(int id)
+	//{
+//		boardID = id;
+//		setBoardName(id);
+//	}
 	
 	public void setSide(int side)
 	{
