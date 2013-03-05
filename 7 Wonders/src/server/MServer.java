@@ -16,6 +16,7 @@ import com.esotericsoftware.minlog.Log;
 
 
 
+@SuppressWarnings("unused")
 public class MServer {
 	
 	private Server server;
