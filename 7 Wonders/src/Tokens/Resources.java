@@ -141,7 +141,7 @@ public class Resources {
 		this.papyrus += papyrus;
 	}
 	
-	public void addResources(int ore, int stone, int wood, int clay, int glass, int loom, int papyrus, int coins)
+	/*public void addResources(int ore, int stone, int wood, int clay, int glass, int loom, int papyrus, int coins)
 	{
 		this.coins += coins;
 		this.ore += ore;
@@ -151,7 +151,7 @@ public class Resources {
 		this.glass += glass;
 		this.loom += loom;
 		this.papyrus += papyrus;
-	}
+	}*/
 	
 	public void addResources(Resources resources)
 	{
