@@ -2,7 +2,7 @@ package WonderBoards;
 
 import java.util.ArrayList;
 import Structures.Structure;
-
+import Tokens.Resources;;
 public class WonderBoard {
 
 	protected static final int NO_BOARD = 0;
@@ -77,11 +77,11 @@ public class WonderBoard {
 	}
 	
 	//setters
-	public void setBoardID(int id)
-	{
-		boardID = id;
-		setBoardName(id);
-	}
+	//public void setBoardID(int id)
+	//{
+//		boardID = id;
+//		setBoardName(id);
+//	}
 	
 	public void setSide(int side)
 	{
@@ -116,6 +116,8 @@ public class WonderBoard {
 			default: boardName = BOARD0; break;
 		}
 	}
+	
+	public boolean buildStage(Structure card, Resources funds){ return false; }
 	
 	//builds a structure on this wonderboard
 	public void buildStructure(Structure s)

@@ -1,10 +1,10 @@
 package Tokens;
 
-public class MilitaryVictoryTokens {
+public class ConflictTokens {
 
 	private int oneTokens, threeTokens, fiveTokens, minusOneTokens;
 	
-	public MilitaryVictoryTokens()
+	public ConflictTokens()
 	{
 		oneTokens = 0;
 		threeTokens = 0;

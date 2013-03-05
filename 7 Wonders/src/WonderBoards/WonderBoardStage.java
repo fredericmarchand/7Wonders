@@ -1,7 +1,7 @@
 package WonderBoards;
 
 import Structures.Structure;
-import Resources.Resources;
+import Tokens.Resources;
 
 public class WonderBoardStage {
 
@@ -25,7 +25,7 @@ public class WonderBoardStage {
 	}
 	
 	
-	public Resources GetResourceCost()
+	public Resources getResourceCost()
 	{
 		return resourceCost;
 	}	
@@ -35,7 +35,7 @@ public class WonderBoardStage {
 		return built;
 	}
 	
-	public boolean Build(Structure card, Resources resources)
+	public boolean build(Structure card, Resources resources)
 	{
 		if ( resourceCost.canAfford(resources) )
 		{

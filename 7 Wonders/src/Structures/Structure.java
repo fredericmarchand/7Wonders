@@ -1,6 +1,8 @@
 package Structures;
 
-import Resources.Resources;
+import Tokens.Resources;
+import WonderBoards.WonderBoard;
+
 
 public class Structure {
 
@@ -73,6 +75,10 @@ public class Structure {
 		return age;
 	}
 	
+	public boolean canBuildForFree(WonderBoard wb)
+	{
+		return false;
+	}
 	
 	
 	/**

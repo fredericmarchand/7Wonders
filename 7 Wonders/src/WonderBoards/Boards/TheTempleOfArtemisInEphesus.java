@@ -1,20 +1,19 @@
 package WonderBoards.Boards;
 
 import Structures.Structure;
+import Tokens.Resources;
 import WonderBoards.WonderBoard;
 import WonderBoards.WonderBoardStage;
-import Resources.Resources;
 
 public class TheTempleOfArtemisInEphesus extends WonderBoard {
 
-	private WonderBoardStage stage1, stage2, stage3;
 	
 	public TheTempleOfArtemisInEphesus()
 	{
 		super(3, 1);
-		stage1 = new WonderBoardStage(new Resources(0, 2, 0, 0, 0, 0, 0, 0));
-		stage2 = new WonderBoardStage(new Resources(0, 0, 2, 0, 0, 0, 0, 0));
-		stage3 = new WonderBoardStage(new Resources(0, 0, 0, 0, 0, 0, 0, 0));
+		WonderBoardStage stage1 = new WonderBoardStage(new Resources(0, 2, 0, 0, 0, 0, 0, 0));
+		WonderBoardStage stage2 = new WonderBoardStage(new Resources(0, 0, 2, 0, 0, 0, 0, 0));
+		WonderBoardStage stage3 = new WonderBoardStage(new Resources(0, 0, 0, 0, 0, 0, 0, 0));
 		stages.add(stage1);
 		stages.add(stage2);
 		stages.add(stage3);
@@ -23,9 +22,9 @@ public class TheTempleOfArtemisInEphesus extends WonderBoard {
 	public TheTempleOfArtemisInEphesus(int side)
 	{
 		super(3, side);
-		stage1 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 2, 0, 0, 0, 0, 0, 0) : new Resources(0, 2, 0, 0, 0, 0, 0, 0)));
-		stage2 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 0, 2, 0, 0, 0, 0, 0) : new Resources(0, 0, 2, 0, 0, 0, 0, 0)));
-		stage3 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 0, 0, 0, 0, 0, 0, 0) : new Resources(0, 0, 0, 0, 1, 1, 0, 0)));
+		WonderBoardStage stage1 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 2, 0, 0, 0, 0, 0, 0) : new Resources(0, 2, 0, 0, 0, 0, 0, 0)));
+		WonderBoardStage stage2 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 0, 2, 0, 0, 0, 0, 0) : new Resources(0, 0, 2, 0, 0, 0, 0, 0)));
+		WonderBoardStage stage3 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 0, 0, 0, 0, 0, 0, 0) : new Resources(0, 0, 0, 0, 1, 1, 0, 0)));
 		stages.add(stage1);
 		stages.add(stage2);
 		stages.add(stage3);
@@ -33,27 +32,18 @@ public class TheTempleOfArtemisInEphesus extends WonderBoard {
 	
 	public boolean isBuilt()
 	{
-		return (stage1.isBuilt() & stage2.isBuilt() & stage3.isBuilt());
+		return (stages.get(1).isBuilt() & stages.get(2).isBuilt() & stages.get(3).isBuilt());
 	}
 	
-	public boolean BuildStage1(Structure card, Resources funds)
+	public boolean buildStage(Structure card, Resources funds)
 	{
-		if ( !stage1.isBuilt() )
-			return stage1.Build(card, funds);
-		return false;
-	}
-	
-	public boolean BuildStage2(Structure card, Resources funds)
-	{
-		if ( stage1.isBuilt() && !stage2.isBuilt() )
-			return stage2.Build(card, funds);
-		return false;
-	}
-	
-	public boolean BuildStage3(Structure card, Resources funds)
-	{
-		if ( stage1.isBuilt() && stage2.isBuilt() && !stage3.isBuilt() )
-			return stage3.Build(card, funds);
+		for (WonderBoardStage s : stages)
+		{
+			if (!s.isBuilt())
+			{
+				return s.build(card, funds);
+			}
+		}
 		return false;
 	}
 	

@@ -2,7 +2,6 @@ package Player;
 
 import WonderBoards.WonderBoard;
 import Structures.Structure;
-import Resources.Resources;
 import java.util.ArrayList;
 import Tokens.*;
 
@@ -16,7 +15,7 @@ public class Player {
 	@SuppressWarnings("unused")
 	private Resources resources, purchased, unavailableResources;
 	private int shields;
-	private MilitaryVictoryTokens militaryVictoryPoints;
+	private ConflictTokens conflictTokens;
 	private int victoryPoints;
 	private ScientificSymbols scientificSymbols;
 	
@@ -31,7 +30,7 @@ public class Player {
 		resources = new Resources(0, 0, 0, 0, 0, 0, 0, 3);
 		purchased = new Resources();
 		unavailableResources = new Resources();
-		militaryVictoryPoints = new MilitaryVictoryTokens();
+		conflictTokens = new ConflictTokens();
 		shields = 0;
 		victoryPoints = 0;
 		scientificSymbols = new ScientificSymbols();
@@ -47,7 +46,7 @@ public class Player {
 		resources = new Resources();
 		purchased = new Resources();
 		unavailableResources = new Resources();
-		militaryVictoryPoints = new MilitaryVictoryTokens();
+		conflictTokens = new ConflictTokens();
 		shields = 0;
 		victoryPoints = 0;
 		scientificSymbols = new ScientificSymbols();
@@ -94,9 +93,9 @@ public class Player {
 		return victoryPoints;
 	}
 	
-	public MilitaryVictoryTokens getMilitaryVictoryTokens()
+	public ConflictTokens getConflictTokens()
 	{
-		return militaryVictoryPoints;
+		return conflictTokens;
 	}
 	
 	public ScientificSymbols getScientificSymbols()
@@ -135,31 +134,27 @@ public class Player {
 		victoryPoints = points;
 	}
 	
-	
-	
-	public boolean actionPhase(int choice)
+	public boolean buildStructure()
 	{
-		switch ( choice )
+		if ( chosenCard.getResourceCost().canAfford(resources) && !wonderBoard.containsCard(chosenCard.getID()) )
 		{
-		case 1://build the structure
-			if ( chosenCard.getResourceCost().canAfford(resources) && !wonderBoard.containsCard(chosenCard.getID()) )
-			{
-				wonderBoard.buildStructure(chosenCard);
-				chosenCard = null;
-				return true;
-			}
-			break;
-			
-		case 2://Build wonderboard stage
-			
-			break;
-			
-		case 3://discard the card for coins
-			resources.addCoins(3); 
+			wonderBoard.buildStructure(chosenCard);
 			chosenCard = null;
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean buildStage()
+	{
+		return wonderBoard.buildStage(chosenCard, resources);
+	}
+	
+	public void discard(ArrayList<Structure> discardedCards)
+	{
+		resources.addCoins(3); 
+		discardedCards.add(chosenCard);
+		chosenCard = null;
 	}
 	
 	public void buyResources(Player neighbor)

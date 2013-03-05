@@ -5,7 +5,7 @@ import Player.Player;
 import Structures.Structure;
 
 public class Match {
-
+	
 	
 	@SuppressWarnings("unused")
 	private ArrayList<Player> players;

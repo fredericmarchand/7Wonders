@@ -42,7 +42,7 @@ public class SpecialEffects {
 		return usedUp;
 	}
 	
-	public int activate()
+	public int activateTime()
 	{
 		return activation;
 	}

@@ -1,7 +1,7 @@
 package Structures.Cards;
 
-import Resources.Resources;
 import Structures.Structure;
+import Tokens.Resources;
 
 public class Marketplace extends Structure {
 
