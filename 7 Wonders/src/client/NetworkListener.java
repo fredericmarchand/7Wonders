@@ -77,7 +77,7 @@ public class NetworkListener extends Listener{
 				case 5: 
 							mclient.setHost((boolean)((Packet4Object)o).getObject());
 							if(mclient.getHost())System.out.println("[CLIENT] SET TO HOST");
-							mclient.setAlive(false);
+							//mclient.setAlive(false);
 							mclient.chat();
 							
 						 break;

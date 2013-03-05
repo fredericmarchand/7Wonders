@@ -32,7 +32,8 @@ public class Match {
 		connection_count = connected.size();
 		System.out.println(connection_count);
 		if(connection_count==MAX_PLAYER_COUNT){
-			countDown();
+			System.out.println("Starting Game!");
+			//countDown();
 		}
 	}
 	public boolean countDown(){
