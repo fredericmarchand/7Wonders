@@ -25,7 +25,7 @@ public class NetworkListener extends Listener{
 	}
 	
 	public void connected(Connection arg0) {
-		Log.info("[CLIENT] Connected");
+		System.out.println("[CLIENT] Connected");
 		// TODO Auto-generated method stub
 		//c.sendTCP(new Packet0LoginRequest());
 		//super.connected(arg0);
@@ -34,7 +34,7 @@ public class NetworkListener extends Listener{
 	@Override
 	public void disconnected(Connection arg0) {
 		// TODO Auto-generated method stub
-		Log.info("[CLIENT] Disconnected");
+		System.out.println("[CLIENT] Disconnected");
 		//super.disconnected(arg0);
 	}
 	
@@ -45,19 +45,47 @@ public class NetworkListener extends Listener{
 		if(o instanceof Packet1LoginAnswer){
 			if(!((Packet1LoginAnswer)o).getAccepted())
 				c.close();
+			mclient.setID(((Packet1LoginAnswer)o).getIDValue());
 		}
+		//check if client has been able to join game
+		//if yes, join lobby
+		//if no stay at match list screen
+		//
 		if(o instanceof Packet3Connection){
-			Log.info("Packet3Connection Received");
-		}
-		if(o instanceof Packet4Object){
-			Log.info("[CLIENT] PACKET 4");
-			if(((Packet4Object) o).getID()==1){
-				list = (ArrayList<Match>)((Packet4Object)o).getObject();
-				for(Match e : list)
-					Log.info(Long.toString(e.getMatch_ID()));
-//				mclient.joinMatch(list);
+			System.out.println("Packet3Connection Received");
+			if(((Packet3Connection)o).getAccepted()){
+				//join match lobby
+				mclient.setMID(((Packet3Connection)o).getIDValue());
+				System.out.println("[CLIENT] JOINED GAME SUCCESSFULLY");
+			}
+			else{
+				System.out.println("GAME IS FULL");
+				//mclient.command();
 			}
 		}
+		if(o instanceof Packet4Object){			
+			switch(((Packet4Object) o).getID()){
+				case 0: ;
+				case 1: {
+							for(Long e : (ArrayList<Long>)((Packet4Object)o).getObject())
+								System.out.println(Long.toString(e));
+							break;
+						}
+				case 2: ;					
+				case 3: ;
+				case 4: ;
+				case 5: 
+							mclient.setHost((boolean)((Packet4Object)o).getObject());
+							if(mclient.getHost())System.out.println("[CLIENT] SET TO HOST");
+							//mclient.setAlive(false);
+							mclient.chat();
+							
+						 break;
+			default: break;
+			}
+			//add client to match list
+		}
+
 		
 		// TODO Auto-generated method stub
 		//super.received(arg0, arg1);

@@ -21,9 +21,11 @@ public class MServer {
 	private Server server;
 	private ArrayList<Object> list;
 	private ArrayList<Match> matchList;
+	private static long client_ID = 100000;
 	Scanner scanner = new Scanner(System.in);
 	
 	public MServer() throws IOException{
+		
 		server = new Server();
 		list = new ArrayList<Object>();
 		matchList = new ArrayList<Match>();
@@ -34,14 +36,17 @@ public class MServer {
 		NetworkListener nl = new NetworkListener();
 		nl.init(server, this);
 		server.addListener(nl);
+		System.out.println("Input ");
 		server.bind(Integer.parseInt((scanner.next())));
 		server.start();
 		
 	}
-	public void createMatch(){		
-		matchList.add(new Match());
-		for(Match m: matchList)
-			System.out.println(m.getMatch_ID());
+	public long createMatch(){		
+		Match m = new Match();
+		matchList.add(m);
+//		for(Match m: matchList)
+//			System.out.println(m.getMatch_ID());
+		return m.getMatch_ID();
 	}
 	
 	
@@ -54,12 +59,26 @@ public class MServer {
 	 */
 	
 	//To be modified
-	public void bridgeClient(Connection c, long m_id){
+	public boolean bridgeClient(Connection c, long m_id){
 		for(Match m : matchList){
 			if(m.getMatch_ID()==m_id){
-				//m.addConnection(c);
+				if(m.getConnectionCount()<Match.MAX_PLAYER_COUNT){
+					m.addConnection(c);
+					return true;
+				}
 			}
 		}
+		return false;
+	}
+	
+	public boolean removeClient(Connection c, long m_id){
+		for(Match m : matchList){
+			if(m.getMatch_ID()==m_id){
+				m.removeConnection(c);
+				return true;
+			}
+		}
+		return false;		
 	}
 	//any class type sent over the network must be registered to the kryo
 	//generic types are implicitly registered
@@ -70,22 +89,30 @@ public class MServer {
 		kryo.register(Packet2Message.class);
 		kryo.register(Packet3Connection.class);
 		kryo.register(Packet4Object.class);
+		kryo.register(Packet5Disconnect.class);
 		kryo.register(java.util.ArrayList.class);
-		kryo.register(Match.class);
+		kryo.register(Match.class);	
 	}
 	
-	public ArrayList<Object> getConnected(){
-		return list;
+	public ArrayList<Object> getConnected(){return list;}
+	public ArrayList<Match> getMatchList(){return matchList;}
+	public long getID(){return client_ID;}
+	public void incID(){++client_ID;}
+	
+	public ArrayList<Long> getMatchID_List(){
+		ArrayList<Long> idList = new ArrayList<Long>();
+		for(Match e: matchList)
+			idList.add(e.getMatch_ID());
+		return idList;
 	}
-	public ArrayList<Match> getMatchList(){
-		return matchList;
-	}
+			
 	
 	
 	public static void main(String[] args){
 		try {
+			
 			new MServer();
-			Log.set(Log.LEVEL_TRACE);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
