@@ -11,6 +11,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.minlog.Log;
 
+@SuppressWarnings("unused")
 public class NetworkListener extends Listener{
 	Client c;
 	MClient mclient;

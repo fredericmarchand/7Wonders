@@ -131,7 +131,7 @@ public class Player {
 	
 	public void addVictoryPoints(int points)
 	{
-		victoryPoints = points;
+		victoryPoints += points;
 	}
 	
 	public boolean buildStructure()
