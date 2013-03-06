@@ -50,4 +50,9 @@ public class Packet {
 		public long getMID(){return matchID;}
 		public void setMID(long id){matchID = id;}		
 	}
+	public static class Packet6ChatMsg{
+		private String msg;
+		public String getMsg(){ return msg;}
+		public void setMsg(String s){ msg = s;}
+	}
 }

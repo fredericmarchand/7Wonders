@@ -72,7 +72,7 @@ public class NetworkListener extends Listener{
 				Packet4Object l = new Packet4Object();
 				l.setID(1);
 				l.setObject(mserver.getMatchID_List());
-				c.sendTCP(l);				
+				//c.sendTCP(l);				
 			}
 			if(message.equals("QUIT")){
 				
@@ -121,6 +121,10 @@ public class NetworkListener extends Listener{
 			System.out.println("[SERVER] CLIENT HAS BEEN REMOVED" +
 					mserver.removeClient(c, ((Packet5Disconnect)o).getMID()));
 			
+		}
+		if(o instanceof Packet6ChatMsg){
+			System.out.println("[SERVER] RECEIVED CHAT MESSAGE");
+			server.sendToAllTCP(o);
 		}
 		// TODO Auto-generated method stub
 		//super.received(arg0, arg1);

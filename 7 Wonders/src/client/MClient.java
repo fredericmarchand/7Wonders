@@ -13,6 +13,7 @@ import Resources.Packet.Packet2Message;
 import Resources.Packet.Packet3Connection;
 import Resources.Packet.Packet4Object;
 import Resources.Packet.Packet5Disconnect;
+import Resources.Packet.Packet6ChatMsg;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.*;
@@ -67,11 +68,12 @@ public class MClient {
 
 
 	        while(GAME_ALIVE){
+	        	System.out.println(matchID);
 	        	String m = s.next();
 	        	if(m.equals("QUIT")){
 		        	System.out.println("MAGIC");
 		        	quitMatch();
-		        }else if(!m.equals("JOIN")){
+		        }else if(!m.equals("JOIN")&&matchID==0){
 		            Packet2Message mpackage = new Packet2Message();
 			        mpackage.setObject(m);
 			        client.sendTCP(mpackage);
@@ -82,6 +84,12 @@ public class MClient {
 		        	client.sendTCP(game_id);      	
 		        	
 		        	//figure out fix
+		        }
+		        else if(matchID!=(long)0){
+		        	System.out.println("Sending message");
+		        	Packet6ChatMsg msg = new Packet6ChatMsg();
+		        	msg.setMsg(m);
+		        	client.sendTCP(msg);
 		        }
 	        }
 	        //immitate turn taking
@@ -131,6 +139,7 @@ public class MClient {
     	kryo.register(Packet3Connection.class);
     	kryo.register(Packet4Object.class);
     	kryo.register(Packet5Disconnect.class);
+    	kryo.register(Packet6ChatMsg.class);
     	kryo.register(java.util.ArrayList.class);
     	kryo.register(Match.class);
    }

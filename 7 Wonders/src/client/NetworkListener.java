@@ -78,12 +78,15 @@ public class NetworkListener extends Listener{
 							mclient.setHost((boolean)((Packet4Object)o).getObject());
 							if(mclient.getHost())System.out.println("[CLIENT] SET TO HOST");
 							//mclient.setAlive(false);
-							mclient.chat();
+							//mclient.chat();
 							
 						 break;
 			default: break;
 			}
 			//add client to match list
+		}
+		if(o instanceof Packet6ChatMsg){
+			System.out.println(((Packet6ChatMsg)o).getMsg());
 		}
 
 		

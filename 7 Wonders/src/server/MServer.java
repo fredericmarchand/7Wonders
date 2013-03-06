@@ -90,6 +90,7 @@ public class MServer {
 		kryo.register(Packet3Connection.class);
 		kryo.register(Packet4Object.class);
 		kryo.register(Packet5Disconnect.class);
+		kryo.register(Packet6ChatMsg.class);
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match.class);	
 	}
