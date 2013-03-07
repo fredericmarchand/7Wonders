@@ -52,7 +52,10 @@ public class Packet {
 	}
 	public static class Packet6ChatMsg{
 		private String msg;
+		private long matchID;
 		public String getMsg(){ return msg;}
 		public void setMsg(String s){ msg = s;}
+		public long getMID(){return matchID;}
+		public void setMID(long id){matchID = id;}		
 	}
 }

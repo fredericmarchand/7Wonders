@@ -124,7 +124,13 @@ public class NetworkListener extends Listener{
 		}
 		if(o instanceof Packet6ChatMsg){
 			System.out.println("[SERVER] RECEIVED CHAT MESSAGE");
+			Match m = mserver.findMatch(((Packet6ChatMsg)o).getMID());
+			if(m!=null){
+			long id = m.getMatch_ID();
+			//mserver.findMatch(((Packet6ChatMsg)o).getMID());
+			if(mserver.findMatch(((Packet6ChatMsg)o).getMID())!=null){
 			server.sendToAllTCP(o);
+			}
 		}
 		// TODO Auto-generated method stub
 		//super.received(arg0, arg1);

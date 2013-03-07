@@ -107,6 +107,14 @@ public class MServer {
 			idList.add(e.getMatch_ID());
 		return idList;
 	}
+	//return the match given a match id
+	public Match findMatch(long id){
+		for(Match e : matchList){
+			if(e.getMatch_ID()==id)
+				return e;
+		}
+		return null;
+	}
 			
 	
 	
