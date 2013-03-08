@@ -60,11 +60,16 @@ public class NetworkListener extends Listener{
 			String message = (String)((Packet2Message)o).getObject();
 			System.out.println(message);
 			if(message.equals("CREATE")){
+				//Request made to create a match
+				//match is created
+				//returns a packet to client, containing the new matchID
+				//client must be set to host 
 				System.out.println("[SERVER ---------- CREATE Received packet" );
-				mserver.bridgeClient(c,mserver.createMatch());
+				long matchID = mserver.createMatch();
+				mserver.bridgeClient(c,matchID);//adding client to match connection list
 				Packet4Object P = new Packet4Object();
 				P.setID(5);
-				P.setObject(true);
+				P.setObject(matchID);
 				c.sendTCP(P);
 			}
 			if(message.equals("LIST")){
