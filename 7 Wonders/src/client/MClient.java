@@ -5,6 +5,7 @@ import java.util.*;
 
 
 
+import Resources.Chat;
 import Resources.Match;
 import Resources.Packet.Packet0LoginRequest;
 import Resources.Packet.Packet1LoginAnswer;
@@ -28,22 +29,19 @@ public class MClient {
     //match ID is 0
     private long matchID = 0000;
     private long ID = 0000;
+    private String username;
+    private Chat chat;
     
     public MClient(){
     	
     	client = new Client();
     	NetworkListener nl = new NetworkListener(this);
+    	chat = new Chat();
     	
     	client.addListener(nl);
     	client.start();
     	register();
-    	//System.out.println("Please enter the specified IP!");
-		//String x = s.next();
-		//System.out.println("Please enter the specified Port!");
-		//int p = Integer.parseInt(s.next());
-		//given 50 seconds to input connect
-		//connection fails if no input
-		//send request to server
+/********************Connect*******************************/
 		try {
 			client.connect(5000,"127.0.0.1",25565);
 		} catch (IOException e) {
@@ -52,7 +50,7 @@ public class MClient {
 			client.stop();
 		}
 		client.sendTCP(new Packet0LoginRequest());
-    	
+/********************Connect*******************************/    	
     	command();
     	
     }
@@ -64,8 +62,14 @@ public class MClient {
     	//while the game is still alive the server will continue
     	//to except user input
     	GAME_ALIVE = true;
+    	System.out.println("Enter user name");
+    	username = s.next();
 
-
+    	//System.out.println("Please enter the specified IP!");
+		//String x = s.next();
+		//System.out.println("Please enter the specified Port!");
+		//int p = Integer.parseInt(s.next());
+    	
 	        while(GAME_ALIVE){
 	        	System.out.println(matchID);
 	        	String m = s.next();
@@ -83,11 +87,13 @@ public class MClient {
 		        	client.sendTCP(game_id);      	
 		        	
 		        	//figure out fix
-		        }
-		        else if(matchID!=(long)0){
+		        }else if(matchID!=(long)0){
 		        	System.out.println("Sending message");
 		        	Packet6ChatMsg msg = new Packet6ChatMsg();
 		        	msg.setMsg(m);
+		        	msg.setCID(ID);
+		        	msg.setuName(username);
+		        	msg.setMID(matchID);
 		        	client.sendTCP(msg);
 		        }
 	        }
@@ -109,6 +115,9 @@ public class MClient {
     //set match id to which client has joined
     public void setMID(long id){matchID = id;}
     public long getMID(){return matchID;}
+    
+    //getter for chat
+    public Chat getChat(){return chat;}
     
     public void ClientWait(){
     	while(true){

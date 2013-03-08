@@ -87,7 +87,10 @@ public class NetworkListener extends Listener{
 			//add client to match list
 		}
 		if(o instanceof Packet6ChatMsg){
-			System.out.println(((Packet6ChatMsg)o).getMsg());
+			(mclient.getChat()).addChat(
+					((Packet6ChatMsg)o).getMsg(),
+					((Packet6ChatMsg)o).getuName(),
+					((Packet6ChatMsg)o).getMID());
 		}
 
 		

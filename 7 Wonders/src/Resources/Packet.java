@@ -53,9 +53,15 @@ public class Packet {
 	public static class Packet6ChatMsg{
 		private String msg;
 		private long matchID;
+		private long clientID;
+		private String uName;
 		public String getMsg(){ return msg;}
 		public void setMsg(String s){ msg = s;}
 		public long getMID(){return matchID;}
-		public void setMID(long id){matchID = id;}		
+		public void setMID(long id){matchID = id;}
+		public long getCID(){return clientID;}
+		public void setCID(long id){clientID=id;}
+		public String getuName(){return uName;}
+		public void setuName(String n){uName = n;}
 	}
 }

@@ -115,6 +115,11 @@ public class MServer {
 		}
 		return null;
 	}
+	
+	public void notifyClient(long id) {
+		// TODO Auto-generated method stub
+		
+	}
 			
 	
 	
@@ -128,6 +133,7 @@ public class MServer {
 			e.printStackTrace();
 		}
 	}
+
 	
 }
 

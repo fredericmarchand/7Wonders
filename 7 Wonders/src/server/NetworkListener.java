@@ -126,10 +126,15 @@ public class NetworkListener extends Listener{
 			System.out.println("[SERVER] RECEIVED CHAT MESSAGE");
 			Match m = mserver.findMatch(((Packet6ChatMsg)o).getMID());
 			if(m!=null){
-			long id = m.getMatch_ID();
-			//mserver.findMatch(((Packet6ChatMsg)o).getMID());
-			if(mserver.findMatch(((Packet6ChatMsg)o).getMID())!=null){
-			server.sendToAllTCP(o);
+				//USING THE PUSH PATTERN
+				//sending chat packet without notification
+				//if clients have the same match id as the chat sender
+				//send the chat packet to all clients of that unique instance
+				//of the match
+				for(Connection x: m.getConnections())
+					x.sendTCP(o);
+				
+				
 			}
 		}
 		// TODO Auto-generated method stub
