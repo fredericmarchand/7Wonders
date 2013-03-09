@@ -2,7 +2,7 @@ package Structures.Effects;
 
 import Player.Player;
 
-public class VictoryPointBonus extends SpecialEffects {
+public class VictoryPointBonus extends SpecialEffect {
 
 	public static final int VictoryPointBonusID = 0x05;
 	private int amountOfPoints;

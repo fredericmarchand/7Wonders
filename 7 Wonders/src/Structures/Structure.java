@@ -2,7 +2,8 @@ package Structures;
 
 import Tokens.Resources;
 import WonderBoards.WonderBoard;
-
+import java.util.ArrayList;
+import Structures.Effects.*;
 
 public class Structure {
 
@@ -20,6 +21,7 @@ public class Structure {
 	protected String name;
 	protected int color;
 	protected int age;
+	protected ArrayList<SpecialEffect> effects;
 	
 	//Constructors
 	public Structure()
@@ -29,6 +31,7 @@ public class Structure {
 		name = "";
 		color = INVALID;
 		age = 0;
+		effects = new ArrayList<SpecialEffect>();
 	}
 	
 	public Structure(Resources resourceCost, int id, String name, int color, int age)
@@ -38,6 +41,7 @@ public class Structure {
 		this.name = name;
 		this.color = color;
 		this.age = age;
+		effects = new ArrayList<SpecialEffect>();
 	}
 	
 	public Structure(Structure s)
@@ -47,6 +51,7 @@ public class Structure {
 		this.name = s.name;
 		this.color= s.color;
 		this.age = s.age;
+		this.effects.addAll(s.effects);
 	}
 	
 	//getters

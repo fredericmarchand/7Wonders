@@ -61,6 +61,34 @@ public class Resources {
 		return true;
 	}
 	
+	public boolean hasRequiredResources(Resources required)
+	{
+		if ( required.clay > clay )
+			return false;
+		if ( required.glass > glass )
+			return false;
+		if ( required.loom > loom )
+			return false;
+		if ( required.ore > ore )
+			return false;
+		if ( required.papyrus > papyrus )
+			return false;
+		if ( required.stone > stone )
+			return false;
+		if ( required.wood > wood )
+			return false;
+
+		//otherwise return true;
+		return true;
+	}
+	
+	//returns the total amount of resources of every type
+	public int getCount()
+	{
+		return (ore + stone + wood + clay + glass + loom + papyrus);
+	}
+	
+	
 	public int getCoins()
 	{
 		return coins;
@@ -141,6 +169,7 @@ public class Resources {
 		this.papyrus += papyrus;
 	}
 	
+	
 	/*public void addResources(int ore, int stone, int wood, int clay, int glass, int loom, int papyrus, int coins)
 	{
 		this.coins += coins;
@@ -179,6 +208,73 @@ public class Resources {
 		return r;
 	}
 	
+	public Resources findMissingResources(Resources required)
+	{
+		Resources r = new Resources();
+		r.ore = required.ore - ore;
+		r.stone = required.stone - stone;
+		r.wood = required.wood - wood;
+		r.clay = required.clay - clay;
+		r.glass = required.glass - glass;
+		r.loom = required.loom - loom;
+		r.papyrus = required.papyrus - papyrus;
+		return r;
+	}
+	
+	//not adjusted for special effect prices
+	public static void buyResources(Resources buyer, Resources seller, Resources required)
+	{
+		if ( seller.getOre() >= required.getOre() && required.getOre() > 0 )
+		{
+			buyer.addOre(required.getOre());
+			buyer.addCoins(required.getOre() * -2);
+			seller.addCoins(required.getOre() * 2);
+			required.addOre(required.getOre() * -1);
+		}
+		if ( seller.getStone() >= required.getStone() && required.getStone() > 0 )
+		{
+			buyer.addStone(required.getStone());
+			buyer.addCoins(required.getStone() * -2);
+			seller.addCoins(required.getStone() * 2);
+			required.addStone(required.getStone() * -1);
+		}
+		if ( seller.getWood() >= required.getWood() && required.getWood() > 0 )
+		{
+			buyer.addWood(required.getWood());
+			buyer.addCoins(required.getWood() * -2);
+			seller.addCoins(required.getWood() * 2);
+			required.addWood(required.getWood() * -1);
+		}
+		if ( seller.getClay() >= required.getClay() && required.getClay() > 0 )
+		{
+			buyer.addClay(required.getClay());
+			buyer.addCoins(required.getClay() * -2);
+			seller.addCoins(required.getClay() * 2);
+			required.addClay(required.getClay() * -1);
+		}
+		if ( seller.getGlass() >= required.getGlass() && required.getGlass() > 0 )
+		{
+			buyer.addOre(required.getGlass());
+			buyer.addCoins(required.getGlass() * -2);
+			seller.addCoins(required.getGlass() * 2);
+			required.addOre(required.getGlass() * -1);
+		}
+		if ( seller.getLoom() >= required.getLoom() && required.getLoom() > 0 )
+		{
+			buyer.addLoom(required.getLoom());
+			buyer.addCoins(required.getLoom() * -2);
+			seller.addCoins(required.getLoom() * 2);
+			required.addLoom(required.getLoom() * -1);
+		}
+		if ( seller.getPapyrus() >= required.getPapyrus() && required.getPapyrus() > 0 )
+		{
+			buyer.addPapyrus(required.getPapyrus());
+			buyer.addCoins(required.getPapyrus() * -2);
+			seller.addCoins(required.getPapyrus() * 2);
+			required.addPapyrus(required.getPapyrus() * -1);
+		}
+		
+	}
 	
 	public String toString()
 	{

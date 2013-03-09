@@ -2,7 +2,7 @@ package Structures.Effects;
 
 import Tokens.Resources;
 
-public class CoinBonus extends SpecialEffects {
+public class CoinBonus extends SpecialEffect {
 
 	public static final int CoinBonusID = 0x03;
 	private int amountOfCoins;
