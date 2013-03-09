@@ -2,7 +2,7 @@ package Structures.Effects;
 
 import Player.Player;
 
-public class ShieldBonus extends SpecialEffects {
+public class ShieldBonus extends SpecialEffect {
 
 	public static final int ShieldBonusID = 0x06;
 	private int amountOfShields;

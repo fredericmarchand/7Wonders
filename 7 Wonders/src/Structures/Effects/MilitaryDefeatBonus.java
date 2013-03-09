@@ -2,7 +2,7 @@ package Structures.Effects;
 
 import Player.Player;
 
-public class MilitaryDefeatBonus extends SpecialEffects {
+public class MilitaryDefeatBonus extends SpecialEffect {
 
 	public static final int MilitaryDefeatBonusID = 0x0A;
 	

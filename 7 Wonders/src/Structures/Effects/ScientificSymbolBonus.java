@@ -2,7 +2,7 @@ package Structures.Effects;
 
 import Player.Player;
 
-public class ScientificSymbolBonus extends SpecialEffects {
+public class ScientificSymbolBonus extends SpecialEffect {
 	
 	public static final int ShieldBonusID = 0x07;
 	private int symbolType; 
