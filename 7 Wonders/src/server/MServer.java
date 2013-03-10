@@ -91,6 +91,7 @@ public class MServer {
 		kryo.register(Packet3Connection.class);
 		kryo.register(Packet4Object.class);
 		kryo.register(Packet5Disconnect.class);
+		kryo.register(Packet6ChatMsg.class);
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match.class);	
 	}
@@ -106,6 +107,19 @@ public class MServer {
 			idList.add(e.getMatch_ID());
 		return idList;
 	}
+	//return the match given a match id
+	public Match findMatch(long id){
+		for(Match e : matchList){
+			if(e.getMatch_ID()==id)
+				return e;
+		}
+		return null;
+	}
+	
+	public void notifyClient(long id) {
+		// TODO Auto-generated method stub
+		
+	}
 			
 	
 	
@@ -119,6 +133,7 @@ public class MServer {
 			e.printStackTrace();
 		}
 	}
+
 	
 }
 

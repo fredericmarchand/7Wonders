@@ -3,7 +3,7 @@ package Structures.Effects;
 import Player.Player;
 import WonderBoards.WonderBoardStage;
 
-public class WonderStageCoinBonus extends SpecialEffects {
+public class WonderStageCoinBonus extends SpecialEffect {
 
 	public static final int WonderStageCoinBonusID = 0x08;
 	private int amountOfCoins;

@@ -2,7 +2,7 @@ package Structures.Effects;
 
 import Tokens.Resources;
 
-public class ResourceChoice extends SpecialEffects {
+public class ResourceChoice extends SpecialEffect {
 
 	public  static final int ResourceChoiceID = 0x01;
 	

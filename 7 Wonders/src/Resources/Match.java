@@ -51,5 +51,11 @@ public class Match {
 			}
 		}
 		return true;
-	}	
+	}
+
+	public boolean contains(Connection c){
+		if(connected.contains(c))
+			return true;
+		return false;
+	}
 }

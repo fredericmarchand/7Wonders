@@ -36,7 +36,12 @@ public class NetworkListener extends Listener{
 	public void disconnected(Connection c) {
 		// TODO Auto-generated method stub
 		System.out.println("[SERVER] User has disconnected");
-		//super.disconnected(arg0);
+		for(Match e :mserver.getMatchList())
+			if(e.contains(c)){
+				//replace with AI ?
+				e.removeConnection(c);
+			}
+		
 	}
 	@Override
 	public void received(Connection c, Object o) {
@@ -60,11 +65,16 @@ public class NetworkListener extends Listener{
 			String message = (String)((Packet2Message)o).getObject();
 			System.out.println(message);
 			if(message.equals("CREATE")){
+				//Request made to create a match
+				//match is created
+				//returns a packet to client, containing the new matchID
+				//client must be set to host 
 				System.out.println("[SERVER ---------- CREATE Received packet" );
-				mserver.bridgeClient(c,mserver.createMatch());
+				long matchID = mserver.createMatch();
+				mserver.bridgeClient(c,matchID);//adding client to match connection list
 				Packet4Object P = new Packet4Object();
 				P.setID(5);
-				P.setObject(true);
+				P.setObject(matchID);
 				c.sendTCP(P);
 			}
 			if(message.equals("LIST")){
@@ -72,7 +82,7 @@ public class NetworkListener extends Listener{
 				Packet4Object l = new Packet4Object();
 				l.setID(1);
 				l.setObject(mserver.getMatchID_List());
-				c.sendTCP(l);				
+				//c.sendTCP(l);				
 			}
 			if(message.equals("QUIT")){
 				
@@ -121,6 +131,21 @@ public class NetworkListener extends Listener{
 			System.out.println("[SERVER] CLIENT HAS BEEN REMOVED" +
 					mserver.removeClient(c, ((Packet5Disconnect)o).getMID()));
 			
+		}
+		if(o instanceof Packet6ChatMsg){
+			System.out.println("[SERVER] RECEIVED CHAT MESSAGE");
+			Match m = mserver.findMatch(((Packet6ChatMsg)o).getMID());
+			if(m!=null){
+				//USING THE PUSH PATTERN
+				//sending chat packet without notification
+				//if clients have the same match id as the chat sender
+				//send the chat packet to all clients of that unique instance
+				//of the match
+				for(Connection x: m.getConnections())
+					x.sendTCP(o);
+				
+				
+			}
 		}
 		// TODO Auto-generated method stub
 		//super.received(arg0, arg1);

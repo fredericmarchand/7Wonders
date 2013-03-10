@@ -2,7 +2,7 @@ package Structures.Effects;
 
 import Tokens.Resources;
 
-public class TradingPerks extends SpecialEffects {
+public class TradingPerks extends SpecialEffect {
 
 	public static final int TradingPerksID = 0x02;
 	

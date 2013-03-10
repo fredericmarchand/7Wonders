@@ -75,16 +75,26 @@ public class NetworkListener extends Listener{
 				case 2: ;					
 				case 3: ;
 				case 4: ;
-				case 5: 
-							mclient.setHost((boolean)((Packet4Object)o).getObject());
-							if(mclient.getHost())System.out.println("[CLIENT] SET TO HOST");
-							//mclient.setAlive(false);
-							mclient.chat();
-							
+				case 5: {
+							if(((long)((Packet4Object)o).getObject())>0){
+								mclient.setMID((long)((Packet4Object)o).getObject());
+								mclient.setHost(true);
+								System.out.println("[CLIENT] SET TO HOST");
+							}
+							else{
+								//failed to create game
+							}
+				};	
 						 break;
 			default: break;
 			}
 			//add client to match list
+		}
+		if(o instanceof Packet6ChatMsg){
+			(mclient.getChat()).addChat(
+					((Packet6ChatMsg)o).getMsg(),
+					((Packet6ChatMsg)o).getuName(),
+					((Packet6ChatMsg)o).getMID());
 		}
 
 		

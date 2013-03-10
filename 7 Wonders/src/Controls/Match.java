@@ -27,7 +27,37 @@ public class Match {
 	
 	public static void runGame()
 	{
-		//add all players		
+		
+		/*
+		void runMatch()
+		{
+			add players to match
+			random wonderboard assignment
+			//3 ages
+			for ( int age = 0; age < 3; ++age )
+			{
+				distributeCards(age)
+				//6 turns
+				for ( int i = 0; i < 6; ++i )
+				{
+					 //each player makes their moves
+					 for ( Player p: players )
+					 {
+					 	select card
+					  	if ( i == 5 ) discard remaining card
+					  	action phase
+					  	pass cards to neighbor
+					  	
+					  	//push match to server
+					  }
+				}
+				settlemilitaryconflicts
+			}
+			countvictorypoints
+		}
+				  
+		*/	  
+		
 	}
 	
 	public void addCardToDiscardedPile(Structure card)

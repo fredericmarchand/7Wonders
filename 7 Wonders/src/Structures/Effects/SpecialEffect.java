@@ -1,6 +1,6 @@
 package Structures.Effects;
 
-public class SpecialEffects {
+public class SpecialEffect {
 
 	protected static final int NO_RELOAD = 0;
 	protected static final int RELOAD_EVERY_TURN = 1;
@@ -16,7 +16,7 @@ public class SpecialEffects {
 	protected int type;
 	protected int activation;
 	
-	public SpecialEffects()
+	public SpecialEffect()
 	{
 		ID = 0;
 		usedUp = true;
@@ -24,7 +24,7 @@ public class SpecialEffects {
 		activation = 2;
 	}
 	
-	public SpecialEffects(int id, boolean used, int type, int act)
+	public SpecialEffect(int id, boolean used, int type, int act)
 	{
 		ID = id;
 		usedUp = used;
