@@ -36,7 +36,12 @@ public class NetworkListener extends Listener{
 	public void disconnected(Connection c) {
 		// TODO Auto-generated method stub
 		System.out.println("[SERVER] User has disconnected");
-		//super.disconnected(arg0);
+		for(Match e :mserver.getMatchList())
+			if(e.contains(c)){
+				//replace with AI ?
+				e.removeConnection(c);
+			}
+		
 	}
 	@Override
 	public void received(Connection c, Object o) {

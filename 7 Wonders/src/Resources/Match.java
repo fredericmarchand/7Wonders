@@ -11,12 +11,10 @@ public class Match {
     private static long counter = 1000;
     public static final int MAX_PLAYER_COUNT = 7;
     private int connection_count;
-    private ArrayList<String> chat;
     
     public Match(){
     	connected = new ArrayList<Connection>();
 		match_id = ++counter;
-		chat = new ArrayList<String>();
     }
 
 	public ArrayList<Connection> getConnections(){return connected;}	
@@ -54,7 +52,10 @@ public class Match {
 		}
 		return true;
 	}
-	public void setChat(String c){
-		chat.add(c);
+
+	public boolean contains(Connection c){
+		if(connected.contains(c))
+			return true;
+		return false;
 	}
 }
