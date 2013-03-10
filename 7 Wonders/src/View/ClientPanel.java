@@ -3,10 +3,16 @@ package View;
 import java.awt.*;
 import javax.swing.*;
 
+import Controls.Match;
+
 public class ClientPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
+	private Match match;
+	
 	public ClientPanel() {
+		match = new Match();
+		
 		GridBagLayout l = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
 		setLayout(l);
@@ -23,4 +29,6 @@ public class ClientPanel extends JPanel {
 		l.setConstraints(label, c);
 		add(label);
 	}
+	
+	
 }

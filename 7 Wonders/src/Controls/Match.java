@@ -7,7 +7,6 @@ import Structures.Structure;
 public class Match {
 	
 	
-	@SuppressWarnings("unused")
 	private ArrayList<Player> players;
 	@SuppressWarnings("unused")
 	private int age, turn;
@@ -28,8 +27,6 @@ public class Match {
 	
 	public static void runGame()
 	{
-		@SuppressWarnings("unused")
-		Match newMatch = new Match();
 		//add all players		
 	}
 	
@@ -39,13 +36,7 @@ public class Match {
 		card = null;
 	}
 	
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		runGame();
+	public ArrayList<Player> getPlayers() {
+		return players;
 	}
-
 }
