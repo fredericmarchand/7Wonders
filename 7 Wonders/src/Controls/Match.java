@@ -4,59 +4,51 @@ import java.util.ArrayList;
 import Player.Player;
 import Structures.Structure;
 import java.util.Scanner;
-import java.util.Random;
 
 public class Match {
-	
-	
+
 	private ArrayList<Player> players;
-	@SuppressWarnings("unused")
 	private int age, turn;
 	private ArrayList<Structure> age1Deck, age2Deck, age3Deck, discarded;
 	
-	public Match()
+	public Match(int numPlayers)
 	{
-		players = new ArrayList<Player>();
-		age = 0;
-		turn = 0;
-		age1Deck = null;
-		age2Deck = null;
-		age3Deck = null;
-		discarded = null;
-	}
-	
-	public void runConsoleGame()
-	{
-		Scanner in = new Scanner(System.in);
-		Random r = new Random();
-		discarded = new ArrayList<Structure>();
-		
-		System.out.println("Please input how many players will play: ");
-		int numPlayers = (int)Integer.parseInt(in.nextLine());
+		players = new ArrayList<Player>();		
 		age1Deck = CardHandler.BuildAge1Deck(numPlayers);
 		age2Deck = CardHandler.BuildAge2Deck(numPlayers);
 		age3Deck = CardHandler.BuildAge3Deck(numPlayers);
+		discarded = new ArrayList<Structure>();
 		
 		for ( int i = 0; i < numPlayers; ++i )
 		{
-			System.out.println("Please input a username for player " + (i + 1) + ": ");
-			String un = in.nextLine();
-			players.add(new Player(un, (i * r.nextInt())));
+			players.add(new Player("Player " + i, i));
 		}
 		CardHandler.DistributeRandomWonderBoards(players, 0);
 		for ( Player p: players )
 		{
 			p.getResources().addCoins(3);
 		}
+	}
+	
+	public void runConsoleGame()
+	{
+		Scanner in = new Scanner(System.in);
 		
-		for ( int age = 1; age < 4; ++age )
+//		for ( int i = 0; i < numPlayers; ++i )
+//		{
+//			System.out.println("Please input a username for player " + (i + 1) + ": ");
+//			String un = in.nextLine();
+//			players.add(new Player(un, (i * r.nextInt())));
+//		}
+		
+		for ( age = 1; age < 4; ++age )
 		{
 			System.out.println("\nAge " + age + "\n");
 			if ( age == 1 )      CardHandler.DistributeCards(players, age1Deck);
 			else if ( age == 2 ) CardHandler.DistributeCards(players, age2Deck);
 			else if ( age == 3 ) CardHandler.DistributeCards(players, age3Deck);
 			
-			for ( int i = 0; i < 6; ++i )
+			for ( turn = 0; turn < 6; ++turn )
 			{
 				 //each player makes their moves
 				 for ( Player p: players )
@@ -96,9 +88,12 @@ public class Match {
 		
 	}
 	
-
-		return players;
-		Match m = new Match();
+	@SuppressWarnings("resource")
+	public static void main(String args[]) {
+		System.out.println("Please input how many players will play: ");
+		int numPlayers = (int)Integer.parseInt(new Scanner(System.in).nextLine());
+		
+		Match m = new Match(numPlayers);
 		m.runConsoleGame();
 	}
 
