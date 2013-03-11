@@ -9,13 +9,10 @@ import java.util.Random;
 public class Match {
 	
 	
-	@SuppressWarnings("unused")
 	private ArrayList<Player> players;
 	@SuppressWarnings("unused")
 	private int age, turn;
-	@SuppressWarnings("unused")
 	private ArrayList<Structure> age1Deck, age2Deck, age3Deck, discarded;
-	
 	
 	public Match()
 	{
@@ -28,7 +25,7 @@ public class Match {
 		discarded = null;
 	}
 	
-	public void runGame()
+	public void runConsoleGame()
 	{
 		Scanner in = new Scanner(System.in);
 		Random r = new Random();
@@ -37,7 +34,6 @@ public class Match {
 		@SuppressWarnings("unused")
 		Match newMatch = new Match();
 		System.out.println("Please input how many players will play: ");
-		String input = in.nextLine();
 		int numPlayers = (int)Integer.parseInt(in.nextLine());
 		
 		age1Deck = CardHandler.BuildAge1Deck(numPlayers);
@@ -80,6 +76,7 @@ public class Match {
 					 if ( p.getCards().size() == 1 ) p.discardHand(discarded);
 					 System.out.println("Please select your move:\n1 - Build the Structure\n2 - Build a Stage of your Wonder\n3 - Discard the card for 3 coins");
 					 move = Integer.parseInt(in.nextLine());
+					 @SuppressWarnings("unused")
 					 boolean valid = true;
 					 switch ( move )
 					 {
@@ -98,38 +95,7 @@ public class Match {
 				  CardHandler.PassCardsToNeighbors(players, age);
 			}
 		}
-		
-		
-		in.close();
-		/*
-		void runMatch()
-		{
-			add players to match
-			random wonderboard assignment
-			//3 ages
-			for ( int age = 0; age < 3; ++age )
-			{
-				distributeCards(age)
-				//6 turns
-				for ( int i = 0; i < 6; ++i )
-				{
-					 //each player makes their moves
-					 for ( Player p: players )
-					 {
-					 	select card
-					  	if ( i == 5 ) discard remaining card
-					  	action phase
-		
-					  	//push match to server
-					  }
-					  pass cards to neighbor
-				}
-				settlemilitaryconflicts
-			}
-			countvictorypoints
-		}
-				  
-		*/	  
+		in.close();  
 		
 	}
 	
@@ -140,7 +106,35 @@ public class Match {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Match m = new Match();
-		m.runGame();
+		m.runConsoleGame();
+	}
+
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public int getTurn() {
+		return turn;
+	}
+
+	public ArrayList<Structure> getAge1Deck() {
+		return age1Deck;
+	}
+
+	public ArrayList<Structure> getAge2Deck() {
+		return age2Deck;
+	}
+
+	public ArrayList<Structure> getAge3Deck() {
+		return age3Deck;
+	}
+
+	public ArrayList<Structure> getDiscarded() {
+		return discarded;
 	}
 
 }
