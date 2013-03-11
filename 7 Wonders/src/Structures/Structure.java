@@ -85,6 +85,11 @@ public class Structure {
 		return false;
 	}
 	
+	public ArrayList<SpecialEffect> getEffects()
+	{
+		return effects;
+	}
+	
 	
 	/**
 	 * @param args
