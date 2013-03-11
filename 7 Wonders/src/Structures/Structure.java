@@ -51,7 +51,7 @@ public class Structure {
 		this.name = s.name;
 		this.color= s.color;
 		this.age = s.age;
-		this.effects.addAll(s.effects);
+		this.effects = new ArrayList<SpecialEffect>(s.effects);
 	}
 	
 	//getters

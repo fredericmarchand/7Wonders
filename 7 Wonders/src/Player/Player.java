@@ -162,7 +162,7 @@ public class Player {
 	public void discardHand(ArrayList<Structure> discardedCards)
 	{
 		discardedCards.addAll(cards);
-		cards = null;
+		cards = new ArrayList<Structure>();
 	}
 	
 	//the preference parameter is used to ask the player if he cares which neighbor he buys resources from

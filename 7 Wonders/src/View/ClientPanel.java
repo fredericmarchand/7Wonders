@@ -22,5 +22,6 @@ public class ClientPanel extends JPanel {
 		c.weighty = 0;
 		l.setConstraints(label, c);
 		add(label);
+		
 	}
 }
