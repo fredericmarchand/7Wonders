@@ -12,6 +12,9 @@ public class NeighbourPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	Player player;
+	private JLabel2D lblClay, lblTablets, lblRed, lblBlue, lblGrey, lblPurple, lblBrown, lblYellow, lblGreen, 
+					 lblGears, lblCompass, lblVictory, lblMilitary, lblNegConflict, lblPosConflict, 
+					 lblOre, lblStone, lblWood, lblGlass, lblPapyrus, lblCoin, lblLoom;
 	
 	public NeighbourPanel(Player p) {
 		player = p;
@@ -20,7 +23,7 @@ public class NeighbourPanel extends JPanel {
 		setSize(478, 300);
 		setBackground(Color.BLACK);
 		
-		JLabel2D lblBrown = new JLabel2D("11", SwingConstants.CENTER);
+		lblBrown = new JLabel2D("11", SwingConstants.CENTER);
 		lblBrown.setForeground(Color.WHITE);
 		lblBrown.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblBrown.setOutlineColor(Color.BLACK);
@@ -28,7 +31,7 @@ public class NeighbourPanel extends JPanel {
 		lblBrown.setBounds(16, 115, 44, 47);
 		add(lblBrown);
 		
-		JLabel2D lblGrey = new JLabel2D("11", SwingConstants.CENTER);
+		lblGrey = new JLabel2D("11", SwingConstants.CENTER);
 		lblGrey.setForeground(Color.WHITE);
 		lblGrey.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblGrey.setOutlineColor(Color.BLACK);
@@ -36,7 +39,7 @@ public class NeighbourPanel extends JPanel {
 		lblGrey.setBounds(73, 115, 44, 47);
 		add(lblGrey);
 		
-		JLabel2D lblPurple = new JLabel2D("11", SwingConstants.CENTER);
+		lblPurple = new JLabel2D("11", SwingConstants.CENTER);
 		lblPurple.setForeground(Color.WHITE);
 		lblPurple.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblPurple.setOutlineColor(Color.BLACK);
@@ -44,7 +47,7 @@ public class NeighbourPanel extends JPanel {
 		lblPurple.setBounds(128, 115, 44, 47);
 		add(lblPurple);
 		
-		JLabel2D lblBlue = new JLabel2D("11", SwingConstants.CENTER);
+		lblBlue = new JLabel2D("11", SwingConstants.CENTER);
 		lblBlue.setForeground(Color.WHITE);
 		lblBlue.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblBlue.setOutlineColor(Color.BLACK);
@@ -52,7 +55,7 @@ public class NeighbourPanel extends JPanel {
 		lblBlue.setBounds(183, 115, 44, 47);
 		add(lblBlue);
 		
-		JLabel2D lblRed = new JLabel2D("11", SwingConstants.CENTER);
+		lblRed = new JLabel2D("11", SwingConstants.CENTER);
 		lblRed.setForeground(Color.WHITE);
 		lblRed.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblRed.setOutlineColor(Color.BLACK);
@@ -60,7 +63,7 @@ public class NeighbourPanel extends JPanel {
 		lblRed.setBounds(236, 115, 44, 47);
 		add(lblRed);
 		
-		JLabel2D lblYellow = new JLabel2D("11", SwingConstants.CENTER);
+		lblYellow = new JLabel2D("11", SwingConstants.CENTER);
 		lblYellow.setForeground(Color.WHITE);
 		lblYellow.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblYellow.setOutlineColor(Color.BLACK);
@@ -68,7 +71,7 @@ public class NeighbourPanel extends JPanel {
 		lblYellow.setBounds(292, 115, 44, 47);
 		add(lblYellow);
 		
-		JLabel2D lblGreen = new JLabel2D("11", SwingConstants.CENTER);
+		lblGreen = new JLabel2D("11", SwingConstants.CENTER);
 		lblGreen.setForeground(Color.WHITE);
 		lblGreen.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblGreen.setOutlineColor(Color.BLACK);
@@ -76,7 +79,7 @@ public class NeighbourPanel extends JPanel {
 		lblGreen.setBounds(346, 115, 44, 47);
 		add(lblGreen);
 		
-		JLabel2D lblGears = new JLabel2D("11", SwingConstants.CENTER);
+		lblGears = new JLabel2D("11", SwingConstants.CENTER);
 		lblGears.setForeground(Color.WHITE);
 		lblGears.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblGears.setOutlineColor(Color.BLACK);
@@ -84,7 +87,7 @@ public class NeighbourPanel extends JPanel {
 		lblGears.setBounds(19, 21, 37, 47);
 		add(lblGears);
 		
-		JLabel2D lblTablets = new JLabel2D("11", SwingConstants.CENTER);
+		lblTablets = new JLabel2D("11", SwingConstants.CENTER);
 		lblTablets.setForeground(Color.WHITE);
 		lblTablets.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblTablets.setOutlineColor(Color.BLACK);
@@ -92,7 +95,7 @@ public class NeighbourPanel extends JPanel {
 		lblTablets.setBounds(69, 21, 40, 47);
 		add(lblTablets);
 		
-		JLabel2D lblCompass = new JLabel2D("11", SwingConstants.CENTER);
+		lblCompass = new JLabel2D("11", SwingConstants.CENTER);
 		lblCompass.setForeground(Color.WHITE);
 		lblCompass.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblCompass.setOutlineColor(Color.BLACK);
@@ -100,7 +103,7 @@ public class NeighbourPanel extends JPanel {
 		lblCompass.setBounds(115, 21, 44, 47);
 		add(lblCompass);
 		
-		JLabel2D lblVictory = new JLabel2D("11", SwingConstants.CENTER);
+		lblVictory = new JLabel2D("11", SwingConstants.CENTER);
 		lblVictory.setForeground(Color.WHITE);
 		lblVictory.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblVictory.setOutlineColor(Color.BLACK);
@@ -108,7 +111,7 @@ public class NeighbourPanel extends JPanel {
 		lblVictory.setBounds(198, 21, 44, 47);
 		add(lblVictory);
 		
-		JLabel2D lblMilitary = new JLabel2D("11", SwingConstants.CENTER);
+		lblMilitary = new JLabel2D("11", SwingConstants.CENTER);
 		lblMilitary.setForeground(Color.WHITE);
 		lblMilitary.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblMilitary.setOutlineColor(Color.BLACK);
@@ -116,7 +119,7 @@ public class NeighbourPanel extends JPanel {
 		lblMilitary.setBounds(288, 21, 44, 47);
 		add(lblMilitary);
 		
-		JLabel2D lblNegConflict = new JLabel2D("-1", SwingConstants.CENTER);
+		lblNegConflict = new JLabel2D("-1", SwingConstants.CENTER);
 		lblNegConflict.setForeground(Color.WHITE);
 		lblNegConflict.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblNegConflict.setOutlineColor(Color.BLACK);
@@ -124,7 +127,7 @@ public class NeighbourPanel extends JPanel {
 		lblNegConflict.setBounds(365, 21, 44, 47);
 		add(lblNegConflict);
 		
-		JLabel2D lblPosConflict = new JLabel2D("11", SwingConstants.CENTER);
+		lblPosConflict = new JLabel2D("11", SwingConstants.CENTER);
 		lblPosConflict.setForeground(Color.WHITE);
 		lblPosConflict.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblPosConflict.setOutlineColor(Color.BLACK);
@@ -132,7 +135,7 @@ public class NeighbourPanel extends JPanel {
 		lblPosConflict.setBounds(422, 21, 44, 47);
 		add(lblPosConflict);
 		
-		JLabel2D lblOre = new JLabel2D("11", 0);
+		lblOre = new JLabel2D("11", SwingConstants.CENTER);
 		lblOre.setOutlineColor(Color.BLACK);
 		lblOre.setForeground(Color.WHITE);
 		lblOre.setFont(new Font("Tahoma", Font.PLAIN, 28));
@@ -141,7 +144,7 @@ public class NeighbourPanel extends JPanel {
 		lblOre.setBounds(16, 177, 44, 47);
 		add(lblOre);
 		
-		JLabel2D lblStone = new JLabel2D("11", 0);
+		lblStone = new JLabel2D("11", SwingConstants.CENTER);
 		lblStone.setOutlineColor(Color.BLACK);
 		lblStone.setForeground(Color.WHITE);
 		lblStone.setFont(new Font("Tahoma", Font.PLAIN, 28));
@@ -150,7 +153,7 @@ public class NeighbourPanel extends JPanel {
 		lblStone.setBounds(72, 177, 44, 47);
 		add(lblStone);
 		
-		JLabel2D lblWood = new JLabel2D("11", 0);
+		lblWood = new JLabel2D("11", SwingConstants.CENTER);
 		lblWood.setOutlineColor(Color.BLACK);
 		lblWood.setForeground(Color.WHITE);
 		lblWood.setFont(new Font("Tahoma", Font.PLAIN, 28));
@@ -159,7 +162,7 @@ public class NeighbourPanel extends JPanel {
 		lblWood.setBounds(127, 177, 44, 47);
 		add(lblWood);
 		
-		JLabel2D lblClay = new JLabel2D("11", 0);
+		lblClay = new JLabel2D("11", SwingConstants.CENTER);
 		lblClay.setOutlineColor(Color.BLACK);
 		lblClay.setForeground(Color.WHITE);
 		lblClay.setFont(new Font("Tahoma", Font.PLAIN, 28));
@@ -168,7 +171,7 @@ public class NeighbourPanel extends JPanel {
 		lblClay.setBounds(180, 177, 44, 47);
 		add(lblClay);
 		
-		JLabel2D lblGlass = new JLabel2D("11", 0);
+		lblGlass = new JLabel2D("11", SwingConstants.CENTER);
 		lblGlass.setOutlineColor(Color.BLACK);
 		lblGlass.setForeground(Color.WHITE);
 		lblGlass.setFont(new Font("Tahoma", Font.PLAIN, 28));
@@ -177,7 +180,7 @@ public class NeighbourPanel extends JPanel {
 		lblGlass.setBounds(236, 177, 44, 47);
 		add(lblGlass);
 		
-		JLabel2D lblLoom = new JLabel2D("11", 0);
+		lblLoom = new JLabel2D("11", SwingConstants.CENTER);
 		lblLoom.setOutlineColor(Color.BLACK);
 		lblLoom.setForeground(Color.WHITE);
 		lblLoom.setFont(new Font("Tahoma", Font.PLAIN, 28));
@@ -186,7 +189,7 @@ public class NeighbourPanel extends JPanel {
 		lblLoom.setBounds(292, 177, 44, 47);
 		add(lblLoom);
 		
-		JLabel2D lblPapyrus = new JLabel2D("11", 0);
+		lblPapyrus = new JLabel2D("11", SwingConstants.CENTER);
 		lblPapyrus.setOutlineColor(Color.BLACK);
 		lblPapyrus.setForeground(Color.WHITE);
 		lblPapyrus.setFont(new Font("Tahoma", Font.PLAIN, 28));
@@ -195,7 +198,7 @@ public class NeighbourPanel extends JPanel {
 		lblPapyrus.setBounds(346, 177, 44, 47);
 		add(lblPapyrus);
 		
-		JLabel2D lblCoin = new JLabel2D("11", 0);
+		lblCoin = new JLabel2D("11", SwingConstants.CENTER);
 		lblCoin.setOutlineColor(Color.BLACK);
 		lblCoin.setForeground(Color.WHITE);
 		lblCoin.setFont(new Font("Tahoma", Font.PLAIN, 28));
@@ -210,5 +213,48 @@ public class NeighbourPanel extends JPanel {
 		JLabel boardLabel = new JLabel(new ImageIcon(NeighbourPanel.class.getResource("/Images/Boards/board"+player.getWonderBoard().getBoardID()+player.getWonderBoard().getSide()+".png")));
 		boardLabel.setBounds(0, 75, 478, 225);
 		add( boardLabel );
+		
+		update();
+	}
+	
+	public void update() {
+		updateLabels();
+	}
+	
+	public void updateLabels() {
+		updateResourceLabels();
+		updateCardLabels();
+		updateOverviewLabels();
+	}
+	
+	public void updateResourceLabels() {
+		lblOre.setText("" + player.getResources().getOre());
+		lblStone.setText("" + player.getResources().getStone());
+		lblWood.setText("" + player.getResources().getWood());
+		lblClay.setText("" + player.getResources().getClay());
+		lblGlass.setText("" + player.getResources().getGlass());
+		lblLoom.setText("" + player.getResources().getLoom());
+		lblPapyrus.setText("" + player.getResources().getPapyrus());
+		lblCoin.setText("" + player.getResources().getCoins());
+	}
+	
+	public void updateCardLabels() {
+		lblBrown.setText("" + player.getWonderBoard().getBrownCardAmount());
+		lblGrey.setText("" + player.getWonderBoard().getGreyCardAmount());
+		lblPurple.setText("" + player.getWonderBoard().getPurpleCardAmount());
+		lblBlue.setText("" + player.getWonderBoard().getBlueCardAmount());
+		lblRed.setText("" + player.getWonderBoard().getRedCardAmount());
+		lblYellow.setText("" + player.getWonderBoard().getYellowCardAmount());
+		lblGreen.setText("" + player.getWonderBoard().getGreenCardAmount());
+	}
+	
+	public void updateOverviewLabels() {
+		lblGears.setText("" + player.getScientificSymbols().getGears());
+		lblTablets.setText("" + player.getScientificSymbols().getTablets());
+		lblCompass.setText("" + player.getScientificSymbols().getCompass());
+		lblVictory.setText("" + player.getVictoryPoints());
+		lblMilitary.setText("" + player.getShields());
+		lblNegConflict.setText(((player.getConflictTokens().getMinusOneTokens() > 0) ? "-" : "") + player.getConflictTokens().getMinusOneTokens());
+		lblPosConflict.setText("" + player.getConflictTokens().getTotalPositive());
 	}
 }

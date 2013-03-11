@@ -37,6 +37,10 @@ public class ConflictTokens {
 		return (1*oneTokens + 3*threeTokens + 5*fiveTokens + -1*minusOneTokens);
 	}
 	
+	public int getTotalPositive() {
+		return (1*oneTokens + 3*threeTokens + 5*fiveTokens);
+	}
+	
 	public void addOneTokens(int amount)
 	{
 		oneTokens += amount;
