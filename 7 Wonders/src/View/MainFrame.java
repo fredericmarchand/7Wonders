@@ -12,7 +12,7 @@ public class MainFrame extends JFrame {
 		setSize(1280, 720);
 		setResizable(true);
 		setBackground(Color.white);
-		add(new ClientPanel());
+		add(new MatchPanel(3));
 	}
 	
 	

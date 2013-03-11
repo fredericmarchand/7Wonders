@@ -11,6 +11,7 @@ public class Player {
 	private String username;
 	private int ID;
 	private WonderBoard wonderBoard;
+	@SuppressWarnings("unused")
 	private ArrayList<Structure> cards, discardedCards;
 	private Structure chosenCard;
 	@SuppressWarnings("unused")
