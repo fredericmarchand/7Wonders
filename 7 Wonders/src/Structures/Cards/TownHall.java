@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class TownHall extends Structure {
 
-	public static final int TownHallID = 0x29;
+	public static final int TownHallID = 37;
 	
 	public TownHall()
 	{

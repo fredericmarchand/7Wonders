@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Excavation extends Structure {
 
-	public static final int ExcavationID = 0x34;
+	public static final int ExcavationID = 6;
 	
 	public Excavation()
 	{

@@ -5,11 +5,11 @@ import Tokens.Resources;
 
 public class Sawmill extends Structure {
 
-	public static final int SawmillID = 0x3D;
+	public static final int SawmillID = 11;
 	
 	public Sawmill()
 	{
-		super(new Resources(0, 0, 0, 0, 0, 0, 0, 1), SawmillID, "Sawmill", BROWN_CARD, 2);
+		super(new Resources(0, 0, 0, 0, 0, 0, 0, 1), SawmillID, "Saw Mill", BROWN_CARD, 2);
 	}
 
 	/**

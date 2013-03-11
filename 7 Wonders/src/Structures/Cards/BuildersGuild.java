@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class BuildersGuild extends Structure {
 
-	public static final int BuildersGuildID = 0x73;
+	public static final int BuildersGuildID = 27;
 	
 	public BuildersGuild()
 	{

@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class StonePit extends Structure {
 
-	public static final int StonePitID = 0x36;
+	public static final int StonePitID = 2;
 	
 	public StonePit()
 	{

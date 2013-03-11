@@ -7,7 +7,7 @@ import WonderBoards.WonderBoard;
 
 public class Pantheon extends Structure {
 
-	public static final int PantheonID = 0x2B;
+	public static final int PantheonID = 35;
 	
 	public Pantheon()
 	{

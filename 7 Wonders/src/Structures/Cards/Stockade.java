@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Stockade extends Structure{
 
-	public static final int StockadeID = 0x13;
+	public static final int StockadeID = 42;
 	
 	public Stockade()
 	{

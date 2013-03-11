@@ -7,7 +7,7 @@ import WonderBoards.WonderBoard;
 
 public class Lodge extends Structure {
 
-	public static final int LodgeID = 0x6A;
+	public static final int LodgeID = 71;
 	
 	public Lodge()
 	{

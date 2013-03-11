@@ -6,7 +6,7 @@ import WonderBoards.WonderBoard;
 
 public class Circus extends Structure {
 
-	public static final int CircusID = 0x18;
+	public static final int CircusID = 47;
 	
 	public Circus()
 	{

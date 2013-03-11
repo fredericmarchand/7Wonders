@@ -7,7 +7,7 @@ import WonderBoards.WonderBoard;
 
 public class Forum extends Structure {
 
-	public static final int ForumID = 0x57;
+	public static final int ForumID = 56;
 	
 	public Forum()
 	{

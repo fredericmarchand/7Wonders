@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Walls extends Structure {
 
-	public static final int WallsID = 0x17;
+	public static final int WallsID = 44;
 	
 	public Walls()
 	{

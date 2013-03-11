@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Workshop extends Structure {
 
-	public static final int WorkshopID = 0x62;
+	public static final int WorkshopID = 65;
 	
 	public Workshop()
 	{

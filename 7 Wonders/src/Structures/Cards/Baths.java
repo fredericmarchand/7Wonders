@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Baths extends Structure {
 
-	public static final int BathsID = 0x21;
+	public static final int BathsID = 29;
 	
 	public Baths()
 	{

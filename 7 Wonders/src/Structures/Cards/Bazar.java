@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Bazar extends Structure {
 
-	public static final int BazarID = 0x56;
+	public static final int BazarID = 59;
 	
 	public Bazar()
 	{

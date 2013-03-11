@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Palace extends Structure {
 
-	public static final int PalaceID = 0x2A;
+	public static final int PalaceID = 38;
 	
 	public Palace()
 	{

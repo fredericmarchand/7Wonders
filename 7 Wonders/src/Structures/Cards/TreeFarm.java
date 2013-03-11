@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class TreeFarm extends Structure {
 
-	public static final int TreeFarmID = 0x35;
+	public static final int TreeFarmID = 5;
 	
 	public TreeFarm()
 	{

@@ -7,7 +7,7 @@ import WonderBoards.WonderBoard;
 public class ArcheryRange extends Structure {
 
 	
-	public static final int ArcheryRangeID = 0x14;
+	public static final int ArcheryRangeID = 50;
 	
 	public ArcheryRange()
 	{

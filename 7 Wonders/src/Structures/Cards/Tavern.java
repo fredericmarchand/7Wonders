@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Tavern extends Structure {
 
-	public static final int TavernID = 0x53;
+	public static final int TavernID = 52;
 	
 	public Tavern()
 	{

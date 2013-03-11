@@ -7,7 +7,7 @@ import WonderBoards.WonderBoard;
 
 public class Observatory extends Structure {
 
-	public static final int ObservatoryID = 0x69;
+	public static final int ObservatoryID = 72;
 	
 	public Observatory()
 	{

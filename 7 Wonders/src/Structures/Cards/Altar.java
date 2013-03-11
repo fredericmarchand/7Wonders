@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Altar extends Structure {
 
-	public static final int AltarID = 0x22;
+	public static final int AltarID = 30;
 	
 	public Altar()
 	{

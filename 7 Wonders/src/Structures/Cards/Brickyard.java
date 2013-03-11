@@ -5,11 +5,11 @@ import Tokens.Resources;
 
 public class Brickyard extends Structure {
 
-	public static final int BrickyardID = 0x3E;
+	public static final int BrickyardID = 13;
 	
 	public Brickyard()
 	{
-		super(new Resources(0, 0, 0, 0, 0, 0, 0, 1), BrickyardID, "Brickyard", BROWN_CARD, 2);
+		super(new Resources(0, 0, 0, 0, 0, 0, 0, 1), BrickyardID, "Brick Yard", BROWN_CARD, 2);
 	}
 
 	/**

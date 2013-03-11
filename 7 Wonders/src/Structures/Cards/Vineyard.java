@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Vineyard extends Structure {
 
-	public static final int VineyardID = 0x58;
+	public static final int VineyardID = 58;
 	
 	public Vineyard()
 	{

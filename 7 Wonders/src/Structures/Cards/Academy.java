@@ -6,7 +6,7 @@ import WonderBoards.WonderBoard;
 
 public class Academy extends Structure {
 
-	public static final int AcademyID = 0x68;
+	public static final int AcademyID = 74;
 	
 	public Academy()
 	{

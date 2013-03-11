@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class School extends Structure {
 
-	public static final int SchoolID = 0x67;
+	public static final int SchoolID = 70;
 	
 	public School()
 	{

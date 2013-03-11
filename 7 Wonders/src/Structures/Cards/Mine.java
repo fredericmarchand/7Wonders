@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Mine extends Structure {
 
-	public static final int MineID = 0x39;
+	public static final int MineID = 10;
 	
 	public Mine()
 	{
