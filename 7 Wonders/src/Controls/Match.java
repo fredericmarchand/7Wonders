@@ -28,6 +28,7 @@ public class Match {
 		{
 			p.getResources().addCoins(3);
 		}
+		CardHandler.DistributeCards(players, age1Deck);
 	}
 	
 	public void runConsoleGame()

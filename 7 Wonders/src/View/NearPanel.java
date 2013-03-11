@@ -8,7 +8,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 
-public class NeighbourPanel extends JPanel {
+public class NearPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	Player player;
@@ -16,7 +16,7 @@ public class NeighbourPanel extends JPanel {
 					 lblGears, lblCompass, lblVictory, lblMilitary, lblNegConflict, lblPosConflict, 
 					 lblOre, lblStone, lblWood, lblGlass, lblPapyrus, lblCoin, lblLoom;
 	
-	public NeighbourPanel(Player p) {
+	public NearPanel(Player p) {
 		player = p;
 		
 		setLayout(null);
@@ -207,10 +207,10 @@ public class NeighbourPanel extends JPanel {
 		lblCoin.setBounds(413, 174, 44, 47);
 		add(lblCoin);
 		
-		JLabel overlayLabel = new JLabel(new ImageIcon(NeighbourPanel.class.getResource("/Images/Icons/overlay.png")));
+		JLabel overlayLabel = new JLabel(new ImageIcon(NearPanel.class.getResource("/Images/Icons/overlay.png")));
 		overlayLabel.setBounds(0, 0, 478, 300);
 		add( overlayLabel );
-		JLabel boardLabel = new JLabel(new ImageIcon(NeighbourPanel.class.getResource("/Images/Boards/board"+player.getWonderBoard().getBoardID()+player.getWonderBoard().getSide()+".png")));
+		JLabel boardLabel = new JLabel(new ImageIcon(NearPanel.class.getResource("/Images/Boards/board"+player.getWonderBoard().getBoardID()+(player.getWonderBoard().getSide()+1)+".png")));
 		boardLabel.setBounds(0, 75, 478, 225);
 		add( boardLabel );
 		

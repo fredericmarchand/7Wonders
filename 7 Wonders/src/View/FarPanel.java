@@ -3,8 +3,6 @@ package View;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
-import java.net.URL;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,13 +10,13 @@ import javax.swing.SwingConstants;
 
 import Player.Player;
 
-public class ForeignPanel extends JPanel {
+public class FarPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	Player player;
 	private JLabel2D lblPosConflict, lblNegConflict, lblTablets, lblMilitary, lblVictory, lblCompass, lblGears, lblCoin;
 	
-	public ForeignPanel(Player p) {
+	public FarPanel(Player p) {
 		player = p;
 		setLayout(null);
 		setSize(320, 150);
@@ -89,11 +87,11 @@ public class ForeignPanel extends JPanel {
 		lblCoin.setBounds(42, 63, 44, 47);
 		add(lblCoin);
 		
-		JLabel overlayLabel = new JLabel(new ImageIcon(NeighbourPanel.class.getResource("/Images/Icons/overlayforeign.png")));
+		JLabel overlayLabel = new JLabel(new ImageIcon(NearPanel.class.getResource("/Images/Icons/overlayforeign.png")));
 		overlayLabel.setBounds(0, 0, 320, 150);
 		add( overlayLabel );
 		
-		JLabel boardLabel = new JLabel(new ImageIcon(new ImageIcon(NeighbourPanel.class.getResource("/Images/Boards/board"+player.getWonderBoard().getBoardID()+player.getWonderBoard().getSide()+".png")).getImage().getScaledInstance(320, 150, java.awt.Image.SCALE_SMOOTH)));
+		JLabel boardLabel = new JLabel(new ImageIcon(new ImageIcon(NearPanel.class.getResource("/Images/Boards/board"+player.getWonderBoard().getBoardID()+(player.getWonderBoard().getSide()+1)+".png")).getImage().getScaledInstance(320, 150, java.awt.Image.SCALE_SMOOTH)));
 		boardLabel.setBounds(0, 0, 320, 150);
 		add( boardLabel );
 		

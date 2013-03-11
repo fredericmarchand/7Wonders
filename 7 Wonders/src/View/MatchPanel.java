@@ -1,54 +1,66 @@
 package View;
 
-import java.util.ArrayList;
+import java.io.File;
 
 import javax.swing.*;
 
-import Player.Player;
-import WonderBoards.WonderBoard;
+import Controls.Match;
 
 public class MatchPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-
-	private ArrayList<Player> players;
+	
+	private Match match;
+	private ImageIcon cards[];
 	
 	public MatchPanel(int numPlayers) {
 		setLayout(null);
-		setSize(1296, 749);
+		setSize(1280, 860);
 		
-		players = new ArrayList<Player>();
+		match = new Match(7);
 		
-		for(int i = 0; i < numPlayers; i++) {
-			players.add(new Player("", i));
+		// Load all the Card images
+		int numCards = new File("src/Images/Cards").listFiles().length;
+		cards = new ImageIcon[numCards+1];
+		for(int i = 1; i < numCards+1; i++) {
+			cards[i] = new ImageIcon(new ImageIcon(MatchPanel.class.getResource("/Images/Cards/"+i+".jpg")).getImage().getScaledInstance(182, 280, java.awt.Image.SCALE_SMOOTH));
 		}
 		
-		players.get(1).assignWonderBoard(new WonderBoard(2, 1));
-		players.get(2).assignWonderBoard(new WonderBoard(3, 2));
-		players.get(3).assignWonderBoard(new WonderBoard(4, 1));
-		players.get(4).assignWonderBoard(new WonderBoard(5, 2));
-		players.get(5).assignWonderBoard(new WonderBoard(6, 1));
-		players.get(6).assignWonderBoard(new WonderBoard(7, 2));
+		// Make the overview panels
 		
-		NeighbourPanel n1 = new NeighbourPanel(players.get(1));
+		// Players
+		NearPanel playerPanel = new NearPanel(match.getPlayers().get(0));
+		playerPanel.setLocation(401, 450);
+		
+		// Neighbours
+		NearPanel n1 = new NearPanel(match.getPlayers().get(1));
 		n1.setLocation(0, 150);
-		NeighbourPanel n2 = new NeighbourPanel(players.get(2));
+		NearPanel n2 = new NearPanel(match.getPlayers().get(2));
 		n2.setLocation(802, 150);
 		
-		ForeignPanel f1 = new ForeignPanel(players.get(3));
+		// Foreigners
+		FarPanel f1 = new FarPanel(match.getPlayers().get(3));
 		f1.setLocation(0, 0);
-		ForeignPanel f2 = new ForeignPanel(players.get(4));
+		FarPanel f2 = new FarPanel(match.getPlayers().get(4));
 		f2.setLocation(320, 0);
-		ForeignPanel f3 = new ForeignPanel(players.get(5));
+		FarPanel f3 = new FarPanel(match.getPlayers().get(5));
 		f3.setLocation(640, 0);
-		ForeignPanel f4 = new ForeignPanel(players.get(6));
+		FarPanel f4 = new FarPanel(match.getPlayers().get(6));
 		f4.setLocation(960, 0);
 		
+		// Cards
+		CardsPanel cardsPanel = new CardsPanel(cards, match.getPlayers().get(0).getCards());
+		cardsPanel.setLocation(3, 558);
+		//cardsPanel.setLocation(3, 750);
+		
+		add(cardsPanel);
+		add(playerPanel);
 		add(n1);
 		add(n2);
 		add(f1);
 		add(f2);
 		add(f3);
 		add(f4);
+		
 	}
 	
 	
