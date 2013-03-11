@@ -2,7 +2,12 @@ package Resources;
 
 import java.util.ArrayList;
 
+
+
+import Resources.Packet.Packet7MatchFunction;
+
 import com.esotericsoftware.kryonet.Connection;
+import com.esotericsoftware.kryonet.Server;
 
 public class Match {
 	
@@ -11,10 +16,14 @@ public class Match {
     private static long counter = 1000;
     public static final int MAX_PLAYER_COUNT = 7;
     private int connection_count;
+    private Server server;
+    
+    //private matchController
     
     public Match(){
     	connected = new ArrayList<Connection>();
 		match_id = ++counter;
+
     }
 
 	public ArrayList<Connection> getConnections(){return connected;}	
@@ -58,4 +67,21 @@ public class Match {
 			return true;
 		return false;
 	}
+	
+	//public void activateController
+	//getters and setters for controller
+	
+	public void setServerMatchCommunication(Server s){server = s;}
+	public void sendMatchInfo(){
+		Packet7MatchFunction gamePacket = new Packet7MatchFunction(); 
+		for(Connection c: connected){
+			c.sendTCP(gamePacket);
+		}
+	}
+	
+	public void receiveEvent(Object o, long cID,Connection c){
+		
+	}
+	
+
 }

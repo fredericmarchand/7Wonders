@@ -64,4 +64,15 @@ public class Packet {
 		public String getuName(){return uName;}
 		public void setuName(String n){uName = n;}
 	}
+	public static class Packet7MatchFunction{
+		private long matchID;
+		private long clientID;
+		private Object o;
+		public long getMID(){return matchID;}
+		public void setMID(long id){matchID = id;}
+		public long getCID(){return clientID;}
+		public void setCID(long id){clientID=id;}
+		public Object getObject(){ return o;}
+		public void setObject(Object ob){ o = ob;}
+	}
 }

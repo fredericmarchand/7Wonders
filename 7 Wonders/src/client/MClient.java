@@ -14,6 +14,7 @@ import Resources.Packet.Packet3Connection;
 import Resources.Packet.Packet4Object;
 import Resources.Packet.Packet5Disconnect;
 import Resources.Packet.Packet6ChatMsg;
+import Resources.Packet.Packet7MatchFunction;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.*;
@@ -41,9 +42,18 @@ public class MClient {
     	client.addListener(nl);
     	client.start();
     	register();
+    	
+    	System.out.println("Enter user name");
+    	username = s.next();
+
+    	System.out.println("Please enter the specified IP!");
+		String x = s.next();
+		System.out.println("Please enter the specified Port!");
+		int p = Integer.parseInt(s.next());
+    	
 /********************Connect*******************************/
 		try {
-			client.connect(5000,"127.0.0.1",25565);
+			client.connect(5000,x,p);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,14 +72,7 @@ public class MClient {
     	//while the game is still alive the server will continue
     	//to except user input
     	GAME_ALIVE = true;
-    	System.out.println("Enter user name");
-    	username = s.next();
 
-    	//System.out.println("Please enter the specified IP!");
-		//String x = s.next();
-		//System.out.println("Please enter the specified Port!");
-		//int p = Integer.parseInt(s.next());
-    	
 	        while(GAME_ALIVE){
 	        	System.out.println(matchID);
 	        	String m = s.next();
@@ -148,6 +151,7 @@ public class MClient {
     	kryo.register(Packet4Object.class);
     	kryo.register(Packet5Disconnect.class);
     	kryo.register(Packet6ChatMsg.class);
+		kryo.register(Packet7MatchFunction.class);
     	kryo.register(java.util.ArrayList.class);
     	kryo.register(Match.class);
    }
