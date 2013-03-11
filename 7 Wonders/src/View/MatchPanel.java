@@ -14,7 +14,7 @@ public class MatchPanel extends JPanel {
 	
 	public MatchPanel(int numPlayers) {
 		setLayout(null);
-		setSize(1280, 720);
+		setSize(1296, 749);
 		
 		players = new ArrayList<Player>();
 		
@@ -26,9 +26,9 @@ public class MatchPanel extends JPanel {
 		players.get(2).assignWonderBoard(new WonderBoard(3, 2));
 		
 		NeighbourPanel n1 = new NeighbourPanel(players.get(1));
-		n1.setLocation(0, 186);
+		n1.setLocation(0, 150);
 		NeighbourPanel n2 = new NeighbourPanel(players.get(2));
-		n2.setLocation(getWidth() - 478 - 16, 186);
+		n2.setLocation(getWidth() - 478 - 16, 150);
 		
 		add(n1);
 		add(n2);

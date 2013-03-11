@@ -9,7 +9,7 @@ public class MainFrame extends JFrame {
 	public MainFrame() {
 		setTitle("7 Wonders");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1280, 720);
+		setSize(1296, 749);
 		setResizable(true);
 		setBackground(Color.white);
 		add(new MatchPanel(3));
