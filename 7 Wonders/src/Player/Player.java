@@ -2,6 +2,9 @@ package Player;
 
 import WonderBoards.WonderBoard;
 import Structures.Structure;
+import Structures.Effects.CoinBonus;
+import Structures.Effects.SpecialEffect;
+
 import java.util.ArrayList;
 import Tokens.*;
 import java.util.Random;
@@ -140,6 +143,11 @@ public class Player {
 		if ( chosenCard.getResourceCost().canAfford(resources) && !wonderBoard.containsCard(chosenCard.getID()) )
 		{
 			wonderBoard.buildStructure(chosenCard);
+			for ( SpecialEffect se : chosenCard.getEffects() )
+			{
+				if ( se.getType() == CoinBonus.CoinBonusID )
+					((CoinBonus)se).acquireCoins(resources); 
+			}
 			chosenCard = null;
 			return true;
 		}
@@ -162,7 +170,7 @@ public class Player {
 	public void discardHand(ArrayList<Structure> discardedCards)
 	{
 		discardedCards.addAll(cards);
-		cards = new ArrayList<Structure>();
+		cards.clear();
 	}
 	
 	//the preference parameter is used to ask the player if he cares which neighbor he buys resources from

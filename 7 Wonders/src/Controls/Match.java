@@ -2,18 +2,15 @@ package Controls;
 
 import java.util.ArrayList;
 import Player.Player;
+import Structures.Effects.*;
 import Structures.Structure;
 import java.util.Scanner;
 import java.util.Random;
 
 public class Match {
 	
-	
-	@SuppressWarnings("unused")
 	private ArrayList<Player> players;
-	@SuppressWarnings("unused")
 	private int age, turn;
-	@SuppressWarnings("unused")
 	private ArrayList<Structure> age1Deck, age2Deck, age3Deck, discarded;
 	
 	
@@ -28,6 +25,21 @@ public class Match {
 		discarded = null;
 	}
 	
+	public int getAge()
+	{
+		return age;
+	}
+	
+	public int getTurn()
+	{
+		return turn;
+	}
+	
+	public ArrayList<Player> getPlayers()
+	{
+		return players;
+	}
+	
 	public void runGame()
 	{
 		Scanner in = new Scanner(System.in);
@@ -37,7 +49,7 @@ public class Match {
 		@SuppressWarnings("unused")
 		Match newMatch = new Match();
 		System.out.println("Please input how many players will play: ");
-		String input = in.nextLine();
+		//String input = in.nextLine();
 		int numPlayers = (int)Integer.parseInt(in.nextLine());
 		
 		age1Deck = CardHandler.BuildAge1Deck(numPlayers);
@@ -56,14 +68,14 @@ public class Match {
 			p.getResources().addCoins(3);
 		}
 		
-		for ( int age = 1; age < 4; ++age )
+		for ( age = 1; age < 4; ++age )
 		{
 			System.out.println("\nAge " + age + "\n");
 			if ( age == 1 )      CardHandler.DistributeCards(players, age1Deck);
 			else if ( age == 2 ) CardHandler.DistributeCards(players, age2Deck);
 			else if ( age == 3 ) CardHandler.DistributeCards(players, age3Deck);
 			
-			for ( int i = 0; i < 6; ++i )
+			for ( turn = 0; turn < 6; ++turn )
 			{
 				 //each player makes their moves
 				 for ( Player p: players )
@@ -97,7 +109,9 @@ public class Match {
 				  }
 				  CardHandler.PassCardsToNeighbors(players, age);
 			}
+			PlayerInteraction.SettleMilitaryConflicts(players, age);
 		}
+		//count victory points
 		
 		
 		in.close();
@@ -131,6 +145,81 @@ public class Match {
 				  
 		*/	  
 		
+	}
+	
+	/*void speffect()
+	{
+		Player p = new Player();
+		for ( Structure s : p.getWonderBoard().getRedCards() )
+		{
+			for ( SpecialEffect se: s.getEffects() )
+			{
+				switch ( se.getType() )
+				{
+				case CoinBonus.CoinBonusID:
+					(CoinBonus)
+					break;
+				}
+			}
+		}
+		for ( Structure s : p.getWonderBoard().getBlueCards() )
+		{
+			
+		}
+		for ( Structure s : p.getWonderBoard().getYellowCards() )
+		{
+			
+		}
+		for ( Structure s : p.getWonderBoard().getPurpleCards() )
+		{
+			
+		}
+		for ( Structure s : p.getWonderBoard().getGreenCards() )
+		{
+			
+		}
+		for ( Structure s : p.getWonderBoard().getBrownGreyCards() )
+		{
+			
+		}
+	}*/
+	
+	public Player getPlayerByID(int id)
+	{
+		for ( Player p : players )
+		{
+			if ( p.getID() == id )
+				return p;
+		}
+		return null;
+	}
+	
+	public Player getLeftNeighbor(int localPlayerID)
+	{
+		for ( int i = 0; i < players.size(); ++i )
+		{
+			if ( players.get(i).getID() == localPlayerID )
+			{
+				if ( i == 0 )
+					return players.get(players.size()-1);
+				else return players.get(i-1);
+			}
+		}
+		return null;
+	}
+	
+	public Player getRightNeighbor(int localPlayerID)
+	{
+		for ( int i = 0; i < players.size(); ++i )
+		{
+			if ( players.get(i).getID() == localPlayerID )
+			{
+				if ( i == 0 )
+					return players.get(players.size()-1);
+				else return players.get(i-1);
+			}
+		}
+		return null;
 	}
 	
 
