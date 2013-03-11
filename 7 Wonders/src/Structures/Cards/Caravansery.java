@@ -6,7 +6,7 @@ import WonderBoards.WonderBoard;
 
 public class Caravansery extends Structure {
 
-	public static final int CaravanseryID = 0x55;
+	public static final int CaravanseryID = 57;
 	
 	public Caravansery()
 	{

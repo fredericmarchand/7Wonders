@@ -6,7 +6,7 @@ import WonderBoards.WonderBoard;
 
 public class Dispensary extends Structure {
 
-	public static final int DispensaryID = 0x64;
+	public static final int DispensaryID = 67;
 	
 	public Dispensary()
 	{

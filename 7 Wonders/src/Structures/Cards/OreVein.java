@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class OreVein extends Structure {
 	
-	public static final int OreVeinID = 0x31;
+	public static final int OreVeinID = 4;
 	
 	public OreVein()
 	{

@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Barracks extends Structure {
 
-	public static final int BarrackID = 0x11;
+	public static final int BarrackID = 42;
 	
 	public Barracks()
 	{

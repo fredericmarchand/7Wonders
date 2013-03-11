@@ -7,7 +7,7 @@ import WonderBoards.WonderBoard;
 
 public class Fortifications extends Structure {
 
-	public static final int FortificationsID = 0x19;
+	public static final int FortificationsID = 46;
 	
 	public Fortifications()
 	{

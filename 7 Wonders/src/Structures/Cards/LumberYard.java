@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class LumberYard extends Structure {
 
-	public static final int LumberYardID = 0x37;
+	public static final int LumberYardID = 1;
 	
 	public LumberYard()
 	{

@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Loom extends Structure {
 
-	public static final int LoomID = 0x41;
+	public static final int LoomID = 15;
 	
 	public Loom()
 	{

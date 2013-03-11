@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class ForestCave extends Structure {
 
-	public static final int ForestCaveID = 0x3A;
+	public static final int ForestCaveID = 9;
 	
 	public ForestCave()
 	{

@@ -7,7 +7,7 @@ import WonderBoards.WonderBoard;
 
 public class SiegeWorkshop extends Structure {
 
-	public static final int SiegeWorkshopID = 0x1A;
+	public static final int SiegeWorkshopID = 51;
 	
 	public SiegeWorkshop()
 	{

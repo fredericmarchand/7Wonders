@@ -5,11 +5,11 @@ import Tokens.Resources;
 
 public class PawnShop extends Structure {
 	
-	public static final int PawnShopID = 0x23;
+	public static final int PawnShopID = 28;
 	
 	public PawnShop()
 	{
-		super(new Resources(), PawnShopID, "PawnShop", BLUE_CARD, 1);
+		super(new Resources(), PawnShopID, "Pawnshop", BLUE_CARD, 1);
 	}
 	
 	/**

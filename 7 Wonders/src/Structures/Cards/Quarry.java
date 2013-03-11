@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Quarry extends Structure {
 
-	public static final int QuarryID = 0x3B;
+	public static final int QuarryID = 13;
 	
 	public Quarry()
 	{

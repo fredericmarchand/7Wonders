@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class WestTradingPost extends Structure {
 
-	public static final int WestTradingPostID = 0x52;
+	public static final int WestTradingPostID = 54;
 	
 	public WestTradingPost()
 	{

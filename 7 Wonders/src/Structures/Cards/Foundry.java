@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Foundry extends Structure {
 
-	public static final int FoundryID = 0x3C;
+	public static final int FoundryID = 14;
 	
 	public Foundry()
 	{

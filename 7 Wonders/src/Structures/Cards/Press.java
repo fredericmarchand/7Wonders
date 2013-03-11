@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Press extends Structure {
 
-	public static final int PressID = 0x42;
+	public static final int PressID = 17;
 	
 	public Press()
 	{

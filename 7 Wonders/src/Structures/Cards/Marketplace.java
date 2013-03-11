@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Marketplace extends Structure {
 
-	public static final int MarketplaceID = 0x51;
+	public static final int MarketplaceID = 55;
 	
 	public Marketplace()
 	{

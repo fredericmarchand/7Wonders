@@ -45,6 +45,7 @@ public class MServer {
 	public long createMatch(){		
 		Match m = new Match();
 		matchList.add(m);
+		m.setServerMatchCommunication(server);
 //		for(Match m: matchList)
 //			System.out.println(m.getMatch_ID());
 		return m.getMatch_ID();
@@ -92,6 +93,7 @@ public class MServer {
 		kryo.register(Packet4Object.class);
 		kryo.register(Packet5Disconnect.class);
 		kryo.register(Packet6ChatMsg.class);
+		kryo.register(Packet7MatchFunction.class);
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match.class);	
 	}
@@ -115,7 +117,13 @@ public class MServer {
 		}
 		return null;
 	}
-	
+	public boolean containsMatch(long id){
+		for(Match e : matchList){
+			if(e.getMatch_ID()==id)
+				return true;
+		}
+		return false;
+	}
 	public void notifyClient(long id) {
 		// TODO Auto-generated method stub
 		
