@@ -1,6 +1,7 @@
 package Structures.Cards;
 
 import Structures.Structure;
+import Structures.Effects.VictoryPointBonus;
 import Tokens.Resources;
 
 public class PawnShop extends Structure {
@@ -10,6 +11,7 @@ public class PawnShop extends Structure {
 	public PawnShop()
 	{
 		super(new Resources(), PawnShopID, "Pawnshop", BLUE_CARD, 1);
+		effects.add(new VictoryPointBonus(3));
 	}
 	
 	/**

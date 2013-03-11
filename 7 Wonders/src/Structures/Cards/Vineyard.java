@@ -1,6 +1,7 @@
 package Structures.Cards;
 
 import Structures.Structure;
+import Structures.Effects.CardCoinBonus;
 import Tokens.Resources;
 
 public class Vineyard extends Structure {
@@ -10,6 +11,7 @@ public class Vineyard extends Structure {
 	public Vineyard()
 	{
 		super(new Resources(), VineyardID, "Vineyard", YELLOW_CARD, 2);
+		effects.add(new CardCoinBonus(1, BROWN_CARD, true));
 	}
 
 	/**

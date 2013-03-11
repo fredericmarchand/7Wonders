@@ -1,6 +1,7 @@
 package Structures.Cards;
 
 import Structures.Structure;
+import Structures.Effects.ScientificSymbolBonus;
 import Tokens.Resources;
 
 public class Workshop extends Structure {
@@ -10,6 +11,7 @@ public class Workshop extends Structure {
 	public Workshop()
 	{
 		super(new Resources(0, 0, 0, 0, 1, 0, 0, 0), WorkshopID, "Workshop", GREEN_CARD, 1);
+		effects.add(new ScientificSymbolBonus(2));
 	}
 
 	/**
