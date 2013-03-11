@@ -118,9 +118,9 @@ public class CardHandler {
 			deck.add(new Brickyard());
 			deck.add(new Sawmill());
 			deck.add(new Quarry());
-			deck.add(new Press2());
-			deck.add(new Glassworks2());
-			deck.add(new Loom2());
+			deck.add(new Press());
+			deck.add(new Glassworks());
+			deck.add(new Loom());
 			deck.add(new Caravansery());
 			deck.add(new Forum());
 			deck.add(new Vineyard());
@@ -142,9 +142,9 @@ public class CardHandler {
 			{
 				deck.add(new Stables());
 				deck.add(new Courthouse());
-				deck.add(new Press2());
-				deck.add(new Glassworks2());
-				deck.add(new Loom2());
+				deck.add(new Press());
+				deck.add(new Glassworks());
+				deck.add(new Loom());
 				deck.add(new Caravansery());
 				deck.add(new Laboratory());
 			}
