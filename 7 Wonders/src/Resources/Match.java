@@ -16,7 +16,8 @@ public class Match {
     private static long counter = 1000;
     public static final int MAX_PLAYER_COUNT = 7;
     private int connection_count;
-    private Server server;
+    @SuppressWarnings("unused")
+	private Server server;
     private int receivedEvents = 0;
     
     //private matchController
