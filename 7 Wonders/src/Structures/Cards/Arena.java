@@ -1,6 +1,8 @@
 package Structures.Cards;
 
 import Structures.Structure;
+import Structures.Effects.WonderStageCoinBonus;
+import Structures.Effects.WonderStageVictoryPointBonus;
 import Tokens.Resources;
 import WonderBoards.WonderBoard;
 
@@ -11,6 +13,8 @@ public class Arena extends Structure {
 	public Arena()
 	{
 		super(new Resources(1, 2, 0, 0, 0, 0, 0, 0), ArenaID, "Arena", YELLOW_CARD, 3);
+		effects.add(new WonderStageCoinBonus(3));
+		effects.add(new WonderStageVictoryPointBonus(1, false));
 	}
 	
 	public boolean canBuildForFree(WonderBoard wb)
