@@ -1,6 +1,7 @@
 package Structures.Cards;
 
 import Structures.Structure;
+import Structures.Effects.TradingPerks;
 import Tokens.Resources;
 
 public class Marketplace extends Structure {
@@ -10,6 +11,7 @@ public class Marketplace extends Structure {
 	public Marketplace()
 	{
 		super(new Resources(), MarketplaceID, "Marketplace", YELLOW_CARD, 1);
+		effects.add(new TradingPerks(3, false, 1));
 	}
 
 	/**

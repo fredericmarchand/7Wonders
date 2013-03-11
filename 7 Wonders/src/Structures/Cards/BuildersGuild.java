@@ -1,6 +1,7 @@
 package Structures.Cards;
 
 import Structures.Structure;
+import Structures.Effects.WonderStageVictoryPointBonus;
 import Tokens.Resources;
 
 public class BuildersGuild extends Structure {
@@ -10,6 +11,7 @@ public class BuildersGuild extends Structure {
 	public BuildersGuild()
 	{
 		super(new Resources(0, 2, 0, 2, 1, 0, 0, 0), BuildersGuildID, "Builders Guild", PURPLE_CARD, 3);
+		effects.add(new WonderStageVictoryPointBonus(1, true));
 	}
 
 	/**

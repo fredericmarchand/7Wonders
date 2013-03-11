@@ -10,19 +10,33 @@ import java.util.Random;
 public class Match {
 	
 	private ArrayList<Player> players;
-	private int age, turn;
+	private int age, turn, numPlayers;
 	private ArrayList<Structure> age1Deck, age2Deck, age3Deck, discarded;
 	
 	
-	public Match()
+	public Match(int numPlayers)
 	{
 		players = new ArrayList<Player>();
 		age = 0;
 		turn = 0;
-		age1Deck = null;
-		age2Deck = null;
-		age3Deck = null;
-		discarded = null;
+		this.numPlayers = numPlayers;
+		age1Deck = CardHandler.BuildAge1Deck(numPlayers);
+		age2Deck = CardHandler.BuildAge2Deck(numPlayers);
+		age3Deck = CardHandler.BuildAge3Deck(numPlayers);
+		discarded = new ArrayList<Structure>();
+		
+		//this will be removed
+		for ( int i = 0; i < numPlayers; ++i )
+		{
+			players.add(new Player("Player " + i, i));
+		}
+		CardHandler.DistributeRandomWonderBoards(players, 0);
+		for ( Player p: players )
+		{
+			p.getResources().addCoins(3);
+		}
+		CardHandler.DistributeCards(players, age1Deck);
+		
 	}
 	
 	public int getAge()
@@ -42,19 +56,12 @@ public class Match {
 	
 	public void runGame()
 	{
+		players = new ArrayList<Player>();
 		Scanner in = new Scanner(System.in);
 		Random r = new Random();
-		discarded = new ArrayList<Structure>();
 		
-		@SuppressWarnings("unused")
-		Match newMatch = new Match();
-		System.out.println("Please input how many players will play: ");
-		//String input = in.nextLine();
-		int numPlayers = (int)Integer.parseInt(in.nextLine());
-		
-		age1Deck = CardHandler.BuildAge1Deck(numPlayers);
-		age2Deck = CardHandler.BuildAge2Deck(numPlayers);
-		age3Deck = CardHandler.BuildAge3Deck(numPlayers);
+		//System.out.println("Please input how many players will play: ");
+		//int numPlayers = (int)Integer.parseInt(in.nextLine());
 		
 		for ( int i = 0; i < numPlayers; ++i )
 		{
@@ -228,7 +235,7 @@ public class Match {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Match m = new Match();
+		Match m = new Match(3);
 		m.runGame();
 	}
 
