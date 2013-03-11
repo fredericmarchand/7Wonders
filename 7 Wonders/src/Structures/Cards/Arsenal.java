@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Arsenal extends Structure {
 
-	public static final int ArsenalID = 0x1B;
+	public static final int ArsenalID = 48;
 	
 	public Arsenal()
 	{

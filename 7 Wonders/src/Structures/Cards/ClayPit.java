@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class ClayPit extends Structure {
 
-	public static final int ClayPitID = 0x32;
+	public static final int ClayPitID = 7;
 	
 	public ClayPit()
 	{

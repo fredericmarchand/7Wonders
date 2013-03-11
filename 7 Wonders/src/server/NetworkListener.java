@@ -36,7 +36,12 @@ public class NetworkListener extends Listener{
 	public void disconnected(Connection c) {
 		// TODO Auto-generated method stub
 		System.out.println("[SERVER] User has disconnected");
-		//super.disconnected(arg0);
+		for(Match e :mserver.getMatchList())
+			if(e.contains(c)){
+				//replace with AI ?
+				e.removeConnection(c);
+			}
+		
 	}
 	@Override
 	public void received(Connection c, Object o) {
@@ -114,7 +119,11 @@ public class NetworkListener extends Listener{
 				break;
 			}
 					
-			case 3: ;
+			case 3: 
+			{
+				System.out.println("[SERVER] Received Client move");
+			break;	
+			}
 			case 4: ;
 					 break;
 			default: break;
@@ -141,6 +150,13 @@ public class NetworkListener extends Listener{
 				
 				
 			}
+		}
+		if(o instanceof Packet7MatchFunction){
+				//pass info to controller
+				//(mserver.findMatch(((Packet7MatchFunction)o).getMID())).buildQ
+				
+			
+					
 		}
 		// TODO Auto-generated method stub
 		//super.received(arg0, arg1);

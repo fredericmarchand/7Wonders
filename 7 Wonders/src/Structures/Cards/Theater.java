@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Theater extends Structure {
 
-	public static final int TheaterID = 0x24;
+	public static final int TheaterID = 31;
 	
 	public Theater()
 	{

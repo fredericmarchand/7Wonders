@@ -7,7 +7,7 @@ import WonderBoards.WonderBoard;
 
 public class Aqueduct extends Structure {
 
-	public static final int AqueductID = 0x27;
+	public static final int AqueductID = 32;
 	
 	public Aqueduct()
 	{

@@ -7,7 +7,7 @@ import WonderBoards.WonderBoard;
 
 public class Statue extends Structure {
 
-	public static final int StatueID = 0x25;
+	public static final int StatueID = 34;
 	
 	public Statue()
 	{

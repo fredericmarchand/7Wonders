@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class ChamberOfCommerce extends Structure {
 
-	public static final int ChamberOfCommerceID = 0x5A;
+	public static final int ChamberOfCommerceID = 62;
 	
 	public ChamberOfCommerce()
 	{

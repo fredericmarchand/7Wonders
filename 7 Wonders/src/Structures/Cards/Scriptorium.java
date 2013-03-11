@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Scriptorium extends Structure {
 
-	public static final int ScriptoriumID = 0x61;
+	public static final int ScriptoriumID = 66;
 	
 	public Scriptorium()
 	{

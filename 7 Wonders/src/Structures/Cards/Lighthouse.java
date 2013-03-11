@@ -7,7 +7,7 @@ import WonderBoards.WonderBoard;
 
 public class Lighthouse extends Structure {
 
-	public static final int LighthouseID = 0x5B;
+	public static final int LighthouseID = 61;
 	
 	public Lighthouse()
 	{

@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class GuardTower extends Structure {
 
-	public static final int GuardTowerID = 0x12;
+	public static final int GuardTowerID = 43;
 	
 	public GuardTower()
 	{

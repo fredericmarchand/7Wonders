@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class TrainingGround extends Structure {
 
-	public static final int TrainingGroundID = 0x16;
+	public static final int TrainingGroundID = 45;
 	
 	public TrainingGround()
 	{

@@ -5,7 +5,7 @@ import Tokens.Resources;
 
 public class Apothecary extends Structure {
 
-	public static final int ApothecaryID = 0x63;
+	public static final int ApothecaryID = 64;
 	
 	public Apothecary()
 	{
