@@ -17,6 +17,7 @@ public class Match {
     public static final int MAX_PLAYER_COUNT = 7;
     private int connection_count;
     private Server server;
+    private int receivedEvents = 0;
     
     //private matchController
     
@@ -80,7 +81,10 @@ public class Match {
 	}
 	
 	public void receiveEvent(Object o, long cID,Connection c){
-		
+		receivedEvents++;
+		if(receivedEvents==connection_count){
+			//hand off info to game controller
+		}
 	}
 	
 

@@ -153,7 +153,7 @@ public class NetworkListener extends Listener{
 		}
 		if(o instanceof Packet7MatchFunction){
 				//pass info to controller
-				(mserver.findMatch(((Packet7MatchFunction)o).getMID())).
+				//(mserver.findMatch(((Packet7MatchFunction)o).getMID())).buildQ
 				
 			
 					
