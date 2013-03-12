@@ -75,4 +75,15 @@ public class Packet {
 		public Object getObject(){ return o;}
 		public void setObject(Object ob){ o = ob;}
 	}
+	public static class Packet8ClientResponse{
+		private long matchID;
+		private long clientID;
+		private Object o;
+		public long getMID(){return matchID;}
+		public void setMID(long id){matchID = id;}
+		public long getCID(){return clientID;}
+		public void setCID(long id){clientID=id;}
+		public Object getObject(){ return o;}
+		public void setObject(Object ob){ o = ob;}
+	}
 }

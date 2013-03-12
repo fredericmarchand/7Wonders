@@ -2,9 +2,11 @@ package client;
 
 import java.io.IOException;
 import java.util.*;
+import Controls.*;
 
 
 
+import Player.Player;
 import Resources.Chat;
 import Resources.Match;
 import Resources.Packet.Packet0LoginRequest;
@@ -15,6 +17,7 @@ import Resources.Packet.Packet4Object;
 import Resources.Packet.Packet5Disconnect;
 import Resources.Packet.Packet6ChatMsg;
 import Resources.Packet.Packet7MatchFunction;
+import Resources.Packet.Packet8ClientResponse;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.*;
@@ -32,7 +35,8 @@ public class MClient {
     private long ID = 0000;
     private String username;
     private Chat chat;
-    
+    private Player player;
+    //player receive game
     public MClient(){
     	
     	client = new Client();
@@ -122,18 +126,15 @@ public class MClient {
     //getter for chat
     public Chat getChat(){return chat;}
     
+    //player getter/setter
+    public void setPlayer(Player pp){player = pp;}
+    public Player getPlayer(){return player;}
+    
     public void ClientWait(){
     	while(true){
     		
     	}
-    }
-    
-    public void turn(){
-    	//Queue<Object> queue = new Queue<Object>();
-    }
-    
-
-    
+    }    
     public void chat(){
 
     	while(true){
@@ -152,6 +153,7 @@ public class MClient {
     	kryo.register(Packet5Disconnect.class);
     	kryo.register(Packet6ChatMsg.class);
 		kryo.register(Packet7MatchFunction.class);
+		kryo.register(Packet8ClientResponse.class);
     	kryo.register(java.util.ArrayList.class);
     	kryo.register(Match.class);
    }
@@ -166,7 +168,20 @@ public class MClient {
     		matchID = 0000; //no longer in a game
     	}
     }
-        
+       
+    ///HEAVY EDIT////
+    public void turn(Packet7MatchFunction o){
+//    	player.passMatch((Controls.Match)(o.getObject()));
+//       	response(player.getCommandMsg());
+    	//player....
+    }
+    public void response(CommandMessage msg){
+    	Packet8ClientResponse resp = new Packet8ClientResponse();
+    	resp.setCID(ID);
+    	resp.setMID(matchID);
+    	resp.setObject(msg);
+    	client.sendTCP(resp);
+    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
