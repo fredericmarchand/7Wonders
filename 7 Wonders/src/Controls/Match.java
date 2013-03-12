@@ -141,6 +141,7 @@ public class Match {
 				//add resource to players resources
 			}
 		}
+		in.close();
 	}
 	
 	public void beginningOfTurnEffects(ArrayList<Player> plyrs)

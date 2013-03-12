@@ -5,12 +5,19 @@ import java.io.File;
 import javax.swing.*;
 
 import Controls.Match;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MatchPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private Match match;
 	private ImageIcon cards[];
+	
+	private FarPanel f1, f2, f3, f4;
+	private NearPanel n1, n2;
+	private LocalPanel playerPanel;
+	private CardsPanel cardsPanel;
 	
 	public MatchPanel(int numPlayers) {
 		setLayout(null);
@@ -28,29 +35,41 @@ public class MatchPanel extends JPanel {
 		// Make the overview panels
 		
 		// Players
-		NearPanel playerPanel = new NearPanel(match.getPlayers().get(0));
+		playerPanel = new LocalPanel(match.getPlayers().get(0));
+		playerPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				localClicked();
+			}
+		});
 		playerPanel.setLocation(401, 450);
 		
 		// Neighbours
-		NearPanel n1 = new NearPanel(match.getPlayers().get(1));
+		n1 = new NearPanel(match.getPlayers().get(1));
 		n1.setLocation(0, 150);
-		NearPanel n2 = new NearPanel(match.getPlayers().get(2));
+		n2 = new NearPanel(match.getPlayers().get(2));
 		n2.setLocation(802, 150);
 		
 		// Foreigners
-		FarPanel f1 = new FarPanel(match.getPlayers().get(3));
+		f1 = new FarPanel(match.getPlayers().get(3));
 		f1.setLocation(0, 0);
-		FarPanel f2 = new FarPanel(match.getPlayers().get(4));
+		f2 = new FarPanel(match.getPlayers().get(4));
 		f2.setLocation(320, 0);
-		FarPanel f3 = new FarPanel(match.getPlayers().get(5));
+		f3 = new FarPanel(match.getPlayers().get(5));
 		f3.setLocation(640, 0);
-		FarPanel f4 = new FarPanel(match.getPlayers().get(6));
+		f4 = new FarPanel(match.getPlayers().get(6));
 		f4.setLocation(960, 0);
 		
 		// Cards
-		CardsPanel cardsPanel = new CardsPanel(cards, match.getPlayers().get(0).getCards());
+		cardsPanel = new CardsPanel(cards, match.getPlayers().get(0).getCards());
+		cardsPanel.setSize(1274, 280);
 		cardsPanel.setLocation(3, 558);
-		//cardsPanel.setLocation(3, 750);
+		cardsPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cardsClicked();
+			}
+		});
 		
 		add(cardsPanel);
 		add(playerPanel);
@@ -63,5 +82,15 @@ public class MatchPanel extends JPanel {
 		
 	}
 	
+
+	private void localClicked() {
+		if(cardsPanel.getY() == 558)
+			cardsPanel.setLocation(cardsPanel.getX(), 750);
+		//else cardsPanel.setLocation(cardsPanel.getX(), 558);
+	}
 	
+	private void cardsClicked() {
+		if(cardsPanel.getY() == 750)
+			cardsPanel.setLocation(cardsPanel.getX(), 558);
+	}
 }
