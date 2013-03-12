@@ -13,7 +13,7 @@ public class Forum extends Structure {
 	public Forum()
 	{
 		super(new Resources(0, 0, 0, 2, 0, 0, 0, 0), ForumID, "Forum", YELLOW_CARD, 2);
-		effects.add(new ResourceChoice(0, 0, 0, 0, 1, 1, 1, true));
+		effects.add(new ResourceChoice(0, 0, 0, 0, 1, 1, 1, false));
 	}
 	
 	public boolean canBuildForFree(WonderBoard wb)

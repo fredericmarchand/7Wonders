@@ -5,13 +5,13 @@ import WonderBoards.WonderBoardStage;
 
 public class WonderStageVictoryPointBonus extends SpecialEffect {
 	
-	public static final int WonderStageCoinBonusID = 0x08;
+	public static final int WonderStageVictoryPointBonusID = 0x0B;
 	private int amountOfPoints;
 	private boolean includeNeighbors;
 	
 	public WonderStageVictoryPointBonus(int vPoints, boolean neighbors)
 	{
-		super(WonderStageCoinBonusID, false, NO_RELOAD, END_OF_GAME);
+		super(WonderStageVictoryPointBonusID, false, NO_RELOAD, END_OF_GAME);
 		amountOfPoints = vPoints;
 		includeNeighbors = neighbors;
 	}

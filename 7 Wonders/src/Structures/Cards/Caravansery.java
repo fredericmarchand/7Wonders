@@ -12,7 +12,7 @@ public class Caravansery extends Structure {
 	public Caravansery()
 	{
 		super(new Resources(0, 0, 2, 0, 0, 0, 0, 0), CaravanseryID, "Caravansery", YELLOW_CARD, 2);
-		effects.add(new ResourceChoice(1, 1, 1, 1, 0, 0, 0, true));
+		effects.add(new ResourceChoice(1, 1, 1, 1, 0, 0, 0, false));
 	}
 	
 	public boolean canBuildForFree(WonderBoard wb)

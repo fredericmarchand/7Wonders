@@ -14,6 +14,7 @@ public class Match {
 	private ArrayList<Structure> age1Deck, age2Deck, age3Deck, discarded;
 	
 	
+	
 	public Match(int numPlayers)
 	{
 		players = new ArrayList<Player>();
@@ -87,7 +88,7 @@ public class Match {
 				 //each player makes their moves
 				 for ( Player p: players )
 				 {
-						
+					 //choose resource
 					 System.out.println("Its your turn " + p.getUsername() + ", please input the ID of the card you want to play: ");
 					 int l = 0;
 					 for ( Structure s: p.getCards() ) 
@@ -115,81 +116,123 @@ public class Match {
 					 }
 				  }
 				  CardHandler.PassCardsToNeighbors(players, age);
+				  endOfTurnSpecialEffects(players);
 			}
 			PlayerInteraction.SettleMilitaryConflicts(players, age);
 		}
+		endOfGameSpecialEffects(players);
 		//count victory points
 		
-		
 		in.close();
-		/*
-		void runMatch()
-		{
-			add players to match
-			random wonderboard assignment
-			//3 ages
-			for ( int age = 0; age < 3; ++age )
-			{
-				distributeCards(age)
-				//6 turns
-				for ( int i = 0; i < 6; ++i )
-				{
-					 //each player makes their moves
-					 for ( Player p: players )
-					 {
-					 	select card
-					  	if ( i == 5 ) discard remaining card
-					  	action phase
-		
-					  	//push match to server
-					  }
-					  pass cards to neighbor
-				}
-				settlemilitaryconflicts
-			}
-			countvictorypoints
-		}
-				  
-		*/	  
-		
 	}
 	
-	/*void speffect()
+	
+	public void resourceChoiceActivation(Structure s, Player p)
 	{
-		Player p = new Player();
-		for ( Structure s : p.getWonderBoard().getRedCards() )
+		Scanner in = new Scanner(System.in);
+		for ( SpecialEffect se: s.getEffects() )
 		{
-			for ( SpecialEffect se: s.getEffects() )
+			if ( se.getType() == ResourceChoice.ResourceChoiceID )
 			{
-				switch ( se.getType() )
-				{
-				case CoinBonus.CoinBonusID:
-					(CoinBonus)
-					break;
-				}
+				System.out.println("The card " + s.getName() + " allows you to select one of the following resources to be available for the turn:");
+				
+				String cmd = in.nextLine();
+				((ResourceChoice)se).chooseResource(Integer.parseInt(cmd));
+				//add resource to players resources
 			}
 		}
-		for ( Structure s : p.getWonderBoard().getBlueCards() )
+	}
+	
+	public void beginningOfTurnEffects(ArrayList<Player> plyrs)
+	{
+		for ( Player p: plyrs )
 		{
+			for ( Structure s : p.getWonderBoard().getYellowCards() )
+				resourceChoiceActivation(s, p);
+						
+			for ( Structure s : p.getWonderBoard().getBrownGreyCards() )
+				resourceChoiceActivation(s, p);
+		}
+	}
+	
+	public void cardCoinBonusActivation(Structure s, Player p)
+	{
+		for ( SpecialEffect se: s.getEffects() )
+		{
+			if ( se.getType() == CardCoinBonus.CardCoinBonusID )
+				((CardCoinBonus)se).acquireCoins(p, getLeftNeighbor(p), getRightNeighbor(p));
+		}
+	}
+	
+	public void endOfTurnSpecialEffects(ArrayList<Player> plyrs)
+	{
+		for ( Player p: plyrs )
+		{
+			for ( Structure s : p.getWonderBoard().getRedCards() )
+				cardCoinBonusActivation(s, p);
+			
+			for ( Structure s : p.getWonderBoard().getBlueCards() )
+				cardCoinBonusActivation(s, p);
+			
+			for ( Structure s : p.getWonderBoard().getYellowCards() )
+				cardCoinBonusActivation(s, p);
+			
+			for ( Structure s : p.getWonderBoard().getPurpleCards() )
+				cardCoinBonusActivation(s, p);
+			
+			for ( Structure s : p.getWonderBoard().getGreenCards() )
+				cardCoinBonusActivation(s, p);
+			
+			for ( Structure s : p.getWonderBoard().getBrownGreyCards() )
+				cardCoinBonusActivation(s, p);
+		}
+	}
+
+	public void addPointActivate(Structure s, Player p)
+	{
+		for ( SpecialEffect se: s.getEffects() )
+		{
+			switch ( se.getType() )
+			{
+				case CardVictoryPointBonus.CardVictoryPointBonusID:
+				((CardVictoryPointBonus)se).acquireVictoryPoints(p, getLeftNeighbor(p), getRightNeighbor(p));
+				break;
+				
+				case WonderStageVictoryPointBonus.WonderStageVictoryPointBonusID:
+				((WonderStageVictoryPointBonus)se).acquirePoints(p, getLeftNeighbor(p), getRightNeighbor(p));
+				break;
+				
+				case MilitaryDefeatBonus.MilitaryDefeatBonusID:
+				((MilitaryDefeatBonus)se).acquireVictoryPoints(p, getLeftNeighbor(p), getRightNeighbor(p));
+				break;
+			}
+		}
+	}
+	
+	public void endOfGameSpecialEffects(ArrayList<Player> plyrs)
+	{
+		for ( Player p : plyrs )
+		{
+			for ( Structure s : p.getWonderBoard().getRedCards() )
+				addPointActivate(s, p);
+			
+			for ( Structure s : p.getWonderBoard().getBlueCards() )
+				addPointActivate(s, p);
+			
+			for ( Structure s : p.getWonderBoard().getYellowCards() )
+				addPointActivate(s, p);
+			
+			for ( Structure s : p.getWonderBoard().getPurpleCards() )
+				addPointActivate(s, p);
+			
+			for ( Structure s : p.getWonderBoard().getGreenCards() )
+				addPointActivate(s, p);
+			
+			for ( Structure s : p.getWonderBoard().getBrownGreyCards() )
+				addPointActivate(s, p);
 			
 		}
-		for ( Structure s : p.getWonderBoard().getYellowCards() )
-		{
-			
-		}
-		for ( Structure s : p.getWonderBoard().getPurpleCards() )
-		{
-			
-		}
-		for ( Structure s : p.getWonderBoard().getGreenCards() )
-		{
-			
-		}
-		for ( Structure s : p.getWonderBoard().getBrownGreyCards() )
-		{
-			
-		}
-	}*/
+	}
 	
 	public Player getPlayerByID(int id)
 	{
@@ -201,11 +244,11 @@ public class Match {
 		return null;
 	}
 	
-	public Player getLeftNeighbor(int localPlayerID)
+	public Player getLeftNeighbor(Player p)
 	{
 		for ( int i = 0; i < players.size(); ++i )
 		{
-			if ( players.get(i).getID() == localPlayerID )
+			if ( players.get(i).getID() == p.getID() )
 			{
 				if ( i == 0 )
 					return players.get(players.size()-1);
@@ -215,11 +258,11 @@ public class Match {
 		return null;
 	}
 	
-	public Player getRightNeighbor(int localPlayerID)
+	public Player getRightNeighbor(Player p)
 	{
 		for ( int i = 0; i < players.size(); ++i )
 		{
-			if ( players.get(i).getID() == localPlayerID )
+			if ( players.get(i).getID() == p.getID() )
 			{
 				if ( i == 0 )
 					return players.get(players.size()-1);
