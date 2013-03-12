@@ -13,7 +13,7 @@ public class Laboratory extends Structure {
 	public Laboratory()
 	{
 		super(new Resources(0, 0, 0, 2, 0, 0, 1, 0), LaboratoryID, "Laboratory", GREEN_CARD, 2);
-		effects.add(new ScientificSymbolBonus(2));
+		effects.add(new ScientificSymbolBonus(2, 2, false));
 	}
 
 	public boolean canBuildForFree(WonderBoard wb)

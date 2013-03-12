@@ -4,22 +4,22 @@ import Player.Player;
 
 public class ScientificSymbolBonus extends SpecialEffect {
 	
-	public static final int ShieldBonusID = 0x07;
+	public static final int ScientificSymbolBonusID = 0x07;
 	private int symbolType; 
 	private boolean choose;
 	
-	public ScientificSymbolBonus()
-	{
-		super(ShieldBonusID, false, NO_RELOAD, END_OF_GAME);
-		symbolType = 0;
-		choose = true;
-	}
+	//public ScientificSymbolBonus()
+	//{
+	//	super(ScientificSymbolBonusID, false, NO_RELOAD, END_OF_GAME);
+	//	symbolType = 0;
+	//	choose = true;
+	//}
 	
-	public ScientificSymbolBonus(int symbol)
+	public ScientificSymbolBonus(int symbol, int activate, boolean choose)
 	{
-		super(ShieldBonusID, false, NO_RELOAD, END_OF_GAME);
+		super(ScientificSymbolBonusID, false, NO_RELOAD, activate);
 		symbolType = symbol;
-		choose = false;
+		this.choose = choose;
 	}
 	
 	public void acquireSymbol(Player p)

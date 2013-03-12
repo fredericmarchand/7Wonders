@@ -18,6 +18,7 @@ public class ResourceChoice extends SpecialEffect {
 		purchaseable = bought;
 	}
 	
+	//pass in a player?
 	public boolean chooseResource(int id)
 	{
 		if ( usedUp ) return false;

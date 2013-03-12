@@ -13,7 +13,7 @@ public class Study extends Structure {
 	public Study()
 	{
 		super(new Resources(0, 0, 1, 0, 0, 1, 1, 0), StudyID, "Study", GREEN_CARD, 3);
-		effects.add(new ScientificSymbolBonus(2));
+		effects.add(new ScientificSymbolBonus(2, 2, false));
 	}
 
 	public boolean canBuildForFree(WonderBoard wb)

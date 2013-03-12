@@ -2,8 +2,7 @@ package Player;
 
 import WonderBoards.WonderBoard;
 import Structures.Structure;
-import Structures.Effects.CoinBonus;
-import Structures.Effects.SpecialEffect;
+import Structures.Effects.*;
 
 import java.util.ArrayList;
 import Tokens.*;
@@ -18,7 +17,7 @@ public class Player {
 	private ArrayList<Structure> cards, discardedCards;
 	private Structure chosenCard;
 	@SuppressWarnings("unused")
-	private Resources resources, purchased, unavailableResources;
+	private Resources resources, extraResources, purchased, unavailableResources;
 	private int shields;
 	private ConflictTokens conflictTokens;
 	private int victoryPoints;
@@ -145,9 +144,22 @@ public class Player {
 		{
 			wonderBoard.buildStructure(chosenCard);
 			for ( SpecialEffect se : chosenCard.getEffects() )
-			{
+			{				
 				if ( se.getType() == CoinBonus.CoinBonusID )
 					((CoinBonus)se).acquireCoins(resources); 
+				else if ( se.getType() == VictoryPointBonus.VictoryPointBonusID )
+					((VictoryPointBonus)se).acquireVictoryPoints(this);
+				else if ( se.getType() == ScientificSymbolBonus.ScientificSymbolBonusID )
+				{
+					if ( !((ScientificSymbolBonus)se).canChoose() ) 
+						((ScientificSymbolBonus)se).acquireSymbol(this);
+				}
+				else if ( se.getType() == ResourcesBonus.ResourcesBonusID )
+					((ResourcesBonus)se).acquireResources(this);
+				else if ( se.getType() == ShieldBonus.ShieldBonusID )
+					((ShieldBonus)se).acquireShields(this);
+				else if ( se.getType() == WonderStageCoinBonus.WonderStageCoinBonusID )
+					((WonderStageCoinBonus)se).acquireCoins(this);
 			}
 			chosenCard = null;
 			return true;

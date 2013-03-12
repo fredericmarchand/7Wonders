@@ -9,7 +9,7 @@ public class SpecialEffect {
 	protected static final int END_OF_TURN = 0;
 	protected static final int START_OF_TURN = 1;
 	protected static final int IN_TURN = 2;
-	protected static final int END_OF_GAME = 3;
+	public static final int END_OF_GAME = 3;
 	
 	protected int ID;
 	protected boolean usedUp;

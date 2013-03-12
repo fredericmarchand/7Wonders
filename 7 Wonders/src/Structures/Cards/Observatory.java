@@ -13,7 +13,7 @@ public class Observatory extends Structure {
 	public Observatory()
 	{
 		super(new Resources(2, 0, 0, 0, 1, 1, 0, 0), ObservatoryID, "Observatory", GREEN_CARD, 3);
-		effects.add(new ScientificSymbolBonus(2));
+		effects.add(new ScientificSymbolBonus(2, 2, false));
 	}
 	
 	public boolean canBuildForFree(WonderBoard wb)
