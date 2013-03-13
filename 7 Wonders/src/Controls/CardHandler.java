@@ -191,7 +191,6 @@ public class CardHandler {
 			//Special handling for guild cards
 			ArrayList<Structure> guilds = new ArrayList<Structure>();
 			guilds.add(new CraftmensGuild());
-			guilds.add(new MournersGuild());
 			guilds.add(new BuildersGuild());
 			guilds.add(new MagistratesGuild());
 			guilds.add(new PhilosophersGuild());

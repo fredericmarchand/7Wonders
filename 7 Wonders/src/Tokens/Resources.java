@@ -196,16 +196,37 @@ public class Resources {
 		return r;
 	}
 	
+	public static Resources addResources(Resources a, Resources b, Resources c)
+	{
+		Resources r = new Resources();
+		r.clay    = a.clay + b.clay + c.clay;
+		r.coins   = a.coins + b.coins + c.coins;
+		r.ore     = a.ore + b.ore + c.coins;
+		r.stone   = a.stone + b.stone + c.stone;
+		r.wood    = a.wood + b.wood + c.wood;
+		r.glass   = a.glass + b.glass + b.glass;
+		r.loom    = a.loom + b.loom + c.loom;
+		r.papyrus = a.papyrus + b.papyrus + c.papyrus;
+		return r;
+	}
+	
 	public Resources findMissingResources(Resources required)
 	{
 		Resources r = new Resources();
 		r.ore = required.ore - ore;
+		if ( r.ore < 0 ) r.ore = 0;
 		r.stone = required.stone - stone;
+		if ( r.stone < 0 ) r.stone = 0;
 		r.wood = required.wood - wood;
+		if ( r.wood < 0 ) r.wood = 0;
 		r.clay = required.clay - clay;
+		if ( r.clay < 0 ) r.clay = 0;
 		r.glass = required.glass - glass;
+		if ( r.glass < 0 ) r.glass = 0;
 		r.loom = required.loom - loom;
+		if ( r.loom < 0 ) r.loom = 0;
 		r.papyrus = required.papyrus - papyrus;
+		if ( r.papyrus < 0 ) r.papyrus = 0;
 		return r;
 	}
 	
