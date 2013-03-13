@@ -86,7 +86,7 @@ public class VerticalLabelUI extends BasicLabelUI {
                 paintDisabledText(label, g, clippedText, textX, textY);
             }
         }
-	g2.setTransform( tr );
+        g2.setTransform( tr );
     }
  
 }

@@ -353,6 +353,22 @@ public class Match {
 		return null;
 	}
 	
+	public void countPlayersVictoryPoints()
+	{	
+		for (Player p : players){
+			
+			//Conflict Tokens
+			p.addVictoryPoints(p.getConflictTokens().getVictoryPoints());
+			
+			//Coins
+			p.addVictoryPoints(p.getResources().getCoins() / 3);
+			
+			//Scientific
+			p.addVictoryPoints(p.getScientificSymbols().victoryPointsValue());
+		}
+		
+	}
+	
 
 	/**
 	 * @param args
