@@ -1,6 +1,9 @@
 package WonderBoards;
 
+import java.util.ArrayList;
+
 import Structures.Structure;
+import Structures.Effects.SpecialEffect;
 import Tokens.Resources;
 import Structures.Effects.*;
 import java.util.ArrayList;
@@ -12,6 +15,7 @@ public class WonderBoardStage {
 	private Structure card;
 	private boolean built;
 	private ArrayList<SpecialEffect> effects;
+
 	
 	public WonderBoardStage()
 	{
@@ -34,14 +38,14 @@ public class WonderBoardStage {
 		return resourceCost;
 	}	
 	
-	public boolean isBuilt()
-	{
-		return built;
-	}
-	
 	public ArrayList<SpecialEffect> getEffects()
 	{
 		return effects;
+	}
+	
+	public boolean isBuilt()
+	{
+		return built;
 	}
 	
 	public boolean build(Structure card, Resources resources)
