@@ -11,7 +11,7 @@ public class WestTradingPost extends Structure {
 	public WestTradingPost()
 	{
 		super(new Resources(), WestTradingPostID, "West Trading Post", YELLOW_CARD, 1);
-		effects.add(new TradingPerks(1, true, 1));
+		effects.add(new TradingPerks(1, 1));
 	}
 
 	/**

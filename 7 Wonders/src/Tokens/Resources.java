@@ -1,5 +1,8 @@
 package Tokens;
 
+import Player.Player;
+import Structures.Effects.TradingPerks;
+
 public class Resources {
 
 	public static final int ORE_ID = 1;
@@ -88,6 +91,15 @@ public class Resources {
 		return (ore + stone + wood + clay + glass + loom + papyrus);
 	}
 	
+	public int getPrimaryCount()
+	{
+		return (ore + stone + wood + clay);
+	}
+	
+	public int getManufacturedCount()
+	{
+		return (glass + loom + papyrus);
+	}
 	
 	public int getCoins()
 	{
@@ -231,58 +243,59 @@ public class Resources {
 	}
 	
 	//not adjusted for special effect prices
-	public static void buyResources(Resources buyer, Resources seller, Resources required)
+	public static int buyResources(Player buyer, Resources seller, Resources required, int primaryPrice, int manufacturedPrice)
 	{
+		int coins = 0;
 		if ( seller.getOre() >= required.getOre() && required.getOre() > 0 )
 		{
-			buyer.addOre(required.getOre());
-			buyer.addCoins(required.getOre() * -2);
-			seller.addCoins(required.getOre() * 2);
+			buyer.getPurchasedResources().addOre(required.getOre());
+			buyer.getPurchasedResources().addCoins(required.getOre() * -primaryPrice);
+			coins += (required.getOre() * primaryPrice);
 			required.addOre(required.getOre() * -1);
 		}
 		if ( seller.getStone() >= required.getStone() && required.getStone() > 0 )
 		{
-			buyer.addStone(required.getStone());
-			buyer.addCoins(required.getStone() * -2);
-			seller.addCoins(required.getStone() * 2);
+			buyer.getPurchasedResources().addStone(required.getStone());
+			buyer.getPurchasedResources().addCoins(required.getStone() * -primaryPrice);
+			coins += (required.getStone() * primaryPrice);
 			required.addStone(required.getStone() * -1);
 		}
 		if ( seller.getWood() >= required.getWood() && required.getWood() > 0 )
 		{
-			buyer.addWood(required.getWood());
-			buyer.addCoins(required.getWood() * -2);
-			seller.addCoins(required.getWood() * 2);
+			buyer.getPurchasedResources().addWood(required.getWood());
+			buyer.getPurchasedResources().addCoins(required.getWood() * -primaryPrice);
+			coins += (required.getWood() * primaryPrice);
 			required.addWood(required.getWood() * -1);
 		}
 		if ( seller.getClay() >= required.getClay() && required.getClay() > 0 )
 		{
-			buyer.addClay(required.getClay());
-			buyer.addCoins(required.getClay() * -2);
-			seller.addCoins(required.getClay() * 2);
+			buyer.getPurchasedResources().addClay(required.getClay());
+			buyer.getPurchasedResources().addCoins(required.getClay() * -primaryPrice);
+			coins += (required.getClay() * primaryPrice);
 			required.addClay(required.getClay() * -1);
 		}
 		if ( seller.getGlass() >= required.getGlass() && required.getGlass() > 0 )
 		{
-			buyer.addOre(required.getGlass());
-			buyer.addCoins(required.getGlass() * -2);
-			seller.addCoins(required.getGlass() * 2);
+			buyer.getPurchasedResources().addOre(required.getGlass());
+			buyer.getPurchasedResources().addCoins(required.getGlass() * -manufacturedPrice);
+			coins += (required.getGlass() * manufacturedPrice);
 			required.addOre(required.getGlass() * -1);
 		}
 		if ( seller.getLoom() >= required.getLoom() && required.getLoom() > 0 )
 		{
-			buyer.addLoom(required.getLoom());
-			buyer.addCoins(required.getLoom() * -2);
-			seller.addCoins(required.getLoom() * 2);
+			buyer.getPurchasedResources().addLoom(required.getLoom());
+			buyer.getPurchasedResources().addCoins(required.getLoom() * -manufacturedPrice);
+			coins += (required.getLoom() * manufacturedPrice);
 			required.addLoom(required.getLoom() * -1);
 		}
 		if ( seller.getPapyrus() >= required.getPapyrus() && required.getPapyrus() > 0 )
 		{
-			buyer.addPapyrus(required.getPapyrus());
-			buyer.addCoins(required.getPapyrus() * -2);
-			seller.addCoins(required.getPapyrus() * 2);
+			buyer.getPurchasedResources().addPapyrus(required.getPapyrus());
+			buyer.getPurchasedResources().addCoins(required.getPapyrus() * -manufacturedPrice);
+			coins += (required.getPapyrus() * manufacturedPrice);
 			required.addPapyrus(required.getPapyrus() * -1);
 		}
-		
+		return coins;
 	}
 	
 	public String toString()
