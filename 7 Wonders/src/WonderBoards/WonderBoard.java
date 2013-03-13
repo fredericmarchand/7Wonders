@@ -117,7 +117,21 @@ public class WonderBoard {
 		}
 	}
 	
-	public boolean buildStage(Structure card, Resources funds){ return false; }
+	public boolean buildStage(Structure card, Resources funds)
+	{ 
+		return false; 
+	}
+	
+	//returns null if all stages are built otherwise returns the first stage that isnt built's resource cost
+	public Resources getNextStageCost()
+	{
+		for ( WonderBoardStage s: stages )
+		{
+			if ( !s.isBuilt() )
+				return s.getResourceCost();
+		}
+		return null;
+	}
 	
 	//builds a structure on this wonderboard
 	public void buildStructure(Structure s)

@@ -12,7 +12,7 @@ public class Match {
 	private ArrayList<Player> players;
 	private int age, turn, numPlayers;
 	private ArrayList<Structure> age1Deck, age2Deck, age3Deck, discarded;
-	
+	private Scanner in;
 	
 	
 	public Match(int numPlayers)
@@ -21,6 +21,7 @@ public class Match {
 		age = 0;
 		turn = 0;
 		this.numPlayers = numPlayers;
+		in = new Scanner(System.in);
 		age1Deck = CardHandler.BuildAge1Deck(numPlayers);
 		age2Deck = CardHandler.BuildAge2Deck(numPlayers);
 		age3Deck = CardHandler.BuildAge3Deck(numPlayers);
@@ -58,7 +59,7 @@ public class Match {
 	public void runGame()
 	{
 		players = new ArrayList<Player>();
-		Scanner in = new Scanner(System.in);
+		//Scanner in = new Scanner(System.in);
 		Random r = new Random();
 		
 		//System.out.println("Please input how many players will play: ");
@@ -71,10 +72,7 @@ public class Match {
 			players.add(new Player(un, (i * r.nextInt())));
 		}
 		CardHandler.DistributeRandomWonderBoards(players, 0);
-		for ( Player p: players )
-		{
-			p.getResources().addCoins(3);
-		}
+		for ( Player p: players ) p.getResources().addCoins(3);
 		
 		for ( age = 1; age < 4; ++age )
 		{
@@ -88,35 +86,26 @@ public class Match {
 				 //each player makes their moves
 				 for ( Player p: players )
 				 {
-					 //choose resource
+					 beginningOfTurnEffects(p);
 					 System.out.println("Its your turn " + p.getUsername() + ", please input the ID of the card you want to play: ");
 					 int l = 0;
 					 for ( Structure s: p.getCards() ) 
 					 {
 					 	System.out.println(l++ + " " + s.getName());
 					 }
-					 int move = Integer.parseInt(in.nextLine());
+					 while ( !in.hasNext() );
+					 int move = in.nextInt();//Integer.parseInt(in.nextLine());
 					 p.chooseCard(move);
 					 if ( p.getCards().size() == 1 ) p.discardHand(discarded);
 					 System.out.println("Please select your move:\n1 - Build the Structure\n2 - Build a Stage of your Wonder\n3 - Discard the card for 3 coins");
-					 move = Integer.parseInt(in.nextLine());
-					 boolean valid = true;
-					 switch ( move )
-					 {
-					 	case 1:
-					 		valid = p.buildStructure();
-					  		break;
-					  	case 2:
-					  		valid = p.buildStage();
-					  		break;
-					  	case 3:
-					  		p.discard(discarded);
-					  		break;
-					  	default: System.out.println("Invalid... Please try again: ");
-					 }
+					 while ( !in.hasNext() );
+					 move = in.nextInt();//Integer.parseInt(in.nextLine());
+					 //action phase
+					 actionPhase(p, move);
 				  }
-				  CardHandler.PassCardsToNeighbors(players, age);
-				  endOfTurnSpecialEffects(players);
+				 for ( Player p : players ) p.resetResources();
+				 CardHandler.PassCardsToNeighbors(players, age);
+				 endOfTurnSpecialEffects(players);
 			}
 			PlayerInteraction.SettleMilitaryConflicts(players, age);
 		}
@@ -126,33 +115,114 @@ public class Match {
 		in.close();
 	}
 	
+	public int actionPhase(Player p, int move)
+	{
+		//Scanner in = new Scanner(System.in);
+		switch ( move )
+		 {
+		 	case 1:
+		 		int retv = p.buildStructure();
+		 		if ( retv == 1 )
+		 		{
+		 			if ( p.neighborsHaveResources(getLeftNeighbor(p), getRightNeighbor(p), p.getChosenCard().getResourceCost()) )
+		  			{
+		  				System.out.println("You have buy resources from neighbors to be able to build this structure. Which neighbor do you prefer to do business with?\n0 - left\n1 - right\n2 - doesn't matter");
+		  				int neib = Integer.parseInt(in.nextLine());
+		  				p.buildStage(getLeftNeighbor(p), getRightNeighbor(p), neib);
+		  			}
+		 			else
+		 			{
+		 				int ans = move;
+		  				while ( ans == move )
+		  				{
+		  					System.out.println("You are not able to build this sturcture, please choose a different move:\n1 - Build the Structure\n2 - Build a Stage of your Wonder\n3 - Discard the card for 3 coins");
+		  					ans = Integer.parseInt(in.nextLine());
+		  				}
+		  				actionPhase(p, ans);
+		 			}
+		 		}
+		 		else if ( retv == 0 )
+		 		{
+		 			int ans = move;
+	  				while ( ans == move )
+	  				{
+	  					System.out.println("You are not able to build this sturcture, please choose a different move:\n1 - Build the Structure\n2 - Build a Stage of your Wonder\n3 - Discard the card for 3 coins");
+	  					ans = Integer.parseInt(in.nextLine());
+	  				}
+	  				actionPhase(p, ans);
+		 		}
+		  		break;
+		  	case 2:
+		  		if ( !p.buildStage() )
+		  		{
+		  			if ( p.neighborsHaveResources(getLeftNeighbor(p), getRightNeighbor(p), p.getWonderBoard().getNextStageCost()) )
+		  			{
+		  				System.out.println("You have buy resources from neighbors to be able to build this stage. Which neighbor do you prefer to do business with?\n0 - left\n1 - right\n2 - doesn't matter");
+		  				int neib = Integer.parseInt(in.nextLine());
+		  				p.buildStage(getLeftNeighbor(p), getRightNeighbor(p), neib);
+		  			}
+		  			else
+		  			{
+		  				int ans = move;
+		  				while ( ans == move )
+		  				{
+		  					System.out.println("You are not able to build this stage, please choose a different move:\n1 - Build the Structure\n2 - Build a Stage of your Wonder\n3 - Discard the card for 3 coins");
+		  					ans = Integer.parseInt(in.nextLine());
+		  				}
+		  				actionPhase(p, ans);
+		  			}
+		  		}
+		  		else
+	  			{
+	  				int ans = move;
+	  				while ( ans == move )
+	  				{
+	  					System.out.println("You are not able to build this sturcture, please choose a different move:\n1 - Build the Structure\n2 - Build a Stage of your Wonder\n3 - Discard the card for 3 coins");
+	  					ans = Integer.parseInt(in.nextLine());
+	  				}
+	  				actionPhase(p, ans);
+	  			}
+		  		break;
+		  	case 3:
+		  		p.discard(discarded);
+		  		break;
+		  	default: System.out.println("Invalid... Please try again: ");
+		 }
+		//in.close();
+		return move;
+	}
 	
 	public void resourceChoiceActivation(Structure s, Player p)
 	{
-		Scanner in = new Scanner(System.in);
+		//Scanner in = new Scanner(System.in);
 		for ( SpecialEffect se: s.getEffects() )
 		{
 			if ( se.getType() == ResourceChoice.ResourceChoiceID )
 			{
-				System.out.println("The card " + s.getName() + " allows you to select one of the following resources to be available for the turn:");
+				ResourceChoice rc = (ResourceChoice)se;
+				System.out.println("The card " + s.getName() + " allows you to select one of the following resources to be available for the turn:\n"+
+									( rc.getPossibilities().getOre() != 0 ? "1 - Ore\n" : "" ) +
+									( rc.getPossibilities().getOre() != 0 ? "2 - Stone\n" : "" ) +
+									( rc.getPossibilities().getOre() != 0 ? "3 - Wood\n" : "" ) +
+									( rc.getPossibilities().getOre() != 0 ? "4 - Clay\n" : "" ) +
+									( rc.getPossibilities().getOre() != 0 ? "5 - Glass\n" : "" ) +
+									( rc.getPossibilities().getOre() != 0 ? "6 - Loom\n" : "" ) +
+									( rc.getPossibilities().getOre() != 0 ? "7 - Papyrus\n" : "" ));
 				
 				String cmd = in.nextLine();
-				((ResourceChoice)se).chooseResource(Integer.parseInt(cmd));
-				//add resource to players resources
+				((ResourceChoice)se).chooseResource(Integer.parseInt(cmd), p);
 			}
 		}
+		//in.close();
 	}
 	
-	public void beginningOfTurnEffects(ArrayList<Player> plyrs)
+	public void beginningOfTurnEffects(Player p)
 	{
-		for ( Player p: plyrs )
-		{
-			for ( Structure s : p.getWonderBoard().getYellowCards() )
-				resourceChoiceActivation(s, p);
+		for ( Structure s : p.getWonderBoard().getYellowCards() )
+			resourceChoiceActivation(s, p);
 						
-			for ( Structure s : p.getWonderBoard().getBrownGreyCards() )
-				resourceChoiceActivation(s, p);
-		}
+		for ( Structure s : p.getWonderBoard().getBrownGreyCards() )
+			resourceChoiceActivation(s, p);
 	}
 	
 	public void cardCoinBonusActivation(Structure s, Player p)
@@ -190,6 +260,7 @@ public class Match {
 
 	public void addPointActivate(Structure s, Player p)
 	{
+		//Scanner in = new Scanner(System.in);
 		for ( SpecialEffect se: s.getEffects() )
 		{
 			switch ( se.getType() )
@@ -205,8 +276,18 @@ public class Match {
 				case MilitaryDefeatBonus.MilitaryDefeatBonusID:
 				((MilitaryDefeatBonus)se).acquireVictoryPoints(p, getLeftNeighbor(p), getRightNeighbor(p));
 				break;
+			
+				case ScientificSymbolBonus.ScientificSymbolBonusID:
+					if ( ((ScientificSymbolBonus)se).canChoose() )
+					{
+						System.out.println("You now can select which scientific symbol you want your guild to represent:\n1 - Compass\n2 - Gear\n3 - Tablet");
+						String ans = in.nextLine();
+						((ScientificSymbolBonus)se).chooseSymbol(p, Integer.parseInt(ans));
+					}
+					break;
 			}
 		}
+		//in.close();
 	}
 	
 	public void endOfGameSpecialEffects(ArrayList<Player> plyrs)

@@ -31,13 +31,12 @@ public class Player {
 		wonderBoard = new WonderBoard();
 		cards = new ArrayList<Structure>();
 		chosenCard = null;
-		resources = new Resources(0, 0, 0, 0, 0, 0, 0, 3);
-		purchased = new Resources();
-		unavailableResources = new Resources();
+		resources = new Resources();
 		conflictTokens = new ConflictTokens();
 		shields = 0;
 		victoryPoints = 0;
 		scientificSymbols = new ScientificSymbols();
+		resetResources();
 	}
 	
 	public Player(String uname, int id)
@@ -48,8 +47,7 @@ public class Player {
 		cards = new ArrayList<Structure>();
 		chosenCard = null;
 		resources = new Resources();
-		purchased = new Resources();
-		unavailableResources = new Resources();
+		resetResources();
 		conflictTokens = new ConflictTokens();
 		shields = 0;
 		victoryPoints = 0;
@@ -107,6 +105,16 @@ public class Player {
 		return scientificSymbols;
 	}
 	
+	public void addExtraResources(Resources r)
+	{
+		extraResources.addResources(r);
+	}
+	
+	public void addUnvResources(Resources r)
+	{
+		unavailableResources.addResources(r);
+	}
+	
 	//actions
 	public void assignWonderBoard(WonderBoard wb)
 	{
@@ -138,38 +146,92 @@ public class Player {
 		victoryPoints += points;
 	}
 	
-	public boolean buildStructure()
+	//resets resetable resources
+	public void resetResources()
 	{
-		if ( chosenCard.getResourceCost().canAfford(resources) && !wonderBoard.containsCard(chosenCard.getID()) )
+		purchased = new Resources();
+		unavailableResources = new Resources();
+		extraResources = new Resources();
+	}
+	//returns 0 if already has card
+	//returns 1 if cant afford
+	//returns 2 if structure got built
+	public int buildStructure()
+	{
+		if ( !wonderBoard.containsCard(chosenCard.getID()) )
 		{
-			wonderBoard.buildStructure(chosenCard);
-			for ( SpecialEffect se : chosenCard.getEffects() )
-			{				
-				if ( se.getType() == CoinBonus.CoinBonusID )
-					((CoinBonus)se).acquireCoins(resources); 
-				else if ( se.getType() == VictoryPointBonus.VictoryPointBonusID )
-					((VictoryPointBonus)se).acquireVictoryPoints(this);
-				else if ( se.getType() == ScientificSymbolBonus.ScientificSymbolBonusID )
-				{
-					if ( !((ScientificSymbolBonus)se).canChoose() ) 
-						((ScientificSymbolBonus)se).acquireSymbol(this);
+			if ( ((chosenCard.getResourceCost().canAfford(Resources.addResources(extraResources, resources, unavailableResources)) 
+					|| chosenCard.canBuildForFree(wonderBoard)))  )
+			{
+				wonderBoard.buildStructure(chosenCard);
+				for ( SpecialEffect se : chosenCard.getEffects() )
+				{				
+					if ( se.getType() == CoinBonus.CoinBonusID )
+						((CoinBonus)se).acquireCoins(resources); 
+					else if ( se.getType() == VictoryPointBonus.VictoryPointBonusID )
+						((VictoryPointBonus)se).acquireVictoryPoints(this);
+					else if ( se.getType() == ScientificSymbolBonus.ScientificSymbolBonusID )
+					{
+						if ( !((ScientificSymbolBonus)se).canChoose() ) 
+							((ScientificSymbolBonus)se).acquireSymbol(this);
+					}
+					else if ( se.getType() == ResourcesBonus.ResourcesBonusID )
+						((ResourcesBonus)se).acquireResources(this);
+					else if ( se.getType() == ShieldBonus.ShieldBonusID )
+						((ShieldBonus)se).acquireShields(this);
+					else if ( se.getType() == WonderStageCoinBonus.WonderStageCoinBonusID )
+						((WonderStageCoinBonus)se).acquireCoins(this);
 				}
-				else if ( se.getType() == ResourcesBonus.ResourcesBonusID )
-					((ResourcesBonus)se).acquireResources(this);
-				else if ( se.getType() == ShieldBonus.ShieldBonusID )
-					((ShieldBonus)se).acquireShields(this);
-				else if ( se.getType() == WonderStageCoinBonus.WonderStageCoinBonusID )
-					((WonderStageCoinBonus)se).acquireCoins(this);
+				chosenCard = null;
+				return 2;
 			}
-			chosenCard = null;
-			return true;
+			else return 1;
 		}
-		return false;
+		else return 0;
+	}
+	
+	//returns true or false
+	public boolean buildStructure(Player leftNeighbor, Player rightNeighbor, int preference)
+	{
+		buyResources(leftNeighbor, rightNeighbor, chosenCard.getResourceCost(), preference);	
+		wonderBoard.buildStructure(chosenCard);
+		for ( SpecialEffect se : chosenCard.getEffects() )
+		{				
+			if ( se.getType() == CoinBonus.CoinBonusID )
+				((CoinBonus)se).acquireCoins(resources); 
+			else if ( se.getType() == VictoryPointBonus.VictoryPointBonusID )
+				((VictoryPointBonus)se).acquireVictoryPoints(this);
+			else if ( se.getType() == ScientificSymbolBonus.ScientificSymbolBonusID )
+			{
+				if ( !((ScientificSymbolBonus)se).canChoose() ) 
+					((ScientificSymbolBonus)se).acquireSymbol(this);
+			}
+			else if ( se.getType() == ResourcesBonus.ResourcesBonusID )
+				((ResourcesBonus)se).acquireResources(this);
+			else if ( se.getType() == ShieldBonus.ShieldBonusID )
+				((ShieldBonus)se).acquireShields(this);
+			else if ( se.getType() == WonderStageCoinBonus.WonderStageCoinBonusID )
+				((WonderStageCoinBonus)se).acquireCoins(this);
+		}
+		chosenCard = null;
+		return true;
 	}
 	
 	public boolean buildStage()
 	{
-		return wonderBoard.buildStage(chosenCard, resources);
+		return wonderBoard.buildStage(chosenCard, Resources.addResources(unavailableResources, Resources.addResources(resources, extraResources)));
+	}
+	
+	public boolean buildStage(Player leftNeighbor, Player rightNeighbor, int preference)
+	{
+		boolean ans = wonderBoard.buildStage(chosenCard, Resources.addResources(unavailableResources, Resources.addResources(resources, extraResources)));
+		
+		if ( ans ) return true;
+		else 
+		{
+			buyResources(leftNeighbor, rightNeighbor, wonderBoard.getNextStageCost(), preference);
+			return wonderBoard.buildStage(chosenCard, Resources.addResources(purchased, Resources.addResources(unavailableResources, Resources.addResources(resources, extraResources))));
+		}
 	}
 	
 	public void discard(ArrayList<Structure> discardedCards)
@@ -196,36 +258,38 @@ public class Player {
 		
 		Random r = new Random();
 		int val;
-		//checking if player has enough money, value of 2 will change when special effects are integrated
-		if ( resources.getCoins() < 2 ) return false;
 		
 		//finds what resources need to be purchased from neighbors
-		Resources missing = resources.findMissingResources(required);
+		Resources missing = (Resources.addResources(extraResources, Resources.addResources(resources, unavailableResources))).findMissingResources(required);
 		
-		//checks if the combined neighbors resources are enough to fill the missing resources and if the player can afford them
-		if ( Resources.addResources(leftNeighbor.getResources(), rightNeighbor.getResources()).hasRequiredResources(missing) && (missing.getCount()*2) <= resources.getCoins() )
-		{
-			if ( preference == 2 )
-				val = r.nextInt(2);
-			else val = preference;
+
+		if ( preference == 2 )
+			val = r.nextInt(2);
+		else val = preference;
 			
-			switch ( val )
-			{
-				case 0: //any neighbor
-					Resources.buyResources(purchased, leftNeighbor.getResources(), missing);
-					Resources.buyResources(purchased, rightNeighbor.getResources(), missing);
-					break;
+		switch ( val )
+		{
+			case 0: //left neighbor preferred
+				Resources.buyResources(purchased, leftNeighbor.getResources(), missing);
+				Resources.buyResources(purchased, rightNeighbor.getResources(), missing);
+				break;
 					
-				case 1: //right neighbor preferred
-					Resources.buyResources(purchased, rightNeighbor.getResources(), missing);
-					Resources.buyResources(purchased, leftNeighbor.getResources(), missing);
-					break;
-			}
-			return true;
+			case 1: //right neighbor preferred
+				Resources.buyResources(purchased, rightNeighbor.getResources(), missing);
+				Resources.buyResources(purchased, leftNeighbor.getResources(), missing);
+				break;
 		}
-		return false;
+		return true;
 	}
 	
+	public boolean neighborsHaveResources(Player leftNeighbor, Player rightNeighbor, Resources required)
+	{
+		if ( resources.getCoins() < 2 ) return false;
+		Resources missing = (Resources.addResources(extraResources, Resources.addResources(resources, unavailableResources))).findMissingResources(required);
+		if ( Resources.addResources(leftNeighbor.getResources(), rightNeighbor.getResources()).hasRequiredResources(missing) && (missing.getCount()*2) <= resources.getCoins() )
+			return true;
+		return false;
+	}
 	
 	
 	/**
