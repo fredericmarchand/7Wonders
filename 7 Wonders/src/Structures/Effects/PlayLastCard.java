@@ -16,6 +16,7 @@ public class PlayLastCard extends SpecialEffect{
 		int success = 0;
 		if ( !usedUp )
 		{
+			/*
 			if ( p.getCards().size() == 2) 
 			{
 				p.chooseCard(0);
@@ -25,6 +26,7 @@ public class PlayLastCard extends SpecialEffect{
 				if (success == 4)
 					return true;
 			}
+			*/
 		}
 		return false;
 	}

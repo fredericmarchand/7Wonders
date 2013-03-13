@@ -10,4 +10,11 @@ public class FreeConstruction extends SpecialEffect{
 		super(FreeConstructionID, false, RELOAD_EVERY_AGE, START_OF_TURN);
 	}
 	
+	public void buildForFree(Player p)
+	{
+		if ( !usedUp )
+			p.getWonderBoard().buildStructure(p.getChosenCard());
+		usedUp = true;
+	}
+	
 }

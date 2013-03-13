@@ -15,8 +15,7 @@ public class WonderBoardStage {
 	private Structure card;
 	private boolean built;
 	private ArrayList<SpecialEffect> effects;
-	
-	protected ArrayList<SpecialEffect> effects;
+
 	
 	public WonderBoardStage()
 	{
@@ -47,11 +46,6 @@ public class WonderBoardStage {
 	public boolean isBuilt()
 	{
 		return built;
-	}
-	
-	public ArrayList<SpecialEffect> getEffects()
-	{
-		return effects;
 	}
 	
 	public boolean build(Structure card, Resources resources)
