@@ -297,7 +297,8 @@ public class Player {
 			val = r.nextInt(2);
 		else val = preference;
 			
-		switch ( val )
+		purchased.buyResources(leftNeighbor, rightNeighbor, missing, sumup, preference);
+		/*switch ( val )
 		{
 			case 0: //left neighbor preferred
 				leftNeighbor.getResources().addCoins(Resources.buyResources(this, 
@@ -316,7 +317,7 @@ public class Player {
 						Resources.addResources(leftNeighbor.getResources(), leftNeighbor.getExtraResources()), 
 						missing, primpriceleft, manprice));
 				break;
-		}
+		}*/
 		return true;
 	}
 	
