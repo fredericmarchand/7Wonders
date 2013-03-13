@@ -82,6 +82,11 @@ public class Player {
 		return chosenCard;
 	}
 	
+	public void setChosenCard( Structure s )
+	{
+		chosenCard = s;
+	}
+	
 	public int getShields()
 	{
 		return shields;
