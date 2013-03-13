@@ -20,7 +20,7 @@ public class MainFrame extends JFrame {
 		setLocationRelativeTo( null );
 		setResizable(false);
 		setBackground(Color.white);
-		MatchPanel panel = new MatchPanel(7);
+		MatchPanel panel = new MatchPanel(7, null);
 		add(panel);
 	}
 	

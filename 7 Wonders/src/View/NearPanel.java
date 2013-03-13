@@ -16,9 +16,11 @@ public class NearPanel extends JPanel {
 					 lblGears, lblCompass, lblVictory, lblMilitary, lblNegConflict, lblPosConflict, 
 					 lblOre, lblStone, lblWood, lblGlass, lblPapyrus, lblCoin, lblLoom;
 	
-	public NearPanel(Player p) {
+	private Controller controller;
+	
+	public NearPanel(Player p, Controller c) {
 		player = p;
-		
+		controller = c;
 		setLayout(null);
 		setSize(478, 300);
 		setBackground(Color.BLACK);
