@@ -1,6 +1,10 @@
 package WonderBoards.Boards;
 
 import Structures.Structure;
+import Structures.Effects.CopyGuild;
+import Structures.Effects.FreeConstruction;
+import Structures.Effects.TradingPerks;
+import Structures.Effects.VictoryPointBonus;
 import Tokens.Resources;
 import WonderBoards.WonderBoard;
 import WonderBoards.WonderBoardStage;
@@ -14,6 +18,21 @@ public class TheStatueOfZeusInOlympia extends WonderBoard {
 		WonderBoardStage stage1 = new WonderBoardStage(new Resources(0, 0, 2, 0, 0, 0, 0, 0));
 		WonderBoardStage stage2 = new WonderBoardStage(new Resources(0, 2, 0, 0, 0, 0, 0, 0));
 		WonderBoardStage stage3 = new WonderBoardStage(new Resources(2, 0, 0, 0, 0, 0, 0, 0));
+		
+		if ( side == SIDE_A )
+		{
+			stage1.getEffects().add(new VictoryPointBonus(3));
+			stage2.getEffects().add(new FreeConstruction());
+			stage3.getEffects().add(new VictoryPointBonus(7));
+		}
+		else
+		{
+			stage1.getEffects().add(new TradingPerks(3, true, 1));
+			stage2.getEffects().add(new VictoryPointBonus(5));
+			stage3.getEffects().add(new CopyGuild());
+			
+		}
+		
 		stages.add(stage1);
 		stages.add(stage2);
 		stages.add(stage3);
