@@ -16,8 +16,11 @@ public class FarPanel extends JPanel {
 	Player player;
 	private JLabel2D lblPosConflict, lblNegConflict, lblTablets, lblMilitary, lblVictory, lblCompass, lblGears, lblCoin;
 	
-	public FarPanel(Player p) {
+	private Controller controller;
+	
+	public FarPanel(Player p, Controller c) {
 		player = p;
+		controller = c;
 		setLayout(null);
 		setSize(320, 150);
 		setBackground(Color.BLACK);

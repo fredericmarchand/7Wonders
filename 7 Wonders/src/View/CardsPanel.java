@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 
 import Structures.Structure;
+
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Image;
@@ -20,7 +22,10 @@ public class CardsPanel extends JPanel {
 	private JLabel cardArr[], lblArr[], lblBgArr[];
 	private Image lblBgImage;
 	
-	public CardsPanel(ImageIcon[] c, ArrayList<Structure> ca) {
+	private Controller controller;
+	private boolean lowered = false;
+	
+	public CardsPanel(ImageIcon[] ii, ArrayList<Structure> ca, Controller c) {
 		setLayout(null);
 		setOpaque(false);
 		setSize(1274, 280);
@@ -29,7 +34,8 @@ public class CardsPanel extends JPanel {
 		lblArr = new JLabel[7];
 		lblBgArr = new JLabel[7];
 		
-		cardImages = c;
+		controller = c;
+		cardImages = ii;
 		cards = ca;
 		lblBgImage = new ImageIcon(CardsPanel.class.getResource("/Images/Icons/cardlblbg.png")).getImage();
 		
@@ -47,7 +53,13 @@ public class CardsPanel extends JPanel {
 			cardArr[i].addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(cards.size() > 0) cards.remove(cards.size()-1);
+					if(!lowered){
+						for (int i = 0; i < cards.size(); i++) {
+							if (((JLabel)e.getComponent()) == cardArr[i]) {
+								if(controller != null) controller.handleCardClicked(cards.get(i));
+							}
+						}
+					}
 					update();
 				}
 			});
@@ -104,5 +116,12 @@ public class CardsPanel extends JPanel {
 			lblArr[i].setLocation(10 + i*182 + ((7-a) * 91), 74);
 			lblBgArr[i].setLocation(8 + i*182 + ((7-a) * 91), 275 - lblBgArr[i].getHeight());
 		}
+	}
+
+	public void setLowered(boolean b) {
+		lowered = b;
+	}
+	public boolean getLowered() {
+		return lowered;
 	}
 }
