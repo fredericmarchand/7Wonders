@@ -27,7 +27,7 @@ public class TradingPerks extends SpecialEffect {
 	
 	public TradingPerks(int partner, int resourceType)
 	{
-		super(TradingPerksID, true, RELOAD_EVERY_TURN, IN_TURN);
+		super(TradingPerksID, true, IN_TURN, IN_TURN);
 		this.partner = partner;
 		rType = resourceType;
 		hasManufactured = false;

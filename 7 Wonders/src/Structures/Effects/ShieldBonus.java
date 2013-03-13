@@ -9,7 +9,7 @@ public class ShieldBonus extends SpecialEffect {
 	
 	public ShieldBonus(int shields)
 	{
-		super(ShieldBonusID, false, NO_RELOAD, END_OF_TURN);
+		super(ShieldBonusID, false, IN_TURN, END_OF_TURN);
 		amountOfShields = shields;
 	}
 	
