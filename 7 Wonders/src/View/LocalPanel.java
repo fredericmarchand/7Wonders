@@ -10,8 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import Player.Player;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 // The client player's board
 public class LocalPanel extends JPanel {
