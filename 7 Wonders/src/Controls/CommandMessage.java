@@ -14,14 +14,6 @@ public class CommandMessage {
 		moveID = moveid;
 	}
 	
-	public void send(MClient c)
-	{
-		Packet.Packet7MatchFunction packet = new Packet.Packet7MatchFunction();
-		packet.setObject(this);
-		packet.setMID(c.getMID());
-		packet.setCID(c.getID());
-	}
-	
 	/**
 	 * @param args
 	 */
