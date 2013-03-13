@@ -13,16 +13,18 @@ public class AIPlayer extends Player {
 		super();
 	}
 	
-	public void chooseCard()
+	public void pickCard()
 	{
+		int chosenIndex = -1;
 		for (Structure s : getCards()){
 			if (s.getResourceCost().canAfford(getResources()) && !getWonderBoard().containsCard(s.getID())){
-				setChosenCard(s);
+				chosenIndex = getCards().indexOf(s);
 				break;
 			}
 				
 		}
-		getCards().remove(getChosenCard());
+		if (chosenIndex != -1)
+			chooseCard(chosenIndex);
 	}
 	
 	
