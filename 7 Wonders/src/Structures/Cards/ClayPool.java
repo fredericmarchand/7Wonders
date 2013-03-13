@@ -1,6 +1,7 @@
 package Structures.Cards;
 
 import Structures.Structure;
+import Structures.Effects.ResourcesBonus;
 import Tokens.Resources;
 
 public class ClayPool extends Structure {
@@ -10,6 +11,7 @@ public class ClayPool extends Structure {
 	public ClayPool()
 	{
 		super(new Resources(0, 0, 0, 0, 0, 0, 0, 0), ClayPoolID, "Clay Pool", BROWN_CARD, 1);
+		effects.add(new ResourcesBonus(0, 0, 0, 1, 0, 0, 0));
 	}
 
 	/**

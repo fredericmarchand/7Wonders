@@ -5,7 +5,7 @@ import Player.Player;
 
 public class CardCoinBonus extends SpecialEffect {
 
-	public static final int CardBonusID = 0x04;
+	public static final int CardCoinBonusID = 0x04;
 	
 	private int amountOfCoins;
 	private int cardColor;
@@ -13,7 +13,7 @@ public class CardCoinBonus extends SpecialEffect {
 	
 	public CardCoinBonus(int coins, int color, boolean neighbors)
 	{
-		super(CardBonusID, false, NO_RELOAD, END_OF_TURN);
+		super(CardCoinBonusID, false, NO_RELOAD, END_OF_TURN);
 		amountOfCoins = coins;
 		cardColor = color;
 		includeNeighbors = neighbors;

@@ -207,6 +207,40 @@ public class WonderBoard {
 		return retValue;
 	}
 	
+	
+	public ArrayList<Structure> getRedCards()
+	{
+		return redCards;
+	}
+	
+	public ArrayList<Structure> getBlueCards()
+	{
+		return blueCards;
+	}
+	
+	public ArrayList<Structure> getGreenCards()
+	{
+		return greenCards;
+	}
+	
+	public ArrayList<Structure> getBrownGreyCards()
+	{
+		return brownGreyCards;
+	}
+	
+	public ArrayList<Structure> getYellowCards()
+	{
+		return yellowCards;
+	}
+	
+	public ArrayList<Structure> getPurpleCards()
+	{
+		return purpleCards;
+	}
+
+	
+	
+	
 	public int getRedCardAmount()
 	{
 		return redCards.size();

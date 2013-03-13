@@ -11,7 +11,7 @@ public class Apothecary extends Structure {
 	public Apothecary()
 	{
 		super(new Resources(0, 0, 0, 0, 0, 1, 0, 0), ApothecaryID, "Apothecary", GREEN_CARD, 1);
-		effects.add(new ScientificSymbolBonus(1));
+		effects.add(new ScientificSymbolBonus(1, 2, false));
 	}
 
 	/**

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 
 
+import Controls.CommandMessage;
 import Resources.Packet.Packet7MatchFunction;
+import Resources.Packet.Packet8ClientResponse;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Server;
@@ -19,12 +21,15 @@ public class Match {
     @SuppressWarnings("unused")
 	private Server server;
     private int receivedEvents = 0;
-    
-    //private matchController
+    ArrayList<CommandMessage> cmdMsgList;
+
+    /////FIX///////////////////////////////////
+    Controls.Match controller;
     
     public Match(){
     	connected = new ArrayList<Connection>();
 		match_id = ++counter;
+		cmdMsgList = new ArrayList<CommandMessage>();
 
     }
 
@@ -73,20 +78,36 @@ public class Match {
 	//public void activateController
 	//getters and setters for controller
 	
-	public void setServerMatchCommunication(Server s){server = s;}
-	public void sendMatchInfo(){
+//	public void setServerMatchCommunication(Server s){server = s;}
+	public void sendMatchInfo(Object o){
 		Packet7MatchFunction gamePacket = new Packet7MatchFunction(); 
+		gamePacket.setObject(o);
+		
 		for(Connection c: connected){
 			c.sendTCP(gamePacket);
 		}
 	}
 	
-	public void receiveEvent(Object o, long cID,Connection c){
+	//control.play 
+	
+	public void receiveEvent(CommandMessage m, long cID){
+		cmdMsgList.add(m);
 		receivedEvents++;
 		if(receivedEvents==connection_count){
+			/***************************************/			
+						
+			/***************************************/
 			//hand off info to game controller
+			//waiting
+			//okay game returned
+			//sendMatchInfo(controller.dispatch(cmdMsgList));
 		}
 	}
+	
+	public void handOff(Packet8ClientResponse receivedPacket){		
+		receiveEvent((CommandMessage)receivedPacket.getObject(), receivedPacket.getCID());
+	}
+	
 	
 
 }

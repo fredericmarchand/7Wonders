@@ -20,6 +20,7 @@ public class CardVictoryPointBonus extends SpecialEffect {
 	
 	public void acquireVictoryPoints(Player you, Player leftNeighbor, Player rightNeighbor)
 	{
+		//only check neighbors cards
 		if ( onlyNeighbors )
 		{
 			if ( !usedUp )
@@ -51,6 +52,7 @@ public class CardVictoryPointBonus extends SpecialEffect {
 				usedUp = true;				
 			}
 		}
+		//otherwise only check the players cards
 		else
 		{
 			if ( !usedUp )
@@ -58,25 +60,25 @@ public class CardVictoryPointBonus extends SpecialEffect {
 				switch ( cardColor )
 				{
 					case Structure.RED_CARD:
-						you.addVictoryPoints(amountOfPoints * (rightNeighbor.getWonderBoard().getRedCardAmount() + leftNeighbor.getWonderBoard().getRedCardAmount()));
+						you.addVictoryPoints(amountOfPoints * you.getWonderBoard().getRedCardAmount());
 						break;
 					case Structure.BLUE_CARD:
-						you.addVictoryPoints(amountOfPoints * (rightNeighbor.getWonderBoard().getBlueCardAmount() + leftNeighbor.getWonderBoard().getBlueCardAmount()));
+						you.addVictoryPoints(amountOfPoints * you.getWonderBoard().getBlueCardAmount());
 						break;
 					case Structure.BROWN_CARD:
-						you.addVictoryPoints(amountOfPoints * (rightNeighbor.getWonderBoard().getBrownCardAmount() + leftNeighbor.getWonderBoard().getBrownCardAmount()));
+						you.addVictoryPoints(amountOfPoints * you.getWonderBoard().getBrownCardAmount());
 						break;
 					case Structure.GREY_CARD:
-						you.addVictoryPoints(amountOfPoints * (rightNeighbor.getWonderBoard().getGreyCardAmount() + leftNeighbor.getWonderBoard().getGreyCardAmount()));
+						you.addVictoryPoints(amountOfPoints * you.getWonderBoard().getGreyCardAmount());
 						break;
 					case Structure.GREEN_CARD:
-						you.addVictoryPoints(amountOfPoints * (rightNeighbor.getWonderBoard().getGreenCardAmount() + leftNeighbor.getWonderBoard().getGreenCardAmount()));
+						you.addVictoryPoints(amountOfPoints * you.getWonderBoard().getGreenCardAmount());
 						break;
 					case Structure.YELLOW_CARD:
-						you.addVictoryPoints(amountOfPoints * (rightNeighbor.getWonderBoard().getYellowCardAmount() + leftNeighbor.getWonderBoard().getYellowCardAmount()));
+						you.addVictoryPoints(amountOfPoints * you.getWonderBoard().getYellowCardAmount());
 						break;
 					case Structure.PURPLE_CARD:
-						you.addVictoryPoints(amountOfPoints * (rightNeighbor.getWonderBoard().getPurpleCardAmount() + leftNeighbor.getWonderBoard().getPurpleCardAmount()));
+						you.addVictoryPoints(amountOfPoints * you.getWonderBoard().getPurpleCardAmount());
 						break;
 				}
 			}
