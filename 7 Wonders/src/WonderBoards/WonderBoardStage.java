@@ -19,7 +19,7 @@ public class WonderBoardStage {
 	
 	public WonderBoardStage()
 	{
-		resourceCost = null;
+		resourceCost = new Resources();
 		card = null;
 		built = false;
 		effects = new ArrayList<SpecialEffect>();
