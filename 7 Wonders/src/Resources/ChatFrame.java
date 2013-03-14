@@ -59,7 +59,7 @@ public class ChatFrame extends JPanel{
 
     public void appendChat(String c){
     	textArea.append(c + newline);
-    	System.out.println("output" + c);	    	
+	    	
     }
     public void createAndShowGUI() {
         //Create and set up the window.

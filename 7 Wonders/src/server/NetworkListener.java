@@ -25,12 +25,12 @@ public class NetworkListener extends Listener{
 	}
 	public void connected(Connection arg0) {
 		System.out.println("[SERVER] User has connected");
-		
-		// TODO Auto-generated method stub
-		for(Connection c: server.getConnections())
-			System.out.println(c.getRemoteAddressTCP().toString());
-	
-		super.connected(arg0);
+//		
+//		// TODO Auto-generated method stub
+//		for(Connection c: server.getConnections())
+//			System.out.println(c.getRemoteAddressTCP().toString());
+//	
+//		super.connected(arg0);
 	
 	}
 	@Override
@@ -48,8 +48,6 @@ public class NetworkListener extends Listener{
 	public void received(Connection c, Object o) {
 		try{
 		System.out.println("[SERVER] Received packet" );
-		
-		//System.out.println(o);
 		
 		if(o instanceof Packet0LoginRequest){
 			//create response

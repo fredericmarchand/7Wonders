@@ -153,7 +153,6 @@ public class MClient {
     public void sendChat(String s){
     	Packet6ChatMsg msg = new Packet6ChatMsg();
     	String _msg = ("[" + username + "."+ID+"]" + " " + s);
-    	System.out.println(_msg);
     	msg.setMsg(_msg);
     	msg.setCID(ID);
     	msg.setuName(username);
@@ -162,9 +161,24 @@ public class MClient {
     }
     
     public void updateChat(String s){
-    	System.out.println(s);
     	chat.addChat(s);
     }
+    
+    
+    
+    //send request packets to server
+    
+    //public void sendMatchRequest(){}
+    //public void sendClientMatch
+    /*
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     */
        
     ///HEAVY EDIT////
     public void turn(Packet7MatchFunction o){

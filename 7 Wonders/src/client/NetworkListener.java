@@ -98,8 +98,6 @@ public class NetworkListener extends Listener{
 		if(o instanceof Packet7MatchFunction){
 			mclient.turn((Packet7MatchFunction)o);
 		}
-		// TODO Auto-generated method stub
-		//super.received(arg0, arg1);
 	}
 
 }
