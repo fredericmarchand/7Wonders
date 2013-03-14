@@ -27,7 +27,7 @@ public class LocalPanel extends JPanel {
 		controller = c;
 		setLayout(null);
 		setSize(478, 300);
-		setBackground(Color.BLACK);
+		setBackground(Color.WHITE);
 		
 		lblBrown = new JLabel2D("11", SwingConstants.CENTER);
 		lblBrown.setForeground(Color.WHITE);

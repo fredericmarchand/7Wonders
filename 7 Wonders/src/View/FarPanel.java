@@ -23,7 +23,7 @@ public class FarPanel extends JPanel {
 		controller = c;
 		setLayout(null);
 		setSize(320, 150);
-		setBackground(Color.BLACK);
+		setBackground(Color.WHITE);
 		
 		lblGears = new JLabel2D("11", SwingConstants.CENTER);
 		lblGears.setForeground(Color.WHITE);
