@@ -13,7 +13,8 @@ public class Match {
 	private int age, turn, numPlayers;
 	private ArrayList<Structure> age1Deck, age2Deck, age3Deck, discarded;
 	private Scanner in;
-	
+	private int state;
+		
 	
 	public Match(int numPlayers)
 	{
@@ -26,6 +27,7 @@ public class Match {
 		age2Deck = CardHandler.BuildAge2Deck(numPlayers);
 		age3Deck = CardHandler.BuildAge3Deck(numPlayers);
 		discarded = new ArrayList<Structure>();
+		state = GameController.BEGINNINGOFGAME;
 		
 		//this will be removed
 		for ( int i = 0; i < numPlayers; ++i )
@@ -39,6 +41,16 @@ public class Match {
 		}
 		CardHandler.DistributeCards(players, age1Deck);
 		
+	}
+	
+	public int getState()
+	{
+		return state;
+	}
+	
+	public void setState(int newstate)
+	{
+		state = newstate;
 	}
 	
 	public int getAge()
@@ -60,9 +72,6 @@ public class Match {
 	{
 		players = new ArrayList<Player>();
 		Random r = new Random();
-		
-		//System.out.println("Please input how many players will play: ");
-		//int numPlayers = (int)Integer.parseInt(in.nextLine());
 		
 		for ( int i = 0; i < numPlayers; ++i )
 		{
@@ -93,12 +102,12 @@ public class Match {
 					 	System.out.println(l++ + " " + s.getName());
 					 }
 					 while ( !in.hasNext() );
-					 int move = in.nextInt();//Integer.parseInt(in.nextLine());
+					 int move = in.nextInt();
 					 p.chooseCard(move);
 					 if ( p.getCards().size() == 1 ) p.discardHand(discarded);
 					 System.out.println("Please select your move:\n1 - Build the Structure\n2 - Build a Stage of your Wonder\n3 - Discard the card for 3 coins");
 					 while ( !in.hasNext() );
-					 move = in.nextInt();//Integer.parseInt(in.nextLine());
+					 move = in.nextInt();
 					 //action phase
 					 actionPhase(p, move);
 				  }
@@ -126,7 +135,7 @@ public class Match {
 		  			{
 		  				System.out.println("You have buy resources from neighbors to be able to build this structure. Which neighbor do you prefer to do business with?\n0 - left\n1 - right\n2 - doesn't matter");
 		  				while ( !in.hasNext() );
-		  				int neib = in.nextInt();//Integer.parseInt(in.nextLine());
+		  				int neib = in.nextInt();
 		  				p.buildStage(getLeftNeighbor(p), getRightNeighbor(p), neib);
 		  			}
 		 			else
@@ -136,7 +145,7 @@ public class Match {
 		  				{
 		  					System.out.println("You are not able to build this sturcture, please choose a different move:\n1 - Build the Structure\n2 - Build a Stage of your Wonder\n3 - Discard the card for 3 coins");
 		  					while ( !in.hasNext() );
-		  					ans = in.nextInt();//Integer.parseInt(in.nextLine());
+		  					ans = in.nextInt();
 		  				}
 		  				actionPhase(p, ans);
 		 			}
@@ -148,7 +157,7 @@ public class Match {
 	  				{
 	  					System.out.println("You are not able to build this sturcture, please choose a different move:\n1 - Build the Structure\n2 - Build a Stage of your Wonder\n3 - Discard the card for 3 coins");
 	  					while ( !in.hasNext() );
-	  					ans = in.nextInt();//Integer.parseInt(in.nextLine());
+	  					ans = in.nextInt();
 	  				}
 	  				actionPhase(p, ans);
 		 		}
@@ -160,7 +169,7 @@ public class Match {
 		  			{
 		  				System.out.println("You have buy resources from neighbors to be able to build this stage. Which neighbor do you prefer to do business with?\n0 - left\n1 - right\n2 - doesn't matter");
 		  				while ( !in.hasNext() );
-		  				int neib = in.nextInt();//Integer.parseInt(in.nextLine());
+		  				int neib = in.nextInt();
 		  				p.buildStage(getLeftNeighbor(p), getRightNeighbor(p), neib);
 		  			}
 		  			else
@@ -170,7 +179,7 @@ public class Match {
 		  				{
 		  					System.out.println("You are not able to build this stage, please choose a different move:\n1 - Build the Structure\n2 - Build a Stage of your Wonder\n3 - Discard the card for 3 coins");
 		  					while ( !in.hasNext() );
-		  					ans = in.nextInt();//Integer.parseInt(in.nextLine());
+		  					ans = in.nextInt();
 		  				}
 		  				actionPhase(p, ans);
 		  			}
@@ -270,7 +279,6 @@ public class Match {
 
 	public void addPointActivate(Structure s, Player p)
 	{
-		//Scanner in = new Scanner(System.in);
 		for ( SpecialEffect se: s.getEffects() )
 		{
 			switch ( se.getID() )
@@ -298,7 +306,6 @@ public class Match {
 					break;
 			}
 		}
-		//in.close();
 	}
 	
 	public void endOfGameSpecialEffects(ArrayList<Player> plyrs)

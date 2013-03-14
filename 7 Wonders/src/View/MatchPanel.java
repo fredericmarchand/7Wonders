@@ -54,19 +54,19 @@ public class MatchPanel extends JPanel {
 		playerPanel.setLocation(401, 450);
 		
 		// Neighbours
-		n1 = new NearPanel(match.getPlayers().get(1), controller);
+		n1 = new NearPanel(match.getPlayers().get(6), controller);
 		n1.setLocation(0, 150);
-		n2 = new NearPanel(match.getPlayers().get(2), controller);
+		n2 = new NearPanel(match.getPlayers().get(1), controller);
 		n2.setLocation(802, 150);
 		
 		// Foreigners
-		f1 = new FarPanel(match.getPlayers().get(3), controller);
+		f1 = new FarPanel(match.getPlayers().get(5), controller);
 		f1.setLocation(0, 0);
 		f2 = new FarPanel(match.getPlayers().get(4), controller);
 		f2.setLocation(320, 0);
-		f3 = new FarPanel(match.getPlayers().get(5), controller);
+		f3 = new FarPanel(match.getPlayers().get(3), controller);
 		f3.setLocation(640, 0);
-		f4 = new FarPanel(match.getPlayers().get(6), controller);
+		f4 = new FarPanel(match.getPlayers().get(2), controller);
 		f4.setLocation(960, 0);
 		
 		// Cards
