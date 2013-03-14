@@ -127,7 +127,8 @@ public class Match {
 		 			if ( p.neighborsHaveResources(getLeftNeighbor(p), getRightNeighbor(p), p.getChosenCard().getResourceCost()) )
 		  			{
 		  				System.out.println("You have buy resources from neighbors to be able to build this structure. Which neighbor do you prefer to do business with?\n0 - left\n1 - right\n2 - doesn't matter");
-		  				int neib = Integer.parseInt(in.nextLine());
+		  				while ( !in.hasNext() );
+		  				int neib = in.nextInt();//Integer.parseInt(in.nextLine());
 		  				p.buildStage(getLeftNeighbor(p), getRightNeighbor(p), neib);
 		  			}
 		 			else
@@ -136,6 +137,7 @@ public class Match {
 		  				while ( ans == move )
 		  				{
 		  					System.out.println("You are not able to build this sturcture, please choose a different move:\n1 - Build the Structure\n2 - Build a Stage of your Wonder\n3 - Discard the card for 3 coins");
+		  					while ( !in.hasNext() );
 		  					ans = in.nextInt();//Integer.parseInt(in.nextLine());
 		  				}
 		  				actionPhase(p, ans);
@@ -147,7 +149,8 @@ public class Match {
 	  				while ( ans == move )
 	  				{
 	  					System.out.println("You are not able to build this sturcture, please choose a different move:\n1 - Build the Structure\n2 - Build a Stage of your Wonder\n3 - Discard the card for 3 coins");
-	  					ans = Integer.parseInt(in.nextLine());
+	  					while ( !in.hasNext() );
+	  					ans = in.nextInt();//Integer.parseInt(in.nextLine());
 	  				}
 	  				actionPhase(p, ans);
 		 		}
@@ -158,6 +161,7 @@ public class Match {
 		  			if ( p.neighborsHaveResources(getLeftNeighbor(p), getRightNeighbor(p), p.getWonderBoard().getNextStageCost()) )
 		  			{
 		  				System.out.println("You have buy resources from neighbors to be able to build this stage. Which neighbor do you prefer to do business with?\n0 - left\n1 - right\n2 - doesn't matter");
+		  				while ( !in.hasNext() );
 		  				int neib = Integer.parseInt(in.nextLine());
 		  				p.buildStage(getLeftNeighbor(p), getRightNeighbor(p), neib);
 		  			}
@@ -167,7 +171,8 @@ public class Match {
 		  				while ( ans == move )
 		  				{
 		  					System.out.println("You are not able to build this stage, please choose a different move:\n1 - Build the Structure\n2 - Build a Stage of your Wonder\n3 - Discard the card for 3 coins");
-		  					ans = Integer.parseInt(in.nextLine());
+		  					while ( !in.hasNext() );
+		  					ans = in.nextInt();//Integer.parseInt(in.nextLine());
 		  				}
 		  				actionPhase(p, ans);
 		  			}
@@ -178,7 +183,7 @@ public class Match {
 	  				while ( ans == move )
 	  				{
 	  					System.out.println("You are not able to build this sturcture, please choose a different move:\n1 - Build the Structure\n2 - Build a Stage of your Wonder\n3 - Discard the card for 3 coins");
-	  					ans = Integer.parseInt(in.nextLine());
+	  					while ( !in.hasNext() );
 	  				}
 	  				actionPhase(p, ans);
 	  			}
@@ -197,18 +202,19 @@ public class Match {
 		//Scanner in = new Scanner(System.in);
 		for ( SpecialEffect se: s.getEffects() )
 		{
-			if ( se.getType() == ResourceChoice.ResourceChoiceID )
+			if ( se.getID() == ResourceChoice.ResourceChoiceID )
 			{
-				//ResourceChoice rc = ((ResourceChoice)se);
-				//System.out.println("The card " + s.getName() + " allows you to select one of the following resources to be available for the turn:\n"+
-				//					( rc.getPossibilities().getOre() != 0 ? "1 - Ore\n" : "" ) +
-				//					( rc.getPossibilities().getOre() != 0 ? "2 - Stone\n" : "" ) +
-				//					( rc.getPossibilities().getOre() != 0 ? "3 - Wood\n" : "" ) +
-				//					( rc.getPossibilities().getOre() != 0 ? "4 - Clay\n" : "" ) +
-				//					( rc.getPossibilities().getOre() != 0 ? "5 - Glass\n" : "" ) +
-				//					( rc.getPossibilities().getOre() != 0 ? "6 - Loom\n" : "" ) +
-				//					( rc.getPossibilities().getOre() != 0 ? "7 - Papyrus\n" : "" ));
-			//	
+				ResourceChoice rc = ((ResourceChoice)se);
+				System.out.println("The card " + s.getName() + " allows you to select one of the following resources to be available for the turn:\n"+
+									( rc.getPossibilities().getOre() != 0 ? "1 - Ore\n" : "" ) +
+									( rc.getPossibilities().getOre() != 0 ? "2 - Stone\n" : "" ) +
+									( rc.getPossibilities().getOre() != 0 ? "3 - Wood\n" : "" ) +
+									( rc.getPossibilities().getOre() != 0 ? "4 - Clay\n" : "" ) +
+									( rc.getPossibilities().getOre() != 0 ? "5 - Glass\n" : "" ) +
+									( rc.getPossibilities().getOre() != 0 ? "6 - Loom\n" : "" ) +
+									( rc.getPossibilities().getOre() != 0 ? "7 - Papyrus\n" : "" ));
+				
+				while ( !in.hasNext() );
 				String cmd = in.nextLine();
 				((ResourceChoice)se).chooseResource(Integer.parseInt(cmd), p);
 			}
@@ -229,7 +235,7 @@ public class Match {
 	{
 		for ( SpecialEffect se: s.getEffects() )
 		{
-			if ( se.getType() == CardCoinBonus.CardCoinBonusID )
+			if ( se.getID() == CardCoinBonus.CardCoinBonusID )
 				((CardCoinBonus)se).acquireCoins(p, getLeftNeighbor(p), getRightNeighbor(p));
 		}
 	}
@@ -263,7 +269,7 @@ public class Match {
 		//Scanner in = new Scanner(System.in);
 		for ( SpecialEffect se: s.getEffects() )
 		{
-			switch ( se.getType() )
+			switch ( se.getID() )
 			{
 				case CardVictoryPointBonus.CardVictoryPointBonusID:
 				((CardVictoryPointBonus)se).acquireVictoryPoints(p, getLeftNeighbor(p), getRightNeighbor(p));
@@ -281,6 +287,7 @@ public class Match {
 					if ( ((ScientificSymbolBonus)se).canChoose() )
 					{
 						System.out.println("You now can select which scientific symbol you want your guild to represent:\n1 - Compass\n2 - Gear\n3 - Tablet");
+						while ( !in.hasNext() );
 						String ans = in.nextLine();
 						((ScientificSymbolBonus)se).chooseSymbol(p, Integer.parseInt(ans));
 					}
