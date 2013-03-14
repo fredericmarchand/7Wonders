@@ -16,7 +16,6 @@ public class Player {
 	@SuppressWarnings("unused")
 	private ArrayList<Structure> cards, discardedCards;
 	private Structure chosenCard;
-	@SuppressWarnings("unused")
 	private Resources resources, extraResources, purchased, unavailableResources;
 	private int shields;
 	private ConflictTokens conflictTokens;

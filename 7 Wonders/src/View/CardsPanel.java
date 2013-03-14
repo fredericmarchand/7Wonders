@@ -29,6 +29,7 @@ public class CardsPanel extends JPanel {
 	private Image lblBgImage;
 	private ImageIcon arrowYes, arrowNo, optionsIcon;
 	private boolean showOptions[];
+	private boolean canDoAction[][];
 	
 	private Controller controller;
 	
@@ -45,6 +46,9 @@ public class CardsPanel extends JPanel {
 		ml = new MouseListener[7];
 		mml = new MouseMotionListener[7];
 		showOptions = new boolean[7];
+		canDoAction = new boolean[7][2];
+		for (boolean[] b : canDoAction)
+			Arrays.fill(b, Boolean.FALSE);
 		Arrays.fill(showOptions, Boolean.FALSE);
 		
 		controller = c;
@@ -85,6 +89,8 @@ public class CardsPanel extends JPanel {
 							//if(controller != null) controller.handleCardClicked(cards.get(i));
 							Arrays.fill(showOptions, Boolean.FALSE);
 							showOptions[i] = true;
+							canDoAction[i][0] = false;
+							canDoAction[i][1] = false;
 							break;
 						}
 					}
