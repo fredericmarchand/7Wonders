@@ -83,11 +83,9 @@ public class NetworkListener extends Listener{
 				Packet4Object l = new Packet4Object();
 				l.setID(1);
 				l.setObject(mserver.getMatchID_List());
-				//c.sendTCP(l);				
+				c.sendTCP(l);				
 			}
-			if(message.equals("QUIT")){
-				
-			}
+	
 			
 		}	
 		//modify connectivity

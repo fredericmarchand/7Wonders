@@ -33,7 +33,7 @@ public class MClient {
     	
     	client = new Client();
     	NetworkListener nl = new NetworkListener(this);
-    	chat = new Chat();
+    	chat = new Chat(this);
     	
     	client.addListener(nl);
     	client.start();
@@ -72,10 +72,7 @@ public class MClient {
 	        while(GAME_ALIVE){
 	        	System.out.println(matchID);
 	        	String m = s.next();
-	        	if(m.equals("QUIT")){
-		        	System.out.println("MAGIC");
-		        	quitMatch();
-		        }else if(!m.equals("JOIN")&&matchID==0){
+	        	if(!m.equals("JOIN")&&matchID==0){
 		            Packet2Message mpackage = new Packet2Message();
 			        mpackage.setObject(m);
 			        client.sendTCP(mpackage);
@@ -84,9 +81,11 @@ public class MClient {
 		        	game_id.setID(2);
 		        	game_id.setObject(s.next());
 		        	client.sendTCP(game_id);      	
-		        	
+		        	chat.launchChatFrame();
 		        	//figure out fix
-		        }else if(matchID!=(long)0){
+		        }else if (m.equals("QUIT")&&matchID!=0){
+		        	quitMatch();
+	        	}else if(matchID!=(long)0){
 		        	System.out.println("Sending message");
 		        	Packet6ChatMsg msg = new Packet6ChatMsg();
 		        	msg.setMsg(m);
@@ -122,17 +121,7 @@ public class MClient {
     public void setPlayer(Player pp){player = pp;}
     public Player getPlayer(){return player;}
     
-    public void ClientWait(){
-    	while(true){
-    		
-    	}
-    }    
-    public void chat(){
 
-    	while(true){
-
-    	}
-    }
   //any class type sent over the network must be registered to the kryo
   	//generic types are implicitly registered
     public void register(){
@@ -159,6 +148,20 @@ public class MClient {
     		client.sendTCP(quit);
     		matchID = 0000; //no longer in a game
     	}
+    }
+    
+    public void sendChat(String s){
+    	Packet6ChatMsg msg = new Packet6ChatMsg();
+    	String _msg = ("[" + username + "."+ID+"]" + " " + s);
+    	msg.setMsg(_msg);
+    	msg.setCID(ID);
+    	msg.setuName(username);
+    	msg.setMID(matchID);
+    	client.sendTCP(msg);
+    }
+    
+    public void updateChat(String s){
+    	chat.addChat(s);
     }
        
     ///HEAVY EDIT////
