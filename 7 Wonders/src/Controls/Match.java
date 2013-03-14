@@ -162,7 +162,7 @@ public class Match {
 		  			{
 		  				System.out.println("You have buy resources from neighbors to be able to build this stage. Which neighbor do you prefer to do business with?\n0 - left\n1 - right\n2 - doesn't matter");
 		  				while ( !in.hasNext() );
-		  				int neib = Integer.parseInt(in.nextLine());
+		  				int neib = in.nextInt();//Integer.parseInt(in.nextLine());
 		  				p.buildStage(getLeftNeighbor(p), getRightNeighbor(p), neib);
 		  			}
 		  			else
@@ -184,6 +184,7 @@ public class Match {
 	  				{
 	  					System.out.println("You are not able to build this sturcture, please choose a different move:\n1 - Build the Structure\n2 - Build a Stage of your Wonder\n3 - Discard the card for 3 coins");
 	  					while ( !in.hasNext() );
+	  					ans = in.nextInt();
 	  				}
 	  				actionPhase(p, ans);
 	  			}
@@ -215,8 +216,8 @@ public class Match {
 									( rc.getPossibilities().getOre() != 0 ? "7 - Papyrus\n" : "" ));
 				
 				while ( !in.hasNext() );
-				String cmd = in.nextLine();
-				((ResourceChoice)se).chooseResource(Integer.parseInt(cmd), p);
+				int cmd = in.nextInt();
+				((ResourceChoice)se).chooseResource(cmd, p);
 			}
 		}
 		//in.close();
