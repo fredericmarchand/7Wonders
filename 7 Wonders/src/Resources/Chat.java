@@ -24,8 +24,8 @@ public class Chat {
 	public void launchChatFrame(){
 		chatFrame.createAndShowGUI();
 	}
-	public void sendMsg(String msg){
-		
+	public void sendMsg(String s){
+		client.sendChat(s);
 	}
 //	public void update(){
 //		for(String s: chatLog)
