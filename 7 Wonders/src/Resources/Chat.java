@@ -14,8 +14,10 @@ public class Chat {
 		System.out.println("[" + uname + "."+ID+"]" + " " + s);
 	}
 	
-	public void update(){
-		for(String s: chatLog)
-			System.out.println(s);
-	}
+	public ArrayList<String> getChatLog(){return chatLog;}
+	
+//	public void update(){
+//		for(String s: chatLog)
+//			System.out.println(s);
+//	}
 }

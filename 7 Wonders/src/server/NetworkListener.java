@@ -154,14 +154,12 @@ public class NetworkListener extends Listener{
 		}
 		if(o instanceof Packet7MatchFunction){
 				//pass info to controller
-				//(mserver.findMatch(((Packet7MatchFunction)o).getMID())).buildQ
-				
+				//(mserver.findMatch(((Packet7MatchFunction)o).getMID())).build
 			
-					
 		}
 		if(o instanceof Packet8ClientResponse){
 			//find match//pass shit
-			(mserver.findMatch(((Packet8ClientResponse)o).getMID())).handOff(((Packet8ClientResponse)o));
+				(mserver.findMatch(((Packet8ClientResponse)o).getMID())).handOff(((Packet8ClientResponse)o));
 		}
 		// TODO Auto-generated method stub
 		//super.received(arg0, arg1);
