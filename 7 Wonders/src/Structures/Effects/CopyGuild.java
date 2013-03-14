@@ -12,7 +12,7 @@ public class CopyGuild extends SpecialEffect{
 		super(CopyGuildID, false, NO_RELOAD, END_OF_GAME);
 	}
 	
-	public boolean copyGuildStructure(Player left, Player right, Player p)
+	public boolean copyGuildStructure(Player left, Player right, Player p, int index)
 	{	
 		ArrayList<Structure> guildList = new ArrayList<Structure>();
 		if ( !usedUp )
@@ -20,6 +20,7 @@ public class CopyGuild extends SpecialEffect{
 			guildList.addAll(left.getWonderBoard().getPurpleCards());
 			guildList.addAll(right.getWonderBoard().getPurpleCards());
 			p.assignCards(guildList);
+			p.chooseCard(index);
 			p.getWonderBoard().buildStructure(p.getChosenCard());
 			usedUp = true;
 			return true;
