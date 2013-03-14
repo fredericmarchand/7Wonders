@@ -43,7 +43,13 @@ public class TradingPerks extends SpecialEffect {
 		}
 		else if ( partner == Both )
 		{
-			hasManufactured = true;
+			if ( resourceType == Manufactured )
+				hasManufactured = true;
+			else if ( resourceType == Primary )
+			{
+				hasPrimaryRight = true;
+				hasPrimaryLeft = true;
+			}
 		}
 	}
 	
