@@ -9,15 +9,7 @@ import Controls.*;
 import Player.Player;
 import Resources.Chat;
 import Resources.Match;
-import Resources.Packet.Packet0LoginRequest;
-import Resources.Packet.Packet1LoginAnswer;
-import Resources.Packet.Packet2Message;
-import Resources.Packet.Packet3Connection;
-import Resources.Packet.Packet4Object;
-import Resources.Packet.Packet5Disconnect;
-import Resources.Packet.Packet6ChatMsg;
-import Resources.Packet.Packet7MatchFunction;
-import Resources.Packet.Packet8ClientResponse;
+import Resources.Packet.*;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.*;
@@ -174,6 +166,11 @@ public class MClient {
 //    	player.passMatch((Controls.Match)(o.getObject()));
 //       	response(player.getCommandMsg());
     	//player....
+    	
+    	// if(player.getMatchComplete?
+    	// new Packet5
+    	//set info
+    	//send tcp
     }
     public void response(CommandMessage msg){
     	Packet8ClientResponse resp = new Packet8ClientResponse();
