@@ -167,6 +167,26 @@ public class Player {
 		unavailableResources = new Resources();
 		extraResources = new Resources();
 	}
+	
+	//francis over here!!!
+	public boolean canBuild(Player left, Player right)
+	{
+		if ( !wonderBoard.containsCard(chosenCard.getID()) )
+		{
+			if ( ((chosenCard.getResourceCost().canAfford(Resources.addResources(extraResources, resources, unavailableResources)) 
+					|| chosenCard.canBuildForFree(wonderBoard)))  )
+			{
+				return true;
+			}
+			else if ( neighborsHaveResources(left, right, getChosenCard().getResourceCost()) )
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
 	//returns 0 if already has card
 	//returns 1 if can't afford
 	//returns 2 if structure got built

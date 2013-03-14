@@ -3,6 +3,7 @@ package WonderBoards.Boards;
 import Structures.Structure;
 import Structures.Effects.CopyGuild;
 import Structures.Effects.FreeConstruction;
+import Structures.Effects.ResourcesBonus;
 import Structures.Effects.TradingPerks;
 import Structures.Effects.VictoryPointBonus;
 import Tokens.Resources;
@@ -33,6 +34,8 @@ public class TheStatueOfZeusInOlympia extends WonderBoard {
 			
 		}
 		
+		startResource = new ResourcesBonus(0, 0, 1, 0, 0, 0, 0);
+		
 		stages.add(stage1);
 		stages.add(stage2);
 		stages.add(stage3);
@@ -47,6 +50,8 @@ public class TheStatueOfZeusInOlympia extends WonderBoard {
 		stages.add(stage1);
 		stages.add(stage2);
 		stages.add(stage3);
+		
+		startResource = new ResourcesBonus(0, 0, 1, 0, 0, 0, 0);
 	}
 	
 	public boolean isBuilt()

@@ -2,8 +2,10 @@ package WonderBoards;
 
 import java.util.ArrayList;
 import Structures.Structure;
+import Structures.Effects.ResourcesBonus;
 import Structures.Effects.SpecialEffect;
-import Tokens.Resources;;
+import Tokens.Resources;
+
 public class WonderBoard {
 
 	protected static final int NO_BOARD = 0;
@@ -25,7 +27,7 @@ public class WonderBoard {
 	protected String boardName;
 	protected ArrayList<Structure> redCards, blueCards, greenCards, yellowCards, purpleCards, brownGreyCards;
 	protected ArrayList<WonderBoardStage> stages;
-	
+	protected ResourcesBonus startResource;
 	
 	//Constructors
 	public WonderBoard()
@@ -54,6 +56,11 @@ public class WonderBoard {
 		purpleCards = new ArrayList<Structure>();
 		brownGreyCards = new ArrayList<Structure>();
 		stages = new ArrayList<WonderBoardStage>();
+	}
+	
+	public ResourcesBonus getStartResource()
+	{
+		return startResource;
 	}
 	
 	//getters

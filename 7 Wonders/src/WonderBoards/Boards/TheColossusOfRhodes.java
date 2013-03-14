@@ -2,6 +2,7 @@ package WonderBoards.Boards;
 
 import Structures.Structure;
 import Structures.Effects.CoinBonus;
+import Structures.Effects.ResourcesBonus;
 import Structures.Effects.ShieldBonus;
 import Structures.Effects.VictoryPointBonus;
 import Tokens.Resources;
@@ -20,6 +21,7 @@ public class TheColossusOfRhodes extends WonderBoard {
 		stages.add(stage1);
 		stages.add(stage2);
 		stages.add(stage3);
+		startResource = new ResourcesBonus(1, 0, 0, 0, 0, 0, 0);
 	}
 	
 	public TheColossusOfRhodes(int side)
@@ -28,6 +30,8 @@ public class TheColossusOfRhodes extends WonderBoard {
 		WonderBoardStage stage1 = new WonderBoardStage((side == SIDE_A? new Resources(0, 0, 2, 0, 0, 0, 0, 0) : new Resources(0, 3, 0, 0, 0, 0, 0, 0)));
 		WonderBoardStage stage2 = new WonderBoardStage((side == SIDE_A? new Resources(0, 0, 0, 3, 0, 0, 0, 0) : new Resources(4, 0, 0, 0, 0, 0, 0, 0)));
 		WonderBoardStage stage3;
+		startResource = new ResourcesBonus(1, 0, 0, 0, 0, 0, 0);
+		
 		if ( side == SIDE_A )
 		{
 			stage1.getEffects().add(new VictoryPointBonus(3));
