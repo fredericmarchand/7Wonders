@@ -181,20 +181,20 @@ public class Player {
 				wonderBoard.buildStructure(chosenCard);
 				for ( SpecialEffect se : chosenCard.getEffects() )
 				{				
-					if ( se.getType() == CoinBonus.CoinBonusID )
+					if ( se.getID() == CoinBonus.CoinBonusID )
 						((CoinBonus)se).acquireCoins(resources); 
-					else if ( se.getType() == VictoryPointBonus.VictoryPointBonusID )
+					else if ( se.getID() == VictoryPointBonus.VictoryPointBonusID )
 						((VictoryPointBonus)se).acquireVictoryPoints(this);
-					else if ( se.getType() == ScientificSymbolBonus.ScientificSymbolBonusID )
+					else if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
 					{
 						if ( !((ScientificSymbolBonus)se).canChoose() ) 
 							((ScientificSymbolBonus)se).acquireSymbol(this);
 					}
-					else if ( se.getType() == ResourcesBonus.ResourcesBonusID )
+					else if ( se.getID() == ResourcesBonus.ResourcesBonusID )
 						((ResourcesBonus)se).acquireResources(this);
-					else if ( se.getType() == ShieldBonus.ShieldBonusID )
+					else if ( se.getID() == ShieldBonus.ShieldBonusID )
 						((ShieldBonus)se).acquireShields(this);
-					else if ( se.getType() == WonderStageCoinBonus.WonderStageCoinBonusID )
+					else if ( se.getID() == WonderStageCoinBonus.WonderStageCoinBonusID )
 						((WonderStageCoinBonus)se).acquireCoins(this);
 				}
 				chosenCard = null;
@@ -212,20 +212,20 @@ public class Player {
 		wonderBoard.buildStructure(chosenCard);
 		for ( SpecialEffect se : chosenCard.getEffects() )
 		{				
-			if ( se.getType() == CoinBonus.CoinBonusID )
+			if ( se.getID() == CoinBonus.CoinBonusID )
 				((CoinBonus)se).acquireCoins(resources); 
-			else if ( se.getType() == VictoryPointBonus.VictoryPointBonusID )
+			else if ( se.getID() == VictoryPointBonus.VictoryPointBonusID )
 				((VictoryPointBonus)se).acquireVictoryPoints(this);
-			else if ( se.getType() == ScientificSymbolBonus.ScientificSymbolBonusID )
+			else if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
 			{
 				if ( !((ScientificSymbolBonus)se).canChoose() ) 
 					((ScientificSymbolBonus)se).acquireSymbol(this);
 			}
-			else if ( se.getType() == ResourcesBonus.ResourcesBonusID )
+			else if ( se.getID() == ResourcesBonus.ResourcesBonusID )
 				((ResourcesBonus)se).acquireResources(this);
-			else if ( se.getType() == ShieldBonus.ShieldBonusID )
+			else if ( se.getID() == ShieldBonus.ShieldBonusID )
 				((ShieldBonus)se).acquireShields(this);
-			else if ( se.getType() == WonderStageCoinBonus.WonderStageCoinBonusID )
+			else if ( se.getID() == WonderStageCoinBonus.WonderStageCoinBonusID )
 				((WonderStageCoinBonus)se).acquireCoins(this);
 		}
 		chosenCard = null;
@@ -278,7 +278,7 @@ public class Player {
 		{
 			for ( SpecialEffect se: s.getEffects() ) 
 			{
-				if ( se.getType() == TradingPerks.TradingPerksID )
+				if ( se.getID() == TradingPerks.TradingPerksID )
 				{
 					perks.add(((TradingPerks)se));
 				}
@@ -330,7 +330,7 @@ public class Player {
 		{
 			for ( SpecialEffect se: s.getEffects() ) 
 			{
-				if ( se.getType() == TradingPerks.TradingPerksID )
+				if ( se.getID() == TradingPerks.TradingPerksID )
 				{
 					perks.add(((TradingPerks)se));
 				}
