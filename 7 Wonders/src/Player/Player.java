@@ -169,35 +169,35 @@ public class Player extends User {
 	}
 	
 	
-	public boolean canBuild(Player left, Player right)
+	public int canBuild(Player left, Player right)
 	{
 		if ( !wonderBoard.containsCard(chosenCard.getID()) )
 		{
 			if ( ((chosenCard.getResourceCost().canAfford(Resources.addResources(extraResources, resources, unavailableResources)) 
 					|| chosenCard.canBuildForFree(wonderBoard)))  )
 			{
-				return true;
+				return 2;
 			}
 			else if ( neighborsHaveResources(left, right, getChosenCard().getResourceCost()) )
 			{
-				return true;
+				return 1;
 			}
 		}
-		return false;
+		return 0;
 	}
 	
 	
-	public boolean canBuildStage(Player left, Player right)
+	public int canBuildStage(Player left, Player right)
 	{
 		if ( wonderBoard.getNextStageCost().canAfford(Resources.addResources(extraResources, resources, unavailableResources)) )
 		{
-			return true;
+			return 2;
 		}
 		else if ( neighborsHaveResources(left, right, getChosenCard().getResourceCost()) )
 		{
-			return true;
+			return 1;
 		}
-		return false;
+		return 0;
 	}
 	
 	//returns 0 if already has card

@@ -43,6 +43,24 @@ public class Match {
 		
 	}
 	
+	public Match()
+	{
+		players = new ArrayList<Player>();
+		age = 1;
+		turn = 1;
+		in = new Scanner(System.in);
+		age1Deck = CardHandler.BuildAge1Deck(numPlayers);
+		age2Deck = CardHandler.BuildAge2Deck(numPlayers);
+		age3Deck = CardHandler.BuildAge3Deck(numPlayers);
+		discarded = new ArrayList<Structure>();
+		state = GameController.BEGINNINGOFGAME;		
+	}
+	
+	public ArrayList<Structure> getDiscardedCards()
+	{
+		return discarded;
+	}
+	
 	public int getState()
 	{
 		return state;
