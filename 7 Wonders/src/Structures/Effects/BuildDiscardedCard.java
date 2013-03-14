@@ -13,11 +13,12 @@ public class BuildDiscardedCard extends SpecialEffect{
 		super(BuildDiscardedCardID, false, NO_RELOAD, START_OF_TURN);
 	}
 	
-	public void playDiscardedCard(Player p, ArrayList<Structure> s)
+	public void playDiscardedCard(Player p, ArrayList<Structure> s, int index)
 	{
 		if ( !usedUp )
 		{
 			p.assignCards(s);
+			p.chooseCard(index);
 			p.getWonderBoard().buildStructure(p.getChosenCard());
 		}
 		usedUp = true;
