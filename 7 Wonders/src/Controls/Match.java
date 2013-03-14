@@ -18,8 +18,8 @@ public class Match {
 	public Match(int numPlayers)
 	{
 		players = new ArrayList<Player>();
-		age = 0;
-		turn = 0;
+		age = 1;
+		turn = 1;
 		this.numPlayers = numPlayers;
 		in = new Scanner(System.in);
 		age1Deck = CardHandler.BuildAge1Deck(numPlayers);
@@ -81,7 +81,7 @@ public class Match {
 			else if ( age == 2 ) CardHandler.DistributeCards(players, age2Deck);
 			else if ( age == 3 ) CardHandler.DistributeCards(players, age3Deck);
 			
-			for ( turn = 0; turn < 6; ++turn )
+			for ( turn = 1; turn < 7; ++turn )
 			{
 				 //each player makes their moves
 				 for ( Player p: players )

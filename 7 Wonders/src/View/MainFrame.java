@@ -5,10 +5,13 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
-
-	public MainFrame() {
+	
+	private Controller controller;
+	
+	public MainFrame(Controller c) {
 		setTitle("7 Wonders");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		controller = c;
 		
 		JFrame temp = new JFrame();
 		temp.pack();
@@ -20,12 +23,12 @@ public class MainFrame extends JFrame {
 		setLocationRelativeTo( null );
 		setResizable(false);
 		setBackground(Color.white);
-		MatchPanel panel = new MatchPanel(7, null);
+		MatchPanel panel = new MatchPanel(7, c);
 		add(panel);
 	}
 	
 	public static void main(String[] args) {
-		MainFrame m = new MainFrame();
+		MainFrame m = new MainFrame(null);
 		m.setVisible(true);
 	}
 

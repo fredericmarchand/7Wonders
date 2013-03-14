@@ -7,6 +7,7 @@ import javax.swing.*;
 import Controls.Match;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -20,6 +21,8 @@ public class MatchPanel extends JPanel {
 	private NearPanel n1, n2;
 	private LocalPanel playerPanel;
 	private CardsPanel cardsPanel;
+	
+	private JLabel lblAge, lblTurn;
 	
 	private Controller controller;
 	
@@ -77,6 +80,16 @@ public class MatchPanel extends JPanel {
 			}
 		});
 		
+		// Other
+		lblAge = new JLabel();
+		lblAge.setBounds(576, 161, 128, 128);
+		lblAge.setIcon(new ImageIcon(MatchPanel.class.getResource("/Images/Icons/age1.png")));
+		
+		lblTurn = new JLabel("Round 1 of 6", SwingConstants.CENTER);
+		lblTurn.setBounds(576, 295, 128, 25);
+		lblTurn.setForeground(Color.BLACK);
+		lblTurn.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
 		add(cardsPanel);
 		add(playerPanel);
 		add(n1);
@@ -85,9 +98,23 @@ public class MatchPanel extends JPanel {
 		add(f2);
 		add(f3);
 		add(f4);
+		add(lblAge);
+		add(lblTurn);
 		
+		update();
 	}
 	
+	public void update() {
+		lblAge.setIcon(new ImageIcon(MatchPanel.class.getResource("/Images/Icons/age" + match.getAge() + ".png")));
+		cardsPanel.update();
+		playerPanel.update();
+		f1.update();
+		f2.update();
+		f3.update();
+		f4.update();
+		n1.update();
+		n2.update();
+	}
 
 	private void localClicked() {
 		if(cardsPanel.getY() == 558) {
@@ -96,7 +123,7 @@ public class MatchPanel extends JPanel {
 		}
 	}
 	
-	void cardsClicked() {
+	private void cardsClicked() {
 		if(cardsPanel.getY() == 750) {
 			cardsPanel.setLocation(cardsPanel.getX(), 558);
 			cardsPanel.addMouseListeners();
