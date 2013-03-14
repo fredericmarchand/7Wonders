@@ -1,6 +1,8 @@
 package View;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -13,15 +15,20 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 
 public class CardsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private ImageIcon[] cardImages;
 	private ArrayList<Structure> cards;	
-	private JLabel cardArr[], lblArr[], lblBgArr[];
+	private JLabel cardArr[], lblArr[], lblBgArr[], lblOptions[], lblArrow[][];
 	private MouseListener ml[];
+	private MouseMotionListener mml[];
 	private Image lblBgImage;
+	private ImageIcon arrowYes, arrowNo, optionsIcon;
+	private boolean showOptions[];
 	
 	private Controller controller;
 	
@@ -33,12 +40,20 @@ public class CardsPanel extends JPanel {
 		cardArr = new JLabel[7];
 		lblArr = new JLabel[7];
 		lblBgArr = new JLabel[7];
+		lblOptions = new JLabel[7];
+		lblArrow = new JLabel[7][3];
 		ml = new MouseListener[7];
+		mml = new MouseMotionListener[7];
+		showOptions = new boolean[7];
+		Arrays.fill(showOptions, Boolean.FALSE);
 		
 		controller = c;
 		cardImages = ii;
 		cards = ca;
 		lblBgImage = new ImageIcon(CardsPanel.class.getResource("/Images/Icons/cardlblbg.png")).getImage();
+		arrowYes = new ImageIcon(CardsPanel.class.getResource("/Images/Icons/arrowyes.png"));
+		arrowNo = new ImageIcon(CardsPanel.class.getResource("/Images/Icons/arrowno.png"));
+		optionsIcon = new ImageIcon(CardsPanel.class.getResource("/Images/Icons/chooser.png"));
 		
 		for (int i = 0; i < 7; i++) {
 			cardArr[i] = new JLabel();
@@ -52,18 +67,50 @@ public class CardsPanel extends JPanel {
 			lblBgArr[i] = new JLabel();
 			lblBgArr[i].setSize(30, 188);
 			
+			lblOptions[i] = new JLabel();
+			lblOptions[i].setSize(150, 192);
+			
+			for(int j = 0; j < 3; j++) {
+				lblArrow[i][j] = new JLabel();
+				lblArrow[i][j].setSize(91, 57);
+				lblArrow[i][j].setIcon(null);
+				add(lblArrow[i][j]);
+			}
+			
 			ml[i] = new MouseAdapter() {
 				@Override
-				public void mouseClicked(MouseEvent e) {
+				public void mousePressed(MouseEvent e) {
 					for (int i = 0; i < cards.size(); i++) {
 						if (((JLabel)e.getComponent()) == cardArr[i]) {
-							if(controller != null) controller.handleCardClicked(cards.get(i));
+							//if(controller != null) controller.handleCardClicked(cards.get(i));
+							Arrays.fill(showOptions, Boolean.FALSE);
+							showOptions[i] = true;
+							break;
 						}
 					}
 					update();
 				}
 			};
 			
+			mml[i] = new MouseMotionAdapter() {
+				@Override
+				public void mouseMoved(MouseEvent e) {
+					for (int i = 0; i < cards.size(); i++) {
+						if (((JLabel)e.getComponent()) == cardArr[i]) {
+							for(int j = 0; j < 3; j++) {
+								if(e.getPoint().x > (26) && e.getPoint().y > (80 + 63*j)
+								   && e.getPoint().x < (26 + 91) && e.getPoint().y < (80 + 63*j + 57) && showOptions[i])
+									lblArrow[i][j].setIcon(arrowYes);
+								else lblArrow[i][j].setIcon(null);
+							}
+							break;
+						}
+					}
+					update();
+				}
+			};
+			
+			add(lblOptions[i]);
 			add(lblArr[i]);
 			add(lblBgArr[i]);
 			add(cardArr[i]);
@@ -76,12 +123,14 @@ public class CardsPanel extends JPanel {
 	public void addMouseListeners() {
 		for (int i = 0; i < 7; i++) {
 			cardArr[i].addMouseListener(ml[i]);
+			cardArr[i].addMouseMotionListener(mml[i]);
 		}
 	}
 	
 	public void removeMouseListeners() {
 		for (int i = 0; i < 7; i++) {
 			cardArr[i].removeMouseListener(ml[i]);
+			cardArr[i].removeMouseMotionListener(mml[i]);
 		}
 	}
 
@@ -90,6 +139,7 @@ public class CardsPanel extends JPanel {
 		updateLabels();
 		updateLabelBackgrounds();
 		updateLocations();
+		updateOptions();
 	}
 	
 	private void updateLabelBackgrounds() {
@@ -119,11 +169,19 @@ public class CardsPanel extends JPanel {
 	}
 	
 	private void updateLocations() {
-		int a = cards.size();
 		for (int i = 0; i < 7; i++) {
-			cardArr[i].setLocation(i*182 + ((7-a) * 91), 0);
-			lblArr[i].setLocation(10 + i*182 + ((7-a) * 91), 74);
-			lblBgArr[i].setLocation(8 + i*182 + ((7-a) * 91), 275 - lblBgArr[i].getHeight());
+			cardArr[i].setLocation(i*182 + ((7-cards.size()) * 91), 0);
+			lblArr[i].setLocation(10 + i*182 + ((7-cards.size()) * 91), 74);
+			lblBgArr[i].setLocation(8 + i*182 + ((7-cards.size()) * 91), 275 - lblBgArr[i].getHeight());
+			lblOptions[i].setLocation(26 + i*182 + ((7-cards.size()) * 91), 75);
+			for(int j = 0; j < 3; j++) lblArrow[i][j].setLocation(26 + i*182 + ((7-cards.size()) * 91), 80 + 63*j);
+		}
+	}
+	
+	private void updateOptions() {
+		for (int i = 0; i < 7; i++) {
+			if(showOptions[i]) lblOptions[i].setIcon(optionsIcon);
+			else lblOptions[i].setIcon(null);
 		}
 	}
 }

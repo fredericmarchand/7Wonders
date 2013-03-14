@@ -169,7 +169,7 @@ public class Player {
 		extraResources = new Resources();
 	}
 	//returns 0 if already has card
-	//returns 1 if cant afford
+	//returns 1 if can't afford
 	//returns 2 if structure got built
 	public int buildStructure()
 	{
