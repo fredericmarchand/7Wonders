@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import Tokens.*;
 import java.util.Random;
 
-public class Player {
+public class Player extends User {
 
 	private String username;
 	private int ID;
@@ -25,8 +25,7 @@ public class Player {
 	//constructors
 	public Player()
 	{
-		username = "noob";
-		ID = 0;
+		super(0, "noob");
 		wonderBoard = new WonderBoard();
 		cards = new ArrayList<Structure>();
 		chosenCard = null;
@@ -40,8 +39,9 @@ public class Player {
 	
 	public Player(String uname, int id)
 	{
-		username = uname;
-		ID = id;
+		//username = uname;
+		//ID = id;
+		super(id, uname);
 		wonderBoard = new WonderBoard();
 		cards = new ArrayList<Structure>();
 		chosenCard = null;
@@ -54,15 +54,15 @@ public class Player {
 	}
 
 	//getters
-	public String getUsername()
-	{
-		return username;
-	}
+	//public String getUsername()
+	//{
+	//	return username;
+	//}
 	
-	public int getID()
-	{
-		return ID;
-	}
+	//public int getID()
+	//{
+	//	return ID;
+	//}
 	
 	public ArrayList<Structure> getCards()
 	{
@@ -168,7 +168,7 @@ public class Player {
 		extraResources = new Resources();
 	}
 	
-	//francis over here!!!
+	
 	public boolean canBuild(Player left, Player right)
 	{
 		if ( !wonderBoard.containsCard(chosenCard.getID()) )
@@ -186,6 +186,19 @@ public class Player {
 		return false;
 	}
 	
+	
+	public boolean canBuildStage(Player left, Player right)
+	{
+		if ( wonderBoard.getNextStageCost().canAfford(Resources.addResources(extraResources, resources, unavailableResources)) )
+		{
+			return true;
+		}
+		else if ( neighborsHaveResources(left, right, getChosenCard().getResourceCost()) )
+		{
+			return true;
+		}
+		return false;
+	}
 	
 	//returns 0 if already has card
 	//returns 1 if can't afford
@@ -304,10 +317,6 @@ public class Player {
 			}
 		}
 		sumup = TradingPerks.addAll(perks);
-		int manprice = 2, primpriceleft = 2, primpriceright = 2;
-		if ( sumup.manufac() ) manprice = 1;
-		if ( sumup.primleft() ) primpriceleft = 1;
-		if ( sumup.primright() ) primpriceright = 1;
 		
 		//finds what resources need to be purchased from neighbors
 		Resources missing = (Resources.addResources(extraResources, Resources.addResources(resources, unavailableResources))).findMissingResources(required);
@@ -317,26 +326,7 @@ public class Player {
 		else val = preference;
 			
 		purchased.buyResources(leftNeighbor, rightNeighbor, missing, sumup, preference);
-		/*switch ( val )
-		{
-			case 0: //left neighbor preferred
-				leftNeighbor.getResources().addCoins(Resources.buyResources(this, 
-						Resources.addResources(leftNeighbor.getResources(), leftNeighbor.getExtraResources()), 
-						missing, primpriceleft, manprice));
-				rightNeighbor.getResources().addCoins(Resources.buyResources(this, 
-						Resources.addResources(rightNeighbor.getResources(), rightNeighbor.getExtraResources()), 
-						missing, primpriceright, manprice));
-				break;
-					
-			case 1: //right neighbor preferred
-				rightNeighbor.getResources().addCoins(Resources.buyResources(this, 
-						Resources.addResources(rightNeighbor.getResources(), rightNeighbor.getExtraResources()), 
-						missing, primpriceright, manprice));
-				leftNeighbor.getResources().addCoins(Resources.buyResources(this, 
-						Resources.addResources(leftNeighbor.getResources(), leftNeighbor.getExtraResources()), 
-						missing, primpriceleft, manprice));
-				break;
-		}*/
+	
 		return true;
 	}
 	
