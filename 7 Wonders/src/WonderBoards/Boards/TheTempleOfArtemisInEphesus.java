@@ -3,6 +3,7 @@ package WonderBoards.Boards;
 import Structures.Structure;
 import Structures.Effects.CoinBonus;
 import Structures.Effects.FreeConstruction;
+import Structures.Effects.ResourcesBonus;
 import Structures.Effects.VictoryPointBonus;
 import Tokens.Resources;
 import WonderBoards.WonderBoard;
@@ -20,6 +21,7 @@ public class TheTempleOfArtemisInEphesus extends WonderBoard {
 		stages.add(stage1);
 		stages.add(stage2);
 		stages.add(stage3);
+		startResource = new ResourcesBonus(0, 0, 0, 0, 0, 0, 1);
 	}
 	
 	public TheTempleOfArtemisInEphesus(int side)
@@ -28,6 +30,8 @@ public class TheTempleOfArtemisInEphesus extends WonderBoard {
 		WonderBoardStage stage1 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 2, 0, 0, 0, 0, 0, 0) : new Resources(0, 2, 0, 0, 0, 0, 0, 0)));
 		WonderBoardStage stage2 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 0, 2, 0, 0, 0, 0, 0) : new Resources(0, 0, 2, 0, 0, 0, 0, 0)));
 		WonderBoardStage stage3 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 0, 0, 0, 0, 0, 0, 0) : new Resources(0, 0, 0, 0, 1, 1, 0, 0)));
+
+		startResource = new ResourcesBonus(0, 0, 0, 0, 0, 0, 1);
 		
 		if ( side == SIDE_A )
 		{

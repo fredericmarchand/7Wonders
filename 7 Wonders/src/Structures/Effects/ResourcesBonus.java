@@ -22,7 +22,11 @@ public class ResourcesBonus extends SpecialEffect {
 		
 		public void acquireResources(Player p)
 		{
-			p.getResources().addResources(resources);
+			if ( !usedUp )
+			{
+				p.getResources().addResources(resources);
+				usedUp = true;
+			}
 		}
 		
 }
