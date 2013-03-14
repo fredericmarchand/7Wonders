@@ -32,6 +32,11 @@ public class SpecialEffect {
 		activation = act;
 	}
 	
+	public int getID()
+	{
+		return ID;
+	}
+	
 	public int getType()
 	{
 		return type;

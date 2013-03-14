@@ -11,7 +11,7 @@ public class Marketplace extends Structure {
 	public Marketplace()
 	{
 		super(new Resources(), MarketplaceID, "Marketplace", YELLOW_CARD, 1);
-		effects.add(new TradingPerks(3, false, 1));
+		effects.add(new TradingPerks(3, 1));
 	}
 
 	/**

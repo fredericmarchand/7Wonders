@@ -136,7 +136,7 @@ public class Match {
 		  				while ( ans == move )
 		  				{
 		  					System.out.println("You are not able to build this sturcture, please choose a different move:\n1 - Build the Structure\n2 - Build a Stage of your Wonder\n3 - Discard the card for 3 coins");
-		  					ans = Integer.parseInt(in.nextLine());
+		  					ans = in.nextInt();//Integer.parseInt(in.nextLine());
 		  				}
 		  				actionPhase(p, ans);
 		 			}
@@ -199,16 +199,16 @@ public class Match {
 		{
 			if ( se.getType() == ResourceChoice.ResourceChoiceID )
 			{
-				ResourceChoice rc = (ResourceChoice)se;
-				System.out.println("The card " + s.getName() + " allows you to select one of the following resources to be available for the turn:\n"+
-									( rc.getPossibilities().getOre() != 0 ? "1 - Ore\n" : "" ) +
-									( rc.getPossibilities().getOre() != 0 ? "2 - Stone\n" : "" ) +
-									( rc.getPossibilities().getOre() != 0 ? "3 - Wood\n" : "" ) +
-									( rc.getPossibilities().getOre() != 0 ? "4 - Clay\n" : "" ) +
-									( rc.getPossibilities().getOre() != 0 ? "5 - Glass\n" : "" ) +
-									( rc.getPossibilities().getOre() != 0 ? "6 - Loom\n" : "" ) +
-									( rc.getPossibilities().getOre() != 0 ? "7 - Papyrus\n" : "" ));
-				
+				//ResourceChoice rc = ((ResourceChoice)se);
+				//System.out.println("The card " + s.getName() + " allows you to select one of the following resources to be available for the turn:\n"+
+				//					( rc.getPossibilities().getOre() != 0 ? "1 - Ore\n" : "" ) +
+				//					( rc.getPossibilities().getOre() != 0 ? "2 - Stone\n" : "" ) +
+				//					( rc.getPossibilities().getOre() != 0 ? "3 - Wood\n" : "" ) +
+				//					( rc.getPossibilities().getOre() != 0 ? "4 - Clay\n" : "" ) +
+				//					( rc.getPossibilities().getOre() != 0 ? "5 - Glass\n" : "" ) +
+				//					( rc.getPossibilities().getOre() != 0 ? "6 - Loom\n" : "" ) +
+				//					( rc.getPossibilities().getOre() != 0 ? "7 - Papyrus\n" : "" ));
+			//	
 				String cmd = in.nextLine();
 				((ResourceChoice)se).chooseResource(Integer.parseInt(cmd), p);
 			}
