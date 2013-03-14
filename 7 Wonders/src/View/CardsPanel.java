@@ -27,7 +27,7 @@ public class CardsPanel extends JPanel {
 	private MouseListener ml[];
 	private MouseMotionListener mml[];
 	private Image lblBgImage;
-	private ImageIcon arrowYes, arrowNo, optionsIcon;
+	private ImageIcon arrowYes, arrowTrading, arrowNo, optionsIcon;
 	private boolean showOptions[];
 	private boolean canDoAction[][];
 	
@@ -47,8 +47,7 @@ public class CardsPanel extends JPanel {
 		mml = new MouseMotionListener[7];
 		showOptions = new boolean[7];
 		canDoAction = new boolean[7][2];
-		for (boolean[] b : canDoAction)
-			Arrays.fill(b, Boolean.FALSE);
+		for (boolean[] b : canDoAction) Arrays.fill(b, Boolean.FALSE);
 		Arrays.fill(showOptions, Boolean.FALSE);
 		
 		controller = c;
@@ -56,6 +55,7 @@ public class CardsPanel extends JPanel {
 		cards = ca;
 		lblBgImage = new ImageIcon(CardsPanel.class.getResource("/Images/Icons/cardlblbg.png")).getImage();
 		arrowYes = new ImageIcon(CardsPanel.class.getResource("/Images/Icons/arrowyes.png"));
+		arrowTrading = new ImageIcon(CardsPanel.class.getResource("/Images/Icons/arrowtrading.png"));
 		arrowNo = new ImageIcon(CardsPanel.class.getResource("/Images/Icons/arrowno.png"));
 		optionsIcon = new ImageIcon(CardsPanel.class.getResource("/Images/Icons/chooser.png"));
 		
@@ -88,6 +88,7 @@ public class CardsPanel extends JPanel {
 						if (((JLabel)e.getComponent()) == cardArr[i]) {
 							//if(controller != null) controller.handleCardClicked(cards.get(i));
 							Arrays.fill(showOptions, Boolean.FALSE);
+							for (boolean[] b : canDoAction) Arrays.fill(b, Boolean.FALSE);
 							showOptions[i] = true;
 							canDoAction[i][0] = false;
 							canDoAction[i][1] = false;
