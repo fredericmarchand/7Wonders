@@ -28,8 +28,8 @@ public class CardsPanel extends JPanel {
 	private MouseMotionListener mml[];
 	private Image lblBgImage;
 	private ImageIcon arrowYes, arrowTrading, arrowNo, optionsIcon;
-	private boolean showOptions[];
-	private boolean canDoAction[][];
+	private boolean showOptions[], showArrow[][];
+	private int canDoAction[][];
 	
 	private Controller controller;
 	
@@ -46,8 +46,10 @@ public class CardsPanel extends JPanel {
 		ml = new MouseListener[7];
 		mml = new MouseMotionListener[7];
 		showOptions = new boolean[7];
-		canDoAction = new boolean[7][2];
-		for (boolean[] b : canDoAction) Arrays.fill(b, Boolean.FALSE);
+		showArrow = new boolean[7][3];
+		canDoAction = new int[7][2];
+		for (int[] b : canDoAction) Arrays.fill(b, -1);
+		for (boolean[] b : showArrow) Arrays.fill(b, Boolean.FALSE);
 		Arrays.fill(showOptions, Boolean.FALSE);
 		
 		controller = c;
@@ -81,41 +83,8 @@ public class CardsPanel extends JPanel {
 				add(lblArrow[i][j]);
 			}
 			
-			ml[i] = new MouseAdapter() {
-				@Override
-				public void mousePressed(MouseEvent e) {
-					for (int i = 0; i < cards.size(); i++) {
-						if (((JLabel)e.getComponent()) == cardArr[i]) {
-							//if(controller != null) controller.handleCardClicked(cards.get(i));
-							Arrays.fill(showOptions, Boolean.FALSE);
-							for (boolean[] b : canDoAction) Arrays.fill(b, Boolean.FALSE);
-							showOptions[i] = true;
-							canDoAction[i][0] = false;
-							canDoAction[i][1] = false;
-							break;
-						}
-					}
-					update();
-				}
-			};
-			
-			mml[i] = new MouseMotionAdapter() {
-				@Override
-				public void mouseMoved(MouseEvent e) {
-					for (int i = 0; i < cards.size(); i++) {
-						if (((JLabel)e.getComponent()) == cardArr[i]) {
-							for(int j = 0; j < 3; j++) {
-								if(e.getPoint().x > (26) && e.getPoint().y > (80 + 63*j)
-								   && e.getPoint().x < (26 + 91) && e.getPoint().y < (80 + 63*j + 57) && showOptions[i])
-									lblArrow[i][j].setIcon(arrowYes);
-								else lblArrow[i][j].setIcon(null);
-							}
-							break;
-						}
-					}
-					update();
-				}
-			};
+			ml[i] = buildMouseAdapter();
+			mml[i] = buildMouseMotionAdapter();
 			
 			add(lblOptions[i]);
 			add(lblArr[i]);
@@ -187,8 +156,92 @@ public class CardsPanel extends JPanel {
 	
 	private void updateOptions() {
 		for (int i = 0; i < 7; i++) {
-			if(showOptions[i]) lblOptions[i].setIcon(optionsIcon);
-			else lblOptions[i].setIcon(null);
+			if(showOptions[i]) {
+				lblOptions[i].setIcon(optionsIcon);
+				for (int j = 0; j < 3; j++) {
+					if(showArrow[i][j]){
+						if(j == 2) lblArrow[i][j].setIcon(arrowYes);
+						else {
+							if(canDoAction[i][j] == 0) lblArrow[i][j].setIcon(arrowNo);
+							else if(canDoAction[i][j] == 1) lblArrow[i][j].setIcon(arrowTrading);
+							else if(canDoAction[i][j] == 2) lblArrow[i][j].setIcon(arrowYes);
+							else lblArrow[i][j].setIcon(null);
+						}
+					} else lblArrow[i][j].setIcon(null);
+				}
+			}
+			else {
+				lblOptions[i].setIcon(null);
+				for (int j = 0; j < 3; j++) {
+					lblArrow[i][j].setIcon(null);
+				}
+			}
 		}
+	}
+	
+	private MouseAdapter buildMouseAdapter() {
+		return new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				for (int i = 0; i < cards.size(); i++) {
+					if (((JLabel)e.getComponent()) == cardArr[i]) {
+						if(showOptions[i]) {
+							for(int j = 0; j < 3; j++) {
+								if(e.getPoint().x > (26) && e.getPoint().y > (80 + 63*j)
+								   && e.getPoint().x < (26 + 150) && e.getPoint().y < (80 + 63*j + 57)){
+									if(controller != null) {
+										if(j == 0) controller.buildStructure();
+										else if (j == 1) controller.buildWonderStage();
+										else if (j == 2) controller.discardChosen();
+									}
+								}
+							}
+						} else {
+							Arrays.fill(showOptions, Boolean.FALSE);
+							for (int[] b : canDoAction) Arrays.fill(b, -1);
+							showOptions[i] = true;
+							if (controller != null) {
+								controller.chooseCard(cards.get(i));
+								canDoAction[i][0] = controller.canBuildStructure(cards.get(i));
+								canDoAction[i][1] = controller.canBuildWonderStage();
+							}
+						}
+						break;
+					}
+				}
+				update();
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				for (int i = 0; i < cards.size(); i++) {
+					if (((JLabel)e.getComponent()) == cardArr[i]) {
+						for (boolean[] b : showArrow) Arrays.fill(b, Boolean.FALSE);
+						break;
+					}
+				}
+				update();
+			}
+		};
+	}
+	
+	private MouseMotionAdapter buildMouseMotionAdapter() {
+		return new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				for (int i = 0; i < cards.size(); i++) {
+					if (((JLabel)e.getComponent()) == cardArr[i]) {
+						for(int j = 0; j < 3; j++) {
+							if(e.getPoint().x > (26) && e.getPoint().y > (80 + 63*j)
+							   && e.getPoint().x < (26 + 150) && e.getPoint().y < (80 + 63*j + 57) && showOptions[i]){
+								showArrow[i][j] = true;
+							} else showArrow[i][j] = false;
+						}
+						break;
+					}
+				}
+				update();
+			}
+		};
 	}
 }

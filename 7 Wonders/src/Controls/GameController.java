@@ -1,5 +1,7 @@
 package Controls;
 
+import java.util.ArrayList;
+
 import Structures.Structure;
 import Tokens.Resources;
 import Tokens.ScientificSymbols;
@@ -20,13 +22,6 @@ public class GameController implements Controller {
 	public static final int CHOOSETRADINGPREFERENCE = 12;
 	public static final int CHOOSEFROMDISCSARDED = 13;
 	public static final int PLAYLASTCARD = 14;
-	
-	
-	@Override
-	public boolean handleCardClicked(Structure s) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public int canBuildStructure(Structure s) {
@@ -35,7 +30,7 @@ public class GameController implements Controller {
 	}
 
 	@Override
-	public void buildStructure(Structure s) {
+	public void buildStructure() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -86,6 +81,48 @@ public class GameController implements Controller {
 	public void chosenTradingPref(int t) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean chooseCard(Structure s) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void discardChosen() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ArrayList<Structure> needToChooseCopyGuild() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void chosenGuild(Structure g) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ArrayList<Structure> needToChooseDiscarded() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void chosenDiscarded(Structure g) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Structure needToChooseLastCard() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

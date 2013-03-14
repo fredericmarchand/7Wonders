@@ -13,7 +13,7 @@ public interface Controller {
 	
 	// int 0 = no, 1 = with trading, 2 = yes
 	int canBuildStructure(Structure s);
-	void buildStructure(Structure s);
+	void buildStructure();
 	
 	// int 0 = no, 1 = with trading, 2 = yes
 	int canBuildWonderStage();
