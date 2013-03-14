@@ -59,7 +59,6 @@ public class Match {
 	public void runGame()
 	{
 		players = new ArrayList<Player>();
-		//Scanner in = new Scanner(System.in);
 		Random r = new Random();
 		
 		//System.out.println("Please input how many players will play: ");
@@ -117,7 +116,6 @@ public class Match {
 	
 	public int actionPhase(Player p, int move)
 	{
-		//Scanner in = new Scanner(System.in);
 		switch ( move )
 		 {
 		 	case 1:
@@ -194,13 +192,19 @@ public class Match {
 		  		break;
 		  	default: System.out.println("Invalid... Please try again: ");
 		 }
-		//in.close();
 		return move;
+	}
+	
+	public void addInitialResources(ArrayList<Player> plyrs)
+	{
+		for ( Player p: plyrs )
+		{
+			p.getWonderBoard().getStartResource().acquireResources(p);
+		}
 	}
 	
 	public void resourceChoiceActivation(Structure s, Player p)
 	{
-		//Scanner in = new Scanner(System.in);
 		for ( SpecialEffect se: s.getEffects() )
 		{
 			if ( se.getID() == ResourceChoice.ResourceChoiceID )
@@ -220,7 +224,6 @@ public class Match {
 				((ResourceChoice)se).chooseResource(cmd, p);
 			}
 		}
-		//in.close();
 	}
 	
 	public void beginningOfTurnEffects(Player p)
