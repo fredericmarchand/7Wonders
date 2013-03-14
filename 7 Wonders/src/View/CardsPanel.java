@@ -7,12 +7,12 @@ import javax.swing.JLabel;
 
 import Structures.Structure;
 
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class CardsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -20,10 +20,10 @@ public class CardsPanel extends JPanel {
 	private ImageIcon[] cardImages;
 	private ArrayList<Structure> cards;	
 	private JLabel cardArr[], lblArr[], lblBgArr[];
+	private MouseListener ml[];
 	private Image lblBgImage;
 	
 	private Controller controller;
-	private boolean lowered = false;
 	
 	public CardsPanel(ImageIcon[] ii, ArrayList<Structure> ca, Controller c) {
 		setLayout(null);
@@ -33,6 +33,7 @@ public class CardsPanel extends JPanel {
 		cardArr = new JLabel[7];
 		lblArr = new JLabel[7];
 		lblBgArr = new JLabel[7];
+		ml = new MouseListener[7];
 		
 		controller = c;
 		cardImages = ii;
@@ -48,34 +49,42 @@ public class CardsPanel extends JPanel {
 			lblArr[i].setFont(new Font("Arial", Font.PLAIN, 18));
 			lblArr[i].setUI(new VerticalLabelUI(false));
 			lblArr[i].setSize(25, 188);
+			lblBgArr[i] = new JLabel();
+			lblBgArr[i].setSize(30, 188);
 			
-			
-			cardArr[i].addMouseListener(new MouseAdapter() {
+			ml[i] = new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(!lowered){
-						for (int i = 0; i < cards.size(); i++) {
-							if (((JLabel)e.getComponent()) == cardArr[i]) {
-								if(controller != null) controller.handleCardClicked(cards.get(i));
-							}
+					for (int i = 0; i < cards.size(); i++) {
+						if (((JLabel)e.getComponent()) == cardArr[i]) {
+							if(controller != null) controller.handleCardClicked(cards.get(i));
 						}
 					}
 					update();
 				}
-			});
-			
-			lblBgArr[i] = new JLabel();
-			lblBgArr[i].setSize(30, 188);
-			
+			};
 			
 			add(lblArr[i]);
 			add(lblBgArr[i]);
 			add(cardArr[i]);
 		}
 		
+		addMouseListeners();
 		update();
 	}
 	
+	public void addMouseListeners() {
+		for (int i = 0; i < 7; i++) {
+			cardArr[i].addMouseListener(ml[i]);
+		}
+	}
+	
+	public void removeMouseListeners() {
+		for (int i = 0; i < 7; i++) {
+			cardArr[i].removeMouseListener(ml[i]);
+		}
+	}
+
 	public void update() {
 		updateCards();
 		updateLabels();
@@ -116,12 +125,5 @@ public class CardsPanel extends JPanel {
 			lblArr[i].setLocation(10 + i*182 + ((7-a) * 91), 74);
 			lblBgArr[i].setLocation(8 + i*182 + ((7-a) * 91), 275 - lblBgArr[i].getHeight());
 		}
-	}
-
-	public void setLowered(boolean b) {
-		lowered = b;
-	}
-	public boolean getLowered() {
-		return lowered;
 	}
 }

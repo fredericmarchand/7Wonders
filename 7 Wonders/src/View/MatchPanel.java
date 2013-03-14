@@ -5,6 +5,8 @@ import java.io.File;
 import javax.swing.*;
 
 import Controls.Match;
+
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -24,6 +26,7 @@ public class MatchPanel extends JPanel {
 	public MatchPanel(int numPlayers, Controller c) {
 		setLayout(null);
 		setSize(1280, 860);
+		setBackground(Color.WHITE);
 		
 		match = new Match(7);
 		controller = c;
@@ -89,14 +92,14 @@ public class MatchPanel extends JPanel {
 	private void localClicked() {
 		if(cardsPanel.getY() == 558) {
 			cardsPanel.setLocation(cardsPanel.getX(), 750);
-			cardsPanel.setLowered(true);
+			cardsPanel.removeMouseListeners();
 		}
 	}
 	
 	void cardsClicked() {
 		if(cardsPanel.getY() == 750) {
 			cardsPanel.setLocation(cardsPanel.getX(), 558);
-			cardsPanel.setLowered(false);
+			cardsPanel.addMouseListeners();
 		}
 	}
 }
