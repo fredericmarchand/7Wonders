@@ -91,6 +91,7 @@ public class NetworkListener extends Listener{
 			//add client to match list
 		}
 		if(o instanceof Packet6ChatMsg){
+			System.out.println("Received msg packet");
 			mclient.updateChat(((Packet6ChatMsg)o).getMsg());
 		}
 

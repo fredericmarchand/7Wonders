@@ -42,14 +42,14 @@ public class MClient {
     	System.out.println("Enter user name");
     	username = s.next();
 
-    	System.out.println("Please enter the specified IP!");
-		String x = s.next();
-		System.out.println("Please enter the specified Port!");
-		int p = Integer.parseInt(s.next());
-    	
+//    	System.out.println("Please enter the specified IP!");
+//		String x = s.next();
+//		System.out.println("Please enter the specified Port!");
+//		int p = Integer.parseInt(s.next());
+//    	
 /********************Connect*******************************/
 		try {
-			client.connect(5000,x,p);
+			client.connect(5000,"127.0.0.1",25565);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -153,6 +153,7 @@ public class MClient {
     public void sendChat(String s){
     	Packet6ChatMsg msg = new Packet6ChatMsg();
     	String _msg = ("[" + username + "."+ID+"]" + " " + s);
+    	System.out.println(_msg);
     	msg.setMsg(_msg);
     	msg.setCID(ID);
     	msg.setuName(username);
@@ -161,6 +162,7 @@ public class MClient {
     }
     
     public void updateChat(String s){
+    	System.out.println(s);
     	chat.addChat(s);
     }
        
