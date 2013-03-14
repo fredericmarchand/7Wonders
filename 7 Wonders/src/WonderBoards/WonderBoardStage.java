@@ -30,6 +30,7 @@ public class WonderBoardStage {
 		built = false;
 		card = null;
 		resourceCost = cost;
+		effects = new ArrayList<SpecialEffect>();
 	}
 	
 	
