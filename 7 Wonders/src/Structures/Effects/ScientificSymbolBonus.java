@@ -1,6 +1,7 @@
 package Structures.Effects;
 
 import Player.Player;
+import Tokens.ScientificSymbols;
 
 public class ScientificSymbolBonus extends SpecialEffect {
 	
@@ -50,6 +51,18 @@ public class ScientificSymbolBonus extends SpecialEffect {
 		if ( sym > 0 && sym < 4 )
 			usedUp = true;
 	}
+	
+	public void chooseSymbol(Player p, ScientificSymbols s)
+	{
+		if ( !usedUp )
+		{
+			p.getScientificSymbols().addCompass(s.getCompass());
+			p.getScientificSymbols().addGears(s.getGears()); 
+			p.getScientificSymbols().addTablets(s.getTablets()); 
+			usedUp = true;
+		}
+	}
+	
 
 	public boolean canChoose()
 	{

@@ -43,6 +43,24 @@ public class Match {
 		
 	}
 	
+	public Match()
+	{
+		players = new ArrayList<Player>();
+		age = 1;
+		turn = 1;
+		in = new Scanner(System.in);
+		age1Deck = CardHandler.BuildAge1Deck(numPlayers);
+		age2Deck = CardHandler.BuildAge2Deck(numPlayers);
+		age3Deck = CardHandler.BuildAge3Deck(numPlayers);
+		discarded = new ArrayList<Structure>();
+		state = GameController.BEGINNINGOFGAME;		
+	}
+	
+	public ArrayList<Structure> getDiscardedCards()
+	{
+		return discarded;
+	}
+	
 	public int getState()
 	{
 		return state;
@@ -221,12 +239,12 @@ public class Match {
 				ResourceChoice rc = ((ResourceChoice)se);
 				System.out.println("The card " + s.getName() + " allows you to select one of the following resources to be available for the turn:\n"+
 									( rc.getPossibilities().getOre() != 0 ? "1 - Ore\n" : "" ) +
-									( rc.getPossibilities().getOre() != 0 ? "2 - Stone\n" : "" ) +
-									( rc.getPossibilities().getOre() != 0 ? "3 - Wood\n" : "" ) +
-									( rc.getPossibilities().getOre() != 0 ? "4 - Clay\n" : "" ) +
-									( rc.getPossibilities().getOre() != 0 ? "5 - Glass\n" : "" ) +
-									( rc.getPossibilities().getOre() != 0 ? "6 - Loom\n" : "" ) +
-									( rc.getPossibilities().getOre() != 0 ? "7 - Papyrus\n" : "" ));
+									( rc.getPossibilities().getStone() != 0 ? "2 - Stone\n" : "" ) +
+									( rc.getPossibilities().getWood() != 0 ? "3 - Wood\n" : "" ) +
+									( rc.getPossibilities().getClay() != 0 ? "4 - Clay\n" : "" ) +
+									( rc.getPossibilities().getGlass() != 0 ? "5 - Glass\n" : "" ) +
+									( rc.getPossibilities().getLoom() != 0 ? "6 - Loom\n" : "" ) +
+									( rc.getPossibilities().getPapyrus() != 0 ? "7 - Papyrus\n" : "" ));
 				
 				while ( !in.hasNext() );
 				int cmd = in.nextInt();
