@@ -401,32 +401,32 @@ public class Match2 {
 	
 	
 	//client side end of game special effects
-		public CommandMessage endOfGameSpecialEffects(Player p)
-		{
-			CommandMessage msg = new CommandMessage();
-			msg.setPlayerID(p.getID());
-			for ( Structure s : p.getWonderBoard().getPurpleCards() )
-				addPointActivate(s, p, msg);
-			return msg;
-		}
+	public CommandMessage endOfGameSpecialEffects(Player p)
+	{
+		CommandMessage msg = new CommandMessage();
+		msg.setPlayerID(p.getID());
+		for ( Structure s : p.getWonderBoard().getPurpleCards() )
+			addPointActivate(s, p, msg);
+		return msg;
+	}
 
-		public void addPointActivate(Structure s, Player p, CommandMessage msg)
+	public void addPointActivate(Structure s, Player p, CommandMessage msg)
+	{
+		for ( SpecialEffect se: s.getEffects() )
 		{
-			for ( SpecialEffect se: s.getEffects() )
+			if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
 			{
-				if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
+				if ( ((ScientificSymbolBonus)se).canChoose() )
 				{
-					if ( ((ScientificSymbolBonus)se).canChoose() )
-					{
-						System.out.println("You now can select which scientific symbol you want your guild will provide:\n1 - Compass\n2 - Gear\n3 - Tablet");
-						while ( !in.hasNext() );
-						int ans = in.nextInt();
-						msg.setScientificSymbol(ans);
-					}
+					System.out.println("You now can select which scientific symbol you want your guild will provide:\n1 - Compass\n2 - Gear\n3 - Tablet");
+					while ( !in.hasNext() );
+					int ans = in.nextInt();
+					msg.setScientificSymbol(ans);
 				}
 			}
 		}
-		//client side end of game special effects
+	}
+	//client side end of game special effects
 	
 	//client moves
 	

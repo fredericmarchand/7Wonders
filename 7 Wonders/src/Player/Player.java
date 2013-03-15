@@ -139,7 +139,8 @@ public class Player extends User {
 	
 	public void chooseCard(int index)
 	{
-		chosenCard = cards.remove(index);
+		chosenCard = cards.get(index);
+		//chosenCard = cards.remove(index);
 	}
 	
 	public void addShields(int s)

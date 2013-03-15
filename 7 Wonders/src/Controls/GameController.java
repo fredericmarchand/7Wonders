@@ -31,10 +31,14 @@ public class GameController implements Controller {
 
 	private Player user;
 	private Match match;
+	
 	public GameController(Player p, Match m)
 	{
 		user = p;
 		match = m;
+		match.addLocalPlayer(user);
+		match.fillWithAI();
+		match.init();
 	}
 	
 
@@ -55,6 +59,7 @@ public class GameController implements Controller {
 		{
 			user.buildStructure(match.getLeftNeighbor(user), match.getRightNeighbor(user), 2);
 		}
+		user.getCards().remove(user.getChosenCard());
 	}
 
 	@Override
@@ -73,6 +78,7 @@ public class GameController implements Controller {
 		{
 			user.buildStage(match.getLeftNeighbor(user), match.getRightNeighbor(user), 2);
 		}
+		user.getCards().remove(user.getChosenCard());
 	}
 
 	@Override
@@ -158,6 +164,7 @@ public class GameController implements Controller {
 	public void discardChosen() {
 		// TODO Auto-generated method stub
 		user.discard(match.getDiscardedCards());
+		user.getCards().remove(user.getChosenCard());
 	}
 
 	@Override
@@ -193,15 +200,10 @@ public class GameController implements Controller {
 	public static void main(String args[])
 	{
 		String name = JOptionPane.showInputDialog("What is your username? ");
-		Player np = new Player(name, 0);
-		Match mat = new Match();
-		mat.addLocalPlayer(np);
-		mat.fillWithAI();
-		mat.init();
-		GameController gc = new GameController(np, mat);
-		MainFrame frame = new MainFrame(gc);
-		frame.startMatch(mat);
-		frame.setVisible(true);
+		GameController gc = new GameController(new Player(name, 0), new Match());
+		//MainFrame frame = new MainFrame(gc);
+		//frame.startMatch(match);
+		//frame.setVisible(true);
 	}
 	
 }
