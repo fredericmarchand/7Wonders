@@ -14,7 +14,8 @@ public class CommandMessage {
 	public static final int SCIENTIFIC_SYMBOL_TYPE = 2;
 	
 
-	private int playerID, msgType;
+	private long playerID; 
+	private int msgType;
 	private ArrayList<Integer> resourceChoice;
 	private int cardID;
 	private int action;
@@ -32,7 +33,7 @@ public class CommandMessage {
 		symbolChoice = 0;
 	}
 	
-	public CommandMessage(int pid, int type, int cardid, int actionchoice, int tradepreference, int scientificSymbol, ArrayList<Integer> reschoice)
+	public CommandMessage(long pid, int type, int cardid, int actionchoice, int tradepreference, int scientificSymbol, ArrayList<Integer> reschoice)
 	{
 		playerID = pid;
 		msgType = type;
@@ -43,11 +44,11 @@ public class CommandMessage {
 		symbolChoice = scientificSymbol;
 	}
 	
-	public int getPlayerID()
+	public long getPlayerID()
 	{
 		return playerID;
 	}
-	public void setPlayerID(int pid)
+	public void setPlayerID(long pid)
 	{
 		playerID = pid;
 	}
