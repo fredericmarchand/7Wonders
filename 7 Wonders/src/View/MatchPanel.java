@@ -1,12 +1,16 @@
 package View;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.*;
+
+import Structures.Structure;
 
 import Controls.Match;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -89,6 +93,24 @@ public class MatchPanel extends JPanel {
 		lblTurn.setBounds(576, 295, 128, 25);
 		lblTurn.setForeground(Color.BLACK);
 		lblTurn.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+		ArrayList<Structure> fullscreen = new ArrayList<Structure>();
+		fullscreen.addAll(match.getPlayers().get(0).getCards());
+		fullscreen.addAll(match.getPlayers().get(1).getCards());
+		fullscreen.addAll(match.getPlayers().get(2).getCards());
+		fullscreen.addAll(match.getPlayers().get(3).getCards());
+		fullscreen.addAll(match.getPlayers().get(4).getCards());
+		fullscreen.addAll(match.getPlayers().get(5).getCards());
+		fullscreen.addAll(match.getPlayers().get(6).getCards());
+		fullscreen.addAll(match.getPlayers().get(0).getCards());
+		fullscreen.addAll(match.getPlayers().get(1).getCards());
+		fullscreen.addAll(match.getPlayers().get(2).getCards());
+		FullscreenCardsPanel fcp = new FullscreenCardsPanel(cards, fullscreen, c);
+		JScrollPane scrollpane = new JScrollPane(fcp, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollpane.setSize(1280, 838);
+		scrollpane.setOpaque(false);
+		
+		add(scrollpane);
 		
 		add(cardsPanel);
 		add(playerPanel);

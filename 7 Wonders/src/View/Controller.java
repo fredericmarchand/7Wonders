@@ -8,17 +8,18 @@ import Tokens.ScientificSymbols;
 
 public interface Controller {
 	
-	// When card is clicked
+	// When card is clicked, save this chosen card for the upcoming action
 	boolean chooseCard(Structure s);
 	
 	// int 0 = no, 1 = with trading, 2 = yes
 	int canBuildStructure(Structure s);
-	void buildStructure(Structure s);
+	void buildStructure();
 	
 	// int 0 = no, 1 = with trading, 2 = yes
 	int canBuildWonderStage();
 	void buildWonderStage();
 	
+	// Discard to get 3 coins back
 	void discardChosen();
 	
 	// Special effect for guild and wonder

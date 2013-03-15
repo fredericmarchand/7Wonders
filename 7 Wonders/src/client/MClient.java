@@ -42,14 +42,14 @@ public class MClient {
     	System.out.println("Enter user name");
     	username = s.next();
 
-    	System.out.println("Please enter the specified IP!");
-		String x = s.next();
-		System.out.println("Please enter the specified Port!");
-		int p = Integer.parseInt(s.next());
-    	
+//    	System.out.println("Please enter the specified IP!");
+//		String x = s.next();
+//		System.out.println("Please enter the specified Port!");
+//		int p = Integer.parseInt(s.next());
+//    	
 /********************Connect*******************************/
 		try {
-			client.connect(5000,x,p);
+			client.connect(5000,"127.0.0.1",25565);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -124,25 +124,10 @@ public class MClient {
 
   //any class type sent over the network must be registered to the kryo
   	//generic types are implicitly registered
-    public void register(){
-    	Kryo kryo = client.getKryo();
-    	kryo.register(Packet0LoginRequest.class);
-    	kryo.register(Packet1LoginAnswer.class);
-    	kryo.register(Packet2Message.class);
-    	kryo.register(Packet3Connection.class);
-    	kryo.register(Packet4Object.class);
-    	kryo.register(Packet5Disconnect.class);
-    	kryo.register(Packet6ChatMsg.class);
-		kryo.register(Packet7MatchFunction.class);
-		kryo.register(Packet8ClientResponse.class);
-    	kryo.register(java.util.ArrayList.class);
-    	kryo.register(Match.class);
-   }
+
     
     public void quitMatch(){
-    	System.out.println(matchID);
     	if(matchID>0){
-    		System.out.println("QUIT called");
     		Packet5Disconnect quit = new Packet5Disconnect();
     		quit.setMID(matchID);
     		client.sendTCP(quit);
@@ -163,6 +148,22 @@ public class MClient {
     public void updateChat(String s){
     	chat.addChat(s);
     }
+    
+    
+    
+    //send request packets to server
+    
+    //public void sendMatchRequest(){}
+    //public void sendClientMatch
+    /*
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     */
        
     ///HEAVY EDIT////
     public void turn(Packet7MatchFunction o){
@@ -182,7 +183,32 @@ public class MClient {
     	resp.setObject(msg);
     	client.sendTCP(resp);
     }
-
+    
+    //return to lobby
+    public void returnToLobby(){
+    	quitMatch();
+    	//return list?	
+    		//send list request packet
+    		//receive list
+    		//set as some variable 
+    	
+    }
+    public void register(){
+    	Kryo kryo = client.getKryo();
+    	kryo.register(Packet0LoginRequest.class);
+    	kryo.register(Packet1LoginAnswer.class);
+    	kryo.register(Packet2Message.class);
+    	kryo.register(Packet3Connection.class);
+    	kryo.register(Packet4Object.class);
+    	kryo.register(Packet5Disconnect.class);
+    	kryo.register(Packet6ChatMsg.class);
+		kryo.register(Packet7MatchFunction.class);
+		kryo.register(Packet8ClientResponse.class);
+		kryo.register(Packet9StartMatch.class);
+		kryo.register(Packet10EndMatch.class);
+    	kryo.register(java.util.ArrayList.class);
+    	kryo.register(Match.class);
+   }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new MClient();

@@ -86,5 +86,7 @@ public class Packet {
 		public Object getObject(){ return o;}
 		public void setObject(Object ob){ o = ob;}
 	}
+	public static class Packet9StartMatch{}
+	public static class Packet10EndMatch{}
 
 }

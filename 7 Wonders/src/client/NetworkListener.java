@@ -91,14 +91,13 @@ public class NetworkListener extends Listener{
 			//add client to match list
 		}
 		if(o instanceof Packet6ChatMsg){
+			System.out.println("Received msg packet");
 			mclient.updateChat(((Packet6ChatMsg)o).getMsg());
 		}
 
 		if(o instanceof Packet7MatchFunction){
 			mclient.turn((Packet7MatchFunction)o);
 		}
-		// TODO Auto-generated method stub
-		//super.received(arg0, arg1);
 	}
 
 }

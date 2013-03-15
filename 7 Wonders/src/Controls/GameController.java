@@ -25,10 +25,9 @@ public class GameController implements Controller {
 	public static final int CHOOSETRADINGPREFERENCE = 12;
 	public static final int CHOOSEFROMDISCSARDED = 13;
 	public static final int PLAYLASTCARD = 14;
-	
+
 	private Player user;
 	private Match match;
-	
 	public GameController(Player p, Match m)
 	{
 		user = p;
@@ -42,7 +41,7 @@ public class GameController implements Controller {
 	}
 
 	@Override
-	public void buildStructure(Structure s) {
+	public void buildStructure() {
 		// TODO Auto-generated method stub
 		int ans = user.canBuild(match.getLeftNeighbor(user), match.getRightNeighbor(user));
 		if ( ans == 2 )

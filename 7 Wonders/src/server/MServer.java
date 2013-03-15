@@ -82,27 +82,13 @@ public class MServer {
 		}
 		return false;		
 	}
-	//any class type sent over the network must be registered to the kryo
-	//generic types are implicitly registered
-	public void registerPackets() throws IOException{
-		Kryo kryo = server.getKryo();
-		kryo.register(Packet0LoginRequest.class);
-		kryo.register(Packet1LoginAnswer.class);
-		kryo.register(Packet2Message.class);
-		kryo.register(Packet3Connection.class);
-		kryo.register(Packet4Object.class);
-		kryo.register(Packet5Disconnect.class);
-		kryo.register(Packet6ChatMsg.class);
-		kryo.register(Packet7MatchFunction.class);
-		kryo.register(Packet8ClientResponse.class);
-		kryo.register(java.util.ArrayList.class);
-		kryo.register(Match.class);	
-	}
-	
+
 	public ArrayList<Object> getConnected(){return list;}
 	public ArrayList<Match> getMatchList(){return matchList;}
 	public long getID(){return client_ID;}
 	public void incID(){++client_ID;}
+	
+	
 	
 	public ArrayList<Long> getMatchID_List(){
 		ArrayList<Long> idList = new ArrayList<Long>();
@@ -125,12 +111,24 @@ public class MServer {
 		}
 		return false;
 	}
-	public void notifyClient(long id) {
-		// TODO Auto-generated method stub
-		
+	//any class type sent over the network must be registered to the kryo
+	//generic types are implicitly registered
+	public void registerPackets() throws IOException{
+		Kryo kryo = server.getKryo();
+		kryo.register(Packet0LoginRequest.class);
+		kryo.register(Packet1LoginAnswer.class);
+		kryo.register(Packet2Message.class);
+		kryo.register(Packet3Connection.class);
+		kryo.register(Packet4Object.class);
+		kryo.register(Packet5Disconnect.class);
+		kryo.register(Packet6ChatMsg.class);
+		kryo.register(Packet7MatchFunction.class);
+		kryo.register(Packet8ClientResponse.class);
+		kryo.register(Packet9StartMatch.class);
+		kryo.register(Packet10EndMatch.class);
+		kryo.register(java.util.ArrayList.class);
+		kryo.register(Match.class);	
 	}
-			
-	
 	
 	public static void main(String[] args){
 		try {

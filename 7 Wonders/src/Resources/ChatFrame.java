@@ -1,25 +1,36 @@
 package Resources;
 
-
-/* TextDemo.java requires no other files. */
- 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
  
-public class ChatFrame extends JPanel implements ActionListener {
+@SuppressWarnings("serial")
+public class ChatFrame extends JPanel{
     protected JTextField textField;
     protected JTextArea textArea;
+    private JFrame frame;
     private final static String newline = "\n";
     private Chat chatHub;
-    private String message;
- 
+
     public ChatFrame(Chat ch) {
         super(new GridBagLayout());
         chatHub = ch;
         textField = new JTextField(20);
-        textField.addActionListener(this);
- 
+        frame = new JFrame("7 Wonders Chat");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //Add contents to the window.
+        frame.add(this);
+        //Display the window.
+        textField.addActionListener(new ActionListener() {
+			
+		    public void actionPerformed(ActionEvent evt) {
+            String text = textField.getText();
+            textField.setText("");
+            chatHub.sendMsg(text);
+            textArea.setCaretPosition(textArea.getDocument().getLength());
+		    }
+        });
         textArea = new JTextArea(5, 20);
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
@@ -37,45 +48,13 @@ public class ChatFrame extends JPanel implements ActionListener {
         add(scrollPane, c);
     }
  
-    public void actionPerformed(ActionEvent evt) {
-        String text = textField.getText();
-        textField.setText("");
-        //textArea.append(text + newline);
-        String message = text;
-        chatHub.sendMsg(message);
-        //Make sure the new text is visible, even if there
-        //was a selection in the text area.
-        textArea.setCaretPosition(textArea.getDocument().getLength());
-    }
- 
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event dispatch thread.
-     */
     public void appendChat(String c){
-    	textArea.append(c + newline);
+    	textArea.append(c + newline);	
     }
     public void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("7 Wonders Chat");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 
-        //Add contents to the window.
-        frame.add(new ChatFrame(chatHub));
- 
-        //Display the window.
         frame.pack();
         frame.setVisible(true);
     }
  
-//    public static void main(String[] args) {
-//        //Schedule a job for the event dispatch thread:
-//        //creating and showing this application's GUI.
-//        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-//            public void run() {
-//                createAndShowGUI();
-//            }
-//        });
-//    }
 }

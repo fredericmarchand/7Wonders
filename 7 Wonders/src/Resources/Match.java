@@ -2,11 +2,15 @@ package Resources;
 
 import java.util.ArrayList;
 
+import server.MServer;
+
 
 
 import Controls.CommandMessage;
+import Resources.Packet.Packet10EndMatch;
 import Resources.Packet.Packet7MatchFunction;
 import Resources.Packet.Packet8ClientResponse;
+import Resources.Packet.Packet9StartMatch;
 
 
 import com.esotericsoftware.kryonet.Connection;
@@ -20,7 +24,7 @@ public class Match {
     public static final int MAX_PLAYER_COUNT = 7;
     private int connection_count;
     @SuppressWarnings("unused")
-	private Server server;
+	private MServer mserver;
     private int receivedEvents = 0;
     ArrayList<CommandMessage> cmdMsgList;
 
@@ -31,9 +35,7 @@ public class Match {
     	connected = new ArrayList<Connection>();
 		match_id = ++counter;
 		cmdMsgList = new ArrayList<CommandMessage>();
-
     }
-
 	public ArrayList<Connection> getConnections(){return connected;}	
 	public void addConnection(Connection c){
 		connected.add(c);
@@ -50,9 +52,10 @@ public class Match {
 		System.out.println(connection_count);
 		if(connection_count==MAX_PLAYER_COUNT){
 			System.out.println("Starting Game!");
-			//countDown();
+			startMatch();
 		}
 	}
+
 	public boolean countDown(){
 		System.out.println("[MATCH] STARTING IN T-MINUS 30 SECONDS");
 		for(int i = 30; i > 0;i--){
@@ -96,7 +99,7 @@ public class Match {
 		receivedEvents++;
 		if(receivedEvents==connection_count){
 			/***************************************/			
-						
+
 			/***************************************/
 			//hand off info to game controller
 			//waiting
@@ -107,9 +110,31 @@ public class Match {
 	
 	public void handOff(Packet8ClientResponse receivedPacket){		
 		receiveEvent((CommandMessage)receivedPacket.getObject(), receivedPacket.getCID());
+	}	
+	public void startMatch(){
+		sendStartMatchRequest();
 	}
-
-
+	
+	public void endMatch(){
+		sendEndMatchRequest();
+	}
+	public void sendStartMatchRequest(){
+		Packet9StartMatch start = new Packet9StartMatch();
+		for(Connection c: connected){
+			c.sendTCP(start);
+		}
+	}
+	
+	public void sendEndMatchRequest(){
+		Packet10EndMatch end = new Packet10EndMatch();
+		for(Connection c: connected){
+			c.sendTCP(end);
+		}
+	}
+	
+	public void returnToLobby(){
+		
+	}
 	
 	
 
