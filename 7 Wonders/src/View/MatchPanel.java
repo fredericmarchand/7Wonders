@@ -12,8 +12,12 @@ import Controls.Match;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
 public class MatchPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -108,7 +112,17 @@ public class MatchPanel extends JPanel {
 		FullscreenCardsPanel fcp = new FullscreenCardsPanel(cards, fullscreen, c);
 		JScrollPane scrollpane = new JScrollPane(fcp, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollpane.setSize(1280, 838);
-		scrollpane.setOpaque(false);
+		scrollpane.getViewport().setOpaque(false);
+		scrollpane.setBackground(new Color(50, 50, 50, 200));
+		//scrollpane.setOpaque(false);
+		
+		final MatchPanel matchpanel = this;
+		scrollpane.getHorizontalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+	        @Override
+	        public void adjustmentValueChanged(final AdjustmentEvent e) {
+	            matchpanel.repaint();
+	        }
+	    });
 		
 		add(scrollpane);
 		
@@ -122,6 +136,16 @@ public class MatchPanel extends JPanel {
 		add(f4);
 		add(lblAge);
 		add(lblTurn);
+		
+		BufferedImage bi = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = bi.createGraphics();
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, bi.getWidth(), bi.getHeight());
+        g.dispose();
+		JLabel bg = new JLabel(new ImageIcon(bi));
+		bg.setSize(this.getSize());
+		bg.setLocation(0, 0);
+		add(bg);
 		
 		update();
 	}
