@@ -19,25 +19,18 @@ public class ChatFrame extends JPanel{
         textField = new JTextField(20);
         frame = new JFrame("7 Wonders Chat");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 
         //Add contents to the window.
         frame.add(this);
- 
         //Display the window.
-    
         textField.addActionListener(new ActionListener() {
 			
 		    public void actionPerformed(ActionEvent evt) {
             String text = textField.getText();
             textField.setText("");
-            //textArea.append(text + newline);
             chatHub.sendMsg(text);
-            //Make sure the new text is visible, even if there
-            //was a selection in the text area.
             textArea.setCaretPosition(textArea.getDocument().getLength());
 		    }
         });
- 
         textArea = new JTextArea(5, 20);
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
@@ -55,11 +48,8 @@ public class ChatFrame extends JPanel{
         add(scrollPane, c);
     }
  
-
-
     public void appendChat(String c){
-    	textArea.append(c + newline);
-	    	
+    	textArea.append(c + newline);	
     }
     public void createAndShowGUI() {
         //Create and set up the window.
