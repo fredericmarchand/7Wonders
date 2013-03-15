@@ -196,9 +196,18 @@ public class CardsPanel extends JPanel {
 								if(e.getPoint().x > (26) && e.getPoint().y > (80 + 63*j)
 								   && e.getPoint().x < (26 + 150) && e.getPoint().y < (80 + 63*j + 57)){
 									if(controller != null) {
-										if(j == 0 && canDoAction[i][0] != 0) controller.buildStructure();
-										else if (j == 1 && canDoAction[i][1] != 0) controller.buildWonderStage();
-										else if (j == 2) controller.discardChosen();
+										if(j == 0 && canDoAction[i][0] != 0) {
+											controller.buildStructure();
+											showOptions[i] = false;
+										}
+										else if (j == 1 && canDoAction[i][1] != 0) {
+											controller.buildWonderStage();
+											showOptions[i] = false;
+										}
+										else if (j == 2) {
+											controller.discardChosen();
+											showOptions[i] = false;
+										}
 									}
 								}
 							}
