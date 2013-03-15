@@ -64,6 +64,7 @@ public class Match {
 		CardHandler.DistributeCards(players, age1Deck);
 		addInitialResources(players);
 		state = GameController.BEGINNINGOFGAME;
+		addInitialResources(players);
 	}
 	
 	public void addLocalPlayer(Player p) {
@@ -423,6 +424,31 @@ public class Match {
 		}
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public void handleAIPlayerMoves()
+	{
+		for ( Player p : players )
+		{
+			if ( p instanceof AIPlayer )
+			{
+				((AIPlayer)p).pickCard(discarded);
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 
 	/**
