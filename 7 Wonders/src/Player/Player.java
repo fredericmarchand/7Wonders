@@ -10,11 +10,8 @@ import java.util.Random;
 
 public class Player extends User {
 
-	private String username;
-	private int ID;
 	private WonderBoard wonderBoard;
-	@SuppressWarnings("unused")
-	private ArrayList<Structure> cards, discardedCards;
+	private ArrayList<Structure> cards;
 	private Structure chosenCard;
 	private Resources resources, extraResources, purchased, unavailableResources;
 	private int shields;
@@ -53,16 +50,6 @@ public class Player extends User {
 		scientificSymbols = new ScientificSymbols();
 	}
 
-	//getters
-	//public String getUsername()
-	//{
-	//	return username;
-	//}
-	
-	//public int getID()
-	//{
-	//	return ID;
-	//}
 	
 	public ArrayList<Structure> getCards()
 	{
@@ -102,6 +89,11 @@ public class Player extends User {
 	public Resources getPurchasedResources()
 	{
 		return purchased;
+	}
+	
+	public Resources getUnvResources()
+	{
+		return unavailableResources;
 	}
 	
 	public int getVictoryPoints()

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import Player.Player;
 import Structures.Structure;
+import Structures.Effects.ScientificSymbolBonus;
+import Structures.Effects.SpecialEffect;
 import Tokens.Resources;
 import Tokens.ScientificSymbols;
 import View.Controller;
@@ -74,18 +76,47 @@ public class GameController implements Controller {
 	@Override
 	public boolean needToChooseScienceSymbol() {
 		// TODO Auto-generated method stub
+		for ( Structure s: user.getWonderBoard().getPurpleCards() )
+		{
+			for ( SpecialEffect se: s.getEffects() )
+			{
+				if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
+				{
+					if ( ((ScientificSymbolBonus)se).canChoose() )
+						return true;
+				}
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public void scienceChosen(ScientificSymbols s) {
-		// TODO Auto-generated method stub
 		
+		for ( Structure st: user.getWonderBoard().getPurpleCards() )
+		{
+			for ( SpecialEffect se: st.getEffects() )
+			{
+				if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID && se.activateTime() == SpecialEffect.END_OF_GAME )
+					((ScientificSymbolBonus)se).chooseSymbol(user, s);		
+			}
+		}
 	}
 
 	@Override
 	public Resources needToChooseResources() {
 		// TODO Auto-generated method stub
+		for ( Structure s: user.getWonderBoard().getPurpleCards() )
+		{
+			for ( SpecialEffect se: s.getEffects() )
+			{
+				if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
+				{
+					if ( ((ScientificSymbolBonus)se).canChoose() )
+						return new Resources();
+				}
+			}
+		}
 		return null;
 	}
 
