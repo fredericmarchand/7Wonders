@@ -62,6 +62,7 @@ public class Match {
 		CardHandler.DistributeRandomWonderBoards(players, 0);
 		for ( Player p: players ) p.getResources().addCoins(3);
 		CardHandler.DistributeCards(players, age1Deck);
+		addInitialResources(players);
 		state = GameController.BEGINNINGOFGAME;
 		addInitialResources(players);
 	}
