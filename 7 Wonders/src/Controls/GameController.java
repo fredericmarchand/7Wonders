@@ -66,6 +66,7 @@ public class GameController implements Controller {
 			user.buildStructure(match.getLeftNeighbor(user), match.getRightNeighbor(user), 2);
 		}
 		user.getCards().remove(user.getChosenCard());
+		user.chooseCard(null);
 		frame.update();
 	}
 
@@ -86,6 +87,7 @@ public class GameController implements Controller {
 			user.buildStage(match.getLeftNeighbor(user), match.getRightNeighbor(user), 2);
 		}
 		user.getCards().remove(user.getChosenCard());
+		user.chooseCard(null);
 		frame.update();
 	}
 
@@ -173,6 +175,7 @@ public class GameController implements Controller {
 		// TODO Auto-generated method stub
 		user.discard(match.getDiscardedCards());
 		user.getCards().remove(user.getChosenCard());
+		user.chooseCard(null);
 		frame.update();
 	}
 
