@@ -10,7 +10,6 @@ import Structures.Structure;
 import Controls.Match;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.AdjustmentEvent;
@@ -98,19 +97,7 @@ public class MatchPanel extends JPanel {
 		lblTurn.setForeground(Color.BLACK);
 		lblTurn.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		ArrayList<Structure> fullscreen = new ArrayList<Structure>();
-		fullscreen.addAll(match.getPlayers().get(0).getCards());
-		fullscreen.addAll(match.getPlayers().get(1).getCards());
-		fullscreen.addAll(match.getPlayers().get(2).getCards());
-		fullscreen.addAll(match.getPlayers().get(3).getCards());
-		fullscreen.addAll(match.getPlayers().get(4).getCards());
-		fullscreen.addAll(match.getPlayers().get(5).getCards());
-		fullscreen.addAll(match.getPlayers().get(6).getCards());
-		fullscreen.addAll(match.getPlayers().get(0).getCards());
-		fullscreen.addAll(match.getPlayers().get(1).getCards());
-		fullscreen.addAll(match.getPlayers().get(2).getCards());
-		
-		fcp = new FullscreenCardsPanel(cards, fullscreen, c);
+		fcp = new FullscreenCardsPanel(cards, null, c);
 		scrollpane = new JScrollPane(fcp, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollpane.setSize(1280, 838);
 		scrollpane.getViewport().setOpaque(false);
@@ -120,7 +107,7 @@ public class MatchPanel extends JPanel {
 		closeButton.setLocation(1224, 0);
 		closeButton.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				scrollpane.setVisible(false);
 			}
 		});
@@ -177,7 +164,7 @@ public class MatchPanel extends JPanel {
 	public MouseAdapter buildMouseAdapterNear() {
 		return new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				NearPanel panel = null;
 				if(e.getComponent() == ((NearPanel) n1)) panel = n1;
 				else if (e.getComponent() == ((NearPanel) n2)) panel = n2;
@@ -195,7 +182,7 @@ public class MatchPanel extends JPanel {
 	public MouseAdapter buildMouseAdapterFar() {
 		return new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				FarPanel panel = null;
 				if(e.getComponent() == ((FarPanel) f1)) panel = f1;
 				else if (e.getComponent() == ((FarPanel) f2)) panel = f2;
@@ -214,7 +201,7 @@ public class MatchPanel extends JPanel {
 	public MouseAdapter buildMouseAdapterLocal() {
 		return new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				if(cardsPanel.getY() == 558) {
 					cardsPanel.setLocation(cardsPanel.getX(), 750);
 					cardsPanel.removeMouseListeners();
@@ -231,7 +218,7 @@ public class MatchPanel extends JPanel {
 	public MouseAdapter buildMouseAdapterCards() {
 		return new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				if(cardsPanel.getY() == 750) {
 					cardsPanel.setLocation(cardsPanel.getX(), 558);
 					cardsPanel.addMouseListeners();
