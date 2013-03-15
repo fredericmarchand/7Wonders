@@ -31,10 +31,20 @@ public class GameController implements Controller {
 
 	private Player user;
 	private Match match;
+	private MainFrame frame;
+	
 	public GameController(Player p, Match m)
 	{
 		user = p;
 		match = m;
+		
+		match.addLocalPlayer(user);
+		match.fillWithAI();
+		match.init();
+		
+		frame = new MainFrame(this);
+		frame.startMatch(match);
+		frame.setVisible(true);
 	}
 	
 
@@ -193,15 +203,7 @@ public class GameController implements Controller {
 	public static void main(String args[])
 	{
 		String name = JOptionPane.showInputDialog("What is your username? ");
-		Player np = new Player(name, 0);
-		Match mat = new Match();
-		mat.addLocalPlayer(np);
-		mat.fillWithAI();
-		mat.init();
-		GameController gc = new GameController(np, mat);
-		MainFrame frame = new MainFrame(gc);
-		frame.startMatch(mat);
-		frame.setVisible(true);
+		GameController gc = new GameController(new Player(name, 0), new Match());
 	}
 	
 }
