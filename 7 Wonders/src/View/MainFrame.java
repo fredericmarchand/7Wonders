@@ -10,6 +10,7 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private Controller controller;
+	private MatchPanel panel;
 	
 	public MainFrame(Controller c) {
 		setTitle("7 Wonders");
@@ -26,8 +27,12 @@ public class MainFrame extends JFrame {
 		setBackground(Color.white);
 	}
 	
+	public void update() {
+		panel.update();
+	}
+	
 	public void startMatch(Match m) {
-		MatchPanel panel = new MatchPanel(m, controller);
+		panel = new MatchPanel(m, controller);
 		add(panel);
 	}
 	

@@ -164,7 +164,8 @@ public class Player extends User {
 	
 	public int canBuild(Player left, Player right)
 	{
-		if ( !wonderBoard.containsCard(chosenCard.getID()) )
+		if ( !wonderBoard.containsCard(
+				chosenCard.getID()) )
 		{
 			if ( ((chosenCard.getResourceCost().canAfford(Resources.addResources(extraResources, resources, unavailableResources)) 
 					|| chosenCard.canBuildForFree(wonderBoard)))  )

@@ -1,11 +1,8 @@
 package View;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import javax.swing.*;
-
-import Structures.Structure;
 
 import Controls.Match;
 
@@ -150,6 +147,7 @@ public class MatchPanel extends JPanel {
 	}
 	
 	public void update() {
+		cardsPanel.setCards(match.getPlayers().get(0).getCards());
 		lblAge.setIcon(new ImageIcon(MatchPanel.class.getResource("/Images/Icons/age" + match.getAge() + ".png")));
 		cardsPanel.update();
 		playerPanel.update();
