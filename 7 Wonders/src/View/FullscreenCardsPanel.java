@@ -51,6 +51,7 @@ public class FullscreenCardsPanel extends JPanel {
 		labels.clear();
 		labelBg.clear();
 		this.removeAll();
+		if(cards == null) cards = new ArrayList<Structure>();
 		for(int i = 0; i < cards.size(); i++) {
 			cardArr.add(new JLabel(cardImages[cards.get(i).getID()]));
 			cardArr.get(i).setSize(182, 280);
