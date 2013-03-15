@@ -5,12 +5,12 @@ import Controls.Match;
 
 public class User {
 
-	protected int ID;
+	protected long ID;
 	protected String username;
 	private Match currentMatch;
 	private CommandMessage msg;
 	
-	public User(int id, String name)
+	public User(String name, long id)
 	{
 		ID = id;
 		username = name;
@@ -21,9 +21,19 @@ public class User {
 		return username;
 	}
 	
-	public int getID()
+	public long getID()
 	{
 		return ID;
+	}
+	
+	public void setUsername(String name)
+	{
+		username = name;
+	}
+	
+	public void setID(long id)
+	{
+		ID = id;
 	}
 	
 	/**

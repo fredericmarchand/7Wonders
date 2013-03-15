@@ -434,7 +434,7 @@ public class Match2 {
 	
 	
 	//get specific players functions
-	public Player getPlayerByID(int id)
+	public Player getPlayerByID(long id)
 	{
 		for ( Player p : players )
 		{
