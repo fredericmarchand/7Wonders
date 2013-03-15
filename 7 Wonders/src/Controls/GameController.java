@@ -2,7 +2,10 @@ package Controls;
 
 import java.util.ArrayList;
 
+import Player.Player;
 import Structures.Structure;
+import Structures.Effects.ScientificSymbolBonus;
+import Structures.Effects.SpecialEffect;
 import Tokens.Resources;
 import Tokens.ScientificSymbols;
 import View.Controller;
@@ -23,45 +26,96 @@ public class GameController implements Controller {
 	public static final int CHOOSEFROMDISCSARDED = 13;
 	public static final int PLAYLASTCARD = 14;
 
+	private Player user;
+	private Match match;
+	public GameController(Player p, Match m)
+	{
+		user = p;
+		match = m;
+	}
+	
+
 	@Override
 	public int canBuildStructure(Structure s) {
-		// TODO Auto-generated method stub
-		return 0;
+		return user.canBuild(match.getLeftNeighbor(user), match.getRightNeighbor(user));
 	}
 
 	@Override
 	public void buildStructure() {
 		// TODO Auto-generated method stub
-		
+		int ans = user.canBuild(match.getLeftNeighbor(user), match.getRightNeighbor(user));
+		if ( ans == 2 )
+		{
+			user.buildStructure();
+		}
+		else if ( ans == 1 )
+		{
+			user.buildStructure(match.getLeftNeighbor(user), match.getRightNeighbor(user), 2);
+		}
 	}
 
 	@Override
 	public int canBuildWonderStage() {
-		// TODO Auto-generated method stub
-		return 0;
+		return user.canBuildStage(match.getLeftNeighbor(user), match.getRightNeighbor(user));
 	}
 
 	@Override
 	public void buildWonderStage() {
-		// TODO Auto-generated method stub
-		
+		int ans = user.canBuild(match.getLeftNeighbor(user), match.getRightNeighbor(user));
+		if ( ans == 2 )
+		{
+			user.buildStage();
+		}
+		else if ( ans == 1 )
+		{
+			user.buildStage(match.getLeftNeighbor(user), match.getRightNeighbor(user), 2);
+		}
 	}
 
 	@Override
 	public boolean needToChooseScienceSymbol() {
 		// TODO Auto-generated method stub
+		for ( Structure s: user.getWonderBoard().getPurpleCards() )
+		{
+			for ( SpecialEffect se: s.getEffects() )
+			{
+				if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
+				{
+					if ( ((ScientificSymbolBonus)se).canChoose() )
+						return true;
+				}
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public void scienceChosen(ScientificSymbols s) {
-		// TODO Auto-generated method stub
 		
+		for ( Structure st: user.getWonderBoard().getPurpleCards() )
+		{
+			for ( SpecialEffect se: st.getEffects() )
+			{
+				if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID && se.activateTime() == SpecialEffect.END_OF_GAME )
+					((ScientificSymbolBonus)se).chooseSymbol(user, s);		
+			}
+		}
 	}
 
 	@Override
 	public Resources needToChooseResources() {
 		// TODO Auto-generated method stub
+		for ( Structure s: user.getWonderBoard().getPurpleCards() )
+		{
+			for ( SpecialEffect se: s.getEffects() )
+			{
+				if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
+				{
+					if ( ((ScientificSymbolBonus)se).canChoose() )
+						return new Resources();
+				}
+			}
+		}
 		return null;
 	}
 
@@ -86,13 +140,21 @@ public class GameController implements Controller {
 	@Override
 	public boolean chooseCard(Structure s) {
 		// TODO Auto-generated method stub
-		return false;
+		for ( int i = 0; i < user.getCards().size(); ++i )
+		{
+			if ( user.getCards().get(i).getID() == s.getID() )
+			{
+				user.chooseCard(i);
+				break;
+			}
+		}
+		return true;
 	}
 
 	@Override
 	public void discardChosen() {
 		// TODO Auto-generated method stub
-		
+		user.discard(match.getDiscardedCards());
 	}
 
 	@Override
@@ -123,6 +185,16 @@ public class GameController implements Controller {
 	public Structure needToChooseLastCard() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public static void main(String args[])
+	{
+		System.out.println("Hi, input your username: ");
+		java.util.Scanner in = new java.util.Scanner(System.in);
+		String name = in.nextLine();
+		Player np = new Player(name, 0);
+		Match mat = new Match();
+		GameController gc = new GameController(np, mat);
 	}
 	
 }
