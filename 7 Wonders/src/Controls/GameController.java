@@ -66,6 +66,8 @@ public class GameController implements Controller {
 		}
 		user.getCards().remove(user.getChosenCard());
 		user.chooseCard(null);
+		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
+		match.handleAIPlayerMoves();
 		frame.update();
 	}
 
@@ -87,6 +89,8 @@ public class GameController implements Controller {
 		}
 		user.getCards().remove(user.getChosenCard());
 		user.chooseCard(null);
+		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
+		match.handleAIPlayerMoves();
 		frame.update();
 	}
 
@@ -169,6 +173,8 @@ public class GameController implements Controller {
 		user.discard(match.getDiscardedCards());
 		user.getCards().remove(user.getChosenCard());
 		user.chooseCard(null);
+		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
+		match.handleAIPlayerMoves();
 		frame.update();
 	}
 
