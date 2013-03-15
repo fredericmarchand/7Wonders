@@ -10,6 +10,7 @@ import Structures.Structure;
 import Controls.Match;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -105,7 +106,11 @@ public class MatchPanel extends JPanel {
 		fullscreen.addAll(match.getPlayers().get(1).getCards());
 		fullscreen.addAll(match.getPlayers().get(2).getCards());
 		FullscreenCardsPanel fcp = new FullscreenCardsPanel(cards, fullscreen, c);
-		add(fcp);
+		JScrollPane scrollpane = new JScrollPane(fcp, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollpane.setSize(1280, 838);
+		scrollpane.setOpaque(false);
+		
+		add(scrollpane);
 		
 		add(cardsPanel);
 		add(playerPanel);
