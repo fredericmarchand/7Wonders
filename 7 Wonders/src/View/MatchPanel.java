@@ -1,8 +1,11 @@
 package View;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.*;
+
+import Structures.Structure;
 
 import Controls.Match;
 
@@ -89,6 +92,20 @@ public class MatchPanel extends JPanel {
 		lblTurn.setBounds(576, 295, 128, 25);
 		lblTurn.setForeground(Color.BLACK);
 		lblTurn.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+		ArrayList<Structure> fullscreen = new ArrayList<Structure>();
+		fullscreen.addAll(match.getPlayers().get(0).getCards());
+		fullscreen.addAll(match.getPlayers().get(1).getCards());
+		fullscreen.addAll(match.getPlayers().get(2).getCards());
+		fullscreen.addAll(match.getPlayers().get(3).getCards());
+		fullscreen.addAll(match.getPlayers().get(4).getCards());
+		fullscreen.addAll(match.getPlayers().get(5).getCards());
+		fullscreen.addAll(match.getPlayers().get(6).getCards());
+		fullscreen.addAll(match.getPlayers().get(0).getCards());
+		fullscreen.addAll(match.getPlayers().get(1).getCards());
+		fullscreen.addAll(match.getPlayers().get(2).getCards());
+		FullscreenCardsPanel fcp = new FullscreenCardsPanel(cards, fullscreen, c);
+		add(fcp);
 		
 		add(cardsPanel);
 		add(playerPanel);
