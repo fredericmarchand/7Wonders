@@ -259,7 +259,38 @@ public class WonderBoard {
 	{
 		return purpleCards;
 	}
+	
+	public ArrayList<Structure> getBrownCards()
+	{
+		ArrayList<Structure> brown = new ArrayList<Structure>();
+		for ( Structure s : brownGreyCards )
+			if ( s.getColor() == Structure.BROWN_CARD )
+				brown.add(s);
+		return brown;
+	}
+	
+	public ArrayList<Structure> getGreyCards()
+	{
+		ArrayList<Structure> grey = new ArrayList<Structure>();
+		for ( Structure s : brownGreyCards )
+			if ( s.getColor() == Structure.GREY_CARD )
+				grey.add(s);
+		return grey;
+	}
 
+	
+	public ArrayList<Structure> getAllCards() 
+	{
+		ArrayList<Structure> all = new ArrayList<Structure>();
+		all.addAll(getBrownCards());
+		all.addAll(getGreyCards());
+		all.addAll(getPurpleCards());
+		all.addAll(getBlueCards());
+		all.addAll(getRedCards());
+		all.addAll(getYellowCards());
+		all.addAll(getGreenCards());
+		return all;
+	}
 	
 	
 	

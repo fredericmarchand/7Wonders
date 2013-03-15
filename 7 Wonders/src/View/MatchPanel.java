@@ -32,6 +32,9 @@ public class MatchPanel extends JPanel {
 	
 	private JLabel lblAge, lblTurn;
 	
+	private JScrollPane scrollpane;
+	private FullscreenCardsPanel fcp;
+	
 	private Controller controller;
 	
 	public MatchPanel(int numPlayers, Controller c) {
@@ -53,45 +56,42 @@ public class MatchPanel extends JPanel {
 		
 		// Players
 		playerPanel = new LocalPanel(match.getPlayers().get(0), controller);
-		playerPanel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				localClicked();
-			}
-		});
+		playerPanel.addMouseListener(buildMouseAdapterLocal());
 		playerPanel.setLocation(401, 450);
 		
 		// Neighbours
 		n1 = new NearPanel(match.getPlayers().get(6), controller);
 		n1.setLocation(0, 150);
+		n1.addMouseListener(buildMouseAdapterNear());
 		n2 = new NearPanel(match.getPlayers().get(1), controller);
 		n2.setLocation(802, 150);
+		n2.addMouseListener(buildMouseAdapterNear());
 		
 		// Foreigners
 		f1 = new FarPanel(match.getPlayers().get(5), controller);
 		f1.setLocation(0, 0);
+		f1.addMouseListener(buildMouseAdapterFar());
 		f2 = new FarPanel(match.getPlayers().get(4), controller);
 		f2.setLocation(320, 0);
+		f2.addMouseListener(buildMouseAdapterFar());
 		f3 = new FarPanel(match.getPlayers().get(3), controller);
 		f3.setLocation(640, 0);
+		f3.addMouseListener(buildMouseAdapterFar());
 		f4 = new FarPanel(match.getPlayers().get(2), controller);
 		f4.setLocation(960, 0);
+		f4.addMouseListener(buildMouseAdapterFar());
+		
+		
 		
 		// Cards
 		cardsPanel = new CardsPanel(cards, match.getPlayers().get(0).getCards(), controller);
 		cardsPanel.setSize(1274, 280);
 		cardsPanel.setLocation(3, 558);
-		cardsPanel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				cardsClicked();
-			}
-		});
+		cardsPanel.addMouseListener(buildMouseAdapterCards());
 		
 		// Other
-		lblAge = new JLabel();
+		lblAge = new JLabel(new ImageIcon(MatchPanel.class.getResource("/Images/Icons/age1.png")));
 		lblAge.setBounds(576, 161, 128, 128);
-		lblAge.setIcon(new ImageIcon(MatchPanel.class.getResource("/Images/Icons/age1.png")));
 		
 		lblTurn = new JLabel("Round 1 of 6", SwingConstants.CENTER);
 		lblTurn.setBounds(576, 295, 128, 25);
@@ -109,13 +109,22 @@ public class MatchPanel extends JPanel {
 		fullscreen.addAll(match.getPlayers().get(0).getCards());
 		fullscreen.addAll(match.getPlayers().get(1).getCards());
 		fullscreen.addAll(match.getPlayers().get(2).getCards());
-		FullscreenCardsPanel fcp = new FullscreenCardsPanel(cards, fullscreen, c);
-		JScrollPane scrollpane = new JScrollPane(fcp, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		
+		fcp = new FullscreenCardsPanel(cards, fullscreen, c);
+		scrollpane = new JScrollPane(fcp, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollpane.setSize(1280, 838);
 		scrollpane.getViewport().setOpaque(false);
 		scrollpane.setBackground(new Color(50, 50, 50, 200));
-		//scrollpane.setOpaque(false);
-		
+		JLabel closeButton = new JLabel(new ImageIcon(MatchPanel.class.getResource("/Images/Icons/X.png")));
+		closeButton.setSize(56, 56);
+		closeButton.setLocation(1224, 0);
+		closeButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				scrollpane.setVisible(false);
+			}
+		});
+		scrollpane.add(closeButton);
 		final MatchPanel matchpanel = this;
 		scrollpane.getHorizontalScrollBar().addAdjustmentListener(new AdjustmentListener() {
 	        @Override
@@ -137,6 +146,9 @@ public class MatchPanel extends JPanel {
 		add(lblAge);
 		add(lblTurn);
 		
+		scrollpane.setVisible(false);
+		
+		// Add solid white BG to fix background repaint issue with scrollpanes
 		BufferedImage bi = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = bi.createGraphics();
         g.setColor(Color.WHITE);
@@ -161,18 +173,70 @@ public class MatchPanel extends JPanel {
 		n1.update();
 		n2.update();
 	}
-
-	private void localClicked() {
-		if(cardsPanel.getY() == 558) {
-			cardsPanel.setLocation(cardsPanel.getX(), 750);
-			cardsPanel.removeMouseListeners();
-		}
+	
+	public MouseAdapter buildMouseAdapterNear() {
+		return new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				NearPanel panel = null;
+				if(e.getComponent() == ((NearPanel) n1)) panel = n1;
+				else if (e.getComponent() == ((NearPanel) n2)) panel = n2;
+				if(panel != null) {
+					fcp.setCards(panel.player.getWonderBoard().getAllCards());
+					//fcp.setCards(panel.player.getCards());
+					fcp.update();
+					scrollpane.revalidate();
+					scrollpane.setVisible(true);
+				}
+			}
+		};
 	}
 	
-	private void cardsClicked() {
-		if(cardsPanel.getY() == 750) {
-			cardsPanel.setLocation(cardsPanel.getX(), 558);
-			cardsPanel.addMouseListeners();
-		}
+	public MouseAdapter buildMouseAdapterFar() {
+		return new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				FarPanel panel = null;
+				if(e.getComponent() == ((FarPanel) f1)) panel = f1;
+				else if (e.getComponent() == ((FarPanel) f2)) panel = f2;
+				else if (e.getComponent() == ((FarPanel) f3)) panel = f3;
+				else if (e.getComponent() == ((FarPanel) f4)) panel = f4;
+				if(panel != null) {
+					fcp.setCards(panel.player.getWonderBoard().getAllCards());
+					fcp.update();
+					scrollpane.revalidate();
+					scrollpane.setVisible(true);
+				}
+			}
+		};
+	}
+	
+	public MouseAdapter buildMouseAdapterLocal() {
+		return new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(cardsPanel.getY() == 558) {
+					cardsPanel.setLocation(cardsPanel.getX(), 750);
+					cardsPanel.removeMouseListeners();
+				} else {
+					fcp.setCards(playerPanel.player.getWonderBoard().getAllCards());
+					fcp.update();
+					scrollpane.revalidate();
+					scrollpane.setVisible(true);
+				}
+			}
+		};
+	}
+	
+	public MouseAdapter buildMouseAdapterCards() {
+		return new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(cardsPanel.getY() == 750) {
+					cardsPanel.setLocation(cardsPanel.getX(), 558);
+					cardsPanel.addMouseListeners();
+				}
+			}
+		};
 	}
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.Scrollable;
 
 import Structures.Structure;
@@ -26,13 +27,10 @@ public class FullscreenCardsPanel extends JPanel {
 	
 	private int totalWidth;
 	
-	// offset = 37, 69
-	
 	public FullscreenCardsPanel (ImageIcon[] ii, ArrayList<Structure> ca, Controller c) {
 		setLayout(null);
 		//setSize(1280, 860);
 		setOpaque(false);
-		
 		
 		cardImages = ii;
 		cards = ca;
@@ -45,6 +43,14 @@ public class FullscreenCardsPanel extends JPanel {
 		
 		totalWidth = 0;
 		
+		update();
+	}
+	
+	public void update() {
+		cardArr.clear();
+		labels.clear();
+		labelBg.clear();
+		this.removeAll();
 		for(int i = 0; i < cards.size(); i++) {
 			cardArr.add(new JLabel(cardImages[cards.get(i).getID()]));
 			cardArr.get(i).setSize(182, 280);
@@ -80,5 +86,9 @@ public class FullscreenCardsPanel extends JPanel {
 			add(labelBg.get(i));
 			add(cardArr.get(i));
 		}
+	}
+	
+	public void setCards(ArrayList<Structure> c) {
+		cards = c;
 	}
 }
