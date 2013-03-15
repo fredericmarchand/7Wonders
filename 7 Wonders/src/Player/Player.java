@@ -22,7 +22,7 @@ public class Player extends User {
 	//constructors
 	public Player()
 	{
-		super(0, "noob");
+		super("noob", 0);
 		wonderBoard = new WonderBoard();
 		cards = new ArrayList<Structure>();
 		chosenCard = null;
@@ -34,11 +34,11 @@ public class Player extends User {
 		resetResources();
 	}
 	
-	public Player(String uname, int id)
+	public Player(String uname, long id)
 	{
 		//username = uname;
 		//ID = id;
-		super(id, uname);
+		super(uname, id);
 		wonderBoard = new WonderBoard();
 		cards = new ArrayList<Structure>();
 		chosenCard = null;
