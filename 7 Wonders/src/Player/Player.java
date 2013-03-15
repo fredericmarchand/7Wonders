@@ -143,6 +143,11 @@ public class Player extends User {
 		//chosenCard = cards.remove(index);
 	}
 	
+	public void chooseCard(Structure s)
+	{
+		chosenCard = s;
+	}
+	
 	public void addShields(int s)
 	{
 		shields += s;
@@ -222,7 +227,7 @@ public class Player extends User {
 					else if ( se.getID() == WonderStageCoinBonus.WonderStageCoinBonusID )
 						((WonderStageCoinBonus)se).acquireCoins(this);
 				}
-				chosenCard = null;
+				//chosenCard = null;
 				return 2;
 			}
 			else return 1;
@@ -253,7 +258,7 @@ public class Player extends User {
 			else if ( se.getID() == WonderStageCoinBonus.WonderStageCoinBonusID )
 				((WonderStageCoinBonus)se).acquireCoins(this);
 		}
-		chosenCard = null;
+		//chosenCard = null;
 		return true;
 	}
 	
@@ -277,8 +282,9 @@ public class Player extends User {
 	public void discard(ArrayList<Structure> discardedCards)
 	{
 		resources.addCoins(3); 
+		cards.remove(chosenCard);
 		discardedCards.add(chosenCard);
-		chosenCard = null;
+		//chosenCard = null;
 	}
 	
 	//this function must be called after a player has selected their card on the last turn of an age
