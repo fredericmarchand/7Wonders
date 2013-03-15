@@ -1,6 +1,8 @@
 package Controls;
 
 import java.util.ArrayList;
+
+import Player.AIPlayer;
 import Player.Player;
 import Structures.Effects.*;
 import Structures.Structure;
@@ -53,7 +55,26 @@ public class Match {
 		age2Deck = CardHandler.BuildAge2Deck(numPlayers);
 		age3Deck = CardHandler.BuildAge3Deck(numPlayers);
 		discarded = new ArrayList<Structure>();
-		state = GameController.BEGINNINGOFGAME;		
+		state = GameController.BEGINNINGOFGAME;
+	}
+	
+	public void init() {
+		System.out.println(players.size());
+		CardHandler.DistributeRandomWonderBoards(players, 0);
+		for ( Player p: players )
+		{
+			p.getResources().addCoins(3);
+		}
+		CardHandler.DistributeCards(players, age1Deck);
+	}
+	
+	public void addLocalPlayer(Player p) {
+		players.add(p);
+	}
+	
+	public void fillWithAI() {
+		for (int i = players.size(); i < 7; i++)
+			players.add(new AIPlayer());
 	}
 	
 	public ArrayList<Structure> getDiscardedCards()

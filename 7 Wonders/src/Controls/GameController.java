@@ -2,6 +2,8 @@ package Controls;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import Player.Player;
 import Structures.Structure;
 import Structures.Effects.ScientificSymbolBonus;
@@ -9,6 +11,7 @@ import Structures.Effects.SpecialEffect;
 import Tokens.Resources;
 import Tokens.ScientificSymbols;
 import View.Controller;
+import View.MainFrame;
 
 public class GameController implements Controller {
 
@@ -189,12 +192,16 @@ public class GameController implements Controller {
 	
 	public static void main(String args[])
 	{
-		System.out.println("Hi, input your username: ");
-		java.util.Scanner in = new java.util.Scanner(System.in);
-		String name = in.nextLine();
+		String name = JOptionPane.showInputDialog("What is your username? ");
 		Player np = new Player(name, 0);
 		Match mat = new Match();
+		mat.addLocalPlayer(np);
+		mat.fillWithAI();
+		mat.init();
 		GameController gc = new GameController(np, mat);
+		MainFrame frame = new MainFrame(gc);
+		frame.startMatch(mat);
+		frame.setVisible(true);
 	}
 	
 }

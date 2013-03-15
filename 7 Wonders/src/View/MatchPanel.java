@@ -36,12 +36,12 @@ public class MatchPanel extends JPanel {
 	
 	private Controller controller;
 	
-	public MatchPanel(int numPlayers, Controller c) {
+	public MatchPanel(Match m, Controller c) {
 		setLayout(null);
 		setSize(1280, 860);
 		setBackground(Color.WHITE);
 		
-		match = new Match(7);
+		match = m;
 		controller = c;
 		
 		// Load all the Card images
