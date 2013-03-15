@@ -50,22 +50,19 @@ public class Match {
 		players = new ArrayList<Player>();
 		age = 1;
 		turn = 1;
-		in = new Scanner(System.in);
+	}
+	
+	public void init() {
+		//System.out.println(players.size());
+		numPlayers = players.size();
 		age1Deck = CardHandler.BuildAge1Deck(numPlayers);
 		age2Deck = CardHandler.BuildAge2Deck(numPlayers);
 		age3Deck = CardHandler.BuildAge3Deck(numPlayers);
 		discarded = new ArrayList<Structure>();
-		state = GameController.BEGINNINGOFGAME;
-	}
-	
-	public void init() {
-		System.out.println(players.size());
 		CardHandler.DistributeRandomWonderBoards(players, 0);
-		for ( Player p: players )
-		{
-			p.getResources().addCoins(3);
-		}
+		for ( Player p: players ) p.getResources().addCoins(3);
 		CardHandler.DistributeCards(players, age1Deck);
+		state = GameController.BEGINNINGOFGAME;
 	}
 	
 	public void addLocalPlayer(Player p) {
