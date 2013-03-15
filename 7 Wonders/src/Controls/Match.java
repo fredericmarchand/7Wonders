@@ -63,6 +63,7 @@ public class Match {
 		for ( Player p: players ) p.getResources().addCoins(3);
 		CardHandler.DistributeCards(players, age1Deck);
 		state = GameController.BEGINNINGOFGAME;
+		addInitialResources(players);
 	}
 	
 	public void addLocalPlayer(Player p) {

@@ -11,7 +11,7 @@ public class ResourcesBonus extends SpecialEffect {
 		
 		public ResourcesBonus(int ore, int stone, int wood, int clay, int glass, int loom, int papyrus)
 		{
-			super(ResourcesBonusID, true, RELOAD_EVERY_TURN, START_OF_TURN);
+			super(ResourcesBonusID, false, RELOAD_EVERY_TURN, START_OF_TURN);
 			resources = new Resources(ore, stone, wood, clay, glass, loom, papyrus, 0);
 		}
 		
