@@ -425,6 +425,31 @@ public class Match {
 		
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	public void handleAIPlayerMoves()
+	{
+		for ( Player p : players )
+		{
+			if ( p instanceof AIPlayer )
+			{
+				((AIPlayer)p).pickCard(discarded);
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/**
 	 * @param args
