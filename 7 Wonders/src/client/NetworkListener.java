@@ -102,6 +102,12 @@ public class NetworkListener extends Listener{
 		if(o instanceof Packet7MatchFunction){
 			mclient.turn((Packet7MatchFunction)o);
 		}
+		if(o instanceof Packet8ClientResponse){
+			
+		}
+		if(o instanceof Packet9StartMatch){
+			mclient.startMatch();
+		}
 	}
 
 }

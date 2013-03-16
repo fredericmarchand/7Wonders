@@ -73,7 +73,9 @@ public class Lobby extends JFrame implements ListSelectionListener {
         
 	     create.addActionListener(new ActionListener(){
 	            public void actionPerformed(ActionEvent e){
-	               
+	            	setVisible(false);
+		               CreateMenu mc = new CreateMenu(mclient);
+		               mc.showGUI();
 	            }
 	        });
 	     
