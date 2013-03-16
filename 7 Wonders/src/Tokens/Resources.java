@@ -246,6 +246,7 @@ public class Resources {
 	
 	public boolean compare(Resources r)
 	{
+		if(r == null) return false;
 		if ( r.ore != ore ) return false;
 		if ( r.clay != clay ) return false;
 		if ( r.coins != coins ) return false;
