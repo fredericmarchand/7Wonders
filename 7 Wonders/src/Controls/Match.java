@@ -463,12 +463,6 @@ public class Match {
 				((AIPlayer)p).pickCard(discarded);
 			}
 
-				for ( Structure s: p.getCards() ) 
-				{
-				 	System.out.println(s.getName());
-				}
-				System.out.println(p.getCards().size());
-
 		}
 	}
 	
