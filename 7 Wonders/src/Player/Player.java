@@ -252,6 +252,7 @@ public class Player extends User {
 	{
 		buyResources(leftNeighbor, rightNeighbor, chosenCard.getResourceCost(), preference);	
 		wonderBoard.buildStructure(chosenCard);
+		purchased = new Resources();
 		for ( SpecialEffect se : chosenCard.getEffects() )
 		{				
 			if ( se.getID() == CoinBonus.CoinBonusID )
@@ -281,14 +282,17 @@ public class Player extends User {
 	
 	public boolean buildStage(Player leftNeighbor, Player rightNeighbor, int preference)
 	{
-		boolean ans = wonderBoard.buildStage(chosenCard, Resources.addResources(unavailableResources, Resources.addResources(resources, extraResources)));
+		//boolean ans = wonderBoard.buildStage(chosenCard, Resources.addResources(unavailableResources, Resources.addResources(resources, extraResources)));
 		
-		if ( ans ) return true;
-		else 
-		{
+		//if ( ans ) return true;
+		//else 
+		//{
 			buyResources(leftNeighbor, rightNeighbor, wonderBoard.getNextStageCost(), preference);
-			return wonderBoard.buildStage(chosenCard, Resources.addResources(purchased, Resources.addResources(unavailableResources, Resources.addResources(resources, extraResources))));
-		}
+			
+			wonderBoard.buildStage(chosenCard, Resources.addResources(purchased, Resources.addResources(unavailableResources, Resources.addResources(resources, extraResources))));
+			purchased = new Resources();
+		//}
+		return true;
 	}
 	
 	public void discard(ArrayList<Structure> discardedCards)
@@ -338,7 +342,9 @@ public class Player extends User {
 		else val = preference;
 			
 		purchased.buyResources(leftNeighbor, rightNeighbor, missing, sumup, preference);
-	
+		resources.addCoins(purchased.getCoins());
+		purchased.addCoins(0*purchased.getCoins());
+		
 		return true;
 	}
 	
@@ -367,7 +373,7 @@ public class Player extends User {
 		if ( Resources.addResources(
 				Resources.addResources(leftNeighbor.getResources(), leftNeighbor.getExtraResources()), 
 				Resources.addResources(rightNeighbor.getResources(), rightNeighbor.getExtraResources())).hasRequiredResources(missing) 
-				&& price <= resources.getCoins() )
+				 && price <= resources.getCoins() )
 			return true;
 		return false;
 	}
