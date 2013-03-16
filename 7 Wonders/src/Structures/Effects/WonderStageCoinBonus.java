@@ -23,7 +23,7 @@ public class WonderStageCoinBonus extends SpecialEffect {
 			{
 				if ( s.isBuilt() ) ++count;
 			}
-			p.getResources().addCoins(amountOfCoins * count);
+			p.getOwnedResources().addCoins(amountOfCoins * count);
 		}	
 		usedUp = true;
 	}

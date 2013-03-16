@@ -43,7 +43,7 @@ public class Match {
 		CardHandler.DistributeRandomWonderBoards(players, 0);
 		for ( Player p: players )
 		{
-			p.getResources().addCoins(3);
+			p.getOwnedResources().addCoins(3);
 		}
 		CardHandler.DistributeCards(players, age1Deck);
 		
@@ -64,7 +64,7 @@ public class Match {
 		age3Deck = CardHandler.BuildAge3Deck(numPlayers);
 		discarded = new ArrayList<Structure>();
 		CardHandler.DistributeRandomWonderBoards(players, 0);
-		for ( Player p: players ) p.getResources().addCoins(3);
+		for ( Player p: players ) p.getOwnedResources().addCoins(3);
 		CardHandler.DistributeCards(players, age1Deck);
 		addInitialResources(players);
 		//state = GameController.BEGINNINGOFGAME;
@@ -144,7 +144,7 @@ public class Match {
 			players.add(new Player(un, (i * r.nextInt())));
 		}
 		CardHandler.DistributeRandomWonderBoards(players, 0);
-		for ( Player p: players ) p.getResources().addCoins(3);
+		for ( Player p: players ) p.getOwnedResources().addCoins(3);
 		
 		for ( age = 1; age < 4; ++age )
 		{

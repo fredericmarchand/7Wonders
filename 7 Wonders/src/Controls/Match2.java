@@ -36,7 +36,7 @@ public class Match2 {
 		CardHandler.DistributeRandomWonderBoards(players, 0);
 		for ( Player p: players )
 		{
-			p.getResources().addCoins(3);
+			p.getOwnedResources().addCoins(3);
 			addInitialResources(players);
 		}
 		CardHandler.DistributeCards(players, age1Deck);
