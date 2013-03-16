@@ -164,6 +164,7 @@ public class Match2 {
 			if ( age == 2 ) CardHandler.DistributeCards(players, age2Deck);
 			if ( age == 3 ) CardHandler.DistributeCards(players, age3Deck);
 		}
+		else ++turn;
 
 		/*endOfGameSpecialEffects(players);
 		countPlayersVictoryPoints();*/
