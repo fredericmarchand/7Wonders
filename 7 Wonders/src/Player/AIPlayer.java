@@ -29,18 +29,6 @@ public class AIPlayer extends Player {
 			getResources().addCoins(3);
 		}
 		cards.remove(chosenCardIndex);
-		
-		/*int chosenIndex = -1;
-		for (Structure s : getCards())
-		{
-			chosenIndex = getCards().indexOf(s);
-			break;				
-		}
-		if (chosenIndex != -1)
-		{
-			chooseCard(chosenIndex);
-			discard(disca);
-		}*/
 	}
 	
 
