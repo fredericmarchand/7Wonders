@@ -67,8 +67,8 @@ public class GameController implements Controller {
 		}
 		user.getCards().remove(user.getChosenCard());
 		user.chooseCard(null);
-		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
 		match.handleAIPlayerMoves();
+		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
 		if ( match.getTurn() == 6 )
 		{
 			PlayerInteraction.SettleMilitaryConflicts(match.getPlayers(), match.getAge());
@@ -105,8 +105,8 @@ public class GameController implements Controller {
 		}
 		user.getCards().remove(user.getChosenCard());
 		user.chooseCard(null);
-		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
 		match.handleAIPlayerMoves();
+		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
 		if ( match.getTurn() == 6 )
 		{
 			PlayerInteraction.SettleMilitaryConflicts(match.getPlayers(), match.getAge());
@@ -213,8 +213,8 @@ public class GameController implements Controller {
 		user.discard(match.getDiscardedCards());
 		//user.getCards().remove(user.getChosenCard());
 		user.chooseCard(null);
-		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
 		match.handleAIPlayerMoves();
+		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
 		if ( match.getTurn() == 6 )
 		{
 			PlayerInteraction.SettleMilitaryConflicts(match.getPlayers(), match.getAge());
@@ -229,14 +229,7 @@ public class GameController implements Controller {
 			}
 		}
 		else match.setTurn(match.getTurn()+1);
-		//for ( Player pap: match.getPlayers() )
-		//{
-		//	for ( Structure s: pap.getCards() ) 
-		//	{
-		//	 	System.out.println(s.getName());
-		//	}
-		//	System.out.println(pap.getCards().size());
-		//}
+
 		frame.update();
 	}
 
