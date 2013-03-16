@@ -179,8 +179,7 @@ public class Player extends User {
 	
 	public int canBuild(Player left, Player right)
 	{
-		if ( !wonderBoard.containsCard(
-				chosenCard.getID()) )
+		if ( !wonderBoard.containsCard(chosenCard.getID()) )
 		{
 			if ( ((chosenCard.getResourceCost().canAfford(Resources.addResources(extraResources, resources, unavailableResources)) 
 					|| chosenCard.canBuildForFree(wonderBoard)))  )
@@ -240,6 +239,8 @@ public class Player extends User {
 						((WonderStageCoinBonus)se).acquireCoins(this);
 				}
 				//chosenCard = null;
+				unavailableResources = new Resources();
+				extraResources = new Resources();
 				return 2;
 			}
 			else return 1;
@@ -253,6 +254,8 @@ public class Player extends User {
 		buyResources(leftNeighbor, rightNeighbor, chosenCard.getResourceCost(), preference);	
 		wonderBoard.buildStructure(chosenCard);
 		purchased = new Resources();
+		unavailableResources = new Resources();
+		extraResources = new Resources();
 		for ( SpecialEffect se : chosenCard.getEffects() )
 		{				
 			if ( se.getID() == CoinBonus.CoinBonusID )
@@ -277,7 +280,10 @@ public class Player extends User {
 	
 	public boolean buildStage()
 	{
-		return wonderBoard.buildStage(chosenCard, Resources.addResources(unavailableResources, Resources.addResources(resources, extraResources)));
+		wonderBoard.buildStage(chosenCard, Resources.addResources(unavailableResources, Resources.addResources(resources, extraResources)));
+		unavailableResources = new Resources();
+		extraResources = new Resources();
+		return true;
 	}
 	
 	public boolean buildStage(Player leftNeighbor, Player rightNeighbor, int preference)
@@ -291,6 +297,8 @@ public class Player extends User {
 			
 			wonderBoard.buildStage(chosenCard, Resources.addResources(purchased, Resources.addResources(unavailableResources, Resources.addResources(resources, extraResources))));
 			purchased = new Resources();
+			unavailableResources = new Resources();
+			extraResources = new Resources();
 		//}
 		return true;
 	}
@@ -337,12 +345,14 @@ public class Player extends User {
 		//finds what resources need to be purchased from neighbors
 		Resources missing = (Resources.addResources(extraResources, Resources.addResources(resources, unavailableResources))).findMissingResources(required);
 		
-		if ( preference == 2 )
+		if ( preference != 1 || preference != 0 )
 			val = r.nextInt(2);
 		else val = preference;
 			
-		purchased.buyResources(leftNeighbor, rightNeighbor, missing, sumup, preference);
-		resources.addCoins(purchased.getCoins());
+		ArrayList revenue = purchased.buyResources(leftNeighbor, rightNeighbor, missing, sumup, val);
+		leftNeighbor.getResources().addCoins((int)revenue.get(0));
+		rightNeighbor.getResources().addCoins((int)revenue.get(1));
+		resources.addCoins(-1*sumup.bulkPrice(missing, leftNeighbor.getResources(), rightNeighbor.getResources()));
 		purchased.addCoins(0*purchased.getCoins());
 		
 		return true;

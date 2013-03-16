@@ -92,7 +92,113 @@ public class TradingPerks extends SpecialEffect {
 		{
 			price += missing.getPrimaryCount();
 		}
-		else if ( hasPrimaryRight && !hasPrimaryLeft )
+		else if ( hasPrimaryLeft )//cheaper price for left
+		{
+			//buy as much as you can at discount from left
+			//buy rest at regular price from right
+			if ( missing.getOre() > 0 )
+			{
+				if ( left.getOre() >= missing.getOre() )
+				{//buy all from left
+					price += missing.getOre();
+				}
+				else
+				{
+					price += left.getOre();
+					price += (2*(missing.getOre() - left.getOre()));
+				}
+			}
+			if ( missing.getStone() > 0 )
+			{
+				if ( left.getStone() >= missing.getStone() )
+				{//buy all from left
+					price += missing.getStone();
+				}
+				else
+				{
+					price += left.getStone();
+					price += (2*(missing.getStone() - left.getStone()));
+				}
+			}
+			if ( missing.getWood() > 0 )
+			{
+				if ( left.getWood() >= missing.getWood() )
+				{//buy all from left
+					price += missing.getWood();
+				}
+				else
+				{
+					price += left.getWood();
+					price += (2*(missing.getWood() - left.getWood()));
+				}
+			}
+			if ( missing.getClay() > 0 )
+			{
+				if ( left.getClay() >= missing.getClay() )
+				{//buy all from left
+					price += missing.getClay();
+				}
+				else
+				{
+					price += left.getClay();
+					price += (2*(missing.getClay() - left.getClay()));
+				}
+			}
+		}
+		else if ( hasPrimaryRight )//cheaper price for right
+		{
+			//buy as much as you can at discount from right
+			//buy rest at regular price from left
+			if ( missing.getOre() > 0 )
+			{
+				if ( right.getOre() >= missing.getOre() )
+				{//buy all from right
+					price += missing.getOre();
+				}
+				else
+				{
+					price += right.getOre();
+					price += (2*(missing.getOre() - right.getOre()));
+				}
+			}
+			if ( missing.getStone() > 0 )
+			{
+				if ( right.getStone() >= missing.getStone() )
+				{//buy all from right
+					price += missing.getStone();
+				}
+				else
+				{
+					price += right.getStone();
+					price += (2*(missing.getStone() - right.getStone()));
+				}
+			}
+			if ( missing.getWood() > 0 )
+			{
+				if ( right.getWood() >= missing.getWood() )
+				{//buy all from right
+					price += missing.getWood();
+				}
+				else
+				{
+					price += right.getWood();
+					price += (2*(missing.getWood() - right.getWood()));
+				}
+			}
+			if ( missing.getClay() > 0 )
+			{
+				if ( right.getClay() >= missing.getClay() )
+				{//buy all from right
+					price += missing.getClay();
+				}
+				else
+				{
+					price += right.getClay();
+					price += (2*(missing.getClay() - right.getClay()));
+				}
+			}
+		}
+		/*else if ( hasPrimaryRight && !hasPrimaryLeft )
 		{
 			if ( missing.getPrimaryCount() <= right.getPrimaryCount() )
 				price += missing.getPrimaryCount();
@@ -111,7 +217,7 @@ public class TradingPerks extends SpecialEffect {
 				price += left.getPrimaryCount();
 				price += 2*(missing.getPrimaryCount() - left.getPrimaryCount());
 			}
-		}
+		}*/
 		else
 		{
 			price += 2*missing.getPrimaryCount();
@@ -140,7 +246,7 @@ public class TradingPerks extends SpecialEffect {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TradingPerks tp = new TradingPerks(0,0);
+		TradingPerks tp = new TradingPerks(3,0);
 		System.out.println(tp.bulkPrice(new Resources(1, 0, 1, 0, 1, 0, 0, 0), new Resources(1, 0, 0, 0, 0, 0, 0, 0), new Resources(0, 0, 1, 0, 1, 0, 0, 0)));
 	}
 
