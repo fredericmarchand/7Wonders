@@ -25,7 +25,6 @@ public class MClient {
     public boolean GAME_ALIVE;
     private boolean host = false;
     private ArrayList<Long> matchList;
-    
     //if client has yet to join a game 
     //match ID is 0
     private long matchID = 0000;
@@ -37,7 +36,7 @@ public class MClient {
         
     //player receive game
     public MClient(){
-    	
+    	matchList = new ArrayList<Long>();
     	client = new Client();
     	NetworkListener nl = new NetworkListener(this);
     	chat = new Chat(this);
@@ -103,6 +102,12 @@ public class MClient {
 
     }
     
+    public void sendCreateMatchRequest(){
+    	Packet2Message mpackage = new Packet2Message();
+        mpackage.setObject("CREATE");
+        client.sendTCP(mpackage);
+    }
+    
     //get/set host values
     public void setHost(boolean h){host = h;}
     public boolean getHost(){return host;}
@@ -139,6 +144,7 @@ public class MClient {
 			e.printStackTrace();
 			client.stop();
 		}
+    	client.sendTCP(new Packet0LoginRequest());
     }
     
 

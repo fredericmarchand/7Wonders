@@ -46,8 +46,9 @@ public class NetworkListener extends Listener{
 		if(o instanceof Packet1LoginAnswer){
 			if(!((Packet1LoginAnswer)o).getAccepted()){
 				c.close();
-				mclient.setMatchList((ArrayList<Long>)((Packet1LoginAnswer)o).getObject());
+				
 			}
+			mclient.setMatchList((ArrayList<Long>)((Packet1LoginAnswer)o).getObject());
 			mclient.setID(((Packet1LoginAnswer)o).getIDValue());
 		}
 		//check if client has been able to join game
@@ -82,6 +83,7 @@ public class NetworkListener extends Listener{
 								mclient.setMID((long)((Packet4Object)o).getObject());
 								mclient.setHost(true);
 								System.out.println("[CLIENT] SET TO HOST");
+								System.out.println((long)((Packet4Object)o).getObject());
 							}
 							else{
 								//failed to create game
