@@ -1,10 +1,7 @@
 package Player;
 
-import WonderBoards.WonderBoard;
 import Structures.Structure;
 import java.util.ArrayList;
-import Tokens.*;
-import java.util.Random;
 
 public class AIPlayer extends Player {
 

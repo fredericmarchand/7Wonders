@@ -149,6 +149,7 @@ public class MatchPanel extends JPanel {
 	public void update() {
 		cardsPanel.setCards(match.getPlayers().get(0).getCards());
 		lblAge.setIcon(new ImageIcon(MatchPanel.class.getResource("/Images/Icons/age" + match.getAge() + ".png")));
+		lblTurn.setText("Round "+ match.getTurn() +" of 6");
 		cardsPanel.update();
 		playerPanel.update();
 		f1.update();

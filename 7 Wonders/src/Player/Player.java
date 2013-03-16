@@ -302,6 +302,7 @@ public class Player extends User {
 	public boolean buyResources(Player leftNeighbor, Player rightNeighbor, Resources required, int preference)
 	{
 		Random r = new Random();
+		@SuppressWarnings("unused")
 		int val;
 		
 		TradingPerks sumup;

@@ -20,6 +20,7 @@ public class LocalPanel extends JPanel {
 					 lblGears, lblCompass, lblVictory, lblMilitary, lblNegConflict, lblPosConflict, 
 					 lblOre, lblStone, lblWood, lblGlass, lblPapyrus, lblCoin, lblLoom;
 	
+	@SuppressWarnings("unused")
 	private Controller controller;
 	
 	public LocalPanel(Player p, Controller c) {

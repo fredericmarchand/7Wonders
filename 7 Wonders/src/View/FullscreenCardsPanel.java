@@ -4,14 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.Scrollable;
 
 import Structures.Structure;
 
@@ -23,6 +20,7 @@ public class FullscreenCardsPanel extends JPanel {
 	private ArrayList<Structure> cards;
 	private Image lblBgImage;
 	
+	@SuppressWarnings("unused")
 	private Controller controller;
 	
 	private int totalWidth;

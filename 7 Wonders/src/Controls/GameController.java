@@ -206,6 +206,7 @@ public class GameController implements Controller {
 	public static void main(String args[])
 	{
 		String name = JOptionPane.showInputDialog("What is your username? ");
+		@SuppressWarnings("unused")
 		GameController gc = new GameController(new Player(name, 0), new Match());
 	}
 	
