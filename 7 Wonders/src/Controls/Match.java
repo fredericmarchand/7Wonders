@@ -64,7 +64,6 @@ public class Match {
 		CardHandler.DistributeCards(players, age1Deck);
 		addInitialResources(players);
 		state = GameController.BEGINNINGOFGAME;
-		addInitialResources(players);
 	}
 	
 	public void addLocalPlayer(Player p) {
@@ -101,9 +100,32 @@ public class Match {
 		return turn;
 	}
 	
+	public void setAge(int a)
+	{
+		age = a;
+	}
+	
+	public void setTurn(int t)
+	{
+		turn = t;
+	}
+	
 	public ArrayList<Player> getPlayers()
 	{
 		return players;
+	}
+	
+	public ArrayList<Structure> getDeck()
+	{
+		switch ( age )
+		{
+			case 1: return age1Deck;
+				
+			case 2: return age2Deck;
+				
+			case 3: return age3Deck;
+		}
+		return null;
 	}
 	
 	public void runGame()
@@ -436,10 +458,17 @@ public class Match {
 	{
 		for ( Player p : players )
 		{
-			if ( p instanceof AIPlayer )
+			if ( p.ai() )
 			{
 				((AIPlayer)p).pickCard(discarded);
 			}
+
+				for ( Structure s: p.getCards() ) 
+				{
+				 	System.out.println(s.getName());
+				}
+				System.out.println(p.getCards().size());
+
 		}
 	}
 	

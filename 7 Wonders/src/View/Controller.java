@@ -27,7 +27,7 @@ public interface Controller {
 	void scienceChosen(ScientificSymbols s);
 	
 	// Pass one of each resource that can be selected
-	Resources needToChooseResources();
+	ArrayList<Resources> needToChooseResources();
 	void resourceChosen(Resources r);
 	
 	// int 0 = left, 1 = right, 2 = random

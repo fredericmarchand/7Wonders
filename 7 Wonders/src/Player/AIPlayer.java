@@ -11,12 +11,21 @@ public class AIPlayer extends Player {
 	
 	public AIPlayer(){
 		super();
+		isAI = true;
 	}
 	
 	public void pickCard(ArrayList<Structure> disca)
 	{
-		chooseCard(0);
-		discard(disca);
+		getCards().remove(0);
+		getResources().addCoins(3);
+		//chooseCard(0);
+		//discard(disca);
+		int l = 0;
+		//for ( Structure s: getCards() ) 
+	//	{
+//		 	System.out.println(l++ + s.getName());
+//		}
+//		System.out.println("");
 		/*int chosenIndex = -1;
 		for (Structure s : getCards())
 		{
@@ -30,6 +39,5 @@ public class AIPlayer extends Player {
 		}*/
 	}
 	
-	
-	
+
 }

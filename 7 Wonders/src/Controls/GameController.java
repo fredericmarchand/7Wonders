@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 
 import Player.Player;
 import Structures.Structure;
+import Structures.Effects.ResourceChoice;
 import Structures.Effects.ScientificSymbolBonus;
 import Structures.Effects.SpecialEffect;
 import Tokens.Resources;
@@ -69,6 +70,21 @@ public class GameController implements Controller {
 		user.chooseCard(null);
 		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
 		match.handleAIPlayerMoves();
+		if ( match.getTurn() == 6 )
+		{
+			PlayerInteraction.SettleMilitaryConflicts(match.getPlayers(), match.getAge());
+			match.setAge(match.getAge()+1);
+			match.setTurn(1);
+			if ( match.getAge() == 2 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
+			if ( match.getAge() == 3 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
+			if ( match.getAge() == 4 ) 
+			{
+				match.setAge(1); 
+				System.out.println("Game Over");
+			}
+		}
+		else match.setTurn(match.getTurn()+1);
+		
 		frame.update();
 	}
 
@@ -92,6 +108,20 @@ public class GameController implements Controller {
 		user.chooseCard(null);
 		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
 		match.handleAIPlayerMoves();
+		if ( match.getTurn() == 6 )
+		{
+			PlayerInteraction.SettleMilitaryConflicts(match.getPlayers(), match.getAge());
+			match.setAge(match.getAge()+1);
+			match.setTurn(1);
+			if ( match.getAge() == 2 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
+			if ( match.getAge() == 3 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
+			if ( match.getAge() == 4 ) 
+			{
+				match.setAge(1); 
+				System.out.println("Game Over");
+			}
+		}
+		else match.setTurn(match.getTurn()+1);
 		frame.update();
 	}
 
@@ -126,20 +156,30 @@ public class GameController implements Controller {
 	}
 
 	@Override
-	public Resources needToChooseResources() {
+	public ArrayList<Resources> needToChooseResources() {
 		// TODO Auto-generated method stub
-		for ( Structure s: user.getWonderBoard().getPurpleCards() )
+		ArrayList<Resources> resources = new ArrayList<Resources>();
+		for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
 			{
-				if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
+				if ( se.getID() == ResourceChoice.ResourceChoiceID )
 				{
-					if ( ((ScientificSymbolBonus)se).canChoose() )
-						return new Resources();
+					resources.add(((ResourceChoice)se).getPossibilities());
 				}
 			}
 		}
-		return null;
+		for ( Structure s: user.getWonderBoard().getBrownGreyCards() )
+		{
+			for ( SpecialEffect se: s.getEffects() )
+			{
+				if ( se.getID() == ResourceChoice.ResourceChoiceID )
+				{
+					resources.add(((ResourceChoice)se).getPossibilities());
+				}
+			}
+		}
+		return resources;
 	}
 
 	@Override
@@ -178,10 +218,32 @@ public class GameController implements Controller {
 	public void discardChosen() {
 		// TODO Auto-generated method stub
 		user.discard(match.getDiscardedCards());
-		user.getCards().remove(user.getChosenCard());
+		//user.getCards().remove(user.getChosenCard());
 		user.chooseCard(null);
 		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
 		match.handleAIPlayerMoves();
+		if ( match.getTurn() == 6 )
+		{
+			PlayerInteraction.SettleMilitaryConflicts(match.getPlayers(), match.getAge());
+			match.setAge(match.getAge()+1);
+			match.setTurn(1);
+			if ( match.getAge() == 2 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
+			if ( match.getAge() == 3 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
+			if ( match.getAge() == 4 ) 
+			{
+				match.setAge(1); 
+				System.out.println("Game Over");
+			}
+		}
+		else match.setTurn(match.getTurn()+1);
+		//for ( Player pap: match.getPlayers() )
+		//{
+		//	for ( Structure s: pap.getCards() ) 
+		//	{
+		//	 	System.out.println(s.getName());
+		//	}
+		//	System.out.println(pap.getCards().size());
+		//}
 		frame.update();
 	}
 

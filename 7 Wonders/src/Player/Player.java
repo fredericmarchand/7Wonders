@@ -13,11 +13,13 @@ public class Player extends User {
 	private WonderBoard wonderBoard;
 	private ArrayList<Structure> cards;
 	private Structure chosenCard;
+	private int chosenCardIndex;
 	private Resources resources, extraResources, purchased, unavailableResources;
 	private int shields;
 	private ConflictTokens conflictTokens;
 	private int victoryPoints;
 	private ScientificSymbols scientificSymbols;
+	protected boolean isAI;
 	
 	//constructors
 	public Player()
@@ -32,6 +34,7 @@ public class Player extends User {
 		victoryPoints = 0;
 		scientificSymbols = new ScientificSymbols();
 		resetResources();
+		isAI = false;
 	}
 	
 	public Player(String uname, long id)
@@ -48,8 +51,13 @@ public class Player extends User {
 		shields = 0;
 		victoryPoints = 0;
 		scientificSymbols = new ScientificSymbols();
+		isAI = false;
 	}
 
+	public boolean ai()
+	{
+		return isAI;
+	}
 	
 	public ArrayList<Structure> getCards()
 	{
@@ -134,12 +142,14 @@ public class Player extends User {
 	
 	public void assignCards(ArrayList<Structure> newCards)
 	{
-		cards = newCards;
+		cards.clear();
+		cards.addAll(newCards);
 	}
 	
 	public void chooseCard(int index)
 	{
 		chosenCard = cards.get(index);
+		chosenCardIndex = index;
 		//chosenCard = cards.remove(index);
 	}
 	
@@ -283,7 +293,7 @@ public class Player extends User {
 	public void discard(ArrayList<Structure> discardedCards)
 	{
 		resources.addCoins(3); 
-		cards.remove(chosenCard);
+		cards.remove(chosenCardIndex);
 		discardedCards.add(chosenCard);
 		//chosenCard = null;
 	}
