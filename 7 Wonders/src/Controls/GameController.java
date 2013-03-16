@@ -276,7 +276,6 @@ public class GameController implements Controller {
 
 	@Override
 	public void resourceChosen(ArrayList<Resources> resources) {
-		//System.out.println(r);
 		int i = 0;
 		for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
@@ -284,7 +283,7 @@ public class GameController implements Controller {
 			{
 				if ( se.getID() == ResourceChoice.ResourceChoiceID )
 				{
-					user.getUnvResources().addResources(resources.get(i));
+					user.getUnvResources().addResources(resources.get(i++));
 				}
 			}
 		}
@@ -294,10 +293,13 @@ public class GameController implements Controller {
 			{
 				if ( se.getID() == ResourceChoice.ResourceChoiceID )
 				{
-					user.getExtraResources().addResources(resources.get(i));
+					user.getExtraResources().addResources(resources.get(i++));
 				}
 			}
 		}
+		//System.out.println(user.getTotalResources().toString());
+		if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
+			frame.update();
 	}
 	
 }

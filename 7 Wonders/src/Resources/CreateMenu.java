@@ -41,6 +41,7 @@ public class CreateMenu extends JFrame {
 	    create.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                mclient.sendCreateMatchRequest();
+               setVisible(false);
             }
         });
 		

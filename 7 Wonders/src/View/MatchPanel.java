@@ -46,6 +46,8 @@ public class MatchPanel extends JPanel {
 		setSize(1280, 860);
 		setBackground(Color.WHITE);
 		
+		picked = new ArrayList<Resources>();
+		
 		match = m;
 		controller = c;
 		picked = new ArrayList<Resources>();

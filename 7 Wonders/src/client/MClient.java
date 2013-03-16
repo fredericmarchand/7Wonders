@@ -106,6 +106,7 @@ public class MClient {
     	Packet2Message mpackage = new Packet2Message();
         mpackage.setObject("CREATE");
         client.sendTCP(mpackage);
+        chat.launchChatFrame();
     }
     
     //get/set host values
@@ -130,7 +131,7 @@ public class MClient {
     public Chat getChat(){return chat;}
     public void setUser(User u){user = u;}
     public User getUser(){return user;}
-    public void setUser_username(String s){}
+    public void setUser_username(String s){username = s;}
     public void setUser_ID(long id){}
     public void createUser(String uname, long id){
     	user = new User(uname, id);
@@ -216,6 +217,11 @@ public class MClient {
     	resp.setMID(matchID);
     	resp.setObject(msg);
     	client.sendTCP(resp);
+    }
+    
+    public void startMatch(){
+    	chat.countdown();
+    	//load match
     }
     
     //return to lobby
