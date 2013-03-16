@@ -48,6 +48,7 @@ public class MatchPanel extends JPanel {
 		
 		match = m;
 		controller = c;
+		picked = new ArrayList<Resources>();
 		
 		// Load all the Card images
 		int numCards = new File("src/Images/Cards").listFiles().length;
@@ -94,8 +95,10 @@ public class MatchPanel extends JPanel {
 		cardsPanel.addMouseListener(buildMouseAdapterCards());
 		
 		// Other
-		lblAge = new JLabel(new ImageIcon(MatchPanel.class.getResource("/Images/Icons/age1.png")));
-		lblAge.setBounds(576, 161, 128, 128);
+		lblAge = new JLabel(new ImageIcon(MatchPanel.class.getResource("/Images/Icons/age1.png")), SwingConstants.CENTER);
+		lblAge.setBounds(512, 161, 256, 128);
+		lblAge.setForeground(Color.BLACK);
+		lblAge.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		
 		lblTurn = new JLabel("Round 1 of 6", SwingConstants.CENTER);
 		lblTurn.setBounds(576, 295, 128, 25);
@@ -162,9 +165,14 @@ public class MatchPanel extends JPanel {
 	
 	public void update() {
 		cardsPanel.setCards(match.getPlayers().get(0).getCards());
-		lblAge.setIcon(new ImageIcon(MatchPanel.class.getResource("/Images/Icons/age" + match.getAge() + ".png")));
+		if(match.getAge() == 4) {
+			lblAge.setIcon(null);
+			lblAge.setText("GAME OVER!");
+		} else {
+			lblAge.setIcon(new ImageIcon(MatchPanel.class.getResource("/Images/Icons/age" + match.getAge() + ".png")));
+			lblAge.setText(null);
+		}
 		lblTurn.setText("Round "+ match.getTurn() +" of 6");
-		cardsPanel.update();
 		playerPanel.update();
 		f1.update();
 		f2.update();
@@ -172,6 +180,7 @@ public class MatchPanel extends JPanel {
 		f4.update();
 		n1.update();
 		n2.update();
+		cardsPanel.update();
 		
 		// Choose resources
 		need = controller.needToChooseResources();
@@ -185,6 +194,7 @@ public class MatchPanel extends JPanel {
 			return need.remove(0);
 		else {
 			controller.resourceChosen(picked);
+			picked.clear();
 			return null;
 		}
 	}
