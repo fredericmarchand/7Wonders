@@ -244,6 +244,20 @@ public class Resources {
 		return r;
 	}
 	
+	public boolean compare(Resources r)
+	{
+		if ( r.ore != ore ) return false;
+		if ( r.clay != clay ) return false;
+		if ( r.coins != coins ) return false;
+		if ( r.ore != ore ) return false;
+		if ( r.stone != stone ) return false;
+		if ( r.wood != wood ) return false;
+		if ( r.glass != glass ) return false;
+		if ( r.loom != loom ) return false;
+		if ( r.papyrus != papyrus ) return false;
+		return true;
+	}
+	
 	public ArrayList<Integer> buyResources(Player leftNeighbor, Player rightNeighbor, Resources required, TradingPerks prices, int preference)
 	{
 		ArrayList<Integer> neighborRevenue = new ArrayList<Integer>();

@@ -191,14 +191,6 @@ public class GameController implements Controller {
 	}
 
 	@Override
-	public void resourceChosen(ArrayList<Resources> resources) {
-		for ( Resources r: resources )
-		{
-			
-		}
-	}
-
-	@Override
 	public void needToChooseTradingPref() {
 		
 	}
@@ -279,6 +271,13 @@ public class GameController implements Controller {
 		String name = JOptionPane.showInputDialog("What is your username? ");
 		@SuppressWarnings("unused")
 		GameController gc = new GameController(new Player(name, 0), new Match());
+	}
+
+
+	@Override
+	public void resourceChosen(Resources r) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
