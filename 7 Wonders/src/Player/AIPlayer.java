@@ -1,6 +1,8 @@
 package Player;
 
 import Structures.Structure;
+import Tokens.Resources;
+
 import java.util.ArrayList;
 
 public class AIPlayer extends Player {
@@ -13,16 +15,21 @@ public class AIPlayer extends Player {
 	
 	public void pickCard(ArrayList<Structure> disca)
 	{
-		getCards().remove(0);
-		getResources().addCoins(3);
-		//chooseCard(0);
-		//discard(disca);
-		int l = 0;
-		//for ( Structure s: getCards() ) 
-	//	{
-//		 	System.out.println(l++ + s.getName());
-//		}
-//		System.out.println("");
+		chooseCard(0);
+		if ( !wonderBoard.containsCard(
+				chosenCard.getID()) )
+		{
+			if ( ((chosenCard.getResourceCost().canAfford(Resources.addResources(extraResources, resources, unavailableResources)) 
+					|| chosenCard.canBuildForFree(wonderBoard)))  )
+				buildStructure();
+				
+		}
+		else
+		{
+			getResources().addCoins(3);
+		}
+		cards.remove(chosenCardIndex);
+		
 		/*int chosenIndex = -1;
 		for (Structure s : getCards())
 		{

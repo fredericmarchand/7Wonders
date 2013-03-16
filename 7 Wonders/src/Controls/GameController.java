@@ -69,6 +69,7 @@ public class GameController implements Controller {
 		user.chooseCard(null);
 		match.handleAIPlayerMoves();
 		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
+		match.playerEndOfTurnSpecialEffects(user);
 		if ( match.getTurn() == 6 )
 		{
 			PlayerInteraction.SettleMilitaryConflicts(match.getPlayers(), match.getAge());
@@ -78,11 +79,17 @@ public class GameController implements Controller {
 			if ( match.getAge() == 3 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
 			if ( match.getAge() == 4 ) 
 			{
-				match.setAge(1); 
+				//match.setAge(1); 
 				System.out.println("Game Over");
+				
+				//end of game special effects
+				//count victory points
 			}
 		}
-		else match.setTurn(match.getTurn()+1);
+		else 
+		{
+			match.setTurn(match.getTurn()+1);
+		}
 		
 		frame.update();
 	}
@@ -107,6 +114,7 @@ public class GameController implements Controller {
 		user.chooseCard(null);
 		match.handleAIPlayerMoves();
 		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
+		match.playerEndOfTurnSpecialEffects(user);
 		if ( match.getTurn() == 6 )
 		{
 			PlayerInteraction.SettleMilitaryConflicts(match.getPlayers(), match.getAge());
@@ -116,8 +124,10 @@ public class GameController implements Controller {
 			if ( match.getAge() == 3 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
 			if ( match.getAge() == 4 ) 
 			{
-				match.setAge(1); 
+				//match.setAge(1); 
 				System.out.println("Game Over");
+				//end of game special effects
+				//count victory points
 			}
 		}
 		else match.setTurn(match.getTurn()+1);
@@ -181,8 +191,11 @@ public class GameController implements Controller {
 	}
 
 	@Override
-	public void resourceChosen(Resources r) {
-		
+	public void resourceChosen(ArrayList<Resources> resources) {
+		for ( Resources r: resources )
+		{
+			
+		}
 	}
 
 	@Override
@@ -215,6 +228,7 @@ public class GameController implements Controller {
 		user.chooseCard(null);
 		match.handleAIPlayerMoves();
 		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
+		match.playerEndOfTurnSpecialEffects(user);
 		if ( match.getTurn() == 6 )
 		{
 			PlayerInteraction.SettleMilitaryConflicts(match.getPlayers(), match.getAge());
@@ -224,8 +238,10 @@ public class GameController implements Controller {
 			if ( match.getAge() == 3 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
 			if ( match.getAge() == 4 ) 
 			{
-				match.setAge(1); 
+				//match.setAge(1); 
 				System.out.println("Game Over");
+				//end of game special effects
+				//count victory points
 			}
 		}
 		else match.setTurn(match.getTurn()+1);

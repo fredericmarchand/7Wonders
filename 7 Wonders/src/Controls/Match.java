@@ -313,6 +313,29 @@ public class Match {
 		}
 	}
 	
+	//used in gui controller
+	public void playerEndOfTurnSpecialEffects(Player user)
+	{
+		for ( Structure s : user.getWonderBoard().getRedCards() )
+			cardCoinBonusActivation(s, user);
+		
+		for ( Structure s : user.getWonderBoard().getBlueCards() )
+			cardCoinBonusActivation(s, user);
+		
+		for ( Structure s : user.getWonderBoard().getYellowCards() )
+			cardCoinBonusActivation(s, user);
+		
+		for ( Structure s : user.getWonderBoard().getPurpleCards() )
+			cardCoinBonusActivation(s, user);
+		
+		for ( Structure s : user.getWonderBoard().getGreenCards() )
+			cardCoinBonusActivation(s, user);
+		
+		for ( Structure s : user.getWonderBoard().getBrownGreyCards() )
+			cardCoinBonusActivation(s, user);
+	}
+	//
+	
 	public void endOfTurnSpecialEffects(ArrayList<Player> plyrs)
 	{
 		for ( Player p: plyrs )

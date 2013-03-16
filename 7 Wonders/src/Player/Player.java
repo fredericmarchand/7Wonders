@@ -10,15 +10,15 @@ import java.util.Random;
 
 public class Player extends User {
 
-	private WonderBoard wonderBoard;
-	private ArrayList<Structure> cards;
-	private Structure chosenCard;
-	private int chosenCardIndex;
-	private Resources resources, extraResources, purchased, unavailableResources;
-	private int shields;
-	private ConflictTokens conflictTokens;
-	private int victoryPoints;
-	private ScientificSymbols scientificSymbols;
+	protected WonderBoard wonderBoard;
+	protected ArrayList<Structure> cards;
+	protected Structure chosenCard;
+	protected int chosenCardIndex;
+	protected Resources resources, extraResources, purchased, unavailableResources;
+	protected int shields;
+	protected ConflictTokens conflictTokens;
+	protected int victoryPoints;
+	protected ScientificSymbols scientificSymbols;
 	protected boolean isAI;
 	
 	//constructors
@@ -220,6 +220,7 @@ public class Player extends User {
 					|| chosenCard.canBuildForFree(wonderBoard)))  )
 			{
 				wonderBoard.buildStructure(chosenCard);
+				resources.addCoins(-1*chosenCard.getResourceCost().getCoins());
 				for ( SpecialEffect se : chosenCard.getEffects() )
 				{				
 					if ( se.getID() == CoinBonus.CoinBonusID )

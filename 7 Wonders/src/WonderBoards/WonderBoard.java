@@ -84,13 +84,7 @@ public class WonderBoard {
 		return stages;
 	}
 	
-	//setters
-	//public void setBoardID(int id)
-	//{
-//		boardID = id;
-//		setBoardName(id);
-//	}
-	
+	//setters	
 	public void setSide(int side)
 	{
 		this.side = side;
