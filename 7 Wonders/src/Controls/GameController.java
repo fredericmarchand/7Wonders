@@ -275,7 +275,7 @@ public class GameController implements Controller {
 
 
 	@Override
-	public void resourceChosen(Resources r) {
+	public void resourceChosen(ArrayList<Resources> r) {
 		System.out.println(r);
 		
 	}

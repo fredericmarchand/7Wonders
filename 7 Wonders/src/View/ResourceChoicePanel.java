@@ -49,6 +49,8 @@ public class ResourceChoicePanel extends JPanel {
 	
 	private JLabel lblResource, lblOverlay;
 	
+	
+	@SuppressWarnings("unused")
 	private Controller controller;
 	
 	private ResourceChoicePanel thisPanel = this;
@@ -97,13 +99,13 @@ public class ResourceChoicePanel extends JPanel {
 				if(whichOverlay == 2) {
 					if(e.getPoint().x > overlayLocations[0].x      && e.getPoint().y > overlayLocations[0].y
 					&& e.getPoint().x < overlayLocations[0].x + 50 && e.getPoint().y < overlayLocations[0].y + 50) {
-						controller.resourceChosen(convertResource(1));
+						matchPanel.resourceChosen(convertResource(1));
 						Resources next = matchPanel.nextResource();
 						if(next == null) thisPanel.setVisible(false);
 						else setResource(next);
 					} else if(e.getPoint().x > overlayLocations[1].x      && e.getPoint().y > overlayLocations[1].y
 						   && e.getPoint().x < overlayLocations[1].x + 50 && e.getPoint().y < overlayLocations[1].y + 50) {
-						controller.resourceChosen(convertResource(2));
+						matchPanel.resourceChosen(convertResource(2));
 						Resources next = matchPanel.nextResource();
 						if(next == null) thisPanel.setVisible(false);
 						else setResource(next);
@@ -113,19 +115,19 @@ public class ResourceChoicePanel extends JPanel {
 				} else if(whichOverlay == 3) {
 					if(e.getPoint().x > overlayLocations[2].x      && e.getPoint().y > overlayLocations[2].y
 					&& e.getPoint().x < overlayLocations[2].x + 38 && e.getPoint().y < overlayLocations[2].y + 38) {
-						controller.resourceChosen(convertResource(1));
+						matchPanel.resourceChosen(convertResource(1));
 						Resources next = matchPanel.nextResource();
 						if(next == null) thisPanel.setVisible(false);
 						else setResource(next);
 					} else if(e.getPoint().x > overlayLocations[3].x      && e.getPoint().y > overlayLocations[3].y
 						   && e.getPoint().x < overlayLocations[3].x + 38 && e.getPoint().y < overlayLocations[3].y + 38) {
-						controller.resourceChosen(convertResource(2));
+						matchPanel.resourceChosen(convertResource(2));
 						Resources next = matchPanel.nextResource();
 						if(next == null) thisPanel.setVisible(false);
 						else setResource(next);
 					} else if(e.getPoint().x > overlayLocations[4].x      && e.getPoint().y > overlayLocations[4].y
 						   && e.getPoint().x < overlayLocations[4].x + 38 && e.getPoint().y < overlayLocations[4].y + 38) {
-						controller.resourceChosen(convertResource(3));
+						matchPanel.resourceChosen(convertResource(3));
 						Resources next = matchPanel.nextResource();
 						if(next == null) thisPanel.setVisible(false);
 						else setResource(next);
@@ -135,25 +137,25 @@ public class ResourceChoicePanel extends JPanel {
 				} else if(whichOverlay == 4) {
 					if(e.getPoint().x > overlayLocations[5].x 	   && e.getPoint().y > overlayLocations[5].y
 					&& e.getPoint().x < overlayLocations[5].x + 32 && e.getPoint().y < overlayLocations[5].y + 32) {
-						controller.resourceChosen(convertResource(1));
+						matchPanel.resourceChosen(convertResource(1));
 						Resources next = matchPanel.nextResource();
 						if(next == null) thisPanel.setVisible(false);
 						else setResource(next);
 					} else if(e.getPoint().x > overlayLocations[6].x 	  && e.getPoint().y > overlayLocations[6].y
 						   && e.getPoint().x < overlayLocations[6].x + 32 && e.getPoint().y < overlayLocations[6].y + 32) {
-						controller.resourceChosen(convertResource(2));
+						matchPanel.resourceChosen(convertResource(2));
 						Resources next = matchPanel.nextResource();
 						if(next == null) thisPanel.setVisible(false);
 						else setResource(next);
 					} else if(e.getPoint().x > overlayLocations[7].x 	  && e.getPoint().y > overlayLocations[7].y
 						   && e.getPoint().x < overlayLocations[7].x + 32 && e.getPoint().y < overlayLocations[7].y + 32) {
-						controller.resourceChosen(convertResource(3));
+						matchPanel.resourceChosen(convertResource(3));
 						Resources next = matchPanel.nextResource();
 						if(next == null) thisPanel.setVisible(false);
 						else setResource(next);
 					} else if(e.getPoint().x > overlayLocations[8].x 	  && e.getPoint().y > overlayLocations[8].y
 						   && e.getPoint().x < overlayLocations[8].x + 32 && e.getPoint().y < overlayLocations[8].y + 32) {
-						controller.resourceChosen(convertResource(4));
+						matchPanel.resourceChosen(convertResource(4));
 						Resources next = matchPanel.nextResource();
 						if(next == null) thisPanel.setVisible(false);
 						else setResource(next);

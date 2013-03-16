@@ -39,6 +39,7 @@ public class MatchPanel extends JPanel {
 	private Controller controller;
 	
 	private ArrayList<Resources> need;
+	private ArrayList<Resources> picked;
 	
 	public MatchPanel(Match m, Controller c) {
 		setLayout(null);
@@ -174,7 +175,6 @@ public class MatchPanel extends JPanel {
 		
 		// Choose resources
 		need = controller.needToChooseResources();
-		System.out.println(need);
 		Resources next = nextResource();
 		rcp.setResource(next);
 		if(next != null) rcp.setVisible(true);
@@ -183,7 +183,14 @@ public class MatchPanel extends JPanel {
 	public Resources nextResource() {
 		if(need.size() > 0)
 			return need.remove(0);
-		else return null;
+		else {
+			controller.resourceChosen(picked);
+			return null;
+		}
+	}
+	
+	public void resourceChosen(Resources r) {
+		picked.add(r);
 	}
 	
 	public MouseAdapter buildMouseAdapterNear() {

@@ -28,7 +28,7 @@ public interface Controller {
 	
 	// Pass one of each resource that can be selected
 	ArrayList<Resources> needToChooseResources();
-	void resourceChosen(Resources r);
+	void resourceChosen(ArrayList<Resources> r);
 	
 	// int 0 = left, 1 = right, 2 = random
 	void needToChooseTradingPref();
