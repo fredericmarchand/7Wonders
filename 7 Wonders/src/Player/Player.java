@@ -320,6 +320,8 @@ public class Player extends User {
 		resources.addCoins(3); 
 		cards.remove(chosenCardIndex);
 		discardedCards.add(chosenCard);
+		unavailableResources = new Resources();
+		extraResources = new Resources();
 		//chosenCard = null;
 	}
 	
