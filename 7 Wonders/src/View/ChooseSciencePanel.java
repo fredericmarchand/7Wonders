@@ -6,6 +6,8 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 
 public class ChooseSciencePanel extends JPanel {
+	private static final long serialVersionUID = 1L;
+
 	public ChooseSciencePanel() {
 		setLayout(null);
 		

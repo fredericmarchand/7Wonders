@@ -16,6 +16,7 @@ public class FarPanel extends JPanel {
 	Player player;
 	private JLabel2D lblPosConflict, lblNegConflict, lblTablets, lblMilitary, lblVictory, lblCompass, lblGears, lblCoin;
 	
+	@SuppressWarnings("unused")
 	private Controller controller;
 	
 	public FarPanel(Player p, Controller c) {

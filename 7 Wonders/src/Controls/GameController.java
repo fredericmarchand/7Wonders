@@ -56,7 +56,6 @@ public class GameController implements Controller {
 
 	@Override
 	public void buildStructure() {
-		// TODO Auto-generated method stub
 		int ans = user.canBuild(match.getLeftNeighbor(user), match.getRightNeighbor(user));
 		if ( ans == 2 )
 		{
@@ -157,7 +156,6 @@ public class GameController implements Controller {
 
 	@Override
 	public ArrayList<Resources> needToChooseResources() {
-		// TODO Auto-generated method stub
 		ArrayList<Resources> resources = new ArrayList<Resources>();
 		for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
@@ -184,25 +182,21 @@ public class GameController implements Controller {
 
 	@Override
 	public void resourceChosen(Resources r) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void needToChooseTradingPref() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void chosenTradingPref(int t) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public boolean chooseCard(Structure s) {
-		// TODO Auto-generated method stub
 		for ( int i = 0; i < user.getCards().size(); ++i )
 		{
 			if ( user.getCards().get(i).getID() == s.getID() )
@@ -216,7 +210,6 @@ public class GameController implements Controller {
 
 	@Override
 	public void discardChosen() {
-		// TODO Auto-generated method stub
 		user.discard(match.getDiscardedCards());
 		//user.getCards().remove(user.getChosenCard());
 		user.chooseCard(null);
@@ -249,37 +242,33 @@ public class GameController implements Controller {
 
 	@Override
 	public ArrayList<Structure> needToChooseCopyGuild() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void chosenGuild(Structure g) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public ArrayList<Structure> needToChooseDiscarded() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void chosenDiscarded(Structure g) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public Structure needToChooseLastCard() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	public static void main(String args[])
 	{
 		String name = JOptionPane.showInputDialog("What is your username? ");
+		@SuppressWarnings("unused")
 		GameController gc = new GameController(new Player(name, 0), new Match());
 	}
 	
