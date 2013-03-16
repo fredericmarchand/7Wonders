@@ -242,13 +242,7 @@ public class MClient {
     	kryo.register(Match.class);
    }
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		String uname = JOptionPane.showInputDialog("What is your username?");
-		String ip = JOptionPane.showInputDialog("IP :");
-		String port = JOptionPane.showInputDialog("Port :");
-		MClient mclient = new MClient();
-		mclient.createUser(uname, mclient.getID());
-		mclient.serverConnect(ip, Integer.parseInt(port));
+		
 
 		Log.set(Log.LEVEL_TRACE);
 
