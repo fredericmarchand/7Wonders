@@ -466,7 +466,7 @@ public class Match {
 			p.addVictoryPoints(p.getConflictTokens().getVictoryPoints());
 			
 			//Coins
-			p.addVictoryPoints(p.getResources().getCoins() / 3);
+			p.addVictoryPoints((int)Math.floor(p.getResources().getCoins() / 3));
 			
 			//Scientific
 			p.addVictoryPoints(p.getScientificSymbols().victoryPointsValue());
