@@ -297,8 +297,8 @@ public class GameController implements Controller {
 				}
 			}
 		}
-		System.out.println(user.getTotalResources().toString());
-		if ( !(match.getAge() == 1 && match.getTurn() == 1) )
+		//System.out.println(user.getTotalResources().toString());
+		if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
 			frame.update();
 	}
 	
