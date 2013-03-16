@@ -3,7 +3,6 @@ package WonderBoards;
 import java.util.ArrayList;
 import Structures.Structure;
 import Structures.Effects.ResourcesBonus;
-import Structures.Effects.SpecialEffect;
 import Tokens.Resources;
 
 public class WonderBoard {

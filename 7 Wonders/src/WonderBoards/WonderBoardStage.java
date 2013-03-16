@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import Structures.Structure;
 import Structures.Effects.SpecialEffect;
 import Tokens.Resources;
-import Structures.Effects.*;
-import java.util.ArrayList;
 
 public class WonderBoardStage {
 

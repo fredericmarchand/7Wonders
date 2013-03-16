@@ -15,6 +15,8 @@ public class FarPanel extends JPanel {
 	
 	Player player;
 	private JLabel2D lblPosConflict, lblNegConflict, lblTablets, lblMilitary, lblVictory, lblCompass, lblGears, lblCoin;
+	private JLabel wonderStage1, wonderStage2, wonderStage3, wonderStage4;
+	private ImageIcon checkmark;
 	
 	@SuppressWarnings("unused")
 	private Controller controller;
@@ -25,6 +27,28 @@ public class FarPanel extends JPanel {
 		setLayout(null);
 		setSize(320, 150);
 		setBackground(Color.WHITE);
+		
+		checkmark = new ImageIcon(new ImageIcon(NearPanel.class.getResource("/Images/Icons/yes.png")).getImage().getScaledInstance(18, 18, java.awt.Image.SCALE_SMOOTH));
+
+		wonderStage1 = new JLabel(checkmark);
+		wonderStage1.setSize(18, 18);
+		wonderStage1.setVisible(false);
+		add(wonderStage1);
+		
+		wonderStage2 = new JLabel(checkmark);
+		wonderStage2.setSize(18, 18);
+		wonderStage2.setVisible(false);
+		add(wonderStage2);
+		
+		wonderStage3 = new JLabel(checkmark);
+		wonderStage3.setSize(18, 18);
+		wonderStage3.setVisible(false);
+		add(wonderStage3);
+		
+		wonderStage4 = new JLabel(checkmark);
+		wonderStage4.setSize(18, 18);
+		wonderStage4.setVisible(false);
+		add(wonderStage4);
 		
 		lblGears = new JLabel2D("11", SwingConstants.CENTER);
 		lblGears.setForeground(Color.WHITE);

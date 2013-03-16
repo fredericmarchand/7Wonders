@@ -1,8 +1,11 @@
 package View;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.*;
+
+import Tokens.Resources;
 
 import Controls.Match;
 
@@ -31,7 +34,11 @@ public class MatchPanel extends JPanel {
 	private JScrollPane scrollpane;
 	private FullscreenCardsPanel fcp;
 	
+	private ResourceChoicePanel rcp;
+	
 	private Controller controller;
+	
+	private ArrayList<Resources> need;
 	
 	public MatchPanel(Match m, Controller c) {
 		setLayout(null);
@@ -117,8 +124,14 @@ public class MatchPanel extends JPanel {
 	        }
 	    });
 		
-		add(scrollpane);
 		
+		
+		
+		rcp = new ResourceChoicePanel(c, this);
+		rcp.setVisible(false);
+		
+		add(rcp);
+		add(scrollpane);
 		add(cardsPanel);
 		add(playerPanel);
 		add(n1);
@@ -147,11 +160,6 @@ public class MatchPanel extends JPanel {
 	}
 	
 	public void update() {
-		System.out.println("Cards:");
-		for (int i = 0; i < match.getPlayers().size(); i++) {
-			System.out.println(match.getPlayers().get(i).getCards().size());
-		}
-		
 		cardsPanel.setCards(match.getPlayers().get(0).getCards());
 		lblAge.setIcon(new ImageIcon(MatchPanel.class.getResource("/Images/Icons/age" + match.getAge() + ".png")));
 		lblTurn.setText("Round "+ match.getTurn() +" of 6");
@@ -163,6 +171,19 @@ public class MatchPanel extends JPanel {
 		f4.update();
 		n1.update();
 		n2.update();
+		
+		// Choose resources
+		need = controller.needToChooseResources();
+		System.out.println(need);
+		Resources next = nextResource();
+		rcp.setResource(next);
+		if(next != null) rcp.setVisible(true);
+	}
+	
+	public Resources nextResource() {
+		if(need.size() > 0)
+			return need.remove(0);
+		else return null;
 	}
 	
 	public MouseAdapter buildMouseAdapterNear() {

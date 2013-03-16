@@ -276,7 +276,7 @@ public class GameController implements Controller {
 
 	@Override
 	public void resourceChosen(Resources r) {
-		// TODO Auto-generated method stub
+		System.out.println(r);
 		
 	}
 	
