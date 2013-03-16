@@ -83,7 +83,7 @@ public class GameController implements Controller {
 				System.out.println("Game Over");
 				
 				//end of game special effects
-				//count victory points
+				match.countPlayersVictoryPoints();
 			}
 		}
 		else 
@@ -127,7 +127,7 @@ public class GameController implements Controller {
 				//match.setAge(1); 
 				System.out.println("Game Over");
 				//end of game special effects
-				//count victory points
+				match.countPlayersVictoryPoints();
 			}
 		}
 		else match.setTurn(match.getTurn()+1);
@@ -241,7 +241,7 @@ public class GameController implements Controller {
 				//match.setAge(1); 
 				System.out.println("Game Over");
 				//end of game special effects
-				//count victory points
+				match.countPlayersVictoryPoints();
 			}
 		}
 		else match.setTurn(match.getTurn()+1);

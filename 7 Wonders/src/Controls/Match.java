@@ -11,6 +11,10 @@ import java.util.Random;
 
 public class Match {
 	
+	public static final int START_OF_TURN = 0;
+	public static final int TURN = 1;
+	public static final int END_OF_GAME = 2;
+	
 	private ArrayList<Player> players;
 	private int age, turn, numPlayers;
 	private ArrayList<Structure> age1Deck, age2Deck, age3Deck, discarded;
