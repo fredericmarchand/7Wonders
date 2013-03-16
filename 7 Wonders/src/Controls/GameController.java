@@ -83,7 +83,7 @@ public class GameController implements Controller {
 				System.out.println("Game Over");
 				
 				//end of game special effects
-				//count victory points
+				match.countPlayersVictoryPoints();
 			}
 		}
 		else 
@@ -127,7 +127,7 @@ public class GameController implements Controller {
 				//match.setAge(1); 
 				System.out.println("Game Over");
 				//end of game special effects
-				//count victory points
+				match.countPlayersVictoryPoints();
 			}
 		}
 		else match.setTurn(match.getTurn()+1);
@@ -191,14 +191,6 @@ public class GameController implements Controller {
 	}
 
 	@Override
-	public void resourceChosen(ArrayList<Resources> resources) {
-		for ( Resources r: resources )
-		{
-			
-		}
-	}
-
-	@Override
 	public void needToChooseTradingPref() {
 		
 	}
@@ -241,7 +233,7 @@ public class GameController implements Controller {
 				//match.setAge(1); 
 				System.out.println("Game Over");
 				//end of game special effects
-				//count victory points
+				match.countPlayersVictoryPoints();
 			}
 		}
 		else match.setTurn(match.getTurn()+1);
@@ -279,6 +271,13 @@ public class GameController implements Controller {
 		String name = JOptionPane.showInputDialog("What is your username? ");
 		@SuppressWarnings("unused")
 		GameController gc = new GameController(new Player(name, 0), new Match());
+	}
+
+
+	@Override
+	public void resourceChosen(Resources r) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

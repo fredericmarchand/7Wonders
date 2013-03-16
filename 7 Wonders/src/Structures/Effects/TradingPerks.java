@@ -140,7 +140,8 @@ public class TradingPerks extends SpecialEffect {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		TradingPerks tp = new TradingPerks(0,0);
+		System.out.println(tp.bulkPrice(new Resources(1, 0, 1, 0, 1, 0, 0, 0), new Resources(1, 0, 0, 0, 0, 0, 0, 0), new Resources(0, 0, 1, 0, 1, 0, 0, 0)));
 	}
 
 }
