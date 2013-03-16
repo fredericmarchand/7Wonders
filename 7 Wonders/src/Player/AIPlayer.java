@@ -26,7 +26,7 @@ public class AIPlayer extends Player {
 		}
 		else
 		{
-			getResources().addCoins(3);
+			getOwnedResources().addCoins(3);
 		}
 		cards.remove(chosenCardIndex);
 	}

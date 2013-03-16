@@ -1,5 +1,7 @@
 package Tokens;
 
+import java.util.ArrayList;
+
 import Player.Player;
 import Structures.Effects.TradingPerks;
 
@@ -257,8 +259,11 @@ public class Resources {
 		return true;
 	}
 	
-	public void buyResources(Player leftNeighbor, Player rightNeighbor, Resources required, TradingPerks prices, int preference)
+	public ArrayList<Integer> buyResources(Player leftNeighbor, Player rightNeighbor, Resources required, TradingPerks prices, int preference)
 	{
+		ArrayList<Integer> neighborRevenue = new ArrayList<Integer>();
+		int leftRev = 0;
+		int rightRev = 0;
 		//handle manufactured resources
 		if ( prices.manufac() )//cheaper price
 		{
@@ -270,22 +275,19 @@ public class Resources {
 						if ( leftNeighbor.getResources().getGlass() >= required.getGlass() )
 						{//buy all from left
 							addGlass(required.getGlass());
-							addCoins(required.getGlass() * -1);
-							leftNeighbor.getResources().addCoins(required.getGlass());
+							leftRev += required.getGlass();
 							required.addGlass(required.getGlass() * -1);
 						}
 						else
 						{
 							//buy as much as you can from left
 							addGlass(leftNeighbor.getResources().getGlass());
-							addCoins(leftNeighbor.getResources().getGlass() * -1);
-							leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getGlass());
+							leftRev += leftNeighbor.getResources().getGlass();
 							required.addGlass(leftNeighbor.getResources().getGlass() * -1);
 							
 							//and the rest from right
 							addGlass(required.getGlass());
-							addCoins(required.getGlass() * -1);
-							rightNeighbor.getResources().addCoins(required.getGlass());
+							rightRev += required.getGlass();
 							required.addGlass(required.getGlass() * -1);
 						}
 					}
@@ -294,22 +296,19 @@ public class Resources {
 						if ( leftNeighbor.getResources().getLoom() >= required.getLoom() )
 						{//buy all from left
 							addLoom(required.getLoom());
-							addCoins(required.getLoom() * -1);
-							leftNeighbor.getResources().addCoins(required.getLoom());
+							leftRev += required.getLoom();
 							required.addLoom(required.getLoom() * -1);
 						}
 						else
 						{
 							//buy as much as you can from left
 							addLoom(leftNeighbor.getResources().getLoom());
-							addCoins(leftNeighbor.getResources().getLoom() * -1);
-							leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getLoom());
+							leftRev += leftNeighbor.getResources().getLoom();
 							required.addLoom(leftNeighbor.getResources().getLoom() * -1);
 							
 							//and the rest from right
 							addLoom(required.getLoom());
-							addCoins(required.getLoom() * -1);
-							rightNeighbor.getResources().addCoins(required.getLoom());
+							rightRev += required.getLoom();
 							required.addLoom(required.getLoom() * -1);
 						}
 					}
@@ -318,22 +317,19 @@ public class Resources {
 						if ( leftNeighbor.getResources().getPapyrus() >= required.getPapyrus() )
 						{//buy all from left
 							addPapyrus(required.getPapyrus());
-							addCoins(required.getPapyrus() * -1);
-							leftNeighbor.getResources().addCoins(required.getPapyrus());
+							leftRev += required.getPapyrus();
 							required.addPapyrus(required.getPapyrus() * -1);
 						}
 						else
 						{
 							//buy as much as you can from left
 							addPapyrus(leftNeighbor.getResources().getPapyrus());
-							addCoins(leftNeighbor.getResources().getPapyrus() * -1);
-							leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getPapyrus());
+							leftRev += leftNeighbor.getResources().getPapyrus();
 							required.addPapyrus(leftNeighbor.getResources().getPapyrus() * -1);
 							
 							//and the rest from right
 							addPapyrus(required.getPapyrus());
-							addCoins(required.getPapyrus() * -1);
-							rightNeighbor.getResources().addCoins(required.getPapyrus());
+							rightRev += required.getPapyrus();
 							required.addPapyrus(required.getPapyrus() * -1);
 						}
 					}
@@ -344,22 +340,19 @@ public class Resources {
 						if ( rightNeighbor.getResources().getGlass() >= required.getGlass() )
 						{//buy all from right
 							addGlass(required.getGlass());
-							addCoins(required.getGlass() * -1);
-							rightNeighbor.getResources().addCoins(required.getGlass());
+							rightRev += required.getGlass();
 							required.addGlass(required.getGlass() * -1);
 						}
 						else
 						{
 							//buy as much as you can from right
 							addGlass(rightNeighbor.getResources().getGlass());
-							addCoins(rightNeighbor.getResources().getGlass() * -1);
-							rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getGlass());
+							rightRev += rightNeighbor.getResources().getGlass();
 							required.addGlass(rightNeighbor.getResources().getGlass() * -1);
 							
 							//and the rest from left
 							addGlass(required.getGlass());
-							addCoins(required.getGlass() * -1);
-							leftNeighbor.getResources().addCoins(required.getGlass());
+							leftRev += required.getGlass();
 							required.addGlass(required.getGlass() * -1);
 						}
 					}
@@ -368,22 +361,19 @@ public class Resources {
 						if ( rightNeighbor.getResources().getLoom() >= required.getLoom() )
 						{//buy all from right
 							addLoom(required.getLoom());
-							addCoins(required.getLoom() * -1);
-							rightNeighbor.getResources().addCoins(required.getLoom());
+							rightRev += required.getLoom();
 							required.addLoom(required.getLoom() * -1);
 						}
 						else
 						{
 							//buy as much as you can from right
 							addLoom(rightNeighbor.getResources().getLoom());
-							addCoins(rightNeighbor.getResources().getLoom() * -1);
-							rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getLoom());
+							rightRev += rightNeighbor.getResources().getLoom();
 							required.addLoom(rightNeighbor.getResources().getLoom() * -1);
 							
 							//and the rest from left
 							addLoom(required.getLoom());
-							addCoins(required.getLoom() * -1);
-							leftNeighbor.getResources().addCoins(required.getLoom());
+							leftRev += required.getLoom();
 							required.addLoom(required.getLoom() * -1);
 						}
 					}
@@ -392,22 +382,19 @@ public class Resources {
 						if ( rightNeighbor.getResources().getPapyrus() >= required.getPapyrus() )
 						{//buy all from right
 							addPapyrus(required.getPapyrus());
-							addCoins(required.getPapyrus() * -1);
-							rightNeighbor.getResources().addCoins(required.getPapyrus());
+							rightRev += required.getPapyrus();
 							required.addPapyrus(required.getPapyrus() * -1);
 						}
 						else
 						{
 							//buy as much as you can from right
 							addPapyrus(rightNeighbor.getResources().getPapyrus());
-							addCoins(rightNeighbor.getResources().getPapyrus() * -1);
-							rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getPapyrus());
+							rightRev += rightNeighbor.getResources().getPapyrus();
 							required.addPapyrus(rightNeighbor.getResources().getPapyrus() * -1);
 							
 							//and the rest from left
 							addPapyrus(required.getPapyrus());
-							addCoins(required.getPapyrus() * -1);
-							leftNeighbor.getResources().addCoins(required.getPapyrus());
+							leftRev += required.getPapyrus();
 							required.addPapyrus(required.getPapyrus() * -1);
 						}
 					}
@@ -424,22 +411,19 @@ public class Resources {
 						if ( leftNeighbor.getResources().getGlass() >= required.getGlass() )
 						{//buy all from left
 							addGlass(required.getGlass());
-							addCoins(required.getGlass() * -2);
-							leftNeighbor.getResources().addCoins(required.getGlass() * 2);
+							leftRev += (required.getGlass() * 2);
 							required.addGlass(required.getGlass() * -1);
 						}
 						else
 						{
 							//buy as much as you can from left
 							addGlass(leftNeighbor.getResources().getGlass());
-							addCoins(leftNeighbor.getResources().getGlass() * -2);
-							leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getGlass() * 2);
+							leftRev += (leftNeighbor.getResources().getGlass() * 2);
 							required.addGlass(leftNeighbor.getResources().getGlass() * -1);
 							
 							//and the rest from right
 							addGlass(required.getGlass());
-							addCoins(required.getGlass() * -2);
-							rightNeighbor.getResources().addCoins(required.getGlass() * 2);
+							rightRev += (required.getGlass() * 2);
 							required.addGlass(required.getGlass() * -1);
 						}
 					}
@@ -448,22 +432,19 @@ public class Resources {
 						if ( leftNeighbor.getResources().getLoom() >= required.getLoom() )
 						{//buy all from left
 							addLoom(required.getLoom());
-							addCoins(required.getLoom() * -2);
-							leftNeighbor.getResources().addCoins(required.getLoom() * 2);
+							leftRev += (required.getLoom() * 2);
 							required.addLoom(required.getLoom() * -1);
 						}
 						else
 						{
 							//buy as much as you can from left
 							addLoom(leftNeighbor.getResources().getLoom());
-							addCoins(leftNeighbor.getResources().getLoom() * -2);
-							leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getLoom() * 2);
+							leftRev += (leftNeighbor.getResources().getLoom() * 2);
 							required.addLoom(leftNeighbor.getResources().getLoom() * -1);
 							
 							//and the rest from right
 							addLoom(required.getLoom());
-							addCoins(required.getLoom() * -2);
-							rightNeighbor.getResources().addCoins(required.getLoom() * 2);
+							rightRev += (required.getLoom() * 2);
 							required.addLoom(required.getLoom() * -1);
 						}
 					}
@@ -472,22 +453,19 @@ public class Resources {
 						if ( leftNeighbor.getResources().getPapyrus() >= required.getPapyrus() )
 						{//buy all from left
 							addPapyrus(required.getPapyrus());
-							addCoins(required.getPapyrus() * -2);
-							leftNeighbor.getResources().addCoins(required.getPapyrus() * 2);
+							leftRev += (required.getPapyrus() * 2);
 							required.addPapyrus(required.getPapyrus() * -1);
 						}
 						else
 						{
 							//buy as much as you can from left
 							addPapyrus(leftNeighbor.getResources().getPapyrus());
-							addCoins(leftNeighbor.getResources().getPapyrus() * -2);
-							leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getPapyrus() * 2);
+							leftRev += (leftNeighbor.getResources().getPapyrus() * 2);
 							required.addPapyrus(leftNeighbor.getResources().getPapyrus() * -1);
 							
 							//and the rest from right
 							addPapyrus(required.getPapyrus());
-							addCoins(required.getPapyrus() * -2);
-							rightNeighbor.getResources().addCoins(required.getPapyrus() * 2);
+							rightRev += (required.getPapyrus() * 2);
 							required.addPapyrus(required.getPapyrus() * -1);
 						}
 					}
@@ -498,22 +476,19 @@ public class Resources {
 						if ( rightNeighbor.getResources().getGlass() >= required.getGlass() )
 						{//buy all from right
 							addGlass(required.getGlass());
-							addCoins(required.getGlass() * -2);
-							rightNeighbor.getResources().addCoins(required.getGlass() * 2);
+							rightRev += (required.getGlass() * 2);
 							required.addGlass(required.getGlass() * -1);
 						}
 						else
 						{
 							//buy as much as you can from right
 							addGlass(rightNeighbor.getResources().getGlass());
-							addCoins(rightNeighbor.getResources().getGlass() * -2);
-							rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getGlass() * 2);
+							rightRev += (rightNeighbor.getResources().getGlass() * 2);
 							required.addGlass(rightNeighbor.getResources().getGlass() * -1);
 							
 							//and the rest from left
 							addGlass(required.getGlass());
-							addCoins(required.getGlass() * -2);
-							leftNeighbor.getResources().addCoins(required.getGlass() * 2);
+							leftRev += (required.getGlass() * 2);
 							required.addGlass(required.getGlass() * -1);
 						}
 					}
@@ -522,22 +497,19 @@ public class Resources {
 						if ( rightNeighbor.getResources().getLoom() >= required.getLoom() )
 						{//buy all from right
 							addLoom(required.getLoom());
-							addCoins(required.getLoom() * -2);
-							rightNeighbor.getResources().addCoins(required.getLoom() * 2);
+							rightRev += (required.getLoom() * 2);
 							required.addLoom(required.getLoom() * -1);
 						}
 						else
 						{
 							//buy as much as you can from right
 							addLoom(rightNeighbor.getResources().getLoom());
-							addCoins(rightNeighbor.getResources().getLoom() * -2);
-							rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getLoom() * 2);
+							rightRev += (rightNeighbor.getResources().getLoom() * 2);
 							required.addLoom(rightNeighbor.getResources().getLoom() * -1);
 							
 							//and the rest from left
 							addLoom(required.getLoom());
-							addCoins(required.getLoom() * -2);
-							leftNeighbor.getResources().addCoins(required.getLoom() * 2);
+							leftRev += (required.getLoom() * 2);
 							required.addLoom(required.getLoom() * -1);
 						}
 					}
@@ -546,22 +518,19 @@ public class Resources {
 						if ( rightNeighbor.getResources().getPapyrus() >= required.getPapyrus() )
 						{//buy all from right
 							addPapyrus(required.getPapyrus());
-							addCoins(required.getPapyrus() * -2);
-							rightNeighbor.getResources().addCoins(required.getPapyrus() * 2);
+							rightRev += (required.getPapyrus() * 2);
 							required.addPapyrus(required.getPapyrus() * -1);
 						}
 						else
 						{
 							//buy as much as you can from right
 							addPapyrus(rightNeighbor.getResources().getPapyrus());
-							addCoins(rightNeighbor.getResources().getPapyrus() * -2);
-							rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getPapyrus() * 2);
+							rightRev += (rightNeighbor.getResources().getPapyrus() * 2);
 							required.addPapyrus(rightNeighbor.getResources().getPapyrus() * -1);
 							
 							//and the rest from left
 							addPapyrus(required.getPapyrus());
-							addCoins(required.getPapyrus() * -2);
-							leftNeighbor.getResources().addCoins(required.getPapyrus() * 2);
+							leftRev += (required.getPapyrus() * 2);
 							required.addPapyrus(required.getPapyrus() * -1);
 						}
 					}
@@ -580,22 +549,19 @@ public class Resources {
 						if ( leftNeighbor.getResources().getOre() >= required.getOre() )
 						{//buy all from left
 							addOre(required.getOre());
-							addCoins(required.getOre() * -1);
-							leftNeighbor.getResources().addCoins(required.getOre());
+							leftRev += required.getOre();
 							required.addOre(required.getOre() * -1);
 						}
 						else
 						{
 							//buy as much as you can from left
 							addOre(leftNeighbor.getResources().getOre());
-							addCoins(leftNeighbor.getResources().getOre() * -1);
-							leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getOre());
+							leftRev += leftNeighbor.getResources().getOre();
 							required.addOre(leftNeighbor.getResources().getOre() * -1);
 							
 							//and the rest from right
 							addOre(required.getOre());
-							addCoins(required.getOre() * -1);
-							rightNeighbor.getResources().addCoins(required.getOre());
+							rightRev += required.getOre();
 							required.addOre(required.getOre() * -1);
 						}
 					}
@@ -604,22 +570,19 @@ public class Resources {
 						if ( leftNeighbor.getResources().getStone() >= required.getStone() )
 						{//buy all from left
 							addStone(required.getStone());
-							addCoins(required.getStone() * -1);
-							leftNeighbor.getResources().addCoins(required.getStone());
+							leftRev += required.getStone();
 							required.addStone(required.getStone() * -1);
 						}
 						else
 						{
 							//buy as much as you can from left
 							addStone(leftNeighbor.getResources().getStone());
-							addCoins(leftNeighbor.getResources().getStone() * -1);
-							leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getStone());
+							leftRev += leftNeighbor.getResources().getStone();
 							required.addStone(leftNeighbor.getResources().getStone() * -1);
 							
 							//and the rest from right
 							addStone(required.getStone());
-							addCoins(required.getStone() * -1);
-							rightNeighbor.getResources().addCoins(required.getStone());
+							rightRev += required.getStone();
 							required.addStone(required.getStone() * -1);
 						}
 					}
@@ -628,22 +591,19 @@ public class Resources {
 						if ( leftNeighbor.getResources().getWood() >= required.getWood() )
 						{//buy all from left
 							addWood(required.getWood());
-							addCoins(required.getWood() * -1);
-							leftNeighbor.getResources().addCoins(required.getWood());
+							leftRev += required.getWood();
 							required.addWood(required.getWood() * -1);
 						}
 						else
 						{
 							//buy as much as you can from left
 							addWood(leftNeighbor.getResources().getWood());
-							addCoins(leftNeighbor.getResources().getWood() * -1);
-							leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getWood());
+							leftRev += leftNeighbor.getResources().getWood();
 							required.addWood(leftNeighbor.getResources().getWood() * -1);
 							
 							//and the rest from right
 							addWood(required.getWood());
-							addCoins(required.getWood() * -1);
-							rightNeighbor.getResources().addCoins(required.getWood());
+							rightRev += required.getWood();
 							required.addWood(required.getWood() * -1);
 						}
 					}
@@ -652,22 +612,19 @@ public class Resources {
 						if ( leftNeighbor.getResources().getClay() >= required.getClay() )
 						{//buy all from left
 							addClay(required.getClay());
-							addCoins(required.getClay() * -1);
-							leftNeighbor.getResources().addCoins(required.getClay());
+							leftRev += required.getClay();
 							required.addClay(required.getClay() * -1);
 						}
 						else
 						{
 							//buy as much as you can from left
 							addClay(leftNeighbor.getResources().getClay());
-							addCoins(leftNeighbor.getResources().getClay() * -1);
-							leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getClay());
+							leftRev += leftNeighbor.getResources().getClay();
 							required.addClay(leftNeighbor.getResources().getClay() * -1);
 							
 							//and the rest from right
 							addClay(required.getClay());
-							addCoins(required.getClay() * -1);
-							rightNeighbor.getResources().addCoins(required.getClay());
+							rightRev += required.getClay();
 							required.addClay(required.getClay() * -1);
 						}
 					}
@@ -678,22 +635,19 @@ public class Resources {
 						if ( rightNeighbor.getResources().getOre() >= required.getOre() )
 						{//buy all from right
 							addOre(required.getOre());
-							addCoins(required.getOre() * -1);
-							rightNeighbor.getResources().addCoins(required.getOre());
+							rightRev += required.getOre();
 							required.addOre(required.getOre() * -1);
 						}
 						else
 						{
 							//buy as much as you can from right
 							addOre(rightNeighbor.getResources().getOre());
-							addCoins(rightNeighbor.getResources().getOre() * -1);
-							rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getOre());
+							rightRev += rightNeighbor.getResources().getOre();
 							required.addOre(rightNeighbor.getResources().getOre() * -1);
 							
 							//and the rest from left
 							addOre(required.getOre());
-							addCoins(required.getOre() * -1);
-							leftNeighbor.getResources().addCoins(required.getOre());
+							leftRev += required.getOre();
 							required.addOre(required.getOre() * -1);
 						}
 					}
@@ -702,22 +656,19 @@ public class Resources {
 						if ( rightNeighbor.getResources().getStone() >= required.getStone() )
 						{//buy all from right
 							addStone(required.getStone());
-							addCoins(required.getStone() * -1);
-							rightNeighbor.getResources().addCoins(required.getStone());
+							rightRev += required.getStone();
 							required.addStone(required.getStone() * -1);
 						}
 						else
 						{
 							//buy as much as you can from right
 							addStone(rightNeighbor.getResources().getStone());
-							addCoins(rightNeighbor.getResources().getStone() * -1);
-							rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getStone());
+							rightRev += rightNeighbor.getResources().getStone();
 							required.addStone(rightNeighbor.getResources().getStone() * -1);
 							
 							//and the rest from left
 							addStone(required.getStone());
-							addCoins(required.getStone() * -1);
-							leftNeighbor.getResources().addCoins(required.getStone());
+							leftRev += required.getStone();
 							required.addStone(required.getStone() * -1);
 						}
 					}
@@ -726,22 +677,19 @@ public class Resources {
 						if ( rightNeighbor.getResources().getWood() >= required.getWood() )
 						{//buy all from right
 							addWood(required.getWood());
-							addCoins(required.getWood() * -1);
-							rightNeighbor.getResources().addCoins(required.getWood());
+							rightRev += (required.getWood());
 							required.addWood(required.getWood() * -1);
 						}
 						else
 						{
 							//buy as much as you can from right
 							addWood(rightNeighbor.getResources().getWood());
-							addCoins(rightNeighbor.getResources().getWood() * -1);
-							rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getWood());
+							rightRev += rightNeighbor.getResources().getWood();
 							required.addWood(rightNeighbor.getResources().getWood() * -1);
 							
 							//and the rest from left
 							addWood(required.getWood());
-							addCoins(required.getWood() * -1);
-							leftNeighbor.getResources().addCoins(required.getWood());
+							leftRev += required.getWood();
 							required.addWood(required.getWood() * -1);
 						}
 					}
@@ -750,22 +698,19 @@ public class Resources {
 						if ( rightNeighbor.getResources().getClay() >= required.getClay() )
 						{//buy all from right
 							addClay(required.getClay());
-							addCoins(required.getClay() * -1);
-							rightNeighbor.getResources().addCoins(required.getClay());
+							rightRev += required.getClay();
 							required.addClay(required.getClay() * -1);
 						}
 						else
 						{
 							//buy as much as you can from right
 							addClay(rightNeighbor.getResources().getClay());
-							addCoins(rightNeighbor.getResources().getClay() * -1);
-							rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getClay());
+							rightRev += rightNeighbor.getResources().getClay();
 							required.addClay(rightNeighbor.getResources().getClay() * -1);
 							
 							//and the rest from left
 							addClay(required.getClay());
-							addCoins(required.getClay() * -1);
-							leftNeighbor.getResources().addCoins(required.getClay());
+							leftRev += required.getClay();
 							required.addClay(required.getClay() * -1);
 						}
 					}
@@ -783,22 +728,19 @@ public class Resources {
 					if ( leftNeighbor.getResources().getOre() >= required.getOre() )
 					{//buy all from left
 						addOre(required.getOre());
-						addCoins(required.getOre() * -1);
-						leftNeighbor.getResources().addCoins(required.getOre());
+						leftRev += required.getOre();
 						required.addOre(required.getOre() * -1);
 					}
 					else
 					{
 						//buy as much as you can from left
 						addOre(leftNeighbor.getResources().getOre());
-						addCoins(leftNeighbor.getResources().getOre() * -1);
-						leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getOre());
+						leftRev += leftNeighbor.getResources().getOre();
 						required.addOre(leftNeighbor.getResources().getOre() * -1);
 						
 						//and the rest from right
 						addOre(required.getOre());
-						addCoins(required.getOre() * -2);
-						rightNeighbor.getResources().addCoins(required.getOre() * 2);
+						rightRev += (required.getOre() * 2);
 						required.addOre(required.getOre() * -1);
 					}
 				}
@@ -807,22 +749,19 @@ public class Resources {
 					if ( leftNeighbor.getResources().getStone() >= required.getStone() )
 					{//buy all from left
 						addStone(required.getStone());
-						addCoins(required.getStone() * -1);
-						leftNeighbor.getResources().addCoins(required.getStone());
+						leftRev += required.getStone();
 						required.addStone(required.getStone() * -1);
 					}
 					else
 					{
 						//buy as much as you can from left
 						addStone(leftNeighbor.getResources().getStone());
-						addCoins(leftNeighbor.getResources().getStone() * -1);
-						leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getStone());
+						leftRev += leftNeighbor.getResources().getStone();
 						required.addStone(leftNeighbor.getResources().getStone() * -1);
 						
 						//and the rest from right
 						addStone(required.getStone());
-						addCoins(required.getStone() * -2);
-						rightNeighbor.getResources().addCoins(required.getStone() * 2);
+						rightRev += (required.getStone() * 2);
 						required.addStone(required.getStone() * -1);
 					}
 				}
@@ -831,22 +770,19 @@ public class Resources {
 					if ( leftNeighbor.getResources().getWood() >= required.getWood() )
 					{//buy all from left
 						addWood(required.getWood());
-						addCoins(required.getWood() * -1);
-						leftNeighbor.getResources().addCoins(required.getWood());
+						leftRev += required.getWood();
 						required.addWood(required.getWood() * -1);
 					}
 					else
 					{
 						//buy as much as you can from left
 						addWood(leftNeighbor.getResources().getWood());
-						addCoins(leftNeighbor.getResources().getWood() * -1);
-						leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getWood());
+						leftRev += leftNeighbor.getResources().getWood();
 						required.addWood(leftNeighbor.getResources().getWood() * -1);
 						
 						//and the rest from right
 						addWood(required.getWood());
-						addCoins(required.getWood() * -2);
-						rightNeighbor.getResources().addCoins(required.getWood() * 2);
+						rightRev += (required.getWood() * 2);
 						required.addWood(required.getWood() * -1);
 					}
 				}
@@ -855,22 +791,19 @@ public class Resources {
 					if ( leftNeighbor.getResources().getClay() >= required.getClay() )
 					{//buy all from left
 						addClay(required.getClay());
-						addCoins(required.getClay() * -1);
-						leftNeighbor.getResources().addCoins(required.getClay());
+						leftRev += required.getClay();
 						required.addClay(required.getClay() * -1);
 					}
 					else
 					{
 						//buy as much as you can from left
 						addClay(leftNeighbor.getResources().getClay());
-						addCoins(leftNeighbor.getResources().getClay() * -1);
-						leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getClay());
+						leftRev += leftNeighbor.getResources().getClay();
 						required.addClay(leftNeighbor.getResources().getClay() * -1);
 						
 						//and the rest from right
 						addClay(required.getClay());
-						addCoins(required.getClay() * -2);
-						rightNeighbor.getResources().addCoins(required.getClay() * 2);
+						rightRev += (required.getClay() * 2);
 						required.addClay(required.getClay() * -1);
 					}
 				}
@@ -884,22 +817,19 @@ public class Resources {
 					if ( rightNeighbor.getResources().getOre() >= required.getOre() )
 					{//buy all from right
 						addOre(required.getOre());
-						addCoins(required.getOre() * -1);
-						rightNeighbor.getResources().addCoins(required.getOre());
+						rightRev += required.getOre();
 						required.addOre(required.getOre() * -1);
 					}
 					else
 					{
 						//buy as much as you can from right
 						addOre(rightNeighbor.getResources().getOre());
-						addCoins(rightNeighbor.getResources().getOre() * -1);
-						rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getOre());
+						rightRev += rightNeighbor.getResources().getOre();
 						required.addOre(rightNeighbor.getResources().getOre() * -1);
 						
 						//and the rest from left
 						addOre(required.getOre());
-						addCoins(required.getOre() * -2);
-						leftNeighbor.getResources().addCoins(required.getOre() * 2);
+						leftRev += (required.getOre() * 2);
 						required.addOre(required.getOre() * -1);
 					}
 				}
@@ -908,22 +838,19 @@ public class Resources {
 					if ( rightNeighbor.getResources().getStone() >= required.getStone() )
 					{//buy all from right
 						addStone(required.getStone());
-						addCoins(required.getStone() * -1);
-						rightNeighbor.getResources().addCoins(required.getStone());
+						rightRev += required.getStone();
 						required.addStone(required.getStone() * -1);
 					}
 					else
 					{
 						//buy as much as you can from right
 						addStone(rightNeighbor.getResources().getStone());
-						addCoins(rightNeighbor.getResources().getStone() * -1);
-						rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getStone());
+						rightRev += rightNeighbor.getResources().getStone();
 						required.addStone(rightNeighbor.getResources().getStone() * -1);
 						
 						//and the rest from left
 						addStone(required.getStone());
-						addCoins(required.getStone() * -2);
-						leftNeighbor.getResources().addCoins(required.getStone() * 2);
+						leftRev += (required.getStone() * 2);
 						required.addStone(required.getStone() * -1);
 					}
 				}
@@ -932,22 +859,19 @@ public class Resources {
 					if ( rightNeighbor.getResources().getWood() >= required.getWood() )
 					{//buy all from right
 						addWood(required.getWood());
-						addCoins(required.getWood() * -1);
-						rightNeighbor.getResources().addCoins(required.getWood());
+						rightRev += required.getWood();
 						required.addWood(required.getWood() * -1);
 					}
 					else
 					{
 						//buy as much as you can from right
 						addWood(rightNeighbor.getResources().getWood());
-						addCoins(rightNeighbor.getResources().getWood() * -1);
-						rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getWood());
+						rightRev += rightNeighbor.getResources().getWood();
 						required.addWood(rightNeighbor.getResources().getWood() * -1);
 						
 						//and the rest from left
 						addWood(required.getWood());
-						addCoins(required.getWood() * -2);
-						leftNeighbor.getResources().addCoins(required.getWood() * 2);
+						leftRev += (required.getWood() * 2);
 						required.addWood(required.getWood() * -1);
 					}
 				}
@@ -956,22 +880,19 @@ public class Resources {
 					if ( rightNeighbor.getResources().getClay() >= required.getClay() )
 					{//buy all from right
 						addClay(required.getClay());
-						addCoins(required.getClay() * -1);
-						rightNeighbor.getResources().addCoins(required.getClay());
+						rightRev += required.getClay();
 						required.addClay(required.getClay() * -1);
 					}
 					else
 					{
 						//buy as much as you can from right
 						addClay(rightNeighbor.getResources().getClay());
-						addCoins(rightNeighbor.getResources().getClay() * -1);
-						rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getClay());
+						rightRev += rightNeighbor.getResources().getClay();
 						required.addClay(rightNeighbor.getResources().getClay() * -1);
 						
 						//and the rest from left
 						addClay(required.getClay());
-						addCoins(required.getClay() * -2);
-						leftNeighbor.getResources().addCoins(required.getClay() * 2);
+						leftRev += (required.getClay() * 2);
 						required.addClay(required.getClay() * -1);
 					}
 				}
@@ -987,22 +908,19 @@ public class Resources {
 						if ( leftNeighbor.getResources().getOre() >= required.getOre() )
 						{//buy all from left
 							addOre(required.getOre());
-							addCoins(required.getOre() * -2);
-							leftNeighbor.getResources().addCoins(required.getOre() * 2);
+							leftRev += (required.getOre() * 2);
 							required.addOre(required.getOre() * -1);
 						}
 						else
 						{
 							//buy as much as you can from left
 							addOre(leftNeighbor.getResources().getOre());
-							addCoins(leftNeighbor.getResources().getOre() * -2);
-							leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getOre() * 2);
+							leftRev += (leftNeighbor.getResources().getOre() * 2);
 							required.addOre(leftNeighbor.getResources().getOre() * -1);
 							
 							//and the rest from right
 							addOre(required.getOre());
-							addCoins(required.getOre() * -2);
-							rightNeighbor.getResources().addCoins(required.getOre() * 2);
+							rightRev += (required.getOre() * 2);
 							required.addOre(required.getOre() * -1);
 						}
 					}
@@ -1011,22 +929,19 @@ public class Resources {
 						if ( leftNeighbor.getResources().getStone() >= required.getStone() )
 						{//buy all from left
 							addStone(required.getStone());
-							addCoins(required.getStone() * -2);
-							leftNeighbor.getResources().addCoins(required.getStone() * 2);
+							leftRev += (required.getStone() * 2);
 							required.addStone(required.getStone() * -1);
 						}
 						else
 						{
 							//buy as much as you can from left
 							addStone(leftNeighbor.getResources().getStone());
-							addCoins(leftNeighbor.getResources().getStone() * -2);
-							leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getStone() * 2);
+							leftRev += (leftNeighbor.getResources().getStone() * 2);
 							required.addStone(leftNeighbor.getResources().getStone() * -1);
 							
 							//and the rest from right
 							addStone(required.getStone());
-							addCoins(required.getStone() * -2);
-							rightNeighbor.getResources().addCoins(required.getStone() * 2);
+							rightRev += (required.getStone() * 2);
 							required.addStone(required.getStone() * -1);
 						}
 					}
@@ -1035,22 +950,19 @@ public class Resources {
 						if ( leftNeighbor.getResources().getWood() >= required.getWood() )
 						{//buy all from left
 							addWood(required.getWood());
-							addCoins(required.getWood() * -2);
-							leftNeighbor.getResources().addCoins(required.getWood() * 2);
+							leftRev += (required.getWood() * 2);
 							required.addWood(required.getWood() * -1);
 						}
 						else
 						{
 							//buy as much as you can from left
 							addWood(leftNeighbor.getResources().getWood());
-							addCoins(leftNeighbor.getResources().getWood() * -2);
-							leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getWood() * 2);
+							leftRev += (leftNeighbor.getResources().getWood() * 2);
 							required.addWood(leftNeighbor.getResources().getWood() * -1);
 							
 							//and the rest from right
 							addWood(required.getWood());
-							addCoins(required.getWood() * -2);
-							rightNeighbor.getResources().addCoins(required.getWood() * 2);
+							rightRev += (required.getWood() * 2);
 							required.addWood(required.getWood() * -1);
 						}
 					}
@@ -1059,22 +971,19 @@ public class Resources {
 						if ( leftNeighbor.getResources().getClay() >= required.getClay() )
 						{//buy all from left
 							addClay(required.getClay());
-							addCoins(required.getClay() * -2);
-							leftNeighbor.getResources().addCoins(required.getClay() * 2);
+							leftRev += (required.getClay() * 2);
 							required.addClay(required.getClay() * -1);
 						}
 						else
 						{
 							//buy as much as you can from left
 							addClay(leftNeighbor.getResources().getClay());
-							addCoins(leftNeighbor.getResources().getClay() * -2);
-							leftNeighbor.getResources().addCoins(leftNeighbor.getResources().getClay() * 2);
+							leftRev += (leftNeighbor.getResources().getClay() * 2);
 							required.addClay(leftNeighbor.getResources().getClay() * -1);
 							
 							//and the rest from right
 							addClay(required.getClay());
-							addCoins(required.getClay() * -2);
-							rightNeighbor.getResources().addCoins(required.getClay() * 2);
+							rightRev += (required.getClay() * 2);
 							required.addClay(required.getClay() * -1);
 						}
 					}
@@ -1085,22 +994,19 @@ public class Resources {
 						if ( rightNeighbor.getResources().getOre() >= required.getOre() )
 						{//buy all from right
 							addOre(required.getOre());
-							addCoins(required.getOre() * -2);
-							rightNeighbor.getResources().addCoins(required.getOre() * 2);
+							rightRev += (required.getOre() * 2);
 							required.addOre(required.getOre() * -1);
 						}
 						else
 						{
 							//buy as much as you can from right
 							addOre(rightNeighbor.getResources().getOre());
-							addCoins(rightNeighbor.getResources().getOre() * -2);
-							rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getOre() * 2);
+							rightRev += (rightNeighbor.getResources().getOre() * 2);
 							required.addOre(rightNeighbor.getResources().getOre() * -2);
 							
 							//and the rest from left
 							addOre(required.getOre());
-							addCoins(required.getOre() * -2);
-							leftNeighbor.getResources().addCoins(required.getOre() * 2);
+							leftRev += (required.getOre() * 2);
 							required.addOre(required.getOre() * -1);
 						}
 					}
@@ -1109,22 +1015,19 @@ public class Resources {
 						if ( rightNeighbor.getResources().getStone() >= required.getStone() )
 						{//buy all from right
 							addStone(required.getStone());
-							addCoins(required.getStone() * -2);
-							rightNeighbor.getResources().addCoins(required.getStone() * 2);
+							rightRev += (required.getStone() * 2);
 							required.addStone(required.getStone() * -1);
 						}
 						else
 						{
 							//buy as much as you can from right
 							addStone(rightNeighbor.getResources().getStone());
-							addCoins(rightNeighbor.getResources().getStone() * -2);
-							rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getStone() * 2);
+							rightRev += (rightNeighbor.getResources().getStone() * 2);
 							required.addStone(rightNeighbor.getResources().getStone() * -1);
 							
 							//and the rest from left
 							addStone(required.getStone());
-							addCoins(required.getStone() * -2);
-							leftNeighbor.getResources().addCoins(required.getStone() * 2);
+							leftRev += (required.getStone() * 2);
 							required.addStone(required.getStone() * -1);
 						}
 					}
@@ -1133,22 +1036,19 @@ public class Resources {
 						if ( rightNeighbor.getResources().getWood() >= required.getWood() )
 						{//buy all from right
 							addWood(required.getWood());
-							addCoins(required.getWood() * -2);
-							rightNeighbor.getResources().addCoins(required.getWood() * 2);
+							rightRev += (required.getWood() * 2);
 							required.addWood(required.getWood() * -1);
 						}
 						else
 						{
 							//buy as much as you can from right
 							addWood(rightNeighbor.getResources().getWood());
-							addCoins(rightNeighbor.getResources().getWood() * -2);
-							rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getWood() * 2);
+							rightRev += (rightNeighbor.getResources().getWood() * 2);
 							required.addWood(rightNeighbor.getResources().getWood() * -1);
 							
 							//and the rest from left
 							addWood(required.getWood());
-							addCoins(required.getWood() * -2);
-							leftNeighbor.getResources().addCoins(required.getWood() * 2);
+							leftRev += (required.getWood() * 2);
 							required.addWood(required.getWood() * -1);
 						}
 					}
@@ -1157,28 +1057,28 @@ public class Resources {
 						if ( rightNeighbor.getResources().getClay() >= required.getClay() )
 						{//buy all from right
 							addClay(required.getClay());
-							addCoins(required.getClay() * -2);
-							rightNeighbor.getResources().addCoins(required.getClay() * 2);
+							rightRev += (required.getClay() * 2);
 							required.addClay(required.getClay() * -1);
 						}
 						else
 						{
 							//buy as much as you can from right
 							addClay(rightNeighbor.getResources().getClay());
-							addCoins(rightNeighbor.getResources().getClay() * -2);
-							rightNeighbor.getResources().addCoins(rightNeighbor.getResources().getClay() * 2);
+							rightRev += (rightNeighbor.getResources().getClay() * 2);
 							required.addClay(rightNeighbor.getResources().getClay() * -1);
 							
 							//and the rest from left
 							addClay(required.getClay());
-							addCoins(required.getClay() * -2);
-							leftNeighbor.getResources().addCoins(required.getClay() * 2);
+							leftRev += (required.getClay() * 2);
 							required.addClay(required.getClay() * -1);
 						}
 					}
 					break;
 			}
 		}
+		neighborRevenue.add(leftRev);
+		neighborRevenue.add(rightRev);
+		return neighborRevenue;
 	}
 	
 	
@@ -1250,17 +1150,20 @@ public class Resources {
 		// TODO Auto-generated method stub
 
 		Player a = new Player();
-		a.getResources().addOre(3);
+		a.getOwnedResources().addOre(3);
 		Player b = new Player();
-		b.getResources().addStone(1);
+		b.getOwnedResources().addStone(1);
 		Resources r = new Resources(3, 1, 0, 0, 0, 0, 0, 0);
-		TradingPerks p = new TradingPerks(1, 0);
+		TradingPerks p = new TradingPerks(0, 0);
 		Resources ar = new Resources();
-		ar.buyResources(a, b, r, p, 0);
+		ArrayList<Integer> vals = ar.buyResources(a, b, r, p, 0);
 		System.out.println(ar.toString() + "\n");
 		System.out.println(a.getResources().toString() + "\n");
 		System.out.println(b.getResources().toString() + "\n");
-		
+		for ( Integer i : vals)
+		{
+			System.out.println(i);
+		}
 	}
 
 }

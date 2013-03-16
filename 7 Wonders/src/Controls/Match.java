@@ -33,7 +33,7 @@ public class Match {
 		age2Deck = CardHandler.BuildAge2Deck(numPlayers);
 		age3Deck = CardHandler.BuildAge3Deck(numPlayers);
 		discarded = new ArrayList<Structure>();
-		state = GameController.BEGINNINGOFGAME;
+		//state = GameController.BEGINNINGOFGAME;
 		
 		//this will be removed
 		for ( int i = 0; i < numPlayers; ++i )
@@ -43,7 +43,7 @@ public class Match {
 		CardHandler.DistributeRandomWonderBoards(players, 0);
 		for ( Player p: players )
 		{
-			p.getResources().addCoins(3);
+			p.getOwnedResources().addCoins(3);
 		}
 		CardHandler.DistributeCards(players, age1Deck);
 		
@@ -64,10 +64,10 @@ public class Match {
 		age3Deck = CardHandler.BuildAge3Deck(numPlayers);
 		discarded = new ArrayList<Structure>();
 		CardHandler.DistributeRandomWonderBoards(players, 0);
-		for ( Player p: players ) p.getResources().addCoins(3);
+		for ( Player p: players ) p.getOwnedResources().addCoins(3);
 		CardHandler.DistributeCards(players, age1Deck);
 		addInitialResources(players);
-		state = GameController.BEGINNINGOFGAME;
+		//state = GameController.BEGINNINGOFGAME;
 	}
 	
 	public void addLocalPlayer(Player p) {
@@ -144,7 +144,7 @@ public class Match {
 			players.add(new Player(un, (i * r.nextInt())));
 		}
 		CardHandler.DistributeRandomWonderBoards(players, 0);
-		for ( Player p: players ) p.getResources().addCoins(3);
+		for ( Player p: players ) p.getOwnedResources().addCoins(3);
 		
 		for ( age = 1; age < 4; ++age )
 		{
@@ -446,13 +446,13 @@ public class Match {
 	
 	public Player getRightNeighbor(Player p)
 	{
-		for ( int i = 0; i < players.size(); ++i )
+		for ( int i = 0; i < players.size(); --i )
 		{
 			if ( players.get(i).getID() == p.getID() )
 			{
-				if ( i == 0 )
-					return players.get(players.size()-1);
-				else return players.get(i-1);
+				if ( i == players.size()-1 )
+					return players.get(0);
+				else return players.get(i+1);
 			}
 		}
 		return null;
