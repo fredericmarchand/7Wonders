@@ -275,9 +275,29 @@ public class GameController implements Controller {
 
 
 	@Override
-	public void resourceChosen(ArrayList<Resources> r) {
-		System.out.println(r);
-		
+	public void resourceChosen(ArrayList<Resources> resources) {
+		//System.out.println(r);
+		int i = 0;
+		for ( Structure s: user.getWonderBoard().getYellowCards() )
+		{
+			for ( SpecialEffect se: s.getEffects() )
+			{
+				if ( se.getID() == ResourceChoice.ResourceChoiceID )
+				{
+					user.getUnvResources().addResources(resources.get(i));
+				}
+			}
+		}
+		for ( Structure s: user.getWonderBoard().getBrownGreyCards() )
+		{
+			for ( SpecialEffect se: s.getEffects() )
+			{
+				if ( se.getID() == ResourceChoice.ResourceChoiceID )
+				{
+					user.getExtraResources().addResources(resources.get(i));
+				}
+			}
+		}
 	}
 	
 }

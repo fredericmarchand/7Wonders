@@ -205,13 +205,17 @@ public class Player extends User {
 	
 	public int canBuildStage(Player left, Player right)
 	{
-		if ( wonderBoard.getNextStageCost().canAfford(Resources.addResources(extraResources, resources, unavailableResources)) )
+		
+		if ( wonderBoard.getNextStageCost() != null )
 		{
-			return 2;
-		}
-		else if ( neighborsHaveResources(left, right, getChosenCard().getResourceCost()) )
-		{
-			return 1;
+			if ( wonderBoard.getNextStageCost().canAfford(Resources.addResources(extraResources, resources, unavailableResources)) )
+			{
+				return 2;
+			}
+			else if ( neighborsHaveResources(left, right, wonderBoard.getNextStageCost()) )
+			{
+				return 1;
+			}
 		}
 		return 0;
 	}
