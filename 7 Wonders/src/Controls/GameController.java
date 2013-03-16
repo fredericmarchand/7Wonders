@@ -101,7 +101,7 @@ public class GameController implements Controller {
 
 	@Override
 	public void buildWonderStage() {
-		int ans = user.canBuild(match.getLeftNeighbor(user), match.getRightNeighbor(user));
+		int ans = user.canBuildStage(match.getLeftNeighbor(user), match.getRightNeighbor(user));
 		if ( ans == 2 )
 		{
 			user.buildStage();
