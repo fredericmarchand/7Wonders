@@ -10,6 +10,9 @@ public class Packet {
 	public static class Packet1LoginAnswer{
 		private boolean accepted = false;
 		private long idvalue;
+		private Object o;
+		public Object getObject(){ return o;}
+		public void setObject(Object ob){ o = ob;}
 		public boolean getAccepted(){return accepted;}
 		public void setAccepted(boolean b){accepted = b;}
 		public void setIDValue(long id){idvalue = id;}

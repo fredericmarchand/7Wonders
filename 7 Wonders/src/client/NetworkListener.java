@@ -44,8 +44,10 @@ public class NetworkListener extends Listener{
 	public void received(Connection c, Object o) {
 		System.out.println("[CLIENT] RECEIVED PACKET");
 		if(o instanceof Packet1LoginAnswer){
-			if(!((Packet1LoginAnswer)o).getAccepted())
+			if(!((Packet1LoginAnswer)o).getAccepted()){
 				c.close();
+				mclient.setMatchList((ArrayList<Long>)((Packet1LoginAnswer)o).getObject());
+			}
 			mclient.setID(((Packet1LoginAnswer)o).getIDValue());
 		}
 		//check if client has been able to join game

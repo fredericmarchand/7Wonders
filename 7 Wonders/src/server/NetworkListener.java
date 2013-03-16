@@ -57,6 +57,7 @@ public class NetworkListener extends Listener{
 			loginAnswer.setAccepted(true);
 			loginAnswer.setIDValue(mserver.getID());
 			mserver.incID();
+			loginAnswer.setObject(mserver.getMatchID_List());
 			c.sendTCP(loginAnswer);
 		}
 		//modify to handle objects from game

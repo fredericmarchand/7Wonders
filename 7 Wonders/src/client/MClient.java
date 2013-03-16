@@ -2,11 +2,15 @@ package client;
 
 import java.io.IOException;
 import java.util.*;
+
+import javax.swing.JOptionPane;
+
 import Controls.*;
 
 
 
 import Player.Player;
+import Player.User;
 import Resources.Chat;
 import Resources.Match;
 import Resources.Packet.*;
@@ -20,6 +24,7 @@ public class MClient {
     private static Scanner s = new Scanner(System.in);
     public boolean GAME_ALIVE;
     private boolean host = false;
+    private ArrayList<Long> matchList;
     
     //if client has yet to join a game 
     //match ID is 0
@@ -27,7 +32,9 @@ public class MClient {
     private long ID = 0000;
     private String username;
     private Chat chat;
-    private Player player;
+    private User user;
+    
+        
     //player receive game
     public MClient(){
     	
@@ -39,25 +46,22 @@ public class MClient {
     	client.start();
     	register();
     	
-    	System.out.println("Enter user name");
-    	username = s.next();
-
 //    	System.out.println("Please enter the specified IP!");
 //		String x = s.next();
 //		System.out.println("Please enter the specified Port!");
 //		int p = Integer.parseInt(s.next());
 //    	
-/********************Connect*******************************/
-		try {
-			client.connect(5000,"127.0.0.1",25565);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			client.stop();
-		}
-		client.sendTCP(new Packet0LoginRequest());
+///********************Connect*******************************/
+//		try {
+//			client.connect(5000,"127.0.0.1",25565);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			client.stop();
+//		}
+//		client.sendTCP(new Packet0LoginRequest());
 /********************Connect*******************************/    	
-    	command();
+    	//command();
     	
     }
     
@@ -114,12 +118,28 @@ public class MClient {
     public void setMID(long id){matchID = id;}
     public long getMID(){return matchID;}
     
+    public void setMatchList(ArrayList<Long> list){matchList = list;}
+    public ArrayList<Long>getMatchList(){return matchList;}
+    
     //getter for chat
     public Chat getChat(){return chat;}
+    public void setUser(User u){user = u;}
+    public User getUser(){return user;}
+    public void setUser_username(String s){}
+    public void setUser_ID(long id){}
+    public void createUser(String uname, long id){
+    	user = new User(uname, id);
+    }
     
-    //player getter/setter
-    public void setPlayer(Player pp){player = pp;}
-    public Player getPlayer(){return player;}
+    public void serverConnect(String ip, int port){
+    	try {
+			client.connect(5000,ip,port);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			client.stop();
+		}
+    }
     
 
   //any class type sent over the network must be registered to the kryo
@@ -150,10 +170,18 @@ public class MClient {
     }
     
     
+   
+    
     
     //send request packets to server
     
-    //public void sendMatchRequest(){}
+    public void sendMatchRequest(String mname){
+    	Packet4Object game_id = new Packet4Object();
+    	game_id.setID(2);
+    	game_id.setObject(mname);
+    	client.sendTCP(game_id);      	
+    	chat.launchChatFrame();    	
+    }
     //public void sendClientMatch
     /*
      * 
@@ -193,6 +221,10 @@ public class MClient {
     		//set as some variable 
     	
     }
+  
+
+    
+   
     public void register(){
     	Kryo kryo = client.getKryo();
     	kryo.register(Packet0LoginRequest.class);
@@ -211,9 +243,17 @@ public class MClient {
    }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new MClient();
+		String uname = JOptionPane.showInputDialog("What is your username?");
+		String ip = JOptionPane.showInputDialog("IP :");
+		String port = JOptionPane.showInputDialog("Port :");
+		MClient mclient = new MClient();
+		mclient.createUser(uname, mclient.getID());
+		mclient.serverConnect(ip, Integer.parseInt(port));
+
 		Log.set(Log.LEVEL_TRACE);
 
 	}
+
+	
 
 }
