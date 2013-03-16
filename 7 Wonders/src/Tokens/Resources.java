@@ -1149,9 +1149,9 @@ public class Resources {
 		// TODO Auto-generated method stub
 
 		Player a = new Player();
-		a.getResources().addOre(3);
+		a.getOwnedResources().addOre(3);
 		Player b = new Player();
-		b.getResources().addStone(1);
+		b.getOwnedResources().addStone(1);
 		Resources r = new Resources(3, 1, 0, 0, 0, 0, 0, 0);
 		TradingPerks p = new TradingPerks(0, 0);
 		Resources ar = new Resources();

@@ -24,7 +24,7 @@ public class ResourcesBonus extends SpecialEffect {
 		{
 			if ( !usedUp )
 			{
-				p.getResources().addResources(resources);
+				p.getOwnedResources().addResources(resources);
 				usedUp = true;
 			}
 		}

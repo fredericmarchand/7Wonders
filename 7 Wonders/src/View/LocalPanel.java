@@ -235,14 +235,14 @@ public class LocalPanel extends JPanel {
 	}
 	
 	public void updateResourceLabels() {
-		lblOre.setText("" + player.getResources().getOre());
-		lblStone.setText("" + player.getResources().getStone());
-		lblWood.setText("" + player.getResources().getWood());
-		lblClay.setText("" + player.getResources().getClay());
-		lblGlass.setText("" + player.getResources().getGlass());
-		lblLoom.setText("" + player.getResources().getLoom());
-		lblPapyrus.setText("" + player.getResources().getPapyrus());
-		lblCoin.setText("" + player.getResources().getCoins());
+		lblOre.setText("" + player.getTotalResources().getOre());
+		lblStone.setText("" + player.getTotalResources().getStone());
+		lblWood.setText("" + player.getTotalResources().getWood());
+		lblClay.setText("" + player.getTotalResources().getClay());
+		lblGlass.setText("" + player.getTotalResources().getGlass());
+		lblLoom.setText("" + player.getTotalResources().getLoom());
+		lblPapyrus.setText("" + player.getTotalResources().getPapyrus());
+		lblCoin.setText("" + player.getTotalResources().getCoins());
 	}
 	
 	public void updateCardLabels() {

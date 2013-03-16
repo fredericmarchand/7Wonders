@@ -39,8 +39,6 @@ public class Player extends User {
 	
 	public Player(String uname, long id)
 	{
-		//username = uname;
-		//ID = id;
 		super(uname, id);
 		wonderBoard = new WonderBoard();
 		cards = new ArrayList<Structure>();
@@ -85,6 +83,16 @@ public class Player extends User {
 	}
 	
 	public Resources getResources()
+	{
+		return Resources.addResources(resources, extraResources);
+	}
+	
+	public Resources getTotalResources()
+	{
+		return Resources.addResources(resources, extraResources, unavailableResources);
+	}
+	
+	public Resources getOwnedResources()
 	{
 		return resources;
 	}
@@ -280,7 +288,7 @@ public class Player extends User {
 	
 	public boolean buildStage()
 	{
-		wonderBoard.buildStage(chosenCard, Resources.addResources(unavailableResources, Resources.addResources(resources, extraResources)));
+		wonderBoard.buildStage(chosenCard, Resources.addResources(unavailableResources, getResources()));
 		unavailableResources = new Resources();
 		extraResources = new Resources();
 		return true;
@@ -295,7 +303,7 @@ public class Player extends User {
 		//{
 			buyResources(leftNeighbor, rightNeighbor, wonderBoard.getNextStageCost(), preference);
 			
-			wonderBoard.buildStage(chosenCard, Resources.addResources(purchased, Resources.addResources(unavailableResources, Resources.addResources(resources, extraResources))));
+			wonderBoard.buildStage(chosenCard, Resources.addResources(purchased, Resources.addResources(unavailableResources, getResources())));
 			purchased = new Resources();
 			unavailableResources = new Resources();
 			extraResources = new Resources();
@@ -350,8 +358,8 @@ public class Player extends User {
 		else val = preference;
 			
 		ArrayList revenue = purchased.buyResources(leftNeighbor, rightNeighbor, missing, sumup, val);
-		leftNeighbor.getResources().addCoins((int)revenue.get(0));
-		rightNeighbor.getResources().addCoins((int)revenue.get(1));
+		leftNeighbor.getOwnedResources().addCoins((int)revenue.get(0));
+		rightNeighbor.getOwnedResources().addCoins((int)revenue.get(1));
 		resources.addCoins(-1*sumup.bulkPrice(missing, leftNeighbor.getResources(), rightNeighbor.getResources()));
 		purchased.addCoins(0*purchased.getCoins());
 		
@@ -375,14 +383,11 @@ public class Player extends User {
 		}
 		sumup = TradingPerks.addAll(perks);
 		
-		Resources missing = (Resources.addResources(extraResources, Resources.addResources(resources, unavailableResources))).findMissingResources(required);
-		int price = sumup.bulkPrice(missing, 
-				Resources.addResources(leftNeighbor.getResources(), leftNeighbor.getExtraResources()), 
-				Resources.addResources(rightNeighbor.getResources(), rightNeighbor.getExtraResources()));
+		Resources missing = (Resources.addResources(extraResources, getResources())).findMissingResources(required);
 		
-		if ( Resources.addResources(
-				Resources.addResources(leftNeighbor.getResources(), leftNeighbor.getExtraResources()), 
-				Resources.addResources(rightNeighbor.getResources(), rightNeighbor.getExtraResources())).hasRequiredResources(missing) 
+		int price = sumup.bulkPrice(missing, leftNeighbor.getResources(), rightNeighbor.getResources());
+		
+		if ( Resources.addResources( leftNeighbor.getResources(),  rightNeighbor.getResources()).hasRequiredResources(missing) 
 				 && price <= resources.getCoins() )
 			return true;
 		return false;
