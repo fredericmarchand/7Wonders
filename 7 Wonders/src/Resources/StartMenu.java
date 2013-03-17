@@ -18,6 +18,8 @@ public class StartMenu extends JFrame{
 	//private FlowLayout layout = new FlowLayout();
 	String uname,ip,port;
 	MClient mclient;
+	linkNetworkView link; 
+	
 	
 	public StartMenu(){
 		create = new JButton("CREATE");
@@ -32,16 +34,16 @@ public class StartMenu extends JFrame{
 	     create.addActionListener(new ActionListener(){
 	            public void actionPerformed(ActionEvent e){
 	               setVisible(false);
-	               CreateMenu mc = new CreateMenu(mclient);
-	               mc.showGUI();
+	               mclient.getLink().launchCreateMenu();
+	 
 	            }
 	        });
 	     
 	    join.addActionListener(new ActionListener(){
 	            public void actionPerformed(ActionEvent e){
 	               setVisible(false);
-	               Lobby l = new Lobby(mclient);
-	               l.showGUI();
+	               mclient.getLink().launchLobby();
+	               
 	            }
 	        });
 	     
@@ -61,6 +63,7 @@ public class StartMenu extends JFrame{
 //			String ip = JOptionPane.showInputDialog("IP :");
 //			String port = JOptionPane.showInputDialog("Port :");
 			mclient = new MClient();
+			
 			mclient.createUser(uname, mclient.getID());
 			mclient.setUser_username(uname);
 			mclient.serverConnect("",6);

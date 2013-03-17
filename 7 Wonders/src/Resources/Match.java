@@ -21,7 +21,7 @@ public class Match {
 	ArrayList<Connection> connected;
     private long match_id;
     private static long counter = 1000;
-    public static final int MAX_PLAYER_COUNT = 7;
+    public static final int MAX_PLAYER_COUNT = 3;
     private int connection_count;
     @SuppressWarnings("unused")
 	private MServer mserver;

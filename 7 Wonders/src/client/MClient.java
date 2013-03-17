@@ -34,6 +34,7 @@ public class MClient {
     private Chat chat;
     private User user;
     private linkNetworkView link;
+    private Player player;
         
     //player receive game
     public MClient(){
@@ -41,8 +42,7 @@ public class MClient {
     	client = new Client();
     	NetworkListener nl = new NetworkListener(this);
     	
-    	link = new linkNetworkView();
-    	chat = new Chat(this);
+    	link = new linkNetworkView(this);
     	
     	client.addListener(nl);
     	client.start();
@@ -130,8 +130,9 @@ public class MClient {
     public ArrayList<Long>getMatchList(){return matchList;}
     
     //getter for chat
-    public Chat getChat(){return chat;}
     public void setUser(User u){user = u;}
+    
+    public linkNetworkView getLink(){return link;}
     public User getUser(){return user;}
     public void setUser_username(String s){username = s;}
     public void setUser_ID(long id){}
@@ -178,13 +179,7 @@ public class MClient {
     	client.sendTCP(msg);
     }
     
-    public void updateChat(String s){
-    	chat.addChat(s);
-    }
-    
-    
-   
-    
+
     
     //send request packets to server
     
@@ -226,8 +221,11 @@ public class MClient {
     }
     
     public void startMatch(){
-    	chat.countdown();
-    	link.launchMainFrame();
+    	Controls.Match m = new Controls.Match();
+    	player = new Player();
+    	
+    	//link.getChat().countdown();
+    	link.launchMainFrame( m,player);
     	//load match
     }
     

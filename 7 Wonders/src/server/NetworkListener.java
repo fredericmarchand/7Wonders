@@ -2,6 +2,8 @@ package server;
 
 
 
+import java.util.ListIterator;
+
 import Controls.CommandMessage;
 import Resources.*;
 import Resources.Packet.*;
@@ -37,11 +39,24 @@ public class NetworkListener extends Listener{
 	public void disconnected(Connection c) {
 		// TODO Auto-generated method stub
 		System.out.println("[SERVER] User has disconnected");
+		
 		for(Match e :mserver.getMatchList())
 			if(e.contains(c)){
 				//replace with AI ?
-				e.removeConnection(c);
+				e.removeConnection(c);	
+
 			}
+		ListIterator<Match> it = mserver.getMatchList().listIterator();
+		while(it.hasNext()){
+			Match m = it.next();
+			if(m.getConnectionCount()==0){
+				it.remove();
+				System.out.println("[SERVER] No on in match - DELETED ");
+			}
+		}
+		
+		
+		
 		
 	}
 	@Override
@@ -112,6 +127,7 @@ public class NetworkListener extends Listener{
 				boolean join = mserver.bridgeClient(c, Long.parseLong((String)((Packet4Object)o).getObject()));
 				Packet3Connection joinResponse = new Packet3Connection();
 				joinResponse.setAccepted(join);
+				
 				joinResponse.setIDValue(Long.parseLong((String)((Packet4Object)o).getObject()));
 				c.sendTCP(joinResponse);
 				break;

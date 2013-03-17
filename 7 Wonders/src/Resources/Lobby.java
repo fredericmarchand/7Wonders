@@ -75,8 +75,7 @@ public class Lobby extends JFrame implements ListSelectionListener {
 	     create.addActionListener(new ActionListener(){
 	            public void actionPerformed(ActionEvent e){
 	            	setVisible(false);
-		               CreateMenu mc = new CreateMenu(mclient);
-		               mc.showGUI();
+		            mclient.getLink().launchCreateMenu();
 	            }
 	        });
 	     
@@ -85,16 +84,8 @@ public class Lobby extends JFrame implements ListSelectionListener {
 	            	if(list.getSelectedIndex()>-1){
 		               String matchName = (list.getSelectedValue()).toString();
 		               mclient.sendMatchRequest(matchName);
-		               
-		               if(mclient.getMID()>0){
-		            	   setVisible(false);
-		            	   mclient.getChat().launchChatFrame();
-		               }
-		               else{
-		            	   System.out.println(mclient.getMID());
-		            	   JOptionPane.showMessageDialog(null, "Match is full \n Try another one!");
-		               }
-		               	
+		               setVisible(false);
+	               
 	            	}
 	            }
 	        });
@@ -104,6 +95,7 @@ public class Lobby extends JFrame implements ListSelectionListener {
 	               System.exit(0);
 	            }
 	        });
+	    setSize(300,200);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         populate();
        // listModel.insertElementAt(employeeName.getText(), index);
@@ -123,21 +115,15 @@ public class Lobby extends JFrame implements ListSelectionListener {
 		}
 	}
 	
+	
+	public void failedJoin(){
+		JOptionPane.showMessageDialog(null, "Match is full \n Try another one!");
+	}
+	
 	public void showGUI() {
  
         //Display the window.
         pack();
         setVisible(true);
     }
-	
-//	
-//	public static void main (String args[]){
-//		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-//            public void run() {
-//                showGUI();
-//            }
-//        });
-//	}
-
-
 }
