@@ -164,6 +164,9 @@ public class NetworkListener extends Listener{
 		}catch(Exception e){
 			System.out.println(e);
 		}
+		if(o instanceof Packet11ImmediateStart){
+			(mserver.findMatch(((Packet11ImmediateStart)o).getMID())).sendStartMatchRequest();
+		}
 	}
 
 }
