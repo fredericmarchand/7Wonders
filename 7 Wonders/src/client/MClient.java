@@ -106,7 +106,6 @@ public class MClient {
     	Packet2Message mpackage = new Packet2Message();
         mpackage.setObject("CREATE");
         client.sendTCP(mpackage);
-        chat.launchChatFrame();
     }
     
     //get/set host values
@@ -139,7 +138,7 @@ public class MClient {
     
     public void serverConnect(String ip, int port){
     	try {
-			client.connect(5000,ip,port);
+			client.connect(5000,"127.0.0.1",25565);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -187,7 +186,7 @@ public class MClient {
     	game_id.setID(2);
     	game_id.setObject(mname);
     	client.sendTCP(game_id);      	
-    	chat.launchChatFrame();    	
+    	//chat.launchChatFrame();    	
     }
     //public void sendClientMatch
     /*
@@ -233,10 +232,7 @@ public class MClient {
     		//set as some variable 
     	
     }
-  
 
-    
-   
     public void register(){
     	Kryo kryo = client.getKryo();
     	kryo.register(Packet0LoginRequest.class);

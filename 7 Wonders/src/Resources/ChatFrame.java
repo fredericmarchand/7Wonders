@@ -47,7 +47,7 @@ public class ChatFrame extends JPanel{
         c.weighty = 1.0;
         add(scrollPane, c);
     }
- 
+     
     public void appendChat(String c){
     	textArea.append(c + newline);	
     }
@@ -55,6 +55,8 @@ public class ChatFrame extends JPanel{
         //Create and set up the window.
         frame.pack();
         frame.setVisible(true);
+        MatchLobby ml = new MatchLobby();	
+        ml.showGUI();
     }
  
 }

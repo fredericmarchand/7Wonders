@@ -41,11 +41,12 @@ public class CreateMenu extends JFrame {
 	    create.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                mclient.sendCreateMatchRequest();
-               setVisible(false);
+               mclient.getChat().launchChatFrame()
+;               setVisible(false);
             }
         });
 		
-		
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setSize(200,175);
 	}

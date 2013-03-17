@@ -15,7 +15,7 @@ public class StartMenu extends JFrame{
 	
 	private JPanel panel;
 	private JButton create,join,quit;
-	private FlowLayout layout = new FlowLayout();
+	//private FlowLayout layout = new FlowLayout();
 	String uname,ip,port;
 	MClient mclient;
 	
@@ -57,13 +57,14 @@ public class StartMenu extends JFrame{
 	 public void showGUI() {
 	        //Create and set up the window.
 		 	// TODO Auto-generated method stub
-			String uname = JOptionPane.showInputDialog("What is your username?");
-			String ip = JOptionPane.showInputDialog("IP :");
-			String port = JOptionPane.showInputDialog("Port :");
+//			String uname = JOptionPane.showInputDialog("What is your username?");
+//			String ip = JOptionPane.showInputDialog("IP :");
+//			String port = JOptionPane.showInputDialog("Port :");
 			mclient = new MClient();
 			mclient.createUser(uname, mclient.getID());
 			mclient.setUser_username(uname);
-			mclient.serverConnect(ip, Integer.parseInt(port));
+			mclient.serverConnect("",6);
+			//mclient.serverConnect(ip, Integer.parseInt(port));
 
 	        pack();
 	        setVisible(true);
