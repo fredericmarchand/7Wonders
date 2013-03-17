@@ -16,7 +16,7 @@ import Tokens.Resources;
 public class ResourceChoicePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	private Point overlayLocations[] = {
+	private final Point overlayLocations[] = {
 			// 2 overlay - width 50
 			new Point(506, 403),
 			new Point(581, 403),
