@@ -126,6 +126,7 @@ public class MServer {
 		kryo.register(Packet8ClientResponse.class);
 		kryo.register(Packet9StartMatch.class);
 		kryo.register(Packet10EndMatch.class);
+		kryo.register(Packet11ImmediateStart.class);
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match.class);	
 	}

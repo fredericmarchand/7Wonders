@@ -55,8 +55,12 @@ public class ChatFrame extends JPanel{
         //Create and set up the window.
         frame.pack();
         frame.setVisible(true);
-        MatchLobby ml = new MatchLobby();	
-        ml.showGUI();
+        
+        //only show start button if host of game
+        if(chatHub.getClient().getHost()){
+	        MatchLobby ml = new MatchLobby(chatHub.getClient());	
+	        ml.showGUI();
+        }
     }
  
 }

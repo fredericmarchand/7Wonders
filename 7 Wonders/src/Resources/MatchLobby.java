@@ -13,14 +13,18 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
+import client.MClient;
+
 import View.MainFrame;
 
 public class MatchLobby extends JFrame{
 	private JList list;
 	private JButton start;
 	JPanel buttonPanel;
+	MClient mclient;
 		
-	public MatchLobby(){
+	public MatchLobby(MClient m){
+		mclient = m;
 		setLayout(new GridBagLayout());
 		start = new JButton("Start");
 		
@@ -28,8 +32,9 @@ public class MatchLobby extends JFrame{
 		
 		 start.addActionListener(new ActionListener(){
 	            public void actionPerformed(ActionEvent e){
-	            	MainFrame f = new MainFrame(null);
-	            	f.setVisible(true);
+	            	mclient.sendStartRequest();
+//	            	MainFrame f = new MainFrame(null);
+//	            	f.setVisible(true);
 	            	setVisible(false);
 	            }
 	        });
@@ -44,7 +49,7 @@ public class MatchLobby extends JFrame{
 	}
 	
 	public static void main (String args[]){
-		MatchLobby m = new MatchLobby();
+		MatchLobby m = new MatchLobby(null);
 		m.setVisible(true);
 	}
 

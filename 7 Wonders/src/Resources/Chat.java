@@ -9,6 +9,8 @@ public class Chat {
 		client = c;
 	}
 	
+	public MClient getClient(){return client;}
+	
 	public void addChat(String s){
 		chatFrame.appendChat(s);
 	}

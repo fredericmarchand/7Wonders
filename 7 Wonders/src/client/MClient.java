@@ -13,6 +13,7 @@ import Player.Player;
 import Player.User;
 import Resources.Chat;
 import Resources.Match;
+import Resources.linkNetworkView;
 import Resources.Packet.*;
 
 import com.esotericsoftware.kryo.Kryo;
@@ -32,13 +33,15 @@ public class MClient {
     private String username;
     private Chat chat;
     private User user;
-    
+    private linkNetworkView link;
         
     //player receive game
     public MClient(){
     	matchList = new ArrayList<Long>();
     	client = new Client();
     	NetworkListener nl = new NetworkListener(this);
+    	
+    	link = new linkNetworkView();
     	chat = new Chat(this);
     	
     	client.addListener(nl);
@@ -151,7 +154,11 @@ public class MClient {
   //any class type sent over the network must be registered to the kryo
   	//generic types are implicitly registered
 
-    
+    public void sendStartRequest(){
+    	Packet11ImmediateStart packet = new Packet11ImmediateStart();
+    	packet.setMID(matchID);
+    	client.sendTCP(packet);
+    }
     public void quitMatch(){
     	if(matchID>0){
     		Packet5Disconnect quit = new Packet5Disconnect();
@@ -220,6 +227,7 @@ public class MClient {
     
     public void startMatch(){
     	chat.countdown();
+    	link.launchMainFrame();
     	//load match
     }
     
@@ -246,6 +254,7 @@ public class MClient {
 		kryo.register(Packet8ClientResponse.class);
 		kryo.register(Packet9StartMatch.class);
 		kryo.register(Packet10EndMatch.class);
+		kryo.register(Packet11ImmediateStart.class);
     	kryo.register(java.util.ArrayList.class);
     	kryo.register(Match.class);
    }
