@@ -85,7 +85,7 @@ public class NetworkListener extends Listener{
 				//returns a packet to client, containing the new matchID
 				//client must be set to host 
 				System.out.println("[SERVER ---------- CREATE Received packet" );
-				long matchID = mserver.createMatch();
+				long matchID = mserver.createMatch((int)((Packet2Message)o).getObject2());
 				mserver.bridgeClient(c,matchID);//adding client to match connection list
 				Packet4Object P = new Packet4Object();
 				P.setID(5);

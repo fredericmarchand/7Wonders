@@ -20,8 +20,11 @@ public class Packet {
 	}
 	public static class Packet2Message{
 		private Object o;
+		private Object o2;
 		public Object getObject(){ return o;}
 		public void setObject(Object ob){ o = ob;}
+		public Object getObject2(){ return o2;}
+		public void setObject2(Object ob){ o2 = ob;}
 	}
 	public static class Packet3Connection{
 		private boolean accepted = false;

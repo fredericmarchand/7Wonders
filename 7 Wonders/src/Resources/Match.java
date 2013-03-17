@@ -21,7 +21,7 @@ public class Match {
 	ArrayList<Connection> connected;
     private long match_id;
     private static long counter = 1000;
-    public static final int MAX_PLAYER_COUNT = 7 ;
+    private int MAX_PLAYER_COUNT = 7 ;
     private int connection_count;
     @SuppressWarnings("unused")
 	private MServer mserver;
@@ -32,13 +32,14 @@ public class Match {
     /////FIX///////////////////////////////////
     Controls.Match controller;
     
-    public Match(){
+    public Match(int x){
     	connected = new ArrayList<Connection>();
 		match_id = ++counter;
 		cmdMsgList = new ArrayList<CommandMessage>();
 		inProgress = false;
+		MAX_PLAYER_COUNT = x;
     }
-    
+    public  int getMaxPlayerCount() {return MAX_PLAYER_COUNT;}
     public boolean get_inProgress(){return inProgress;}
 	public ArrayList<Connection> getConnections(){return connected;}	
 	public void addConnection(Connection c){
@@ -136,6 +137,8 @@ public class Match {
 			c.sendTCP(end);
 		}
 	}
+	
+	
 	
 
 	

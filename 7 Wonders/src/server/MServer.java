@@ -42,8 +42,8 @@ public class MServer {
 		server.start();
 		
 	}
-	public long createMatch(){		
-		Match m = new Match();
+	public long createMatch(int x){		
+		Match m = new Match(x);
 		matchList.add(m);
 		//m.setServerMatchCommunication(server);
 //		for(Match m: matchList)
@@ -64,7 +64,7 @@ public class MServer {
 	public boolean bridgeClient(Connection c, long m_id){
 		for(Match m : matchList){
 			if(m.getMatch_ID()==m_id){
-				if(m.getConnectionCount()<Match.MAX_PLAYER_COUNT){
+				if(m.getConnectionCount()<m.getMaxPlayerCount()){
 					m.addConnection(c);
 					return true;
 				}

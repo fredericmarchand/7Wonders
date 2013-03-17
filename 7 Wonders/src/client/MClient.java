@@ -105,9 +105,10 @@ public class MClient {
 
     }
     
-    public void sendCreateMatchRequest(){
+    public void sendCreateMatchRequest(int x){
     	Packet2Message mpackage = new Packet2Message();
         mpackage.setObject("CREATE");
+        mpackage.setObject2(x);
         client.sendTCP(mpackage);
     }
     
