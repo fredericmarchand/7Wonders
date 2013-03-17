@@ -477,6 +477,29 @@ public class Match {
 	
 	
 	
+	public void endOfTurn()
+	{
+		CardHandler.PassCardsToNeighbors(getPlayers(), getAge());
+		if ( getTurn() == 6 )
+		{
+			PlayerInteraction.SettleMilitaryConflicts(getPlayers(), getAge());
+			setAge(getAge()+1);
+			setTurn(1);
+			if ( getAge() == 2 ) CardHandler.DistributeCards(getPlayers(), getDeck());
+			if ( getAge() == 3 ) CardHandler.DistributeCards(getPlayers(), getDeck());
+			if ( getAge() == 4 ) 
+			{
+				System.out.println("Game Over");
+				
+				//end of game special effects
+				countPlayersVictoryPoints();
+			}
+		}
+		else 
+		{
+			setTurn(getTurn()+1);
+		}
+	}
 	
 	
 	
