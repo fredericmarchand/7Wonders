@@ -79,6 +79,7 @@ public class GameController implements Controller {
 			if ( match.getAge() == 3 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
 			if ( match.getAge() == 4 ) 
 			{
+				match.setAge(1);
 				//match.setAge(1); 
 				System.out.println("Game Over");
 				
