@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -84,7 +85,16 @@ public class Lobby extends JFrame implements ListSelectionListener {
 	            	if(list.getSelectedIndex()>-1){
 		               String matchName = (list.getSelectedValue()).toString();
 		               mclient.sendMatchRequest(matchName);
-		               setVisible(false);
+		               
+		               if(mclient.getMID()>0){
+		            	   setVisible(false);
+		            	   mclient.getChat().launchChatFrame();
+		               }
+		               else{
+		            	   System.out.println(mclient.getMID());
+		            	   JOptionPane.showMessageDialog(null, "Match is full \n Try another one!");
+		               }
+		               	
 	            	}
 	            }
 	        });

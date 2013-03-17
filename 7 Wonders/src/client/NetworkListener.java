@@ -64,7 +64,7 @@ public class NetworkListener extends Listener{
 			}
 			else{
 				System.out.println("GAME IS FULL");
-				//mclient.command();
+		
 			}
 		}
 		if(o instanceof Packet4Object){			
