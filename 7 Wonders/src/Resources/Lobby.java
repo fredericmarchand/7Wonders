@@ -1,8 +1,10 @@
 package Resources;
 
 import java.awt.BorderLayout;
+import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -63,6 +65,7 @@ public class Lobby extends JFrame implements ListSelectionListener {
         buttonPanel.add(new JSeparator(SwingConstants.VERTICAL));
         buttonPanel.add(Box.createHorizontalStrut(5));
         buttonPanel.add(join);
+        buttonPanel.add(refresh);
         buttonPanel.add(quit);
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));   
 	    
@@ -95,10 +98,14 @@ public class Lobby extends JFrame implements ListSelectionListener {
 	               System.exit(0);
 	            }
 	        });
+	    refresh.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+               mclient.sendMatchListRequest();
+            }
+        });
 	    setSize(300,200);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         populate();
-       // listModel.insertElementAt(employeeName.getText(), index);
 	}
 	
 	public void valueChanged(ListSelectionEvent e) {
@@ -115,9 +122,19 @@ public class Lobby extends JFrame implements ListSelectionListener {
 		}
 	}
 	
+	public void update(ArrayList<Long> list){
+
+		for(Long id: list){
+			listModel.insertElementAt(id, index++);
+		}
+		index = 0;
+	}
+	
+	
+	
 	
 	public void failedJoin(){
-		JOptionPane.showMessageDialog(null, "Match is full \n Try another one!");
+		JOptionPane.showMessageDialog(null, "Match is full or in progress \nTry another one!");
 	}
 	
 	public void showGUI() {

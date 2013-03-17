@@ -1,5 +1,7 @@
 package Resources;
 
+import java.util.ArrayList;
+
 import client.MClient;
 import Controls.GameController;
 import Player.Player;
@@ -26,6 +28,10 @@ public class linkNetworkView {
 		lobby.showGUI();
 	}
 	
+	public void updateLobby(ArrayList<Long> list){
+		lobby.update(list);
+	}
+	
 	public void launchMatchLobby(){
 		matchLobby = new MatchLobby(mclient);
 		matchLobby.showGUI();
@@ -40,6 +46,8 @@ public class linkNetworkView {
 		chat = new Chat(mclient);
 		chat.launchChatFrame();
 	}
+	
+	
 	
 	public void launchCreateMenu(){
 		createMenu = new CreateMenu(mclient);

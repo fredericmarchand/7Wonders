@@ -116,6 +116,7 @@ public class NetworkListener extends Listener{
 			case 1: ;
 			case 2: 
 			{
+				
 				System.out.println("[SERVER] Received match JOIN Request");
 				//test if the game is viable to join
 				//if not return false
@@ -124,11 +125,19 @@ public class NetworkListener extends Listener{
 				System.out.println(Long.parseLong((String) ((Packet4Object)o).getObject()));
 				System.out.println(c.getRemoteAddressTCP());
 				//mserver.bridgeClient(c, Long.parseLong((String)((Packet4Object)o).getObject()))){
-				boolean join = mserver.bridgeClient(c, Long.parseLong((String)((Packet4Object)o).getObject()));
-				Packet3Connection joinResponse = new Packet3Connection();
-				joinResponse.setAccepted(join);
 				
-				joinResponse.setIDValue(Long.parseLong((String)((Packet4Object)o).getObject()));
+				Packet3Connection joinResponse = new Packet3Connection();
+				boolean join;
+				if((mserver.findMatch(Long.parseLong((String)((Packet4Object)o).getObject())).get_inProgress())==true){
+					 joinResponse.setAccepted(false);
+					 joinResponse.setIDValue(0);
+				}
+				else{
+					 join = mserver.bridgeClient(c, Long.parseLong((String)((Packet4Object)o).getObject()));
+					 joinResponse.setAccepted(join);
+					 joinResponse.setIDValue(Long.parseLong((String)((Packet4Object)o).getObject()));
+				}
+			
 				c.sendTCP(joinResponse);
 				break;
 			}

@@ -179,6 +179,11 @@ public class MClient {
     	client.sendTCP(msg);
     }
     
+    public void sendMatchListRequest(){
+    	Packet2Message packet = new Packet2Message();
+    	packet.setObject("LIST");
+    	client.sendTCP(packet);
+    }
 
     
     //send request packets to server
@@ -188,7 +193,7 @@ public class MClient {
     	game_id.setID(2);
     	game_id.setObject(mname);
     	client.sendTCP(game_id);      	
-    	//chat.launchChatFrame();    	
+  	
     }
     //public void sendClientMatch
     /*

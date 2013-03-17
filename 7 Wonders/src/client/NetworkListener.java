@@ -74,8 +74,9 @@ public class NetworkListener extends Listener{
 			switch(((Packet4Object) o).getID()){
 				case 0: ;
 				case 1: {
-							for(Long e : (ArrayList<Long>)((Packet4Object)o).getObject())
-								System.out.println(Long.toString(e));
+							mclient.getLink().updateLobby((ArrayList<Long>)((Packet4Object)o).getObject());
+//							for(Long e : (ArrayList<Long>)((Packet4Object)o).getObject())
+//								System.out.println(Long.toString(e));
 							break;
 						}
 				case 2: ;					

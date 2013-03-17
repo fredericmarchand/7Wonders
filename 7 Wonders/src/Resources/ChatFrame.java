@@ -12,6 +12,7 @@ public class ChatFrame extends JPanel{
     private JFrame frame;
     private final static String newline = "\n";
     private Chat chatHub;
+    JScrollPane scrollPane;
 
     public ChatFrame(Chat ch) {
         super(new GridBagLayout());
@@ -33,7 +34,7 @@ public class ChatFrame extends JPanel{
         });
         textArea = new JTextArea(5, 20);
         textArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane = new JScrollPane(textArea);
  
         //Add Components to this panel.
         GridBagConstraints c = new GridBagConstraints();
@@ -50,6 +51,7 @@ public class ChatFrame extends JPanel{
      
     public void appendChat(String c){
     	textArea.append(c + newline);	
+    	textArea.setCaretPosition(textArea.getDocument().getLength());
     }
     public void createAndShowGUI() {
         //Create and set up the window.
