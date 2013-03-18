@@ -92,6 +92,10 @@ public class GameController implements Controller {
 		{
 			match.setTurn(match.getTurn()+1);
 		}*/
+		if ( match.getAge() == 4 ) 
+		{
+			match.discardAllPlayersCards();
+		}
 		
 		frame.update();
 	}
@@ -134,6 +138,11 @@ public class GameController implements Controller {
 			}
 		}
 		else match.setTurn(match.getTurn()+1);*/
+		if ( match.getAge() == 4 ) 
+		{
+			match.discardAllPlayersCards();
+		}
+		
 		frame.update();
 	}
 
@@ -241,6 +250,11 @@ public class GameController implements Controller {
 		}
 		else match.setTurn(match.getTurn()+1);*/
 
+		if ( match.getAge() == 4 ) 
+		{
+			match.discardAllPlayersCards();
+		}
+		
 		frame.update();
 	}
 

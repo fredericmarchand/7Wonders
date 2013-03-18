@@ -53,7 +53,7 @@ public class MatchPanel extends JPanel {
 		picked = new ArrayList<Resources>();
 		
 		// Load all the Card images
-		int numCards = new File("src/Images/Cards").listFiles().length;
+		int numCards = 75;
 		cards = new ImageIcon[numCards+1];
 		for(int i = 1; i < numCards+1; i++) {
 			cards[i] = new ImageIcon(new ImageIcon(MatchPanel.class.getResource("/Images/Cards/"+i+".jpg")).getImage().getScaledInstance(182, 280, java.awt.Image.SCALE_SMOOTH));

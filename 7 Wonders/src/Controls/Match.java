@@ -489,7 +489,7 @@ public class Match {
 			if ( getAge() == 3 ) CardHandler.DistributeCards(getPlayers(), getDeck());
 			if ( getAge() == 4 ) 
 			{
-				System.out.println("Game Over");
+				//System.out.println("Game Over");
 				
 				//end of game special effects
 				countPlayersVictoryPoints();
@@ -517,7 +517,13 @@ public class Match {
 	}
 	
 	
-	
+	public void discardAllPlayersCards()
+	{
+		for ( Player p : players )
+		{
+			p.discardHand(discarded);
+		}
+	}
 	
 	
 	
