@@ -20,8 +20,11 @@ public class Packet {
 	}
 	public static class Packet2Message{
 		private Object o;
+		private Object o2;
 		public Object getObject(){ return o;}
 		public void setObject(Object ob){ o = ob;}
+		public Object getObject2(){ return o2;}
+		public void setObject2(Object ob){ o2 = ob;}
 	}
 	public static class Packet3Connection{
 		private boolean accepted = false;
@@ -97,6 +100,13 @@ public class Packet {
 		private long matchID;
 		public long getMID(){return matchID;}
 		public void setMID(long id){matchID = id;}		
+	}
+	public static class Packet12CreateMatch{
+		int numHuman,numAI;
+		public void setHuman(int x){numHuman = x;}
+		public int getHuman(){return numHuman;}
+		public void setAI(int x){numAI = x;}
+		public int getAI(){return numAI;}
 	}
 
 }

@@ -1,8 +1,12 @@
 package Resources;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.TextArea;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -63,6 +67,7 @@ public class Lobby extends JFrame implements ListSelectionListener {
         buttonPanel.add(new JSeparator(SwingConstants.VERTICAL));
         buttonPanel.add(Box.createHorizontalStrut(5));
         buttonPanel.add(join);
+        buttonPanel.add(refresh);
         buttonPanel.add(quit);
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));   
 	    
@@ -75,8 +80,7 @@ public class Lobby extends JFrame implements ListSelectionListener {
 	     create.addActionListener(new ActionListener(){
 	            public void actionPerformed(ActionEvent e){
 	            	setVisible(false);
-		               CreateMenu mc = new CreateMenu(mclient);
-		               mc.showGUI();
+		            mclient.getLink().launchCreateMenu();
 	            }
 	        });
 	     
@@ -85,16 +89,8 @@ public class Lobby extends JFrame implements ListSelectionListener {
 	            	if(list.getSelectedIndex()>-1){
 		               String matchName = (list.getSelectedValue()).toString();
 		               mclient.sendMatchRequest(matchName);
-		               
-		               if(mclient.getMID()>0){
-		            	   setVisible(false);
-		            	   mclient.getChat().launchChatFrame();
-		               }
-		               else{
-		            	   System.out.println(mclient.getMID());
-		            	   JOptionPane.showMessageDialog(null, "Match is full \n Try another one!");
-		               }
-		               	
+		               setVisible(false);
+	               
 	            	}
 	            }
 	        });
@@ -104,9 +100,16 @@ public class Lobby extends JFrame implements ListSelectionListener {
 	               System.exit(0);
 	            }
 	        });
+	    refresh.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+               mclient.sendMatchListRequest();
+            }
+        });
+	    setSize(300,200);
+	    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		 this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         populate();
-       // listModel.insertElementAt(employeeName.getText(), index);
 	}
 	
 	public void valueChanged(ListSelectionEvent e) {
@@ -123,21 +126,25 @@ public class Lobby extends JFrame implements ListSelectionListener {
 		}
 	}
 	
+	public void update(ArrayList<Long> list){
+
+		for(Long id: list){
+			listModel.insertElementAt(id, index++);
+		}
+		index = 0;
+	}
+	
+	
+	
+	
+	public void failedJoin(){
+		JOptionPane.showMessageDialog(null, "Match is full or in progress \nTry another one!");
+	}
+	
 	public void showGUI() {
  
         //Display the window.
         pack();
         setVisible(true);
     }
-	
-//	
-//	public static void main (String args[]){
-//		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-//            public void run() {
-//                showGUI();
-//            }
-//        });
-//	}
-
-
 }

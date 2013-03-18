@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import client.MClient;
@@ -40,9 +41,22 @@ public class CreateMenu extends JFrame {
 		
 	    create.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-               mclient.sendCreateMatchRequest();
-               mclient.getChat().launchChatFrame()
-;               setVisible(false);
+            	//fix this code
+            	if(humanNum.getText().equals(""))humanNum.setText("0");
+            	if(aiNum.getText().equals(""))aiNum.setText("0");
+            	if(((Integer.parseInt(humanNum.getText())<=7&&Integer.parseInt(humanNum.getText())>=1))&&
+            			(Integer.parseInt(humanNum.getText())+Integer.parseInt(aiNum.getText()))<=7){
+	               mclient.sendCreateMatchRequest(Integer.parseInt(humanNum.getText()),Integer.parseInt(aiNum.getText()));
+	               
+	               setVisible(false);
+            	}
+            	else
+            		JOptionPane.showMessageDialog(null, "Must be 7 or less players or\n1 or more players!");
+            }
+        });
+	    cancel.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+               System.exit(0);
             }
         });
 		

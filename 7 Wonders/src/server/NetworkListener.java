@@ -2,6 +2,8 @@ package server;
 
 
 
+import java.util.ListIterator;
+
 import Controls.CommandMessage;
 import Resources.*;
 import Resources.Packet.*;
@@ -37,11 +39,24 @@ public class NetworkListener extends Listener{
 	public void disconnected(Connection c) {
 		// TODO Auto-generated method stub
 		System.out.println("[SERVER] User has disconnected");
+		
 		for(Match e :mserver.getMatchList())
 			if(e.contains(c)){
 				//replace with AI ?
-				e.removeConnection(c);
+				e.removeConnection(c);	
+
 			}
+		ListIterator<Match> it = mserver.getMatchList().listIterator();
+		while(it.hasNext()){
+			Match m = it.next();
+			if(m.getConnectionCount()==0){
+				it.remove();
+				System.out.println("[SERVER] No on in match - DELETED ");
+			}
+		}
+		
+		
+		
 		
 	}
 	@Override
@@ -68,14 +83,14 @@ public class NetworkListener extends Listener{
 				//Request made to create a match
 				//match is created
 				//returns a packet to client, containing the new matchID
-				//client must be set to host 
-				System.out.println("[SERVER ---------- CREATE Received packet" );
-				long matchID = mserver.createMatch();
-				mserver.bridgeClient(c,matchID);//adding client to match connection list
-				Packet4Object P = new Packet4Object();
-				P.setID(5);
-				P.setObject(matchID);
-				c.sendTCP(P);
+//				//client must be set to host 
+//				System.out.println("[SERVER ---------- CREATE Received packet" );
+//				long matchID = mserver.createMatch((int)((Packet2Message)o).getObject2());
+//				mserver.bridgeClient(c,matchID);//adding client to match connection list
+//				Packet4Object P = new Packet4Object();
+//				P.setID(5);
+//				P.setObject(matchID);
+//				c.sendTCP(P);
 			}
 			if(message.equals("LIST")){
 				System.out.println("[SERVER ---------- LIST Received packet" );
@@ -101,6 +116,7 @@ public class NetworkListener extends Listener{
 			case 1: ;
 			case 2: 
 			{
+				
 				System.out.println("[SERVER] Received match JOIN Request");
 				//test if the game is viable to join
 				//if not return false
@@ -109,10 +125,19 @@ public class NetworkListener extends Listener{
 				System.out.println(Long.parseLong((String) ((Packet4Object)o).getObject()));
 				System.out.println(c.getRemoteAddressTCP());
 				//mserver.bridgeClient(c, Long.parseLong((String)((Packet4Object)o).getObject()))){
-				boolean join = mserver.bridgeClient(c, Long.parseLong((String)((Packet4Object)o).getObject()));
+				
 				Packet3Connection joinResponse = new Packet3Connection();
-				joinResponse.setAccepted(join);
-				joinResponse.setIDValue(Long.parseLong((String)((Packet4Object)o).getObject()));
+				boolean join;
+				if((mserver.findMatch(Long.parseLong((String)((Packet4Object)o).getObject())).get_inProgress())==true){
+					 joinResponse.setAccepted(false);
+					 joinResponse.setIDValue(0);
+				}
+				else{
+					 join = mserver.bridgeClient(c, Long.parseLong((String)((Packet4Object)o).getObject()));
+					 joinResponse.setAccepted(join);
+					 joinResponse.setIDValue(Long.parseLong((String)((Packet4Object)o).getObject()));
+				}
+			
 				c.sendTCP(joinResponse);
 				break;
 			}
@@ -166,6 +191,16 @@ public class NetworkListener extends Listener{
 		}
 		if(o instanceof Packet11ImmediateStart){
 			(mserver.findMatch(((Packet11ImmediateStart)o).getMID())).sendStartMatchRequest();
+		}
+		if(o instanceof Packet12CreateMatch){
+			System.out.println("[SERVER ---------- CREATE Received packet" );
+			long matchID = mserver.createMatch(((Packet12CreateMatch)o).getHuman(),
+					((Packet12CreateMatch)o).getAI());
+			mserver.bridgeClient(c,matchID);//adding client to match connection list
+			Packet4Object P = new Packet4Object();
+			P.setID(5);
+			P.setObject(matchID);
+			c.sendTCP(P);
 		}
 	}
 

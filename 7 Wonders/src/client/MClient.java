@@ -34,6 +34,7 @@ public class MClient {
     private Chat chat;
     private User user;
     private linkNetworkView link;
+    private Player player;
         
     //player receive game
     public MClient(){
@@ -41,8 +42,7 @@ public class MClient {
     	client = new Client();
     	NetworkListener nl = new NetworkListener(this);
     	
-    	link = new linkNetworkView();
-    	chat = new Chat(this);
+    	link = new linkNetworkView(this);
     	
     	client.addListener(nl);
     	client.start();
@@ -105,10 +105,14 @@ public class MClient {
 
     }
     
-    public void sendCreateMatchRequest(){
-    	Packet2Message mpackage = new Packet2Message();
-        mpackage.setObject("CREATE");
-        client.sendTCP(mpackage);
+    public void sendCreateMatchRequest(int human,int ai){
+//    	Packet2Message mpackage = new Packet2Message();
+//        mpackage.setObject("CREATE");
+//        mpackage.setObject2(x);
+    	Packet12CreateMatch packet = new Packet12CreateMatch();
+    	packet.setHuman(human);
+    	packet.setAI(ai);
+        client.sendTCP(packet);
     }
     
     //get/set host values
@@ -130,8 +134,9 @@ public class MClient {
     public ArrayList<Long>getMatchList(){return matchList;}
     
     //getter for chat
-    public Chat getChat(){return chat;}
     public void setUser(User u){user = u;}
+    
+    public linkNetworkView getLink(){return link;}
     public User getUser(){return user;}
     public void setUser_username(String s){username = s;}
     public void setUser_ID(long id){}
@@ -178,13 +183,12 @@ public class MClient {
     	client.sendTCP(msg);
     }
     
-    public void updateChat(String s){
-    	chat.addChat(s);
+    public void sendMatchListRequest(){
+    	Packet2Message packet = new Packet2Message();
+    	packet.setObject("LIST");
+    	client.sendTCP(packet);
     }
-    
-    
-   
-    
+
     
     //send request packets to server
     
@@ -193,7 +197,7 @@ public class MClient {
     	game_id.setID(2);
     	game_id.setObject(mname);
     	client.sendTCP(game_id);      	
-    	//chat.launchChatFrame();    	
+  	
     }
     //public void sendClientMatch
     /*
@@ -226,8 +230,11 @@ public class MClient {
     }
     
     public void startMatch(){
-    	chat.countdown();
-    	link.launchMainFrame();
+    	Controls.Match m = new Controls.Match();
+    	player = new Player();
+    	
+    	//link.getChat().countdown();
+    	link.launchMainFrame( m,player);
     	//load match
     }
     
@@ -255,6 +262,7 @@ public class MClient {
 		kryo.register(Packet9StartMatch.class);
 		kryo.register(Packet10EndMatch.class);
 		kryo.register(Packet11ImmediateStart.class);
+		kryo.register(Packet12CreateMatch.class);
     	kryo.register(java.util.ArrayList.class);
     	kryo.register(Match.class);
    }

@@ -1,6 +1,8 @@
 package Resources;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,6 +21,7 @@ public class StartMenu extends JFrame{
 	String uname,ip,port;
 	MClient mclient;
 	
+	
 	public StartMenu(){
 		create = new JButton("CREATE");
 		join = new JButton("JOIN");
@@ -32,16 +35,16 @@ public class StartMenu extends JFrame{
 	     create.addActionListener(new ActionListener(){
 	            public void actionPerformed(ActionEvent e){
 	               setVisible(false);
-	               CreateMenu mc = new CreateMenu(mclient);
-	               mc.showGUI();
+	               mclient.getLink().launchCreateMenu();
+	 
 	            }
 	        });
 	     
 	    join.addActionListener(new ActionListener(){
 	            public void actionPerformed(ActionEvent e){
 	               setVisible(false);
-	               Lobby l = new Lobby(mclient);
-	               l.showGUI();
+	               mclient.getLink().launchLobby();
+	               
 	            }
 	        });
 	     
@@ -50,17 +53,19 @@ public class StartMenu extends JFrame{
 	               System.exit(0);
 	            }
 	        });
-		
+	    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		 this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		add(panel);
 	}
 	
 	 public void showGUI() {
 	        //Create and set up the window.
 		 	// TODO Auto-generated method stub
-//			String uname = JOptionPane.showInputDialog("What is your username?");
-//			String ip = JOptionPane.showInputDialog("IP :");
-//			String port = JOptionPane.showInputDialog("Port :");
+			String uname = JOptionPane.showInputDialog("What is your username?");
+			String ip = JOptionPane.showInputDialog("IP :");
+			String port = JOptionPane.showInputDialog("Port :");
 			mclient = new MClient();
+			
 			mclient.createUser(uname, mclient.getID());
 			mclient.setUser_username(uname);
 			mclient.serverConnect("",6);

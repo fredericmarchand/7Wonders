@@ -60,9 +60,12 @@ public class NetworkListener extends Listener{
 			if(((Packet3Connection)o).getAccepted()){
 				//join match lobby
 				mclient.setMID(((Packet3Connection)o).getIDValue());
+				
+				mclient.getLink().launchChatFrame();
 				System.out.println("[CLIENT] JOINED GAME SUCCESSFULLY");
 			}
 			else{
+				mclient.getLink().failedMatchLobby();
 				System.out.println("GAME IS FULL");
 		
 			}
@@ -71,8 +74,9 @@ public class NetworkListener extends Listener{
 			switch(((Packet4Object) o).getID()){
 				case 0: ;
 				case 1: {
-							for(Long e : (ArrayList<Long>)((Packet4Object)o).getObject())
-								System.out.println(Long.toString(e));
+							mclient.getLink().updateLobby((ArrayList<Long>)((Packet4Object)o).getObject());
+//							for(Long e : (ArrayList<Long>)((Packet4Object)o).getObject())
+//								System.out.println(Long.toString(e));
 							break;
 						}
 				case 2: ;					
@@ -82,6 +86,8 @@ public class NetworkListener extends Listener{
 							if(((long)((Packet4Object)o).getObject())>0){
 								mclient.setMID((long)((Packet4Object)o).getObject());
 								mclient.setHost(true);
+								mclient.getLink().launchChatFrame();
+								//if(mclient.getHost()) mclient.getLink().launchMatchLobby();
 								System.out.println("[CLIENT] SET TO HOST");
 								System.out.println((long)((Packet4Object)o).getObject());
 							}
@@ -96,7 +102,8 @@ public class NetworkListener extends Listener{
 		}
 		if(o instanceof Packet6ChatMsg){
 			System.out.println("Received msg packet");
-			mclient.updateChat(((Packet6ChatMsg)o).getMsg());
+			mclient.getLink().getChat().addChat(((Packet6ChatMsg)o).getMsg());
+			//mclient.updateChat(((Packet6ChatMsg)o).getMsg());
 		}
 
 		if(o instanceof Packet7MatchFunction){
