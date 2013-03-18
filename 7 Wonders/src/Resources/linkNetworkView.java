@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import client.MClient;
 import Controls.GameController;
+import Controls.Match1;
 import Player.Player;
 import View.MainFrame;
 import Resources.*;
@@ -19,15 +20,8 @@ public class linkNetworkView {
 		mclient = c;
 	}
 	
-	public void launchMainFrame(Controls.Match m, Player p){
-
+	public void launchMainFrame(Match1 m, Player p){
 		GameController gc = new GameController(p,m);
-		try{
-			matchLobby.setVisible(false);
-		}catch(Exception e){
-			
-		}
-		
 	}
 	
 	public void launchLobby(){

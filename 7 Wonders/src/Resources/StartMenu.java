@@ -66,10 +66,10 @@ public class StartMenu extends JFrame{
 			String port = JOptionPane.showInputDialog("Port :");
 			mclient = new MClient();
 			
-			mclient.createUser(uname, mclient.getID());
+//			mclient.createUser(uname, mclient.getID());
 			mclient.setUser_username(uname);
-			mclient.serverConnect("",6);
-			//mclient.serverConnect(ip, Integer.parseInt(port));
+			//mclient.serverConnect("",6);
+			mclient.serverConnect(ip, Integer.parseInt(port));
 
 	        pack();
 	        setVisible(true);

@@ -2,7 +2,7 @@ package View;
 
 import javax.swing.*;
 
-import Controls.Match;
+import Controls.Match1;
 
 import java.awt.*;
 
@@ -31,7 +31,7 @@ public class MainFrame extends JFrame {
 		panel.update();
 	}
 	
-	public void startMatch(Match m) {
+	public void startMatch(Match1 m) {
 		panel = new MatchPanel(m, controller);
 		add(panel);
 	}

@@ -7,7 +7,7 @@ import javax.swing.*;
 
 import Tokens.Resources;
 
-import Controls.Match;
+import Controls.Match1;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -21,7 +21,7 @@ import java.awt.image.BufferedImage;
 public class MatchPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
-	private Match match;
+	private Match1 match;
 	private ImageIcon cards[];
 	
 	private FarPanel f1, f2, f3, f4;
@@ -41,7 +41,7 @@ public class MatchPanel extends JPanel {
 	private ArrayList<Resources> need;
 	private ArrayList<Resources> picked;
 	
-	public MatchPanel(Match m, Controller c) {
+	public MatchPanel(Match1 m, Controller c) {
 		setLayout(null);
 		setSize(1280, 860);
 		setBackground(Color.WHITE);

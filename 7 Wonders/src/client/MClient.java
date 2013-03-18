@@ -3,7 +3,6 @@ package client;
 import java.io.IOException;
 import java.util.*;
 
-import javax.swing.JOptionPane;
 
 import Controls.*;
 
@@ -12,7 +11,7 @@ import Controls.*;
 import Player.Player;
 import Player.User;
 import Resources.Chat;
-import Resources.Match;
+
 import Resources.linkNetworkView;
 import Resources.Packet.*;
 
@@ -35,6 +34,7 @@ public class MClient {
     private User user;
     private linkNetworkView link;
     private Player player;
+    Controls.Match1 m;
         
     //player receive game
     public MClient(){
@@ -146,7 +146,7 @@ public class MClient {
     
     public void serverConnect(String ip, int port){
     	try {
-			client.connect(5000,"127.0.0.1",25565);
+			client.connect(5000,ip,port);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -230,8 +230,8 @@ public class MClient {
     }
     
     public void startMatch(){
-    	Controls.Match m = new Controls.Match();
-    	player = new Player();
+    	 m = new Controls.Match1();
+    	 player = new Player();
     	
     	//link.getChat().countdown();
     	link.launchMainFrame( m,player);
@@ -264,7 +264,7 @@ public class MClient {
 		kryo.register(Packet11ImmediateStart.class);
 		kryo.register(Packet12CreateMatch.class);
     	kryo.register(java.util.ArrayList.class);
-    	kryo.register(Match.class);
+    	kryo.register(Match1.class);
    }
 	public static void main(String[] args) {
 		

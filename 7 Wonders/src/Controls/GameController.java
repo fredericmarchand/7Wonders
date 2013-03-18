@@ -31,10 +31,10 @@ public class GameController implements Controller {
 	//public static final int PLAYLASTCARD = 14;
 
 	private Player user;
-	private Match match;
+	private Match1 match;
 	private MainFrame frame;
 	
-	public GameController(Player p, Match m)
+	public GameController(Player p, Match1 m)
 	{
 		user = p;
 		match = m;
@@ -287,7 +287,7 @@ public class GameController implements Controller {
 	{
 		String name = JOptionPane.showInputDialog("What is your username? ");
 		@SuppressWarnings("unused")
-		GameController gc = new GameController(new Player(name, 0), new Match());
+		GameController gc = new GameController(new Player(name, 0), new Match1());
 	}
 
 

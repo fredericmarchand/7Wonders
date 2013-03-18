@@ -30,7 +30,7 @@ public class Match {
     private boolean inProgress;
 
     /////FIX///////////////////////////////////
-    Controls.Match controller;
+    Controls.Match1 controller;
     
     public Match(int h,int ai){
     	connected = new ArrayList<Connection>();
@@ -126,9 +126,11 @@ public class Match {
 	}
 	public void sendStartMatchRequest(){
 		Packet9StartMatch start = new Packet9StartMatch();
-		for(Connection c: connected){
-			c.sendTCP(start);
-		}
+		
+			for(Connection c: connected){
+				c.sendTCP(start);
+			}
+	
 	}
 	
 	public void sendEndMatchRequest(){

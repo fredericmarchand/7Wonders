@@ -1,13 +1,13 @@
 package Player;
 
 import Controls.CommandMessage;
-import Controls.Match;
+import Controls.Match1;
 
 public class User {
 
 	protected long ID;
 	protected String username;
-	private Match currentMatch;
+	private Match1 currentMatch;
 	private CommandMessage msg;
 	
 	public User(String name, long id)
