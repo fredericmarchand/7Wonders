@@ -42,8 +42,8 @@ public class MServer {
 		server.start();
 		
 	}
-	public long createMatch(int x){		
-		Match m = new Match(x);
+	public long createMatch(int h, int ai){		
+		Match m = new Match(h,ai);
 		matchList.add(m);
 		//m.setServerMatchCommunication(server);
 //		for(Match m: matchList)
@@ -127,6 +127,7 @@ public class MServer {
 		kryo.register(Packet9StartMatch.class);
 		kryo.register(Packet10EndMatch.class);
 		kryo.register(Packet11ImmediateStart.class);
+		kryo.register(Packet12CreateMatch.class);
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match.class);	
 	}

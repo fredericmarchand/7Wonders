@@ -105,11 +105,14 @@ public class MClient {
 
     }
     
-    public void sendCreateMatchRequest(int x){
-    	Packet2Message mpackage = new Packet2Message();
-        mpackage.setObject("CREATE");
-        mpackage.setObject2(x);
-        client.sendTCP(mpackage);
+    public void sendCreateMatchRequest(int human,int ai){
+//    	Packet2Message mpackage = new Packet2Message();
+//        mpackage.setObject("CREATE");
+//        mpackage.setObject2(x);
+    	Packet12CreateMatch packet = new Packet12CreateMatch();
+    	packet.setHuman(human);
+    	packet.setAI(ai);
+        client.sendTCP(packet);
     }
     
     //get/set host values
@@ -259,6 +262,7 @@ public class MClient {
 		kryo.register(Packet9StartMatch.class);
 		kryo.register(Packet10EndMatch.class);
 		kryo.register(Packet11ImmediateStart.class);
+		kryo.register(Packet12CreateMatch.class);
     	kryo.register(java.util.ArrayList.class);
     	kryo.register(Match.class);
    }

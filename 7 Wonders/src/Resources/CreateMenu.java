@@ -42,9 +42,12 @@ public class CreateMenu extends JFrame {
 	    create.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
             	//fix this code
+            	if(humanNum.getText().equals(""))humanNum.setText("0");
+            	if(aiNum.getText().equals(""))aiNum.setText("0");
             	if(((Integer.parseInt(humanNum.getText())<=7&&Integer.parseInt(humanNum.getText())>=1))&&
             			(Integer.parseInt(humanNum.getText())+Integer.parseInt(aiNum.getText()))<=7){
-	               mclient.sendCreateMatchRequest(Integer.parseInt(humanNum.getText()));
+	               mclient.sendCreateMatchRequest(Integer.parseInt(humanNum.getText()),Integer.parseInt(aiNum.getText()));
+	               
 	               setVisible(false);
             	}
             	else

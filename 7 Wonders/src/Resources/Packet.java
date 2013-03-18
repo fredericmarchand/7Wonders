@@ -101,5 +101,12 @@ public class Packet {
 		public long getMID(){return matchID;}
 		public void setMID(long id){matchID = id;}		
 	}
+	public static class Packet12CreateMatch{
+		int numHuman,numAI;
+		public void setHuman(int x){numHuman = x;}
+		public int getHuman(){return numHuman;}
+		public void setAI(int x){numAI = x;}
+		public int getAI(){return numAI;}
+	}
 
 }

@@ -32,12 +32,12 @@ public class Match {
     /////FIX///////////////////////////////////
     Controls.Match controller;
     
-    public Match(int x){
+    public Match(int h,int ai){
     	connected = new ArrayList<Connection>();
 		match_id = ++counter;
 		cmdMsgList = new ArrayList<CommandMessage>();
 		inProgress = false;
-		MAX_PLAYER_COUNT = x;
+		MAX_PLAYER_COUNT = h+ai;
     }
     public  int getMaxPlayerCount() {return MAX_PLAYER_COUNT;}
     public boolean get_inProgress(){return inProgress;}
