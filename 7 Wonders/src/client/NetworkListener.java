@@ -60,7 +60,7 @@ public class NetworkListener extends Listener{
 			if(((Packet3Connection)o).getAccepted()){
 				//join match lobby
 				mclient.setMID(((Packet3Connection)o).getIDValue());
-				mclient.getLink().launchMatchLobby();
+				
 				mclient.getLink().launchChatFrame();
 				System.out.println("[CLIENT] JOINED GAME SUCCESSFULLY");
 			}
@@ -87,6 +87,7 @@ public class NetworkListener extends Listener{
 								mclient.setMID((long)((Packet4Object)o).getObject());
 								mclient.setHost(true);
 								mclient.getLink().launchChatFrame();
+								//if(mclient.getHost()) mclient.getLink().launchMatchLobby();
 								System.out.println("[CLIENT] SET TO HOST");
 								System.out.println((long)((Packet4Object)o).getObject());
 							}

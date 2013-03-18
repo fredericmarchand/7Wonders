@@ -51,9 +51,10 @@ public class MatchLobby extends JFrame{
 		setVisible(true);
 	}
 	
-	public static void main (String args[]){
-		MatchLobby m = new MatchLobby(null);
-		m.setVisible(true);
-	}
+	
+//	public static void main (String args[]){
+//		MatchLobby m = new MatchLobby(null);
+//		m.setVisible(true);
+//	}
 
 }

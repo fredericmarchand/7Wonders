@@ -20,7 +20,14 @@ public class linkNetworkView {
 	}
 	
 	public void launchMainFrame(Controls.Match m, Player p){
+
 		GameController gc = new GameController(p,m);
+		try{
+			matchLobby.setVisible(false);
+		}catch(Exception e){
+			
+		}
+		
 	}
 	
 	public void launchLobby(){
