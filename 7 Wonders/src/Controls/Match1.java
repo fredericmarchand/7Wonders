@@ -466,7 +466,7 @@ public class Match1 {
 			p.addVictoryPoints(p.getConflictTokens().getVictoryPoints());
 			
 			//Coins
-			p.addVictoryPoints(p.getResources().getCoins() / 3);
+			p.addVictoryPoints((int)Math.floor(p.getResources().getCoins() / 3));
 			
 			//Scientific
 			p.addVictoryPoints(p.getScientificSymbols().victoryPointsValue());
@@ -477,6 +477,29 @@ public class Match1 {
 	
 	
 	
+	public void endOfTurn()
+	{
+		CardHandler.PassCardsToNeighbors(getPlayers(), getAge());
+		if ( getTurn() == 6 )
+		{
+			PlayerInteraction.SettleMilitaryConflicts(getPlayers(), getAge());
+			setAge(getAge()+1);
+			setTurn(1);
+			if ( getAge() == 2 ) CardHandler.DistributeCards(getPlayers(), getDeck());
+			if ( getAge() == 3 ) CardHandler.DistributeCards(getPlayers(), getDeck());
+			if ( getAge() == 4 ) 
+			{
+				//System.out.println("Game Over");
+				
+				//end of game special effects
+				countPlayersVictoryPoints();
+			}
+		}
+		else 
+		{
+			setTurn(getTurn()+1);
+		}
+	}
 	
 	
 	
@@ -494,7 +517,13 @@ public class Match1 {
 	}
 	
 	
-	
+	public void discardAllPlayersCards()
+	{
+		for ( Player p : players )
+		{
+			p.discardHand(discarded);
+		}
+	}
 	
 	
 	

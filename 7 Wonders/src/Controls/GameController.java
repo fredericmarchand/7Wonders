@@ -68,8 +68,9 @@ public class GameController implements Controller {
 		user.getCards().remove(user.getChosenCard());
 		user.chooseCard(null);
 		match.handleAIPlayerMoves();
-		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
 		match.playerEndOfTurnSpecialEffects(user);
+		match.endOfTurn();
+		/*CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
 		if ( match.getTurn() == 6 )
 		{
 			PlayerInteraction.SettleMilitaryConflicts(match.getPlayers(), match.getAge());
@@ -79,6 +80,7 @@ public class GameController implements Controller {
 			if ( match.getAge() == 3 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
 			if ( match.getAge() == 4 ) 
 			{
+				match.setAge(1);
 				//match.setAge(1); 
 				System.out.println("Game Over");
 				
@@ -89,6 +91,10 @@ public class GameController implements Controller {
 		else 
 		{
 			match.setTurn(match.getTurn()+1);
+		}*/
+		if ( match.getAge() == 4 ) 
+		{
+			match.discardAllPlayersCards();
 		}
 		
 		frame.update();
@@ -113,8 +119,9 @@ public class GameController implements Controller {
 		user.getCards().remove(user.getChosenCard());
 		user.chooseCard(null);
 		match.handleAIPlayerMoves();
-		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
 		match.playerEndOfTurnSpecialEffects(user);
+		match.endOfTurn();
+		/*CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
 		if ( match.getTurn() == 6 )
 		{
 			PlayerInteraction.SettleMilitaryConflicts(match.getPlayers(), match.getAge());
@@ -130,7 +137,12 @@ public class GameController implements Controller {
 				match.countPlayersVictoryPoints();
 			}
 		}
-		else match.setTurn(match.getTurn()+1);
+		else match.setTurn(match.getTurn()+1);*/
+		if ( match.getAge() == 4 ) 
+		{
+			match.discardAllPlayersCards();
+		}
+		
 		frame.update();
 	}
 
@@ -216,11 +228,11 @@ public class GameController implements Controller {
 	@Override
 	public void discardChosen() {
 		user.discard(match.getDiscardedCards());
-		//user.getCards().remove(user.getChosenCard());
 		user.chooseCard(null);
 		match.handleAIPlayerMoves();
-		CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
 		match.playerEndOfTurnSpecialEffects(user);
+		match.endOfTurn();
+		/*CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
 		if ( match.getTurn() == 6 )
 		{
 			PlayerInteraction.SettleMilitaryConflicts(match.getPlayers(), match.getAge());
@@ -236,8 +248,13 @@ public class GameController implements Controller {
 				match.countPlayersVictoryPoints();
 			}
 		}
-		else match.setTurn(match.getTurn()+1);
+		else match.setTurn(match.getTurn()+1);*/
 
+		if ( match.getAge() == 4 ) 
+		{
+			match.discardAllPlayersCards();
+		}
+		
 		frame.update();
 	}
 
