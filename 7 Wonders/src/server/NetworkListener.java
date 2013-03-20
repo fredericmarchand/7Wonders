@@ -138,16 +138,16 @@ public class NetworkListener extends Listener {
 		if (o instanceof Packet13MatchJoinRequest) {
 			Packet3Connection joinResponse = new Packet3Connection();
 			boolean join;
-			if ((mserver.findMatch(Long.parseLong((String) ((Packet4Object) o)
-					.getObject())).get_inProgress()) == true) {
+			if ((mserver.findMatch(((Packet13MatchJoinRequest) o)
+					.getMID()).get_inProgress()) == true) {
 				joinResponse.setAccepted(false);
 				joinResponse.setIDValue(0);
 			} else {
-				join = mserver.bridgeClient(c, Long
-						.parseLong((String) ((Packet4Object) o).getObject()));
+				join = mserver.bridgeClient(c, ((Packet13MatchJoinRequest) o)
+						.getMID());
 				joinResponse.setAccepted(join);
-				joinResponse.setIDValue(Long
-						.parseLong((String) ((Packet4Object) o).getObject()));
+				joinResponse.setIDValue(((Packet13MatchJoinRequest) o)
+						.getMID());
 			}
 			c.sendTCP(joinResponse);
 		}
