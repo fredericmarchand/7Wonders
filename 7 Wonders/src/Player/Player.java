@@ -1,6 +1,7 @@
 package Player;
 
 import WonderBoards.WonderBoard;
+import WonderBoards.WonderBoardStage;
 import Structures.Structure;
 import Structures.Effects.*;
 
@@ -189,8 +190,8 @@ public class Player extends User {
 	{
 		if ( !wonderBoard.containsCard(chosenCard.getID()) )
 		{
-			if ( ((chosenCard.getResourceCost().canAfford(Resources.addResources(extraResources, resources, unavailableResources)) 
-					|| chosenCard.canBuildForFree(wonderBoard)))  )
+			if ( ((chosenCard.getResourceCost().canAfford(getTotalResources())) 
+					|| chosenCard.canBuildForFree(wonderBoard))	)
 			{
 				return 2;
 			}
@@ -208,7 +209,7 @@ public class Player extends User {
 		
 		if ( wonderBoard.getNextStageCost() != null )
 		{
-			if ( wonderBoard.getNextStageCost().canAfford(Resources.addResources(extraResources, resources, unavailableResources)) )
+			if ( wonderBoard.getNextStageCost().canAfford(getTotalResources()) )
 			{
 				return 2;
 			}
@@ -292,26 +293,40 @@ public class Player extends User {
 	
 	public boolean buildStage()
 	{
-		wonderBoard.buildStage(chosenCard, Resources.addResources(unavailableResources, getResources()));
+		WonderBoardStage stg = wonderBoard.getNextStage();
+		wonderBoard.buildStage(chosenCard, getTotalResources());
 		unavailableResources = new Resources();
 		extraResources = new Resources();
+		for ( SpecialEffect se : stg.getEffects() )
+		{				
+			if ( se.getID() == CoinBonus.CoinBonusID )
+				((CoinBonus)se).acquireCoins(resources); 
+			else if ( se.getID() == VictoryPointBonus.VictoryPointBonusID )
+				((VictoryPointBonus)se).acquireVictoryPoints(this);
+			else if ( se.getID() == ShieldBonus.ShieldBonusID )
+				((ShieldBonus)se).acquireShields(this);
+		}
 		return true;
 	}
 	
 	public boolean buildStage(Player leftNeighbor, Player rightNeighbor, int preference)
 	{
-		//boolean ans = wonderBoard.buildStage(chosenCard, Resources.addResources(unavailableResources, Resources.addResources(resources, extraResources)));
-		
-		//if ( ans ) return true;
-		//else 
-		//{
-			buyResources(leftNeighbor, rightNeighbor, wonderBoard.getNextStageCost(), preference);
+		WonderBoardStage stg = wonderBoard.getNextStage();
+		buyResources(leftNeighbor, rightNeighbor, wonderBoard.getNextStageCost(), preference);
 			
-			wonderBoard.buildStage(chosenCard, Resources.addResources(purchased, Resources.addResources(unavailableResources, getResources())));
-			purchased = new Resources();
-			unavailableResources = new Resources();
-			extraResources = new Resources();
-		//}
+		wonderBoard.buildStage(chosenCard, Resources.addResources(purchased, Resources.addResources(unavailableResources, getResources())));
+		purchased = new Resources();
+		unavailableResources = new Resources();
+		extraResources = new Resources();
+		for ( SpecialEffect se : stg.getEffects() )
+		{				
+			if ( se.getID() == CoinBonus.CoinBonusID )
+				((CoinBonus)se).acquireCoins(resources); 
+			else if ( se.getID() == VictoryPointBonus.VictoryPointBonusID )
+				((VictoryPointBonus)se).acquireVictoryPoints(this);
+			else if ( se.getID() == ShieldBonus.ShieldBonusID )
+				((ShieldBonus)se).acquireShields(this);
+		}
 		return true;
 	}
 	
@@ -354,6 +369,16 @@ public class Player extends User {
 				}
 			}
 		}
+		for ( WonderBoardStage stg: wonderBoard.getStages() )
+		{
+			for ( SpecialEffect se: stg.getEffects() )
+			{
+				if ( se.getID() == TradingPerks.TradingPerksID )
+				{
+					perks.add(((TradingPerks)se));
+				}
+			}
+		}
 		sumup = TradingPerks.addAll(perks);
 		
 		//finds what resources need to be purchased from neighbors
@@ -387,13 +412,23 @@ public class Player extends User {
 				}
 			}
 		}
+		for ( WonderBoardStage stg: wonderBoard.getStages() )
+		{
+			for ( SpecialEffect se: stg.getEffects() )
+			{
+				if ( se.getID() == TradingPerks.TradingPerksID )
+				{
+					perks.add(((TradingPerks)se));
+				}
+			}
+		}
 		sumup = TradingPerks.addAll(perks);
 		
-		Resources missing = (Resources.addResources(extraResources, getResources())).findMissingResources(required);
+		Resources missing = (getTotalResources()).findMissingResources(required);
 		
 		int price = sumup.bulkPrice(missing, leftNeighbor.getResources(), rightNeighbor.getResources());
 		
-		if ( Resources.addResources( leftNeighbor.getResources(),  rightNeighbor.getResources()).hasRequiredResources(missing) 
+		if ( Resources.addResources(leftNeighbor.getResources(), rightNeighbor.getResources()).hasRequiredResources(missing) 
 				 && price <= resources.getCoins() )
 			return true;
 		return false;

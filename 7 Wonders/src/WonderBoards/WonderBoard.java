@@ -18,8 +18,8 @@ public class WonderBoard {
 	public static final String BOARD6 = "The Mausoleum of Halicarnassus";
 	public static final String BOARD7 = "The Pyramids of Giza";
 	
-	protected static final int SIDE_A = 1;
-	protected static final int SIDE_B = 2;
+	public static final int SIDE_A = 0;
+	public static final int SIDE_B = 1;
 
 	protected int boardID;
 	protected int side;
@@ -129,7 +129,19 @@ public class WonderBoard {
 		for ( WonderBoardStage s: stages )
 		{
 			if ( !s.isBuilt() )
+			{
 				return s.getResourceCost();
+			}
+		}
+		return null;
+	}
+	
+	public WonderBoardStage getNextStage()
+	{
+		for ( WonderBoardStage s: stages )
+		{
+			if ( !s.isBuilt() )
+				return s;
 		}
 		return null;
 	}
