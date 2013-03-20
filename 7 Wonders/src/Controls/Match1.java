@@ -512,7 +512,7 @@ public class Match1 {
 		{
 			if ( p.ai() )
 			{
-				((AIPlayer)p).pickCard(discarded);
+				((AIPlayer)p).pickCard(discarded, getLeftNeighbor(p), getRightNeighbor(p));
 			}
 
 		}

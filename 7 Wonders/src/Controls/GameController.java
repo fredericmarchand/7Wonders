@@ -17,19 +17,10 @@ import WonderBoards.WonderBoardStage;
 
 public class GameController extends java.lang.Thread implements Controller {
 
-	//public static final int BEGINNINGOFGAME = 0;
-	//public static final int BEGINNINGOFAGE = 1;
 	public static final int BEGINNINGTURN = 0;
 	public static final int MOVE = 1;
-	//public static final int ENDOFTURN = 4;
-	//public static final int ENDOFAGE = 5;
 	public static final int ENDOFGAME = 2;
 
-	//public static final int CHOOSERESOURCE = 10;
-	//public static final int CHOOSESCIENTIFICSYMBOL = 11;
-	//public static final int CHOOSETRADINGPREFERENCE = 12;
-	//public static final int CHOOSEFROMDISCSARDED = 13;
-	//public static final int PLAYLASTCARD = 14;
 
 	private Player user;
 	private Match1 match;
@@ -71,28 +62,7 @@ public class GameController extends java.lang.Thread implements Controller {
 		match.handleAIPlayerMoves();
 		match.playerEndOfTurnSpecialEffects(user);
 		match.endOfTurn();
-		/*CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
-		if ( match.getTurn() == 6 )
-		{
-			PlayerInteraction.SettleMilitaryConflicts(match.getPlayers(), match.getAge());
-			match.setAge(match.getAge()+1);
-			match.setTurn(1);
-			if ( match.getAge() == 2 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
-			if ( match.getAge() == 3 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
-			if ( match.getAge() == 4 ) 
-			{
-				match.setAge(1);
-				//match.setAge(1); 
-				System.out.println("Game Over");
-				
-				//end of game special effects
-				match.countPlayersVictoryPoints();
-			}
-		}
-		else 
-		{
-			match.setTurn(match.getTurn()+1);
-		}*/
+
 		if ( match.getAge() == 4 ) 
 		{
 			match.discardAllPlayersCards();
@@ -122,23 +92,7 @@ public class GameController extends java.lang.Thread implements Controller {
 		match.handleAIPlayerMoves();
 		match.playerEndOfTurnSpecialEffects(user);
 		match.endOfTurn();
-		/*CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
-		if ( match.getTurn() == 6 )
-		{
-			PlayerInteraction.SettleMilitaryConflicts(match.getPlayers(), match.getAge());
-			match.setAge(match.getAge()+1);
-			match.setTurn(1);
-			if ( match.getAge() == 2 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
-			if ( match.getAge() == 3 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
-			if ( match.getAge() == 4 ) 
-			{
-				//match.setAge(1); 
-				System.out.println("Game Over");
-				//end of game special effects
-				match.countPlayersVictoryPoints();
-			}
-		}
-		else match.setTurn(match.getTurn()+1);*/
+
 		if ( match.getAge() == 4 ) 
 		{
 			match.discardAllPlayersCards();
@@ -158,6 +112,20 @@ public class GameController extends java.lang.Thread implements Controller {
 				{
 					if ( ((ScientificSymbolBonus)se).canChoose() )
 						return true;
+				}
+			}
+		}
+		for ( WonderBoardStage stg: user.getWonderBoard().getStages() )
+		{
+			if ( stg.isBuilt() )
+			{
+				for ( SpecialEffect se: stg.getEffects() )
+				{
+					if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
+					{
+						if ( ((ScientificSymbolBonus)se).canChoose() )
+							return true;
+					}
 				}
 			}
 		}
@@ -202,9 +170,9 @@ public class GameController extends java.lang.Thread implements Controller {
 		}
 		for ( WonderBoardStage stg: user.getWonderBoard().getStages() )
 		{
-			for ( SpecialEffect se: stg.getEffects() )
+			if ( stg.isBuilt() )
 			{
-				if ( stg.isBuilt() )
+				for ( SpecialEffect se: stg.getEffects() )
 				{
 					if ( se.getID() == ResourceChoice.ResourceChoiceID )
 					{
@@ -246,23 +214,7 @@ public class GameController extends java.lang.Thread implements Controller {
 		match.handleAIPlayerMoves();
 		match.playerEndOfTurnSpecialEffects(user);
 		match.endOfTurn();
-		/*CardHandler.PassCardsToNeighbors(match.getPlayers(), match.getAge());
-		if ( match.getTurn() == 6 )
-		{
-			PlayerInteraction.SettleMilitaryConflicts(match.getPlayers(), match.getAge());
-			match.setAge(match.getAge()+1);
-			match.setTurn(1);
-			if ( match.getAge() == 2 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
-			if ( match.getAge() == 3 ) CardHandler.DistributeCards(match.getPlayers(), match.getDeck());
-			if ( match.getAge() == 4 ) 
-			{
-				//match.setAge(1); 
-				System.out.println("Game Over");
-				//end of game special effects
-				match.countPlayersVictoryPoints();
-			}
-		}
-		else match.setTurn(match.getTurn()+1);*/
+
 		for ( Structure s: user.getWonderBoard().getRedCards() )
 		{
 			System.out.println(s.getName());
