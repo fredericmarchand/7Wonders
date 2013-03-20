@@ -273,13 +273,16 @@ public class GameController extends java.lang.Thread implements Controller {
 	{
 		for ( WonderBoardStage stg: user.getWonderBoard().getStages() )
 		{
-			for ( SpecialEffect se: stg.getEffects() )
+			if ( stg.isBuilt() )
 			{
-				if ( se.getID() == BuildDiscardedCard.BuildDiscardedCardID )
+				for ( SpecialEffect se: stg.getEffects() )
 				{
-					if ( !se.isUsedUp() )
+					if ( se.getID() == BuildDiscardedCard.BuildDiscardedCardID )
 					{
-						return match.getDiscardedCards();
+						if ( !se.isUsedUp() )
+						{
+							return match.getDiscardedCards();
+						}
 					}
 				}
 			}

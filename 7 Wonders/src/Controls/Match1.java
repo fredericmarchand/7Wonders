@@ -489,11 +489,14 @@ public class Match1 {
 			{
 				for ( WonderBoardStage stg: p.getWonderBoard().getStages() )
 				{
-					for ( SpecialEffect se: stg.getEffects() )
+					if ( stg.isBuilt() )
 					{
-						if ( se.getID() == FreeConstruction.FreeConstructionID )
+						for ( SpecialEffect se: stg.getEffects() )
 						{
-							se.reset();
+							if ( se.getID() == FreeConstruction.FreeConstructionID )
+							{
+								se.reset();
+							}
 						}
 					}
 				}
