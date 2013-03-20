@@ -31,7 +31,6 @@ public class TheStatueOfZeusInOlympia extends WonderBoard {
 			stage1.getEffects().add(new TradingPerks(3, 0));
 			stage2.getEffects().add(new VictoryPointBonus(5));
 			stage3.getEffects().add(new CopyGuild());
-			
 		}
 		
 		startResource = new ResourcesBonus(0, 0, 1, 0, 0, 0, 0);

@@ -6,6 +6,9 @@ import javax.swing.JOptionPane;
 
 import Player.Player;
 import Structures.Structure;
+import Structures.Effects.BuildDiscardedCard;
+import Structures.Effects.CopyGuild;
+import Structures.Effects.PlayLastCard;
 import Structures.Effects.ResourceChoice;
 import Structures.Effects.ScientificSymbolBonus;
 import Structures.Effects.SpecialEffect;
@@ -42,12 +45,14 @@ public class GameController extends java.lang.Thread implements Controller {
 	
 
 	@Override
-	public int canBuildStructure(Structure s) {
+	public int canBuildStructure(Structure s) 
+	{
 		return user.canBuild(match.getLeftNeighbor(user), match.getRightNeighbor(user));
 	}
 
 	@Override
-	public void buildStructure() {
+	public void buildStructure() 
+	{
 		int ans = user.canBuild(match.getLeftNeighbor(user), match.getRightNeighbor(user));
 		if ( ans == 2 )
 		{
@@ -72,12 +77,14 @@ public class GameController extends java.lang.Thread implements Controller {
 	}
 
 	@Override
-	public int canBuildWonderStage() {
+	public int canBuildWonderStage() 
+	{
 		return user.canBuildStage(match.getLeftNeighbor(user), match.getRightNeighbor(user));
 	}
 
 	@Override
-	public void buildWonderStage() {
+	public void buildWonderStage() 
+	{
 		int ans = user.canBuildStage(match.getLeftNeighbor(user), match.getRightNeighbor(user));
 		if ( ans == 2 )
 		{
@@ -102,7 +109,8 @@ public class GameController extends java.lang.Thread implements Controller {
 	}
 
 	@Override
-	public boolean needToChooseScienceSymbol() {
+	public boolean needToChooseScienceSymbol() 
+	{
 		// TODO Auto-generated method stub
 		for ( Structure s: user.getWonderBoard().getPurpleCards() )
 		{
@@ -133,7 +141,8 @@ public class GameController extends java.lang.Thread implements Controller {
 	}
 
 	@Override
-	public void scienceChosen(ScientificSymbols s) {
+	public void scienceChosen(ScientificSymbols s) 
+	{
 		
 		for ( Structure st: user.getWonderBoard().getPurpleCards() )
 		{
@@ -146,7 +155,8 @@ public class GameController extends java.lang.Thread implements Controller {
 	}
 
 	@Override
-	public ArrayList<Resources> needToChooseResources() {
+	public ArrayList<Resources> needToChooseResources() 
+	{
 		ArrayList<Resources> resources = new ArrayList<Resources>();
 		for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
@@ -185,17 +195,20 @@ public class GameController extends java.lang.Thread implements Controller {
 	}
 
 	@Override
-	public void needToChooseTradingPref() {
+	public void needToChooseTradingPref() 
+	{
 		
 	}
 
 	@Override
-	public void chosenTradingPref(int t) {
+	public void chosenTradingPref(int t) 
+	{
 		
 	}
 
 	@Override
-	public boolean chooseCard(Structure s) {
+	public boolean chooseCard(Structure s) 
+	{
 		for ( int i = 0; i < user.getCards().size(); ++i )
 		{
 			if ( user.getCards().get(i).getID() == s.getID() )
@@ -208,7 +221,8 @@ public class GameController extends java.lang.Thread implements Controller {
 	}
 
 	@Override
-	public void discardChosen() {
+	public void discardChosen() 
+	{
 		user.discard(match.getDiscardedCards());
 		user.chooseCard(null);
 		match.handleAIPlayerMoves();
@@ -229,41 +243,77 @@ public class GameController extends java.lang.Thread implements Controller {
 		frame.update();
 	}
 
-	@Override
-	public ArrayList<Structure> needToChooseCopyGuild() {
-		return null;
-	}
-
-	@Override
-	public void chosenGuild(Structure g) {
-		
-	}
-
-	@Override
-	public ArrayList<Structure> needToChooseDiscarded() {
-		return null;
-	}
-
-	@Override
-	public void chosenDiscarded(Structure g) {
-		
-	}
-
-	@Override
-	public Structure needToChooseLastCard() {
-		return null;
-	}
-	
-	public static void main(String args[])
+	@Override//have to check if not null
+	public ArrayList<Structure> needToChooseCopyGuild() 
 	{
-		String name = JOptionPane.showInputDialog("What is your username? ");
-		@SuppressWarnings("unused")
-		GameController gc = new GameController(new Player(name, 0), new Match1());
+		for ( WonderBoardStage stg: user.getWonderBoard().getStages() )
+		{
+			if ( stg.isBuilt() )
+			{
+				for ( SpecialEffect se: stg.getEffects() )
+				{
+					if ( se.getID() == CopyGuild.CopyGuildID )
+					{
+						return ((CopyGuild)se).getGuilds(match.getLeftNeighbor(user), match.getRightNeighbor(user));
+					}
+				}
+			}
+		}
+		return null;
 	}
 
+	@Override
+	public void chosenGuild(Structure g) 
+	{
+		
+	}
+
+	@Override//have to check if null
+	public ArrayList<Structure> needToChooseDiscarded() 
+	{
+		for ( WonderBoardStage stg: user.getWonderBoard().getStages() )
+		{
+			for ( SpecialEffect se: stg.getEffects() )
+			{
+				if ( se.getID() == BuildDiscardedCard.BuildDiscardedCardID )
+				{
+					if ( !se.isUsedUp() )
+					{
+						return match.getDiscardedCards();
+					}
+				}
+			}
+		}
+		return null;
+	}
 
 	@Override
-	public void resourceChosen(ArrayList<Resources> resources) {
+	public void chosenDiscarded(Structure g) 
+	{
+		user.getWonderBoard().buildStructure(g);
+		for ( SpecialEffect se: g.getEffects() )
+			user.activateBuildEffect(se);
+	}
+
+	@Override//have to check if null 
+	public Structure needToChooseLastCard() 
+	{
+		for ( WonderBoardStage stg: user.getWonderBoard().getStages() )
+		{
+			for ( SpecialEffect se: stg.getEffects() )
+			{
+				if ( se.getID() == PlayLastCard.PlayLastCardID )
+				{
+					return user.getCards().get(0);
+				}
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public void resourceChosen(ArrayList<Resources> resources) 
+	{
 		int i = 0;
 		for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
@@ -288,6 +338,14 @@ public class GameController extends java.lang.Thread implements Controller {
 		//System.out.println(user.getTotalResources().toString());
 		if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
 			frame.update();
+	}
+	
+	
+	public static void main(String args[])
+	{
+		String name = JOptionPane.showInputDialog("What is your username? ");
+		@SuppressWarnings("unused")
+		GameController gc = new GameController(new Player(name, 0), new Match1());
 	}
 	
 }
