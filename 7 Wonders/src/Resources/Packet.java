@@ -18,7 +18,7 @@ public class Packet {
 		public void setIDValue(long id){idvalue = id;}
 		public long getIDValue(){return idvalue;}		
 	}
-	public static class Packet2Message{
+	public static class Packet2MatchListRequest{
 		private Object o;
 		private Object o2;
 		public Object getObject(){ return o;}
@@ -35,19 +35,9 @@ public class Packet {
 		public long getIDValue(){return idvalue;}				
 	}
 	public static class Packet4Object{
-		//id ::
-		// 0 = null
-		// 1 = matchlist
-		// 2 = client match id
-		// 3 = client move
-		// 4 = client card
-		// 5 = host responsibilies
 		private Object o;
-		private int id = 0;
 		public Object getObject(){ return o;}
 		public void setObject(Object ob){ o = ob;}
-		public int getID(){return id;}
-		public void setID(int i){id = i;}
 	}
 	public static class Packet5Disconnect{
 		//if client sends one of these
@@ -108,5 +98,17 @@ public class Packet {
 		public void setAI(int x){numAI = x;}
 		public int getAI(){return numAI;}
 	}
-
+	public static class Packet13MatchJoinRequest{
+		long matchID;
+		public long getMID(){return matchID;}
+		public void setMID(long id){matchID = id;}	
+	}
+	public static class Packet14HostCreateMatch{
+		long matchID;
+		int numPlayer;
+		public long getMID(){return matchID;}
+		public void setMID(long id){matchID = id;}
+		public void setnPlayer(int i){numPlayer = i;}
+		public int  getnPlayer(){return numPlayer;}
+	}
 }

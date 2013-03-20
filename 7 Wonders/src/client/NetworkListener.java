@@ -71,34 +71,7 @@ public class NetworkListener extends Listener{
 			}
 		}
 		if(o instanceof Packet4Object){			
-			switch(((Packet4Object) o).getID()){
-				case 0: ;
-				case 1: {
-							mclient.getLink().updateLobby((ArrayList<Long>)((Packet4Object)o).getObject());
-//							for(Long e : (ArrayList<Long>)((Packet4Object)o).getObject())
-//								System.out.println(Long.toString(e));
-							break;
-						}
-				case 2: ;					
-				case 3: ;
-				case 4: ;
-				case 5: {
-							if(((long)((Packet4Object)o).getObject())>0){
-								mclient.setMID((long)((Packet4Object)o).getObject());
-								mclient.setHost(true);
-								mclient.getLink().launchChatFrame();
-								//if(mclient.getHost()) mclient.getLink().launchMatchLobby();
-								System.out.println("[CLIENT] SET TO HOST");
-								System.out.println((long)((Packet4Object)o).getObject());
-							}
-							else{
-								//failed to create game
-							}
-				};	
-						 break;
-			default: break;
-			}
-			//add client to match list
+			mclient.getLink().updateLobby((ArrayList<Long>)((Packet4Object)o).getObject());
 		}
 		if(o instanceof Packet6ChatMsg){
 			System.out.println("Received msg packet");
@@ -114,6 +87,14 @@ public class NetworkListener extends Listener{
 		}
 		if(o instanceof Packet9StartMatch){
 			mclient.startMatch();
+		}
+		if(o instanceof Packet14HostCreateMatch){
+			mclient.setMID(((Packet14HostCreateMatch)o).getMID());
+			mclient.setHost(true);
+			if(((Packet14HostCreateMatch)o).getnPlayer()>1){
+				mclient.getLink().launchMatchLobby();
+				mclient.getLink().launchChatFrame();
+			}
 		}
 	}
 
