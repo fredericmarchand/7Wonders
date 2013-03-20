@@ -117,7 +117,7 @@ public class MServer {
 		Kryo kryo = server.getKryo();
 		kryo.register(Packet0LoginRequest.class);
 		kryo.register(Packet1LoginAnswer.class);
-		kryo.register(Packet2Message.class);
+		kryo.register(Packet2MatchListRequest.class);
 		kryo.register(Packet3Connection.class);
 		kryo.register(Packet4Object.class);
 		kryo.register(Packet5Disconnect.class);
@@ -128,6 +128,8 @@ public class MServer {
 		kryo.register(Packet10EndMatch.class);
 		kryo.register(Packet11ImmediateStart.class);
 		kryo.register(Packet12CreateMatch.class);
+		kryo.register(Packet13MatchJoinRequest.class);
+		kryo.register(Packet14HostCreateMatch.class);
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match.class);	
 	}

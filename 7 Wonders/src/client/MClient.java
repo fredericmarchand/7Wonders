@@ -67,46 +67,8 @@ public class MClient {
     	
     }
     
-    public void command(){
-    	//Test code
-    	//user inputs ip address as well as forwarded port
-    	//exchanges exception packet 
-    	//while the game is still alive the server will continue
-    	//to except user input
-    	GAME_ALIVE = true;
-
-	        while(GAME_ALIVE){
-	        	System.out.println(matchID);
-	        	String m = s.next();
-	        	if(!m.equals("JOIN")&&matchID==0){
-		            Packet2Message mpackage = new Packet2Message();
-			        mpackage.setObject(m);
-			        client.sendTCP(mpackage);
-		        }else if(m.equals("JOIN")){
-		        	Packet4Object game_id = new Packet4Object();
-		        	game_id.setID(2);
-		        	game_id.setObject(s.next());
-		        	client.sendTCP(game_id);      	
-		        	chat.launchChatFrame();
-		        	//figure out fix
-		        }else if (m.equals("QUIT")&&matchID!=0){
-		        	quitMatch();
-	        	}else if(matchID!=(long)0){
-		        	System.out.println("Sending message");
-		        	Packet6ChatMsg msg = new Packet6ChatMsg();
-		        	msg.setMsg(m);
-		        	msg.setCID(ID);
-		        	msg.setuName(username);
-		        	msg.setMID(matchID);
-		        	client.sendTCP(msg);
-		        }
-	        }
-	        //immitate turn taking
-
-    }
-    
     public void sendCreateMatchRequest(int human,int ai){
-//    	Packet2Message mpackage = new Packet2Message();
+//    	Packet2MatchListRequest mpackage = new Packet2MatchListRequest();
 //        mpackage.setObject("CREATE");
 //        mpackage.setObject2(x);
     	Packet12CreateMatch packet = new Packet12CreateMatch();
@@ -139,7 +101,11 @@ public class MClient {
     public linkNetworkView getLink(){return link;}
     public User getUser(){return user;}
     public void setUser_username(String s){username = s;}
+    public String getUser_username(){return username;}
     public void setUser_ID(long id){}
+    
+    
+    
     public void createUser(String uname, long id){
     	user = new User(uname, id);
     }
@@ -184,7 +150,7 @@ public class MClient {
     }
     
     public void sendMatchListRequest(){
-    	Packet2Message packet = new Packet2Message();
+    	Packet2MatchListRequest packet = new Packet2MatchListRequest();
     	packet.setObject("LIST");
     	client.sendTCP(packet);
     }
@@ -193,10 +159,13 @@ public class MClient {
     //send request packets to server
     
     public void sendMatchRequest(String mname){
-    	Packet4Object game_id = new Packet4Object();
-    	game_id.setID(2);
-    	game_id.setObject(mname);
-    	client.sendTCP(game_id);      	
+//    	Packet4Object game_id = new Packet4Object();
+//    	game_id.setID(2);
+//    	game_id.setObject(mname);
+//    	client.sendTCP(game_id); 
+    	Packet13MatchJoinRequest rPacket = new Packet13MatchJoinRequest();
+    	rPacket.setMID(Long.parseLong(mname));
+    	client.sendTCP(rPacket);
   	
     }
     //public void sendClientMatch
@@ -252,7 +221,7 @@ public class MClient {
     	Kryo kryo = client.getKryo();
     	kryo.register(Packet0LoginRequest.class);
     	kryo.register(Packet1LoginAnswer.class);
-    	kryo.register(Packet2Message.class);
+    	kryo.register(Packet2MatchListRequest.class);
     	kryo.register(Packet3Connection.class);
     	kryo.register(Packet4Object.class);
     	kryo.register(Packet5Disconnect.class);
@@ -263,6 +232,8 @@ public class MClient {
 		kryo.register(Packet10EndMatch.class);
 		kryo.register(Packet11ImmediateStart.class);
 		kryo.register(Packet12CreateMatch.class);
+		kryo.register(Packet13MatchJoinRequest.class);
+		kryo.register(Packet14HostCreateMatch.class);
     	kryo.register(java.util.ArrayList.class);
     	kryo.register(Match1.class);
    }
