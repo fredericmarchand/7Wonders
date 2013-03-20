@@ -235,23 +235,8 @@ public class Player extends User {
 				resources.addCoins(-1*chosenCard.getResourceCost().getCoins());
 				for ( SpecialEffect se : chosenCard.getEffects() )
 				{				
-					if ( se.getID() == CoinBonus.CoinBonusID )
-						((CoinBonus)se).acquireCoins(resources); 
-					else if ( se.getID() == VictoryPointBonus.VictoryPointBonusID )
-						((VictoryPointBonus)se).acquireVictoryPoints(this);
-					else if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
-					{
-						if ( !((ScientificSymbolBonus)se).canChoose() ) 
-							((ScientificSymbolBonus)se).acquireSymbol(this);
-					}
-					else if ( se.getID() == ResourcesBonus.ResourcesBonusID )
-						((ResourcesBonus)se).acquireResources(this);
-					else if ( se.getID() == ShieldBonus.ShieldBonusID )
-						((ShieldBonus)se).acquireShields(this);
-					else if ( se.getID() == WonderStageCoinBonus.WonderStageCoinBonusID )
-						((WonderStageCoinBonus)se).acquireCoins(this);
+					activateBuildEffect(se);
 				}
-				//chosenCard = null;
 				unavailableResources = new Resources();
 				extraResources = new Resources();
 				return 2;
@@ -271,23 +256,8 @@ public class Player extends User {
 		extraResources = new Resources();
 		for ( SpecialEffect se : chosenCard.getEffects() )
 		{				
-			if ( se.getID() == CoinBonus.CoinBonusID )
-				((CoinBonus)se).acquireCoins(resources); 
-			else if ( se.getID() == VictoryPointBonus.VictoryPointBonusID )
-				((VictoryPointBonus)se).acquireVictoryPoints(this);
-			else if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
-			{
-				if ( !((ScientificSymbolBonus)se).canChoose() ) 
-					((ScientificSymbolBonus)se).acquireSymbol(this);
-			}
-			else if ( se.getID() == ResourcesBonus.ResourcesBonusID )
-				((ResourcesBonus)se).acquireResources(this);
-			else if ( se.getID() == ShieldBonus.ShieldBonusID )
-				((ShieldBonus)se).acquireShields(this);
-			else if ( se.getID() == WonderStageCoinBonus.WonderStageCoinBonusID )
-				((WonderStageCoinBonus)se).acquireCoins(this);
+			activateBuildEffect(se);
 		}
-		//chosenCard = null;
 		return true;
 	}
 	
@@ -337,7 +307,6 @@ public class Player extends User {
 		discardedCards.add(chosenCard);
 		unavailableResources = new Resources();
 		extraResources = new Resources();
-		//chosenCard = null;
 	}
 	
 	//this function must be called after a player has selected their card on the last turn of an age
@@ -345,6 +314,42 @@ public class Player extends User {
 	{
 		discardedCards.addAll(cards);
 		cards.clear();
+	}
+	
+	
+	public boolean freeBuild()
+	{
+		for ( WonderBoardStage stg: wonderBoard.getStages() )
+		{
+			for ( SpecialEffect se: stg.getEffects() )
+			{
+				if ( se.getID() == FreeConstruction.FreeConstructionID )
+				{
+					return ((FreeConstruction)se).canBuildForFree();
+				}
+			}
+		}
+		return false;
+	}
+	
+	
+	public void activateBuildEffect(SpecialEffect se)
+	{
+		if ( se.getID() == CoinBonus.CoinBonusID )
+			((CoinBonus)se).acquireCoins(resources); 
+		else if ( se.getID() == VictoryPointBonus.VictoryPointBonusID )
+			((VictoryPointBonus)se).acquireVictoryPoints(this);
+		else if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
+		{
+			if ( !((ScientificSymbolBonus)se).canChoose() ) 
+				((ScientificSymbolBonus)se).acquireSymbol(this);
+		}
+		else if ( se.getID() == ResourcesBonus.ResourcesBonusID )
+			((ResourcesBonus)se).acquireResources(this);
+		else if ( se.getID() == ShieldBonus.ShieldBonusID )
+			((ShieldBonus)se).acquireShields(this);
+		else if ( se.getID() == WonderStageCoinBonus.WonderStageCoinBonusID )
+			((WonderStageCoinBonus)se).acquireCoins(this);
 	}
 	
 	//the preference parameter is used to ask the player if he cares which neighbor he buys resources from

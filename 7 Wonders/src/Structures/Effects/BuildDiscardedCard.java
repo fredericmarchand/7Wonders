@@ -13,15 +13,17 @@ public class BuildDiscardedCard extends SpecialEffect{
 		super(BuildDiscardedCardID, false, NO_RELOAD, START_OF_TURN);
 	}
 	
+	//handled in the controller too specific to put in here
 	public void playDiscardedCard(Player p, ArrayList<Structure> s, int index)
 	{
 		if ( !usedUp )
 		{
-			p.assignCards(s);
-			p.chooseCard(index);
-			p.getWonderBoard().buildStructure(p.getChosenCard());
+			
+			//p.assignCards(s);
+			//p.chooseCard(index);
+			//p.getWonderBoard().buildStructure(p.getChosenCard());
+			//usedUp = true;
 		}
-		usedUp = true;
 	}
 	
 }

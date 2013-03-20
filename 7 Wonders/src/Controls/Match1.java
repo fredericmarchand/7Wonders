@@ -7,6 +7,7 @@ import Player.Player;
 import Structures.Effects.*;
 import Structures.Structure;
 import WonderBoards.WonderBoard;
+import WonderBoards.WonderBoardStage;
 
 import java.util.Scanner;
 import java.util.Random;
@@ -484,6 +485,19 @@ public class Match1 {
 		CardHandler.PassCardsToNeighbors(getPlayers(), getAge());
 		if ( getTurn() == 6 )
 		{
+			for ( Player p: players )
+			{
+				for ( WonderBoardStage stg: p.getWonderBoard().getStages() )
+				{
+					for ( SpecialEffect se: stg.getEffects() )
+					{
+						if ( se.getID() == FreeConstruction.FreeConstructionID )
+						{
+							se.reset();
+						}
+					}
+				}
+			}
 			PlayerInteraction.SettleMilitaryConflicts(getPlayers(), getAge());
 			setAge(getAge()+1);
 			setTurn(1);

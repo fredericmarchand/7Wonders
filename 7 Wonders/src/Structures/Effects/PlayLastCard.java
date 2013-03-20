@@ -11,11 +11,13 @@ public class PlayLastCard extends SpecialEffect{
 		super(PlayLastCardID, false, RELOAD_EVERY_AGE, IN_TURN);
 	}
 	
-	public boolean buildLastCard(Player p)
+	public boolean canBuildLastCard()
 	{
-		int success = 0;
+		//int success = 0;
 		if ( !usedUp )
 		{
+			
+			return true;
 			/*
 			if ( p.getCards().size() == 2) 
 			{
