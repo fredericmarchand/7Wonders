@@ -321,11 +321,14 @@ public class Player extends User {
 	{
 		for ( WonderBoardStage stg: wonderBoard.getStages() )
 		{
-			for ( SpecialEffect se: stg.getEffects() )
+			if ( stg.isBuilt() )
 			{
-				if ( se.getID() == FreeConstruction.FreeConstructionID )
+				for ( SpecialEffect se: stg.getEffects() )
 				{
-					return ((FreeConstruction)se).canBuildForFree();
+					if ( se.getID() == FreeConstruction.FreeConstructionID )
+					{
+						return ((FreeConstruction)se).canBuildForFree();
+					}
 				}
 			}
 		}
