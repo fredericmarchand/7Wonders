@@ -33,7 +33,7 @@ public class Match2 {
 		age3Deck = CardHandler.BuildAge3Deck(numPlayers);
 		discarded = new ArrayList<Structure>();
 		
-		CardHandler.DistributeRandomWonderBoards(players, 0);
+		CardHandler.DistributeRandomWonderBoards(players);
 		for ( Player p: players )
 		{
 			p.getOwnedResources().addCoins(3);

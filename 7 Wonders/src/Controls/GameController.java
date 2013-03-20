@@ -13,8 +13,9 @@ import Tokens.Resources;
 import Tokens.ScientificSymbols;
 import View.Controller;
 import View.MainFrame;
+import WonderBoards.WonderBoardStage;
 
-public class GameController implements Controller {
+public class GameController extends java.lang.Thread implements Controller {
 
 	//public static final int BEGINNINGOFGAME = 0;
 	//public static final int BEGINNINGOFAGE = 1;
@@ -199,6 +200,19 @@ public class GameController implements Controller {
 				}
 			}
 		}
+		for ( WonderBoardStage stg: user.getWonderBoard().getStages() )
+		{
+			for ( SpecialEffect se: stg.getEffects() )
+			{
+				if ( stg.isBuilt() )
+				{
+					if ( se.getID() == ResourceChoice.ResourceChoiceID )
+					{
+						resources.add(((ResourceChoice)se).getPossibilities());
+					}
+				}
+			}
+		}
 		return resources;
 	}
 
@@ -249,6 +263,11 @@ public class GameController implements Controller {
 			}
 		}
 		else match.setTurn(match.getTurn()+1);*/
+		for ( Structure s: user.getWonderBoard().getRedCards() )
+		{
+			System.out.println(s.getName());
+		}
+		System.out.println("");
 
 		if ( match.getAge() == 4 ) 
 		{

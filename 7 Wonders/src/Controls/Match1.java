@@ -6,6 +6,8 @@ import Player.AIPlayer;
 import Player.Player;
 import Structures.Effects.*;
 import Structures.Structure;
+import WonderBoards.WonderBoard;
+
 import java.util.Scanner;
 import java.util.Random;
 
@@ -40,7 +42,7 @@ public class Match1 {
 		{
 			players.add(new Player("Player " + i, i));
 		}
-		CardHandler.DistributeRandomWonderBoards(players, 0);
+		CardHandler.DistributeRandomWonderBoards(players);
 		for ( Player p: players )
 		{
 			p.getOwnedResources().addCoins(3);
@@ -63,7 +65,7 @@ public class Match1 {
 		age2Deck = CardHandler.BuildAge2Deck(numPlayers);
 		age3Deck = CardHandler.BuildAge3Deck(numPlayers);
 		discarded = new ArrayList<Structure>();
-		CardHandler.DistributeRandomWonderBoards(players, 0);
+		CardHandler.DistributeRandomWonderBoards(players);
 		for ( Player p: players ) p.getOwnedResources().addCoins(3);
 		CardHandler.DistributeCards(players, age1Deck);
 		addInitialResources(players);
@@ -143,7 +145,7 @@ public class Match1 {
 			String un = in.nextLine();
 			players.add(new Player(un, (i * r.nextInt())));
 		}
-		CardHandler.DistributeRandomWonderBoards(players, 0);
+		CardHandler.DistributeRandomWonderBoards(players);
 		for ( Player p: players ) p.getOwnedResources().addCoins(3);
 		
 		for ( age = 1; age < 4; ++age )

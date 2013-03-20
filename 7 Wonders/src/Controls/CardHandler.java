@@ -7,6 +7,7 @@ import WonderBoards.Boards.*;
 import Player.Player;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class CardHandler {
 
@@ -284,6 +285,29 @@ public class CardHandler {
 		}
 	}
 	
+	//This handles the assignment of random wonderboards to every player
+		public static void DistributeRandomWonderBoards(ArrayList<Player> players)
+		{
+			Random r =  new Random();
+			ArrayList<WonderBoard> boards = new ArrayList<WonderBoard>();
+			boards.add(new TheColossusOfRhodes(r.nextInt(2)));
+			boards.add(new TheHangingGardensOfBabylon(r.nextInt(2)));
+			boards.add(new TheLighthouseOfAlexandria(r.nextInt(2)));
+			boards.add(new TheMausoleumOfHalicarnassus(r.nextInt(2)));
+			boards.add(new TheStatueOfZeusInOlympia(r.nextInt(2)));
+			boards.add(new TheTempleOfArtemisInEphesus(r.nextInt(2)));
+			boards.add(new ThePyramidsOfGiza(r.nextInt(2)));
+			
+			Collections.shuffle(boards);
+			int index = 0;
+			
+			for ( Player p: players )
+			{
+				p.assignWonderBoard(boards.get(index));
+				++index;
+			}
+		}
+	
 	//the set of cards of each player is assigned to the neighbor on the left or on the right depending on the age
 	public static void PassCardsToNeighbors(ArrayList<Player> players, int age)
 	{
@@ -325,7 +349,7 @@ public class CardHandler {
 		players.add(new Player());
 		players.add(new Player());
 		ArrayList<Structure> deck = BuildAge1Deck(7);
-		DistributeRandomWonderBoards(players, 1);
+		/*DistributeRandomWonderBoards(players, 1);
 		DistributeCards(players, deck);
 		for ( Player p : players )
 		{
@@ -345,6 +369,11 @@ public class CardHandler {
 			{
 				System.out.println(s.getName());
 			}
+		}*/
+		Random r = new Random();
+		for ( int i = 0; i<10; ++i )
+		{
+			System.out.println(r.nextInt(2));
 		}
 		
 	}
