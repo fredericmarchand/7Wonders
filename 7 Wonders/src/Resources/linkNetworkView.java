@@ -15,15 +15,20 @@ public class linkNetworkView {
 	Chat chat;
 	CreateMenu createMenu;
 	MClient mclient;	
+	GameController gc;
 	
 	public linkNetworkView(MClient c){
 		mclient = c;
 	}
 	
 	public void launchMainFrame(Match1 m, Player p){
-		GameController gc = new GameController(p,m);
+		 gc = new GameController(p,m);
 	}
-	
+	public void killMainFrame(){
+		//close match
+		
+		lobby.showGUI();
+	}
 	public void launchLobby(){
 		lobby = new Lobby(mclient);
 		lobby.showGUI();

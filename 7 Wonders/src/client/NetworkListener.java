@@ -96,6 +96,10 @@ public class NetworkListener extends Listener{
 				mclient.getLink().launchChatFrame();
 			}
 		}
+		if( o instanceof Packet15MatchDisconnect){
+			System.out.println("[CLIENT]  Graceful Disconnect");
+			mclient.getLink().killMainFrame();
+		}
 	}
 
 }

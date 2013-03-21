@@ -34,7 +34,7 @@ public class NetworkListener extends Listener {
 			if (e.contains(c)) {
 				// replace with AI ?
 				e.removeConnection(c);
-
+				break;
 			}
 		ListIterator<Match> it = mserver.getMatchList().listIterator();
 		while (it.hasNext()) {
@@ -43,6 +43,12 @@ public class NetworkListener extends Listener {
 				it.remove();
 				System.out.println("[SERVER] No on in match - DELETED ");
 			}
+		}
+		try{
+			Packet15MatchDisconnect packet = new Packet15MatchDisconnect();
+			c.sendTCP(packet);
+		}catch(Exception e){
+			
 		}
 
 	}

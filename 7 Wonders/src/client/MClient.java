@@ -48,29 +48,9 @@ public class MClient {
     	client.start();
     	register();
     	
-//    	System.out.println("Please enter the specified IP!");
-//		String x = s.next();
-//		System.out.println("Please enter the specified Port!");
-//		int p = Integer.parseInt(s.next());
-//    	
-///********************Connect*******************************/
-//		try {
-//			client.connect(5000,"127.0.0.1",25565);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			client.stop();
-//		}
-//		client.sendTCP(new Packet0LoginRequest());
-/********************Connect*******************************/    	
-    	//command();
-    	
     }
     
     public void sendCreateMatchRequest(int human,int ai){
-//    	Packet2MatchListRequest mpackage = new Packet2MatchListRequest();
-//        mpackage.setObject("CREATE");
-//        mpackage.setObject2(x);
     	Packet12CreateMatch packet = new Packet12CreateMatch();
     	packet.setHuman(human);
     	packet.setAI(ai);
@@ -234,6 +214,7 @@ public class MClient {
 		kryo.register(Packet12CreateMatch.class);
 		kryo.register(Packet13MatchJoinRequest.class);
 		kryo.register(Packet14HostCreateMatch.class);
+		kryo.register(Packet15MatchDisconnect.class);
     	kryo.register(java.util.ArrayList.class);
     	kryo.register(Match1.class);
    }
