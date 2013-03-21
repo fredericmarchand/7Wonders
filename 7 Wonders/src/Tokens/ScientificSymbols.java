@@ -12,7 +12,7 @@ public class ScientificSymbols {
 	}
 	
 	//this constructor should not be used other than for testing
-	public ScientificSymbols(int g, int c, int t)
+	public ScientificSymbols(int g, int t, int c)
 	{
 		gears = g;
 		compass = c;
@@ -71,7 +71,7 @@ public class ScientificSymbols {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ScientificSymbols sym = new ScientificSymbols(3, 4, 2);
+		ScientificSymbols sym = new ScientificSymbols(3, 2, 4);
 		System.out.println(sym.victoryPointsValue());
 	}
 

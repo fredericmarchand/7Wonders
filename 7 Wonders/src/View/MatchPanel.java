@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import Tokens.Resources;
+import Tokens.ScientificSymbols;
 
 import Controls.Match1;
 
@@ -283,6 +284,10 @@ public class MatchPanel extends JPanel implements Runnable {
 	
 	public void resourceChosen(Resources r) {
 		picked.add(r);
+	}
+	
+	public void scienceChosen(ScientificSymbols s) {
+		//controller.scienceChosen(s);
 	}
 	
 	public MouseAdapter buildMouseAdapterNear() {

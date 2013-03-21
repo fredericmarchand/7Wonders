@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Point;
 
 import javax.swing.JPanel;
@@ -18,17 +19,17 @@ public class ResourceChoicePanel extends JPanel {
 
 	private final Point overlayLocations[] = {
 			// 2 overlay - width 50
-			new Point(506, 403),
-			new Point(581, 403),
+			new Point(577, 403),
+			new Point(652, 403),
 			// 3 overlay - width 38
-			new Point(493, 404),
-			new Point(543, 404),
-			new Point(594, 404),
+			new Point(564, 404),
+			new Point(614, 404),
+			new Point(665, 404),
 			// 4 overlay - width 32
-			new Point(490, 403),
-			new Point(526, 403),
 			new Point(561, 403),
-			new Point(598, 403)
+			new Point(597, 403),
+			new Point(632, 403),
+			new Point(669, 403)
 	};
 	
 	/*
@@ -57,8 +58,8 @@ public class ResourceChoicePanel extends JPanel {
 	private MatchPanel matchPanel;
 	
 	public ResourceChoicePanel(Controller c, MatchPanel m) {
-		setSize(1280, 860);
 		setLayout(null);
+		setSize(1280, 860);
 		setBackground(new Color(50, 50, 50, 200)); 
 		
 		resource = null;
@@ -84,9 +85,14 @@ public class ResourceChoicePanel extends JPanel {
 		add(lblOverlay);
 		
 		lblResource = new JLabel("", SwingConstants.CENTER);
-		lblResource.setBounds(497, 400, 143, 60);
+		lblResource.setBounds(568, 400, 143, 60);
 		lblResource.setIcon(new ImageIcon(ResourceChoicePanel.class.getResource("/Images/Icons/resource-1111000.png")));
 		add(lblResource);
+		
+		JLabel lblDesc = new JLabel("Choose a resource:", SwingConstants.CENTER);
+		lblDesc.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblDesc.setBounds(491, 383, 297, 20);
+		add(lblDesc);
 		
 		addMouseListener(buildMouseAdapter());
 		addMouseMotionListener(buildMouseMotionAdapter());
@@ -311,5 +317,4 @@ public class ResourceChoicePanel extends JPanel {
 		}
 		return null;
 	}
-	
 }
