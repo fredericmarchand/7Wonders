@@ -34,6 +34,7 @@ public class AIPlayer extends Player {
 				buildStructure(leftNeighbor, rightNeighbor, 2);
 				break;
 			}
+			if ( result != 0 ) break;
 		}
 		if ( !did )
 		{
