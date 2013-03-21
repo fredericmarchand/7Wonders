@@ -19,6 +19,10 @@ public class linkNetworkView {
 	
 	public linkNetworkView(MClient c){
 		mclient = c;
+		lobby = new Lobby(mclient);
+		matchLobby = new MatchLobby(mclient);
+		chat = new Chat(mclient);
+		createMenu = new CreateMenu(mclient);
 	}
 	
 	public void launchMainFrame(Match1 m, Player p){
@@ -30,7 +34,7 @@ public class linkNetworkView {
 		lobby.showGUI();
 	}
 	public void launchLobby(){
-		lobby = new Lobby(mclient);
+		
 		lobby.showGUI();
 	}
 	
@@ -39,7 +43,7 @@ public class linkNetworkView {
 	}
 	
 	public void launchMatchLobby(){
-		matchLobby = new MatchLobby(mclient);
+		
 		matchLobby.showGUI();
 	}
 	
@@ -49,14 +53,16 @@ public class linkNetworkView {
 	}
 	
 	public void launchChatFrame(){
-		chat = new Chat(mclient);
+		
 		chat.launchChatFrame();
+	}
+	public void killChatFrame(){
+		chat.kill();
 	}
 	
 	
-	
 	public void launchCreateMenu(){
-		createMenu = new CreateMenu(mclient);
+
 		createMenu.showGUI();
 	}
 	

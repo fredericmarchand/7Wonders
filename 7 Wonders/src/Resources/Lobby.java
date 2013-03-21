@@ -127,7 +127,7 @@ public class Lobby extends JFrame implements ListSelectionListener {
 	}
 	
 	public void update(ArrayList<Long> list){
-
+		listModel.clear();
 		for(Long id: list){
 			listModel.insertElementAt(id, index++);
 		}

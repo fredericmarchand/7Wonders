@@ -15,7 +15,7 @@ public class Chat {
 		chatFrame.appendChat(s);
 	}
 	public void launchChatFrame(){
-		chatFrame.createAndShowGUI();
+		chatFrame.showGUI();
 	}
 	public void sendMsg(String s){
 		client.sendChat(s);
@@ -25,5 +25,9 @@ public class Chat {
 		for(int i = 10; i > 0;i--){
 			chatFrame.appendChat("[MATCH] STARTING ");
 		}
+	}
+	public void kill(){
+		chatFrame.clear();
+		chatFrame.setVisible(false);
 	}
 }

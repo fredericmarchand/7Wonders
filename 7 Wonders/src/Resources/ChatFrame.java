@@ -70,16 +70,20 @@ public class ChatFrame extends JPanel {
 		textArea.setCaretPosition(textArea.getDocument().getLength());
 	}
 
-	public void createAndShowGUI() {
+	public void showGUI() {
 		// Create and set up the window.
 		frame.pack();
 		frame.setVisible(true);
 
 	}
-	
+	public void clear(){
+		textArea.setText("");
+		textField.setText("");
+	}
 	public static void main(String args[]){
 		ChatFrame f = new ChatFrame(null,null);
-		f.createAndShowGUI();
+		f.showGUI();
 	}
+
 
 }
