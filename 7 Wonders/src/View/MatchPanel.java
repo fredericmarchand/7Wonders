@@ -41,7 +41,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	private ArrayList<Resources> need;
 	private ArrayList<Resources> picked;
 	
-	private int numCards = 75;
+	private int numCards;
 	
 	public MatchPanel(Match1 m, Controller c) {
 		setLayout(null);
@@ -55,7 +55,7 @@ public class MatchPanel extends JPanel implements Runnable {
 		picked = new ArrayList<Resources>();
 		
 		// Load all the Card images
-		
+		numCards = 75;
 		cards = new ImageIcon[numCards+1];
 //		for(int i = 1; i < numCards+1; i++) {
 //			cards[i] = new ImageIcon(new ImageIcon(MatchPanel.class.getResource("/Images/Cards/"+i+".jpg")).getImage().getScaledInstance(182, 280, java.awt.Image.SCALE_SMOOTH));
@@ -133,10 +133,10 @@ public class MatchPanel extends JPanel implements Runnable {
 //	        }
 //	    });
 		
-		fcp = new FullscreenCardsPanel(cards, null, c);
+		//fcp = new FullscreenCardsPanel(cards, null, c);
 		
 		
-		rcp = new ResourceChoicePanel(c, this);
+		rcp = new ResourceChoicePanel(controller, this);
 		rcp.setVisible(false);
 		
 		add(rcp);
@@ -218,6 +218,7 @@ public class MatchPanel extends JPanel implements Runnable {
 		lblTurn.setForeground(Color.BLACK);
 		lblTurn.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
+		fcp = new FullscreenCardsPanel(cards, null, controller);
 		
 		scrollpane = new JScrollPane(fcp, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollpane.setSize(1280, 838);
@@ -241,7 +242,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	        }
 	    });
 		
-
+		
 	}
 	
 	public void update() {

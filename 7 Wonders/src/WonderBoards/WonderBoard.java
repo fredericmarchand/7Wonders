@@ -153,6 +153,7 @@ public class WonderBoard {
 		{
 			case Structure.RED_CARD:
 				redCards.add(s);
+				break;
 			case Structure.BLUE_CARD:
 				blueCards.add(s);
 				break;
