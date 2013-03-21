@@ -6,7 +6,7 @@ public class Chat {
 	MClient client ;	
 	public Chat(MClient c){
 		client = c;
-		chatFrame = new ChatFrame(this , c.getUser_username());		
+		chatFrame = new ChatFrame(this,c.getUser_username());		
 	}
 	
 	public MClient getClient(){return client;}
