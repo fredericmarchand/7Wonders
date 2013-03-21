@@ -296,31 +296,31 @@ public class LocalPanel extends JPanel {
 	private void updateWonderBoardLabels() {
 		ArrayList<WonderBoardStage> stages = player.getWonderBoard().getStages();
 		if(stages.size() == 2) {
-			wonderStage1.setLocation(168, 287);
+			wonderStage1.setLocation(168, 257);
 			wonderStage1.setVisible(stages.get(0).isBuilt());
-			wonderStage2.setLocation(318, 287);
+			wonderStage2.setLocation(318, 257);
 			wonderStage2.setVisible(stages.get(1).isBuilt());
 			wonderStage3.setLocation(0, 0);
 			wonderStage3.setVisible(false);
 			wonderStage4.setLocation(0, 0);
 			wonderStage4.setVisible(false);
 		} else if(stages.size() == 3) {
-			wonderStage1.setLocation(30, 287);
+			wonderStage1.setLocation(30, 257);
 			wonderStage1.setVisible(stages.get(0).isBuilt());
-			wonderStage2.setLocation(170, 287);
+			wonderStage2.setLocation(170, 257);
 			wonderStage2.setVisible(stages.get(1).isBuilt());
-			wonderStage3.setLocation(314, 287);
+			wonderStage3.setLocation(314, 257);
 			wonderStage3.setVisible(stages.get(2).isBuilt());
 			wonderStage4.setLocation(0, 0);
 			wonderStage4.setVisible(false);
 		} else if(stages.size() == 4) {
-			wonderStage1.setLocation(1, 287);
+			wonderStage1.setLocation(1, 257);
 			wonderStage1.setVisible(stages.get(0).isBuilt());
-			wonderStage2.setLocation(110, 287);
+			wonderStage2.setLocation(110, 257);
 			wonderStage2.setVisible(stages.get(1).isBuilt());
-			wonderStage3.setLocation(238, 287);
+			wonderStage3.setLocation(238, 257);
 			wonderStage3.setVisible(stages.get(2).isBuilt());
-			wonderStage4.setLocation(370, 287);
+			wonderStage4.setLocation(370, 257);
 			wonderStage4.setVisible(stages.get(3).isBuilt());
 		}
 	}
