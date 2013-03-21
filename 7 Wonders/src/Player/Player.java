@@ -399,8 +399,8 @@ public class Player extends User {
 		ArrayList revenue = purchased.buyResources(leftNeighbor, rightNeighbor, missing, sumup, val);
 		leftNeighbor.getOwnedResources().addCoins((int)revenue.get(0));
 		rightNeighbor.getOwnedResources().addCoins((int)revenue.get(1));
-		resources.addCoins(-1*sumup.bulkPrice(missing, leftNeighbor.getResources(), rightNeighbor.getResources()));
-		purchased.addCoins(0*purchased.getCoins());
+		resources.deductCoins((int)revenue.get(0) + (int)revenue.get(1));
+		purchased.deductCoins(purchased.getCoins());
 		
 		return true;
 	}
@@ -408,6 +408,8 @@ public class Player extends User {
 	//checks if his neighbors have enough resources to fulfill the missing ones and if the player can afford to pay for them
 	public boolean neighborsHaveResources(Player leftNeighbor, Player rightNeighbor, Resources required)
 	{
+		if ( required.getCoins() == required.getCount() ) return false;
+		
 		TradingPerks sumup;
 		ArrayList<TradingPerks> perks = new ArrayList<TradingPerks>();
 		for ( Structure s: wonderBoard.getYellowCards() )
