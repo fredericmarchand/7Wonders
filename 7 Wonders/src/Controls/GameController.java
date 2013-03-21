@@ -18,7 +18,7 @@ import View.Controller;
 import View.MainFrame;
 import WonderBoards.WonderBoardStage;
 
-public class GameController extends java.lang.Thread implements Controller {
+public class GameController extends java.lang.Thread implements Controller, Runnable {
 
 	public static final int BEGINNINGTURN = 0;
 	public static final int MOVE = 1;
@@ -38,9 +38,21 @@ public class GameController extends java.lang.Thread implements Controller {
 		match.fillWithAI();
 		match.init();
 		
-		frame = new MainFrame(this);
-		frame.startMatch(match);
-		frame.setVisible(true);
+		run();
+		//frame = new MainFrame(this);
+		//frame.startMatch(match);
+		//frame.setVisible(true);
+	}
+	
+	public void run()
+	{
+		try 
+		{
+			frame = new MainFrame(this);
+			frame.startMatch(match);
+			frame.setVisible(true);
+		} 
+		catch (Exception e){}
 	}
 	
 
@@ -341,6 +353,11 @@ public class GameController extends java.lang.Thread implements Controller {
 		//System.out.println(user.getTotalResources().toString());
 		if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
 			frame.update();
+	}
+	
+	public void callGarbageTruck()
+	{
+		frame.dispose();
 	}
 	
 	
