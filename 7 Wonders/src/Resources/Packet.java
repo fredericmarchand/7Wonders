@@ -111,4 +111,5 @@ public class Packet {
 		public void setnPlayer(int i){numPlayer = i;}
 		public int  getnPlayer(){return numPlayer;}
 	}
+	public static class Packet15MatchDisconnect{}
 }

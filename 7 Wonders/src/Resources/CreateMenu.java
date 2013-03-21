@@ -59,7 +59,9 @@ public class CreateMenu extends JFrame {
 		});
 		cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				Lobby l = new Lobby(mclient);
+				l.showGUI();
+				setVisible(false);
 			}
 		});
 
