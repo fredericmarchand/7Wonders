@@ -143,6 +143,11 @@ public class Resources {
 		return papyrus;
 	}
 	
+	public void deductCoins(int coins)
+	{
+		this.coins -= coins;
+	}
+	
 	public void addCoins(int coins)
 	{
 		this.coins += coins;
