@@ -3,10 +3,12 @@ package View;
 import javax.swing.*;
 
 import Player.Player;
+import WonderBoards.WonderBoardStage;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 
 public class NearPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -15,6 +17,9 @@ public class NearPanel extends JPanel {
 	private JLabel2D lblClay, lblTablets, lblRed, lblBlue, lblGrey, lblPurple, lblBrown, lblYellow, lblGreen, 
 					 lblGears, lblCompass, lblVictory, lblMilitary, lblNegConflict, lblPosConflict, 
 					 lblOre, lblStone, lblWood, lblGlass, lblPapyrus, lblCoin, lblLoom;
+	
+	private JLabel wonderStage1, wonderStage2, wonderStage3, wonderStage4;
+	private ImageIcon checkmark;
 	
 	@SuppressWarnings("unused")
 	private Controller controller;
@@ -25,6 +30,28 @@ public class NearPanel extends JPanel {
 		setLayout(null);
 		setSize(478, 300);
 		setBackground(Color.WHITE);
+		
+		checkmark = new ImageIcon(new ImageIcon(NearPanel.class.getResource("/Images/Icons/yes.png")).getImage().getScaledInstance(34, 34, java.awt.Image.SCALE_SMOOTH));
+
+		wonderStage1 = new JLabel(checkmark);
+		wonderStage1.setSize(34, 34);
+		wonderStage1.setVisible(false);
+		add(wonderStage1);
+		
+		wonderStage2 = new JLabel(checkmark);
+		wonderStage2.setSize(34, 34);
+		wonderStage2.setVisible(false);
+		add(wonderStage2);
+		
+		wonderStage3 = new JLabel(checkmark);
+		wonderStage3.setSize(34, 34);
+		wonderStage3.setVisible(false);
+		add(wonderStage3);
+		
+		wonderStage4 = new JLabel(checkmark);
+		wonderStage4.setSize(34, 34);
+		wonderStage4.setVisible(false);
+		add(wonderStage4);
 		
 		lblBrown = new JLabel2D("11", SwingConstants.CENTER);
 		lblBrown.setForeground(Color.WHITE);
@@ -228,8 +255,9 @@ public class NearPanel extends JPanel {
 		updateResourceLabels();
 		updateCardLabels();
 		updateOverviewLabels();
+		updateWonderBoardLabels();
 	}
-	
+
 	public void updateResourceLabels() {
 		lblOre.setText("" + player.getResources().getOre());
 		lblStone.setText("" + player.getResources().getStone());
@@ -259,5 +287,37 @@ public class NearPanel extends JPanel {
 		lblMilitary.setText("" + player.getShields());
 		lblNegConflict.setText(((player.getConflictTokens().getMinusOneTokens() > 0) ? "-" : "") + player.getConflictTokens().getMinusOneTokens());
 		lblPosConflict.setText("" + player.getConflictTokens().getTotalPositive());
+	}
+	
+	private void updateWonderBoardLabels() {
+		ArrayList<WonderBoardStage> stages = player.getWonderBoard().getStages();
+		if(stages.size() == 2) {
+			wonderStage1.setLocation(168, 287);
+			wonderStage1.setVisible(stages.get(0).isBuilt());
+			wonderStage2.setLocation(318, 287);
+			wonderStage2.setVisible(stages.get(1).isBuilt());
+			wonderStage3.setLocation(0, 0);
+			wonderStage3.setVisible(false);
+			wonderStage4.setLocation(0, 0);
+			wonderStage4.setVisible(false);
+		} else if(stages.size() == 3) {
+			wonderStage1.setLocation(30, 287);
+			wonderStage1.setVisible(stages.get(0).isBuilt());
+			wonderStage2.setLocation(170, 287);
+			wonderStage2.setVisible(stages.get(1).isBuilt());
+			wonderStage3.setLocation(314, 287);
+			wonderStage3.setVisible(stages.get(2).isBuilt());
+			wonderStage4.setLocation(0, 0);
+			wonderStage4.setVisible(false);
+		} else if(stages.size() == 4) {
+			wonderStage1.setLocation(1, 287);
+			wonderStage1.setVisible(stages.get(0).isBuilt());
+			wonderStage2.setLocation(110, 287);
+			wonderStage2.setVisible(stages.get(1).isBuilt());
+			wonderStage3.setLocation(238, 287);
+			wonderStage3.setVisible(stages.get(2).isBuilt());
+			wonderStage4.setLocation(370, 287);
+			wonderStage4.setVisible(stages.get(3).isBuilt());
+		}
 	}
 }

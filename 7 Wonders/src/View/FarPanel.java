@@ -3,12 +3,15 @@ package View;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import Player.Player;
+import WonderBoards.WonderBoardStage;
 
 public class FarPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -132,6 +135,7 @@ public class FarPanel extends JPanel {
 	
 	public void updateLabels() {
 		updateOverviewLabels();
+		updateWonderLabels();
 	}
 	
 	public void updateOverviewLabels() {
@@ -143,5 +147,37 @@ public class FarPanel extends JPanel {
 		lblNegConflict.setText(((player.getConflictTokens().getMinusOneTokens() > 0) ? "-" : "") + player.getConflictTokens().getMinusOneTokens());
 		lblPosConflict.setText("" + player.getConflictTokens().getTotalPositive());
 		lblCoin.setText("" + player.getResources().getCoins());
+	}
+	
+	public void updateWonderLabels() {
+		ArrayList<WonderBoardStage> stages = player.getWonderBoard().getStages();
+		if(stages.size() == 2) {
+			wonderStage1.setLocation(115, 122);
+			wonderStage1.setVisible(stages.get(0).isBuilt());
+			wonderStage2.setLocation(318, 122);
+			wonderStage2.setVisible(stages.get(1).isBuilt());
+			wonderStage3.setLocation(0, 0);
+			wonderStage3.setVisible(false);
+			wonderStage4.setLocation(0, 0);
+			wonderStage4.setVisible(false);
+		} else if(stages.size() == 3) {
+			wonderStage1.setLocation(22, 122);
+			wonderStage1.setVisible(stages.get(0).isBuilt());
+			wonderStage2.setLocation(115, 122);
+			wonderStage2.setVisible(stages.get(1).isBuilt());
+			wonderStage3.setLocation(318, 122);
+			wonderStage3.setVisible(stages.get(2).isBuilt());
+			wonderStage4.setLocation(0, 0);
+			wonderStage4.setVisible(false);
+		} else if(stages.size() == 4) {
+			wonderStage1.setLocation(0, 122);
+			wonderStage1.setVisible(stages.get(0).isBuilt());
+			wonderStage2.setLocation(76, 122);
+			wonderStage2.setVisible(stages.get(1).isBuilt());
+			wonderStage3.setLocation(161, 122);
+			wonderStage3.setVisible(stages.get(2).isBuilt());
+			wonderStage4.setLocation(250, 122);
+			wonderStage4.setVisible(stages.get(3).isBuilt());
+		}
 	}
 }
