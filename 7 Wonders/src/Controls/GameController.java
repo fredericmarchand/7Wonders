@@ -278,7 +278,7 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 		
 	}
 
-	@Override//have to check if null
+	@Override //have to check if empty
 	public ArrayList<Structure> needToChooseDiscarded() 
 	{
 		for ( WonderBoardStage stg: user.getWonderBoard().getStages() )

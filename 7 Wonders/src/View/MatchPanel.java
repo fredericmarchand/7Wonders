@@ -191,8 +191,8 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(!needDiscarded.isEmpty()) {
 			fcp.setCards(needDiscarded);
 			fcp.setMode(FullscreenCardsPanel.SELECT);
-			scrollpane.revalidate();
 			closeButton.setVisible(false);
+			scrollpane.revalidate();
 			scrollpane.setVisible(true);
 		}
 	}
@@ -216,8 +216,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	}
 	
 	public void discardChosen(Structure s) {
-		controller.chooseCard(s);
-		controller.discardChosen();
+		controller.chosenDiscarded(s);
 		scrollpane.setVisible(false);
 		closeButton.setVisible(true);
 	}
