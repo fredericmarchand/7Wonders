@@ -19,7 +19,6 @@ public class NearPanel extends JPanel {
 					 lblOre, lblStone, lblWood, lblGlass, lblPapyrus, lblCoin, lblLoom;
 	
 	private JLabel wonderStage1, wonderStage2, wonderStage3, wonderStage4;
-	private ImageIcon checkmark;
 	
 	@SuppressWarnings("unused")
 	private Controller controller;
@@ -30,25 +29,23 @@ public class NearPanel extends JPanel {
 		setLayout(null);
 		setSize(478, 300);
 		setBackground(Color.WHITE);
-		
-		checkmark = new ImageIcon(new ImageIcon(NearPanel.class.getResource("/Images/Icons/yes.png")).getImage().getScaledInstance(34, 34, java.awt.Image.SCALE_SMOOTH));
 
-		wonderStage1 = new JLabel(checkmark);
+		wonderStage1 = new JLabel(Images.checkmarkBig);
 		wonderStage1.setSize(34, 34);
 		wonderStage1.setVisible(false);
 		add(wonderStage1);
 		
-		wonderStage2 = new JLabel(checkmark);
+		wonderStage2 = new JLabel(Images.checkmarkBig);
 		wonderStage2.setSize(34, 34);
 		wonderStage2.setVisible(false);
 		add(wonderStage2);
 		
-		wonderStage3 = new JLabel(checkmark);
+		wonderStage3 = new JLabel(Images.checkmarkBig);
 		wonderStage3.setSize(34, 34);
 		wonderStage3.setVisible(false);
 		add(wonderStage3);
 		
-		wonderStage4 = new JLabel(checkmark);
+		wonderStage4 = new JLabel(Images.checkmarkBig);
 		wonderStage4.setSize(34, 34);
 		wonderStage4.setVisible(false);
 		add(wonderStage4);
@@ -237,10 +234,10 @@ public class NearPanel extends JPanel {
 		lblCoin.setBounds(413, 174, 44, 47);
 		add(lblCoin);
 		
-		JLabel overlayLabel = new JLabel(new ImageIcon(NearPanel.class.getResource("/Images/Icons/overlay.png")));
+		JLabel overlayLabel = new JLabel(Images.overlayNear);
 		overlayLabel.setBounds(0, 0, 478, 300);
 		add( overlayLabel );
-		JLabel boardLabel = new JLabel(new ImageIcon(NearPanel.class.getResource("/Images/Boards/board"+player.getWonderBoard().getBoardID()+(player.getWonderBoard().getSide()+1)+".png")));
+		JLabel boardLabel = new JLabel(Images.boardsSmall[player.getWonderBoard().getBoardID()][player.getWonderBoard().getSide()]);
 		boardLabel.setBounds(0, 75, 478, 225);
 		add( boardLabel );
 		

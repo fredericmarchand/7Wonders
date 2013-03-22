@@ -3,7 +3,6 @@ package View;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -15,25 +14,20 @@ import Structures.Structure;
 public class FullscreenCardsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
-	ImageIcon cardImages[];
 	private ArrayList<JLabel> cardArr, labels, labelBg;
 	private ArrayList<Structure> cards;
-	private Image lblBgImage;
 	
 	@SuppressWarnings("unused")
 	private Controller controller;
 	
 	private int totalWidth;
 	
-	public FullscreenCardsPanel (ImageIcon[] ii, ArrayList<Structure> ca, Controller c) {
+	public FullscreenCardsPanel (ArrayList<Structure> ca, Controller c) {
 		setLayout(null);
-		//setSize(1280, 860);
 		setOpaque(false);
 		
-		cardImages = ii;
 		cards = ca;
 		controller = c;
-		lblBgImage = new ImageIcon(FullscreenCardsPanel.class.getResource("/Images/Icons/cardlblbg.png")).getImage();
 		
 		cardArr = new ArrayList<JLabel>();
 		labels = new ArrayList<JLabel>();
@@ -51,7 +45,7 @@ public class FullscreenCardsPanel extends JPanel {
 		this.removeAll();
 		if(cards == null) cards = new ArrayList<Structure>();
 		for(int i = 0; i < cards.size(); i++) {
-			cardArr.add(new JLabel(cardImages[cards.get(i).getID()]));
+			cardArr.add(new JLabel(Images.cards[cards.get(i).getID()]));
 			cardArr.get(i).setSize(182, 280);
 			
 			labels.add(new JLabel(cards.get(i).getName()));
@@ -63,7 +57,7 @@ public class FullscreenCardsPanel extends JPanel {
 			labelBg.add(new JLabel());
 			labelBg.get(i).setSize(30, 188);
 			int w = labels.get(i).getFontMetrics(labels.get(i).getFont()).stringWidth(labels.get(i).getText()) + 23;
-			labelBg.get(i).setIcon(new ImageIcon(lblBgImage.getScaledInstance(30, w, java.awt.Image.SCALE_SMOOTH)));
+			labelBg.get(i).setIcon(new ImageIcon(Images.cardlabelbg.getScaledInstance(30, w, java.awt.Image.SCALE_SMOOTH)));
 			labelBg.get(i).setSize(30, w);
 			
 			// Calculate offset

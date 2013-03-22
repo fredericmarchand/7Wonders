@@ -43,13 +43,10 @@ public class ResourceChoicePanel extends JPanel {
 		1111000
 	 */
 	
-	private ImageIcon overlayImage2, overlayImage3, overlayImage4;
-	ImageIcon image0011000, image0101000, image0110000, image1001000, image1010000, image1100000, image0000111, image1111000;
 	private Resources resource;
 	int whichOverlay = 2;
 	
 	private JLabel lblResource, lblOverlay;
-	
 	
 	@SuppressWarnings("unused")
 	private Controller controller;
@@ -66,27 +63,14 @@ public class ResourceChoicePanel extends JPanel {
 		controller = c;
 		matchPanel = m;
 		
-		overlayImage2 = new ImageIcon(ResourceChoicePanel.class.getResource("/Images/Icons/circleselect2.png"));
-		overlayImage3 = new ImageIcon(ResourceChoicePanel.class.getResource("/Images/Icons/circleselect3.png"));
-		overlayImage4 = new ImageIcon(ResourceChoicePanel.class.getResource("/Images/Icons/circleselect4.png"));
-		
-		image0011000 = new ImageIcon(ResourceChoicePanel.class.getResource("/Images/Icons/resource-0011000.png"));
-		image0101000 = new ImageIcon(ResourceChoicePanel.class.getResource("/Images/Icons/resource-0101000.png"));
-		image0110000 = new ImageIcon(ResourceChoicePanel.class.getResource("/Images/Icons/resource-0110000.png"));
-		image1001000 = new ImageIcon(ResourceChoicePanel.class.getResource("/Images/Icons/resource-1001000.png"));
-		image1010000 = new ImageIcon(ResourceChoicePanel.class.getResource("/Images/Icons/resource-1010000.png"));
-		image1100000 = new ImageIcon(ResourceChoicePanel.class.getResource("/Images/Icons/resource-1100000.png"));
-		image0000111 = new ImageIcon(ResourceChoicePanel.class.getResource("/Images/Icons/resource-0000111.png"));
-		image1111000 = new ImageIcon(ResourceChoicePanel.class.getResource("/Images/Icons/resource-1111000.png"));
-		
 		lblOverlay = new JLabel("", SwingConstants.CENTER);
-		lblOverlay.setIcon(overlayImage4);
+		lblOverlay.setIcon(Images.resOverlay4);
 		lblOverlay.setBounds(598, 403, 50, 50);
 		add(lblOverlay);
 		
 		lblResource = new JLabel("", SwingConstants.CENTER);
 		lblResource.setBounds(568, 400, 143, 60);
-		lblResource.setIcon(new ImageIcon(ResourceChoicePanel.class.getResource("/Images/Icons/resource-1111000.png")));
+		lblResource.setIcon(Images.res1111000);
 		add(lblResource);
 		
 		JLabel lblDesc = new JLabel("Choose a resource:", SwingConstants.CENTER);
@@ -237,43 +221,36 @@ public class ResourceChoicePanel extends JPanel {
 		lblOverlay.setVisible(false);
 		if(r != null) {
 			if(new Resources(0, 0, 1, 1, 0, 0, 0, 0).compare(r)) {
-				lblResource.setIcon(image0011000);
-				lblOverlay.setIcon(overlayImage2);
+				lblResource.setIcon(Images.res0011000);
+				lblOverlay.setIcon(Images.resOverlay2);
 				whichOverlay = 2;
-			}
-			else if(new Resources(0, 1, 0, 1, 0, 0, 0, 0).compare(r)) {
-				lblResource.setIcon(image0101000);
-				lblOverlay.setIcon(overlayImage2);
+			} else if(new Resources(0, 1, 0, 1, 0, 0, 0, 0).compare(r)) {
+				lblResource.setIcon(Images.res0101000);
+				lblOverlay.setIcon(Images.resOverlay2);
 				whichOverlay = 2;
-			}
-			else if(new Resources(0, 1, 1, 0, 0, 0, 0, 0).compare(r)) {
-				lblResource.setIcon(image0110000);
-				lblOverlay.setIcon(overlayImage2);
+			} else if(new Resources(0, 1, 1, 0, 0, 0, 0, 0).compare(r)) {
+				lblResource.setIcon(Images.res0110000);
+				lblOverlay.setIcon(Images.resOverlay2);
 				whichOverlay = 2;
-			}
-			else if(new Resources(1, 0, 0, 1, 0, 0, 0, 0).compare(r)) {
-				lblResource.setIcon(image1001000);
-				lblOverlay.setIcon(overlayImage2);
+			} else if(new Resources(1, 0, 0, 1, 0, 0, 0, 0).compare(r)) {
+				lblResource.setIcon(Images.res1001000);
+				lblOverlay.setIcon(Images.resOverlay2);
 				whichOverlay = 2;
-			}
-			else if(new Resources(1, 0, 1, 0, 0, 0, 0, 0).compare(r)) {
-				lblResource.setIcon(image1010000);
-				lblOverlay.setIcon(overlayImage2);
+			} else if(new Resources(1, 0, 1, 0, 0, 0, 0, 0).compare(r)) {
+				lblResource.setIcon(Images.res1010000);
+				lblOverlay.setIcon(Images.resOverlay2);
 				whichOverlay = 2;
-			}
-			else if(new Resources(1, 1, 0, 0, 0, 0, 0, 0).compare(r)) {
-				lblResource.setIcon(image1100000);
-				lblOverlay.setIcon(overlayImage2);
+			} else if(new Resources(1, 1, 0, 0, 0, 0, 0, 0).compare(r)) {
+				lblResource.setIcon(Images.res1100000);
+				lblOverlay.setIcon(Images.resOverlay2);
 				whichOverlay = 2;
-			}
-			else if(new Resources(0, 0, 0, 0, 1, 1, 1, 0).compare(r)) {
-				lblResource.setIcon(image0000111);
-				lblOverlay.setIcon(overlayImage3);
+			} else if(new Resources(0, 0, 0, 0, 1, 1, 1, 0).compare(r)) {
+				lblResource.setIcon(Images.res0000111);
+				lblOverlay.setIcon(Images.resOverlay3);
 				whichOverlay = 3;
-			}
-			else if(new Resources(1, 1, 1, 1, 0, 0, 0, 0).compare(r)) {
-				lblResource.setIcon(image1111000);
-				lblOverlay.setIcon(overlayImage4);
+			} else if(new Resources(1, 1, 1, 1, 0, 0, 0, 0).compare(r)) {
+				lblResource.setIcon(Images.res1111000);
+				lblOverlay.setIcon(Images.resOverlay4);
 				whichOverlay = 4;
 			}
 		}
@@ -283,33 +260,26 @@ public class ResourceChoicePanel extends JPanel {
 		if(new Resources(0, 0, 1, 1, 0, 0, 0, 0).compare(resource)) {
 			if(which == 1) return new Resources(0, 0, 1, 0, 0, 0, 0, 0);
 			if(which == 2) return new Resources(0, 0, 0, 1, 0, 0, 0, 0);
-		}
-		else if(new Resources(0, 1, 0, 1, 0, 0, 0, 0).compare(resource)) {
+		} else if(new Resources(0, 1, 0, 1, 0, 0, 0, 0).compare(resource)) {
 			if(which == 1) return new Resources(0, 1, 0, 0, 0, 0, 0, 0);
 			if(which == 2) return new Resources(0, 0, 0, 1, 0, 0, 0, 0);
-		}
-		else if(new Resources(0, 1, 1, 0, 0, 0, 0, 0).compare(resource)) {
+		} else if(new Resources(0, 1, 1, 0, 0, 0, 0, 0).compare(resource)) {
 			if(which == 1) return new Resources(0, 1, 0, 0, 0, 0, 0, 0);
 			if(which == 2) return new Resources(0, 0, 1, 0, 0, 0, 0, 0);
-		}
-		else if(new Resources(1, 0, 0, 1, 0, 0, 0, 0).compare(resource)) {
+		} else if(new Resources(1, 0, 0, 1, 0, 0, 0, 0).compare(resource)) {
 			if(which == 1) return new Resources(0, 0, 0, 1, 0, 0, 0, 0);
 			if(which == 2) return new Resources(1, 0, 0, 0, 0, 0, 0, 0);
-		}
-		else if(new Resources(1, 0, 1, 0, 0, 0, 0, 0).compare(resource)) {
+		} else if(new Resources(1, 0, 1, 0, 0, 0, 0, 0).compare(resource)) {
 			if(which == 1) return new Resources(0, 0, 1, 0, 0, 0, 0, 0);
 			if(which == 2) return new Resources(1, 0, 0, 0, 0, 0, 0, 0);
-		}
-		else if(new Resources(1, 1, 0, 0, 0, 0, 0, 0).compare(resource)) {
+		} else if(new Resources(1, 1, 0, 0, 0, 0, 0, 0).compare(resource)) {
 			if(which == 1) return new Resources(0, 1, 0, 0, 0, 0, 0, 0);
 			if(which == 2) return new Resources(1, 0, 0, 0, 0, 0, 0, 0);
-		}
-		else if(new Resources(0, 0, 0, 0, 1, 1, 1, 0).compare(resource)) {
+		} else if(new Resources(0, 0, 0, 0, 1, 1, 1, 0).compare(resource)) {
 			if(which == 1) return new Resources(0, 0, 0, 0, 1, 0, 0, 0);
 			if(which == 2) return new Resources(0, 0, 0, 0, 0, 1, 0, 0);
 			if(which == 3) return new Resources(0, 0, 0, 0, 0, 0, 1, 0);
-		}
-		else if(new Resources(1, 1, 1, 1, 0, 0, 0, 0).compare(resource)) {
+		} else if(new Resources(1, 1, 1, 1, 0, 0, 0, 0).compare(resource)) {
 			if(which == 1) return new Resources(0, 0, 1, 0, 0, 0, 0, 0);
 			if(which == 2) return new Resources(0, 1, 0, 0, 0, 0, 0, 0);
 			if(which == 3) return new Resources(1, 0, 0, 0, 0, 0, 0, 0);

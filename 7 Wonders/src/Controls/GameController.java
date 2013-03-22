@@ -15,6 +15,7 @@ import Structures.Effects.SpecialEffect;
 import Tokens.Resources;
 import Tokens.ScientificSymbols;
 import View.Controller;
+import View.Images;
 import View.MainFrame;
 import WonderBoards.WonderBoardStage;
 
@@ -48,6 +49,7 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 	{
 		try 
 		{
+			Images.run();
 			frame = new MainFrame(this);
 			frame.startMatch(match);
 			frame.setVisible(true);

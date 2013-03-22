@@ -21,19 +21,16 @@ import java.awt.event.MouseMotionListener;
 public class CardsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
-	private ImageIcon[] cardImages;
 	private ArrayList<Structure> cards;	
 	private JLabel cardArr[], lblArr[], lblBgArr[], lblOptions[], lblArrow[][];
 	private MouseListener ml[];
 	private MouseMotionListener mml[];
-	private Image lblBgImage;
-	private ImageIcon arrowYes, arrowTrading, arrowNo, optionsIcon;
 	private boolean showOptions[], showArrow[][];
 	private int canDoAction[][];
 	
 	private Controller controller;
 	
-	public CardsPanel(ImageIcon[] ii, ArrayList<Structure> ca, Controller c) {
+	public CardsPanel(ArrayList<Structure> ca, Controller c) {
 		setLayout(null);
 		setOpaque(false);
 		setSize(1274, 280);
@@ -53,13 +50,7 @@ public class CardsPanel extends JPanel {
 		Arrays.fill(showOptions, Boolean.FALSE);
 		
 		controller = c;
-		cardImages = ii;
 		cards = ca;
-		lblBgImage = new ImageIcon(CardsPanel.class.getResource("/Images/Icons/cardlblbg.png")).getImage();
-		arrowYes = new ImageIcon(CardsPanel.class.getResource("/Images/Icons/arrowyes.png"));
-		arrowTrading = new ImageIcon(CardsPanel.class.getResource("/Images/Icons/arrowtrading.png"));
-		arrowNo = new ImageIcon(CardsPanel.class.getResource("/Images/Icons/arrowno.png"));
-		optionsIcon = new ImageIcon(CardsPanel.class.getResource("/Images/Icons/chooser.png"));
 		
 		for (int i = 0; i < 7; i++) {
 			cardArr[i] = new JLabel();
@@ -128,7 +119,7 @@ public class CardsPanel extends JPanel {
 		for (int i = 0; i < 7; i++) {
 			if(cards.size() > i) {
 				int w = lblArr[i].getFontMetrics(lblArr[i].getFont()).stringWidth(lblArr[i].getText()) + 23;
-				lblBgArr[i].setIcon(new ImageIcon(lblBgImage.getScaledInstance(30, w, java.awt.Image.SCALE_SMOOTH)));
+				lblBgArr[i].setIcon(new ImageIcon(Images.cardlabelbg.getScaledInstance(30, w, java.awt.Image.SCALE_SMOOTH)));
 				lblBgArr[i].setSize(30, w);
 			} else lblBgArr[i].setIcon(null);
 		}
@@ -137,7 +128,7 @@ public class CardsPanel extends JPanel {
 	private void updateCards() {
 		for (int i = 0; i < 7; i++) {
 			if(cards.size() > i) 
-				cardArr[i].setIcon(cardImages[cards.get(i).getID()]);
+				cardArr[i].setIcon(Images.cards[cards.get(i).getID()]);
 			else cardArr[i].setIcon(null);
 		}
 	}
@@ -163,14 +154,14 @@ public class CardsPanel extends JPanel {
 	private void updateOptions() {
 		for (int i = 0; i < 7; i++) {
 			if(showOptions[i]) {
-				lblOptions[i].setIcon(optionsIcon);
+				lblOptions[i].setIcon(Images.options);
 				for (int j = 0; j < 3; j++) {
 					if(showArrow[i][j]){
-						if(j == 2) lblArrow[i][j].setIcon(arrowYes);
+						if(j == 2) lblArrow[i][j].setIcon(Images.arrows[2]);
 						else {
-							if(canDoAction[i][j] == 0) lblArrow[i][j].setIcon(arrowNo);
-							else if(canDoAction[i][j] == 1) lblArrow[i][j].setIcon(arrowTrading);
-							else if(canDoAction[i][j] == 2) lblArrow[i][j].setIcon(arrowYes);
+							if(canDoAction[i][j] == 0) lblArrow[i][j].setIcon(Images.arrows[0]);
+							else if(canDoAction[i][j] == 1) lblArrow[i][j].setIcon(Images.arrows[1]);
+							else if(canDoAction[i][j] == 2) lblArrow[i][j].setIcon(Images.arrows[2]);
 							else lblArrow[i][j].setIcon(null);
 						}
 					} else lblArrow[i][j].setIcon(null);

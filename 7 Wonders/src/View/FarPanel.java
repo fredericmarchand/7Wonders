@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -19,7 +18,6 @@ public class FarPanel extends JPanel {
 	Player player;
 	private JLabel2D lblPosConflict, lblNegConflict, lblTablets, lblMilitary, lblVictory, lblCompass, lblGears, lblCoin;
 	private JLabel wonderStage1, wonderStage2, wonderStage3, wonderStage4;
-	private ImageIcon checkmark;
 	
 	@SuppressWarnings("unused")
 	private Controller controller;
@@ -30,25 +28,23 @@ public class FarPanel extends JPanel {
 		setLayout(null);
 		setSize(320, 150);
 		setBackground(Color.WHITE);
-		
-		checkmark = new ImageIcon(new ImageIcon(NearPanel.class.getResource("/Images/Icons/yes.png")).getImage().getScaledInstance(18, 18, java.awt.Image.SCALE_SMOOTH));
 
-		wonderStage1 = new JLabel(checkmark);
+		wonderStage1 = new JLabel(Images.checkmarkSmall);
 		wonderStage1.setSize(18, 18);
 		wonderStage1.setVisible(false);
 		add(wonderStage1);
 		
-		wonderStage2 = new JLabel(checkmark);
+		wonderStage2 = new JLabel(Images.checkmarkSmall);
 		wonderStage2.setSize(18, 18);
 		wonderStage2.setVisible(false);
 		add(wonderStage2);
 		
-		wonderStage3 = new JLabel(checkmark);
+		wonderStage3 = new JLabel(Images.checkmarkSmall);
 		wonderStage3.setSize(18, 18);
 		wonderStage3.setVisible(false);
 		add(wonderStage3);
 		
-		wonderStage4 = new JLabel(checkmark);
+		wonderStage4 = new JLabel(Images.checkmarkSmall);
 		wonderStage4.setSize(18, 18);
 		wonderStage4.setVisible(false);
 		add(wonderStage4);
@@ -118,11 +114,11 @@ public class FarPanel extends JPanel {
 		lblCoin.setBounds(42, 63, 44, 47);
 		add(lblCoin);
 		
-		JLabel overlayLabel = new JLabel(new ImageIcon(NearPanel.class.getResource("/Images/Icons/overlayforeign.png")));
+		JLabel overlayLabel = new JLabel(Images.overlayFar);
 		overlayLabel.setBounds(0, 0, 320, 150);
 		add( overlayLabel );
 		
-		JLabel boardLabel = new JLabel(new ImageIcon(new ImageIcon(NearPanel.class.getResource("/Images/Boards/board"+player.getWonderBoard().getBoardID()+(player.getWonderBoard().getSide()+1)+".png")).getImage().getScaledInstance(320, 150, java.awt.Image.SCALE_SMOOTH)));
+		JLabel boardLabel = new JLabel(Images.boardsSmall[player.getWonderBoard().getBoardID()][player.getWonderBoard().getSide()]);
 		boardLabel.setBounds(0, 0, 320, 150);
 		add( boardLabel );
 		

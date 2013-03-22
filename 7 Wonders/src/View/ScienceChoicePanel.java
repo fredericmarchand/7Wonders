@@ -29,17 +29,17 @@ public class ScienceChoicePanel extends JPanel {
 		matchPanel = m;
 		
 		lblOver3 = new JLabel("");
-		lblOver3.setIcon(new ImageIcon(ScienceChoicePanel.class.getResource("/Images/Icons/scienceoverlay3.png")));
+		lblOver3.setIcon(Images.sciOverlay3);
 		lblOver3.setBounds(664, 386, 65, 88);
 		add(lblOver3);
 		
 		lblOver2 = new JLabel("");
-		lblOver2.setIcon(new ImageIcon(ScienceChoicePanel.class.getResource("/Images/Icons/scienceoverlay2.png")));
+		lblOver2.setIcon(Images.sciOverlay2);
 		lblOver2.setBounds(618, 386, 46, 88);
 		add(lblOver2);
 		
 		lblOver1 = new JLabel("");
-		lblOver1.setIcon(new ImageIcon(ScienceChoicePanel.class.getResource("/Images/Icons/scienceoverlay1.png")));
+		lblOver1.setIcon(Images.sciOverlay1);
 		lblOver1.setBounds(551, 386, 67, 88);
 		add(lblOver1);
 		
@@ -49,7 +49,7 @@ public class ScienceChoicePanel extends JPanel {
 		add(lblPurpose);
 		
 		JLabel lblScience = new JLabel("", SwingConstants.CENTER);
-		lblScience.setIcon(new ImageIcon(ScienceChoicePanel.class.getResource("/Images/Icons/sciencepicker.png")));
+		lblScience.setIcon(Images.sciPicker);
 		lblScience.setBounds(551, 386, 178, 88);
 		add(lblScience);
 		
