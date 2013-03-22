@@ -57,6 +57,8 @@ public class Match1 {
 		players = new ArrayList<Player>();
 		age = 1;
 		turn = 1;
+		
+		
 	}
 	
 	public void init() {
@@ -70,6 +72,11 @@ public class Match1 {
 		for ( Player p: players ) p.getOwnedResources().addCoins(3);
 		CardHandler.DistributeCards(players, age1Deck);
 		addInitialResources(players);
+		//Added to give players knowledge of the current age for AI choices
+		for (Player p : players)
+		{
+			p.initAge();
+		}
 		//state = GameController.BEGINNINGOFGAME;
 	}
 	
@@ -503,6 +510,7 @@ public class Match1 {
 			}
 			PlayerInteraction.SettleMilitaryConflicts(getPlayers(), getAge());
 			setAge(getAge()+1);
+			incPlayerAges();
 			setTurn(1);
 			if ( getAge() == 2 ) CardHandler.DistributeCards(getPlayers(), getDeck());
 			if ( getAge() == 3 ) CardHandler.DistributeCards(getPlayers(), getDeck());
@@ -521,7 +529,13 @@ public class Match1 {
 	}
 	
 	
-	
+	public void incPlayerAges()
+	{
+		for (Player p : players)
+		{
+			p.nextAge();
+		}
+	}
 	
 	public void handleAIPlayerMoves()
 	{

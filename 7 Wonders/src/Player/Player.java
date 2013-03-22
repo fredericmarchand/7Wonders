@@ -21,6 +21,7 @@ public class Player extends User {
 	protected int victoryPoints;
 	protected ScientificSymbols scientificSymbols;
 	protected boolean isAI;
+	protected int currentAge;
 	
 	//constructors
 	public Player()
@@ -53,6 +54,21 @@ public class Player extends User {
 		isAI = false;
 	}
 
+	public int getAge()
+	{
+		return currentAge;
+	}
+	
+	public void nextAge()
+	{
+		currentAge++;
+	}
+	
+	public void initAge()
+	{
+		currentAge = 1;
+	}
+	
 	public boolean ai()
 	{
 		return isAI;
