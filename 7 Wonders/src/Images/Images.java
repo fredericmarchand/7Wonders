@@ -1,4 +1,4 @@
-package View;
+package Images;
 
 import java.awt.Image;
 import java.net.URL;
@@ -14,12 +14,11 @@ public class Images {
 							resOverlay2, resOverlay3, resOverlay4,
 							sciOverlay3, sciOverlay2, sciOverlay1, sciPicker, 
 							age[], xClose;
-//	public Images() {
-//		run();
-//	}
 	
 	public static void run() {
-				
+		long startTime = System.currentTimeMillis();
+		
+		
 		// MatchPanel
 		age = new ImageIcon[3];
 		age[0] = new ImageIcon(Images.class.getResource("/Images/Icons/age1.png"));
@@ -27,10 +26,15 @@ public class Images {
 		age[2] = new ImageIcon(Images.class.getResource("/Images/Icons/age3.png"));
 		xClose = new ImageIcon(Images.class.getResource("/Images/Icons/X.png"));
 		
+		System.out.println("Done loading MatchPanel images. Took " + (System.currentTimeMillis() - startTime) + "ms");
+		
 		// Cards
 		cards = new ImageIcon[76];
 		for(int i = 1; i <= 75; i++) 
 			cards[i] = new ImageIcon(new ImageIcon(Images.class.getResource("/Images/Cards/"+i+".jpg")).getImage().getScaledInstance(182, 280, java.awt.Image.SCALE_SMOOTH));
+		
+		System.out.println("Done loading Card images. Took " + (System.currentTimeMillis() - startTime) + "ms");
+		
 		arrows = new ImageIcon[3];
 		arrows[0] = new ImageIcon(Images.class.getResource("/Images/Icons/arrowno.png"));
 		arrows[1] = new ImageIcon(Images.class.getResource("/Images/Icons/arrowtrading.png"));
@@ -38,6 +42,7 @@ public class Images {
 		options = new ImageIcon(Images.class.getResource("/Images/Icons/chooser.png"));
 		cardlabelbg = new ImageIcon(Images.class.getResource("/Images/Icons/cardlblbg.png")).getImage();
 		
+		System.out.println("Done loading CardPanel images. Took " + (System.currentTimeMillis() - startTime) + "ms");
 		
 		// Boards
 		boardsSmall = new ImageIcon[7][2];
@@ -45,10 +50,13 @@ public class Images {
 		for(int i = 1; i <= 7; i++) {
 			for(int j = 1; j <= 2; j++) {
 				URL temp = Images.class.getResource("/Images/Boards/board"+i+j+".png");
-				boardsSmall[i][j] = new ImageIcon(new ImageIcon(temp).getImage().getScaledInstance(320, 150, java.awt.Image.SCALE_SMOOTH));
-				boardsBig[i][j] = new ImageIcon(temp);
+				boardsSmall[i-1][j-1] = new ImageIcon(new ImageIcon(temp).getImage().getScaledInstance(320, 150, java.awt.Image.SCALE_SMOOTH));
+				boardsBig[i-1][j-1] = new ImageIcon(temp);
 			}
 		}
+		
+		System.out.println("Done loading WonderBoard images. Took " + (System.currentTimeMillis() - startTime) + "ms");
+		
 		checkmarkSmall = new ImageIcon(new ImageIcon(Images.class.getResource("/Images/Icons/yes.png")).getImage().getScaledInstance(18, 18, java.awt.Image.SCALE_SMOOTH));
 		checkmarkBig = new ImageIcon(new ImageIcon(Images.class.getResource("/Images/Icons/yes.png")).getImage().getScaledInstance(34, 34, java.awt.Image.SCALE_SMOOTH));
 		overlayFar = new ImageIcon(Images.class.getResource("/Images/Icons/overlayforeign.png"));
@@ -74,5 +82,7 @@ public class Images {
 		sciOverlay1 = new ImageIcon(Images.class.getResource("/Images/Icons/scienceoverlay1.png"));
 		sciOverlay2 = new ImageIcon(Images.class.getResource("/Images/Icons/scienceoverlay2.png"));
 		sciOverlay3 = new ImageIcon(Images.class.getResource("/Images/Icons/scienceoverlay3.png"));
+		
+		System.out.println("Done loading all images. Took " + (System.currentTimeMillis() - startTime) + "ms");
 	}
 }

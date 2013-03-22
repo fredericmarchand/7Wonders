@@ -3,19 +3,26 @@ package View;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Images.Images;
 import Structures.Structure;
+import Tokens.Resources;
 
 public class FullscreenCardsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private ArrayList<JLabel> cardArr, labels, labelBg;
 	private ArrayList<Structure> cards;
+	private Structure selected;
+	
 	
 	@SuppressWarnings("unused")
 	private Controller controller;
@@ -38,6 +45,15 @@ public class FullscreenCardsPanel extends JPanel {
 		update();
 	}
 	
+	private MouseListener buildMouseAdapter() {
+		return new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				selected = cards.get(((JLabel)e.getComponent()).getX()/37);
+			}
+		};
+	}
+
 	public void update() {
 		cardArr.clear();
 		labels.clear();
@@ -47,6 +63,7 @@ public class FullscreenCardsPanel extends JPanel {
 		for(int i = 0; i < cards.size(); i++) {
 			cardArr.add(new JLabel(Images.cards[cards.get(i).getID()]));
 			cardArr.get(i).setSize(182, 280);
+			cardArr.get(i).addMouseListener(buildMouseAdapter());
 			
 			labels.add(new JLabel(cards.get(i).getName()));
 			labels.get(i).setForeground(Color.BLACK);

@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import Images.Images;
 import Player.Player;
 import WonderBoards.WonderBoardStage;
 
@@ -118,7 +119,7 @@ public class FarPanel extends JPanel {
 		overlayLabel.setBounds(0, 0, 320, 150);
 		add( overlayLabel );
 		
-		JLabel boardLabel = new JLabel(Images.boardsSmall[player.getWonderBoard().getBoardID()][player.getWonderBoard().getSide()]);
+		JLabel boardLabel = new JLabel(Images.boardsSmall[player.getWonderBoard().getBoardID()-1][player.getWonderBoard().getSide()]);
 		boardLabel.setBounds(0, 0, 320, 150);
 		add( boardLabel );
 		

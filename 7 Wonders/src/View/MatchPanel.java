@@ -8,6 +8,7 @@ import Tokens.Resources;
 import Tokens.ScientificSymbols;
 
 import Controls.Match1;
+import Images.Images;
 
 import java.awt.Color;
 import java.awt.Font;

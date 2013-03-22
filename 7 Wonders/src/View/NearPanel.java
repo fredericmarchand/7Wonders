@@ -2,6 +2,7 @@ package View;
 
 import javax.swing.*;
 
+import Images.Images;
 import Player.Player;
 import WonderBoards.WonderBoardStage;
 
@@ -237,7 +238,7 @@ public class NearPanel extends JPanel {
 		JLabel overlayLabel = new JLabel(Images.overlayNear);
 		overlayLabel.setBounds(0, 0, 478, 300);
 		add( overlayLabel );
-		JLabel boardLabel = new JLabel(Images.boardsSmall[player.getWonderBoard().getBoardID()][player.getWonderBoard().getSide()]);
+		JLabel boardLabel = new JLabel(Images.boardsBig[player.getWonderBoard().getBoardID()-1][player.getWonderBoard().getSide()]);
 		boardLabel.setBounds(0, 75, 478, 225);
 		add( boardLabel );
 		

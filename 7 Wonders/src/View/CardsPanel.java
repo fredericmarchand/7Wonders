@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+import Images.Images;
 import Structures.Structure;
 
 import java.awt.Font;

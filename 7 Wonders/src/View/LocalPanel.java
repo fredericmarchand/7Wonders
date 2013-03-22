@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import Images.Images;
 import Player.Player;
 import WonderBoards.WonderBoardStage;
 
@@ -241,7 +242,7 @@ public class LocalPanel extends JPanel {
 		JLabel overlayLabel = new JLabel(Images.overlayNear);
 		overlayLabel.setBounds(0, 0, 478, 300);
 		add( overlayLabel );
-		JLabel boardLabel = new JLabel(Images.boardsBig[player.getWonderBoard().getBoardID()][player.getWonderBoard().getSide()]);
+		JLabel boardLabel = new JLabel(Images.boardsBig[player.getWonderBoard().getBoardID()-1][player.getWonderBoard().getSide()]);
 		boardLabel.setBounds(0, 75, 478, 225);
 		add( boardLabel );
 		

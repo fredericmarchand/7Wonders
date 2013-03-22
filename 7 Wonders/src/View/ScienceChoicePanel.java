@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
+import Images.Images;
 import Tokens.ScientificSymbols;
 
 import java.awt.Color;
