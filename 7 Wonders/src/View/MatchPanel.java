@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import Structures.Structure;
 import Tokens.Resources;
 import Tokens.ScientificSymbols;
 
@@ -29,7 +30,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	private LocalPanel playerPanel;
 	private CardsPanel cardsPanel;
 	
-	private JLabel lblAge, lblTurn;
+	private JLabel lblAge, lblTurn, closeButton;
 	
 	private JScrollPane scrollpane;
 	private FullscreenCardsPanel fcp;
@@ -38,19 +39,20 @@ public class MatchPanel extends JPanel implements Runnable {
 	
 	private Controller controller;
 	
-	private ArrayList<Resources> need;
-	private ArrayList<Resources> picked;
+	private ArrayList<Resources> needResources;
+	private ArrayList<Resources> pickedResources;
+	
+	private ArrayList<Structure> needDiscarded;
 	
 	public MatchPanel(Match1 m, Controller c) {
 		setLayout(null);
 		setSize(1280, 860);
 		setBackground(Color.WHITE);
 		
-		picked = new ArrayList<Resources>();
-		
 		match = m;
 		controller = c;
-		picked = new ArrayList<Resources>();
+		pickedResources = new ArrayList<Resources>();
+		needDiscarded = new ArrayList<Structure>();
 		
 		// Start async part
 		run();
@@ -132,13 +134,13 @@ public class MatchPanel extends JPanel implements Runnable {
 		lblTurn.setForeground(Color.BLACK);
 		lblTurn.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		fcp = new FullscreenCardsPanel(null, controller);
+		fcp = new FullscreenCardsPanel(controller, this);
 		
 		scrollpane = new JScrollPane(fcp, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollpane.setSize(1280, 838);
 		scrollpane.getViewport().setOpaque(false);
 		scrollpane.setBackground(new Color(50, 50, 50, 200));
-		JLabel closeButton = new JLabel(Images.xClose);
+		closeButton = new JLabel(Images.xClose);
 		closeButton.setSize(56, 56);
 		closeButton.setLocation(1224, 0);
 		closeButton.addMouseListener(new MouseAdapter() {
@@ -179,28 +181,45 @@ public class MatchPanel extends JPanel implements Runnable {
 		cardsPanel.update();
 		
 		// Choose resources
-		need = controller.needToChooseResources();
+		needResources = controller.needToChooseResources();
 		Resources next = nextResource();
 		rcp.setResource(next);
 		if(next != null) rcp.setVisible(true);
+		
+		// Choose discarded
+		needDiscarded = controller.needToChooseDiscarded();
+		if(!needDiscarded.isEmpty()) {
+			fcp.setCards(needDiscarded);
+			fcp.setMode(FullscreenCardsPanel.SELECT);
+			scrollpane.revalidate();
+			closeButton.setVisible(false);
+			scrollpane.setVisible(true);
+		}
 	}
 	
 	public Resources nextResource() {
-		if(need.size() > 0)
-			return need.remove(0);
+		if(needResources.size() > 0)
+			return needResources.remove(0);
 		else {
-			controller.resourceChosen(picked);
-			picked.clear();
+			controller.resourceChosen(pickedResources);
+			pickedResources.clear();
 			return null;
 		}
 	}
 	
 	public void resourceChosen(Resources r) {
-		picked.add(r);
+		pickedResources.add(r);
 	}
 	
 	public void scienceChosen(ScientificSymbols s) {
 		controller.scienceChosen(s);
+	}
+	
+	public void discardChosen(Structure s) {
+		controller.chooseCard(s);
+		controller.discardChosen();
+		scrollpane.setVisible(false);
+		closeButton.setVisible(true);
 	}
 	
 	public MouseAdapter buildMouseAdapterNear() {
@@ -212,8 +231,8 @@ public class MatchPanel extends JPanel implements Runnable {
 				else if (e.getComponent() == ((NearPanel) n2)) panel = n2;
 				if(panel != null) {
 					fcp.setCards(panel.player.getWonderBoard().getAllCards());
+					fcp.setMode(FullscreenCardsPanel.DISPLAY);
 					//fcp.setCards(panel.player.getCards());
-					fcp.update();
 					scrollpane.revalidate();
 					scrollpane.setVisible(true);
 				}
@@ -232,7 +251,7 @@ public class MatchPanel extends JPanel implements Runnable {
 				else if (e.getComponent() == ((FarPanel) f4)) panel = f4;
 				if(panel != null) {
 					fcp.setCards(panel.player.getWonderBoard().getAllCards());
-					fcp.update();
+					fcp.setMode(FullscreenCardsPanel.DISPLAY);
 					scrollpane.revalidate();
 					scrollpane.setVisible(true);
 				}
@@ -249,7 +268,7 @@ public class MatchPanel extends JPanel implements Runnable {
 					cardsPanel.removeMouseListeners();
 				} else {
 					fcp.setCards(playerPanel.player.getWonderBoard().getAllCards());
-					fcp.update();
+					fcp.setMode(FullscreenCardsPanel.DISPLAY);
 					scrollpane.revalidate();
 					scrollpane.setVisible(true);
 				}

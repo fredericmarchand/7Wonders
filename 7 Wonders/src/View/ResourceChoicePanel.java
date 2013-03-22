@@ -6,7 +6,6 @@ import java.awt.Point;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -19,30 +18,19 @@ public class ResourceChoicePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private final Point overlayLocations[] = {
-			// 2 overlay - width 50
-			new Point(577, 403),
-			new Point(652, 403),
-			// 3 overlay - width 38
-			new Point(564, 404),
-			new Point(614, 404),
-			new Point(665, 404),
-			// 4 overlay - width 32
-			new Point(561, 403),
-			new Point(597, 403),
-			new Point(632, 403),
-			new Point(669, 403)
+		// 2 overlay - width 50
+		new Point(577, 403),
+		new Point(652, 403),
+		// 3 overlay - width 38
+		new Point(564, 404),
+		new Point(614, 404),
+		new Point(665, 404),
+		// 4 overlay - width 32
+		new Point(561, 403),
+		new Point(597, 403),
+		new Point(632, 403),
+		new Point(669, 403)
 	};
-	
-	/*
-		0000111
-		0011000
-		0101000
-		0110000
-		1001000
-		1010000
-		1100000
-		1111000
-	 */
 	
 	private Resources resource;
 	int whichOverlay = 2;
@@ -76,7 +64,8 @@ public class ResourceChoicePanel extends JPanel {
 		
 		JLabel lblDesc = new JLabel("Choose a resource:", SwingConstants.CENTER);
 		lblDesc.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblDesc.setBounds(491, 383, 297, 20);
+		lblDesc.setForeground(Color.WHITE);
+		lblDesc.setBounds(491, 379, 297, 20);
 		add(lblDesc);
 		
 		addMouseListener(buildMouseAdapter());

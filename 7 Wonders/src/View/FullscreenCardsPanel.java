@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 
 import Images.Images;
 import Structures.Structure;
-import Tokens.Resources;
 
 public class FullscreenCardsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -23,19 +22,25 @@ public class FullscreenCardsPanel extends JPanel {
 	private ArrayList<Structure> cards;
 	private Structure selected;
 	
+	public static final int DISPLAY = 0;
+	public static final int SELECT = 1;
+	private int mode;
 	
-	@SuppressWarnings("unused")
 	private Controller controller;
+	private FullscreenCardsPanel thisPanel;
+	private MatchPanel matchPanel;
 	
 	private int totalWidth;
 	
-	public FullscreenCardsPanel (ArrayList<Structure> ca, Controller c) {
+	public FullscreenCardsPanel (Controller c, MatchPanel m) {
 		setLayout(null);
 		setOpaque(false);
 		
-		cards = ca;
 		controller = c;
 		selected = null;
+		mode = DISPLAY;
+		thisPanel = this;
+		matchPanel = m;
 		
 		cardArr = new ArrayList<JLabel>();
 		labels = new ArrayList<JLabel>();
@@ -50,7 +55,11 @@ public class FullscreenCardsPanel extends JPanel {
 		return new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				selected = cards.get(((JLabel)e.getComponent()).getX()/37);
+				if(mode == SELECT) {
+					selected = cards.get(((JLabel)e.getComponent()).getX()/37);
+					matchPanel.discardChosen(selected);
+					//thisPanel.setVisible(false);
+				}
 			}
 		};
 	}
@@ -82,7 +91,6 @@ public class FullscreenCardsPanel extends JPanel {
 			int xoffset = (i*37);
 			int yoffset = (i*66) % 594;
 			
-			
 			cardArr.get(i).setLocation(xoffset, yoffset);
 			labels.get(i).setLocation(xoffset + 10, yoffset + 74);
 			labelBg.get(i).setLocation(xoffset + 8, yoffset + 275 - w);
@@ -101,5 +109,10 @@ public class FullscreenCardsPanel extends JPanel {
 	
 	public void setCards(ArrayList<Structure> c) {
 		cards = c;
+		update();
+	}
+	
+	public void setMode(int m) {
+		mode = m;
 	}
 }

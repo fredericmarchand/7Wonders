@@ -297,7 +297,7 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 				}
 			}
 		}
-		return null;
+		return new ArrayList<Structure>();
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package View;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
 import Images.Images;
@@ -45,6 +44,7 @@ public class ScienceChoicePanel extends JPanel {
 		add(lblOver1);
 		
 		JLabel lblPurpose = new JLabel("Choose a symbol:", SwingConstants.CENTER);
+		lblPurpose.setForeground(Color.WHITE);
 		lblPurpose.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblPurpose.setBounds(560, 363, 159, 22);
 		add(lblPurpose);
@@ -116,12 +116,4 @@ public class ScienceChoicePanel extends JPanel {
 			}
 		};
 	}
-	
-	
-//	public static void main(String args[]) {
-//		javax.swing.JFrame frame = new javax.swing.JFrame("ScienceTest");
-//		frame.setSize(1280, 860);
-//		frame.add(new ScienceChoicePanel());
-//		frame.setVisible(true);
-//	}
 }
