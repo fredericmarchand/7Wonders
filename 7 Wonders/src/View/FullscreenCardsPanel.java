@@ -35,6 +35,7 @@ public class FullscreenCardsPanel extends JPanel {
 		
 		cards = ca;
 		controller = c;
+		selected = null;
 		
 		cardArr = new ArrayList<JLabel>();
 		labels = new ArrayList<JLabel>();
