@@ -23,6 +23,9 @@ public class ChatFrame extends JPanel {
 		textField = new JTextField(20);
 		frame = new JFrame(uname + " - 7 Wonders Chat");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
+		
 		menuBar = new JMenuBar();
 		menu = new JMenu("Match Options");
 		start = new JMenuItem("Start");
@@ -31,7 +34,7 @@ public class ChatFrame extends JPanel {
 		
 		
 		// Add contents to the window.
-		frame.add(this);
+		
 		// Display the window.
 		textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -41,6 +44,26 @@ public class ChatFrame extends JPanel {
 				textArea.setCaretPosition(textArea.getDocument().getLength());
 			}
 		});
+		
+		start.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				chatHub.getClient().sendStartRequest();
+			}
+		});
+		quit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				int option = JOptionPane.showConfirmDialog (null, "Do you wish to quit the match?");
+				if(option==JOptionPane.YES_OPTION){
+					frame.dispose();
+					//CLIENT KILL CONNECTION CLOSE EXTERNAL CONNECTIONS
+					chatHub.getClient().quitMatch();
+				}
+			}
+		});
+		
+		
+		
+		
 		textArea = new JTextArea(5, 20);
 		textArea.setEditable(false);
 		scrollPane = new JScrollPane(textArea);
@@ -60,9 +83,10 @@ public class ChatFrame extends JPanel {
 		menu.add(start);
 		menu.add(quit);
 		menuBar.add(menu);
-		menuBar.setSize(50,this.getX());
 		menuBar.setVisible(true);
-		frame.add(menuBar);
+		frame.setJMenuBar(menuBar);
+		frame.add(this);
+		
 	}
 
 	public void appendChat(String c) {
@@ -76,12 +100,20 @@ public class ChatFrame extends JPanel {
 		frame.setVisible(true);
 
 	}
+	
+	public void setStart(boolean b){
+		if(b)
+			start.setEnabled(true);
+		else 
+			start.setEnabled(false);
+	}
 	public void clear(){
 		textArea.setText("");
 		textField.setText("");
 	}
 	public static void main(String args[]){
 		ChatFrame f = new ChatFrame(null,null);
+		f.setStart(false);
 		f.showGUI();
 	}
 
