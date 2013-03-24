@@ -1,11 +1,22 @@
 package Resources;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class ChatFrame extends JPanel {
+public class ChatFrame extends JPanel implements Runnable {
 	protected JTextField textField;
 	protected JTextArea textArea;
 	private JFrame frame;

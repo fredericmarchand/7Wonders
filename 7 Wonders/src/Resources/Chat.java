@@ -14,7 +14,8 @@ public class Chat {
 	public void addChat(String s){
 		chatFrame.appendChat(s);
 	}
-	public void launchChatFrame(){
+	public void launchChatFrame(boolean b){
+		chatFrame.setStart(b);
 		chatFrame.showGUI();
 	}
 	public void sendMsg(String s){

@@ -92,7 +92,7 @@ public class NetworkListener extends Listener{
 			mclient.setMID(((Packet14HostCreateMatch)o).getMID());
 			mclient.setHost(true);
 			if(((Packet14HostCreateMatch)o).getnPlayer()>1){
-				mclient.getLink().launchMatchLobby();
+				//mclient.getLink().launchMatchLobby();
 				mclient.getLink().launchChatFrame();
 			}
 		}

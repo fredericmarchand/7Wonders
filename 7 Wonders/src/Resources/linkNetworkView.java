@@ -54,7 +54,7 @@ public class linkNetworkView {
 	
 	public void launchChatFrame(){
 		
-		chat.launchChatFrame();
+		chat.launchChatFrame(mclient.getHost());
 	}
 	public void killChatFrame(){
 		chat.kill();
