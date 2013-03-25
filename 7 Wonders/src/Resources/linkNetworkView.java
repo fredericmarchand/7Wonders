@@ -2,6 +2,8 @@ package Resources;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import client.MClient;
 import Controls.GameController;
 import Controls.Match1;
@@ -36,6 +38,7 @@ public class linkNetworkView {
 	public void launchLobby(){
 		
 		lobby.showGUI();
+		lobby.update(mclient.getMatchList());
 	}
 	
 	public void updateLobby(ArrayList<Long> list){
@@ -67,5 +70,27 @@ public class linkNetworkView {
 	}
 	
 	public Chat getChat(){return chat;}
+	
+	public void failConnect(){
+		int failJoin = JOptionPane.showConfirmDialog(null, 
+				"Failed to connect to server\nDo you wish to retry");
+		if(failJoin == JOptionPane.OK_OPTION){
+			String uname = JOptionPane.showInputDialog("What is your username?");
+			String ip = JOptionPane.showInputDialog("IP :");
+			String port = JOptionPane.showInputDialog("Port :");
+			mclient = new MClient();
+
+			// mclient.createUser(uname, mclient.getID());
+			mclient.setUser_username(uname);
+			// mclient.serverConnect("",6);
+			mclient.serverConnect(ip, Integer.parseInt(port));
+
+		}
+		else{ 
+			System.exit(0);
+		}
+			
+		
+	}
 	
 }

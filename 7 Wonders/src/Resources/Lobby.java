@@ -108,8 +108,7 @@ public class Lobby extends JFrame implements ListSelectionListener {
 	    setSize(300,200);
 	    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		 this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        populate();
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 	}
 	
 	public void valueChanged(ListSelectionEvent e) {

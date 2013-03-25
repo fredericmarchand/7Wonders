@@ -63,6 +63,7 @@ public class StartMenu extends JFrame {
 		// Create and set up the window.
 		// TODO Auto-generated method stub
 		String uname = JOptionPane.showInputDialog("What is your username?");
+		
 		String ip = JOptionPane.showInputDialog("IP :");
 		String port = JOptionPane.showInputDialog("Port :");
 		mclient = new MClient();

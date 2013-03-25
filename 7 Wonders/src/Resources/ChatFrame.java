@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class ChatFrame extends JPanel implements Runnable {
+public class ChatFrame extends JPanel{
 	protected JTextField textField;
 	protected JTextArea textArea;
 	private JFrame frame;
@@ -122,11 +122,15 @@ public class ChatFrame extends JPanel implements Runnable {
 		textArea.setText("");
 		textField.setText("");
 	}
+	
+
+	
+	
 	public static void main(String args[]){
 		ChatFrame f = new ChatFrame(null,null);
 		f.setStart(false);
 		f.showGUI();
 	}
-
+	
 
 }
