@@ -2,7 +2,7 @@ package Resources;
 
 import java.util.ArrayList;
 
-import server.MServer;
+//import server.MServer;
 
 
 
@@ -24,11 +24,13 @@ public class Match {
     private int MAX_PLAYER_COUNT = 7 ;
     private int connection_count;
     @SuppressWarnings("unused")
-	private MServer mserver;
+	//private MServer mserver;
     private int receivedEvents = 0;
     ArrayList<CommandMessage> cmdMsgList;
     private boolean inProgress;
 
+    ///////////////////////////////////////////
+    //    handle ai creation
     /////FIX///////////////////////////////////
     Controls.Match1 controller;
     

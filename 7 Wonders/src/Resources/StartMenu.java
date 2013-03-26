@@ -1,7 +1,6 @@
 package Resources;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -62,17 +61,26 @@ public class StartMenu extends JFrame {
 	public void showGUI() {
 		// Create and set up the window.
 		// TODO Auto-generated method stub
-		String uname = JOptionPane.showInputDialog("What is your username?");
-		
-		String ip = JOptionPane.showInputDialog("IP :");
-		String port = JOptionPane.showInputDialog("Port :");
+		String uname = "";
+		String ip = "";
+		String port = "";
+		try{
+			while(uname.isEmpty())
+				uname = JOptionPane.showInputDialog("What is your username?");
+			while(ip.isEmpty())
+				ip= JOptionPane.showInputDialog("IP :");
+			while(port.isEmpty())
+				port = JOptionPane.showInputDialog("Port :");
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(null, "Incorrect Input");
+			System.exit(0);
+		}
 		mclient = new MClient();
 
-		// mclient.createUser(uname, mclient.getID());
+		mclient.createUser(uname, mclient.getID());
 		mclient.setUser_username(uname);
-		// mclient.serverConnect("",6);
 		mclient.serverConnect(ip, Integer.parseInt(port));
-
+		
 		pack();
 		setVisible(true);
 	}

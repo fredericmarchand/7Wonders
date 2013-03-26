@@ -18,6 +18,7 @@ public class linkNetworkView {
 	CreateMenu createMenu;
 	MClient mclient;	
 	GameController gc;
+	StartMenu startMenu;
 	
 	public linkNetworkView(MClient c){
 		mclient = c;
@@ -25,6 +26,7 @@ public class linkNetworkView {
 		matchLobby = new MatchLobby(mclient);
 		chat = new Chat(mclient);
 		createMenu = new CreateMenu(mclient);
+		
 	}
 	
 	public void launchMainFrame(Match1 m, Player p){
@@ -72,18 +74,21 @@ public class linkNetworkView {
 	public Chat getChat(){return chat;}
 	
 	public void failConnect(){
+		
 		int failJoin = JOptionPane.showConfirmDialog(null, 
 				"Failed to connect to server\nDo you wish to retry");
 		if(failJoin == JOptionPane.OK_OPTION){
-			String uname = JOptionPane.showInputDialog("What is your username?");
-			String ip = JOptionPane.showInputDialog("IP :");
-			String port = JOptionPane.showInputDialog("Port :");
-			mclient = new MClient();
-
-			// mclient.createUser(uname, mclient.getID());
-			mclient.setUser_username(uname);
-			// mclient.serverConnect("",6);
-			mclient.serverConnect(ip, Integer.parseInt(port));
+			startMenu = new StartMenu();
+			startMenu.showGUI();
+//			String uname = JOptionPane.showInputDialog("What is your username?");
+//			String ip = JOptionPane.showInputDialog("IP :");
+//			String port = JOptionPane.showInputDialog("Port :");
+//			mclient = new MClient();
+//
+//			// mclient.createUser(uname, mclient.getID());
+//			mclient.setUser_username(uname);
+//			// mclient.serverConnect("",6);
+//			mclient.serverConnect(ip, Integer.parseInt(port));
 
 		}
 		else{ 
