@@ -18,6 +18,8 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.*;
 import com.esotericsoftware.minlog.Log;
 
+
+//kill mclient once frames have been closed.
 public class MClient {
 	private Client client;
 	private boolean host = false;
