@@ -20,8 +20,6 @@ import com.esotericsoftware.minlog.Log;
 
 public class MClient {
 	private Client client;
-	private static Scanner s = new Scanner(System.in);
-	public boolean GAME_ALIVE;
 	private boolean host = false;
 	private ArrayList<Long> matchList;
 	// if client has yet to join a game
@@ -29,7 +27,6 @@ public class MClient {
 	private long matchID = 0000;
 	private long ID = 0000;
 	private String username;
-	private Chat chat;
 	private User user;
 	private linkNetworkView link;
 	private Player player;
@@ -72,14 +69,6 @@ public class MClient {
 
 	public long getID() {
 		return ID;
-	}
-
-	public void setAlive(boolean a) {
-		GAME_ALIVE = a;
-	}
-
-	public boolean getAlive() {
-		return GAME_ALIVE;
 	}
 
 	// set match id to which client has joined

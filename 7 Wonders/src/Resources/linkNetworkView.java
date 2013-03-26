@@ -37,8 +37,7 @@ public class linkNetworkView {
 		
 		lobby.showGUI();
 	}
-	public void launchLobby(){
-		
+	public void launchLobby(){		
 		lobby.showGUI();
 		lobby.update(mclient.getMatchList());
 	}
@@ -47,8 +46,7 @@ public class linkNetworkView {
 		lobby.update(list);
 	}
 	
-	public void launchMatchLobby(){
-		
+	public void launchMatchLobby(){		
 		matchLobby.showGUI();
 	}
 	
@@ -57,17 +55,14 @@ public class linkNetworkView {
 		lobby.showGUI();
 	}
 	
-	public void launchChatFrame(){
-		
+	public void launchChatFrame(){		
 		chat.launchChatFrame(mclient.getHost());
 	}
 	public void killChatFrame(){
 		chat.kill();
 	}
 	
-	
 	public void launchCreateMenu(){
-
 		createMenu.showGUI();
 	}
 	
@@ -80,22 +75,10 @@ public class linkNetworkView {
 		if(failJoin == JOptionPane.OK_OPTION){
 			startMenu = new StartMenu();
 			startMenu.showGUI();
-//			String uname = JOptionPane.showInputDialog("What is your username?");
-//			String ip = JOptionPane.showInputDialog("IP :");
-//			String port = JOptionPane.showInputDialog("Port :");
-//			mclient = new MClient();
-//
-//			// mclient.createUser(uname, mclient.getID());
-//			mclient.setUser_username(uname);
-//			// mclient.serverConnect("",6);
-//			mclient.serverConnect(ip, Integer.parseInt(port));
-
 		}
 		else{ 
 			System.exit(0);
-		}
-			
-		
+		}		
 	}
 	
 }
