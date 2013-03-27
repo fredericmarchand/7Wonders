@@ -29,10 +29,13 @@ public class MClient {
 	private long matchID = 0000;
 	private long ID = 0000;
 	private String username;
-	private User user;
+	
 	private linkNetworkView link;
-	private Player player;
-	Controls.Match1 m;
+	
+	
+	//private Player player;
+	
+	private User user;
 
 	// player receive game
 	public MClient() {
@@ -115,7 +118,18 @@ public class MClient {
 	}
 
 	public void createUser(String uname, long id) {
-		user = new User(uname, id);
+		user = new Player(uname, id);
+		//user.setClient(this);
+		//client.sendCommandMessage();
+		
+	}
+	
+	public void sendCommandMessage(CommandMessage m){
+		Packet7MatchFunction packet = new Packet7MatchFunction();
+		packet.setCID(ID);
+		packet.setMID(matchID);
+		packet.setObject(m);
+		client.sendTCP(packet);
 	}
 
 	public void serverConnect(String ip, int port) {
@@ -194,10 +208,10 @@ public class MClient {
 	}
 
 	public void startMatch() {
-		m = new Controls.Match1();
-		player = new Player();
+		
+
 		link.getChat().countdown();
-		link.launchMainFrame(m, player);
+		//link.launchMainFrame(m, );
 		// load match
 	}
 

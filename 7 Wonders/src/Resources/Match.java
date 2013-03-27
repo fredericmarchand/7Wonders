@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 
 import Controls.CommandMessage;
+import Controls.Match2;
 import Resources.Packet.Packet10EndMatch;
 import Resources.Packet.Packet7MatchFunction;
 import Resources.Packet.Packet8ClientResponse;
@@ -23,16 +24,17 @@ public class Match {
     private static long counter = 1000;
     private int MAX_PLAYER_COUNT = 7 ;
     private int connection_count;
-    @SuppressWarnings("unused")
-	//private MServer mserver;
     private int receivedEvents = 0;
     ArrayList<CommandMessage> cmdMsgList;
     private boolean inProgress;
 
     ///////////////////////////////////////////
     //    handle ai creation
+    
+    
     /////FIX///////////////////////////////////
-    Controls.Match1 controller;
+    //freds new class
+    Match2 controller;
     
     public Match(int h,int ai){
     	connected = new ArrayList<Connection>();
