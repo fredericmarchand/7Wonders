@@ -1,5 +1,6 @@
 package Player;
 
+import client.MClient;
 import Controls.CommandMessage;
 import Controls.Match1;
 
@@ -9,6 +10,7 @@ public class User {
 	protected String username;
 	private Match1 currentMatch;
 	private CommandMessage msg;
+	private MClient client;
 	
 	public User(String name, long id)
 	{
@@ -26,6 +28,11 @@ public class User {
 		return ID;
 	}
 	
+	public MClient getClient()
+	{
+		return client;
+	}
+	
 	public void setUsername(String name)
 	{
 		username = name;
@@ -35,6 +42,19 @@ public class User {
 	{
 		ID = id;
 	}
+	
+	public void setClient(MClient cl)
+	{
+		client = cl;
+	}
+	
+	public void sendCommandMessage()
+	{
+		client.sendCommandMessage();
+	}
+	
+	
+	
 	
 	/**
 	 * @param args

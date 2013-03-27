@@ -53,6 +53,19 @@ public class Player extends User {
 		scientificSymbols = new ScientificSymbols();
 		isAI = false;
 	}
+	
+	public void resetPlayerStats()
+	{
+		wonderBoard = new WonderBoard();
+		cards = new ArrayList<Structure>();
+		chosenCard = null;
+		resources = new Resources();
+		resetResources();
+		conflictTokens = new ConflictTokens();
+		shields = 0;
+		victoryPoints = 0;
+		scientificSymbols = new ScientificSymbols();
+	}
 
 	public int getAge()
 	{
