@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import Controls.CommandMessage;
 import Controls.Match2;
+import Player.User;
 import Resources.Packet.Packet10EndMatch;
 import Resources.Packet.Packet7MatchFunction;
 import Resources.Packet.Packet8ClientResponse;
@@ -20,6 +21,7 @@ import com.esotericsoftware.kryonet.Server;
 public class Match {
 	
 	ArrayList<Connection> connected;
+	ArrayList<User> userList;
     private long match_id;
     private static long counter = 1000;
     private int MAX_PLAYER_COUNT = 7 ;
@@ -42,15 +44,22 @@ public class Match {
 		cmdMsgList = new ArrayList<CommandMessage>();
 		inProgress = false;
 		MAX_PLAYER_COUNT = h+ai;
+		
     }
     public  int getMaxPlayerCount() {return MAX_PLAYER_COUNT;}
     public boolean get_inProgress(){return inProgress;}
 	public ArrayList<Connection> getConnections(){return connected;}	
-	public void addConnection(Connection c){
+	public void addConnection(Connection c, Object o){
+		userList.add((User)o);
 		connected.add(c);
 		update();
 	}
-	public void removeConnection(Connection c) { 
+	public void removeConnection(Connection c, Object o) {
+		userList.remove(o);
+		connected.remove(c);
+		update();
+	}
+	public void removeConnectionOnly(Connection c){
 		connected.remove(c);
 		update();
 	}
@@ -113,7 +122,11 @@ public class Match {
 			//hand off info to game controller
 			//waiting
 			//okay game returned
-			//sendMatchInfo(controller.dispatch(cmdMsgList));
+			
+			
+			sendMatchInfo(controller.dispatch(cmdMsgList));
+			
+			
 		}
 	}
 	
@@ -121,15 +134,18 @@ public class Match {
 		receiveEvent((CommandMessage)receivedPacket.getObject(), receivedPacket.getCID());
 	}	
 	public void startMatch(){
+		
+		controller = new Match2(userList);
 		inProgress = true;
-		sendStartMatchRequest();
+		sendStartMatchRequest(controller);
 	}
 	
 	public void endMatch(){
 		sendEndMatchRequest();
 	}
-	public void sendStartMatchRequest(){
+	public void sendStartMatchRequest(Match2 ctrl){
 		Packet9StartMatch start = new Packet9StartMatch();
+		start.setObject(ctrl);
 		
 			for(Connection c: connected){
 				c.sendTCP(start);
@@ -143,11 +159,4 @@ public class Match {
 			c.sendTCP(end);
 		}
 	}
-	
-	
-	
-
-	
-	
-
 }
