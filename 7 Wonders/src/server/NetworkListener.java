@@ -126,7 +126,7 @@ public class NetworkListener extends Listener {
 
 		if (o instanceof Packet11ImmediateStart) {
 			(mserver.findMatch(((Packet11ImmediateStart) o).getMID()))
-					.sendStartMatchRequest();
+					.startMatch();
 		}
 		if (o instanceof Packet12CreateMatch) {
 			System.out.println("[SERVER ---------- CREATE Received packet");

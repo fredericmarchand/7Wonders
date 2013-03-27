@@ -122,7 +122,9 @@ public class Match {
 			//hand off info to game controller
 			//waiting
 			//okay game returned
-			//controller.dispatch(cmdMsgList);
+			
+			
+			sendMatchInfo(controller.dispatch(cmdMsgList));
 			
 			
 		}
@@ -135,14 +137,15 @@ public class Match {
 		
 		controller = new Match2(userList);
 		inProgress = true;
-		sendStartMatchRequest();
+		sendStartMatchRequest(controller);
 	}
 	
 	public void endMatch(){
 		sendEndMatchRequest();
 	}
-	public void sendStartMatchRequest(){
+	public void sendStartMatchRequest(Match2 ctrl){
 		Packet9StartMatch start = new Packet9StartMatch();
+		start.setObject(ctrl);
 		
 			for(Connection c: connected){
 				c.sendTCP(start);

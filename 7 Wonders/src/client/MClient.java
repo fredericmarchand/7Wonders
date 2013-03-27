@@ -161,6 +161,7 @@ public class MClient {
 			quit.setObject(user);
 			client.sendTCP(quit);
 			matchID = 0000; // no longer in a game
+			link.launchLobby();
 		}
 	}
 
@@ -193,27 +194,24 @@ public class MClient {
 	}
 
 	// /HEAVY EDIT////
-	public void turn(Packet7MatchFunction o) {
-		// player.passMatch((Controls.Match)(o.getObject()));
-		// response(player.getCommandMsg());
-		// player....
-
-		// if(player.getMatchComplete?
-		// new Packet5
-		// set info
-		// send tcp
+	public void turn(Object o) {
+				
+		user.updateMatch((Match2)o);
+				
 	}
 
 
-	public void startMatch() {
-		
-
+	public void startMatch(Object o) {
 		link.getChat().countdown();
+		user.startMatch((Match2)o);
+		
 		//link.launchMainFrame(m, );
 		// load match
 	}
 
 	// return to lobby
+	
+	
 	public void returnToLobby() {
 		quitMatch();
 		// return list?
