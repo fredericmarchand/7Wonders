@@ -3,6 +3,7 @@ package Player;
 import client.MClient;
 import Controls.CommandMessage;
 import Controls.Match1;
+import Controls.Match2;
 
 public class User {
 
@@ -50,9 +51,18 @@ public class User {
 	
 	public void sendCommandMessage()
 	{
-		client.sendCommandMessage();
+		client.sendCommandMessage(msg);
 	}
 	
+	public void updateMatch(Match2 match)
+	{
+		
+	}
+	
+	public void returnToLobby()
+	{
+		client.returnToLobby();
+	}
 	
 	
 	

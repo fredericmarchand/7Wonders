@@ -473,7 +473,11 @@ public class Match2 {
 		return null;
 	}
 	
-	
+	public Match2 dispatch(ArrayList<CommandMessage> messages)
+	{
+		
+		return this;
+	}
 	
 
 	/**
