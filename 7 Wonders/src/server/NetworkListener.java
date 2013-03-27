@@ -33,7 +33,7 @@ public class NetworkListener extends Listener {
 		for (Match e : mserver.getMatchList())
 			if (e.contains(c)) {
 				// replace with AI ?
-				e.removeConnection(c);
+				e.removeConnectionOnly(c);
 				break;
 			}
 		ListIterator<Match> it = mserver.getMatchList().listIterator();
@@ -95,7 +95,7 @@ public class NetworkListener extends Listener {
 			System.out
 					.println("[SERVER] CLIENT HAS BEEN REMOVED"
 							+ mserver.removeClient(c,
-									((Packet5Disconnect) o).getMID()));
+									((Packet5Disconnect) o).getMID(),((Packet5Disconnect)o).getObject()));
 
 		}
 		if (o instanceof Packet6ChatMsg) {
@@ -133,7 +133,7 @@ public class NetworkListener extends Listener {
 			long matchID = mserver.createMatch(
 					((Packet12CreateMatch) o).getHuman(),
 					((Packet12CreateMatch) o).getAI());
-			mserver.bridgeClient(c, matchID);// adding client to match
+			mserver.bridgeClient(c, matchID,((Packet12CreateMatch)o).getObject());// adding client to match
 												// connection list
 
 			Packet14HostCreateMatch packet = new Packet14HostCreateMatch();
@@ -150,7 +150,7 @@ public class NetworkListener extends Listener {
 				joinResponse.setIDValue(0);
 			} else {
 				join = mserver.bridgeClient(c, ((Packet13MatchJoinRequest) o)
-						.getMID());
+						.getMID(), ((Packet13MatchJoinRequest)o).getObject());
 				joinResponse.setAccepted(join);
 				joinResponse.setIDValue(((Packet13MatchJoinRequest) o)
 						.getMID());

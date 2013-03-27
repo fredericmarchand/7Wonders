@@ -58,6 +58,7 @@ public class StartMenu extends JFrame {
 		add(panel);
 	}
 
+	//MClient client = new cl
 	public void showGUI() {
 		// Create and set up the window.
 		// TODO Auto-generated method stub

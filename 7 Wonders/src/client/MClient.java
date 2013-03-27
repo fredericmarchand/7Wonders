@@ -55,6 +55,7 @@ public class MClient {
 		Packet12CreateMatch packet = new Packet12CreateMatch();
 		packet.setHuman(human);
 		packet.setAI(ai);
+		packet.setObject(user);
 		client.sendTCP(packet);
 	}
 
@@ -125,7 +126,7 @@ public class MClient {
 	}
 	
 	public void sendCommandMessage(CommandMessage m){
-		Packet7MatchFunction packet = new Packet7MatchFunction();
+		Packet8ClientResponse packet = new Packet8ClientResponse();
 		packet.setCID(ID);
 		packet.setMID(matchID);
 		packet.setObject(m);
@@ -157,6 +158,7 @@ public class MClient {
 		if (matchID > 0) {
 			Packet5Disconnect quit = new Packet5Disconnect();
 			quit.setMID(matchID);
+			quit.setObject(user);
 			client.sendTCP(quit);
 			matchID = 0000; // no longer in a game
 		}
@@ -180,8 +182,11 @@ public class MClient {
 
 	// send request packets to server
 
+	
+	//request to join match
 	public void sendMatchRequest(String mname) {
 		Packet13MatchJoinRequest rPacket = new Packet13MatchJoinRequest();
+		rPacket.setObject(user);
 		rPacket.setMID(Long.parseLong(mname));
 		client.sendTCP(rPacket);
 
@@ -199,13 +204,6 @@ public class MClient {
 		// send tcp
 	}
 
-	public void response(CommandMessage msg) {
-		Packet8ClientResponse resp = new Packet8ClientResponse();
-		resp.setCID(ID);
-		resp.setMID(matchID);
-		resp.setObject(msg);
-		client.sendTCP(resp);
-	}
 
 	public void startMatch() {
 		

@@ -50,7 +50,7 @@ public class User {
 	
 	public void sendCommandMessage()
 	{
-		client.sendCommandMessage();
+		client.sendCommandMessage(msg);
 	}
 	
 	
