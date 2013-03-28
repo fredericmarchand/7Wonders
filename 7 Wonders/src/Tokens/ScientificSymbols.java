@@ -64,7 +64,13 @@ public class ScientificSymbols {
 	{
 		tablets += amount;
 	}
-	
+
+	public void addScientifcSymbols(ScientificSymbols symbs)
+	{
+		compass += symbs.getCompass();
+		gears += symbs.getGears();
+		tablets += symbs.getTablets();
+	}
 	
 	/**
 	 * @param args

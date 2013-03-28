@@ -24,7 +24,7 @@ public interface Controller {
 	
 	// Special effect for guild and wonder
 	boolean needToChooseScienceSymbol();
-	void scienceChosen(ScientificSymbols s);
+	void scienceChosen(ArrayList<ScientificSymbols> symbs);
 	
 	// Pass one of each resource that can be selected
 	ArrayList<Resources> needToChooseResources();

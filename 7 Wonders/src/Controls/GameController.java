@@ -119,8 +119,9 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 	}
 
 	@Override
-	public boolean needToChooseScienceSymbol() 
+	public ArrayList<ScientificSymbols> needToChooseScienceSymbol() 
 	{
+		ArrayList<ScientificSymbols> symbs = new ArrayList<ScientificSymbols>();
 		// TODO Auto-generated method stub
 		for ( Structure s: user.getWonderBoard().getPurpleCards() )
 		{
@@ -129,7 +130,7 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 				if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
 				{
 					if ( ((ScientificSymbolBonus)se).canChoose() )
-						return true;
+						symbs.add(new ScientificSymbols());
 				}
 			}
 		}
@@ -142,25 +143,28 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 					if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
 					{
 						if ( ((ScientificSymbolBonus)se).canChoose() )
-							return true;
+							symbs.add(new ScientificSymbols());
 					}
 				}
 			}
 		}
-		return false;
+		return symbs;
 	}
 
 	@Override
-	public void scienceChosen(ScientificSymbols s) 
+	public void scienceChosen(ArrayList<ScientificSymbols> symbs) 
 	{
-		
-		for ( Structure st: user.getWonderBoard().getPurpleCards() )
+		/*for ( Structure st: user.getWonderBoard().getPurpleCards() )
 		{
 			for ( SpecialEffect se: st.getEffects() )
 			{
 				if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID && se.activateTime() == SpecialEffect.END_OF_GAME )
 					((ScientificSymbolBonus)se).chooseSymbol(user, s);		
 			}
+		}*/
+		for ( ScientificSymbols sy : symbs )
+		{
+			user.getScientificSymbols().addScientifcSymbols(sy);
 		}
 	}
 
@@ -289,9 +293,9 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 				{
 					if ( se.getID() == BuildDiscardedCard.BuildDiscardedCardID )
 					{
-						se.use();
 						if ( !se.isUsedUp() )
 						{
+							se.use();
 							return match.getDiscardedCards();
 						}
 					}
