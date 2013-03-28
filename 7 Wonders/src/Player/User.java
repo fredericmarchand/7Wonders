@@ -9,7 +9,7 @@ public class User {
 
 	protected long ID;
 	protected String username;
-	private Match1 currentMatch;
+	private Match2 currentMatch;
 	private CommandMessage msg;
 	private MClient client;
 	
@@ -62,6 +62,11 @@ public class User {
 	public void returnToLobby()
 	{
 		client.returnToLobby();
+	}
+	
+	public void startMatch(Match2 match)
+	{
+		currentMatch = match;
 	}
 	
 	

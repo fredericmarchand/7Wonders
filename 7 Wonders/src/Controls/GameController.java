@@ -289,6 +289,7 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 				{
 					if ( se.getID() == BuildDiscardedCard.BuildDiscardedCardID )
 					{
+						se.use();
 						if ( !se.isUsedUp() )
 						{
 							return match.getDiscardedCards();
@@ -304,6 +305,7 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 	public void chosenDiscarded(Structure g) 
 	{
 		user.getWonderBoard().buildStructure(g);
+		match.getDiscardedCards().remove(g);
 		for ( SpecialEffect se: g.getEffects() )
 			user.activateBuildEffect(se);
 	}
