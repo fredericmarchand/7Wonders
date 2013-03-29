@@ -278,7 +278,9 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 	@Override
 	public void chosenGuild(Structure g) 
 	{
-		
+		user.getWonderBoard().buildStructure(g);
+		for ( SpecialEffect se: g.getEffects() )
+			user.activateBuildEffect(se);
 	}
 
 	@Override //have to check if empty
