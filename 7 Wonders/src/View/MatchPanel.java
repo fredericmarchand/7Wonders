@@ -8,6 +8,7 @@ import Structures.Structure;
 import Tokens.Resources;
 import Tokens.ScientificSymbols;
 
+import Controls.Controller;
 import Controls.Match1;
 import Images.Images;
 
@@ -43,6 +44,9 @@ public class MatchPanel extends JPanel implements Runnable {
 	private ArrayList<Resources> pickedResources;
 	
 	private ArrayList<Structure> needDiscarded;
+	
+	private ArrayList<ScientificSymbols> needScience;
+	private ArrayList<ScientificSymbols> pickedSciences;
 	
 	public MatchPanel(Match1 m, Controller c) {
 		setLayout(null);
@@ -188,6 +192,7 @@ public class MatchPanel extends JPanel implements Runnable {
 		
 		// Choose discarded
 		needDiscarded = controller.needToChooseDiscarded();
+		System.out.println(needDiscarded);
 		if(!needDiscarded.isEmpty()) {
 			fcp.setCards(needDiscarded);
 			fcp.setMode(FullscreenCardsPanel.SELECT);
@@ -195,6 +200,8 @@ public class MatchPanel extends JPanel implements Runnable {
 			scrollpane.revalidate();
 			scrollpane.setVisible(true);
 		}
+		
+		needScience = controller.needToChooseScienceSymbol();
 	}
 	
 	public Resources nextResource() {
@@ -211,8 +218,18 @@ public class MatchPanel extends JPanel implements Runnable {
 		pickedResources.add(r);
 	}
 	
+	public ScientificSymbols nextScience() {
+		if(needScience.size() > 0)
+			return needScience.remove(0);
+		else {
+			controller.scienceChosen(pickedSciences);
+			pickedSciences.clear();
+			return null;
+		}
+	}
+	
 	public void scienceChosen(ScientificSymbols s) {
-		controller.scienceChosen(s);
+		pickedSciences.add(s);
 	}
 	
 	public void discardChosen(Structure s) {

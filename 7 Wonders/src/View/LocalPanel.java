@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import Controls.Controller;
 import Images.Images;
 import Player.Player;
 import WonderBoards.WonderBoardStage;

@@ -1,4 +1,4 @@
-package View;
+package Controls;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public interface Controller {
 	void discardChosen();
 	
 	// Special effect for guild and wonder
-	boolean needToChooseScienceSymbol();
+	ArrayList<ScientificSymbols> needToChooseScienceSymbol();
 	void scienceChosen(ArrayList<ScientificSymbols> symbs);
 	
 	// Pass one of each resource that can be selected

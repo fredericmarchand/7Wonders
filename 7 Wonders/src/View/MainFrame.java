@@ -2,6 +2,7 @@ package View;
 
 import javax.swing.*;
 
+import Controls.Controller;
 import Controls.Match1;
 
 import java.awt.*;

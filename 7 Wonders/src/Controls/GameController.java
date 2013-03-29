@@ -15,7 +15,6 @@ import Structures.Effects.ScientificSymbolBonus;
 import Structures.Effects.SpecialEffect;
 import Tokens.Resources;
 import Tokens.ScientificSymbols;
-import View.Controller;
 import View.MainFrame;
 import WonderBoards.WonderBoardStage;
 

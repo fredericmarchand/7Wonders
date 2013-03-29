@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Controls.Controller;
 import Images.Images;
 import Structures.Structure;
 
