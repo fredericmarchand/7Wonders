@@ -11,7 +11,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
-import Controls.Controller;
 import Images.Images;
 import Tokens.Resources;
 
@@ -38,19 +37,15 @@ public class ResourceChoicePanel extends JPanel {
 	
 	private JLabel lblResource, lblOverlay;
 	
-	@SuppressWarnings("unused")
-	private Controller controller;
-	
 	private ResourceChoicePanel thisPanel = this;
 	private MatchPanel matchPanel;
 	
-	public ResourceChoicePanel(Controller c, MatchPanel m) {
+	public ResourceChoicePanel(MatchPanel m) {
 		setLayout(null);
 		setSize(1280, 860);
 		setBackground(new Color(50, 50, 50, 200)); 
 		
 		resource = null;
-		controller = c;
 		matchPanel = m;
 		
 		lblOverlay = new JLabel("", SwingConstants.CENTER);

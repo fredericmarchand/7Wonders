@@ -13,7 +13,6 @@ import Structures.Structure;
 
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -121,7 +120,7 @@ public class CardsPanel extends JPanel {
 		for (int i = 0; i < 7; i++) {
 			if(cards.size() > i) {
 				int w = lblArr[i].getFontMetrics(lblArr[i].getFont()).stringWidth(lblArr[i].getText()) + 23;
-				lblBgArr[i].setIcon(new ImageIcon(Images.cardlabelbg.getScaledInstance(30, w, java.awt.Image.SCALE_SMOOTH)));
+				lblBgArr[i].setIcon(new ImageIcon((Images.cardlabelbg.getImage()).getScaledInstance(30, w, java.awt.Image.SCALE_SMOOTH)));
 				lblBgArr[i].setSize(30, w);
 			} else lblBgArr[i].setIcon(null);
 		}

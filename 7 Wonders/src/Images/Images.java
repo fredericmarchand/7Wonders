@@ -1,19 +1,16 @@
 package Images;
 
-import java.awt.Image;
 import java.net.URL;
-
 import javax.swing.ImageIcon;
 
 public class Images {
-	public static Image cardlabelbg;
 	public static ImageIcon cards[], arrows[], boardsSmall[][], boardsBig[][], options, 
 							checkmarkSmall, checkmarkBig, overlayFar, overlayNear,
 							res0011000, res0101000, res0110000, res1001000, 
 							res1010000, res1100000, res0000111, res1111000,
 							resOverlay2, resOverlay3, resOverlay4,
 							sciOverlay3, sciOverlay2, sciOverlay1, sciPicker, 
-							age[], xClose;
+							age[], xClose, cardlabelbg;
 	
 	public static void run() {
 		long startTime = System.currentTimeMillis();
@@ -40,7 +37,7 @@ public class Images {
 		arrows[1] = new ImageIcon(Images.class.getResource("/Images/Icons/arrowtrading.png"));
 		arrows[2] = new ImageIcon(Images.class.getResource("/Images/Icons/arrowyes.png"));
 		options = new ImageIcon(Images.class.getResource("/Images/Icons/chooser.png"));
-		cardlabelbg = new ImageIcon(Images.class.getResource("/Images/Icons/cardlblbg.png")).getImage();
+		cardlabelbg = new ImageIcon(Images.class.getResource("/Images/Icons/cardlblbg.png"));
 		
 		System.out.println("Done loading CardPanel images. Took " + (System.currentTimeMillis() - startTime) + "ms");
 		
@@ -85,4 +82,7 @@ public class Images {
 		
 		System.out.println("Done loading all images. Took " + (System.currentTimeMillis() - startTime) + "ms");
 	}
+	
+	
+	
 }
