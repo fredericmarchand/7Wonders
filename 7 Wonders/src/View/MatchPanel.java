@@ -37,16 +37,16 @@ public class MatchPanel extends JPanel implements Runnable {
 	private FullscreenCardsPanel fcp;
 	
 	private ResourceChoicePanel rcp;
+	private ScienceChoicePanel scp;
 	
 	private Controller controller;
 	
 	private ArrayList<Resources> needResources;
 	private ArrayList<Resources> pickedResources;
-	
-	private ArrayList<Structure> needDiscarded;
-	
 	private ArrayList<ScientificSymbols> needScience;
 	private ArrayList<ScientificSymbols> pickedSciences;
+	private ArrayList<Structure> needDiscarded;
+	private ArrayList<Structure> needGuild;
 	
 	public MatchPanel(Match1 m, Controller c) {
 		setLayout(null);
@@ -57,13 +57,20 @@ public class MatchPanel extends JPanel implements Runnable {
 		controller = c;
 		pickedResources = new ArrayList<Resources>();
 		needDiscarded = new ArrayList<Structure>();
+		needGuild = new ArrayList<Structure>();
+		needScience = new ArrayList<ScientificSymbols>();
+		pickedSciences = new ArrayList<ScientificSymbols>();
 		
-		// Start async part
+		// Start asynchronous part
 		run();
 		
-		rcp = new ResourceChoicePanel(controller, this);
+		rcp = new ResourceChoicePanel(this);
 		rcp.setVisible(false);
 		
+		scp = new ScienceChoicePanel(this);
+		scp.setVisible(false);
+		
+		add(scp);
 		add(rcp);
 		add(scrollpane);
 		add(cardsPanel);
@@ -128,7 +135,7 @@ public class MatchPanel extends JPanel implements Runnable {
 		cardsPanel.addMouseListener(buildMouseAdapterCards());
 		
 		// Other
-		lblAge = new JLabel(Images.age[0], SwingConstants.CENTER);
+		lblAge = new JLabel(Images.get("age0"), SwingConstants.CENTER);
 		lblAge.setBounds(512, 161, 256, 128);
 		lblAge.setForeground(Color.BLACK);
 		lblAge.setFont(new Font("Tahoma", Font.PLAIN, 28));
@@ -138,13 +145,12 @@ public class MatchPanel extends JPanel implements Runnable {
 		lblTurn.setForeground(Color.BLACK);
 		lblTurn.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		fcp = new FullscreenCardsPanel(controller, this);
-		
+		fcp = new FullscreenCardsPanel(this);
 		scrollpane = new JScrollPane(fcp, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollpane.setSize(1280, 838);
 		scrollpane.getViewport().setOpaque(false);
 		scrollpane.setBackground(new Color(50, 50, 50, 200));
-		closeButton = new JLabel(Images.xClose);
+		closeButton = new JLabel(Images.get("X"));
 		closeButton.setSize(56, 56);
 		closeButton.setLocation(1224, 0);
 		closeButton.addMouseListener(new MouseAdapter() {
@@ -171,7 +177,7 @@ public class MatchPanel extends JPanel implements Runnable {
 			lblAge.setIcon(null);
 			lblAge.setText("GAME OVER!");
 		} else {
-			lblAge.setIcon(Images.age[match.getAge()-1]);
+			lblAge.setIcon(Images.get("age"+(match.getAge()-1)));
 			lblAge.setText(null);
 		}
 		lblTurn.setText("Round "+ match.getTurn() +" of 6");
@@ -190,18 +196,30 @@ public class MatchPanel extends JPanel implements Runnable {
 		rcp.setResource(next);
 		if(next != null) rcp.setVisible(true);
 		
+		
 		// Choose discarded
 		needDiscarded = controller.needToChooseDiscarded();
-		System.out.println(needDiscarded);
 		if(!needDiscarded.isEmpty()) {
 			fcp.setCards(needDiscarded);
-			fcp.setMode(FullscreenCardsPanel.SELECT);
+			fcp.setMode(FullscreenCardsPanel.DISCARDED);
 			closeButton.setVisible(false);
 			scrollpane.revalidate();
 			scrollpane.setVisible(true);
 		}
 		
+		// Choose guild to copy
+		needGuild = controller.needToChooseCopyGuild();
+		if(!needGuild.isEmpty()) {
+			fcp.setCards(needGuild);
+			fcp.setMode(FullscreenCardsPanel.GUILD);
+			closeButton.setVisible(false);
+			scrollpane.revalidate();
+			scrollpane.setVisible(true);
+		}
+		
+		// Choose Science
 		needScience = controller.needToChooseScienceSymbol();
+		if(nextScience() != null) scp.setVisible(true);
 	}
 	
 	public Resources nextResource() {
@@ -238,6 +256,12 @@ public class MatchPanel extends JPanel implements Runnable {
 		closeButton.setVisible(true);
 	}
 	
+	public void guildChosen(Structure s) {
+		controller.chosenGuild(s);
+		scrollpane.setVisible(false);
+		closeButton.setVisible(true);
+	}
+	
 	public MouseAdapter buildMouseAdapterNear() {
 		return new MouseAdapter() {
 			@Override
@@ -248,7 +272,6 @@ public class MatchPanel extends JPanel implements Runnable {
 				if(panel != null) {
 					fcp.setCards(panel.player.getWonderBoard().getAllCards());
 					fcp.setMode(FullscreenCardsPanel.DISPLAY);
-					//fcp.setCards(panel.player.getCards());
 					scrollpane.revalidate();
 					scrollpane.setVisible(true);
 				}

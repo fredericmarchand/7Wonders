@@ -6,7 +6,6 @@ import Player.AIPlayer;
 import Player.Player;
 import Structures.Effects.*;
 import Structures.Structure;
-import WonderBoards.WonderBoard;
 import WonderBoards.WonderBoardStage;
 
 import java.util.Scanner;

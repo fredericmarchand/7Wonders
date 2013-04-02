@@ -2,6 +2,7 @@ package Structures.Effects;
 
 import Player.Player;
 
+@SuppressWarnings("unused")
 public class PlayLastCard extends SpecialEffect{
 	
 	public static final int PlayLastCardID = 0x0D;

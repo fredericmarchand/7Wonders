@@ -15,7 +15,7 @@ public class Match2 {
 	private int age, turn, numPlayers;
 	private ArrayList<Structure> age1Deck, age2Deck, age3Deck, discarded;
 	private Scanner in;
-		
+
 	//server side constructor
 	public Match2(ArrayList<User> users)
 	{
@@ -109,6 +109,7 @@ public class Match2 {
 		{
 			if ( se.getID() == ResourceChoice.ResourceChoiceID )
 			{
+				@SuppressWarnings("unused")
 				ResourceChoice rc = ((ResourceChoice)se);
 				if ( msg.getResourceChoices().get(index) == 1 )
 					r.addResources(new Resources(1, 0, 0, 0, 0, 0, 0, 0));

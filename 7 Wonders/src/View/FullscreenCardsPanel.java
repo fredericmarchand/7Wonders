@@ -12,7 +12,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Controls.Controller;
 import Images.Images;
 import Structures.Structure;
 
@@ -24,23 +23,21 @@ public class FullscreenCardsPanel extends JPanel {
 	private Structure selected;
 	
 	public static final int DISPLAY = 0;
-	public static final int SELECT = 1;
+	public static final int DISCARDED = 1;
+	public static final int GUILD = 2;
+	
 	private int mode;
 	
-	private Controller controller;
-	private FullscreenCardsPanel thisPanel;
 	private MatchPanel matchPanel;
 	
 	private int totalWidth;
 	
-	public FullscreenCardsPanel (Controller c, MatchPanel m) {
+	public FullscreenCardsPanel (MatchPanel m) {
 		setLayout(null);
 		setOpaque(false);
 		
-		controller = c;
 		selected = null;
 		mode = DISPLAY;
-		thisPanel = this;
 		matchPanel = m;
 		
 		cardArr = new ArrayList<JLabel>();
@@ -56,10 +53,13 @@ public class FullscreenCardsPanel extends JPanel {
 		return new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if(mode == SELECT) {
+				if(mode == DISCARDED) {
 					selected = cards.get(((JLabel)e.getComponent()).getX()/37);
 					matchPanel.discardChosen(selected);
-					//thisPanel.setVisible(false);
+				}
+				else if (mode == GUILD) {
+					selected = cards.get(((JLabel)e.getComponent()).getX()/37);
+					matchPanel.guildChosen(selected);
 				}
 			}
 		};
@@ -72,7 +72,7 @@ public class FullscreenCardsPanel extends JPanel {
 		this.removeAll();
 		if(cards == null) cards = new ArrayList<Structure>();
 		for(int i = 0; i < cards.size(); i++) {
-			cardArr.add(new JLabel(Images.cards[cards.get(i).getID()]));
+			cardArr.add(new JLabel(Images.get("card"+cards.get(i).getID())));
 			cardArr.get(i).setSize(182, 280);
 			cardArr.get(i).addMouseListener(buildMouseAdapter());
 			
@@ -85,7 +85,7 @@ public class FullscreenCardsPanel extends JPanel {
 			labelBg.add(new JLabel());
 			labelBg.get(i).setSize(30, 188);
 			int w = labels.get(i).getFontMetrics(labels.get(i).getFont()).stringWidth(labels.get(i).getText()) + 23;
-			labelBg.get(i).setIcon(new ImageIcon(Images.cardlabelbg.getScaledInstance(30, w, java.awt.Image.SCALE_SMOOTH)));
+			labelBg.get(i).setIcon(new ImageIcon((Images.get("cardLabelbg").getImage()).getScaledInstance(30, w, java.awt.Image.SCALE_SMOOTH)));
 			labelBg.get(i).setSize(30, w);
 			
 			// Calculate offset

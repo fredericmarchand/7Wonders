@@ -8,6 +8,7 @@ public class TradingPerks extends SpecialEffect {
 
 	public static final int TradingPerksID = 0x02;
 	
+	@SuppressWarnings("unused")
 	private static final int None = 0;
 	private static final int LeftNeighbor = 1;
 	private static final int RightNeighbor = 2;
