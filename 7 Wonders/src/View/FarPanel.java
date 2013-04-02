@@ -31,22 +31,22 @@ public class FarPanel extends JPanel {
 		setSize(320, 150);
 		setBackground(Color.WHITE);
 
-		wonderStage1 = new JLabel(Images.checkmarkSmall);
+		wonderStage1 = new JLabel(Images.get("checkmarkSmall"));
 		wonderStage1.setSize(18, 18);
 		wonderStage1.setVisible(false);
 		add(wonderStage1);
 		
-		wonderStage2 = new JLabel(Images.checkmarkSmall);
+		wonderStage2 = new JLabel(Images.get("checkmarkSmall"));
 		wonderStage2.setSize(18, 18);
 		wonderStage2.setVisible(false);
 		add(wonderStage2);
 		
-		wonderStage3 = new JLabel(Images.checkmarkSmall);
+		wonderStage3 = new JLabel(Images.get("checkmarkSmall"));
 		wonderStage3.setSize(18, 18);
 		wonderStage3.setVisible(false);
 		add(wonderStage3);
 		
-		wonderStage4 = new JLabel(Images.checkmarkSmall);
+		wonderStage4 = new JLabel(Images.get("checkmarkSmall"));
 		wonderStage4.setSize(18, 18);
 		wonderStage4.setVisible(false);
 		add(wonderStage4);
@@ -116,11 +116,11 @@ public class FarPanel extends JPanel {
 		lblCoin.setBounds(42, 63, 44, 47);
 		add(lblCoin);
 		
-		JLabel overlayLabel = new JLabel(Images.overlayFar);
+		JLabel overlayLabel = new JLabel(Images.get("overlayFar"));
 		overlayLabel.setBounds(0, 0, 320, 150);
 		add( overlayLabel );
 		
-		JLabel boardLabel = new JLabel(Images.boardsSmall[player.getWonderBoard().getBoardID()-1][player.getWonderBoard().getSide()]);
+		JLabel boardLabel = new JLabel(Images.get("boardSmall"+(player.getWonderBoard().getBoardID()-1)+(player.getWonderBoard().getSide())));
 		boardLabel.setBounds(0, 0, 320, 150);
 		add( boardLabel );
 		

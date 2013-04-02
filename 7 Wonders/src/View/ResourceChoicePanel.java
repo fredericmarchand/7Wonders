@@ -49,13 +49,13 @@ public class ResourceChoicePanel extends JPanel {
 		matchPanel = m;
 		
 		lblOverlay = new JLabel("", SwingConstants.CENTER);
-		lblOverlay.setIcon(Images.resOverlay4);
+		lblOverlay.setIcon(Images.get("resOverlay4"));
 		lblOverlay.setBounds(598, 403, 50, 50);
 		add(lblOverlay);
 		
 		lblResource = new JLabel("", SwingConstants.CENTER);
 		lblResource.setBounds(568, 400, 143, 60);
-		lblResource.setIcon(Images.res1111000);
+		lblResource.setIcon(Images.get("res1111000"));
 		add(lblResource);
 		
 		JLabel lblDesc = new JLabel("Choose a resource:", SwingConstants.CENTER);
@@ -207,36 +207,36 @@ public class ResourceChoicePanel extends JPanel {
 		lblOverlay.setVisible(false);
 		if(r != null) {
 			if(new Resources(0, 0, 1, 1, 0, 0, 0, 0).compare(r)) {
-				lblResource.setIcon(Images.res0011000);
-				lblOverlay.setIcon(Images.resOverlay2);
+				lblResource.setIcon(Images.get("res0011000"));
+				lblOverlay.setIcon(Images.get("resOverlay2"));
 				whichOverlay = 2;
 			} else if(new Resources(0, 1, 0, 1, 0, 0, 0, 0).compare(r)) {
-				lblResource.setIcon(Images.res0101000);
-				lblOverlay.setIcon(Images.resOverlay2);
+				lblResource.setIcon(Images.get("res0101000"));
+				lblOverlay.setIcon(Images.get("resOverlay2"));
 				whichOverlay = 2;
 			} else if(new Resources(0, 1, 1, 0, 0, 0, 0, 0).compare(r)) {
-				lblResource.setIcon(Images.res0110000);
-				lblOverlay.setIcon(Images.resOverlay2);
+				lblResource.setIcon(Images.get("res0110000"));
+				lblOverlay.setIcon(Images.get("resOverlay2"));
 				whichOverlay = 2;
 			} else if(new Resources(1, 0, 0, 1, 0, 0, 0, 0).compare(r)) {
-				lblResource.setIcon(Images.res1001000);
-				lblOverlay.setIcon(Images.resOverlay2);
+				lblResource.setIcon(Images.get("res1001000"));
+				lblOverlay.setIcon(Images.get("resOverlay2"));
 				whichOverlay = 2;
 			} else if(new Resources(1, 0, 1, 0, 0, 0, 0, 0).compare(r)) {
-				lblResource.setIcon(Images.res1010000);
-				lblOverlay.setIcon(Images.resOverlay2);
+				lblResource.setIcon(Images.get("res1010000"));
+				lblOverlay.setIcon(Images.get("resOverlay2"));
 				whichOverlay = 2;
 			} else if(new Resources(1, 1, 0, 0, 0, 0, 0, 0).compare(r)) {
-				lblResource.setIcon(Images.res1100000);
-				lblOverlay.setIcon(Images.resOverlay2);
+				lblResource.setIcon(Images.get("res1100000"));
+				lblOverlay.setIcon(Images.get("resOverlay2"));
 				whichOverlay = 2;
 			} else if(new Resources(0, 0, 0, 0, 1, 1, 1, 0).compare(r)) {
-				lblResource.setIcon(Images.res0000111);
-				lblOverlay.setIcon(Images.resOverlay3);
+				lblResource.setIcon(Images.get("res0000111"));
+				lblOverlay.setIcon(Images.get("resOverlay3"));
 				whichOverlay = 3;
 			} else if(new Resources(1, 1, 1, 1, 0, 0, 0, 0).compare(r)) {
-				lblResource.setIcon(Images.res1111000);
-				lblOverlay.setIcon(Images.resOverlay4);
+				lblResource.setIcon(Images.get("res1111000"));
+				lblOverlay.setIcon(Images.get("resOverlay4"));
 				whichOverlay = 4;
 			}
 		}

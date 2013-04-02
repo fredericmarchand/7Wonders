@@ -72,7 +72,7 @@ public class FullscreenCardsPanel extends JPanel {
 		this.removeAll();
 		if(cards == null) cards = new ArrayList<Structure>();
 		for(int i = 0; i < cards.size(); i++) {
-			cardArr.add(new JLabel(Images.cards[cards.get(i).getID()]));
+			cardArr.add(new JLabel(Images.get("card"+cards.get(i).getID())));
 			cardArr.get(i).setSize(182, 280);
 			cardArr.get(i).addMouseListener(buildMouseAdapter());
 			
@@ -85,7 +85,7 @@ public class FullscreenCardsPanel extends JPanel {
 			labelBg.add(new JLabel());
 			labelBg.get(i).setSize(30, 188);
 			int w = labels.get(i).getFontMetrics(labels.get(i).getFont()).stringWidth(labels.get(i).getText()) + 23;
-			labelBg.get(i).setIcon(new ImageIcon((Images.cardlabelbg.getImage()).getScaledInstance(30, w, java.awt.Image.SCALE_SMOOTH)));
+			labelBg.get(i).setIcon(new ImageIcon((Images.get("cardLabelbg").getImage()).getScaledInstance(30, w, java.awt.Image.SCALE_SMOOTH)));
 			labelBg.get(i).setSize(30, w);
 			
 			// Calculate offset

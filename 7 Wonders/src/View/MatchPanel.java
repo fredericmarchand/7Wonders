@@ -135,7 +135,7 @@ public class MatchPanel extends JPanel implements Runnable {
 		cardsPanel.addMouseListener(buildMouseAdapterCards());
 		
 		// Other
-		lblAge = new JLabel(Images.age[0], SwingConstants.CENTER);
+		lblAge = new JLabel(Images.get("age0"), SwingConstants.CENTER);
 		lblAge.setBounds(512, 161, 256, 128);
 		lblAge.setForeground(Color.BLACK);
 		lblAge.setFont(new Font("Tahoma", Font.PLAIN, 28));
@@ -150,7 +150,7 @@ public class MatchPanel extends JPanel implements Runnable {
 		scrollpane.setSize(1280, 838);
 		scrollpane.getViewport().setOpaque(false);
 		scrollpane.setBackground(new Color(50, 50, 50, 200));
-		closeButton = new JLabel(Images.xClose);
+		closeButton = new JLabel(Images.get("X"));
 		closeButton.setSize(56, 56);
 		closeButton.setLocation(1224, 0);
 		closeButton.addMouseListener(new MouseAdapter() {
@@ -177,7 +177,7 @@ public class MatchPanel extends JPanel implements Runnable {
 			lblAge.setIcon(null);
 			lblAge.setText("GAME OVER!");
 		} else {
-			lblAge.setIcon(Images.age[match.getAge()-1]);
+			lblAge.setIcon(Images.get("age"+(match.getAge()-1)));
 			lblAge.setText(null);
 		}
 		lblTurn.setText("Round "+ match.getTurn() +" of 6");

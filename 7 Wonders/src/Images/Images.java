@@ -1,88 +1,97 @@
 package Images;
 
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.swing.ImageIcon;
 
 public class Images {
-	public static ImageIcon cards[], arrows[], boardsSmall[][], boardsBig[][], options, 
-							checkmarkSmall, checkmarkBig, overlayFar, overlayNear,
-							res0011000, res0101000, res0110000, res1001000, 
-							res1010000, res1100000, res0000111, res1111000,
-							resOverlay2, resOverlay3, resOverlay4,
-							sciOverlay3, sciOverlay2, sciOverlay1, sciPicker, 
-							age[], xClose, cardlabelbg;
 	
-	public static void run() {
-		long startTime = System.currentTimeMillis();
-		
-		
-		// MatchPanel
-		age = new ImageIcon[3];
-		age[0] = new ImageIcon(Images.class.getResource("/Images/Icons/age1.png"));
-		age[1] = new ImageIcon(Images.class.getResource("/Images/Icons/age2.png"));
-		age[2] = new ImageIcon(Images.class.getResource("/Images/Icons/age3.png"));
-		xClose = new ImageIcon(Images.class.getResource("/Images/Icons/X.png"));
-		
-		System.out.println("Done loading MatchPanel images. Took " + (System.currentTimeMillis() - startTime) + "ms");
-		
-		// Cards
-		cards = new ImageIcon[76];
-		for(int i = 1; i <= 75; i++) 
-			cards[i] = new ImageIcon(new ImageIcon(Images.class.getResource("/Images/Cards/"+i+".jpg")).getImage().getScaledInstance(182, 280, java.awt.Image.SCALE_SMOOTH));
-		
-		System.out.println("Done loading Card images. Took " + (System.currentTimeMillis() - startTime) + "ms");
-		
-		arrows = new ImageIcon[3];
-		arrows[0] = new ImageIcon(Images.class.getResource("/Images/Icons/arrowno.png"));
-		arrows[1] = new ImageIcon(Images.class.getResource("/Images/Icons/arrowtrading.png"));
-		arrows[2] = new ImageIcon(Images.class.getResource("/Images/Icons/arrowyes.png"));
-		options = new ImageIcon(Images.class.getResource("/Images/Icons/chooser.png"));
-		cardlabelbg = new ImageIcon(Images.class.getResource("/Images/Icons/cardlblbg.png"));
-		
-		System.out.println("Done loading CardPanel images. Took " + (System.currentTimeMillis() - startTime) + "ms");
-		
-		// Boards
-		boardsSmall = new ImageIcon[7][2];
-		boardsBig = new ImageIcon[7][2];
-		for(int i = 1; i <= 7; i++) {
-			for(int j = 1; j <= 2; j++) {
-				URL temp = Images.class.getResource("/Images/Boards/board"+i+j+".png");
-				boardsSmall[i-1][j-1] = new ImageIcon(new ImageIcon(temp).getImage().getScaledInstance(320, 150, java.awt.Image.SCALE_SMOOTH));
-				boardsBig[i-1][j-1] = new ImageIcon(temp);
-			}
-		}
-		
-		System.out.println("Done loading WonderBoard images. Took " + (System.currentTimeMillis() - startTime) + "ms");
-		
-		checkmarkSmall = new ImageIcon(new ImageIcon(Images.class.getResource("/Images/Icons/yes.png")).getImage().getScaledInstance(18, 18, java.awt.Image.SCALE_SMOOTH));
-		checkmarkBig = new ImageIcon(new ImageIcon(Images.class.getResource("/Images/Icons/yes.png")).getImage().getScaledInstance(34, 34, java.awt.Image.SCALE_SMOOTH));
-		overlayFar = new ImageIcon(Images.class.getResource("/Images/Icons/overlayforeign.png"));
-		overlayNear = new ImageIcon(Images.class.getResource("/Images/Icons/overlay.png"));
-		
-		
-		// ResourceChoicePanel
-		res0011000 = new ImageIcon(Images.class.getResource("/Images/Icons/resource-0011000.png"));
-		res0101000 = new ImageIcon(Images.class.getResource("/Images/Icons/resource-0101000.png"));
-		res0110000 = new ImageIcon(Images.class.getResource("/Images/Icons/resource-0110000.png"));
-		res1001000 = new ImageIcon(Images.class.getResource("/Images/Icons/resource-1001000.png"));
-		res1010000 = new ImageIcon(Images.class.getResource("/Images/Icons/resource-1010000.png"));
-		res1100000 = new ImageIcon(Images.class.getResource("/Images/Icons/resource-1100000.png"));
-		res0000111 = new ImageIcon(Images.class.getResource("/Images/Icons/resource-0000111.png"));
-		res1111000 = new ImageIcon(Images.class.getResource("/Images/Icons/resource-1111000.png"));
-		resOverlay2 = new ImageIcon(Images.class.getResource("/Images/Icons/circleselect2.png"));
-		resOverlay3 = new ImageIcon(Images.class.getResource("/Images/Icons/circleselect3.png"));
-		resOverlay4 = new ImageIcon(Images.class.getResource("/Images/Icons/circleselect4.png"));
-		
-		
-		// ScienceChoicePanel
-		sciPicker = new ImageIcon(Images.class.getResource("/Images/Icons/sciencepicker.png"));
-		sciOverlay1 = new ImageIcon(Images.class.getResource("/Images/Icons/scienceoverlay1.png"));
-		sciOverlay2 = new ImageIcon(Images.class.getResource("/Images/Icons/scienceoverlay2.png"));
-		sciOverlay3 = new ImageIcon(Images.class.getResource("/Images/Icons/scienceoverlay3.png"));
-		
-		System.out.println("Done loading all images. Took " + (System.currentTimeMillis() - startTime) + "ms");
+	private static HashMap<String, ImageIcon> map;
+	private static ArrayList<String> stringList;
+	
+	private static int total;
+	private static int current;
+	
+	private static ImageLoadingGUI callback;
+	
+	public static ImageIcon get(String key) {
+		return map.get(key);
 	}
 	
+	// Sets up the array that will keep the data of all the images that require loading.
+	// Once the list is built, they will be batch-loaded into a HashMap.
+	private static void buildImageList() {
+		for(int i = 1; i < 4; i++) add("age"+i, "/Images/Icons/age"+i+".png");
+		add("X", "/Images/Icons/X.png");
+		for(int i = 1; i <= 75; i++) add("card"+i, "/Images/Cards/"+i+".jpg", 182, 280);
+		add("arrow0", "/Images/Icons/arrowno.png");
+		add("arrow1", "/Images/Icons/arrowtrading.png");
+		add("arrow2", "/Images/Icons/arrowyes.png");
+		add("options", "/Images/Icons/chooser.png");
+		add("cardLabelbg", "/Images/Icons/cardlblbg.png");
+		for(int i = 1; i <= 7; i++)	for(int j = 1; j <= 2; j++)	add("boardSmall"+(i-1)+(j-1), "/Images/Boards/board"+i+j+".png", 320, 150);
+		for(int i = 1; i <= 7; i++)	for(int j = 1; j <= 2; j++)	add("boardBig"+(i-1)+(j-1), "/Images/Boards/board"+i+j+".png");
+		add("checkmarkSmall", "/Images/Icons/yes.png,18,18");
+		add("checkmarkBig", "/Images/Icons/yes.png,34,34");
+		add("overlayFar", "/Images/Icons/overlayforeign.png");
+		add("overlayNear", "/Images/Icons/overlay.png");
+		add("res0011000", "/Images/Icons/resource-0011000.png");
+		add("res0101000", "/Images/Icons/resource-0101000.png");
+		add("res0110000", "/Images/Icons/resource-0110000.png");
+		add("res1001000", "/Images/Icons/resource-1001000.png");
+		add("res1010000", "/Images/Icons/resource-1010000.png");
+		add("res1100000", "/Images/Icons/resource-1100000.png");
+		add("res0000111", "/Images/Icons/resource-0000111.png");
+		add("res1111000", "/Images/Icons/resource-1111000.png");
+		add("resOverlay2", "/Images/Icons/circleselect2.png");
+		add("resOverlay3", "/Images/Icons/circleselect3.png");
+		add("resOverlay4", "/Images/Icons/circleselect4.png");
+		add("sciPicker", "/Images/Icons/sciencepicker.png");
+		add("sciOverlay1", "/Images/Icons/scienceoverlay1.png");
+		add("sciOverlay2", "/Images/Icons/scienceoverlay2.png");
+		add("sciOverlay3", "/Images/Icons/scienceoverlay3.png");
+	}
 	
+	private static void add(String name, String path) {
+		stringList.add(name+","+path+",0,0");
+	}
 	
+	private static void add(String name, String path, int width, int height) {
+		stringList.add(name+","+path+","+width+","+height);
+	}
+	
+	// Loops through the image list and loads them based on the parameters given
+	// The syntax for the string for an image is the following:
+	//   "<name>,<path>,<width>,<height>"
+	// If the width and height are set to 0, it is not resized and is kept as default
+	private static void loadImages() {
+		for (String s : stringList) {
+			String[] args = s.split(",");
+			if(args[2].equals("0") || args[3].equals("0")) map.put(args[0], new ImageIcon(Images.class.getResource(args[1])));
+			else map.put(args[0], new ImageIcon(new ImageIcon(Images.class.getResource(args[1])).getImage().getScaledInstance(Integer.parseInt(args[2]), Integer.parseInt(args[3]), java.awt.Image.SCALE_SMOOTH)));
+			doneLoadingOne();
+		}
+	}
+	
+	private static void doneLoadingOne() {
+		current++;
+		if(callback != null) callback.update(current, total);
+		//System.out.println("Loaded image " + current + " of " + total + ".");
+	}
+	
+	public static void run() {
+		map = new HashMap<String, ImageIcon>();
+		stringList = new ArrayList<String>();
+		
+		buildImageList();
+		total = stringList.size();
+		current = 0;
+		
+		System.out.println("Starting to load " + total + " images.");	
+		long startTime = System.currentTimeMillis();
+		callback.imagesBeginLoad(total);
+		loadImages();
+		System.out.println("Done loading all images. Took " + (System.currentTimeMillis() - startTime) + "ms");
+	}
 }
