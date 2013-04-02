@@ -33,9 +33,8 @@ public class StartMenu extends JFrame {
 
 		create.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
 				mclient.getLink().launchCreateMenu();
-
+				setVisible(false);
 			}
 		});
 
@@ -77,10 +76,6 @@ public class StartMenu extends JFrame {
 			System.exit(0);
 		}
 		mclient = new MClient();
-
-		mclient.createUser(uname, mclient.getID());
-		//mclient.setUser_username(uname);
-		//give weird port # will fail
 		try{
 			mclient.serverConnect(ip, Integer.parseInt(port));
 		}catch(Exception e){
@@ -88,6 +83,11 @@ public class StartMenu extends JFrame {
 			JOptionPane.showMessageDialog(null, "Incorrect Input");
 			showGUI();
 		}
+
+		mclient.createUser(uname, mclient.getID());
+		//mclient.setUser_username(uname);
+		//give weird port # will fail
+
 		pack();
 		setVisible(true);
 	}
