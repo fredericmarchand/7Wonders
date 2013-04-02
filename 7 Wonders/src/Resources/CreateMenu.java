@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 
 import client.MClient;
 
-public class CreateMenu extends JFrame {
+public class CreateMenu extends JFrame implements Runnable{
 	JButton create, cancel;
 	JLabel human, ai;
 	JTextField humanNum, aiNum;
@@ -45,9 +45,9 @@ public class CreateMenu extends JFrame {
 					if (aiNum.getText().equals(""))
 						aiNum.setText("0");
 					if (((Integer.parseInt(humanNum.getText()) <= 7 && Integer
-							.parseInt(humanNum.getText()) >= 1))
+							.parseInt(humanNum.getText()) >= 0))
 							&& (Integer.parseInt(humanNum.getText()) + Integer
-									.parseInt(aiNum.getText())) <= 7) {
+									.parseInt(aiNum.getText())) <= 0) {
 						mclient.sendCreateMatchRequest(
 								Integer.parseInt(humanNum.getText()),
 								Integer.parseInt(aiNum.getText()));
@@ -57,11 +57,12 @@ public class CreateMenu extends JFrame {
 						JOptionPane.showMessageDialog(null,
 								"Must be 7 or less players or\n1 or more players!");
 					}
-				catch(Exception error){
+				catch(Exception error){ 
+					System.out.println(error);
 					humanNum.setText("");
 					aiNum.setText("");
 					JOptionPane.showMessageDialog(null, "Incorrect input" +
-							"\nPlease enter 1-7 in the text boxes" +
+							"\nPlease enter 0-7 in the text boxes" +
 							"\nfor a total of at most 7 players");
 				}
 			}
@@ -79,6 +80,9 @@ public class CreateMenu extends JFrame {
 		setSize(200, 175);
 	}
 
+	public void run(){
+		
+	}
 	public void showGUI() {
 		setVisible(true);
 	}
