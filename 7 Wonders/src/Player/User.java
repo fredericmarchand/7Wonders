@@ -49,6 +49,11 @@ public class User {
 		client = cl;
 	}
 	
+	public void setCommand(CommandMessage msg)
+	{
+		this.msg = msg;
+	}
+	
 	public void sendCommandMessage()
 	{
 		client.sendCommandMessage(msg);
@@ -56,7 +61,14 @@ public class User {
 	
 	public void updateMatch(Match2 match)
 	{
-		
+		currentMatch.setAge(match.getAge());
+		currentMatch.setTurn(match.getTurn());
+		currentMatch.getDiscardedCards().clear();
+		currentMatch.getDiscardedCards().addAll(match.getDiscardedCards());
+		for ( Player p: currentMatch.getPlayers() )
+		{
+			//fuck this shit
+		}
 	}
 	
 	public void returnToLobby()

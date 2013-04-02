@@ -11,7 +11,7 @@ public class Quarry extends Structure {
 	public Quarry()
 	{
 		super(new Resources(0, 0, 0, 0, 0, 0, 0, 1), QuarryID, "Quarry", BROWN_CARD, 2);
-		effects.add(new ResourcesBonus(0, 2, 0, 0, 0, 0, 0));
+		effects.add(new ResourcesBonus(0, 0, 0, 2, 0, 0, 0));
 	}
 	
 	/**

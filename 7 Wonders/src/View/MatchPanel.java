@@ -10,6 +10,7 @@ import Tokens.ScientificSymbols;
 
 import Controls.Controller;
 import Controls.Match1;
+import Controls.Match2;
 import Images.Images;
 
 import java.awt.Color;
@@ -24,7 +25,7 @@ import java.awt.image.BufferedImage;
 public class MatchPanel extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
 	
-	private Match1 match;
+	private Match2 match;
 	
 	private FarPanel f1, f2, f3, f4;
 	private NearPanel n1, n2;
@@ -48,7 +49,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	private ArrayList<ScientificSymbols> needScience;
 	private ArrayList<ScientificSymbols> pickedSciences;
 	
-	public MatchPanel(Match1 m, Controller c) {
+	public MatchPanel(Match2 m, Controller c) {
 		setLayout(null);
 		setSize(1280, 860);
 		setBackground(Color.WHITE);
