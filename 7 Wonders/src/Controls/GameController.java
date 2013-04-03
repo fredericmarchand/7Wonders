@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import Images.Images;
 import Player.Player;
 import Structures.Structure;
+import Structures.Cards.ScientistsGuild;
 import Structures.Effects.BuildDiscardedCard;
 import Structures.Effects.CopyGuild;
 import Structures.Effects.PlayLastCard;
@@ -17,6 +18,7 @@ import Tokens.Resources;
 import Tokens.ScientificSymbols;
 import View.MainFrame;
 import WonderBoards.WonderBoardStage;
+import WonderBoards.Boards.TheHangingGardensOfBabylon;
 
 public class GameController extends java.lang.Thread implements Controller, Runnable {
 
@@ -368,9 +370,48 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 	
 	public static void main(String args[])
 	{
-		String name = JOptionPane.showInputDialog("What is your username? ");
-		@SuppressWarnings("unused")
-		GameController gc = new GameController(new Player(name, 0), new Match1());
+		//String name = JOptionPane.showInputDialog("What is your username? ");
+		//@SuppressWarnings("unused")
+		//GameController gc = new GameController(new Player(name, 0), new Match1());
+		ArrayList<ScientificSymbols> symbs = new ArrayList<ScientificSymbols>();
+		// TODO Auto-generated method stub
+		Player p =new Player();
+		p.assignWonderBoard(new TheHangingGardensOfBabylon(0));
+		p.getWonderBoard().buildStage(new Structure(), new Resources(5, 5, 5, 5, 5, 5, 5, 5));
+		p.getWonderBoard().buildStage(new Structure(), new Resources(5, 5, 5, 5, 5, 5, 5, 5));
+		System.out.println(p.getWonderBoard().getStages().get(1).isBuilt());
+		p.getWonderBoard().getPurpleCards().add(new ScientistsGuild());
+		
+		for ( Structure s: p.getWonderBoard().getPurpleCards() )
+		{
+			for ( SpecialEffect se: s.getEffects() )
+			{
+				if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
+				{
+					if ( ((ScientificSymbolBonus)se).canChoose() )
+						symbs.add(new ScientificSymbols());
+				}
+			}
+		}
+		for ( WonderBoardStage stg: p.getWonderBoard().getStages() )
+		{
+			if ( stg.isBuilt() )
+			{
+				for ( SpecialEffect se: stg.getEffects() )
+				{
+					if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
+					{
+						if ( ((ScientificSymbolBonus)se).canChoose() )
+							symbs.add(new ScientificSymbols());
+					}
+				}
+			}
+		}
+		for ( ScientificSymbols s: symbs )
+		{
+			System.out.println(s.getCompass() + " " + s.getGears() + " " + s.getTablets());
+		}
+		
 	}
 	
 }
