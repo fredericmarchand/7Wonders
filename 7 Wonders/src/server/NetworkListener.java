@@ -151,7 +151,7 @@ public class NetworkListener extends Listener {
 				joinResponse.setIDValue(0);
 			} else {
 				join = mserver.bridgeClient(c, ((Packet13MatchJoinRequest) o)
-						.getMID(), ((Packet13MatchJoinRequest)o).getCID());
+						.getMID(), ((Packet13MatchJoinRequest)o).getUser());
 				joinResponse.setAccepted(join);
 				joinResponse.setIDValue(((Packet13MatchJoinRequest) o)
 						.getMID());

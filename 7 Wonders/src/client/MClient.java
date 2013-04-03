@@ -3,13 +3,10 @@ package client;
 import java.io.IOException;
 import java.util.*;
 
-import javax.swing.JOptionPane;
-
 import Controls.*;
 
 import Player.Player;
 import Player.User;
-import Resources.Chat;
 
 import Resources.linkNetworkView;
 import Resources.Packet.*;
@@ -257,15 +254,20 @@ public class MClient {
 		kryo.register(Packet15MatchDisconnect.class);
 		kryo.register(Packet16UserObject.class);
 		kryo.register(java.util.ArrayList.class);
-		kryo.register(Match1.class);		
+		kryo.register(Match1.class);	
+		kryo.register(Match2.class);
 		kryo.register(User.class);
-		//kryo.register(WonderBoards.WonderBoardStage.class);
+		
+		kryo.register(Structures.Cards.Loom.class);
+		kryo.register(Structures.Cards.LumberYard.class);
+		kryo.register(Structures.Cards.ClayPool.class);
+		
 	}
 
 	public static void main(String[] args) {
 
 		Log.set(Log.LEVEL_TRACE);
-
+		
 	}
 
 }

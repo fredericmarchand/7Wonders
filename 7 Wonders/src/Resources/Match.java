@@ -48,7 +48,7 @@ public class Match {
 		inProgress = false;
 		MAX_PLAYER_COUNT = h+ai;		
     }
-    public  int getMaxPlayerCount() {return MAX_PLAYER_COUNT;}
+    public int getMaxPlayerCount() {return MAX_PLAYER_COUNT;}
     public boolean get_inProgress(){return inProgress;}
 	public ArrayList<Connection> getConnections(){return connected;}	
 	public void addConnection(Connection c, Object o){
@@ -139,15 +139,15 @@ public class Match {
 	public void startMatch(){
 		controller = new Match2(userList);
 		inProgress = true;
-		sendStartMatchRequest(controller);
+		sendStartMatchRequest();
 	}
 	
 	public void endMatch(){
 		sendEndMatchRequest();
 	}
-	public void sendStartMatchRequest(Match2 ctrl){
+	public void sendStartMatchRequest(){
 		Packet9StartMatch start = new Packet9StartMatch();
-		start.setObject(ctrl);
+		//start.setObject(controller);
 		
 			for(Connection c: connected){
 				c.sendTCP(start);
