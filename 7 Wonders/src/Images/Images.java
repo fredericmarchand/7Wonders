@@ -94,7 +94,6 @@ public class Images {
 		
 		System.out.println("Starting to load " + total + " images.");	
 		long startTime = System.currentTimeMillis();
-		if(callback != null) callback.imagesBeginLoad(total);
 		loadImages();
 		System.out.println("Done loading all images. Took " + (System.currentTimeMillis() - startTime) + "ms");
 	}
