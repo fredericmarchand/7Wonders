@@ -61,11 +61,11 @@ public class MServer {
 	 */
 	
 	//To be modified
-	public boolean bridgeClient(Connection c, long m_id, Object user){
+	public boolean bridgeClient(Connection c, long m_id, long cid){
 		for(Match m : matchList){
 			if(m.getMatch_ID()==m_id){
 				if(m.getConnectionCount()<m.getMaxPlayerCount()){
-					m.addConnection(c,user);
+					m.addConnection(c,cid);
 					return true;
 				}
 			}
@@ -73,10 +73,10 @@ public class MServer {
 		return false;
 	}
 	
-	public boolean removeClient(Connection c, long m_id, Object user){
+	public boolean removeClient(Connection c, long m_id, long cid){
 		for(Match m : matchList){
 			if(m.getMatch_ID()==m_id){
-				m.removeConnection(c,user);
+				m.removeConnection(c,cid);
 				return true;
 			}
 		}

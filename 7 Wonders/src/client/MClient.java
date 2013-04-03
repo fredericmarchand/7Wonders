@@ -87,15 +87,17 @@ public class MClient {
 	public ArrayList<Long> getMatchList() {
 		return matchList;
 	}
+	public linkNetworkView getLink() {
+		return link;
+	}
 
 	// getter for chat
 	public void setUser(User u) {
 		user = u;
 	}
 
-	public linkNetworkView getLink() {
-		return link;
-	}
+
+
 
 	public User getUser() {
 		return user;
@@ -112,8 +114,8 @@ public class MClient {
 	public void setUser_ID(long id) {
 	}
 
-	public void createUser(String uname, long id) {
-		user = new Player(uname, id);
+	public void createUser() {
+		user = new Player(username, ID);
 		//user.setClient(this);
 		//client.sendCommandMessage();
 		
@@ -144,7 +146,7 @@ public class MClient {
 		packet.setHuman(human);
 		packet.setAI(ai);
 		//
-		packet.setObject(user);
+		//packet.setObject(user);
 		packet.setCID(ID);
 		client.sendTCP(packet);
 	}
@@ -162,7 +164,7 @@ public class MClient {
 		if (matchID > 0) {
 			Packet5Disconnect quit = new Packet5Disconnect();
 			quit.setMID(matchID);
-			quit.setObject(user);
+			//quit.setObject(user);
 			client.sendTCP(quit);
 			matchID = 0000; // no longer in a game
 			link.launchLobby();
@@ -191,7 +193,8 @@ public class MClient {
 	//request to join match
 	public void sendMatchRequest(String mname) {
 		Packet13MatchJoinRequest rPacket = new Packet13MatchJoinRequest();
-		rPacket.setObject(user);
+		//rPacket.setObject(user);
+		rPacket.setCID(ID);
 		rPacket.setMID(Long.parseLong(mname));
 		client.sendTCP(rPacket);
 
@@ -248,11 +251,11 @@ public class MClient {
 		
 		
 		
-//		kryo.register(Player.class);
-//		kryo.register(Tokens.ConflictTokens.class);
-//		kryo.register(Tokens.Resources.class);
-//		kryo.register(Tokens.ScientificSymbols.class);
-//		kryo.register(WonderBoards.WonderBoard.class);
+		kryo.register(Player.class);
+		kryo.register(Tokens.ConflictTokens.class);
+		kryo.register(Tokens.Resources.class);
+		kryo.register(Tokens.ScientificSymbols.class);
+		kryo.register(WonderBoards.WonderBoard.class);
 		//kryo.register(WonderBoards.WonderBoardStage.class);
 	}
 
