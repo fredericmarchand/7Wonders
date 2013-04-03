@@ -36,6 +36,7 @@ public class NetworkListener extends Listener{
 	public void disconnected(Connection arg0) {
 		// TODO Auto-generated method stub
 		System.out.println("[CLIENT] Disconnected");
+		System.exit(0);
 		//super.disconnected(arg0);
 	}
 	
@@ -50,6 +51,7 @@ public class NetworkListener extends Listener{
 			}
 			mclient.setMatchList((ArrayList<Long>)((Packet1LoginAnswer)o).getObject());
 			mclient.setID(((Packet1LoginAnswer)o).getIDValue());
+			mclient.createUser();
 		}
 		//check if client has been able to join game
 		//if yes, join lobby

@@ -5,14 +5,16 @@ import javax.swing.*;
 import Controls.Controller;
 import Controls.Match1;
 import Controls.Match2;
+import Images.Images;
 
 import java.awt.*;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements Runnable {
 	private static final long serialVersionUID = 1L;
 	
 	private Controller controller;
 	private MatchPanel panel;
+	private LoadingPanel loading;
 	
 	public MainFrame(Controller c) {
 		setTitle("7 Wonders");
@@ -27,6 +29,14 @@ public class MainFrame extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setBackground(Color.white);
+		
+		loading = new LoadingPanel();
+		loading.setVisible(true);
+		
+		add(loading);
+		this.setVisible(true);
+		
+		run();
 	}
 	
 	public void update() {
@@ -37,10 +47,12 @@ public class MainFrame extends JFrame {
 		panel = new MatchPanel(m, controller);
 		add(panel);
 	}
-	
-	public static void main(String[] args) {
-		MainFrame m = new MainFrame(null);
-		m.setVisible(true);
+
+	@Override
+	public void run() {
+		Images.setGUI(loading);
+		Images.run();
+		loading.setVisible(false);
 	}
 
 }

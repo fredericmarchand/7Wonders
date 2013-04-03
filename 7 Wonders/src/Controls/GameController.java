@@ -41,14 +41,11 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 		match.init();
 		
 		run();
-		//frame = new MainFrame(this);
-		//frame.startMatch(match);
-		//frame.setVisible(true);
 	}
 	
 	public void run()
 	{
-		Images.run();
+		
 		frame = new MainFrame(this);
 		//frame.startMatch(match);
 		frame.setVisible(true);
@@ -163,9 +160,11 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 					((ScientificSymbolBonus)se).chooseSymbol(user, s);		
 			}
 		}*/
-		for ( ScientificSymbols sy : symbs )
-		{
-			user.getScientificSymbols().addScientifcSymbols(sy);
+		if(symbs != null) {
+			for ( ScientificSymbols sy : symbs )
+			{
+				user.getScientificSymbols().addScientifcSymbols(sy);
+			}
 		}
 	}
 
@@ -244,12 +243,6 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 		match.playerEndOfTurnSpecialEffects(user);
 		match.endOfTurn();
 
-		for ( Structure s: user.getWonderBoard().getRedCards() )
-		{
-			System.out.println(s.getName());
-		}
-		System.out.println("");
-
 		if ( match.getAge() == 4 ) 
 		{
 			match.discardAllPlayersCards();
@@ -274,7 +267,7 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 				}
 			}
 		}
-		return null;
+		return new ArrayList<Structure>();
 	}
 
 	@Override
@@ -357,7 +350,7 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 				}
 			}
 		}
-		//System.out.println(user.getTotalResources().toString());
+		
 		if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
 			frame.update();
 	}
@@ -375,7 +368,7 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 		//GameController gc = new GameController(new Player(name, 0), new Match1());
 		ArrayList<ScientificSymbols> symbs = new ArrayList<ScientificSymbols>();
 		// TODO Auto-generated method stub
-		Player p =new Player();
+		Player p = new Player();
 		p.assignWonderBoard(new TheHangingGardensOfBabylon(0));
 		p.getWonderBoard().buildStage(new Structure(), new Resources(5, 5, 5, 5, 5, 5, 5, 5));
 		p.getWonderBoard().buildStage(new Structure(), new Resources(5, 5, 5, 5, 5, 5, 5, 5));

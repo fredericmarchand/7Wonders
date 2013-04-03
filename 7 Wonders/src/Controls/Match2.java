@@ -18,7 +18,7 @@ public class Match2 {
 	private ArrayList<Player> players;
 	private int age, turn, numPlayers;
 	private ArrayList<Structure> age1Deck, age2Deck, age3Deck, discarded;
-		
+
 	//server side constructor
 	public Match2(ArrayList<User> users)
 	{

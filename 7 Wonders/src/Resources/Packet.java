@@ -43,11 +43,11 @@ public class Packet {
 		//if client sends one of these
 		//eliminate from any current game
 		private long matchID;
-		Object o;
+		private long cID;
 		public long getMID(){return matchID;}
 		public void setMID(long id){matchID = id;}		
-		public Object getObject(){ return o;}
-		public void setObject(Object ob){ o = ob;}
+		public long getCID(){ return cID;}
+		public void setCID(long i){cID= i;}
 	}
 	public static class Packet6ChatMsg{
 		private String msg;
@@ -101,21 +101,21 @@ public class Packet {
 	}
 	public static class Packet12CreateMatch{
 		int numHuman,numAI;
-		Object o;
+		long clientID;
 		public void setHuman(int x){numHuman = x;}
 		public int getHuman(){return numHuman;}
 		public void setAI(int x){numAI = x;}
 		public int getAI(){return numAI;}
-		public Object getObject(){ return o;}
-		public void setObject(Object ob){ o = ob;}
+		public long getCID(){return clientID;}
+		public void setCID(long id){clientID=id;}
 	}
 	public static class Packet13MatchJoinRequest{
 		long matchID;
-		Object o;
+		long cID;
 		public long getMID(){return matchID;}
 		public void setMID(long id){matchID = id;}
-		public Object getObject(){ return o;}
-		public void setObject(Object ob){ o = ob;}
+		public long getCID(){ return cID;}
+		public void setCID(long i){cID= i;}
 	}
 	public static class Packet14HostCreateMatch{
 		long matchID;

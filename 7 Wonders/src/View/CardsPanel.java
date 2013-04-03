@@ -13,7 +13,6 @@ import Structures.Structure;
 
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -121,7 +120,7 @@ public class CardsPanel extends JPanel {
 		for (int i = 0; i < 7; i++) {
 			if(cards.size() > i) {
 				int w = lblArr[i].getFontMetrics(lblArr[i].getFont()).stringWidth(lblArr[i].getText()) + 23;
-				lblBgArr[i].setIcon(new ImageIcon(Images.cardlabelbg.getScaledInstance(30, w, java.awt.Image.SCALE_SMOOTH)));
+				lblBgArr[i].setIcon(new ImageIcon((Images.get("cardLabelbg").getImage()).getScaledInstance(30, w, java.awt.Image.SCALE_SMOOTH)));
 				lblBgArr[i].setSize(30, w);
 			} else lblBgArr[i].setIcon(null);
 		}
@@ -130,7 +129,7 @@ public class CardsPanel extends JPanel {
 	private void updateCards() {
 		for (int i = 0; i < 7; i++) {
 			if(cards.size() > i) 
-				cardArr[i].setIcon(Images.cards[cards.get(i).getID()]);
+				cardArr[i].setIcon(Images.get("card"+cards.get(i).getID()));
 			else cardArr[i].setIcon(null);
 		}
 	}
@@ -156,14 +155,14 @@ public class CardsPanel extends JPanel {
 	private void updateOptions() {
 		for (int i = 0; i < 7; i++) {
 			if(showOptions[i]) {
-				lblOptions[i].setIcon(Images.options);
+				lblOptions[i].setIcon(Images.get("options"));
 				for (int j = 0; j < 3; j++) {
 					if(showArrow[i][j]){
-						if(j == 2) lblArrow[i][j].setIcon(Images.arrows[2]);
+						if(j == 2) lblArrow[i][j].setIcon(Images.get("arrow"+2));
 						else {
-							if(canDoAction[i][j] == 0) lblArrow[i][j].setIcon(Images.arrows[0]);
-							else if(canDoAction[i][j] == 1) lblArrow[i][j].setIcon(Images.arrows[1]);
-							else if(canDoAction[i][j] == 2) lblArrow[i][j].setIcon(Images.arrows[2]);
+							if(canDoAction[i][j] == 0) lblArrow[i][j].setIcon(Images.get("arrow"+0));
+							else if(canDoAction[i][j] == 1) lblArrow[i][j].setIcon(Images.get("arrow"+1));
+							else if(canDoAction[i][j] == 2) lblArrow[i][j].setIcon(Images.get("arrow"+2));
 							else lblArrow[i][j].setIcon(null);
 						}
 					} else lblArrow[i][j].setIcon(null);

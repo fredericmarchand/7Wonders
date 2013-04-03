@@ -21,7 +21,7 @@ import com.esotericsoftware.kryonet.Server;
 public class Match {
 	
 	ArrayList<Connection> connected;
-	ArrayList<User> userList;
+	ArrayList<Long> userIDList;
     private long match_id;
     private static long counter = 1000;
     private int MAX_PLAYER_COUNT = 7 ;
@@ -39,6 +39,7 @@ public class Match {
     Match2 controller;
     
     public Match(int h,int ai){
+    	userIDList = new ArrayList<Long>();
     	connected = new ArrayList<Connection>();
 		match_id = ++counter;
 		cmdMsgList = new ArrayList<CommandMessage>();
@@ -49,13 +50,13 @@ public class Match {
     public  int getMaxPlayerCount() {return MAX_PLAYER_COUNT;}
     public boolean get_inProgress(){return inProgress;}
 	public ArrayList<Connection> getConnections(){return connected;}	
-	public void addConnection(Connection c, Object o){
-		userList.add((User)o);
+	public void addConnection(Connection c, Long o){
+		userIDList.add(o);
 		connected.add(c);
 		update();
 	}
 	public void removeConnection(Connection c, Object o) {
-		userList.remove(o);
+		userIDList.remove(o);
 		connected.remove(c);
 		update();
 	}
@@ -134,8 +135,7 @@ public class Match {
 		receiveEvent((CommandMessage)receivedPacket.getObject(), receivedPacket.getCID());
 	}	
 	public void startMatch(){
-		
-		controller = new Match2(userList);
+		//controller = new Match2(userIDList);
 		inProgress = true;
 		sendStartMatchRequest(controller);
 	}
