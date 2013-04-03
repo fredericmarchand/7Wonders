@@ -134,7 +134,6 @@ public class Match {
 		receiveEvent((CommandMessage)receivedPacket.getObject(), receivedPacket.getCID());
 	}	
 	public void startMatch(){
-		
 		controller = new Match2(userList);
 		inProgress = true;
 		sendStartMatchRequest(controller);

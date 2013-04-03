@@ -51,13 +51,7 @@ public class MClient {
 
 	}
 
-	public void sendCreateMatchRequest(int human, int ai) {
-		Packet12CreateMatch packet = new Packet12CreateMatch();
-		packet.setHuman(human);
-		packet.setAI(ai);
-		packet.setObject(user);
-		client.sendTCP(packet);
-	}
+
 
 	// get/set host values
 	public void setHost(boolean h) {
@@ -145,6 +139,16 @@ public class MClient {
 		client.sendTCP(new Packet0LoginRequest());
 	}
 
+	public void sendCreateMatchRequest(int human, int ai) {
+		Packet12CreateMatch packet = new Packet12CreateMatch();
+		packet.setHuman(human);
+		packet.setAI(ai);
+		//
+		packet.setObject(user);
+		packet.setCID(ID);
+		client.sendTCP(packet);
+	}
+	
 	// any class type sent over the network must be registered to the kryo
 	// generic types are implicitly registered
 
@@ -241,6 +245,15 @@ public class MClient {
 		kryo.register(Packet15MatchDisconnect.class);
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match1.class);
+		
+		
+		
+//		kryo.register(Player.class);
+//		kryo.register(Tokens.ConflictTokens.class);
+//		kryo.register(Tokens.Resources.class);
+//		kryo.register(Tokens.ScientificSymbols.class);
+//		kryo.register(WonderBoards.WonderBoard.class);
+		//kryo.register(WonderBoards.WonderBoardStage.class);
 	}
 
 	public static void main(String[] args) {
