@@ -216,6 +216,11 @@ public class MClient {
 		// load match
 	}
 
+	public void sendUserInfo(){
+		Packet16UserObject packet = new Packet16UserObject();
+		packet.setUser(new User(username,ID));
+		client.sendTCP(packet);
+	}
 	// return to lobby
 	
 	
@@ -227,6 +232,7 @@ public class MClient {
 		// set as some variable
 
 	}
+
 
 	public void register() {
 		Kryo kryo = client.getKryo();
@@ -246,16 +252,10 @@ public class MClient {
 		kryo.register(Packet13MatchJoinRequest.class);
 		kryo.register(Packet14HostCreateMatch.class);
 		kryo.register(Packet15MatchDisconnect.class);
+		kryo.register(Packet16UserObject.class);
 		kryo.register(java.util.ArrayList.class);
-		kryo.register(Match1.class);
-		
-		
-		
-		kryo.register(Player.class);
-		kryo.register(Tokens.ConflictTokens.class);
-		kryo.register(Tokens.Resources.class);
-		kryo.register(Tokens.ScientificSymbols.class);
-		kryo.register(WonderBoards.WonderBoard.class);
+		kryo.register(Match1.class);		
+		kryo.register(User.class);
 		//kryo.register(WonderBoards.WonderBoardStage.class);
 	}
 

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
+import Controls.Match1;
+import Player.User;
 import Resources.Match;
 import Resources.Packet.*;
 
@@ -131,8 +133,11 @@ public class MServer {
 		kryo.register(Packet13MatchJoinRequest.class);
 		kryo.register(Packet14HostCreateMatch.class);
 		kryo.register(Packet15MatchDisconnect.class);
+		kryo.register(Packet16UserObject.class);
 		kryo.register(java.util.ArrayList.class);
-		kryo.register(Match.class);	
+		kryo.register(Match1.class);
+		kryo.register(User.class);
+		
 	}
 	
 	public static void main(String[] args){
