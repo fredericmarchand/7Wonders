@@ -52,6 +52,7 @@ public class NetworkListener extends Listener{
 			mclient.setMatchList((ArrayList<Long>)((Packet1LoginAnswer)o).getObject());
 			mclient.setID(((Packet1LoginAnswer)o).getIDValue());
 			mclient.createUser();
+			//mclient.sendUserInfo();
 		}
 		//check if client has been able to join game
 		//if yes, join lobby
@@ -93,10 +94,11 @@ public class NetworkListener extends Listener{
 		if(o instanceof Packet14HostCreateMatch){
 			mclient.setMID(((Packet14HostCreateMatch)o).getMID());
 			mclient.setHost(true);
-			if(((Packet14HostCreateMatch)o).getnPlayer()>1){
+			if(((Packet14HostCreateMatch)o).getnPlayer()>0){
 				//mclient.getLink().launchMatchLobby();
 				mclient.getLink().launchChatFrame();
 			}
+			
 		}
 		if( o instanceof Packet15MatchDisconnect){
 			System.out.println("[CLIENT]  Graceful Disconnect");

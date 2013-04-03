@@ -13,6 +13,8 @@ public class User {
 	private CommandMessage msg;
 	private MClient client;
 	
+	//default constructor
+	public User(){}
 	public User(String name, long id)
 	{
 		ID = id;

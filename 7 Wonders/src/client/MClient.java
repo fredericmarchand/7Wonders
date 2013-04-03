@@ -3,13 +3,10 @@ package client;
 import java.io.IOException;
 import java.util.*;
 
-import javax.swing.JOptionPane;
-
 import Controls.*;
 
 import Player.Player;
 import Player.User;
-import Resources.Chat;
 
 import Resources.linkNetworkView;
 import Resources.Packet.*;
@@ -143,10 +140,10 @@ public class MClient {
 
 	public void sendCreateMatchRequest(int human, int ai) {
 		Packet12CreateMatch packet = new Packet12CreateMatch();
+		user = new User(username, ID);
 		packet.setHuman(human);
 		packet.setAI(ai);
-		//
-		//packet.setObject(user);
+		packet.setUser(user);
 		packet.setCID(ID);
 		client.sendTCP(packet);
 	}
@@ -194,8 +191,10 @@ public class MClient {
 	public void sendMatchRequest(String mname) {
 		Packet13MatchJoinRequest rPacket = new Packet13MatchJoinRequest();
 		//rPacket.setObject(user);
+		user = new User(username,ID);
 		rPacket.setCID(ID);
 		rPacket.setMID(Long.parseLong(mname));
+		rPacket.setUser(user);
 		client.sendTCP(rPacket);
 
 	}
@@ -216,6 +215,12 @@ public class MClient {
 		// load match
 	}
 
+	public void sendUserInfo(){
+		Packet16UserObject packet = new Packet16UserObject();
+		user = new User(username,ID);
+		packet.setUser(user);
+		client.sendTCP(packet);
+	}
 	// return to lobby
 	
 	
@@ -227,6 +232,7 @@ public class MClient {
 		// set as some variable
 
 	}
+
 
 	public void register() {
 		Kryo kryo = client.getKryo();
@@ -246,23 +252,22 @@ public class MClient {
 		kryo.register(Packet13MatchJoinRequest.class);
 		kryo.register(Packet14HostCreateMatch.class);
 		kryo.register(Packet15MatchDisconnect.class);
+		kryo.register(Packet16UserObject.class);
 		kryo.register(java.util.ArrayList.class);
-		kryo.register(Match1.class);
+		kryo.register(Match1.class);	
+		kryo.register(Match2.class);
+		kryo.register(User.class);
 		
+		kryo.register(Structures.Cards.Loom.class);
+		kryo.register(Structures.Cards.LumberYard.class);
+		kryo.register(Structures.Cards.ClayPool.class);
 		
-		
-		kryo.register(Player.class);
-		kryo.register(Tokens.ConflictTokens.class);
-		kryo.register(Tokens.Resources.class);
-		kryo.register(Tokens.ScientificSymbols.class);
-		kryo.register(WonderBoards.WonderBoard.class);
-		//kryo.register(WonderBoards.WonderBoardStage.class);
 	}
 
 	public static void main(String[] args) {
 
 		Log.set(Log.LEVEL_TRACE);
-
+		
 	}
 
 }

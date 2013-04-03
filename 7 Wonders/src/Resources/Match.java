@@ -22,6 +22,7 @@ public class Match {
 	
 	ArrayList<Connection> connected;
 	ArrayList<Long> userIDList;
+	ArrayList<User> userList;
     private long match_id;
     private static long counter = 1000;
     private int MAX_PLAYER_COUNT = 7 ;
@@ -36,22 +37,23 @@ public class Match {
     
     /////FIX///////////////////////////////////
     //freds new class
-    Match2 controller;
+    private Match2 controller;
     
     public Match(int h,int ai){
     	userIDList = new ArrayList<Long>();
+    	userList = new ArrayList<User>();
     	connected = new ArrayList<Connection>();
 		match_id = ++counter;
 		cmdMsgList = new ArrayList<CommandMessage>();
 		inProgress = false;
-		MAX_PLAYER_COUNT = h+ai;
-		
+		MAX_PLAYER_COUNT = h+ai;		
     }
-    public  int getMaxPlayerCount() {return MAX_PLAYER_COUNT;}
+    public int getMaxPlayerCount() {return MAX_PLAYER_COUNT;}
     public boolean get_inProgress(){return inProgress;}
 	public ArrayList<Connection> getConnections(){return connected;}	
-	public void addConnection(Connection c, Long o){
-		userIDList.add(o);
+	public void addConnection(Connection c, Object o){
+		userList.add((User)o);
+		//userIDList.add(o);
 		connected.add(c);
 		update();
 	}
@@ -135,17 +137,17 @@ public class Match {
 		receiveEvent((CommandMessage)receivedPacket.getObject(), receivedPacket.getCID());
 	}	
 	public void startMatch(){
-		//controller = new Match2(userIDList);
+		controller = new Match2(userList);
 		inProgress = true;
-		sendStartMatchRequest(controller);
+		sendStartMatchRequest();
 	}
 	
 	public void endMatch(){
 		sendEndMatchRequest();
 	}
-	public void sendStartMatchRequest(Match2 ctrl){
+	public void sendStartMatchRequest(){
 		Packet9StartMatch start = new Packet9StartMatch();
-		start.setObject(ctrl);
+		//start.setObject(controller);
 		
 			for(Connection c: connected){
 				c.sendTCP(start);

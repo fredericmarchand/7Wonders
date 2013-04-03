@@ -1,5 +1,7 @@
 package Resources;
 
+import Player.User;
+
 //create packets to communicate from the server to anyone connected to the server
 //EACH packet represents a different type of communication
 //Packet4Object is the most complex and should be used for sending playing moves to the 
@@ -100,30 +102,44 @@ public class Packet {
 		
 	}
 	public static class Packet12CreateMatch{
-		int numHuman,numAI;
-		long clientID;
+		private int numHuman,numAI;
+		private long clientID;
+		private User user = new User();
 		public void setHuman(int x){numHuman = x;}
 		public int getHuman(){return numHuman;}
 		public void setAI(int x){numAI = x;}
 		public int getAI(){return numAI;}
 		public long getCID(){return clientID;}
 		public void setCID(long id){clientID=id;}
+		public User getUser(){return user;}
+		public void setUser(User u){user = u;}
+		
+		
 	}
 	public static class Packet13MatchJoinRequest{
-		long matchID;
-		long cID;
+		private long matchID;
+		private long cID;
+		private User user = new User();
 		public long getMID(){return matchID;}
 		public void setMID(long id){matchID = id;}
 		public long getCID(){ return cID;}
 		public void setCID(long i){cID= i;}
+		public User getUser(){return user;}
+		public void setUser(User u){user = u;}
 	}
 	public static class Packet14HostCreateMatch{
-		long matchID;
-		int numPlayer;
+		private long matchID;
+		private int numPlayer;
 		public long getMID(){return matchID;}
 		public void setMID(long id){matchID = id;}
 		public void setnPlayer(int i){numPlayer = i;}
 		public int  getnPlayer(){return numPlayer;}
 	}
 	public static class Packet15MatchDisconnect{}
+	public static class Packet16UserObject{
+		User u;
+		public User getUser(){return u;}
+		public void setUser(User n){u = n;}
+	}
 }
+

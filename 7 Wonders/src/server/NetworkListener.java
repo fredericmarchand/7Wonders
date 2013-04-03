@@ -134,7 +134,7 @@ public class NetworkListener extends Listener {
 			long matchID = mserver.createMatch(
 					((Packet12CreateMatch) o).getHuman(),
 					((Packet12CreateMatch) o).getAI());
-			mserver.bridgeClient(c, matchID,((Packet12CreateMatch)o).getCID());// adding client to match
+			mserver.bridgeClient(c, matchID,((Packet12CreateMatch)o).getUser());// adding client to match
 												// connection list
 
 			Packet14HostCreateMatch packet = new Packet14HostCreateMatch();
@@ -151,12 +151,15 @@ public class NetworkListener extends Listener {
 				joinResponse.setIDValue(0);
 			} else {
 				join = mserver.bridgeClient(c, ((Packet13MatchJoinRequest) o)
-						.getMID(), ((Packet13MatchJoinRequest)o).getCID());
+						.getMID(), ((Packet13MatchJoinRequest)o).getUser());
 				joinResponse.setAccepted(join);
 				joinResponse.setIDValue(((Packet13MatchJoinRequest) o)
 						.getMID());
 			}
 			c.sendTCP(joinResponse);
+		}
+		if(o instanceof Packet16UserObject){
+			System.out.println("[SERVER] WOOP");
 		}
 	}
 
