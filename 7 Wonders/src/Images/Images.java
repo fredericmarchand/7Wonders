@@ -61,6 +61,10 @@ public class Images {
 		stringList.add(name+","+path+","+width+","+height);
 	}
 	
+	public static void setGUI(ImageLoadingGUI g) {
+		callback = g;
+	}
+	
 	// Loops through the image list and loads them based on the parameters given
 	// The syntax for the string for an image is the following:
 	//   "<name>,<path>,<width>,<height>"
@@ -90,7 +94,7 @@ public class Images {
 		
 		System.out.println("Starting to load " + total + " images.");	
 		long startTime = System.currentTimeMillis();
-		callback.imagesBeginLoad(total);
+		if(callback != null) callback.imagesBeginLoad(total);
 		loadImages();
 		System.out.println("Done loading all images. Took " + (System.currentTimeMillis() - startTime) + "ms");
 	}
