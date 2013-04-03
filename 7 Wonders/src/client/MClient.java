@@ -208,7 +208,7 @@ public class MClient {
 
 
 	public void startMatch(Object o) {
-		link.getChat().countdown();
+		//link.getChat().countdown();
 		user.startMatch((Match2)o);
 		
 		//link.launchMainFrame(m, );
@@ -370,11 +370,7 @@ public class MClient {
 		kryo.register(WonderBoards.Boards.TheStatueOfZeusInOlympia.class);
 		kryo.register(WonderBoards.Boards.TheTempleOfArtemisInEphesus.class);
 		
-		
-		
-		
-		
-
+		kryo.register(Controls.CommandMessage.class);
 	}
 
 	public static void main(String[] args) {

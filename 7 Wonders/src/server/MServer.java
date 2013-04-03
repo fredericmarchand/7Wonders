@@ -253,6 +253,7 @@ public class MServer {
 		kryo.register(WonderBoards.Boards.TheStatueOfZeusInOlympia.class);
 		kryo.register(WonderBoards.Boards.TheTempleOfArtemisInEphesus.class);
 		
+		kryo.register(Controls.CommandMessage.class);
 	}
 	
 	public static void main(String[] args){
