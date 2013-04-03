@@ -143,10 +143,10 @@ public class MClient {
 
 	public void sendCreateMatchRequest(int human, int ai) {
 		Packet12CreateMatch packet = new Packet12CreateMatch();
+		user = new User(username, ID);
 		packet.setHuman(human);
 		packet.setAI(ai);
-		//
-		//packet.setObject(user);
+		packet.setUser(user);
 		packet.setCID(ID);
 		client.sendTCP(packet);
 	}
@@ -194,8 +194,10 @@ public class MClient {
 	public void sendMatchRequest(String mname) {
 		Packet13MatchJoinRequest rPacket = new Packet13MatchJoinRequest();
 		//rPacket.setObject(user);
+		user = new User(username,ID);
 		rPacket.setCID(ID);
 		rPacket.setMID(Long.parseLong(mname));
+		rPacket.setUser(user);
 		client.sendTCP(rPacket);
 
 	}
@@ -218,7 +220,8 @@ public class MClient {
 
 	public void sendUserInfo(){
 		Packet16UserObject packet = new Packet16UserObject();
-		packet.setUser(new User(username,ID));
+		user = new User(username,ID);
+		packet.setUser(user);
 		client.sendTCP(packet);
 	}
 	// return to lobby

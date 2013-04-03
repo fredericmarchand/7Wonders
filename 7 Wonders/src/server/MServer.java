@@ -63,11 +63,11 @@ public class MServer {
 	 */
 	
 	//To be modified
-	public boolean bridgeClient(Connection c, long m_id, long cid){
+	public boolean bridgeClient(Connection c, long m_id, Object o){
 		for(Match m : matchList){
 			if(m.getMatch_ID()==m_id){
 				if(m.getConnectionCount()<m.getMaxPlayerCount()){
-					m.addConnection(c,cid);
+					m.addConnection(c,o);
 					return true;
 				}
 			}

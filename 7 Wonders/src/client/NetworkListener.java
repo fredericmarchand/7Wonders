@@ -52,7 +52,7 @@ public class NetworkListener extends Listener{
 			mclient.setMatchList((ArrayList<Long>)((Packet1LoginAnswer)o).getObject());
 			mclient.setID(((Packet1LoginAnswer)o).getIDValue());
 			mclient.createUser();
-			mclient.sendUserInfo();
+			//mclient.sendUserInfo();
 		}
 		//check if client has been able to join game
 		//if yes, join lobby
