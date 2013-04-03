@@ -49,10 +49,10 @@ public class User {
 		client = cl;
 	}
 	
-	public void sendCommandMessage()
-	{
-		client.sendCommandMessage(msg);
-	}
+//	public void sendCommandMessage()
+//	{
+//		client.sendCommandMessage(msg);
+//	}
 	
 	public void updateMatch(Match2 match)
 	{

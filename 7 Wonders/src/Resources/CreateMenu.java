@@ -60,7 +60,7 @@ public class CreateMenu extends JFrame {
 					}
 				}
 				catch(Exception error){ 
-					System.out.println(error);
+					error.printStackTrace();
 					humanNum.setText("");
 					aiNum.setText("");
 					JOptionPane.showMessageDialog(null, "Incorrect input" +
