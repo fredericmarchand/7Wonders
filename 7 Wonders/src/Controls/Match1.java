@@ -20,8 +20,6 @@ public class Match1 {
 	private ArrayList<Player> players;
 	private int age, turn, numPlayers;
 	private ArrayList<Structure> age1Deck, age2Deck, age3Deck, discarded;
-	private Scanner in;
-	private int state;
 		
 	
 	public Match1(int numPlayers)
@@ -30,12 +28,11 @@ public class Match1 {
 		age = 1;
 		turn = 1;
 		this.numPlayers = numPlayers;
-		in = new Scanner(System.in);
+		//in = new Scanner(System.in);
 		age1Deck = CardHandler.BuildAge1Deck(numPlayers);
 		age2Deck = CardHandler.BuildAge2Deck(numPlayers);
 		age3Deck = CardHandler.BuildAge3Deck(numPlayers);
 		discarded = new ArrayList<Structure>();
-		//state = GameController.BEGINNINGOFGAME;
 		
 		//this will be removed
 		for ( int i = 0; i < numPlayers; ++i )
@@ -61,7 +58,6 @@ public class Match1 {
 	}
 	
 	public void init() {
-		//System.out.println(players.size());
 		numPlayers = players.size();
 		age1Deck = CardHandler.BuildAge1Deck(numPlayers);
 		age2Deck = CardHandler.BuildAge2Deck(numPlayers);
@@ -76,7 +72,6 @@ public class Match1 {
 		{
 			p.initAge();
 		}
-		//state = GameController.BEGINNINGOFGAME;
 	}
 	
 	public void addLocalPlayer(Player p) {
@@ -93,15 +88,15 @@ public class Match1 {
 		return discarded;
 	}
 	
-	public int getState()
-	{
-		return state;
-	}
+	//public int getState()
+	//{
+	//	return state;
+	//}
 	
-	public void setState(int newstate)
-	{
-		state = newstate;
-	}
+	//public void setState(int newstate)
+	//{
+	//	state = newstate;
+	//}
 	
 	public int getAge()
 	{
@@ -141,7 +136,7 @@ public class Match1 {
 		return null;
 	}
 	
-	public void runGame()
+	/*public void runGame()
 	{
 		players = new ArrayList<Player>();
 		Random r = new Random();
@@ -275,7 +270,7 @@ public class Match1 {
 		  	default: System.out.println("Invalid... Please try again: ");
 		 }
 		return move;
-	}
+	}*/
 	
 	public void addInitialResources(ArrayList<Player> plyrs)
 	{
@@ -301,9 +296,9 @@ public class Match1 {
 									( rc.getPossibilities().getLoom() != 0 ? "6 - Loom\n" : "" ) +
 									( rc.getPossibilities().getPapyrus() != 0 ? "7 - Papyrus\n" : "" ));
 				
-				while ( !in.hasNext() );
-				int cmd = in.nextInt();
-				((ResourceChoice)se).chooseResource(cmd, p);
+				//while ( !in.hasNext() );
+				//int cmd = in.nextInt();
+				//((ResourceChoice)se).chooseResource(cmd, p);
 			}
 		}
 	}
@@ -394,10 +389,10 @@ public class Match1 {
 				case ScientificSymbolBonus.ScientificSymbolBonusID:
 					if ( ((ScientificSymbolBonus)se).canChoose() )
 					{
-						System.out.println("You now can select which scientific symbol you want your guild to represent:\n1 - Compass\n2 - Gear\n3 - Tablet");
-						while ( !in.hasNext() );
-						String ans = in.nextLine();
-						((ScientificSymbolBonus)se).chooseSymbol(p, Integer.parseInt(ans));
+						//System.out.println("You now can select which scientific symbol you want your guild to represent:\n1 - Compass\n2 - Gear\n3 - Tablet");
+						//while ( !in.hasNext() );
+						//String ans = in.nextLine();
+						//((ScientificSymbolBonus)se).chooseSymbol(p, Integer.parseInt(ans));
 					}
 					break;
 			}
@@ -489,6 +484,7 @@ public class Match1 {
 	public void endOfTurn()
 	{
 		CardHandler.PassCardsToNeighbors(getPlayers(), getAge());
+		for ( Player p : players ) p.resetResources();
 		if ( getTurn() == 6 )
 		{
 			for ( Player p: players )
@@ -507,6 +503,8 @@ public class Match1 {
 					}
 				}
 			}
+			
+			
 			PlayerInteraction.SettleMilitaryConflicts(getPlayers(), getAge());
 			setAge(getAge()+1);
 			incPlayerAges();
@@ -515,15 +513,13 @@ public class Match1 {
 			if ( getAge() == 3 ) CardHandler.DistributeCards(getPlayers(), getDeck());
 			if ( getAge() == 4 ) 
 			{
-				//System.out.println("Game Over");
-				
-				//end of game special effects
+				endOfGameSpecialEffects(players);
 				countPlayersVictoryPoints();
 			}
 		}
 		else 
 		{
-			setTurn(getTurn()+1);
+			turn += 1;
 		}
 	}
 	
@@ -567,8 +563,8 @@ public class Match1 {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Match1 m = new Match1(3);
-		m.runGame();
+		//Match1 m = new Match1(3);
+		//m.runGame();
 	}
 
 }

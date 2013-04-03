@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import Controls.Controller;
 import Controls.Match1;
+import Controls.Match2;
 import Images.Images;
 
 import java.awt.*;
@@ -42,7 +43,7 @@ public class MainFrame extends JFrame implements Runnable {
 		panel.update();
 	}
 	
-	public void startMatch(Match1 m) {
+	public void startMatch(Match2 m) {
 		panel = new MatchPanel(m, controller);
 		add(panel);
 	}
