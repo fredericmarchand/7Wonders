@@ -147,7 +147,7 @@ public class Match {
 	}
 	public void sendStartMatchRequest(){
 		Packet9StartMatch start = new Packet9StartMatch();
-		//start.setObject(controller);
+		start.setObject(new Match2(userList));
 		
 			for(Connection c: connected){
 				c.sendTCP(start);
