@@ -10,68 +10,41 @@ public class AIPlayer extends Player {
 
 	public static final int SCIENCE = 0;
 	public static final int MILITARY = 1;
-	public static final int BONUSPOINTS = 2;
-	private int strategy;
+	public static final int VPOINTS = 2;
+	private int favor;
+	private Strategy strategy;
 	private Random rand = new Random();
 	
-	
+	//Used to generate a AI with a random difficulty
 	public AIPlayer(){
 		super();
 		isAI = true;
-		strategy = rand.nextInt(3);
+		favor = rand.nextInt(3);
+		int randomStrat = rand.nextInt(3);
+		if (randomStrat == 0)
+			strategy = new Simple();
+		else if (randomStrat == 1)
+			strategy = new Moderate();
+		else 
+			strategy = new Intermediate();
+			
+	}
+	
+	//Used to generate AI with difficulty corresponding to strat passed
+	public AIPlayer(Strategy strat){
+		super();
+		isAI = true;
+		strategy = strat;
+		favor = rand.nextInt(3);
 	}
 	
 	public void pickCard(ArrayList<Structure> discarded, Player leftNeighbor, Player rightNeighbor)
 	{
-		boolean did = false;
-		for ( int index = 0; index < cards.size(); ++index )
-		{
-			int result;
-			chooseCard(index);
-			result = canBuild(leftNeighbor, rightNeighbor);
-			switch ( result )
-			{
-			case 0: continue;
-			
-			case 1: 
-				buildStructure();
-				did = true;
-				break;
-			case 2:
-				did = true;
-				buildStructure(leftNeighbor, rightNeighbor, 2);
-				break;
-			}
-			if ( result != 0 ) break;
-		}
-		if ( !did )
-		{
-			chooseCard(0);
-			int result = canBuildStage(leftNeighbor, rightNeighbor);
-			switch ( result )
-			{
-			case 0: break;
-			
-			case 1: 
-				did = true;
-				buildStage(leftNeighbor, rightNeighbor, 2);
-				break;
-				
-			case 2:
-				did = true;
-				buildStage(leftNeighbor, rightNeighbor, 2);
-				break;
-			}
-		}
-		if ( !did )
-		{
-			getOwnedResources().addCoins(3);
-		}
-		cards.remove(chosenCardIndex);
+		strategy.strategicPick(this, discarded, leftNeighbor, rightNeighbor);
 	}
 	
 	//Looks for cards that could be used strategically by the next player
-	public ArrayList<Integer> blockableIndexesFree(Player leftNeighbor, Player rightNeighbor)
+	public ArrayList<Integer> blockableIndexes(Player leftNeighbor, Player rightNeighbor)
 	{
 		ArrayList<Integer> blockIndexes = new ArrayList<Integer>();
 		Player p = chooseNextPlayer(leftNeighbor, rightNeighbor);
@@ -131,6 +104,21 @@ public class AIPlayer extends Player {
 		return vPoint;
 	}	
 	
+	//Returns a list of indexes that refer to resource cards in the hand
+	public ArrayList<Integer> getResourceIndexes(){
+		
+		ArrayList<Integer> resource = new ArrayList<Integer>();
+		
+		for ( int index = 0; index < cards.size(); ++index )
+		{
+			if ( (cards.get(index).getColor() == Structure.GREY_CARD) || (cards.get(index).getColor() == Structure.BROWN_CARD))
+			{
+				resource.add(index);
+			}
+		} 
+		return resource;
+	}
+	
 	//Try to detect the next players basic strategy
 	public int nextPlayerStrat(Player leftNeighbor, Player rightNeighbor)
 	{
@@ -153,7 +141,7 @@ public class AIPlayer extends Player {
 			}
 			else
 			{
-				return BONUSPOINTS;
+				return VPOINTS;
 			}
 		}
 		return -1;
