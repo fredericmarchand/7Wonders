@@ -2,6 +2,8 @@ package Resources;
 
 import java.util.ArrayList;
 
+import server.MServer;
+
 //import server.MServer;
 
 
@@ -21,16 +23,17 @@ import com.esotericsoftware.kryonet.Server;
 public class Match {
 	
 	ArrayList<Connection> connected;
-	//ArrayList<Long> userIDList;
 	ArrayList<User> userList;
+	ArrayList<User> AIuserList;
+    ArrayList<CommandMessage> cmdMsgList;
     private long match_id;
     private static long counter = 1000;
     private int MAX_PLAYER_COUNT = 7 ;
     private int connection_count;
     private int receivedEvents = 0;
-    ArrayList<CommandMessage> cmdMsgList;
+
     private boolean inProgress;
-    
+    MServer server;
 
     ///////////////////////////////////////////
     //    handle ai creation
@@ -40,14 +43,17 @@ public class Match {
     //freds new class
     private Match2 controller;
     
-    public Match(int h,int ai){
-    	//userIDList = new ArrayList<Long>();
+    public Match(int h,int ai, MServer m){
+    	server = m;
     	userList = new ArrayList<User>();
+    	AIuserList = new ArrayList<User>();
     	connected = new ArrayList<Connection>();
 		match_id = ++counter;
 		cmdMsgList = new ArrayList<CommandMessage>();
 		inProgress = false;
-		MAX_PLAYER_COUNT = h+ai;		
+		MAX_PLAYER_COUNT = h+ai;
+		generateAI(ai);
+			
     }
     public int getMaxPlayerCount() {return MAX_PLAYER_COUNT;}
     public boolean get_inProgress(){return inProgress;}
@@ -78,7 +84,18 @@ public class Match {
 		}
 	}
 
-	public void generateAI(long ID){
+	public void generateAI(int n){
+		long idAI;
+		String usernameAI;
+		for(int i = 0; i<n;i++)
+			idAI= server.getID();
+			server.incID();
+			usernameAI = "JP the evil frenchmen"; 
+			controller.newAIPlayer(idAI, usernameAI);
+			AIuserList.add(controller.newAIPlayer(idAI, usernameAI);
+		
+		//match2ai 
+		//fill with AI
 		//new AI(ID)
 		//add something to sending something to AI
 		
@@ -90,10 +107,8 @@ public class Match {
 		return false;
 	}
 	
-	//public void activateController
 	//getters and setters for controller
 	
-//	public void setServerMatchCommunication(Server s){server = s;}
 	public void sendMatchInfo(Object o){
 		Packet7MatchFunction gamePacket = new Packet7MatchFunction(); 
 		gamePacket.setObject(o);
