@@ -47,14 +47,8 @@ public class LoadingPanel extends JPanel implements ImageLoadingGUI {
 	}
 
 	@Override
-	public void imagesBeginLoad(int t) {
-		//total = t;
-	}
-
-	@Override
 	public void update(int current, int total) {
 		int percentage = (int)(((float)current/(float)total)*100);
 		progressBar.setValue(percentage);
-		System.out.println(percentage);
 	}
 }

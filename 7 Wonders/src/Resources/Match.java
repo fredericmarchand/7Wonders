@@ -21,6 +21,7 @@ import com.esotericsoftware.kryonet.Server;
 public class Match {
 	
 	ArrayList<Connection> connected;
+	//ArrayList<Long> userIDList;
 	ArrayList<User> userList;
     private long match_id;
     private static long counter = 1000;
@@ -29,6 +30,7 @@ public class Match {
     private int receivedEvents = 0;
     ArrayList<CommandMessage> cmdMsgList;
     private boolean inProgress;
+    
 
     ///////////////////////////////////////////
     //    handle ai creation
@@ -36,26 +38,28 @@ public class Match {
     
     /////FIX///////////////////////////////////
     //freds new class
-    Match2 controller;
+    private Match2 controller;
     
     public Match(int h,int ai){
+    	//userIDList = new ArrayList<Long>();
+    	userList = new ArrayList<User>();
     	connected = new ArrayList<Connection>();
 		match_id = ++counter;
 		cmdMsgList = new ArrayList<CommandMessage>();
 		inProgress = false;
-		MAX_PLAYER_COUNT = h+ai;
-		
+		MAX_PLAYER_COUNT = h+ai;		
     }
-    public  int getMaxPlayerCount() {return MAX_PLAYER_COUNT;}
+    public int getMaxPlayerCount() {return MAX_PLAYER_COUNT;}
     public boolean get_inProgress(){return inProgress;}
 	public ArrayList<Connection> getConnections(){return connected;}	
 	public void addConnection(Connection c, Object o){
 		userList.add((User)o);
+		//userIDList.add(o);
 		connected.add(c);
 		update();
 	}
 	public void removeConnection(Connection c, Object o) {
-		userList.remove(o);
+		userList.remove((User)o);
 		connected.remove(c);
 		update();
 	}
@@ -74,21 +78,10 @@ public class Match {
 		}
 	}
 
-	public boolean countDown(){
-		System.out.println("[MATCH] STARTING IN T-MINUS 30 SECONDS");
-		for(int i = 30; i > 0;i--){
-			if(connection_count!=MAX_PLAYER_COUNT){
-				System.out.println("Someone has disconnected");
-				return false;
-			}
-			System.out.println(i);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		return true;
+	public void generateAI(long ID){
+		//new AI(ID)
+		//add something to sending something to AI
+		
 	}
 
 	public boolean contains(Connection c){
@@ -136,15 +129,15 @@ public class Match {
 	public void startMatch(){
 		controller = new Match2(userList);
 		inProgress = true;
-		sendStartMatchRequest(controller);
+		sendStartMatchRequest();
 	}
 	
 	public void endMatch(){
 		sendEndMatchRequest();
 	}
-	public void sendStartMatchRequest(Match2 ctrl){
+	public void sendStartMatchRequest(){
 		Packet9StartMatch start = new Packet9StartMatch();
-		start.setObject(ctrl);
+		start.setObject(new Match2(userList));
 		
 			for(Connection c: connected){
 				c.sendTCP(start);

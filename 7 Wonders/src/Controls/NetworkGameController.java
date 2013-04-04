@@ -2,9 +2,11 @@ package Controls;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
+import Images.Images;
 import Player.Player;
 import Structures.Structure;
-import Structures.Cards.ScientistsGuild;
 import Structures.Effects.BuildDiscardedCard;
 import Structures.Effects.CopyGuild;
 import Structures.Effects.PlayLastCard;
@@ -15,9 +17,8 @@ import Tokens.Resources;
 import Tokens.ScientificSymbols;
 import View.MainFrame;
 import WonderBoards.WonderBoardStage;
-import WonderBoards.Boards.TheHangingGardensOfBabylon;
 
-public class GameController extends java.lang.Thread implements Controller, Runnable {
+public class NetworkGameController extends java.lang.Thread implements Controller, Runnable {
 
 	public static final int BEGINNINGTURN = 0;
 	public static final int MOVE = 1;
@@ -25,26 +26,29 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 
 
 	private Player user;
-	private Match1 match;
+	private Match2 match;
 	private MainFrame frame;
 	
-	public GameController(Player p, Match1 m)
+	public NetworkGameController(Player p, Match2 m)
 	{
 		user = p;
 		match = m;
 		
-		match.addLocalPlayer(user);
-		match.fillWithAI();
+		//match.addLocalPlayer(user);
+		//match.fillWithAI();
 		match.init();
 		
 		run();
+		//frame = new MainFrame(this);
+		//frame.startMatch(match);
+		//frame.setVisible(true);
 	}
 	
 	public void run()
 	{
-		
+		Images.run();
 		frame = new MainFrame(this);
-		//frame.startMatch(match);
+		frame.startMatch(match);
 		frame.setVisible(true);
 	}
 	
@@ -59,25 +63,14 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 	public void buildStructure() 
 	{
 		int ans = user.canBuild(match.getLeftNeighbor(user), match.getRightNeighbor(user));
-		if ( ans == 2 )
+		switch ( ans )
 		{
-			user.buildStructure();
+		case 1:
+			match.initMove(user, 1, -1);
+			break;
+		case 2:
+			match.initMove(user, 1, 2);
 		}
-		else if ( ans == 1 )
-		{
-			user.buildStructure(match.getLeftNeighbor(user), match.getRightNeighbor(user), 2);
-		}
-		user.getCards().remove(user.getChosenCard());
-		user.chooseCard(null);
-		match.handleAIPlayerMoves();
-		match.playerEndOfTurnSpecialEffects(user);
-		match.endOfTurn();
-
-		if ( match.getAge() == 4 ) 
-		{
-			match.discardAllPlayersCards();
-		}
-		
 		frame.update();
 	}
 
@@ -91,25 +84,14 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 	public void buildWonderStage() 
 	{
 		int ans = user.canBuildStage(match.getLeftNeighbor(user), match.getRightNeighbor(user));
-		if ( ans == 2 )
+		switch ( ans )
 		{
-			user.buildStage();
+		case 1:
+			match.initMove(user, 2, -1);
+			break;
+		case 2:
+			match.initMove(user, 2, 2);
 		}
-		else if ( ans == 1 )
-		{
-			user.buildStage(match.getLeftNeighbor(user), match.getRightNeighbor(user), 2);
-		}
-		user.getCards().remove(user.getChosenCard());
-		user.chooseCard(null);
-		match.handleAIPlayerMoves();
-		match.playerEndOfTurnSpecialEffects(user);
-		match.endOfTurn();
-
-		if ( match.getAge() == 4 ) 
-		{
-			match.discardAllPlayersCards();
-		}
-		
 		frame.update();
 	}
 
@@ -156,13 +138,14 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 				if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID && se.activateTime() == SpecialEffect.END_OF_GAME )
 					((ScientificSymbolBonus)se).chooseSymbol(user, s);		
 			}
+		
 		}*/
-		if(symbs != null) {
-			for ( ScientificSymbols sy : symbs )
-			{
-				user.getScientificSymbols().addScientifcSymbols(sy);
-			}
-		}
+		//for ( ScientificSymbols sy : symbs )
+		//{
+		//	user.getScientificSymbols().addScientifcSymbols(sy);
+		//}
+		match.initScienceChoice(user, symbs);
+		
 	}
 
 	@Override
@@ -234,17 +217,7 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 	@Override
 	public void discardChosen() 
 	{
-		user.discard(match.getDiscardedCards());
-		user.chooseCard(null);
-		match.handleAIPlayerMoves();
-		match.playerEndOfTurnSpecialEffects(user);
-		match.endOfTurn();
-
-		if ( match.getAge() == 4 ) 
-		{
-			match.discardAllPlayersCards();
-		}
-		
+		match.initMove(user, 3, 2);		
 		frame.update();
 	}
 
@@ -264,7 +237,7 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 				}
 			}
 		}
-		return new ArrayList<Structure>();
+		return null;
 	}
 
 	@Override
@@ -326,7 +299,7 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 	@Override
 	public void resourceChosen(ArrayList<Resources> resources) 
 	{
-		int i = 0;
+		/*int i = 0;
 		for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
@@ -347,9 +320,12 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 				}
 			}
 		}
+		//System.out.println(user.getTotalResources().toString());*/
+		//if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
+		//	frame.update();
 		
-		if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
-			frame.update();
+		match.initResourceChoice(user, resources);
+		
 	}
 	
 	public void callGarbageTruck()
@@ -360,48 +336,9 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 	
 	public static void main(String args[])
 	{
-		//String name = JOptionPane.showInputDialog("What is your username? ");
-		//@SuppressWarnings("unused")
-		//GameController gc = new GameController(new Player(name, 0), new Match1());
-		ArrayList<ScientificSymbols> symbs = new ArrayList<ScientificSymbols>();
-		// TODO Auto-generated method stub
-		Player p = new Player();
-		p.assignWonderBoard(new TheHangingGardensOfBabylon(0));
-		p.getWonderBoard().buildStage(new Structure(), new Resources(5, 5, 5, 5, 5, 5, 5, 5));
-		p.getWonderBoard().buildStage(new Structure(), new Resources(5, 5, 5, 5, 5, 5, 5, 5));
-		System.out.println(p.getWonderBoard().getStages().get(1).isBuilt());
-		p.getWonderBoard().getPurpleCards().add(new ScientistsGuild());
-		
-		for ( Structure s: p.getWonderBoard().getPurpleCards() )
-		{
-			for ( SpecialEffect se: s.getEffects() )
-			{
-				if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
-				{
-					if ( ((ScientificSymbolBonus)se).canChoose() )
-						symbs.add(new ScientificSymbols());
-				}
-			}
-		}
-		for ( WonderBoardStage stg: p.getWonderBoard().getStages() )
-		{
-			if ( stg.isBuilt() )
-			{
-				for ( SpecialEffect se: stg.getEffects() )
-				{
-					if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID )
-					{
-						if ( ((ScientificSymbolBonus)se).canChoose() )
-							symbs.add(new ScientificSymbols());
-					}
-				}
-			}
-		}
-		for ( ScientificSymbols s: symbs )
-		{
-			System.out.println(s.getCompass() + " " + s.getGears() + " " + s.getTablets());
-		}
-		
+		String name = JOptionPane.showInputDialog("What is your username? ");
+		@SuppressWarnings("unused")
+		NetworkGameController gc = new NetworkGameController(new Player(name, 0), new Match2());
 	}
 	
 }

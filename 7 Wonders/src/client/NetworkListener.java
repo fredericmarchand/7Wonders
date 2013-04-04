@@ -36,6 +36,7 @@ public class NetworkListener extends Listener{
 	public void disconnected(Connection arg0) {
 		// TODO Auto-generated method stub
 		System.out.println("[CLIENT] Disconnected");
+		System.exit(0);
 		//super.disconnected(arg0);
 	}
 	
@@ -50,6 +51,8 @@ public class NetworkListener extends Listener{
 			}
 			mclient.setMatchList((ArrayList<Long>)((Packet1LoginAnswer)o).getObject());
 			mclient.setID(((Packet1LoginAnswer)o).getIDValue());
+			mclient.createUser();
+			//mclient.sendUserInfo();
 		}
 		//check if client has been able to join game
 		//if yes, join lobby
@@ -87,14 +90,15 @@ public class NetworkListener extends Listener{
 		}
 		if(o instanceof Packet9StartMatch){
 			mclient.startMatch(((Packet9StartMatch)o).getObject());
+			mclient.getLink().getChat().countdown();
 		}
 		if(o instanceof Packet14HostCreateMatch){
 			mclient.setMID(((Packet14HostCreateMatch)o).getMID());
 			mclient.setHost(true);
-			if(((Packet14HostCreateMatch)o).getnPlayer()>1){
-				//mclient.getLink().launchMatchLobby();
+			if(((Packet14HostCreateMatch)o).getnPlayer()>0){
 				mclient.getLink().launchChatFrame();
 			}
+			
 		}
 		if( o instanceof Packet15MatchDisconnect){
 			System.out.println("[CLIENT]  Graceful Disconnect");

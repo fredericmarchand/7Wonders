@@ -76,15 +76,17 @@ public class StartMenu extends JFrame {
 			System.exit(0);
 		}
 		mclient = new MClient();
+		mclient.setUser_username(uname);
 		try{
 			mclient.serverConnect(ip, Integer.parseInt(port));
 		}catch(Exception e){
 			this.dispose();
 			JOptionPane.showMessageDialog(null, "Incorrect Input");
 			showGUI();
+			System.exit(0);
 		}
 
-		mclient.createUser(uname, mclient.getID());
+		//mclient.createUser(uname, mclient.getID());
 		//mclient.setUser_username(uname);
 		//give weird port # will fail
 

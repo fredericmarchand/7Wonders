@@ -9,7 +9,7 @@ import Tokens.Resources;
 import Tokens.ScientificSymbols;
 
 import Controls.Controller;
-import Controls.Match1;
+import Controls.Match2;
 import Images.Images;
 
 import java.awt.Color;
@@ -24,8 +24,9 @@ import java.awt.image.BufferedImage;
 public class MatchPanel extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
 	
-	private Match1 match;
+	private Match2 match;
 	
+	int numplayers;
 	private FarPanel f1, f2, f3, f4;
 	private NearPanel n1, n2;
 	private LocalPanel playerPanel;
@@ -48,7 +49,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	private ArrayList<Structure> needDiscarded;
 	private ArrayList<Structure> needGuild;
 	
-	public MatchPanel(Match1 m, Controller c) {
+	public MatchPanel(Match2 m, Controller c) {
 		setLayout(null);
 		setSize(1280, 860);
 		setBackground(Color.WHITE);
@@ -64,12 +65,6 @@ public class MatchPanel extends JPanel implements Runnable {
 		// Start asynchronous part
 		run();
 		
-		rcp = new ResourceChoicePanel(this);
-		rcp.setVisible(false);
-		
-		scp = new ScienceChoicePanel(this);
-		scp.setVisible(false);
-		
 		add(scp);
 		add(rcp);
 		add(scrollpane);
@@ -77,14 +72,12 @@ public class MatchPanel extends JPanel implements Runnable {
 		add(playerPanel);
 		add(n1);
 		add(n2);
-		add(f1);
-		add(f2);
-		add(f3);
-		add(f4);
+		if(numplayers > 3) add(f1);
+		if(numplayers > 4) add(f2);
+		if(numplayers > 5) add(f3);
+		if(numplayers > 6) add(f4);
 		add(lblAge);
 		add(lblTurn);
-		
-		scrollpane.setVisible(false);
 		
 		// Add solid white BG to fix background repaint issue with scrollpanes
 		BufferedImage bi = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -102,34 +95,64 @@ public class MatchPanel extends JPanel implements Runnable {
 	
 	public void run(){
 		
-		playerPanel = new LocalPanel(match.getPlayers().get(0), controller);
+		numplayers = match.getPlayers().size();
+		
+		// Local
+		Player.Player p1 = match.getLocalPlayer();
+		playerPanel = new LocalPanel(p1, controller);
 		playerPanel.addMouseListener(buildMouseAdapterLocal());
 		playerPanel.setLocation(401, 450);
 		
-		// Neighbours
-		n1 = new NearPanel(match.getPlayers().get(6), controller);
-		n1.setLocation(0, 150);
-		n1.addMouseListener(buildMouseAdapterNear());
-		n2 = new NearPanel(match.getPlayers().get(1), controller);
+		// Right Neighbor
+		Player.Player p2 = match.getRightNeighbor(p1);
+		n2 = new NearPanel(p2, controller);
 		n2.setLocation(802, 150);
 		n2.addMouseListener(buildMouseAdapterNear());
 		
-		// Foreigners
-		f1 = new FarPanel(match.getPlayers().get(5), controller);
-		f1.setLocation(0, 0);
-		f1.addMouseListener(buildMouseAdapterFar());
-		f2 = new FarPanel(match.getPlayers().get(4), controller);
-		f2.setLocation(320, 0);
-		f2.addMouseListener(buildMouseAdapterFar());
-		f3 = new FarPanel(match.getPlayers().get(3), controller);
-		f3.setLocation(640, 0);
-		f3.addMouseListener(buildMouseAdapterFar());
-		f4 = new FarPanel(match.getPlayers().get(2), controller);
-		f4.setLocation(960, 0);
-		f4.addMouseListener(buildMouseAdapterFar());
+		// Left Neighbor
+		Player.Player p3 = match.getLeftNeighbor(p1);
+		n1 = new NearPanel(p3, controller);
+		n1.setLocation(0, 150);
+		n1.addMouseListener(buildMouseAdapterNear());
+		
+		
+		Player.Player p4 = null;
+		Player.Player p5 = null;
+		Player.Player p6 = null;
+		Player.Player p7 = null;
+		f1 = null;
+		f2 = null;
+		f3 = null;
+		f4 = null;
+
+		if(numplayers > 3) {
+			p4 = match.getRightNeighbor(p2);
+			f1 = new FarPanel(p4);
+			f1.setLocation(getForeignPos(numplayers, 0), 0);
+			f1.addMouseListener(buildMouseAdapterFar());
+		}
+		if(numplayers > 4) {
+			p5 = match.getRightNeighbor(p4);
+			f2 = new FarPanel(p5);
+			f2.setLocation(getForeignPos(numplayers, 1), 0);
+			f2.addMouseListener(buildMouseAdapterFar());
+		}
+		if(numplayers > 5) {
+			p6 = match.getRightNeighbor(p5);
+			f3 = new FarPanel(p6);
+			f3.setLocation(getForeignPos(numplayers, 2), 0);
+			f3.addMouseListener(buildMouseAdapterFar());
+		}
+		if(numplayers > 6) {
+			p7 = match.getRightNeighbor(p6);
+			f4 = new FarPanel(p7);
+			f4.setLocation(getForeignPos(numplayers, 3), 0);
+			f4.addMouseListener(buildMouseAdapterFar());
+		}
+		
 		
 		// Cards
-		cardsPanel = new CardsPanel(match.getPlayers().get(0).getCards(), controller);
+		cardsPanel = new CardsPanel(match.getLocalPlayer().getCards(), controller);
 		cardsPanel.setSize(1274, 280);
 		cardsPanel.setLocation(3, 558);
 		cardsPanel.addMouseListener(buildMouseAdapterCards());
@@ -167,27 +190,33 @@ public class MatchPanel extends JPanel implements Runnable {
 	            matchpanel.repaint();
 	        }
 	    });
+		scrollpane.setVisible(false);
 		
+		rcp = new ResourceChoicePanel(this);
+		rcp.setVisible(false);
 		
+		scp = new ScienceChoicePanel(this);
+		scp.setVisible(false);
 	}
 	
 	public void update() {
-		cardsPanel.setCards(match.getPlayers().get(0).getCards());
+		cardsPanel.setCards(match.getLocalPlayer().getCards());
 		if(match.getAge() == 4) {
 			lblAge.setIcon(null);
 			lblAge.setText("GAME OVER!");
+			lblTurn.setText(null);
 		} else {
 			lblAge.setIcon(Images.get("age"+match.getAge()));
 			lblAge.setText(null);
+			lblTurn.setText("Round "+ match.getTurn() +" of 6");
 		}
-		lblTurn.setText("Round "+ match.getTurn() +" of 6");
 		playerPanel.update();
-		f1.update();
-		f2.update();
-		f3.update();
-		f4.update();
 		n1.update();
 		n2.update();
+		if(f1 != null) f1.update();
+		if(f2 != null) f2.update();
+		if(f3 != null) f3.update();
+		if(f4 != null) f4.update();
 		cardsPanel.update();
 		
 		// Choose resources
@@ -325,5 +354,13 @@ public class MatchPanel extends JPanel implements Runnable {
 				}
 			}
 		};
+	}
+	
+	private int getForeignPos(int numplayers, int index){
+		if(numplayers == 4) return 480;
+		if(numplayers == 5) return 320 + 320*index;
+		if(numplayers == 6) return 160 + 320*index;
+		if(numplayers == 7) return 320*index;
+		return 0;
 	}
 }

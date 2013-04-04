@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import Player.Player;
 import Resources.Packet;
+import Tokens.Resources;
+import Tokens.ScientificSymbols;
 import client.MClient;
 
 public class CommandMessage {
@@ -16,24 +18,24 @@ public class CommandMessage {
 
 	private long playerID; 
 	private int msgType;
-	private ArrayList<Integer> resourceChoice;
+	private ArrayList<Resources> resourceChoice;
 	private int cardID;
 	private int action;
 	private int preference;
-	private int symbolChoice;
+	private ArrayList<ScientificSymbols> symbolChoice;
 	
 	public CommandMessage()
 	{
 		playerID = 0;
 		msgType = 0;
-		resourceChoice = new ArrayList<Integer>();
+		resourceChoice = new ArrayList<Resources>();
 		cardID = 0;
 		action = 0;
 		preference = 0;
-		symbolChoice = 0;
+		symbolChoice = new ArrayList<ScientificSymbols>();
 	}
 	
-	public CommandMessage(long pid, int type, int cardid, int actionchoice, int tradepreference, int scientificSymbol, ArrayList<Integer> reschoice)
+	public CommandMessage(long pid, int type, int cardid, int actionchoice, int tradepreference, ArrayList<ScientificSymbols> scientificSymbols, ArrayList<Resources> reschoice)
 	{
 		playerID = pid;
 		msgType = type;
@@ -41,7 +43,7 @@ public class CommandMessage {
 		cardID = cardid;
 		action = actionchoice;
 		preference = tradepreference;
-		symbolChoice = scientificSymbol;
+		symbolChoice = scientificSymbols;
 	}
 	
 	public long getPlayerID()
@@ -89,18 +91,22 @@ public class CommandMessage {
 		preference = p;
 	}
 	
-	public int getScientificSymbol()
+	public ArrayList<ScientificSymbols> getScientificSymbols()
 	{
 		return symbolChoice;
 	}
-	public void setScientificSymbol(int s)
+	public void setScientificSymbol(ArrayList<ScientificSymbols> s)
 	{
 		symbolChoice = s;
 	}
 	
-	public ArrayList<Integer> getResourceChoices()
+	public ArrayList<Resources> getResourceChoices()
 	{
 		return resourceChoice;
+	}
+	public void setResourceChoices(ArrayList<Resources> choices)
+	{
+		resourceChoice = choices;
 	}
 
 	

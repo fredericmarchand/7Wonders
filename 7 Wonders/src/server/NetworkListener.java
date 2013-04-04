@@ -61,6 +61,7 @@ public class NetworkListener extends Listener {
 			// create response
 			// assign client an ID value
 			// send info through packets
+			System.out.println("[SERVER] Client connected");
 			Packet1LoginAnswer loginAnswer = new Packet1LoginAnswer();
 			loginAnswer.setAccepted(true);
 			loginAnswer.setIDValue(mserver.getID());
@@ -95,7 +96,7 @@ public class NetworkListener extends Listener {
 			System.out
 					.println("[SERVER] CLIENT HAS BEEN REMOVED"
 							+ mserver.removeClient(c,
-									((Packet5Disconnect) o).getMID(),((Packet5Disconnect)o).getObject()));
+									((Packet5Disconnect) o).getMID(),((Packet5Disconnect)o).getCID()));
 
 		}
 		if (o instanceof Packet6ChatMsg) {
@@ -133,7 +134,8 @@ public class NetworkListener extends Listener {
 			long matchID = mserver.createMatch(
 					((Packet12CreateMatch) o).getHuman(),
 					((Packet12CreateMatch) o).getAI());
-			mserver.bridgeClient(c, matchID,((Packet12CreateMatch)o).getObject());// adding client to match
+			
+			mserver.bridgeClient(c, matchID,((Packet12CreateMatch)o).getUser());// adding client to match
 												// connection list
 
 			Packet14HostCreateMatch packet = new Packet14HostCreateMatch();
@@ -150,12 +152,15 @@ public class NetworkListener extends Listener {
 				joinResponse.setIDValue(0);
 			} else {
 				join = mserver.bridgeClient(c, ((Packet13MatchJoinRequest) o)
-						.getMID(), ((Packet13MatchJoinRequest)o).getObject());
+						.getMID(), ((Packet13MatchJoinRequest)o).getUser());
 				joinResponse.setAccepted(join);
 				joinResponse.setIDValue(((Packet13MatchJoinRequest) o)
 						.getMID());
 			}
 			c.sendTCP(joinResponse);
+		}
+		if(o instanceof Packet16UserObject){
+			System.out.println("[SERVER] WOOP");
 		}
 	}
 

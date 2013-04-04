@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
+import Controls.Match1;
+import Controls.Match2;
+import Player.User;
 import Resources.Match;
 import Resources.Packet.*;
 
@@ -45,6 +48,11 @@ public class MServer {
 	public long createMatch(int h, int ai){		
 		Match m = new Match(h,ai);
 		matchList.add(m);
+		if(ai>0){
+			for(int i = 0;i<ai; i++)
+				m.generateAI(client_ID);
+				incID();
+		}
 		//m.setServerMatchCommunication(server);
 //		for(Match m: matchList)
 //			System.out.println(m.getMatch_ID());
@@ -61,11 +69,11 @@ public class MServer {
 	 */
 	
 	//To be modified
-	public boolean bridgeClient(Connection c, long m_id, Object user){
+	public boolean bridgeClient(Connection c, long m_id, Object o){
 		for(Match m : matchList){
 			if(m.getMatch_ID()==m_id){
 				if(m.getConnectionCount()<m.getMaxPlayerCount()){
-					m.addConnection(c,user);
+					m.addConnection(c,o);
 					return true;
 				}
 			}
@@ -73,10 +81,10 @@ public class MServer {
 		return false;
 	}
 	
-	public boolean removeClient(Connection c, long m_id, Object user){
+	public boolean removeClient(Connection c, long m_id, long cid){
 		for(Match m : matchList){
 			if(m.getMatch_ID()==m_id){
-				m.removeConnection(c,user);
+				m.removeConnection(c,cid);
 				return true;
 			}
 		}
@@ -131,8 +139,126 @@ public class MServer {
 		kryo.register(Packet13MatchJoinRequest.class);
 		kryo.register(Packet14HostCreateMatch.class);
 		kryo.register(Packet15MatchDisconnect.class);
+		kryo.register(Packet16UserObject.class);
 		kryo.register(java.util.ArrayList.class);
-		kryo.register(Match.class);	
+		kryo.register(Match1.class);
+		kryo.register(Match2.class);
+		kryo.register(User.class);
+		
+		
+		kryo.register(Structures.Structure.class);
+		kryo.register(Structures.Cards.Academy.class);
+		kryo.register(Structures.Cards.Altar.class);
+		kryo.register(Structures.Cards.Apothecary.class);
+		kryo.register(Structures.Cards.Aqueduct.class);
+		kryo.register(Structures.Cards.ArcheryRange.class);
+		kryo.register(Structures.Cards.Arena.class);
+		kryo.register(Structures.Cards.Arsenal.class);
+		kryo.register(Structures.Cards.Barracks.class);
+		kryo.register(Structures.Cards.Baths.class);
+		kryo.register(Structures.Cards.Bazar.class);
+		kryo.register(Structures.Cards.Brickyard.class);
+		kryo.register(Structures.Cards.BuildersGuild.class);
+		kryo.register(Structures.Cards.Caravansery.class);
+		kryo.register(Structures.Cards.ChamberOfCommerce.class);
+		kryo.register(Structures.Cards.Circus.class);
+		kryo.register(Structures.Cards.ClayPit.class);
+		kryo.register(Structures.Cards.ClayPool.class);
+		kryo.register(Structures.Cards.Courthouse.class);
+		kryo.register(Structures.Cards.CraftmensGuild.class);
+		kryo.register(Structures.Cards.Dispensary.class);
+		kryo.register(Structures.Cards.EastTradingPost.class);
+		kryo.register(Structures.Cards.Excavation.class);
+		kryo.register(Structures.Cards.ForestCave.class);
+		kryo.register(Structures.Cards.Fortifications.class);
+		kryo.register(Structures.Cards.Forum.class);
+		kryo.register(Structures.Cards.Foundry.class);
+		kryo.register(Structures.Cards.Gardens.class);
+		kryo.register(Structures.Cards.Glassworks.class);
+		kryo.register(Structures.Cards.GuardTower.class);
+		kryo.register(Structures.Cards.Haven.class);
+		kryo.register(Structures.Cards.Laboratory.class);
+		kryo.register(Structures.Cards.Library.class);
+		kryo.register(Structures.Cards.Lighthouse.class);
+		kryo.register(Structures.Cards.Lodge.class);
+		kryo.register(Structures.Cards.Loom.class);
+		kryo.register(Structures.Cards.LumberYard.class);
+		kryo.register(Structures.Cards.MagistratesGuild.class);
+		kryo.register(Structures.Cards.Marketplace.class);
+		kryo.register(Structures.Cards.Mine.class);
+		kryo.register(Structures.Cards.Observatory.class);
+		kryo.register(Structures.Cards.OreVein.class);
+		kryo.register(Structures.Cards.Palace.class);
+		kryo.register(Structures.Cards.Pantheon.class);
+		kryo.register(Structures.Cards.PawnShop.class);
+		kryo.register(Structures.Cards.PhilosophersGuild.class);
+		kryo.register(Structures.Cards.Press.class);
+		kryo.register(Structures.Cards.Quarry.class);
+		kryo.register(Structures.Cards.Sawmill.class);
+		kryo.register(Structures.Cards.School.class);
+		kryo.register(Structures.Cards.ScientistsGuild.class);
+		kryo.register(Structures.Cards.Scriptorium.class);
+		kryo.register(Structures.Cards.Senate.class);
+		kryo.register(Structures.Cards.ShipownersGuild.class);
+		kryo.register(Structures.Cards.SiegeWorkshop.class);
+		kryo.register(Structures.Cards.SpiesGuild.class);
+		kryo.register(Structures.Cards.Stables.class);
+		kryo.register(Structures.Cards.Statue.class);
+		kryo.register(Structures.Cards.Stockade.class);
+		kryo.register(Structures.Cards.StonePit.class);
+		kryo.register(Structures.Cards.StrategistsGuild.class);
+		kryo.register(Structures.Cards.Study.class);
+		kryo.register(Structures.Cards.Tavern.class);
+		kryo.register(Structures.Cards.Temple.class);
+		kryo.register(Structures.Cards.Theater.class);
+		kryo.register(Structures.Cards.TimberYard.class);
+		kryo.register(Structures.Cards.TownHall.class);
+		kryo.register(Structures.Cards.TradersGuild.class);
+		kryo.register(Structures.Cards.TrainingGround.class);
+		kryo.register(Structures.Cards.TreeFarm.class);
+		kryo.register(Structures.Cards.University.class);
+		kryo.register(Structures.Cards.Vineyard.class);
+		kryo.register(Structures.Cards.Walls.class);
+		kryo.register(Structures.Cards.WestTradingPost.class);
+		kryo.register(Structures.Cards.WorkersGuild.class);
+		kryo.register(Structures.Cards.Workshop.class);
+		
+		kryo.register(Structures.Effects.BuildDiscardedCard.class);
+		kryo.register(Structures.Effects.CardCoinBonus.class);
+		kryo.register(Structures.Effects.CardVictoryPointBonus.class);
+		kryo.register(Structures.Effects.CoinBonus.class);
+		kryo.register(Structures.Effects.CopyGuild.class);
+		kryo.register(Structures.Effects.FreeConstruction.class);
+		kryo.register(Structures.Effects.MilitaryDefeatBonus.class);
+		kryo.register(Structures.Effects.PlayLastCard.class);		
+		kryo.register(Structures.Effects.ResourceChoice.class);
+		kryo.register(Structures.Effects.ResourcesBonus.class);
+		kryo.register(Structures.Effects.ScientificSymbolBonus.class);
+		kryo.register(Structures.Effects.ShieldBonus.class);
+		kryo.register(Structures.Effects.SpecialEffect.class);
+		kryo.register(Structures.Effects.TradingPerks.class);
+		kryo.register(Structures.Effects.VictoryPointBonus.class);
+		kryo.register(Structures.Effects.WonderStageCoinBonus.class);
+		kryo.register(Structures.Effects.WonderStageVictoryPointBonus.class);
+		
+		kryo.register(Tokens.ConflictTokens.class);
+		kryo.register(Tokens.Resources.class);
+		kryo.register(Tokens.ScientificSymbols.class);
+		
+		kryo.register(Player.Player.class);
+		
+		kryo.register(WonderBoards.WonderBoard.class);
+		kryo.register(WonderBoards.WonderBoardStage.class);
+		
+		kryo.register(WonderBoards.Boards.TheColossusOfRhodes.class);
+		kryo.register(WonderBoards.Boards.TheHangingGardensOfBabylon.class);
+		kryo.register(WonderBoards.Boards.TheLighthouseOfAlexandria.class);
+		kryo.register(WonderBoards.Boards.TheMausoleumOfHalicarnassus.class);
+		kryo.register(WonderBoards.Boards.ThePyramidsOfGiza.class);
+		kryo.register(WonderBoards.Boards.TheStatueOfZeusInOlympia.class);
+		kryo.register(WonderBoards.Boards.TheTempleOfArtemisInEphesus.class);
+		
+		kryo.register(Controls.CommandMessage.class);
 	}
 	
 	public static void main(String[] args){

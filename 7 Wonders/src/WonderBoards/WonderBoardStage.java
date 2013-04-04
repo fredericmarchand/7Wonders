@@ -31,7 +31,6 @@ public class WonderBoardStage {
 		effects = new ArrayList<SpecialEffect>();
 	}
 	
-	
 	public Resources getResourceCost()
 	{
 		return resourceCost;
