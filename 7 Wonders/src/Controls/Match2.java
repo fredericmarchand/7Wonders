@@ -120,6 +120,11 @@ public class Match2 {
 		return null;
 	}
 	
+	public void addAIPlayer(long id, String name)
+	{
+		players.add(new AIPlayer(id, name));
+	}
+	
 	//server side
 	public void addInitialResources(ArrayList<Player> plyrs)
 	{
@@ -363,7 +368,7 @@ public class Match2 {
 	
 	public Player getRightNeighbor(Player p)
 	{
-		for ( int i = 0; i < players.size(); --i )
+		for ( int i = 0; i < players.size(); ++i )
 		{
 			if ( players.get(i).getID() == p.getID() )
 			{
