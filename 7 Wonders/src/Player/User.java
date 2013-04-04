@@ -58,7 +58,10 @@ public class User {
 	
 	public void sendCommandMessage()
 	{
-		client.sendCommandMessage(msg);
+		if(client!= null)
+			client.sendCommandMessage(msg);
+		
+		System.out.println(msg);
 	}
 	
 	public void updateMatch(Match2 match)
