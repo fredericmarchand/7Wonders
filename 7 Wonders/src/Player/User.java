@@ -13,7 +13,6 @@ public class User {
 	private Match2 currentMatch;
 	private CommandMessage msg;
 	private MClient client;
-	private boolean isLocalPlayer;
 	
 	//default constructor
 	public User(){}
