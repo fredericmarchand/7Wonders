@@ -34,19 +34,13 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		user = p;
 		match = m;
 		
-		//match.addLocalPlayer(user);
-		//match.fillWithAI();
 		match.init();
 		
 		run();
-		//frame = new MainFrame(this);
-		//frame.startMatch(match);
-		//frame.setVisible(true);
 	}
 	
 	public void run()
 	{
-		Images.run();
 		frame = new MainFrame(this);
 		frame.startMatch(match);
 		frame.setVisible(true);
@@ -237,7 +231,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 				}
 			}
 		}
-		return null;
+		return new ArrayList<Structure>();
 	}
 
 	@Override
@@ -323,7 +317,8 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		//System.out.println(user.getTotalResources().toString());*/
 		//if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
 		//	frame.update();
-		
+		if ( resources == null )
+			resources = new ArrayList<Resources>();
 		match.initResourceChoice(user, resources);
 		
 	}

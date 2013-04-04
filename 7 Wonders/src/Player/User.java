@@ -2,7 +2,6 @@ package Player;
 
 import client.MClient;
 import Controls.CommandMessage;
-import Controls.Match1;
 import Controls.Match2;
 import Controls.NetworkGameController;
 
@@ -13,7 +12,6 @@ public class User {
 	private Match2 currentMatch;
 	private CommandMessage msg;
 	private MClient client;
-	private boolean isLocalPlayer;
 	
 	//default constructor
 	public User(){}
@@ -60,7 +58,10 @@ public class User {
 	
 	public void sendCommandMessage()
 	{
-		client.sendCommandMessage(msg);
+		if(client!= null)
+			client.sendCommandMessage(msg);
+		
+		System.out.println(msg);
 	}
 	
 	public void updateMatch(Match2 match)

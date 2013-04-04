@@ -37,6 +37,12 @@ public class AIPlayer extends Player {
 		favor = rand.nextInt(3);
 	}
 	
+	public AIPlayer(long id, String name){
+		super(name, id);
+		isAI = true;
+		strategy = rand.nextInt(3);
+	}
+	
 	public void pickCard(ArrayList<Structure> discarded, Player leftNeighbor, Player rightNeighbor)
 	{
 		strategy.strategicPick(this, discarded, leftNeighbor, rightNeighbor);
