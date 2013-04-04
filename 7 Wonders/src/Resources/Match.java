@@ -10,6 +10,7 @@ import server.MServer;
 
 import Controls.CommandMessage;
 import Controls.Match2;
+import Player.Player;
 import Player.User;
 import Resources.Packet.Packet10EndMatch;
 import Resources.Packet.Packet7MatchFunction;
@@ -24,7 +25,7 @@ public class Match {
 	
 	ArrayList<Connection> connected;
 	ArrayList<User> userList;
-	ArrayList<User> AIuserList;
+	ArrayList<User> aiList;
     ArrayList<CommandMessage> cmdMsgList;
     private long match_id;
     private static long counter = 1000;
@@ -46,27 +47,27 @@ public class Match {
     public Match(int h,int ai, MServer m){
     	server = m;
     	userList = new ArrayList<User>();
-    	AIuserList = new ArrayList<User>();
+    	aiList = new ArrayList<User>();
     	connected = new ArrayList<Connection>();
 		match_id = ++counter;
 		cmdMsgList = new ArrayList<CommandMessage>();
 		inProgress = false;
 		MAX_PLAYER_COUNT = h+ai;
-		generateAI(ai);
-			
+		generateAI(ai);			
     }
     public int getMaxPlayerCount() {return MAX_PLAYER_COUNT;}
     public boolean get_inProgress(){return inProgress;}
 	public ArrayList<Connection> getConnections(){return connected;}	
 	public void addConnection(Connection c, Object o){
-		userList.add((User)o);
-		//userIDList.add(o);
+		userList.add((User)o);		
 		connected.add(c);
+		connection_count++;
 		update();
 	}
 	public void removeConnection(Connection c, Object o) {
 		userList.remove((User)o);
 		connected.remove(c);
+		connection_count--;
 		update();
 	}
 	public void removeConnectionOnly(Connection c){
@@ -76,7 +77,6 @@ public class Match {
 	public long getMatch_ID(){return match_id;}
 	public int getConnectionCount(){return connection_count;}
 	public void update(){
-		connection_count = connected.size();
 		System.out.println(connection_count);
 		if(connection_count==MAX_PLAYER_COUNT){
 			System.out.println("Starting Game!");
@@ -87,18 +87,14 @@ public class Match {
 	public void generateAI(int n){
 		long idAI;
 		String usernameAI;
-		for(int i = 0; i<n;i++)
+		for(int i = 0; i<n;i++){
 			idAI= server.getID();
 			server.incID();
 			usernameAI = "JP the evil frenchmen"; 
-			controller.newAIPlayer(idAI, usernameAI);
-			AIuserList.add(controller.newAIPlayer(idAI, usernameAI);
-		
-		//match2ai 
-		//fill with AI
-		//new AI(ID)
-		//add something to sending something to AI
-		
+			aiList.add(controller.addAIPlayer(idAI, usernameAI));
+			connection_count++;
+			update();
+		}
 	}
 
 	public boolean contains(Connection c){
@@ -112,13 +108,11 @@ public class Match {
 	public void sendMatchInfo(Object o){
 		Packet7MatchFunction gamePacket = new Packet7MatchFunction(); 
 		gamePacket.setObject(o);
-		
+
 		for(Connection c: connected){
 			c.sendTCP(gamePacket);
 		}
 	}
-	
-	//control.play 
 	
 	public void receiveEvent(CommandMessage m, long cID){
 		cmdMsgList.add(m);
@@ -130,8 +124,7 @@ public class Match {
 			//hand off info to game controller
 			//waiting
 			//okay game returned
-			
-			
+						
 			sendMatchInfo(controller.dispatch(cmdMsgList));
 			
 			
@@ -157,7 +150,8 @@ public class Match {
 			for(Connection c: connected){
 				c.sendTCP(start);
 			}
-	
+			
+			
 	}
 	
 	public void sendEndMatchRequest(){
