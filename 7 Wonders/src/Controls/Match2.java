@@ -363,7 +363,7 @@ public class Match2 {
 	
 	public Player getRightNeighbor(Player p)
 	{
-		for ( int i = 0; i < players.size(); --i )
+		for ( int i = 0; i < players.size(); ++i )
 		{
 			if ( players.get(i).getID() == p.getID() )
 			{

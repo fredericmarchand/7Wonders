@@ -113,7 +113,7 @@ public class MClient {
 
 	public void createUser() {
 		user = new Player(username, ID);
-		user.setClient(this);
+		//user.setClient(this);
 		//user.setClient(this);
 		//client.sendCommandMessage();
 		

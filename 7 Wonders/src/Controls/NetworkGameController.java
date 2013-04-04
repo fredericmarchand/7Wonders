@@ -231,7 +231,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 				}
 			}
 		}
-		return null;
+		return new ArrayList<Structure>();
 	}
 
 	@Override
