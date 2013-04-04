@@ -21,6 +21,12 @@ public class AIPlayer extends Player {
 		strategy = rand.nextInt(3);
 	}
 	
+	public AIPlayer(long id, String name){
+		super(name, id);
+		isAI = true;
+		strategy = rand.nextInt(3);
+	}
+	
 	public void pickCard(ArrayList<Structure> discarded, Player leftNeighbor, Player rightNeighbor)
 	{
 		boolean did = false;
