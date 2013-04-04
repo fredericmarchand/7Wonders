@@ -4,6 +4,7 @@ import client.MClient;
 import Controls.CommandMessage;
 import Controls.Match1;
 import Controls.Match2;
+import Controls.NetworkGameController;
 
 public class User {
 
@@ -12,6 +13,7 @@ public class User {
 	private Match2 currentMatch;
 	private CommandMessage msg;
 	private MClient client;
+	private boolean isLocalPlayer;
 	
 	//default constructor
 	public User(){}
@@ -81,6 +83,8 @@ public class User {
 	public void startMatch(Match2 match)
 	{
 		currentMatch = match;
+		currentMatch.setLocalPlayerID(ID);
+		NetworkGameController gc = new NetworkGameController(new Player(username, ID), currentMatch);
 	}
 	
 	

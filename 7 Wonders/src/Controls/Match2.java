@@ -18,6 +18,7 @@ public class Match2 {
 	private ArrayList<Player> players;
 	private int age, turn, numPlayers;
 	private ArrayList<Structure> age1Deck, age2Deck, age3Deck, discarded;
+	private long localPlayerID;
 
 	//server side constructor
 	public Match2(ArrayList<User> users)
@@ -94,6 +95,11 @@ public class Match2 {
 	public void setTurn(int t)
 	{
 		turn = t;
+	}
+	
+	public void setLocalPlayerID(long id)
+	{
+		localPlayerID = id;
 	}
 	
 	public ArrayList<Player> getPlayers()
@@ -319,7 +325,17 @@ public class Match2 {
 	//client moves
 	
 	
-	
+	public Player getLocalPlayer()
+	{
+		for ( Player p : players )
+		{
+			if ( p.getID() == localPlayerID )
+			{
+				return p;
+			}
+		}
+		return null;
+	}
 	
 	public Player getPlayerByID(long id)
 	{
