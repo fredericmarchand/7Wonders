@@ -71,14 +71,11 @@ public class Images {
 	//   "<name>,<path>,<width>,<height>"
 	// If the width and height are set to 0, it is not resized and is kept as default
 	private static void loadImages() {
-		if(!loaded){
-			for (String s : stringList) {
-				String[] args = s.split(",");
-				if(args[2].equals("0") || args[3].equals("0")) map.put(args[0], new ImageIcon(Images.class.getResource(args[1])));
-				else map.put(args[0], new ImageIcon(new ImageIcon(Images.class.getResource(args[1])).getImage().getScaledInstance(Integer.parseInt(args[2]), Integer.parseInt(args[3]), java.awt.Image.SCALE_SMOOTH)));
-				doneLoadingOne();
-			}
-			loaded = true;
+		for (String s : stringList) {
+			String[] args = s.split(",");
+			if(args[2].equals("0") || args[3].equals("0")) map.put(args[0], new ImageIcon(Images.class.getResource(args[1])));
+			else map.put(args[0], new ImageIcon(new ImageIcon(Images.class.getResource(args[1])).getImage().getScaledInstance(Integer.parseInt(args[2]), Integer.parseInt(args[3]), java.awt.Image.SCALE_SMOOTH)));
+			doneLoadingOne();
 		}
 	}
 	
@@ -89,16 +86,19 @@ public class Images {
 	}
 	
 	public static void run() {
-		map = new HashMap<String, ImageIcon>();
-		stringList = new ArrayList<String>();
-		
-		buildImageList();
-		total = stringList.size();
-		current = 0;
-		
-		System.out.println("Starting to load " + total + " images.");	
-		long startTime = System.currentTimeMillis();
-		loadImages();
-		System.out.println("Done loading all images. Took " + (System.currentTimeMillis() - startTime) + "ms");
+		if(!loaded){
+			map = new HashMap<String, ImageIcon>();
+			stringList = new ArrayList<String>();
+			
+			buildImageList();
+			total = stringList.size();
+			current = 0;
+			
+			System.out.println("Starting to load " + total + " images.");	
+			long startTime = System.currentTimeMillis();
+			loadImages();
+			System.out.println("Done loading all images. Took " + (System.currentTimeMillis() - startTime) + "ms");
+			loaded = true;
+		}
 	}
 }

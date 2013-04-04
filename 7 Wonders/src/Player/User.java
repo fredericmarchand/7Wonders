@@ -2,7 +2,6 @@ package Player;
 
 import client.MClient;
 import Controls.CommandMessage;
-import Controls.Match1;
 import Controls.Match2;
 import Controls.NetworkGameController;
 
