@@ -90,12 +90,12 @@ public class NetworkListener extends Listener{
 		}
 		if(o instanceof Packet9StartMatch){
 			mclient.startMatch(((Packet9StartMatch)o).getObject());
+			mclient.getLink().getChat().countdown();
 		}
 		if(o instanceof Packet14HostCreateMatch){
 			mclient.setMID(((Packet14HostCreateMatch)o).getMID());
 			mclient.setHost(true);
 			if(((Packet14HostCreateMatch)o).getnPlayer()>0){
-				//mclient.getLink().launchMatchLobby();
 				mclient.getLink().launchChatFrame();
 			}
 			

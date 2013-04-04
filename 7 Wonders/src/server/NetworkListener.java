@@ -134,6 +134,7 @@ public class NetworkListener extends Listener {
 			long matchID = mserver.createMatch(
 					((Packet12CreateMatch) o).getHuman(),
 					((Packet12CreateMatch) o).getAI());
+			
 			mserver.bridgeClient(c, matchID,((Packet12CreateMatch)o).getUser());// adding client to match
 												// connection list
 

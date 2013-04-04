@@ -48,6 +48,11 @@ public class MServer {
 	public long createMatch(int h, int ai){		
 		Match m = new Match(h,ai);
 		matchList.add(m);
+		if(ai>0){
+			for(int i = 0;i<ai; i++)
+				m.generateAI(client_ID);
+				incID();
+		}
 		//m.setServerMatchCommunication(server);
 //		for(Match m: matchList)
 //			System.out.println(m.getMatch_ID());
