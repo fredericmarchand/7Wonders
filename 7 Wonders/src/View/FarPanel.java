@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import Controls.Controller;
 import Images.Images;
 import Player.Player;
 import WonderBoards.WonderBoardStage;
@@ -21,12 +20,8 @@ public class FarPanel extends JPanel {
 	private JLabel2D lblPosConflict, lblNegConflict, lblTablets, lblMilitary, lblVictory, lblCompass, lblGears, lblCoin;
 	private JLabel wonderStage1, wonderStage2, wonderStage3, wonderStage4;
 	
-	@SuppressWarnings("unused")
-	private Controller controller;
-	
-	public FarPanel(Player p, Controller c) {
+	public FarPanel(Player p) {
 		player = p;
-		controller = c;
 		setLayout(null);
 		setSize(320, 150);
 		setBackground(Color.WHITE);

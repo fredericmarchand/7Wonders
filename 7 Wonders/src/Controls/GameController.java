@@ -2,9 +2,6 @@ package Controls;
 
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
-import Images.Images;
 import Player.Player;
 import Structures.Structure;
 import Structures.Cards.ScientistsGuild;

@@ -8,9 +8,6 @@ import Structures.Effects.*;
 import Structures.Structure;
 import WonderBoards.WonderBoardStage;
 
-import java.util.Scanner;
-import java.util.Random;
-
 public class Match1 {
 	
 	public static final int START_OF_TURN = 0;
