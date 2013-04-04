@@ -96,7 +96,7 @@ public class NetworkListener extends Listener {
 			System.out
 					.println("[SERVER] CLIENT HAS BEEN REMOVED"
 							+ mserver.removeClient(c,
-									((Packet5Disconnect) o).getMID(),((Packet5Disconnect)o).getCID()));
+									((Packet5Disconnect) o).getMID(),((Packet5Disconnect)o).getUser()));
 
 		}
 		if (o instanceof Packet6ChatMsg) {

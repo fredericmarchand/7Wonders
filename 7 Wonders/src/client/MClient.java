@@ -113,6 +113,7 @@ public class MClient {
 
 	public void createUser() {
 		user = new Player(username, ID);
+		user.setClient(this);
 		//user.setClient(this);
 		//client.sendCommandMessage();
 		
@@ -161,7 +162,7 @@ public class MClient {
 		if (matchID > 0) {
 			Packet5Disconnect quit = new Packet5Disconnect();
 			quit.setMID(matchID);
-			//quit.setObject(user);
+			quit.setUser(user);
 			client.sendTCP(quit);
 			matchID = 0000; // no longer in a game
 			link.launchLobby();

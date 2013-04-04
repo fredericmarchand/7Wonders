@@ -81,10 +81,10 @@ public class MServer {
 		return false;
 	}
 	
-	public boolean removeClient(Connection c, long m_id, long cid){
+	public boolean removeClient(Connection c, long m_id, Object o){
 		for(Match m : matchList){
 			if(m.getMatch_ID()==m_id){
-				m.removeConnection(c,cid);
+				m.removeConnection(c,o);
 				return true;
 			}
 		}

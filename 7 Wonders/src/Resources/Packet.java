@@ -46,10 +46,13 @@ public class Packet {
 		//eliminate from any current game
 		private long matchID;
 		private long cID;
+		private User user;
 		public long getMID(){return matchID;}
 		public void setMID(long id){matchID = id;}		
 		public long getCID(){ return cID;}
 		public void setCID(long i){cID= i;}
+		public User getUser(){return user;}
+		public void setUser(User u){user = u;}
 	}
 	public static class Packet6ChatMsg{
 		private String msg;
