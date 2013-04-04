@@ -34,19 +34,13 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		user = p;
 		match = m;
 		
-		//match.addLocalPlayer(user);
-		//match.fillWithAI();
 		match.init();
 		
 		run();
-		//frame = new MainFrame(this);
-		//frame.startMatch(match);
-		//frame.setVisible(true);
 	}
 	
 	public void run()
 	{
-		Images.run();
 		frame = new MainFrame(this);
 		frame.startMatch(match);
 		frame.setVisible(true);
