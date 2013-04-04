@@ -26,8 +26,7 @@ public class AIPlayer extends Player {
 		else if (randomStrat == 1)
 			strategy = new Moderate();
 		else 
-			strategy = new Intermediate();
-			
+			strategy = new Intermediate();	
 	}
 	
 	//Used to generate AI with difficulty corresponding to strat passed
@@ -44,19 +43,18 @@ public class AIPlayer extends Player {
 	}
 	
 	//Looks for cards that could be used strategically by the next player
-	public ArrayList<Integer> blockableIndexes(Player leftNeighbor, Player rightNeighbor)
+	public ArrayList<Integer> freeIndexes(Player p)
 	{
-		ArrayList<Integer> blockIndexes = new ArrayList<Integer>();
-		Player p = chooseNextPlayer(leftNeighbor, rightNeighbor);
+		ArrayList<Integer> freeIndexes = new ArrayList<Integer>();
 		
 		for ( int index = 0; index < cards.size(); ++index )
 		{
 			if (cards.get(index).canBuildForFree(p.getWonderBoard()))
 			{
-				blockIndexes.add(index);
+				freeIndexes.add(index);
 			}
 		}
-		return blockIndexes;
+		return freeIndexes;
 	}
 	
 	//Returns a list of indexes that refer to science cards in the hands
@@ -120,9 +118,8 @@ public class AIPlayer extends Player {
 	}
 	
 	//Try to detect the next players basic strategy
-	public int nextPlayerStrat(Player leftNeighbor, Player rightNeighbor)
+	public int nextPlayerStrat(Player p)
 	{
-		Player p = chooseNextPlayer(leftNeighbor, rightNeighbor);
 		
 		int military = p.getWonderBoard().getRedCardAmount();
 		int science = p.getWonderBoard().getGreenCardAmount();
@@ -148,12 +145,54 @@ public class AIPlayer extends Player {
 	}
 	
 	//Returns the player that the hand is being passed to next turn
-	public Player chooseNextPlayer(Player leftNeighbor, Player rightNeighbor)
+	public Player getNextPlayer(Player leftNeighbor, Player rightNeighbor)
 	{
 		if (getAge() == 2)
 			return rightNeighbor;
 		else
 			return leftNeighbor;
+	}
+	
+	public ArrayList<Integer> cardSelectionNumbers(Player leftNeighbor, Player rightNeighbor)
+	{
+		ArrayList<Integer> selectionNumbers = new ArrayList<Integer>();
+		
+		for(int i = 0; i < 7; i++)
+		{
+			selectionNumbers.add(0);
+		}
+		
+		for(Integer i : getStrategicIndexes(this.favor))
+		{
+			selectionNumbers.set(i, (selectionNumbers.get(i) + 1));
+		}
+		
+		for(Integer i : freeIndexes(this))
+		{
+			selectionNumbers.set(i, (selectionNumbers.get(i) + 1));
+		}
+		
+		for(Integer i : getStrategicIndexes(nextPlayerStrat(getNextPlayer(leftNeighbor, rightNeighbor))))
+		{
+			selectionNumbers.set(i, (selectionNumbers.get(i) + 1));
+		}
+		
+		for(Integer i : freeIndexes(getNextPlayer(leftNeighbor, rightNeighbor)))
+		{
+			selectionNumbers.set(i, (selectionNumbers.get(i) + 1));
+		}
+		
+		return selectionNumbers;
+	}
+	
+	public ArrayList<Integer> getStrategicIndexes(int strat)
+	{
+		if (strat == MILITARY)
+			return getMilitaryIndexes();
+		if (strat == SCIENCE)
+			return getScienceIndexes();
+		else
+			return getVictoryIndexes();
 	}
 
 }
