@@ -21,7 +21,7 @@ import com.esotericsoftware.kryonet.Server;
 public class Match {
 	
 	ArrayList<Connection> connected;
-	ArrayList<Long> userIDList;
+	//ArrayList<Long> userIDList;
 	ArrayList<User> userList;
     private long match_id;
     private static long counter = 1000;
@@ -30,6 +30,7 @@ public class Match {
     private int receivedEvents = 0;
     ArrayList<CommandMessage> cmdMsgList;
     private boolean inProgress;
+    
 
     ///////////////////////////////////////////
     //    handle ai creation
@@ -40,7 +41,7 @@ public class Match {
     private Match2 controller;
     
     public Match(int h,int ai){
-    	userIDList = new ArrayList<Long>();
+    	//userIDList = new ArrayList<Long>();
     	userList = new ArrayList<User>();
     	connected = new ArrayList<Connection>();
 		match_id = ++counter;
@@ -58,7 +59,7 @@ public class Match {
 		update();
 	}
 	public void removeConnection(Connection c, Object o) {
-		userIDList.remove(o);
+		userList.remove((User)o);
 		connected.remove(c);
 		update();
 	}
@@ -77,21 +78,10 @@ public class Match {
 		}
 	}
 
-	public boolean countDown(){
-		System.out.println("[MATCH] STARTING IN T-MINUS 30 SECONDS");
-		for(int i = 30; i > 0;i--){
-			if(connection_count!=MAX_PLAYER_COUNT){
-				System.out.println("Someone has disconnected");
-				return false;
-			}
-			System.out.println(i);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		return true;
+	public void generateAI(long ID){
+		//new AI(ID)
+		//add something to sending something to AI
+		
 	}
 
 	public boolean contains(Connection c){

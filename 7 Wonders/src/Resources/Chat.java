@@ -26,9 +26,12 @@ public class Chat implements Runnable {
 	}
 	
 	public void countdown(){		
+		if(chatFrame == null)
+			chatFrame = new ChatFrame(this, client.getUser_username());
 		chatFrame.appendChat("[MATCH STARTING]");
 		chatFrame.appendChat("[MATCH STARTING]");
 		chatFrame.appendChat("[MATCH STARTING]");
+		chatFrame.setStart(false);
 		for(int i = 10; i > 0;i--){
 			    chatFrame.appendChat(String.valueOf(i));
 			    try {
