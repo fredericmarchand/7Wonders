@@ -12,6 +12,7 @@ public class Images {
 	
 	private static int total;
 	private static int current;
+	private static boolean loaded = false;
 	
 	private static ImageLoadingGUI callback;
 	
@@ -70,11 +71,14 @@ public class Images {
 	//   "<name>,<path>,<width>,<height>"
 	// If the width and height are set to 0, it is not resized and is kept as default
 	private static void loadImages() {
-		for (String s : stringList) {
-			String[] args = s.split(",");
-			if(args[2].equals("0") || args[3].equals("0")) map.put(args[0], new ImageIcon(Images.class.getResource(args[1])));
-			else map.put(args[0], new ImageIcon(new ImageIcon(Images.class.getResource(args[1])).getImage().getScaledInstance(Integer.parseInt(args[2]), Integer.parseInt(args[3]), java.awt.Image.SCALE_SMOOTH)));
-			doneLoadingOne();
+		if(!loaded){
+			for (String s : stringList) {
+				String[] args = s.split(",");
+				if(args[2].equals("0") || args[3].equals("0")) map.put(args[0], new ImageIcon(Images.class.getResource(args[1])));
+				else map.put(args[0], new ImageIcon(new ImageIcon(Images.class.getResource(args[1])).getImage().getScaledInstance(Integer.parseInt(args[2]), Integer.parseInt(args[3]), java.awt.Image.SCALE_SMOOTH)));
+				doneLoadingOne();
+			}
+			loaded = true;
 		}
 	}
 	
