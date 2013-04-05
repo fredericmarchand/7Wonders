@@ -44,7 +44,6 @@ public class StartMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				mclient.getLink().launchLobby();
-
 			}
 		});
 
@@ -59,10 +58,7 @@ public class StartMenu extends JFrame {
 		add(panel);
 	}
 
-	//MClient client = new cl
 	public void showGUI() {
-		// Create and set up the window.
-		// TODO Auto-generated method stub
 		String uname = "";
 		String ip = "";
 		String port = "";
@@ -93,11 +89,6 @@ public class StartMenu extends JFrame {
 			showGUI();
 			System.exit(0);
 		}
-
-		//mclient.createUser(uname, mclient.getID());
-		//mclient.setUser_username(uname);
-		//give weird port # will fail
-
 		pack();
 		setVisible(true);
 	}
