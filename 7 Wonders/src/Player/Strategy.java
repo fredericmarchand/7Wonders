@@ -1,7 +1,6 @@
 package Player;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import Structures.Structure;
 

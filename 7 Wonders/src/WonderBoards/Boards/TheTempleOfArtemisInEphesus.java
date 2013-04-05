@@ -2,7 +2,6 @@ package WonderBoards.Boards;
 
 import Structures.Structure;
 import Structures.Effects.CoinBonus;
-import Structures.Effects.FreeConstruction;
 import Structures.Effects.ResourcesBonus;
 import Structures.Effects.VictoryPointBonus;
 import Tokens.Resources;

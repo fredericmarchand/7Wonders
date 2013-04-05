@@ -1,24 +1,20 @@
 package Resources;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JPanel;
 
 import client.MClient;
 
-import View.MainFrame;
-
 public class MatchLobby extends JFrame{
-	private JList list;
+	private static final long serialVersionUID = 1L;
+	
 	private JButton start;
 	JPanel buttonPanel;
 	MClient mclient;
