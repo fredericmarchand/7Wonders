@@ -2,15 +2,12 @@ package Controls;
 
 import java.util.ArrayList;
 
-import Player.AIPlayer;
-import Player.Player;
-import Player.User;
 import Structures.Effects.*;
 import Structures.Structure;
 import Tokens.Resources;
 import Tokens.ScientificSymbols;
 import WonderBoards.WonderBoardStage;
-
+import Player.*;
 import java.util.Scanner;
 
 public class Match2 {
@@ -122,7 +119,7 @@ public class Match2 {
 	
 	public Player addAIPlayer(long id, String name)
 	{
-		players.add(new AIPlayer(id, name, null));
+		players.add(new AIPlayer(id, name, new Simple()));
 		return players.get(players.size()-1);
 	}
 	
