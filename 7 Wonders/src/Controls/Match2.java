@@ -120,7 +120,7 @@ public class Match2 {
 		return null;
 	}
 	
-	public Player addAIPlayer(long id, String name)
+	public Player newAIPlayer(long id, String name)
 	{
 		players.add(new AIPlayer(id, name));
 		return players.get(players.size()-1);
