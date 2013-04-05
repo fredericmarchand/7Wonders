@@ -40,7 +40,7 @@ public class AIPlayer extends Player {
 	public AIPlayer(long id, String name){
 		super(name, id);
 		isAI = true;
-		strategy = rand.nextInt(3);
+		strategy = new Intermediate();
 	}
 	
 	public void pickCard(ArrayList<Structure> discarded, Player leftNeighbor, Player rightNeighbor)
