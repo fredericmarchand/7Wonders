@@ -122,7 +122,7 @@ public class Match2 {
 	
 	public Player addAIPlayer(long id, String name)
 	{
-		players.add(new AIPlayer(id, name));
+		players.add(new AIPlayer(id, name, null));
 		return players.get(players.size()-1);
 	}
 	

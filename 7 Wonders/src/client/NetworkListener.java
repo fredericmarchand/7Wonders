@@ -13,6 +13,9 @@ import com.esotericsoftware.minlog.Log;
 
 @SuppressWarnings("unused")
 public class NetworkListener extends Listener{
+
+	private final boolean VERBOSE = false;
+	
 	Client c;
 	MClient mclient;
 	ArrayList<Match> list;
@@ -43,7 +46,7 @@ public class NetworkListener extends Listener{
 	@SuppressWarnings("unchecked")
 	@Override
 	public void received(Connection c, Object o) {
-		System.out.println("[CLIENT] RECEIVED PACKET");
+		if(VERBOSE) System.out.println("[CLIENT] RECEIVED PACKET");
 		if(o instanceof Packet1LoginAnswer){
 			if(!((Packet1LoginAnswer)o).getAccepted()){
 				c.close();

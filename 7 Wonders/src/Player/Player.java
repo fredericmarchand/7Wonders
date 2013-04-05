@@ -27,30 +27,14 @@ public class Player extends User {
 	public Player()
 	{
 		super("noob", 0);
-		wonderBoard = new WonderBoard();
-		cards = new ArrayList<Structure>();
-		chosenCard = null;
-		resources = new Resources();
-		conflictTokens = new ConflictTokens();
-		shields = 0;
-		victoryPoints = 0;
-		scientificSymbols = new ScientificSymbols();
-		resetResources();
+		resetPlayerStats();
 		isAI = false;
 	}
 	
 	public Player(String uname, long id)
 	{
 		super(uname, id);
-		wonderBoard = new WonderBoard();
-		cards = new ArrayList<Structure>();
-		chosenCard = null;
-		resources = new Resources();
-		resetResources();
-		conflictTokens = new ConflictTokens();
-		shields = 0;
-		victoryPoints = 0;
-		scientificSymbols = new ScientificSymbols();
+		resetPlayerStats();
 		isAI = false;
 	}
 	
@@ -217,7 +201,7 @@ public class Player extends User {
 	
 	public int canBuild(Player left, Player right)
 	{
-		if ( !wonderBoard.containsCard(chosenCard.getID()) )
+		if ( chosenCard != null && !wonderBoard.containsCard(chosenCard.getID()) )
 		{
 			if ( ((chosenCard.getResourceCost().canAfford(getTotalResources())) 
 					|| chosenCard.canBuildForFree(wonderBoard))	)

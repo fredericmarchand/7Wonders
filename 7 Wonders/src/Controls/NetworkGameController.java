@@ -197,6 +197,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public boolean chooseCard(Structure s) 
 	{
+		System.out.println(user.getCards());
 		for ( int i = 0; i < user.getCards().size(); ++i )
 		{
 			if ( user.getCards().get(i).getID() == s.getID() )
@@ -211,7 +212,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void discardChosen() 
 	{
-		match.initMove(user, 3, 2);		
+		match.initMove(user, 3, 2);
 		frame.update();
 	}
 
