@@ -107,6 +107,16 @@ public class Match2 {
 		return players;
 	}
 	
+	public void addPlayer(Player p)
+	{
+		players.add(p);
+	}
+	
+	public void addPlayer(ArrayList<Player> plyrs)
+	{
+		players.addAll(plyrs);
+	}
+	
 	public ArrayList<Structure> getDeck()
 	{
 		switch ( age )
@@ -122,7 +132,7 @@ public class Match2 {
 	
 	public Player newAIPlayer(long id, String name)
 	{
-		players.add(new AIPlayer(id, name));
+		players.add(new AIPlayer(id, name, new Moderate()));
 		return players.get(players.size()-1);
 	}
 	
