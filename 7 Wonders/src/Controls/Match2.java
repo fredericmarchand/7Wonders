@@ -107,7 +107,7 @@ public class Match2 {
 		players.add(p);
 	}
 	
-	public void addPlayers(ArrayList<Player> plyrs)
+	public void addPlayers(ArrayList<User> plyrs)
 	{
 		for ( User u: plyrs )
 			players.add((Player)u);
