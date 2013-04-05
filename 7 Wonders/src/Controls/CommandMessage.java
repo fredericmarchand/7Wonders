@@ -2,11 +2,8 @@ package Controls;
 
 import java.util.ArrayList;
 
-import Player.Player;
-import Resources.Packet;
 import Tokens.Resources;
 import Tokens.ScientificSymbols;
-import client.MClient;
 
 public class CommandMessage {
 

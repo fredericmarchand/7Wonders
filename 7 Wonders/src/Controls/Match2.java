@@ -11,8 +11,6 @@ import Tokens.Resources;
 import Tokens.ScientificSymbols;
 import WonderBoards.WonderBoardStage;
 
-import java.util.Scanner;
-
 public class Match2 {
 	
 	private ArrayList<Player> players;

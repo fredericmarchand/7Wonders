@@ -70,10 +70,10 @@ public class User {
 		currentMatch.setTurn(match.getTurn());
 		currentMatch.getDiscardedCards().clear();
 		currentMatch.getDiscardedCards().addAll(match.getDiscardedCards());
-		for ( Player p: currentMatch.getPlayers() )
-		{
-			//fuck this shit
-		}
+//		for ( Player p: currentMatch.getPlayers() )
+//		{
+//			//fuck this shit
+//		}
 	}
 	
 	public void returnToLobby()
@@ -85,6 +85,7 @@ public class User {
 	{
 		currentMatch = match;
 		currentMatch.setLocalPlayerID(ID);
+		@SuppressWarnings("unused")
 		NetworkGameController gc = new NetworkGameController(new Player(username, ID), currentMatch);
 	}
 	

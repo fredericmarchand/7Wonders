@@ -348,7 +348,7 @@ public class CardHandler {
 		players.add(new Player());
 		players.add(new Player());
 		players.add(new Player());
-		ArrayList<Structure> deck = BuildAge1Deck(7);
+		//ArrayList<Structure> deck = BuildAge1Deck(7);
 		/*DistributeRandomWonderBoards(players, 1);
 		DistributeCards(players, deck);
 		for ( Player p : players )
