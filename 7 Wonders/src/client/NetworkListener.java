@@ -94,6 +94,7 @@ public class NetworkListener extends Listener{
 		}
 		if(o instanceof Packet9StartMatch){
 			mclient.startMatch(((Packet9StartMatch)o).getObject());
+			//eliminate countdown causing so many god damn errors.
 			//mclient.getLink().getChat().run();
 		}
 		if(o instanceof Packet14HostCreateMatch){
