@@ -88,7 +88,7 @@ public class Match {
 			idAI= server.getID();
 			server.incID();
 			usernameAI = "JP the evil frenchmen"; 
-			controller.addAIPlayer(idAI, usernameAI);
+			controller.newAIPlayer(idAI, usernameAI);
 			update();
 		}
 	}
