@@ -1,11 +1,9 @@
 package server;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Scanner;
-
 
 import Controls.Match1;
 import Controls.Match2;
@@ -23,116 +21,114 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.*;
 import com.esotericsoftware.minlog.Log;
 
-
-
 @SuppressWarnings("unused")
 public class MServer {
-	
+
 	private Server server;
 	private ArrayList<Object> list;
 	private ArrayList<Match> matchList;
 	private static long client_ID = 100000;
 	Scanner scanner = new Scanner(System.in);
-	
-	public MServer() throws IOException{
-		
+
+	public MServer() throws IOException {
+
 		server = new Server();
 		list = new ArrayList<Object>();
 		matchList = new ArrayList<Match>();
-		
+
 		registerPackets();
-		
-		
+
 		NetworkListener nl = new NetworkListener();
 		nl.init(server, this);
 		server.addListener(nl);
 		System.out.println("Input ");
 		server.bind(Integer.parseInt((scanner.next())));
 		server.start();
-		
+
 	}
-	public long createMatch(int h, int ai){		
-		Match m = new Match(h,ai, this);
+
+	public long createMatch(int h, int ai) {
+		Match m = new Match(h, ai, this);
 		matchList.add(m);
-		//m.setServerMatchCommunication(server);
-//		for(Match m: matchList)
-//			System.out.println(m.getMatch_ID());
 		return m.getMatch_ID();
 	}
-	
-	
-	/********************************
-	 * bridgeClient
-	 * given a connect and match id
-	 * add client to the match list
-	 * @param c
-	 * @param m_id
-	 */
-	
-	//To be modified
-	public boolean bridgeClient(Connection c, long m_id, Object o){
-		for(Match m : matchList){
-			if(m.getMatch_ID()==m_id){
-				if(m.getConnectionCount()<m.getMaxPlayerCount()){
-					m.addConnection(c,o);
+
+	public boolean bridgeClient(Connection c, long m_id, Object o) {
+		for (Match m : matchList) {
+			if (m.getMatch_ID() == m_id) {
+				if (m.getConnectionCount() < m.getMaxPlayerCount()) {
+					m.addConnection(c, o);
 					return true;
 				}
 			}
 		}
 		return false;
 	}
-	
-	public boolean removeClient(Connection c, long m_id, Object o){
-		for(Match m : matchList){
-			if(m.getMatch_ID()==m_id){
-				m.removeConnection(c,o);
-				if(m.getHumanConnectionCount()==0){
+
+	public boolean removeClient(Connection c, long m_id, Object o) {
+		for (Match m : matchList) {
+			if (m.getMatch_ID() == m_id) {
+				m.removeConnection(c, o);
+				if (m.getHumanConnectionCount() == 0) {
 					ListIterator<Match> it = getMatchList().listIterator();
 					while (it.hasNext()) {
 						Match match = it.next();
 						if (m.getHumanConnectionCount() == 0) {
 							it.remove();
-							System.out.println("[SERVER] No one in match  - DELETED ");
+							System.out
+									.println("[SERVER] No one in match  - DELETED ");
 						}
 					}
 				}
 				return true;
 			}
 		}
-		return false;		
+		return false;
 	}
 
-	public ArrayList<Object> getConnected(){return list;}
-	public ArrayList<Match> getMatchList(){return matchList;}
-	public long getID(){return client_ID;}
-	public void incID(){++client_ID;}
-	
-	
-	
-	public ArrayList<Long> getMatchID_List(){
+	public ArrayList<Object> getConnected() {
+		return list;
+	}
+
+	public ArrayList<Match> getMatchList() {
+		return matchList;
+	}
+
+	public long getID() {
+		return client_ID;
+	}
+
+	public void incID() {
+		++client_ID;
+	}
+
+	public ArrayList<Long> getMatchID_List() {
 		ArrayList<Long> idList = new ArrayList<Long>();
-		for(Match e: matchList)
+		for (Match e : matchList)
 			idList.add(e.getMatch_ID());
 		return idList;
 	}
-	//return the match given a match id
-	public Match findMatch(long id){
-		for(Match e : matchList){
-			if(e.getMatch_ID()==id)
+
+	// return the match given a match id
+	public Match findMatch(long id) {
+		for (Match e : matchList) {
+			if (e.getMatch_ID() == id)
 				return e;
 		}
 		return null;
 	}
-	public boolean containsMatch(long id){
-		for(Match e : matchList){
-			if(e.getMatch_ID()==id)
+
+	public boolean containsMatch(long id) {
+		for (Match e : matchList) {
+			if (e.getMatch_ID() == id)
 				return true;
 		}
 		return false;
 	}
-	//any class type sent over the network must be registered to the kryo
-	//generic types are implicitly registered
-	public void registerPackets() throws IOException{
+
+	// any class type sent over the network must be registered to the kryo
+	// generic types are implicitly registered
+	public void registerPackets() throws IOException {
 		Kryo kryo = server.getKryo();
 		kryo.register(Packet0LoginRequest.class);
 		kryo.register(Packet1LoginAnswer.class);
@@ -155,8 +151,7 @@ public class MServer {
 		kryo.register(Match1.class);
 		kryo.register(Match2.class);
 		kryo.register(User.class);
-		
-		
+
 		kryo.register(Structures.Structure.class);
 		kryo.register(Structures.Cards.Academy.class);
 		kryo.register(Structures.Cards.Altar.class);
@@ -233,7 +228,7 @@ public class MServer {
 		kryo.register(Structures.Cards.WestTradingPost.class);
 		kryo.register(Structures.Cards.WorkersGuild.class);
 		kryo.register(Structures.Cards.Workshop.class);
-		
+
 		kryo.register(Structures.Effects.BuildDiscardedCard.class);
 		kryo.register(Structures.Effects.CardCoinBonus.class);
 		kryo.register(Structures.Effects.CardVictoryPointBonus.class);
@@ -241,7 +236,7 @@ public class MServer {
 		kryo.register(Structures.Effects.CopyGuild.class);
 		kryo.register(Structures.Effects.FreeConstruction.class);
 		kryo.register(Structures.Effects.MilitaryDefeatBonus.class);
-		kryo.register(Structures.Effects.PlayLastCard.class);		
+		kryo.register(Structures.Effects.PlayLastCard.class);
 		kryo.register(Structures.Effects.ResourceChoice.class);
 		kryo.register(Structures.Effects.ResourcesBonus.class);
 		kryo.register(Structures.Effects.ScientificSymbolBonus.class);
@@ -251,16 +246,16 @@ public class MServer {
 		kryo.register(Structures.Effects.VictoryPointBonus.class);
 		kryo.register(Structures.Effects.WonderStageCoinBonus.class);
 		kryo.register(Structures.Effects.WonderStageVictoryPointBonus.class);
-		
+
 		kryo.register(Tokens.ConflictTokens.class);
 		kryo.register(Tokens.Resources.class);
 		kryo.register(Tokens.ScientificSymbols.class);
-		
+
 		kryo.register(Player.Player.class);
-		
+
 		kryo.register(WonderBoards.WonderBoard.class);
 		kryo.register(WonderBoards.WonderBoardStage.class);
-		
+
 		kryo.register(WonderBoards.Boards.TheColossusOfRhodes.class);
 		kryo.register(WonderBoards.Boards.TheHangingGardensOfBabylon.class);
 		kryo.register(WonderBoards.Boards.TheLighthouseOfAlexandria.class);
@@ -268,32 +263,28 @@ public class MServer {
 		kryo.register(WonderBoards.Boards.ThePyramidsOfGiza.class);
 		kryo.register(WonderBoards.Boards.TheStatueOfZeusInOlympia.class);
 		kryo.register(WonderBoards.Boards.TheTempleOfArtemisInEphesus.class);
-		
+
 		kryo.register(Controls.CommandMessage.class);
-		
+
 		kryo.register(AIPlayer.class);
 		kryo.register(Strategy.class);
 		kryo.register(Simple.class);
 		kryo.register(Moderate.class);
 		kryo.register(Intermediate.class);
-		
+
 		kryo.register(java.util.Random.class);
-		
+
 		kryo.register(java.util.concurrent.atomic.AtomicLong.class);
-		
+
 	}
-	
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		try {
-			
 			new MServer();
-			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	
 }
-

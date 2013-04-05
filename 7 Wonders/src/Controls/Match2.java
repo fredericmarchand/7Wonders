@@ -107,9 +107,10 @@ public class Match2 {
 		players.add(p);
 	}
 	
-	public void addPlayer(ArrayList<Player> plyrs)
+	public void addPlayers(ArrayList<User> plyrs)
 	{
-		players.addAll(plyrs);
+		for ( User u: plyrs )
+			players.add((Player)u);
 	}
 	
 	public ArrayList<Structure> getDeck()
@@ -125,10 +126,9 @@ public class Match2 {
 		return null;
 	}
 	
-	public Player addAIPlayer(long id, String name)
+	public void addAIPlayer(long id, String name)
 	{
 		players.add(new AIPlayer(id, name, new Simple()));
-		return players.get(players.size()-1);
 	}
 	
 	//server side
