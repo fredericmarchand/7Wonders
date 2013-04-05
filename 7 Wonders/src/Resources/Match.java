@@ -36,13 +36,6 @@ public class Match {
 
     private boolean inProgress;
     MServer server;
-
-    ///////////////////////////////////////////
-    //    handle ai creation
-    
-    
-    /////FIX///////////////////////////////////
-    //freds new class
     private Match2 controller;
     
     public Match(int h,int ai, MServer m){
