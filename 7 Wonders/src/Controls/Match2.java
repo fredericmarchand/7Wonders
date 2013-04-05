@@ -8,8 +8,6 @@ import Tokens.Resources;
 import Tokens.ScientificSymbols;
 import WonderBoards.WonderBoardStage;
 import Player.*;
-import java.util.Scanner;
-
 public class Match2 {
 	
 	private ArrayList<Player> players;

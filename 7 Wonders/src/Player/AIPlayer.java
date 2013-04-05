@@ -1,7 +1,6 @@
 package Player;
 
 import Structures.Structure;
-import Tokens.Resources;
 
 import java.util.ArrayList;
 import java.util.Random;

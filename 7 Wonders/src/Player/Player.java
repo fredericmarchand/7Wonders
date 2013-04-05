@@ -375,7 +375,6 @@ public class Player extends User {
 	public boolean buyResources(Player leftNeighbor, Player rightNeighbor, Resources required, int preference)
 	{
 		Random r = new Random();
-		@SuppressWarnings("unused")
 		int val;
 		
 		TradingPerks sumup;
@@ -409,7 +408,7 @@ public class Player extends User {
 			val = r.nextInt(2);
 		else val = preference;
 			
-		ArrayList revenue = purchased.buyResources(leftNeighbor, rightNeighbor, missing, sumup, val);
+		ArrayList<Integer> revenue = purchased.buyResources(leftNeighbor, rightNeighbor, missing, sumup, val);
 		leftNeighbor.getOwnedResources().addCoins((int)revenue.get(0));
 		rightNeighbor.getOwnedResources().addCoins((int)revenue.get(1));
 		resources.deductCoins((int)revenue.get(0) + (int)revenue.get(1));
