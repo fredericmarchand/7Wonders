@@ -20,13 +20,7 @@ public class AIPlayer extends Player {
 		super();
 		isAI = true;
 		favor = rand.nextInt(3);
-		int randomStrat = rand.nextInt(3);
-		if (randomStrat == 0)
-			strategy = new Simple();
-		else if (randomStrat == 1)
-			strategy = new Moderate();
-		else 
-			strategy = new Intermediate();	
+		setRandomStrategy();
 	}
 	
 	//Used to generate AI with difficulty corresponding to strat passed
@@ -40,7 +34,18 @@ public class AIPlayer extends Player {
 	public AIPlayer(long id, String name){
 		super(name, id);
 		isAI = true;
-		strategy = rand.nextInt(3);
+		favor = rand.nextInt(3);
+		setRandomStrategy();
+	}
+	
+	public void setRandomStrategy(){
+		int randomStrat = rand.nextInt(3);
+		if (randomStrat == 0)
+			strategy = new Simple();
+		else if (randomStrat == 1)
+			strategy = new Moderate();
+		else 
+			strategy = new Intermediate();	
 	}
 	
 	public void pickCard(ArrayList<Structure> discarded, Player leftNeighbor, Player rightNeighbor)
