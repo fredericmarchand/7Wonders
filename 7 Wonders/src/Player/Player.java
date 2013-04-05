@@ -42,7 +42,7 @@ public class Player extends User {
 	{
 		wonderBoard = new WonderBoard();
 		cards = new ArrayList<Structure>();
-		chosenCard = null;
+		chosenCard = new Structure();
 		resources = new Resources();
 		resetResources();
 		conflictTokens = new ConflictTokens();
