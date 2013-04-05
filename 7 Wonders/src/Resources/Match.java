@@ -95,6 +95,15 @@ public class Match {
 			controller.addAIPlayer(idAI, usernameAI);
 			update();
 		}
+		//FOR DEBUGGING
+		//
+		//
+		for(User u : controller.getPlayers()){
+			System.out.println(u.getUsername());
+		}
+		//
+		//
+		////////////////
 	}
 
 	public boolean contains(Connection c){
