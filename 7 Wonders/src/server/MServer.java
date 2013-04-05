@@ -3,6 +3,7 @@ package server;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.ListIterator;
 import java.util.Scanner;
 
 
@@ -80,6 +81,16 @@ public class MServer {
 		for(Match m : matchList){
 			if(m.getMatch_ID()==m_id){
 				m.removeConnection(c,o);
+				if(m.getHumanConnectionCount()==0){
+					ListIterator<Match> it = getMatchList().listIterator();
+					while (it.hasNext()) {
+						Match match = it.next();
+						if (m.getHumanConnectionCount() == 0) {
+							it.remove();
+							System.out.println("[SERVER] No one in match  - DELETED ");
+						}
+					}
+				}
 				return true;
 			}
 		}
