@@ -287,6 +287,7 @@ public class Match2 {
 			}
 		}
 	}
+	
 	//server side endof game effects
 	//server methods
 	

@@ -77,7 +77,6 @@ public class Match {
 	public int getConnectionCount(){return connection_count;}
 	public int getHumanConnectionCount(){return human_connection_count;}
 	public void update(){
-		//connection_count=connected.size();
 		System.out.println(connection_count);
 		if(connection_count==MAX_PLAYER_COUNT){
 			System.out.println("Starting Game!");
@@ -96,15 +95,6 @@ public class Match {
 			controller.addAIPlayer(idAI, usernameAI);
 			
 		}
-				//FOR DEBUGGING
-		//
-		//
-		for(User u : controller.getPlayers()){
-			System.out.println(u.getUsername());
-		}
-		//
-		//
-		////////////////
 	}
 
 	public boolean contains(Connection c){
@@ -127,18 +117,21 @@ public class Match {
 	public void receiveEvent(CommandMessage m, long cID){
 		cmdMsgList.add(m);
 		receivedEvents++;
-		if(receivedEvents==connection_count){				
-			sendMatchInfo(controller.dispatch(cmdMsgList));			
+		if(receivedEvents==human_connection_count){				
+			sendMatchInfo(controller.dispatch(cmdMsgList));		
+			cmdMsgList.clear();
 		}
 	}
 	
 	public void handOff(Packet8ClientResponse receivedPacket){		
 		receiveEvent((CommandMessage)receivedPacket.getObject(), receivedPacket.getCID());
 	}	
+	
+	
 	public void startMatch(){
-		controller = new Match2(userList);
-		
+		controller = new Match2();		
 		generateAI();	
+		//controller
 		inProgress = true;
 		sendStartMatchRequest();
 	}
@@ -148,13 +141,10 @@ public class Match {
 	}
 	public void sendStartMatchRequest(){
 		Packet9StartMatch start = new Packet9StartMatch();
-		start.setObject(controller);
-		
-			for(Connection c: connected){
-				c.sendTCP(start);
-			}
-			
-			
+		start.setObject(controller);		
+		for(Connection c: connected){
+			c.sendTCP(start);
+		}			
 	}
 	
 	public void sendEndMatchRequest(){
