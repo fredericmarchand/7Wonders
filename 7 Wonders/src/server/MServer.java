@@ -9,6 +9,11 @@ import java.util.Scanner;
 
 import Controls.Match1;
 import Controls.Match2;
+import Player.AIPlayer;
+import Player.Intermediate;
+import Player.Moderate;
+import Player.Simple;
+import Player.Strategy;
 import Player.User;
 import Resources.Match;
 import Resources.Packet.*;
@@ -265,6 +270,17 @@ public class MServer {
 		kryo.register(WonderBoards.Boards.TheTempleOfArtemisInEphesus.class);
 		
 		kryo.register(Controls.CommandMessage.class);
+		
+		kryo.register(AIPlayer.class);
+		kryo.register(Strategy.class);
+		kryo.register(Simple.class);
+		kryo.register(Moderate.class);
+		kryo.register(Intermediate.class);
+		
+		kryo.register(java.util.Random.class);
+		
+		kryo.register(java.util.concurrent.atomic.AtomicLong.class);
+		
 	}
 	
 	public static void main(String[] args){
