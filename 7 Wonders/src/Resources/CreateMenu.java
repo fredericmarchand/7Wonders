@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import client.MClient;
 
 public class CreateMenu extends JFrame {
+	private static final long serialVersionUID = 1L;
+	
 	JButton create, cancel;
 	JLabel human, ai;
 	JTextField humanNum, aiNum;

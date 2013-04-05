@@ -2,17 +2,12 @@ package Controls;
 
 import java.util.ArrayList;
 
-import Player.AIPlayer;
-import Player.Player;
-import Player.User;
 import Structures.Effects.*;
 import Structures.Structure;
 import Tokens.Resources;
 import Tokens.ScientificSymbols;
 import WonderBoards.WonderBoardStage;
-
-import java.util.Scanner;
-
+import Player.*;
 public class Match2 {
 	
 	private ArrayList<Player> players;
@@ -130,9 +125,9 @@ public class Match2 {
 		return null;
 	}
 	
-	public Player newAIPlayer(long id, String name)
+	public Player addAIPlayer(long id, String name)
 	{
-		players.add(new AIPlayer(id, name, new Moderate()));
+		players.add(new AIPlayer(id, name, new Simple()));
 		return players.get(players.size()-1);
 	}
 	
@@ -300,6 +295,7 @@ public class Match2 {
 			}
 		}
 	}
+	
 	//server side endof game effects
 	//server methods
 	

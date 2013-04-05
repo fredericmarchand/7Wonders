@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import Images.Images;
 import Player.Player;
 import Structures.Structure;
 import Structures.Effects.BuildDiscardedCard;
@@ -125,19 +124,19 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void scienceChosen(ArrayList<ScientificSymbols> symbs) 
 	{
-		/*for ( Structure st: user.getWonderBoard().getPurpleCards() )
-		{
-			for ( SpecialEffect se: st.getEffects() )
-			{
-				if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID && se.activateTime() == SpecialEffect.END_OF_GAME )
-					((ScientificSymbolBonus)se).chooseSymbol(user, s);		
-			}
-		
-		}*/
-		//for ( ScientificSymbols sy : symbs )
-		//{
-		//	user.getScientificSymbols().addScientifcSymbols(sy);
-		//}
+//		for ( Structure st: user.getWonderBoard().getPurpleCards() )
+//		{
+//			for ( SpecialEffect se: st.getEffects() )
+//			{
+//				if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID && se.activateTime() == SpecialEffect.END_OF_GAME )
+//					((ScientificSymbolBonus)se).chooseSymbol(user, s);		
+//			}
+//		
+//		}
+//		for ( ScientificSymbols sy : symbs )
+//		{
+//			user.getScientificSymbols().addScientifcSymbols(sy);
+//		}
 		match.initScienceChoice(user, symbs);
 		
 	}
@@ -197,6 +196,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public boolean chooseCard(Structure s) 
 	{
+		System.out.println(user.getCards());
 		for ( int i = 0; i < user.getCards().size(); ++i )
 		{
 			if ( user.getCards().get(i).getID() == s.getID() )
@@ -211,7 +211,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void discardChosen() 
 	{
-		match.initMove(user, 3, 2);		
+		match.initMove(user, 3, 2);
 		frame.update();
 	}
 

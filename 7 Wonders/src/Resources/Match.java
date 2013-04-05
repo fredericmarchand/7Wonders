@@ -50,7 +50,7 @@ public class Match {
 		inProgress = false;
 		MAX_PLAYER_COUNT = h+ai;
 		connection_count+=ai;
-				
+	
     }
     public int getMaxPlayerCount() {return MAX_PLAYER_COUNT;}
     public boolean get_inProgress(){return inProgress;}
@@ -77,7 +77,6 @@ public class Match {
 	public int getConnectionCount(){return connection_count;}
 	public int getHumanConnectionCount(){return human_connection_count;}
 	public void update(){
-		//connection_count=connected.size();
 		System.out.println(connection_count);
 		if(connection_count==MAX_PLAYER_COUNT){
 			System.out.println("Starting Game!");
@@ -87,13 +86,14 @@ public class Match {
 
 	public void generateAI(){
 		long idAI;
+		System.out.println(nAI);
 		String usernameAI;
 		for(int i = 0; i<nAI;i++){
 			idAI= server.getID();
 			server.incID();
 			usernameAI = "JP the evil frenchmen"; 
-			controller.newAIPlayer(idAI, usernameAI);
-			update();
+			controller.addAIPlayer(idAI, usernameAI);
+			
 		}
 	}
 
@@ -117,17 +117,21 @@ public class Match {
 	public void receiveEvent(CommandMessage m, long cID){
 		cmdMsgList.add(m);
 		receivedEvents++;
-		if(receivedEvents==connection_count){				
-			sendMatchInfo(controller.dispatch(cmdMsgList));			
+		if(receivedEvents==human_connection_count){				
+			sendMatchInfo(controller.dispatch(cmdMsgList));		
+			cmdMsgList.clear();
 		}
 	}
 	
 	public void handOff(Packet8ClientResponse receivedPacket){		
 		receiveEvent((CommandMessage)receivedPacket.getObject(), receivedPacket.getCID());
 	}	
+	
+	
 	public void startMatch(){
-		controller = new Match2(userList);
-		//generateAI(nAI);	
+		controller = new Match2();		
+		generateAI();	
+		//controller
 		inProgress = true;
 		sendStartMatchRequest();
 	}
@@ -137,13 +141,10 @@ public class Match {
 	}
 	public void sendStartMatchRequest(){
 		Packet9StartMatch start = new Packet9StartMatch();
-		start.setObject(controller);
-		
-			for(Connection c: connected){
-				c.sendTCP(start);
-			}
-			
-			
+		start.setObject(controller);		
+		for(Connection c: connected){
+			c.sendTCP(start);
+		}			
 	}
 	
 	public void sendEndMatchRequest(){

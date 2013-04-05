@@ -27,30 +27,14 @@ public class Player extends User {
 	public Player()
 	{
 		super("noob", 0);
-		wonderBoard = new WonderBoard();
-		cards = new ArrayList<Structure>();
-		chosenCard = null;
-		resources = new Resources();
-		conflictTokens = new ConflictTokens();
-		shields = 0;
-		victoryPoints = 0;
-		scientificSymbols = new ScientificSymbols();
-		resetResources();
+		resetPlayerStats();
 		isAI = false;
 	}
 	
 	public Player(String uname, long id)
 	{
 		super(uname, id);
-		wonderBoard = new WonderBoard();
-		cards = new ArrayList<Structure>();
-		chosenCard = null;
-		resources = new Resources();
-		resetResources();
-		conflictTokens = new ConflictTokens();
-		shields = 0;
-		victoryPoints = 0;
-		scientificSymbols = new ScientificSymbols();
+		resetPlayerStats();
 		isAI = false;
 	}
 	
@@ -217,7 +201,7 @@ public class Player extends User {
 	
 	public int canBuild(Player left, Player right)
 	{
-		if ( !wonderBoard.containsCard(chosenCard.getID()) )
+		if ( chosenCard != null && !wonderBoard.containsCard(chosenCard.getID()) )
 		{
 			if ( ((chosenCard.getResourceCost().canAfford(getTotalResources())) 
 					|| chosenCard.canBuildForFree(wonderBoard))	)
@@ -391,7 +375,6 @@ public class Player extends User {
 	public boolean buyResources(Player leftNeighbor, Player rightNeighbor, Resources required, int preference)
 	{
 		Random r = new Random();
-		@SuppressWarnings("unused")
 		int val;
 		
 		TradingPerks sumup;
@@ -425,7 +408,7 @@ public class Player extends User {
 			val = r.nextInt(2);
 		else val = preference;
 			
-		ArrayList revenue = purchased.buyResources(leftNeighbor, rightNeighbor, missing, sumup, val);
+		ArrayList<Integer> revenue = purchased.buyResources(leftNeighbor, rightNeighbor, missing, sumup, val);
 		leftNeighbor.getOwnedResources().addCoins((int)revenue.get(0));
 		rightNeighbor.getOwnedResources().addCoins((int)revenue.get(1));
 		resources.deductCoins((int)revenue.get(0) + (int)revenue.get(1));
