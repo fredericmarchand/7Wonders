@@ -107,9 +107,10 @@ public class Match2 {
 		players.add(p);
 	}
 	
-	public void addPlayer(ArrayList<Player> plyrs)
+	public void addPlayers(ArrayList<Player> plyrs)
 	{
-		players.addAll(plyrs);
+		for ( User u: plyrs )
+			players.add((Player)u);
 	}
 	
 	public ArrayList<Structure> getDeck()
