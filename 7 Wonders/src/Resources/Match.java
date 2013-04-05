@@ -4,22 +4,15 @@ import java.util.ArrayList;
 
 import server.MServer;
 
-//import server.MServer;
-
-
-
 import Controls.CommandMessage;
 import Controls.Match2;
-import Player.Player;
 import Player.User;
 import Resources.Packet.Packet10EndMatch;
 import Resources.Packet.Packet7MatchFunction;
 import Resources.Packet.Packet8ClientResponse;
 import Resources.Packet.Packet9StartMatch;
 
-
 import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.Server;
 
 public class Match {
 	
@@ -32,7 +25,6 @@ public class Match {
     private int connection_count;
     private int human_connection_count;
     private int receivedEvents = 0;
-    private int nHum;
     private int nAI;
 
     private boolean inProgress;
@@ -40,7 +32,6 @@ public class Match {
     private Match2 controller;
     
     public Match(int h,int ai, MServer m){
-    	nHum = h;
     	nAI = ai;
     	server = m;
     	userList = new ArrayList<User>();

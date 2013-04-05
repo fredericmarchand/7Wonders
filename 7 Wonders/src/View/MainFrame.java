@@ -3,7 +3,6 @@ package View;
 import javax.swing.*;
 
 import Controls.Controller;
-import Controls.Match1;
 import Controls.Match2;
 import Images.Images;
 

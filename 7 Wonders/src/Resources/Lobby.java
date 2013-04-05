@@ -2,28 +2,13 @@ package Resources;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.TextArea;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.ListSelectionModel;
-import javax.swing.SwingConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.*;
+import javax.swing.event.*;
 
 import client.MClient;
 
@@ -31,21 +16,17 @@ import client.MClient;
 
 @SuppressWarnings("serial")
 public class Lobby extends JFrame implements ListSelectionListener {
-	private JList list;
+	private JList<Long> list;
 	private JButton create,join,quit,refresh;
 	JPanel buttonPanel;
 	private int index = 0;
 	private MClient mclient;
-	private DefaultListModel listModel;
+	private DefaultListModel<Long> listModel;
 	
-	
-	
-	
-	@SuppressWarnings("unchecked")
 	public Lobby(MClient c){
 		setLayout(new BorderLayout());
-		listModel = new DefaultListModel();
-		list = new JList(listModel);
+		listModel = new DefaultListModel<Long>();
+		list = new JList<Long>(listModel);
 		create = new JButton("CREATE");
 		refresh = new JButton("REFRESH");
 		join = new JButton("JOIN");
@@ -115,8 +96,7 @@ public class Lobby extends JFrame implements ListSelectionListener {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	public void populate(){
 		for(Long id: mclient.getMatchList()){
 			System.out.println(id);

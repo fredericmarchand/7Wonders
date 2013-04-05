@@ -8,8 +8,6 @@ import client.MClient;
 import Controls.GameController;
 import Controls.Match1;
 import Player.Player;
-import View.MainFrame;
-import Resources.*;
 
 public class linkNetworkView {
 	Lobby lobby;
