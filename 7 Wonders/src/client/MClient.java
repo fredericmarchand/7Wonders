@@ -5,8 +5,7 @@ import java.util.*;
 
 import Controls.*;
 
-import Player.Player;
-import Player.User;
+import Player.*;
 
 import Resources.linkNetworkView;
 import Resources.Packet.*;
@@ -372,6 +371,16 @@ public class MClient {
 		kryo.register(WonderBoards.Boards.TheTempleOfArtemisInEphesus.class);
 		
 		kryo.register(Controls.CommandMessage.class);
+		
+		kryo.register(AIPlayer.class);
+		kryo.register(Strategy.class);
+		kryo.register(Simple.class);
+		kryo.register(Moderate.class);
+		kryo.register(Intermediate.class);
+		
+		kryo.register(java.util.Random.class);
+		
+		kryo.register(java.util.concurrent.atomic.AtomicLong.class);
 	}
 
 	public static void main(String[] args) {

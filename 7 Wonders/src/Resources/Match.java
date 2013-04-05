@@ -50,7 +50,7 @@ public class Match {
 		inProgress = false;
 		MAX_PLAYER_COUNT = h+ai;
 		connection_count+=ai;
-				
+	
     }
     public int getMaxPlayerCount() {return MAX_PLAYER_COUNT;}
     public boolean get_inProgress(){return inProgress;}
@@ -87,15 +87,16 @@ public class Match {
 
 	public void generateAI(){
 		long idAI;
+		System.out.println(nAI);
 		String usernameAI;
 		for(int i = 0; i<nAI;i++){
 			idAI= server.getID();
 			server.incID();
 			usernameAI = "JP the evil frenchmen"; 
 			controller.addAIPlayer(idAI, usernameAI);
-			update();
+			
 		}
-		//FOR DEBUGGING
+				//FOR DEBUGGING
 		//
 		//
 		for(User u : controller.getPlayers()){
@@ -136,7 +137,8 @@ public class Match {
 	}	
 	public void startMatch(){
 		controller = new Match2(userList);
-		//generateAI(nAI);	
+		
+		generateAI();	
 		inProgress = true;
 		sendStartMatchRequest();
 	}
