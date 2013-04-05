@@ -39,9 +39,9 @@ public class NetworkListener extends Listener {
 		ListIterator<Match> it = mserver.getMatchList().listIterator();
 		while (it.hasNext()) {
 			Match m = it.next();
-			if (m.getConnectionCount() == 0) {
+			if (m.getHumanConnectionCount() == 0) {
 				it.remove();
-				System.out.println("[SERVER] No on in match - DELETED ");
+				System.out.println("[SERVER] No one in match  - DELETED ");
 			}
 		}
 		try{

@@ -30,6 +30,7 @@ public class Match {
     private static long counter = 1000;
     private int MAX_PLAYER_COUNT = 7 ;
     private int connection_count;
+    private int human_connection_count;
     private int receivedEvents = 0;
     private int nHum;
     private int nAI;
@@ -58,12 +59,14 @@ public class Match {
 		userList.add((User)o);		
 		connected.add(c);		
 		connection_count++;
+		human_connection_count++;
 		update();
 	}
 	public void removeConnection(Connection c, Object o) {
 		userList.remove((User)o);
 		connected.remove(c);
 		connection_count--;
+		human_connection_count--;
 		update();
 	}
 	public void removeConnectionOnly(Connection c){
@@ -72,6 +75,7 @@ public class Match {
 	}
 	public long getMatch_ID(){return match_id;}
 	public int getConnectionCount(){return connection_count;}
+	public int getHumanConnectionCount(){return human_connection_count;}
 	public void update(){
 		//connection_count=connected.size();
 		System.out.println(connection_count);

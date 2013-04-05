@@ -11,8 +11,8 @@ public class AIPlayer extends Player {
 	public static final int SCIENCE = 0;
 	public static final int MILITARY = 1;
 	public static final int VPOINTS = 2;
-	private int favor;
-	private Strategy strategy;
+	private int favor;						//The structure cards favored over others. Structure based strategy.
+	private Strategy strategy;				//The strategy/difficulty of the ai.
 	private Random rand = new Random();
 	
 	//Used to generate a AI with a random difficulty
@@ -20,13 +20,7 @@ public class AIPlayer extends Player {
 		super();
 		isAI = true;
 		favor = rand.nextInt(3);
-		int randomStrat = rand.nextInt(3);
-		if (randomStrat == 0)
-			strategy = new Simple();
-		else if (randomStrat == 1)
-			strategy = new Moderate();
-		else 
-			strategy = new Intermediate();	
+		setRandomStrategy();
 	}
 	
 	//Used to generate AI with difficulty corresponding to strat passed
@@ -37,10 +31,22 @@ public class AIPlayer extends Player {
 		favor = rand.nextInt(3);
 	}
 	
-	public AIPlayer(long id, String name){
+	public AIPlayer(long id, String name, Strategy strat){
 		super(name, id);
 		isAI = true;
-		strategy = new Intermediate();
+		favor = rand.nextInt(3);
+		setRandomStrategy();
+		strategy = strat;
+	}
+	
+	public void setRandomStrategy(){
+		int randomStrat = rand.nextInt(3);
+		if (randomStrat == 0)
+			strategy = new Simple();
+		else if (randomStrat == 1)
+			strategy = new Moderate();
+		else 
+			strategy = new Intermediate();	
 	}
 	
 	public void pickCard(ArrayList<Structure> discarded, Player leftNeighbor, Player rightNeighbor)
