@@ -15,7 +15,8 @@ public class AIPlayer extends Player {
 	private Random rand = new Random();
 	
 	//Used to generate a AI with a random difficulty
-	public AIPlayer(){
+	public AIPlayer()
+	{
 		super();
 		isAI = true;
 		favor = rand.nextInt(3);
@@ -23,14 +24,16 @@ public class AIPlayer extends Player {
 	}
 	
 	//Used to generate AI with difficulty corresponding to strat passed
-	public AIPlayer(Strategy strat){
+	public AIPlayer(Strategy strat)
+	{
 		super();
 		isAI = true;
 		strategy = strat;
 		favor = rand.nextInt(3);
 	}
 	
-	public AIPlayer(long id, String name, Strategy strat){
+	public AIPlayer(long id, String name, Strategy strat)
+	{
 		super(name, id);
 		isAI = true;
 		favor = rand.nextInt(3);
@@ -38,7 +41,8 @@ public class AIPlayer extends Player {
 		strategy = strat;
 	}
 	
-	public void setRandomStrategy(){
+	public void setRandomStrategy()
+	{
 		int randomStrat = rand.nextInt(3);
 		if (randomStrat == 0)
 			strategy = new Simple();
@@ -114,8 +118,8 @@ public class AIPlayer extends Player {
 	}	
 	
 	//Returns a list of indexes that refer to resource cards in the hand
-	public ArrayList<Integer> getResourceIndexes(){
-		
+	public ArrayList<Integer> getResourceIndexes()
+	{
 		ArrayList<Integer> resource = new ArrayList<Integer>();
 		
 		for ( int index = 0; index < cards.size(); ++index )
@@ -181,6 +185,36 @@ public class AIPlayer extends Player {
 		for(Integer i : freeIndexes(this))
 		{
 			selectionNumbers.set(i, (selectionNumbers.get(i) + 1));
+		}
+		
+		if (currentAge == 1)
+		{
+			for(Integer i : getResourceIndexes())
+			{
+				selectionNumbers.set(i, (selectionNumbers.get(i) + 2));
+			}
+		}
+		
+		for(Integer i : getStrategicIndexes(nextPlayerStrat(getNextPlayer(leftNeighbor, rightNeighbor))))
+		{
+			selectionNumbers.set(i, (selectionNumbers.get(i) + 1));
+		}
+		
+		for(Integer i : freeIndexes(getNextPlayer(leftNeighbor, rightNeighbor)))
+		{
+			selectionNumbers.set(i, (selectionNumbers.get(i) + 1));
+		}
+		
+		return selectionNumbers;
+	}
+	
+	public ArrayList<Integer> blockSelectionNumbers(Player leftNeighbor, Player rightNeighbor)
+	{
+		ArrayList<Integer> selectionNumbers = new ArrayList<Integer>();
+		
+		for(int i = 0; i < 7; i++)
+		{
+			selectionNumbers.add(0);
 		}
 		
 		for(Integer i : getStrategicIndexes(nextPlayerStrat(getNextPlayer(leftNeighbor, rightNeighbor))))
