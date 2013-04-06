@@ -92,7 +92,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	public ArrayList<ScientificSymbols> needToChooseScienceSymbol() 
 	{
 		ArrayList<ScientificSymbols> symbs = new ArrayList<ScientificSymbols>();
-		// TODO Auto-generated method stub
 		for ( Structure s: user.getWonderBoard().getPurpleCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
