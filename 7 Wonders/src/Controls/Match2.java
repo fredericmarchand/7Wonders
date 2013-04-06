@@ -61,10 +61,10 @@ public class Match2 {
 		CardHandler.DistributeCards(players, age1Deck);
 		addInitialResources(players);
 		//Added to give players knowledge of the current age for AI choices
-		for (Player p : players)
-		{
-			p.initAge();
-		}
+		//for (Player p : players)
+		//{
+		//	p.initAge();
+		//}
 	}
 	
 	 public ArrayList<Object> getParameters()
