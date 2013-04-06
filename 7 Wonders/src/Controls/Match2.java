@@ -110,7 +110,11 @@ public class Match2 {
 	public void addPlayers(ArrayList<User> plyrs)
 	{
 		for ( User u: plyrs )
-			players.add(new Player(u.getUsername(), u.getID()));
+		{
+			Player p = new Player(u.getUsername(), u.getID());
+			p.setClient(u.getClient());
+			players.add(p);
+		}
 	}
 	
 	public ArrayList<Structure> getDeck()
