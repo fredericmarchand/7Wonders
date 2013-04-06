@@ -44,6 +44,7 @@ public class StartMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				mclient.getLink().launchLobby();
+
 			}
 		});
 

@@ -210,9 +210,7 @@ public class MClient {
 	public void startMatch(Object o) {
 		//link.getChat().countdown();
 		user.startMatch((Match2)o);
-		
-		//link.launchMainFrame(m, );
-		// load match
+
 	}
 
 	public void sendUserInfo(){
