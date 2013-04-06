@@ -103,7 +103,7 @@ public class Match {
 		for (int i = 0; i < nAI; i++) {
 			idAI = server.getID();
 			server.incID();
-			usernameAI = "JP the evil frenchmen";
+			usernameAI = "JP the evil frenchman";
 			controller.addAIPlayer(idAI, usernameAI);
 		}
 	}

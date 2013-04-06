@@ -21,7 +21,8 @@ public class LocalPanel extends JPanel {
 	Player player;
 	private JLabel2D lblClay, lblTablets, lblRed, lblBlue, lblGrey, lblPurple, lblBrown, lblYellow, lblGreen, 
 					 lblGears, lblCompass, lblVictory, lblMilitary, lblNegConflict, lblPosConflict, 
-					 lblOre, lblStone, lblWood, lblGlass, lblPapyrus, lblCoin, lblLoom;
+					 lblOre, lblStone, lblWood, lblGlass, lblPapyrus, lblCoin, lblLoom,
+					 lblPlayerName;
 	
 	private JLabel wonderStage1, wonderStage2, wonderStage3, wonderStage4;
 	
@@ -55,12 +56,20 @@ public class LocalPanel extends JPanel {
 		wonderStage4.setVisible(false);
 		add(wonderStage4);
 		
+		lblPlayerName = new JLabel2D("11", SwingConstants.CENTER);
+		lblPlayerName.setForeground(Color.WHITE);
+		lblPlayerName.setFont(new Font("Arial Black", Font.PLAIN, 20));
+		lblPlayerName.setOutlineColor(Color.BLACK);
+		lblPlayerName.setStroke(new BasicStroke(2f));
+		lblPlayerName.setBounds(103, 84, 272, 47);
+		add(lblPlayerName);
+		
 		lblBrown = new JLabel2D("11", SwingConstants.CENTER);
 		lblBrown.setForeground(Color.WHITE);
 		lblBrown.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblBrown.setOutlineColor(Color.BLACK);
 		lblBrown.setStroke(new BasicStroke(2f));
-		lblBrown.setBounds(16, 115, 44, 47);
+		lblBrown.setBounds(17, 134, 44, 47);
 		add(lblBrown);
 		
 		lblGrey = new JLabel2D("11", SwingConstants.CENTER);
@@ -68,7 +77,7 @@ public class LocalPanel extends JPanel {
 		lblGrey.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblGrey.setOutlineColor(Color.BLACK);
 		lblGrey.setStroke(new BasicStroke(2f));
-		lblGrey.setBounds(73, 115, 44, 47);
+		lblGrey.setBounds(74, 134, 44, 47);
 		add(lblGrey);
 		
 		lblPurple = new JLabel2D("11", SwingConstants.CENTER);
@@ -76,7 +85,7 @@ public class LocalPanel extends JPanel {
 		lblPurple.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblPurple.setOutlineColor(Color.BLACK);
 		lblPurple.setStroke(new BasicStroke(2f));
-		lblPurple.setBounds(128, 115, 44, 47);
+		lblPurple.setBounds(129, 134, 44, 47);
 		add(lblPurple);
 		
 		lblBlue = new JLabel2D("11", SwingConstants.CENTER);
@@ -84,7 +93,7 @@ public class LocalPanel extends JPanel {
 		lblBlue.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblBlue.setOutlineColor(Color.BLACK);
 		lblBlue.setStroke(new BasicStroke(2f));
-		lblBlue.setBounds(183, 115, 44, 47);
+		lblBlue.setBounds(184, 134, 44, 47);
 		add(lblBlue);
 		
 		lblRed = new JLabel2D("11", SwingConstants.CENTER);
@@ -92,7 +101,7 @@ public class LocalPanel extends JPanel {
 		lblRed.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblRed.setOutlineColor(Color.BLACK);
 		lblRed.setStroke(new BasicStroke(2f));
-		lblRed.setBounds(236, 115, 44, 47);
+		lblRed.setBounds(237, 134, 44, 47);
 		add(lblRed);
 		
 		lblYellow = new JLabel2D("11", SwingConstants.CENTER);
@@ -100,7 +109,7 @@ public class LocalPanel extends JPanel {
 		lblYellow.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblYellow.setOutlineColor(Color.BLACK);
 		lblYellow.setStroke(new BasicStroke(2f));
-		lblYellow.setBounds(292, 115, 44, 47);
+		lblYellow.setBounds(293, 134, 44, 47);
 		add(lblYellow);
 		
 		lblGreen = new JLabel2D("11", SwingConstants.CENTER);
@@ -108,7 +117,7 @@ public class LocalPanel extends JPanel {
 		lblGreen.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblGreen.setOutlineColor(Color.BLACK);
 		lblGreen.setStroke(new BasicStroke(2f));
-		lblGreen.setBounds(346, 115, 44, 47);
+		lblGreen.setBounds(347, 134, 44, 47);
 		add(lblGreen);
 		
 		lblGears = new JLabel2D("11", SwingConstants.CENTER);
@@ -173,7 +182,7 @@ public class LocalPanel extends JPanel {
 		lblOre.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblOre.setOutlineColor(Color.BLACK);
 		lblOre.setStroke(new BasicStroke(2f));
-		lblOre.setBounds(16, 177, 44, 47);
+		lblOre.setBounds(16, 192, 44, 47);
 		add(lblOre);
 		
 		lblStone = new JLabel2D("11", SwingConstants.CENTER);
@@ -182,7 +191,7 @@ public class LocalPanel extends JPanel {
 		lblStone.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblStone.setOutlineColor(Color.BLACK);
 		lblStone.setStroke(new BasicStroke(2f));
-		lblStone.setBounds(72, 177, 44, 47);
+		lblStone.setBounds(72, 192, 44, 47);
 		add(lblStone);
 		
 		lblWood = new JLabel2D("11", SwingConstants.CENTER);
@@ -191,7 +200,7 @@ public class LocalPanel extends JPanel {
 		lblWood.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblWood.setOutlineColor(Color.BLACK);
 		lblWood.setStroke(new BasicStroke(2f));
-		lblWood.setBounds(127, 177, 44, 47);
+		lblWood.setBounds(127, 192, 44, 47);
 		add(lblWood);
 		
 		lblClay = new JLabel2D("11", SwingConstants.CENTER);
@@ -200,7 +209,7 @@ public class LocalPanel extends JPanel {
 		lblClay.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblClay.setOutlineColor(Color.BLACK);
 		lblClay.setStroke(new BasicStroke(2f));
-		lblClay.setBounds(180, 177, 44, 47);
+		lblClay.setBounds(180, 192, 44, 47);
 		add(lblClay);
 		
 		lblGlass = new JLabel2D("11", SwingConstants.CENTER);
@@ -209,7 +218,7 @@ public class LocalPanel extends JPanel {
 		lblGlass.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblGlass.setOutlineColor(Color.BLACK);
 		lblGlass.setStroke(new BasicStroke(2f));
-		lblGlass.setBounds(236, 177, 44, 47);
+		lblGlass.setBounds(236, 192, 44, 47);
 		add(lblGlass);
 		
 		lblLoom = new JLabel2D("11", SwingConstants.CENTER);
@@ -218,7 +227,7 @@ public class LocalPanel extends JPanel {
 		lblLoom.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblLoom.setOutlineColor(Color.BLACK);
 		lblLoom.setStroke(new BasicStroke(2f));
-		lblLoom.setBounds(292, 177, 44, 47);
+		lblLoom.setBounds(292, 192, 44, 47);
 		add(lblLoom);
 		
 		lblPapyrus = new JLabel2D("11", SwingConstants.CENTER);
@@ -227,7 +236,7 @@ public class LocalPanel extends JPanel {
 		lblPapyrus.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblPapyrus.setOutlineColor(Color.BLACK);
 		lblPapyrus.setStroke(new BasicStroke(2f));
-		lblPapyrus.setBounds(346, 177, 44, 47);
+		lblPapyrus.setBounds(346, 192, 44, 47);
 		add(lblPapyrus);
 		
 		lblCoin = new JLabel2D("11", SwingConstants.CENTER);
@@ -236,7 +245,7 @@ public class LocalPanel extends JPanel {
 		lblCoin.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblCoin.setOutlineColor(Color.BLACK);
 		lblCoin.setStroke(new BasicStroke(2f));
-		lblCoin.setBounds(413, 174, 44, 47);
+		lblCoin.setBounds(413, 189, 44, 47);
 		add(lblCoin);
 		
 		JLabel overlayLabel = new JLabel(Images.get("overlayNear"));
@@ -255,13 +264,7 @@ public class LocalPanel extends JPanel {
 	}
 	
 	public void updateLabels() {
-		updateResourceLabels();
-		updateCardLabels();
-		updateOverviewLabels();
-		updateWonderBoardLabels();
-	}
-	
-	public void updateResourceLabels() {
+		lblPlayerName.setText("" + player.getUsername());
 		lblOre.setText("" + player.getTotalResources().getOre());
 		lblStone.setText("" + player.getTotalResources().getStone());
 		lblWood.setText("" + player.getTotalResources().getWood());
@@ -270,9 +273,6 @@ public class LocalPanel extends JPanel {
 		lblLoom.setText("" + player.getTotalResources().getLoom());
 		lblPapyrus.setText("" + player.getTotalResources().getPapyrus());
 		lblCoin.setText("" + player.getTotalResources().getCoins());
-	}
-	
-	public void updateCardLabels() {
 		lblBrown.setText("" + player.getWonderBoard().getBrownCardAmount());
 		lblGrey.setText("" + player.getWonderBoard().getGreyCardAmount());
 		lblPurple.setText("" + player.getWonderBoard().getPurpleCardAmount());
@@ -280,9 +280,6 @@ public class LocalPanel extends JPanel {
 		lblRed.setText("" + player.getWonderBoard().getRedCardAmount());
 		lblYellow.setText("" + player.getWonderBoard().getYellowCardAmount());
 		lblGreen.setText("" + player.getWonderBoard().getGreenCardAmount());
-	}
-	
-	public void updateOverviewLabels() {
 		lblGears.setText("" + player.getScientificSymbols().getGears());
 		lblTablets.setText("" + player.getScientificSymbols().getTablets());
 		lblCompass.setText("" + player.getScientificSymbols().getCompass());
@@ -290,9 +287,6 @@ public class LocalPanel extends JPanel {
 		lblMilitary.setText("" + player.getShields());
 		lblNegConflict.setText(((player.getConflictTokens().getMinusOneTokens() > 0) ? "-" : "") + player.getConflictTokens().getMinusOneTokens());
 		lblPosConflict.setText("" + player.getConflictTokens().getTotalPositive());
-	}
-	
-	private void updateWonderBoardLabels() {
 		ArrayList<WonderBoardStage> stages = player.getWonderBoard().getStages();
 		if(stages.size() == 2) {
 			wonderStage1.setLocation(168, 257);
