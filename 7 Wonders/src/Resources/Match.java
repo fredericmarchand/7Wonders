@@ -76,12 +76,14 @@ public class Match {
 		connected.remove(c);
 		connection_count--;
 		human_connection_count--;
-		update();
+		
 	}
 
 	public void removeConnectionOnly(Connection c) {
 		connected.remove(c);
-		update();
+		connection_count--;
+		human_connection_count--;
+		
 	}
 
 	public long getMatch_ID() {

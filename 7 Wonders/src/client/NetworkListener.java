@@ -14,7 +14,7 @@ import com.esotericsoftware.minlog.Log;
 @SuppressWarnings("unused")
 public class NetworkListener extends Listener{
 
-	private final boolean VERBOSE = false;
+	private final boolean VERBOSE = true;
 	
 	Client c;
 	MClient mclient;
@@ -53,8 +53,6 @@ public class NetworkListener extends Listener{
 			mclient.setMatchList((ArrayList<Long>)((Packet1LoginAnswer)o).getObject());
 			mclient.setID(((Packet1LoginAnswer)o).getIDValue());
 			mclient.createUser();
-			mclient.getUser().setClient(mclient);
-			//mclient.sendUserInfo();
 		}
 		//check if client has been able to join game
 		//if yes, join lobby
@@ -79,7 +77,7 @@ public class NetworkListener extends Listener{
 			mclient.getLink().updateLobby((ArrayList<Long>)((Packet4Object)o).getObject());
 		}
 		if(o instanceof Packet6ChatMsg){
-			System.out.println("Received msg packet");
+			System.out.println("[CLIENT] Received msg packet");
 			mclient.getLink().getChat().addChat(((Packet6ChatMsg)o).getMsg());
 			//mclient.updateChat(((Packet6ChatMsg)o).getMsg());
 		}
