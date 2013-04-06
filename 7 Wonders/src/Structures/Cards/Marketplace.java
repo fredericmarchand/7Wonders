@@ -14,12 +14,6 @@ public class Marketplace extends Structure {
 		effects.add(new TradingPerks(3, 1));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

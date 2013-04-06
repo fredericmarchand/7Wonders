@@ -21,13 +21,7 @@ public class Library extends Structure {
 		return wb.containsCard(Scriptorium.ScriptoriumID);
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }
 

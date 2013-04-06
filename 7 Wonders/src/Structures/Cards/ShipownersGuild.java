@@ -16,12 +16,6 @@ public class ShipownersGuild extends Structure {
 		effects.add(new CardVictoryPointBonus(1, false, PURPLE_CARD));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

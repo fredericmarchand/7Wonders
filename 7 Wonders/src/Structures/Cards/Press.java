@@ -14,12 +14,6 @@ public class Press extends Structure {
 		effects.add(new ResourcesBonus(0, 0, 0, 0, 0, 0, 1));
 	}
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

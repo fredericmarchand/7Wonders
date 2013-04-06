@@ -14,12 +14,6 @@ public class Apothecary extends Structure {
 		effects.add(new ScientificSymbolBonus(1, 2, false));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

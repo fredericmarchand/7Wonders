@@ -70,12 +70,6 @@ public class TheMausoleumOfHalicarnassus extends WonderBoard {
 		return false;
 	}
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

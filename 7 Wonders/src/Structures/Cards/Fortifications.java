@@ -21,13 +21,7 @@ public class Fortifications extends Structure {
 		return wb.containsCard(Walls.WallsID);
 	}
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }
 

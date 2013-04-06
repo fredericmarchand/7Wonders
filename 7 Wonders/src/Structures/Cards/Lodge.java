@@ -21,13 +21,7 @@ public class Lodge extends Structure {
 		return wb.containsCard(Dispensary.DispensaryID);
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }
 

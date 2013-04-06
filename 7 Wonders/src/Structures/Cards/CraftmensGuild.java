@@ -14,12 +14,6 @@ public class CraftmensGuild extends Structure {
 		effects.add(new CardVictoryPointBonus(2, true, GREY_CARD));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

@@ -14,12 +14,6 @@ public class BuildersGuild extends Structure {
 		effects.add(new WonderStageVictoryPointBonus(1, true));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

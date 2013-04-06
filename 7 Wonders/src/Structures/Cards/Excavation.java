@@ -13,12 +13,6 @@ public class Excavation extends Structure {
 		super(new Resources(0, 0, 0, 0, 0, 0, 0, 1), ExcavationID, "Excavation", BROWN_CARD, 1);
 		effects.add(new ResourceChoice(0, 1, 0, 1, 0, 0, 0, true));
 	}
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

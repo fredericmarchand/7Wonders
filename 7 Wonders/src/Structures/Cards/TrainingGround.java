@@ -14,12 +14,6 @@ public class TrainingGround extends Structure {
 		effects.add(new ShieldBonus(2));
 	}
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

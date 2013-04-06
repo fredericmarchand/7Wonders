@@ -20,12 +20,6 @@ public class Circus extends Structure {
 		return wb.containsCard(TrainingGround.TrainingGroundID);
 	}
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }
