@@ -13,7 +13,7 @@ public class Moderate implements Strategy{
 		ArrayList<Integer> selectionNumbers = p.cardSelectionNumbers(leftNeighbor, rightNeighbor);
 		
 		for ( int i = 0; i < p.cards.size(); ++i )
-		{
+		{	
 			if (Collections.max(p.cardSelectionNumbers(leftNeighbor, rightNeighbor)) == 0)
 				break;
 			int result;
