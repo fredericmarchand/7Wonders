@@ -17,7 +17,7 @@ public class FarPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	Player player;
-	private JLabel2D lblPosConflict, lblNegConflict, lblTablets, lblMilitary, lblVictory, lblCompass, lblGears, lblCoin;
+	private JLabel2D lblPosConflict, lblNegConflict, lblTablets, lblMilitary, lblVictory, lblCompass, lblGears, lblCoin, lblPlayerName;
 	private JLabel wonderStage1, wonderStage2, wonderStage3, wonderStage4;
 	
 	public FarPanel(Player p) {
@@ -46,12 +46,20 @@ public class FarPanel extends JPanel {
 		wonderStage4.setVisible(false);
 		add(wonderStage4);
 		
+		lblPlayerName = new JLabel2D("11", SwingConstants.CENTER);
+		lblPlayerName.setForeground(Color.WHITE);
+		lblPlayerName.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		lblPlayerName.setOutlineColor(Color.BLACK);
+		lblPlayerName.setStroke(new BasicStroke(2f));
+		lblPlayerName.setBounds(106, 20, 196, 28);
+		add(lblPlayerName);
+		
 		lblGears = new JLabel2D("11", SwingConstants.CENTER);
 		lblGears.setForeground(Color.WHITE);
 		lblGears.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblGears.setOutlineColor(Color.BLACK);
 		lblGears.setStroke(new BasicStroke(2f));
-		lblGears.setBounds(8, 8, 37, 47);
+		lblGears.setBounds(16, 60, 37, 47);
 		add(lblGears);
 		
 		lblTablets = new JLabel2D("11", SwingConstants.CENTER);
@@ -59,7 +67,7 @@ public class FarPanel extends JPanel {
 		lblTablets.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblTablets.setOutlineColor(Color.BLACK);
 		lblTablets.setStroke(new BasicStroke(2f));
-		lblTablets.setBounds(43, 8, 40, 47);
+		lblTablets.setBounds(51, 60, 40, 47);
 		add(lblTablets);
 		
 		lblCompass = new JLabel2D("11", SwingConstants.CENTER);
@@ -67,7 +75,7 @@ public class FarPanel extends JPanel {
 		lblCompass.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblCompass.setOutlineColor(Color.BLACK);
 		lblCompass.setStroke(new BasicStroke(2f));
-		lblCompass.setBounds(74, 8, 44, 47);
+		lblCompass.setBounds(82, 60, 44, 47);
 		add(lblCompass);
 		
 		lblVictory = new JLabel2D("11", SwingConstants.CENTER);
@@ -75,7 +83,7 @@ public class FarPanel extends JPanel {
 		lblVictory.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblVictory.setOutlineColor(Color.BLACK);
 		lblVictory.setStroke(new BasicStroke(2f));
-		lblVictory.setBounds(131, 7, 44, 47);
+		lblVictory.setBounds(138, 58, 44, 47);
 		add(lblVictory);
 		
 		lblMilitary = new JLabel2D("11", SwingConstants.CENTER);
@@ -83,7 +91,7 @@ public class FarPanel extends JPanel {
 		lblMilitary.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblMilitary.setOutlineColor(Color.BLACK);
 		lblMilitary.setStroke(new BasicStroke(2f));
-		lblMilitary.setBounds(192, 8, 44, 47);
+		lblMilitary.setBounds(200, 58, 44, 47);
 		add(lblMilitary);
 		
 		lblNegConflict = new JLabel2D("-1", SwingConstants.CENTER);
@@ -91,7 +99,7 @@ public class FarPanel extends JPanel {
 		lblNegConflict.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNegConflict.setOutlineColor(Color.BLACK);
 		lblNegConflict.setStroke(new BasicStroke(2f));
-		lblNegConflict.setBounds(136, 66, 44, 47);
+		lblNegConflict.setBounds(58, 10, 44, 47);
 		add(lblNegConflict);
 		
 		lblPosConflict = new JLabel2D("11", SwingConstants.CENTER);
@@ -99,7 +107,7 @@ public class FarPanel extends JPanel {
 		lblPosConflict.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPosConflict.setOutlineColor(Color.BLACK);
 		lblPosConflict.setStroke(new BasicStroke(2f));
-		lblPosConflict.setBounds(231, 67, 44, 47);
+		lblPosConflict.setBounds(265, 62, 44, 47);
 		add(lblPosConflict);
 		
 		lblCoin = new JLabel2D("11", SwingConstants.CENTER);
@@ -108,7 +116,7 @@ public class FarPanel extends JPanel {
 		lblCoin.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblCoin.setOutlineColor(Color.BLACK);
 		lblCoin.setStroke(new BasicStroke(2f));
-		lblCoin.setBounds(42, 63, 44, 47);
+		lblCoin.setBounds(9, 6, 44, 47);
 		add(lblCoin);
 		
 		JLabel overlayLabel = new JLabel(Images.get("overlayFar"));
@@ -127,11 +135,7 @@ public class FarPanel extends JPanel {
 	}
 	
 	public void updateLabels() {
-		updateOverviewLabels();
-		updateWonderLabels();
-	}
-	
-	public void updateOverviewLabels() {
+		lblPlayerName.setText("" + player.getUsername());
 		lblGears.setText("" + player.getScientificSymbols().getGears());
 		lblTablets.setText("" + player.getScientificSymbols().getTablets());
 		lblCompass.setText("" + player.getScientificSymbols().getCompass());
@@ -140,9 +144,6 @@ public class FarPanel extends JPanel {
 		lblNegConflict.setText(((player.getConflictTokens().getMinusOneTokens() > 0) ? "-" : "") + player.getConflictTokens().getMinusOneTokens());
 		lblPosConflict.setText("" + player.getConflictTokens().getTotalPositive());
 		lblCoin.setText("" + player.getResources().getCoins());
-	}
-	
-	public void updateWonderLabels() {
 		ArrayList<WonderBoardStage> stages = player.getWonderBoard().getStages();
 		if(stages.size() == 2) {
 			wonderStage1.setLocation(115, 122);
