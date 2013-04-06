@@ -49,6 +49,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public int canBuildStructure(Structure s) 
 	{
+		user.chooseCard(s);
 		return user.canBuild(match.getLeftNeighbor(user), match.getRightNeighbor(user));
 	}
 
