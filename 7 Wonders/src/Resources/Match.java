@@ -125,7 +125,9 @@ public class Match {
 		Packet7MatchFunction packet = new Packet7MatchFunction();
 		for(Object o : controller.getParameters()){
 			packet.setObject(o);
+			System.out.println("[SERVER] Sending:\t" +o);
 			for (Connection c : connected) {
+				System.out.println("[SERVER] Sending Match 2 chunk to Client");
 				c.sendTCP(packet);
 			}
 		}
@@ -150,7 +152,7 @@ public class Match {
 		controller = new Match2();
 		generateAI();
 		controller.addPlayers(userList);
-		controller.init();
+		//controller.init();
 		inProgress = true;
 		sendStartMatchRequest();
 	}
