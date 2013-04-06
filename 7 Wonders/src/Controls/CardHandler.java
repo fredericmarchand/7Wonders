@@ -333,48 +333,43 @@ public class CardHandler {
 		}	
 	}
 	
-	
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
-		//ArrayList<Structure> deck = BuildAge1Deck(7);
-		/*DistributeRandomWonderBoards(players, 1);
-		DistributeCards(players, deck);
-		for ( Player p : players )
-		{
-			System.out.println("\n" + p.getWonderBoard().getBoardName());
-			for ( Structure s: p.getCards() )
-			{
-				System.out.println(s.getName());
-			}
-		}
-		
-		PassCardsToNeighbors(players, 2);
-		
-		for ( Player p : players )
-		{
-			System.out.println("\n" + p.getWonderBoard().getBoardName());
-			for ( Structure s: p.getCards() )
-			{
-				System.out.println(s.getName());
-			}
-		}*/
-		Random r = new Random();
-		for ( int i = 0; i<10; ++i )
-		{
-			System.out.println(r.nextInt(2));
-		}
-		
-	}
+//	public static void main(String[] args) {
+//		ArrayList<Player> players = new ArrayList<Player>();
+//		players.add(new Player());
+//		players.add(new Player());
+//		players.add(new Player());
+//		players.add(new Player());
+//		players.add(new Player());
+//		players.add(new Player());
+//		players.add(new Player());
+//		ArrayList<Structure> deck = BuildAge1Deck(7);
+//		DistributeRandomWonderBoards(players, 1);
+//		DistributeCards(players, deck);
+//		for ( Player p : players )
+//		{
+//			System.out.println("\n" + p.getWonderBoard().getBoardName());
+//			for ( Structure s: p.getCards() )
+//			{
+//				System.out.println(s.getName());
+//			}
+//		}
+//		
+//		PassCardsToNeighbors(players, 2);
+//		
+//		for ( Player p : players )
+//		{
+//			System.out.println("\n" + p.getWonderBoard().getBoardName());
+//			for ( Structure s: p.getCards() )
+//			{
+//				System.out.println(s.getName());
+//			}
+//		}
+//		Random r = new Random();
+//		for ( int i = 0; i<10; ++i )
+//		{
+//			System.out.println(r.nextInt(2));
+//		}
+//		
+//	}
 
 }

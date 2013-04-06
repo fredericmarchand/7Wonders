@@ -41,7 +41,7 @@ public class MServer {
 		NetworkListener nl = new NetworkListener();
 		nl.init(server, this);
 		server.addListener(nl);
-		System.out.println("Input ");
+		System.out.println("Input server port (60001 recommended): ");
 		server.bind(Integer.parseInt((scanner.next())));
 		server.start();
 

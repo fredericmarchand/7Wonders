@@ -2,8 +2,6 @@ package Controls;
 
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 import Player.Player;
 import Player.User;
 import Structures.Structure;
@@ -203,7 +201,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public boolean chooseCard(Structure s) 
 	{
-		System.out.println(user.getCards());
+		System.out.println("chooseCard: " + user.getCards());
 		for ( int i = 0; i < user.getCards().size(); ++i )
 		{
 			if ( user.getCards().get(i).getID() == s.getID() )

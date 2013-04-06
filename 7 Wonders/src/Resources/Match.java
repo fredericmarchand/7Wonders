@@ -89,7 +89,7 @@ public class Match {
 	}
 
 	public void update() {
-		System.out.println(connection_count);
+		System.out.println("Server Match update connection count: " + connection_count);
 		if (connection_count == MAX_PLAYER_COUNT) {
 			System.out.println("Starting Game!");
 			startMatch();
@@ -98,7 +98,7 @@ public class Match {
 
 	public void generateAI() {
 		long idAI;
-		System.out.println(nAI);
+		System.out.println("Number of AI: " + nAI);
 		String usernameAI;
 		for (int i = 0; i < nAI; i++) {
 			idAI = server.getID();
