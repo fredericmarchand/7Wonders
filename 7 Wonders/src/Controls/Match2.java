@@ -106,6 +106,36 @@ public class Match2 {
 		turn = t;
 	}
 	
+	public void setAge1Deck(ArrayList<Structure> deck)
+	{
+		age1Deck = deck;
+	}
+	
+	public void setAge2Deck(ArrayList<Structure> deck)
+	{
+		age2Deck = deck;
+	}
+	
+	public void setAge3Deck(ArrayList<Structure> deck)
+	{
+		age3Deck = deck;
+	}
+	
+	public void setDiscardedDeck(ArrayList<Structure> deck)
+	{
+		discarded = deck;
+	}
+	
+	public void setPlayers(ArrayList<Player> plrs)
+	{
+		players = plrs;
+	}
+	
+	public void setNumPlayers(int plrs)
+	{
+		numPlayers = plrs;
+	}
+	
 	public void setLocalPlayerID(long id)
 	{
 		localPlayerID = id;
