@@ -161,7 +161,7 @@ public class NetworkListener extends Listener {
 			c.sendTCP(joinResponse);
 		}
 		if(o instanceof Packet16UserObject){
-			System.out.println("[SERVER] WOOP");
+			System.out.println("[SERVER] RECEIVED USER OBJECT! WOOP!");
 		}
 	}
 

@@ -455,15 +455,4 @@ public class Player extends User {
 			return true;
 		return false;
 	}
-	
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-		Random r = new Random();
-		System.out.println(r.nextInt(2));
-	}
-
 }

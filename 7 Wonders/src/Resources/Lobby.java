@@ -98,7 +98,7 @@ public class Lobby extends JFrame implements ListSelectionListener {
 
 	public void populate(){
 		for(Long id: mclient.getMatchList()){
-			System.out.println(id);
+			System.out.println("Lobby populate: " + id);
 			listModel.insertElementAt(id, index);
 			index++;
 		}

@@ -96,7 +96,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	public void run(){
 		
 		numplayers = match.getPlayers().size();
-		System.out.println(numplayers);
+		System.out.println("MatchPanel numplayers: " + numplayers);
 		// Local
 		Player.Player p1 = match.getLocalPlayer();
 		playerPanel = new LocalPanel(p1, controller);
