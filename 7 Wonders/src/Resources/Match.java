@@ -168,12 +168,12 @@ public class Match {
 		}
 		
 		Packet7MatchFunction packet = new Packet7MatchFunction();
-		for(Object o : controller.get)
-			packet.setObject(controller.getParameters());
-			for (Connection c : connected) {
+		for(Object o : controller.getParameters()){
+			packet.setObject(o);
+			for (Connection c : connected){
 				c.sendTCP(packet);
 			}
-		
+		}
 	}
 
 	public void sendEndMatchRequest() {

@@ -19,6 +19,7 @@ public class NetworkListener extends Listener{
 	Client c;
 	MClient mclient;
 	ArrayList<Match> list;
+	int matchChunksReceived = 0;
 	
 	public NetworkListener(MClient m){
 		mclient = m;
@@ -83,7 +84,7 @@ public class NetworkListener extends Listener{
 		}
 
 		if(o instanceof Packet7MatchFunction){
-			mclient.turn(o);
+			
 		}
 		if(o instanceof Packet8ClientResponse){
 			
