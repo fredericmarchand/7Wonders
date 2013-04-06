@@ -117,7 +117,6 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 	public ArrayList<ScientificSymbols> needToChooseScienceSymbol() 
 	{
 		ArrayList<ScientificSymbols> symbs = new ArrayList<ScientificSymbols>();
-		// TODO Auto-generated method stub
 		for ( Structure s: user.getWonderBoard().getPurpleCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
@@ -364,7 +363,6 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 		//@SuppressWarnings("unused")
 		//GameController gc = new GameController(new Player(name, 0), new Match1());
 		ArrayList<ScientificSymbols> symbs = new ArrayList<ScientificSymbols>();
-		// TODO Auto-generated method stub
 		Player p = new Player();
 		p.assignWonderBoard(new TheHangingGardensOfBabylon(0));
 		p.getWonderBoard().buildStage(new Structure(), new Resources(5, 5, 5, 5, 5, 5, 5, 5));

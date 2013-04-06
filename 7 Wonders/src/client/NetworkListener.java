@@ -30,14 +30,12 @@ public class NetworkListener extends Listener{
 	
 	public void connected(Connection arg0) {
 		System.out.println("[CLIENT] Connected");
-		// TODO Auto-generated method stub
 		//c.sendTCP(new Packet0LoginRequest());
 		//super.connected(arg0);
 	}
 	
 	@Override
 	public void disconnected(Connection arg0) {
-		// TODO Auto-generated method stub
 		System.out.println("[CLIENT] Disconnected");
 		System.exit(0);
 		//super.disconnected(arg0);

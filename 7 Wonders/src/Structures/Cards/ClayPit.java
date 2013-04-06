@@ -14,12 +14,6 @@ public class ClayPit extends Structure {
 		effects.add(new ResourceChoice(1, 0, 0, 1, 0, 0, 0, true));
 	}
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

@@ -16,12 +16,6 @@ public class ChamberOfCommerce extends Structure {
 		effects.add(new CardVictoryPointBonus(2, false, GREY_CARD));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

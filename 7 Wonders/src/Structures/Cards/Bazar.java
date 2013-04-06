@@ -14,12 +14,6 @@ public class Bazar extends Structure {
 		effects.add(new CardCoinBonus(2, GREY_CARD, true));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

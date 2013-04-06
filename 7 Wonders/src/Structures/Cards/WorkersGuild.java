@@ -14,12 +14,6 @@ public class WorkersGuild extends Structure {
 		effects.add(new CardVictoryPointBonus(1, true, BROWN_CARD));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

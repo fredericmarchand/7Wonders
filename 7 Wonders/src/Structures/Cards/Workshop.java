@@ -14,12 +14,6 @@ public class Workshop extends Structure {
 		effects.add(new ScientificSymbolBonus(2, 2, false));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

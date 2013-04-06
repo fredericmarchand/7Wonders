@@ -14,12 +14,6 @@ public class Tavern extends Structure {
 		effects.add(new CoinBonus(5));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

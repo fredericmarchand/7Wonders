@@ -93,7 +93,6 @@ public class Lobby extends JFrame implements ListSelectionListener {
 	}
 	
 	public void valueChanged(ListSelectionEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 

@@ -14,12 +14,6 @@ public class ScientistsGuild extends Structure {
 		effects.add(new ScientificSymbolBonus(1, 3, true));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

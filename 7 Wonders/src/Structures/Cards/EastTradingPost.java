@@ -14,12 +14,6 @@ public class EastTradingPost extends Structure {
 		effects.add(new TradingPerks(2, 0));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

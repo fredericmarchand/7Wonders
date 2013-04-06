@@ -21,12 +21,6 @@ public class Aqueduct extends Structure {
 		return wb.containsCard(Baths.BathsID);
 	}
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }
