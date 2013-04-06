@@ -28,17 +28,13 @@ public class MClient {
 	
 	private linkNetworkView link;
 	
-	
-	//private Player player;
-	
 	private User user;
 
-	// player receive game
 	public MClient() {
 		matchList = new ArrayList<Long>();
 		client = new Client();
 		NetworkListener nl = new NetworkListener(this);
-
+		nl.init(client);
 		link = new linkNetworkView(this);
 
 		client.addListener(nl);
@@ -46,8 +42,6 @@ public class MClient {
 		register();
 
 	}
-
-
 
 	// get/set host values
 	public void setHost(boolean h) {
@@ -92,9 +86,6 @@ public class MClient {
 		user = u;
 	}
 
-
-
-
 	public User getUser() {
 		return user;
 	}
@@ -112,10 +103,7 @@ public class MClient {
 
 	public void createUser() {
 		user = new Player(username, ID);
-		//user.setClient(this);
-		//user.setClient(this);
-		//client.sendCommandMessage();
-		
+		user.setClient(this);
 	}
 	
 	public void sendCommandMessage(CommandMessage m){
