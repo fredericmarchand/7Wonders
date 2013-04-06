@@ -89,6 +89,7 @@ public class NetworkListener extends Listener{
 			
 		}
 		if(o instanceof Packet9StartMatch){
+			System.out.println("[CLIENT] Received match 2 " + ((Packet9StartMatch)o).getObject());
 			mclient.startMatch(((Packet9StartMatch)o).getObject());
 			//eliminate countdown causing so many god damn errors.
 			//mclient.getLink().getChat().run();

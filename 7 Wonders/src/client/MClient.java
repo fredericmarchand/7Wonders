@@ -34,7 +34,6 @@ public class MClient {
 		matchList = new ArrayList<Long>();
 		client = new Client();
 		NetworkListener nl = new NetworkListener(this);
-		nl.init(client);
 		link = new linkNetworkView(this);
 
 		client.addListener(nl);
@@ -128,6 +127,7 @@ public class MClient {
 	}
 
 	public void sendCreateMatchRequest(int human, int ai) {
+		System.out.println("[CLIENT]Sending Create request)" );
 		Packet12CreateMatch packet = new Packet12CreateMatch();
 		user = new User(username, ID);
 		packet.setHuman(human);

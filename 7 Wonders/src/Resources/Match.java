@@ -64,7 +64,9 @@ public class Match {
 	}
 
 	public void addConnection(Connection c, Object o) {
-		userList.add((User) o);
+		User u = (User)o;
+		System.out.println("[SERVER - MATCH] User: \t" + u);
+		userList.add(u);
 		connected.add(c);
 		connection_count++;
 		human_connection_count++;
@@ -145,7 +147,9 @@ public class Match {
 		controller = new Match2();
 		generateAI();
 		controller.addPlayers(userList);
-		//controller.init();
+	
+		controller.init();
+		
 		inProgress = true;
 		sendStartMatchRequest();
 	}
