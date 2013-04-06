@@ -161,19 +161,19 @@ public class Match {
 
 	public void sendStartMatchRequest() {
 		Packet9StartMatch start = new Packet9StartMatch();
-		start.setObject(controller);
+		//start.setObject(controller);
 		for (Connection c : connected) {
 			System.out.println("[SERVER] Sending client Match 2");
 			c.sendTCP(start);
 		}
 		
-//		Packet7MatchFunction packet = new Packet7MatchFunction();
-//		for(int i = 0;i<8;i++){
-//			packet.setObject(controller.getParameters(i));
-//			for (Connection c : connected) {
-//				c.sendTCP(packet);
-//			}
-//		}
+		Packet7MatchFunction packet = new Packet7MatchFunction();
+		for(Object o : controller.get)
+			packet.setObject(controller.getParameters());
+			for (Connection c : connected) {
+				c.sendTCP(packet);
+			}
+		
 	}
 
 	public void sendEndMatchRequest() {

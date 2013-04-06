@@ -55,33 +55,17 @@ public class Match2 {
 		age1Deck = CardHandler.BuildAge1Deck(numPlayers);
 		age2Deck = CardHandler.BuildAge2Deck(numPlayers);
 		age3Deck = CardHandler.BuildAge3Deck(numPlayers);
-//		discarded = new ArrayList<Structure>();
-//		CardHandler.DistributeRandomWonderBoards(players);
-//		for ( Player p: players ) p.getOwnedResources().addCoins(3);
-//		CardHandler.DistributeCards(players, age1Deck);
-//		addInitialResources(players);
-//		//Added to give players knowledge of the current age for AI choices
-//		for (Player p : players)
-//		{
-//			p.initAge();
-//		}
+		discarded = new ArrayList<Structure>();
+		CardHandler.DistributeRandomWonderBoards(players);
+		for ( Player p: players ) p.getOwnedResources().addCoins(3);
+		CardHandler.DistributeCards(players, age1Deck);
+		addInitialResources(players);
+		//Added to give players knowledge of the current age for AI choices
+		for (Player p : players)
+		{
+			p.initAge();
+		}
 	}
-	
-	
-	public ArrayList<Object> getParameters()
-	{
-		ArrayList<Object> params = new ArrayList<Object>();
-		params.add(players);
-		params.add(age);
-		params.add(turn);
-		params.add(numPlayers);
-		params.add(age1Deck);
-		params.add(age2Deck);
-		params.add(age3Deck);
-		params.add(discarded);
-		return params;
-	}
-	
 	
 	public ArrayList<Structure> getDiscardedCards()
 	{
