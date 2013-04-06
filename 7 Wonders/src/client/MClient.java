@@ -127,7 +127,7 @@ public class MClient {
 	}
 
 	public void sendCreateMatchRequest(int human, int ai) {
-		System.out.println("[CLIENT]Sending Create request)" );
+		System.out.println("[CLIENT]Sending Create request" );
 		Packet12CreateMatch packet = new Packet12CreateMatch();
 		user = new User(username, ID);
 		packet.setHuman(human);

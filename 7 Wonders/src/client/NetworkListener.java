@@ -57,7 +57,7 @@ public class NetworkListener extends Listener{
 		//check if client has been able to join game
 		//if yes, join lobby
 		//if no stay at match list screen
-		//
+
 		if(o instanceof Packet3Connection){
 			System.out.println("Packet3Connection Received");
 			if(((Packet3Connection)o).getAccepted()){
@@ -90,7 +90,7 @@ public class NetworkListener extends Listener{
 		}
 		if(o instanceof Packet9StartMatch){
 			System.out.println("[CLIENT] Received match 2 " + ((Packet9StartMatch)o).getObject());
-			mclient.startMatch(((Packet9StartMatch)o).getObject());
+			//mclient.startMatch(((Packet9StartMatch)o).getObject());
 			//eliminate countdown causing so many god damn errors.
 			//mclient.getLink().getChat().run();
 		}

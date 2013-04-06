@@ -12,6 +12,7 @@ import Resources.Packet.Packet7MatchFunction;
 import Resources.Packet.Packet8ClientResponse;
 import Resources.Packet.Packet9StartMatch;
 
+
 import com.esotericsoftware.kryonet.Connection;
 
 public class Match {
@@ -148,7 +149,7 @@ public class Match {
 		generateAI();
 		controller.addPlayers(userList);
 	
-		controller.init();
+		//controller.init();
 		
 		inProgress = true;
 		sendStartMatchRequest();
@@ -162,8 +163,17 @@ public class Match {
 		Packet9StartMatch start = new Packet9StartMatch();
 		start.setObject(controller);
 		for (Connection c : connected) {
+			System.out.println("[SERVER] Sending client Match 2");
 			c.sendTCP(start);
 		}
+		
+//		Packet7MatchFunction packet = new Packet7MatchFunction();
+//		for(int i = 0;i<8;i++){
+//			packet.setObject(controller.getParameters(i));
+//			for (Connection c : connected) {
+//				c.sendTCP(packet);
+//			}
+//		}
 	}
 
 	public void sendEndMatchRequest() {

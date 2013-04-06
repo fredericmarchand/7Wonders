@@ -33,6 +33,7 @@ public class MServer {
 	public MServer() throws IOException {
 
 		server = new Server();
+		
 		list = new ArrayList<Object>();
 		matchList = new ArrayList<Match>();
 
