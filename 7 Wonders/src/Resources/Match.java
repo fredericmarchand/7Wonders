@@ -121,12 +121,13 @@ public class Match {
 
 	// getters and setters for controller
 
-	public void sendMatchInfo(Object o) {
-		Packet7MatchFunction gamePacket = new Packet7MatchFunction();
-		gamePacket.setObject(o);
-
-		for (Connection c : connected) {
-			c.sendTCP(gamePacket);
+	public void sendMatchInfo() {		
+		Packet7MatchFunction packet = new Packet7MatchFunction();
+		for(Object o : controller.getParameters()){
+			packet.setObject(o);
+			for (Connection c : connected) {
+				c.sendTCP(packet);
+			}
 		}
 	}
 
@@ -134,8 +135,9 @@ public class Match {
 		cmdMsgList.add(m);
 		receivedEvents++;
 		if (receivedEvents == human_connection_count) {
-			sendMatchInfo(controller.dispatch(cmdMsgList));
+			controller.dispatch(cmdMsgList);
 			cmdMsgList.clear();
+			sendMatchInfo();
 		}
 	}
 
@@ -148,9 +150,7 @@ public class Match {
 		controller = new Match2();
 		generateAI();
 		controller.addPlayers(userList);
-	
-		//controller.init();
-		
+		controller.init();
 		inProgress = true;
 		sendStartMatchRequest();
 	}
@@ -160,21 +160,15 @@ public class Match {
 	}
 
 	public void sendStartMatchRequest() {
+		sendMatchInfo();
 		Packet9StartMatch start = new Packet9StartMatch();
-		//start.setObject(controller);
 		for (Connection c : connected) {
-			System.out.println("[SERVER] Sending client Match 2");
+			System.out.println("[SERVER] Sending start request");
 			c.sendTCP(start);
 		}
-		
-		Packet7MatchFunction packet = new Packet7MatchFunction();
-		for(Object o : controller.getParameters())
-			packet.setObject(controller.getParameters());
-			for (Connection c : connected) {
-				c.sendTCP(packet);
-			}
-		
 	}
+	
+	
 
 	public void sendEndMatchRequest() {
 		Packet10EndMatch end = new Packet10EndMatch();

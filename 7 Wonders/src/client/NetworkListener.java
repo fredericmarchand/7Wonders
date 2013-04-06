@@ -19,6 +19,8 @@ public class NetworkListener extends Listener{
 	Client c;
 	MClient mclient;
 	ArrayList<Match> list;
+	ArrayList<Object> fredsShittyList = new ArrayList<Object>();
+	int matchChunksReceived = 0;
 	
 	public NetworkListener(MClient m){
 		mclient = m;
@@ -83,14 +85,24 @@ public class NetworkListener extends Listener{
 		}
 
 		if(o instanceof Packet7MatchFunction){
-			mclient.turn(o);
+			System.out.println("[CLIENT] Received Match 2 Chunk");
+			
+			++matchChunksReceived;
+			fredsShittyList.add(((Packet7MatchFunction)o).getObject());
+			if(matchChunksReceived==7){
+				//receive shitty list
+				
+				fredsShittyList.clear();
+				matchChunksReceived=0;
+			}
+			
 		}
 		if(o instanceof Packet8ClientResponse){
 			
 		}
-		if(o instanceof Packet9StartMatch){
-			System.out.println("[CLIENT] Received match 2 " + ((Packet9StartMatch)o).getObject());
-			//mclient.startMatch(((Packet9StartMatch)o).getObject());
+		if(o instanceof Packet9StartMatch){			
+			System.out.println("[CLIENT] Received start match request");
+			mclient.startMatch();
 			//eliminate countdown causing so many god damn errors.
 			//mclient.getLink().getChat().run();
 		}
