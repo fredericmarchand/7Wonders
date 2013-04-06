@@ -1,5 +1,9 @@
 package Player;
 
+import java.util.ArrayList;
+
+import Structures.Structure;
+
 import client.MClient;
 import Controls.CommandMessage;
 import Controls.Match2;
@@ -77,18 +81,60 @@ public class User {
 //		}
 	}
 	
+	public void receive(ArrayList<Object> devonsShittyMatchInfo)
+	{
+		currentMatch = new Match2();
+		for ( int i = 0; i < devonsShittyMatchInfo.size(); ++i )
+		{
+			switch ( i )
+			{
+			case 0:
+				currentMatch.setPlayers((ArrayList<Player>)devonsShittyMatchInfo.get(i));
+				break;
+				
+			case 1:
+				currentMatch.setAge((int)devonsShittyMatchInfo.get(i));
+				break;
+				
+			case 2:
+				currentMatch.setTurn((int)devonsShittyMatchInfo.get(i));
+				break;
+				
+			case 3:
+				currentMatch.setNumPlayers((int)devonsShittyMatchInfo.get(i));
+				break;
+				
+			case 4:
+				currentMatch.setAge1Deck((ArrayList<Structure>)devonsShittyMatchInfo.get(i));
+				break;
+				
+			case 5:
+				currentMatch.setAge2Deck((ArrayList<Structure>)devonsShittyMatchInfo.get(i));
+				break;
+				
+			case 6:
+				currentMatch.setAge3Deck((ArrayList<Structure>)devonsShittyMatchInfo.get(i));
+				break;
+				
+			case 7:
+				currentMatch.setDiscardedDeck((ArrayList<Structure>)devonsShittyMatchInfo.get(i));
+				break;
+			}
+		}
+		
+	}
+	
 	public void returnToLobby()
 	{
 		client.returnToLobby();
 	}
 	
-	public void startMatch(Match2 match)
+	public void startMatch()
 	{
-		System.out.println("StartMatch Wonderboard?: " + match.getPlayers().get(0).getWonderBoard());
-		currentMatch = match;
+		//System.out.println("StartMatch Wonderboard?: " + match.getPlayers().get(0).getWonderBoard());
+		//currentMatch = match;
 		currentMatch.setLocalPlayerID(ID);
-		@SuppressWarnings("unused")
-		NetworkGameController gc = new NetworkGameController(this, match);
+		NetworkGameController gc = new NetworkGameController(this, currentMatch);
 	}
 	
 	
