@@ -69,13 +69,7 @@ public class Packet {
 		public void setuName(String n){uName = n;}
 	}
 	public static class Packet7MatchFunction{
-		private long matchID;
-		private long clientID;
 		private Object o;
-		public long getMID(){return matchID;}
-		public void setMID(long id){matchID = id;}
-		public long getCID(){return clientID;}
-		public void setCID(long id){clientID=id;}
 		public Object getObject(){ return o;}
 		public void setObject(Object ob){ o = ob;}
 	}
@@ -90,11 +84,7 @@ public class Packet {
 		public Object getObject(){ return o;}
 		public void setObject(Object ob){ o = ob;}
 	}
-	public static class Packet9StartMatch{
-		private Object o;
-		public Object getObject(){ return o;}
-		public void setObject(Object ob){ o = ob;}
-	}
+	public static class Packet9StartMatch{}
 	public static class Packet10EndMatch{}
 	public static class Packet11ImmediateStart{
 		//if client sends one of these

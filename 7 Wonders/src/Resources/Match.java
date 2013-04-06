@@ -12,6 +12,7 @@ import Resources.Packet.Packet7MatchFunction;
 import Resources.Packet.Packet8ClientResponse;
 import Resources.Packet.Packet9StartMatch;
 
+
 import com.esotericsoftware.kryonet.Connection;
 
 public class Match {
@@ -64,7 +65,9 @@ public class Match {
 	}
 
 	public void addConnection(Connection c, Object o) {
-		userList.add((User) o);
+		User u = (User)o;
+		System.out.println("[SERVER - MATCH] User: \t" + u);
+		userList.add(u);
 		connected.add(c);
 		connection_count++;
 		human_connection_count++;
@@ -76,12 +79,14 @@ public class Match {
 		connected.remove(c);
 		connection_count--;
 		human_connection_count--;
-		update();
+		
 	}
 
 	public void removeConnectionOnly(Connection c) {
 		connected.remove(c);
-		update();
+		connection_count--;
+		human_connection_count--;
+		
 	}
 
 	public long getMatch_ID() {
@@ -89,7 +94,7 @@ public class Match {
 	}
 
 	public void update() {
-		System.out.println(connection_count);
+		System.out.println("Server Match update connection count: " + connection_count);
 		if (connection_count == MAX_PLAYER_COUNT) {
 			System.out.println("Starting Game!");
 			startMatch();
@@ -98,7 +103,7 @@ public class Match {
 
 	public void generateAI() {
 		long idAI;
-		System.out.println(nAI);
+		System.out.println("Number of AI: " + nAI);
 		String usernameAI;
 		for (int i = 0; i < nAI; i++) {
 			idAI = server.getID();
@@ -116,12 +121,15 @@ public class Match {
 
 	// getters and setters for controller
 
-	public void sendMatchInfo(Object o) {
-		Packet7MatchFunction gamePacket = new Packet7MatchFunction();
-		gamePacket.setObject(o);
-
-		for (Connection c : connected) {
-			c.sendTCP(gamePacket);
+	public void sendMatchInfo() {		
+		Packet7MatchFunction packet = new Packet7MatchFunction();
+		for(Object o : controller.getParameters()){
+			packet.setObject(o);
+			System.out.println("[SERVER] Sending:\t" +o);
+			for (Connection c : connected) {
+				System.out.println("[SERVER] Sending Match 2 chunk to Client");
+				c.sendTCP(packet);
+			}
 		}
 	}
 
@@ -129,8 +137,9 @@ public class Match {
 		cmdMsgList.add(m);
 		receivedEvents++;
 		if (receivedEvents == human_connection_count) {
-			sendMatchInfo(controller.dispatch(cmdMsgList));
+			controller.dispatch(cmdMsgList);
 			cmdMsgList.clear();
+			sendMatchInfo();
 		}
 	}
 
@@ -143,6 +152,7 @@ public class Match {
 		controller = new Match2();
 		generateAI();
 		controller.addPlayers(userList);
+		//controller.init();
 		inProgress = true;
 		sendStartMatchRequest();
 	}
@@ -152,12 +162,15 @@ public class Match {
 	}
 
 	public void sendStartMatchRequest() {
+		sendMatchInfo();
 		Packet9StartMatch start = new Packet9StartMatch();
-		start.setObject(controller);
 		for (Connection c : connected) {
+			System.out.println("[SERVER] Sending start request");
 			c.sendTCP(start);
 		}
 	}
+	
+	
 
 	public void sendEndMatchRequest() {
 		Packet10EndMatch end = new Packet10EndMatch();

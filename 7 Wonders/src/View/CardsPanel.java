@@ -86,7 +86,6 @@ public class CardsPanel extends JPanel {
 		
 		addMouseListeners();
 		update();
-		//System.out.println(cards.size());
 	}
 	
 	public void addMouseListeners() {

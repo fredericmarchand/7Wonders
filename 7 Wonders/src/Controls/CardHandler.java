@@ -15,6 +15,90 @@ public class CardHandler {
 	{
 	}
 	
+	public static Structure getCardByID(int id)
+	{
+		switch ( id )
+		{
+		case 1: return new LumberYard();
+		case 2: return new StonePit();
+		case 3: return new ClayPool();
+		case 4: return new OreVein();
+		case 5: return new TreeFarm();
+		case 6: return new Excavation();
+		case 7: return new ClayPit();
+		case 8: return new TimberYard();
+		case 9: return new ForestCave();	
+		case 10: return new Mine();
+		case 11: return new Sawmill();
+		case 12: return new Quarry();
+		case 13: return new Brickyard();
+		case 14: return new Foundry();
+		case 15: return new Loom();	
+		case 16: return new Glassworks();
+		case 17: return new Press();
+		case 18: return new WorkersGuild();	
+		case 19: return new CraftmensGuild();
+		case 20: return new TradersGuild();
+		case 21: return new PhilosophersGuild();
+		case 22: return new SpiesGuild();
+		case 23: return new StrategistsGuild();
+		case 24: return new ShipownersGuild();	
+		case 25: return new ScientistsGuild();
+		case 26: return new MagistratesGuild();	
+		case 27: return new BuildersGuild();
+		case 28: return new PawnShop();
+		case 29: return new Baths();
+		case 30: return new Altar();
+		case 31: return new Theater();
+		case 32: return new Aqueduct();
+		case 33: return new Temple();
+		case 34: return new Statue();
+		case 35: return new Pantheon();
+		case 36: return new Gardens();
+		case 37: return new TownHall();
+		case 38: return new Palace();	
+		case 39: return new Courthouse();
+		case 40: return new Senate();
+		case 41: return new Stockade();
+		case 42: return new Barracks();
+		case 43: return new GuardTower();
+		case 44: return new Walls();	
+		case 45: return new TrainingGround();
+		case 46: return new Fortifications();
+		case 47: return new Circus();	
+		case 48: return new Arsenal();
+		case 49: return new Stables();
+		case 50: return new ArcheryRange();	
+		case 51: return new SiegeWorkshop();
+		case 52: return new Tavern();
+		case 53: return new EastTradingPost();
+		case 54: return new WestTradingPost();
+		case 55: return new Marketplace();
+		case 56: return new Forum();
+		case 57: return new Caravansery();
+		case 58: return new Vineyard();
+		case 59: return new Bazar();	
+		case 60: return new Haven();
+		case 61: return new Lighthouse();
+		case 62: return new ChamberOfCommerce();	
+		case 63: return new Arena();
+		case 64: return new Apothecary();
+		case 65: return new Workshop();
+		case 66: return new Scriptorium();
+		case 67: return new Dispensary();
+		case 68: return new Laboratory();
+		case 69: return new Library();
+		case 70: return new School();
+		case 71: return new Lodge();
+		case 72: return new Observatory();
+		case 73: return new University();
+		case 74: return new Academy();
+		case 75: return new Study();
+	
+		}
+		return null;
+	}
+	
 	//builds a deck according to the amount of players participating in the game
 	public static ArrayList<Structure> BuildAge1Deck(int numPlayers)
 	{
@@ -333,48 +417,43 @@ public class CardHandler {
 		}	
 	}
 	
-	
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
-		//ArrayList<Structure> deck = BuildAge1Deck(7);
-		/*DistributeRandomWonderBoards(players, 1);
-		DistributeCards(players, deck);
-		for ( Player p : players )
-		{
-			System.out.println("\n" + p.getWonderBoard().getBoardName());
-			for ( Structure s: p.getCards() )
-			{
-				System.out.println(s.getName());
-			}
-		}
-		
-		PassCardsToNeighbors(players, 2);
-		
-		for ( Player p : players )
-		{
-			System.out.println("\n" + p.getWonderBoard().getBoardName());
-			for ( Structure s: p.getCards() )
-			{
-				System.out.println(s.getName());
-			}
-		}*/
-		Random r = new Random();
-		for ( int i = 0; i<10; ++i )
-		{
-			System.out.println(r.nextInt(2));
-		}
-		
-	}
+//	public static void main(String[] args) {
+//		ArrayList<Player> players = new ArrayList<Player>();
+//		players.add(new Player());
+//		players.add(new Player());
+//		players.add(new Player());
+//		players.add(new Player());
+//		players.add(new Player());
+//		players.add(new Player());
+//		players.add(new Player());
+//		ArrayList<Structure> deck = BuildAge1Deck(7);
+//		DistributeRandomWonderBoards(players, 1);
+//		DistributeCards(players, deck);
+//		for ( Player p : players )
+//		{
+//			System.out.println("\n" + p.getWonderBoard().getBoardName());
+//			for ( Structure s: p.getCards() )
+//			{
+//				System.out.println(s.getName());
+//			}
+//		}
+//		
+//		PassCardsToNeighbors(players, 2);
+//		
+//		for ( Player p : players )
+//		{
+//			System.out.println("\n" + p.getWonderBoard().getBoardName());
+//			for ( Structure s: p.getCards() )
+//			{
+//				System.out.println(s.getName());
+//			}
+//		}
+//		Random r = new Random();
+//		for ( int i = 0; i<10; ++i )
+//		{
+//			System.out.println(r.nextInt(2));
+//		}
+//		
+//	}
 
 }

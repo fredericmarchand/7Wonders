@@ -61,10 +61,31 @@ public class Match2 {
 		CardHandler.DistributeCards(players, age1Deck);
 		addInitialResources(players);
 		//Added to give players knowledge of the current age for AI choices
-		for (Player p : players)
+//		for (Player p : players)
+//		{
+//			p.initAge();
+//		}
+	}
+	
+	public ArrayList<Object> getParameters()
+	{
+		ArrayList<Object> params = new ArrayList<Object>();
+		params.add(players);
+		params.add(age);
+		params.add(turn);
+		params.add(numPlayers);
+		params.add(discarded);
+		return params;
+	}
+	 
+	public ArrayList<Integer> getDiscardedCardIDs()
+	{
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		for ( Structure s: discarded )
 		{
-			p.initAge();
+			ids.add(s.getID());
 		}
+		return ids;
 	}
 	
 	public ArrayList<Structure> getDiscardedCards()
@@ -92,6 +113,36 @@ public class Match2 {
 		turn = t;
 	}
 	
+	public void setAge1Deck(ArrayList<Structure> deck)
+	{
+		age1Deck = deck;
+	}
+	
+	public void setAge2Deck(ArrayList<Structure> deck)
+	{
+		age2Deck = deck;
+	}
+	
+	public void setAge3Deck(ArrayList<Structure> deck)
+	{
+		age3Deck = deck;
+	}
+	
+	public void setDiscardedDeck(ArrayList<Structure> deck)
+	{
+		discarded = deck;
+	}
+	
+	public void setPlayers(ArrayList<Player> plrs)
+	{
+		players = plrs;
+	}
+	
+	public void setNumPlayers(int plrs)
+	{
+		numPlayers = plrs;
+	}
+	
 	public void setLocalPlayerID(long id)
 	{
 		localPlayerID = id;
@@ -110,7 +161,11 @@ public class Match2 {
 	public void addPlayers(ArrayList<User> plyrs)
 	{
 		for ( User u: plyrs )
-			players.add(new Player(u.getUsername(), u.getID()));
+		{
+			Player p = new Player(u.getUsername(), u.getID());
+			//p.setClient(u.getClient());
+			players.add(p);
+		}
 	}
 	
 	public ArrayList<Structure> getDeck()

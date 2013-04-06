@@ -50,7 +50,6 @@ public class CreateMenu extends JFrame {
 							.parseInt(humanNum.getText()) >= 1))
 							&& (Integer.parseInt(humanNum.getText()) + Integer
 									.parseInt(aiNum.getText())) > 0){
-						System.out.println("Sending request");
 						mclient.sendCreateMatchRequest(
 								Integer.parseInt(humanNum.getText()),
 								Integer.parseInt(aiNum.getText()));

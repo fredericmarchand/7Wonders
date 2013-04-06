@@ -2,9 +2,8 @@ package Controls;
 
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 import Player.Player;
+import Player.User;
 import Structures.Structure;
 import Structures.Effects.BuildDiscardedCard;
 import Structures.Effects.CopyGuild;
@@ -28,12 +27,18 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	private Match2 match;
 	private MainFrame frame;
 	
-	public NetworkGameController(Player p, Match2 m)
+	public NetworkGameController(User u, Match2 m)
 	{
-		user = p;
+		user = new Player(u.getUsername(), u.getID());
+		//user.setClient(u.getClient());
+		CommandMessage msg = new CommandMessage();
+		user.setCommand(msg);
+		user.sendCommandMessage();
 		match = m;
+		//if ( m.getPlayers().get(0).getWonderBoard() != null )
+		//	System.out.println("derpidoo");
 		
-		match.init();
+		//match.init();
 		
 		run();
 	}
@@ -49,6 +54,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public int canBuildStructure(Structure s) 
 	{
+		user.chooseCard(s);
 		return user.canBuild(match.getLeftNeighbor(user), match.getRightNeighbor(user));
 	}
 
@@ -195,7 +201,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public boolean chooseCard(Structure s) 
 	{
-		System.out.println(user.getCards());
+		System.out.println("chooseCard: " + user.getCards());
 		for ( int i = 0; i < user.getCards().size(); ++i )
 		{
 			if ( user.getCards().get(i).getID() == s.getID() )
@@ -330,9 +336,9 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	
 	public static void main(String args[])
 	{
-		String name = JOptionPane.showInputDialog("What is your username? ");
-		@SuppressWarnings("unused")
-		NetworkGameController gc = new NetworkGameController(new Player(name, 0), new Match2());
+		//String name = JOptionPane.showInputDialog("What is your username? ");
+		
+		//NetworkGameController gc = new NetworkGameController(new Player(name, 0), new Match2());
 	}
 	
 }

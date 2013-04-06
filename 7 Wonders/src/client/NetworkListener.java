@@ -14,11 +14,14 @@ import com.esotericsoftware.minlog.Log;
 @SuppressWarnings("unused")
 public class NetworkListener extends Listener{
 
-	private final boolean VERBOSE = false;
+	private final boolean VERBOSE = true;
 	
 	Client c;
 	MClient mclient;
 	ArrayList<Match> list;
+	ArrayList<Object> fredsShittyList = new ArrayList<Object>();
+	int matchChunksReceived = 0;
+	int startMatchChunks = 0;
 	
 	public NetworkListener(MClient m){
 		mclient = m;
@@ -53,13 +56,11 @@ public class NetworkListener extends Listener{
 			mclient.setMatchList((ArrayList<Long>)((Packet1LoginAnswer)o).getObject());
 			mclient.setID(((Packet1LoginAnswer)o).getIDValue());
 			mclient.createUser();
-			mclient.getUser().setClient(mclient);
-			//mclient.sendUserInfo();
 		}
 		//check if client has been able to join game
 		//if yes, join lobby
 		//if no stay at match list screen
-		//
+
 		if(o instanceof Packet3Connection){
 			System.out.println("Packet3Connection Received");
 			if(((Packet3Connection)o).getAccepted()){
@@ -79,19 +80,40 @@ public class NetworkListener extends Listener{
 			mclient.getLink().updateLobby((ArrayList<Long>)((Packet4Object)o).getObject());
 		}
 		if(o instanceof Packet6ChatMsg){
-			System.out.println("Received msg packet");
+			System.out.println("[CLIENT] Received msg packet");
 			mclient.getLink().getChat().addChat(((Packet6ChatMsg)o).getMsg());
 			//mclient.updateChat(((Packet6ChatMsg)o).getMsg());
 		}
 
 		if(o instanceof Packet7MatchFunction){
-			mclient.turn(o);
+			System.out.println("[CLIENT] Received Match 2 Chunk");
+			
+			++matchChunksReceived;
+			if(startMatchChunks<8)++startMatchChunks;
+			fredsShittyList.add(((Packet7MatchFunction)o).getObject());
+			if(matchChunksReceived==8){
+				//receive shitty list
+				mclient.getUser().receive(fredsShittyList);				
+				fredsShittyList.clear();
+				matchChunksReceived=0;
+				
+			}
+			
 		}
 		if(o instanceof Packet8ClientResponse){
 			
 		}
-		if(o instanceof Packet9StartMatch){
-			mclient.startMatch(((Packet9StartMatch)o).getObject());
+		if(o instanceof Packet9StartMatch){			
+			System.out.println("[CLIENT] Received start match request");
+			
+			//if delay in network and chunks received later than start request, ensures
+			//chunks are received before start
+			while(true){
+				if(startMatchChunks==8){
+					mclient.startMatch();
+					break;
+				}
+			}
 			//eliminate countdown causing so many god damn errors.
 			//mclient.getLink().getChat().run();
 		}

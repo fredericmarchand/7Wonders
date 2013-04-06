@@ -28,17 +28,12 @@ public class MClient {
 	
 	private linkNetworkView link;
 	
-	
-	//private Player player;
-	
 	private User user;
 
-	// player receive game
 	public MClient() {
 		matchList = new ArrayList<Long>();
 		client = new Client();
 		NetworkListener nl = new NetworkListener(this);
-
 		link = new linkNetworkView(this);
 
 		client.addListener(nl);
@@ -46,8 +41,6 @@ public class MClient {
 		register();
 
 	}
-
-
 
 	// get/set host values
 	public void setHost(boolean h) {
@@ -92,9 +85,6 @@ public class MClient {
 		user = u;
 	}
 
-
-
-
 	public User getUser() {
 		return user;
 	}
@@ -112,13 +102,11 @@ public class MClient {
 
 	public void createUser() {
 		user = new Player(username, ID);
-		//user.setClient(this);
-		//user.setClient(this);
-		//client.sendCommandMessage();
-		
+		user.setClient(this);
 	}
 	
 	public void sendCommandMessage(CommandMessage m){
+		System.out.println("[CLIENT] Sending command message \n\t" + m);
 		Packet8ClientResponse packet = new Packet8ClientResponse();
 		packet.setCID(ID);
 		packet.setMID(matchID);
@@ -139,6 +127,7 @@ public class MClient {
 	}
 
 	public void sendCreateMatchRequest(int human, int ai) {
+		System.out.println("[CLIENT]Sending Create request" );
 		Packet12CreateMatch packet = new Packet12CreateMatch();
 		user = new User(username, ID);
 		packet.setHuman(human);
@@ -207,12 +196,10 @@ public class MClient {
 	}
 
 
-	public void startMatch(Object o) {
+	public void startMatch() {
 		//link.getChat().countdown();
-		user.startMatch((Match2)o);
-		
-		//link.launchMainFrame(m, );
-		// load match
+		user.startMatch();
+
 	}
 
 	public void sendUserInfo(){

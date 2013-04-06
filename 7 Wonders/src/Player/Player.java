@@ -50,6 +50,7 @@ public class Player extends User {
 		shields = 0;
 		victoryPoints = 0;
 		scientificSymbols = new ScientificSymbols();
+		currentAge = 1;
 	}
 
 	public int getAge()
@@ -456,7 +457,6 @@ public class Player extends User {
 			return true;
 		return false;
 	}
-	
 	public int calculateVictoryPoints()
 	{
 		int vpoints = 0;
@@ -467,12 +467,5 @@ public class Player extends User {
 		vpoints += getScientificSymbols().victoryPointsValue();
 		
 		return vpoints;
-	}
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Random r = new Random();
-		System.out.println(r.nextInt(2));
 	}
 }

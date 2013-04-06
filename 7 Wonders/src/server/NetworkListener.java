@@ -29,12 +29,13 @@ public class NetworkListener extends Listener {
 	public void disconnected(Connection c) {
 		System.out.println("[SERVER] User has disconnected");
 
-		for (Match e : mserver.getMatchList())
+		for (Match e : mserver.getMatchList()){
 			if (e.contains(c)) {
 				// replace with AI ?
 				e.removeConnectionOnly(c);
 				break;
 			}
+		}
 		ListIterator<Match> it = mserver.getMatchList().listIterator();
 		while (it.hasNext()) {
 			Match m = it.next();
@@ -119,7 +120,8 @@ public class NetworkListener extends Listener {
 
 		}
 		if (o instanceof Packet8ClientResponse) {
-			// find match//pass shit
+			System.out.println("[SERVER] Received client command message \n\t"+
+			((Packet8ClientResponse)o).getObject());
 			(mserver.findMatch(((Packet8ClientResponse) o).getMID()))
 					.handOff(((Packet8ClientResponse) o));
 		}
@@ -159,7 +161,7 @@ public class NetworkListener extends Listener {
 			c.sendTCP(joinResponse);
 		}
 		if(o instanceof Packet16UserObject){
-			System.out.println("[SERVER] WOOP");
+			System.out.println("[SERVER] RECEIVED USER OBJECT! WOOP!");
 		}
 	}
 
