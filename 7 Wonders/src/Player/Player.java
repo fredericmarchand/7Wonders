@@ -49,6 +49,7 @@ public class Player extends User {
 		shields = 0;
 		victoryPoints = 0;
 		scientificSymbols = new ScientificSymbols();
+		currentAge = 1;
 	}
 
 	public int getAge()
