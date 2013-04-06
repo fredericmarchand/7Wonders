@@ -198,7 +198,7 @@ public class MClient {
 
 	public void startMatch(Object o) {
 		//link.getChat().countdown();
-		user.startMatch((Match2)o);
+		user.startMatch();
 
 	}
 
