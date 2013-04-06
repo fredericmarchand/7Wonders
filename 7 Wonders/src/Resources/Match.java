@@ -145,7 +145,7 @@ public class Match {
 		controller = new Match2();
 		generateAI();
 		controller.addPlayers(userList);
-		controller.init();
+		//controller.init();
 		inProgress = true;
 		sendStartMatchRequest();
 	}
