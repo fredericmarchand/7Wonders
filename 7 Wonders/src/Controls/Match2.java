@@ -67,6 +67,22 @@ public class Match2 {
 //		}
 	}
 	
+	
+	public ArrayList<Object> getParameters()
+	{
+		ArrayList<Object> params = new ArrayList<Object>();
+		params.add(players);
+		params.add(age);
+		params.add(turn);
+		params.add(numPlayers);
+		params.add(age1Deck);
+		params.add(age2Deck);
+		params.add(age3Deck);
+		params.add(discarded);
+		return params;
+	}
+	
+	
 	public ArrayList<Structure> getDiscardedCards()
 	{
 		return discarded;
