@@ -112,7 +112,7 @@ public class Match2 {
 		for ( User u: plyrs )
 		{
 			Player p = new Player(u.getUsername(), u.getID());
-			p.setClient(u.getClient());
+			//p.setClient(u.getClient());
 			players.add(p);
 		}
 	}
