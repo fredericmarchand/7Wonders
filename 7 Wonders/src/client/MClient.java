@@ -119,6 +119,7 @@ public class MClient {
 	}
 	
 	public void sendCommandMessage(CommandMessage m){
+		System.out.println("[CLIENT] Sending command message \n\t" + m);
 		Packet8ClientResponse packet = new Packet8ClientResponse();
 		packet.setCID(ID);
 		packet.setMID(matchID);

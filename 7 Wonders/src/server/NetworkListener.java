@@ -120,7 +120,8 @@ public class NetworkListener extends Listener {
 
 		}
 		if (o instanceof Packet8ClientResponse) {
-			// find match//pass shit
+			System.out.println("[SERVER] Received client command message \n\t"+
+			((Packet8ClientResponse)o).getObject());
 			(mserver.findMatch(((Packet8ClientResponse) o).getMID()))
 					.handOff(((Packet8ClientResponse) o));
 		}
