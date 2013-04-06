@@ -102,7 +102,15 @@ public class NetworkListener extends Listener{
 		}
 		if(o instanceof Packet9StartMatch){			
 			System.out.println("[CLIENT] Received start match request");
-			mclient.startMatch();
+			
+			//if delay in network and chunks received later than start request, ensures
+			//chunks are received before start
+			while(true){
+				if(matchChunksReceived==8){
+					mclient.startMatch();
+					break;
+				}
+			}
 			//eliminate countdown causing so many god damn errors.
 			//mclient.getLink().getChat().run();
 		}
