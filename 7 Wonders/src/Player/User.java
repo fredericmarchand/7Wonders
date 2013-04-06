@@ -121,6 +121,7 @@ public class User {
 				break;
 			}
 		}
+		
 	}
 	
 	public void returnToLobby()
@@ -133,8 +134,7 @@ public class User {
 		//System.out.println("StartMatch Wonderboard?: " + match.getPlayers().get(0).getWonderBoard());
 		//currentMatch = match;
 		currentMatch.setLocalPlayerID(ID);
-		@SuppressWarnings("unused")
-		NetworkGameController gc = new NetworkGameController(this, match);
+		NetworkGameController gc = new NetworkGameController(this, currentMatch);
 	}
 	
 	
