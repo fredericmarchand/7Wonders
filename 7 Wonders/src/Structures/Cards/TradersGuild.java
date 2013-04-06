@@ -14,12 +14,6 @@ public class TradersGuild extends Structure {
 		effects.add(new CardVictoryPointBonus(1, true, YELLOW_CARD));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

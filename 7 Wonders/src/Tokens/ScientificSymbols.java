@@ -76,7 +76,6 @@ public class ScientificSymbols {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		ScientificSymbols sym = new ScientificSymbols(3, 2, 4);
 		System.out.println(sym.victoryPointsValue());
 	}

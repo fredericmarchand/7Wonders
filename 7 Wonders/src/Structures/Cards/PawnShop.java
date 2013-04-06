@@ -14,12 +14,6 @@ public class PawnShop extends Structure {
 		effects.add(new VictoryPointBonus(3));
 	}
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

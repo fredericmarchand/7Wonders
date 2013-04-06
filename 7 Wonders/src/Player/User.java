@@ -48,6 +48,8 @@ public class User {
 	
 	public void setClient(MClient cl)
 	{
+		System.out.println("setting client");
+		if ( cl == null ) System.out.println("client is null");
 		client = cl;
 	}
 	
@@ -58,7 +60,7 @@ public class User {
 	
 	public void sendCommandMessage()
 	{
-		if(client!= null)
+		if ( client != null )
 			client.sendCommandMessage(msg);
 		
 		System.out.println(msg);
@@ -83,20 +85,16 @@ public class User {
 	
 	public void startMatch(Match2 match)
 	{
+		if ( match.getPlayers().get(0).getWonderBoard() != null )
+			System.out.println("derpidoo");
 		currentMatch = match;
 		currentMatch.setLocalPlayerID(ID);
 		@SuppressWarnings("unused")
-		NetworkGameController gc = new NetworkGameController(new Player(username, ID), currentMatch);
+		NetworkGameController gc = new NetworkGameController(this, match);
 	}
 	
 	
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

@@ -21,13 +21,7 @@ public class Stables extends Structure {
 		return wb.containsCard(Apothecary.ApothecaryID);
 	}
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }
 

@@ -21,13 +21,7 @@ public class Statue extends Structure {
 		return wb.containsCard(Theater.TheaterID);
 	}
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }
 

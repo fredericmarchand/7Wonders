@@ -14,12 +14,6 @@ public class StonePit extends Structure {
 		effects.add(new ResourcesBonus(0, 1, 0, 0, 0, 0, 0));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

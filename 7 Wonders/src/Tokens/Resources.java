@@ -1152,7 +1152,6 @@ public class Resources {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		Player a = new Player();
 		a.getOwnedResources().addOre(3);

@@ -14,12 +14,6 @@ public class Foundry extends Structure {
 		effects.add(new ResourcesBonus(2, 0, 0, 0, 0, 0, 0));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

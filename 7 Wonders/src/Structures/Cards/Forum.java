@@ -21,13 +21,7 @@ public class Forum extends Structure {
 		return (wb.containsCard(EastTradingPost.EastTradingPostID) | wb.containsCard(WestTradingPost.WestTradingPostID));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }
 

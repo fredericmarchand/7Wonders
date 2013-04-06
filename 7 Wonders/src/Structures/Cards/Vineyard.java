@@ -14,12 +14,6 @@ public class Vineyard extends Structure {
 		effects.add(new CardCoinBonus(1, BROWN_CARD, true));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

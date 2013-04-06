@@ -21,13 +21,7 @@ public class Laboratory extends Structure {
 		return wb.containsCard(Workshop.WorkshopID);
 	}
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }
 

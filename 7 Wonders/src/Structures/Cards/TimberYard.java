@@ -14,12 +14,6 @@ public class TimberYard extends Structure {
 		effects.add(new ResourceChoice(0, 1, 1, 0, 0, 0, 0, true));
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }
