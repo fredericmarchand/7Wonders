@@ -77,7 +77,7 @@ public class Match {
 		connected.add(c);
 		connection_count++;
 		human_connection_count++;
-		update();
+		//update();
 	}
 
 	public void removeConnection(Connection c, Object k) {

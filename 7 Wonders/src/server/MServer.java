@@ -126,6 +126,10 @@ public class MServer {
 		}
 		return false;
 	}
+	
+	public void updateMatch(long mid){
+		findMatch(mid).update();
+	}
 
 	// any class type sent over the network must be registered to the kryo
 	// generic types are implicitly registered

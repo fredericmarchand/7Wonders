@@ -105,9 +105,10 @@ public class NetworkListener extends Listener{
 		if(o instanceof Packet9StartMatch){			
 			System.out.println("[CLIENT] Received start match request");	
 			
+				while(true)
 				if(gameStart){
 					mclient.startMatch();
-					
+					break;
 				}
 			
 
