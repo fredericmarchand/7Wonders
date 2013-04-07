@@ -123,7 +123,7 @@ public class MClient {
 	}
 
 
-	public void sendCommandMessage(CommandMessage m){
+	public void sendCommandMessage(ArrayList<Integer> m){
 		System.out.println("[CLIENT] Sending command message \n\t" + m);
 		Packet8ClientResponse packet = new Packet8ClientResponse();
 		packet.setCID(ID);
@@ -142,10 +142,6 @@ public class MClient {
 		packet.setCID(ID);
 		client.sendTCP(packet);
 	}
-	
-
-
-
 	
 	public void sendStartRequest() {
 		Packet11ImmediateStart packet = new Packet11ImmediateStart();
@@ -187,8 +183,6 @@ public class MClient {
 	//request to join match
 	public void sendMatchRequest(String mname) {
 		Packet13MatchJoinRequest rPacket = new Packet13MatchJoinRequest();
-		//rPacket.setObject(user);
-		//user = new User(username,ID);
 		rPacket.setCID(ID);
 		rPacket.setMID(Long.parseLong(mname));
 		rPacket.setUName(username);
