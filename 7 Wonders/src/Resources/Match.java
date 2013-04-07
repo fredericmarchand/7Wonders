@@ -1,16 +1,21 @@
 package Resources;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import server.MServer;
 
 import Controls.CommandMessage;
 import Controls.Match2;
+import Player.Player;
 import Player.User;
 import Resources.Packet.Packet10EndMatch;
+import Resources.Packet.Packet17PlayerObject;
+import Resources.Packet.Packet18DList;
 import Resources.Packet.Packet7MatchFunction;
 import Resources.Packet.Packet8ClientResponse;
 import Resources.Packet.Packet9StartMatch;
+import WonderBoards.Boards.TheColossusOfRhodes;
 
 
 import com.esotericsoftware.kryonet.Connection;
@@ -122,16 +127,33 @@ public class Match {
 	// getters and setters for controller
 
 	public void sendMatchInfo() {		
-		Packet7MatchFunction packet = new Packet7MatchFunction();
+		Packet7MatchFunction packet1 = new Packet7MatchFunction();		
 		for(Object o : controller.getParameters()){
-			packet.setObject(o);
+			packet1.setObject(o);
 			System.out.println("[SERVER] Sending:\t" +o);
 			for (Connection c : connected) {
 				System.out.println("[SERVER] Sending Match 2 chunk to Client");
-				c.sendTCP(packet);
+				c.sendTCP(packet1);
 			}
 		}
+		
+		//send players
+		Packet17PlayerObject packet2 = new Packet17PlayerObject();
+		for(Object  p : controller.getPlayers()){
+			packet2.setPlayer(p);
+			System.out.println("[SERVER] Sending:\t" +p);
+			for(Connection c : connected)
+				c.sendTCP(packet2);
+		}
+		
+		Packet18DList packet3 = new Packet18DList();
+		Object l = controller.getDiscardedCardIDs();
+		packet3.setObject(l);			
+		System.out.println("[SERVER] Sending:\t" +l);
+		for(Connection c : connected)
+			c.sendTCP(packet3);
 	}
+	
 
 	public void receiveEvent(CommandMessage m, long cID) {
 		cmdMsgList.add(m);
@@ -152,7 +174,7 @@ public class Match {
 		controller = new Match2();
 		generateAI();
 		controller.addPlayers(userList);
-		//controller.init();
+		controller.init();
 		inProgress = true;
 		sendStartMatchRequest();
 	}
