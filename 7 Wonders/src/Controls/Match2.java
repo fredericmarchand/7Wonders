@@ -178,7 +178,6 @@ public class Match2 {
 		for ( User u: plyrs )
 		{
 			Player p = new Player(u.getUsername(), u.getID());
-			//p.setClient(u.getClient());
 			players.add(p);
 		}
 	}
@@ -213,17 +212,32 @@ public class Match2 {
 	//beginning of turn effects
 	public void beginningOfTurnEffects(ArrayList<CommandMessage> messages)
 	{
+		int index = 0;
 		for ( CommandMessage msg: messages)
 		{
 			Player p = getPlayerByID(msg.getPlayerID());
 			for ( Structure s : p.getWonderBoard().getYellowCards() )
 			{
-				serverHandleBeginningOfTurnEffects(p.getUnvResources(), s, msg);
+				for ( SpecialEffect se: s.getEffects() )
+				{
+					if ( se.getID() == ResourceChoice.ResourceChoiceID )
+					{
+						p.getUnvResources().addResources(msg.getResourceChoices().get(index));
+						++index;
+					}
+				}
 			}
 							
 			for ( Structure s : p.getWonderBoard().getBrownGreyCards() )
 			{
-				serverHandleBeginningOfTurnEffects(p.getExtraResources(), s, msg);
+				for ( SpecialEffect se: s.getEffects() )
+				{
+					if ( se.getID() == ResourceChoice.ResourceChoiceID )
+					{
+						p.getExtraResources().addResources(msg.getResourceChoices().get(index));
+						++index;
+					}
+				}
 			}
 		}		
 	}

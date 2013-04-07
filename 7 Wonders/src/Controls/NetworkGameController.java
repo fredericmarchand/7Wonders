@@ -294,7 +294,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void resourceChosen(ArrayList<Resources> resources) 
 	{
-		/*int i = 0;
+		int i = 0;
 		for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
@@ -316,11 +316,13 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 			}
 		}
 		//System.out.println(user.getTotalResources().toString());*/
-		//if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
-		//	frame.update();
+		if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
+			frame.update();
 		if ( resources == null )
 			resources = new ArrayList<Resources>();
 		match.initResourceChoice(user, resources);
+		//if ( !(match.getAge() == 1 && match.getTurn() == 1) )
+		//	frame.update();
 		
 	}
 	
@@ -338,7 +340,9 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void buildForFree(Structure g) 
 	{
-		
+		user.getWonderBoard().buildStructure(g);
+		for ( SpecialEffect sp: g.getEffects() )
+			user.activateBuildEffect(sp);
 	}
 	
 	public static void main(String args[])
