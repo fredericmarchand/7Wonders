@@ -90,10 +90,7 @@ public class CreateMatchPanel extends JPanel {
 		
 		create.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// fix this code
-				try{
-					
-					
+				try {
 					if (humanNum.getText().equals("")) humanNum.setText("1");
 					if (aiNum.getText().equals("")) aiNum.setText("0");
 					int human = Integer.parseInt(humanNum.getText());
