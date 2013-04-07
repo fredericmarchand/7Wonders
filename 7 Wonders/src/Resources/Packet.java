@@ -46,13 +46,16 @@ public class Packet {
 		//eliminate from any current game
 		private long matchID;
 		private long cID;
-		private User user;
+		private String username;
+//		private User user;
 		public long getMID(){return matchID;}
 		public void setMID(long id){matchID = id;}		
 		public long getCID(){ return cID;}
 		public void setCID(long i){cID= i;}
-		public User getUser(){return user;}
-		public void setUser(User u){user = u;}
+		public String getUName(){return username;}
+		public void setUName(String s){username = s;}
+//		public User getUser(){return user;}
+//		public void setUser(User u){user = u;}
 	}
 	public static class Packet6ChatMsg{
 		private String msg;
@@ -100,28 +103,39 @@ public class Packet {
 	public static class Packet12CreateMatch{
 		private int numHuman,numAI;
 		private long clientID;
-		private User user = new User();
+		private String username;
+		
+//		private User user = new User();
 		public void setHuman(int x){numHuman = x;}
 		public int getHuman(){return numHuman;}
 		public void setAI(int x){numAI = x;}
 		public int getAI(){return numAI;}
 		public long getCID(){return clientID;}
 		public void setCID(long id){clientID=id;}
-		public User getUser(){return user;}
-		public void setUser(User u){user = u;}
+//		public User getUser(){return user;}
+//		public void setUser(User u){user = u;}
+		
+		public String getUName(){return username;}
+		public void setUName(String s){username = s;}
+		
+		
 		
 		
 	}
 	public static class Packet13MatchJoinRequest{
 		private long matchID;
 		private long cID;
-		private User user = new User();
+		private String username;
+//		private User user = new User();
 		public long getMID(){return matchID;}
 		public void setMID(long id){matchID = id;}
 		public long getCID(){ return cID;}
 		public void setCID(long i){cID= i;}
-		public User getUser(){return user;}
-		public void setUser(User u){user = u;}
+//		public User getUser(){return user;}
+//		public void setUser(User u){user = u;}
+		
+		public String getUName(){return username;}
+		public void setUName(String s){username = s;}
 	}
 	public static class Packet14HostCreateMatch{
 		private long matchID;

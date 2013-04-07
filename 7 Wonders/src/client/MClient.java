@@ -81,9 +81,9 @@ public class MClient {
 	}
 
 	// getter for chat
-	public void setUser(User u) {
-		user = u;
-	}
+//	public void setUser(User u) {
+//		user = u;
+//	}
 
 	public User getUser() {
 		return user;
@@ -99,7 +99,7 @@ public class MClient {
 
 	public void setUser_ID(long id) {
 	}
-
+	
 	public void createUser() {
 		System.out.println("[CLIENT] Creating user");
 		System.out.println("[CLIENT] MClient : \t" + this);
@@ -107,16 +107,9 @@ public class MClient {
 		user.setClient(this);
 		System.out.println("[CLIENT] User MClient : \t"+ user.getClient());
 	}
-	
-	public void sendCommandMessage(CommandMessage m){
-		System.out.println("[CLIENT] Sending command message \n\t" + m);
-		Packet8ClientResponse packet = new Packet8ClientResponse();
-		packet.setCID(ID);
-		packet.setMID(matchID);
-		packet.setObject(m);
-		client.sendTCP(packet);
-	}
 
+	
+	//transmission methods///
 	public void serverConnect(String ip, int port) {
 		try {
 			client.connect(5000, ip, port);
@@ -129,25 +122,30 @@ public class MClient {
 		client.sendTCP(new Packet0LoginRequest());
 	}
 
+
+	public void sendCommandMessage(CommandMessage m){
+		System.out.println("[CLIENT] Sending command message \n\t" + m);
+		Packet8ClientResponse packet = new Packet8ClientResponse();
+		packet.setCID(ID);
+		packet.setMID(matchID);
+		packet.setObject(m);
+		client.sendTCP(packet);
+	}
+
+
 	public void sendCreateMatchRequest(int human, int ai) {
 		System.out.println("[CLIENT]Sending Create request" );
 		Packet12CreateMatch packet = new Packet12CreateMatch();
-		user = new User(username, ID);
 		packet.setHuman(human);
 		packet.setAI(ai);
-		packet.setUser(user);
+		packet.setUName(username);
 		packet.setCID(ID);
 		client.sendTCP(packet);
 	}
 	
-	// any class type sent over the network must be registered to the kryo
-	// generic types are implicitly registered
 
-	public void pushToUser(ArrayList<Integer> devonsShittyList1,
-						   ArrayList<Long> devonsShittyList2,
-						   ArrayList<String	> devonsShittyList3){
-		user.receive(devonsShittyList1,devonsShittyList2,devonsShittyList3);
-	}
+
+
 	
 	public void sendStartRequest() {
 		Packet11ImmediateStart packet = new Packet11ImmediateStart();
@@ -159,7 +157,8 @@ public class MClient {
 		if (matchID > 0) {
 			Packet5Disconnect quit = new Packet5Disconnect();
 			quit.setMID(matchID);
-			quit.setUser(user);
+			quit.setCID(ID);
+			quit.setUName(username);
 			client.sendTCP(quit);
 			matchID = 0000; // no longer in a game
 			link.launchLobby();
@@ -189,34 +188,35 @@ public class MClient {
 	public void sendMatchRequest(String mname) {
 		Packet13MatchJoinRequest rPacket = new Packet13MatchJoinRequest();
 		//rPacket.setObject(user);
-		user = new User(username,ID);
+		//user = new User(username,ID);
 		rPacket.setCID(ID);
 		rPacket.setMID(Long.parseLong(mname));
-		rPacket.setUser(user);
+		rPacket.setUName(username);
+
 		client.sendTCP(rPacket);
 
 	}
-
-	// /HEAVY EDIT////
-	public void turn(Object o) {
-				
-		user.updateMatch((Match2)o);
-				
+	
+	public void sendUserInfo(){
+		Packet16UserObject packet = new Packet16UserObject();
+		packet.setUser(user);
+		client.sendTCP(packet);
 	}
 
+	//signal user
 
 	public void startMatch() {
 		//link.getChat().countdown();
 		user.startMatch();
-
+	}
+	
+	public void pushToUser(ArrayList<Integer> devonsShittyList1,
+			   ArrayList<Long> devonsShittyList2,
+			   ArrayList<String	> devonsShittyList3){
+		user.receive(devonsShittyList1,devonsShittyList2,devonsShittyList3);
 	}
 
-	public void sendUserInfo(){
-		Packet16UserObject packet = new Packet16UserObject();
-		user = new User(username,ID);
-		packet.setUser(user);
-		client.sendTCP(packet);
-	}
+
 	// return to lobby
 	
 	
@@ -229,7 +229,8 @@ public class MClient {
 
 	}
 
-
+	// any class type sent over the network must be registered to the kryo
+	// generic types are implicitly registered
 	public void register() {
 		Kryo kryo = client.getKryo();
 		kryo.register(Packet0LoginRequest.class);
@@ -379,6 +380,7 @@ public class MClient {
 		kryo.register(java.util.Random.class);
 		
 		kryo.register(java.util.concurrent.atomic.AtomicLong.class);
+		
 	}
 
 	public static void main(String[] args) {

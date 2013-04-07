@@ -96,7 +96,7 @@ public class NetworkListener extends Listener {
 			System.out
 					.println("[SERVER] CLIENT HAS BEEN REMOVED"
 							+ mserver.removeClient(c,
-									((Packet5Disconnect) o).getMID(),((Packet5Disconnect)o).getUser()));
+									((Packet5Disconnect) o).getMID(),((Packet5Disconnect)o).getCID()));
 
 		}
 		if (o instanceof Packet6ChatMsg) {
@@ -136,8 +136,10 @@ public class NetworkListener extends Listener {
 					((Packet12CreateMatch) o).getHuman(),
 					((Packet12CreateMatch) o).getAI());
 			
-			mserver.bridgeClient(c, matchID,((Packet12CreateMatch)o).getUser());// adding client to match
-												// connection list
+			mserver.bridgeClient(c, matchID,((Packet12CreateMatch)o).getCID(),
+					((Packet12CreateMatch)o).getUName());
+			// adding client to match
+			// connection list
 
 			Packet14HostCreateMatch packet = new Packet14HostCreateMatch();
 			packet.setMID(matchID);
@@ -153,7 +155,8 @@ public class NetworkListener extends Listener {
 				joinResponse.setIDValue(0);
 			} else {
 				join = mserver.bridgeClient(c, ((Packet13MatchJoinRequest) o)
-						.getMID(), ((Packet13MatchJoinRequest)o).getUser());
+						.getMID(), ((Packet13MatchJoinRequest)o).getCID(),
+						((Packet13MatchJoinRequest)o).getUName());
 				joinResponse.setAccepted(join);
 				joinResponse.setIDValue(((Packet13MatchJoinRequest) o)
 						.getMID());
