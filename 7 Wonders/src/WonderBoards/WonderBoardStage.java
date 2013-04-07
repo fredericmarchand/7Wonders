@@ -71,6 +71,15 @@ public class WonderBoardStage {
 			built = true;
 	}
 	
+	public void updateStage(WonderBoardStage stg)
+	{
+		resourceCost = stg.resourceCost;
+		card = stg.card;
+		built = stg.built;
+		effects.clear();
+		effects.addAll(stg.effects);
+	}
+	
 
 
 }

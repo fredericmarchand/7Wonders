@@ -218,6 +218,18 @@ public class Player extends User {
 		//chosenCard = cards.remove(index);
 	}
 	
+	public void chooseCardByID(int id)
+	{
+		for ( Structure s: cards )
+		{
+			if ( id == s.getID() )
+			{
+				chooseCard(s);
+				break;
+			}
+		}
+	}
+	
 	public void chooseCard(Structure s)
 	{
 		chosenCard = s;
@@ -498,6 +510,7 @@ public class Player extends User {
 			return true;
 		return false;
 	}
+	
 	public int calculateVictoryPoints()
 	{
 		int vpoints = 0;
@@ -508,5 +521,24 @@ public class Player extends User {
 		vpoints += getScientificSymbols().victoryPointsValue();
 		
 		return vpoints;
+	}
+	
+	public void updatePlayer(Player p)
+	{
+		currentAge = p.currentAge;
+		isAI = p.isAI;
+		scientificSymbols = p.scientificSymbols;
+		victoryPoints = p.victoryPoints;
+		conflictTokens = p.conflictTokens;
+		shields = p.shields;
+		resources = p.resources;
+		extraResources = p.extraResources;
+		purchased = p.purchased;
+		unavailableResources = p.unavailableResources;
+		chosenCard = p.chosenCard;
+		chosenCardIndex = p.chosenCardIndex;
+		cards.clear();
+		cards.addAll(p.getCards());
+		wonderBoard.updateWonderBoard(p.getWonderBoard());
 	}
 }

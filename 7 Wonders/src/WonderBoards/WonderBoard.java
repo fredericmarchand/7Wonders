@@ -348,6 +348,40 @@ public class WonderBoard {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	public void updateWonderBoard(WonderBoard wb)
+	{
+		boardID = wb.boardID;
+		side = wb.side;
+		boardName = wb.boardName;
+		startResource = wb.startResource;
+		redCards.clear();
+		blueCards.clear();
+		greenCards.clear();
+		blueCards.clear(); 
+		yellowCards.clear(); 
+		purpleCards.clear(); 
+		brownGreyCards.clear();
+		redCards.addAll(wb.redCards);
+		blueCards.addAll(wb.blueCards);
+		greenCards.addAll(wb.greenCards);
+		blueCards.addAll(wb.blueCards); 
+		yellowCards.addAll(wb.yellowCards); 
+		purpleCards.addAll(wb.purpleCards); 
+		brownGreyCards.addAll(wb.brownGreyCards);
+		int i = 0;
+		for ( WonderBoardStage stg: stages )
+		{
+			stg.updateStage(wb.getStages().get(i++));
+		}
+	}
+	
+	
 
 
 }
