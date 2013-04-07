@@ -30,8 +30,9 @@ public class CardsPanel extends JPanel {
 	private int canDoAction[][];
 	
 	private Controller controller;
+	private FreeBuildPanel fbp;
 	
-	public CardsPanel(ArrayList<Structure> ca, Controller c) {
+	public CardsPanel(ArrayList<Structure> ca, Controller c, FreeBuildPanel f) {
 		setLayout(null);
 		setOpaque(false);
 		setSize(1274, 280);
@@ -52,6 +53,8 @@ public class CardsPanel extends JPanel {
 		
 		controller = c;
 		cards = ca;
+		fbp = f;
+		fbp.setCardsPanel(this);
 		
 		for (int i = 0; i < 7; i++) {
 			cardArr[i] = new JLabel();
@@ -107,73 +110,51 @@ public class CardsPanel extends JPanel {
 	}
 
 	public void update() {
-		updateCards();
-		updateLabels();
-		updateLabelBackgrounds();
-		updateLocations();
-		updateOptions();
-		this.repaint();
-	}
-	
-	private void updateLabelBackgrounds() {
 		for (int i = 0; i < 7; i++) {
 			if(cards.size() > i) {
+				
+				// Card image and name
+				cardArr[i].setIcon(Images.get("card"+cards.get(i).getID()));
+				lblArr[i].setText(cards.get(i).getName());
+				
+				// Update card labels
 				int w = lblArr[i].getFontMetrics(lblArr[i].getFont()).stringWidth(lblArr[i].getText()) + 23;
 				lblBgArr[i].setIcon(new ImageIcon((Images.get("cardLabelbg").getImage()).getScaledInstance(30, w, java.awt.Image.SCALE_SMOOTH)));
 				lblBgArr[i].setSize(30, w);
-			} else lblBgArr[i].setIcon(null);
-		}
-	}
-
-	private void updateCards() {
-		for (int i = 0; i < 7; i++) {
-			if(cards.size() > i) 
-				cardArr[i].setIcon(Images.get("card"+cards.get(i).getID()));
-			else cardArr[i].setIcon(null);
-		}
-	}
-	
-	private void updateLabels() {
-		for(int i = 0; i < 7; i++) {
-			if(cards.size() > i)
-				lblArr[i].setText(cards.get(i).getName());
-			else lblArr[i].setText("");
-		}
-	}
-	
-	private void updateLocations() {
-		for (int i = 0; i < 7; i++) {
-			cardArr[i].setLocation(i*182 + ((7-cards.size()) * 91), 0);
-			lblArr[i].setLocation(10 + i*182 + ((7-cards.size()) * 91), 74);
-			lblBgArr[i].setLocation(8 + i*182 + ((7-cards.size()) * 91), 275 - lblBgArr[i].getHeight());
-			lblOptions[i].setLocation(26 + i*182 + ((7-cards.size()) * 91), 75);
-			for(int j = 0; j < 3; j++) lblArrow[i][j].setLocation(26 + i*182 + ((7-cards.size()) * 91), 80 + 63*j);
-		}
-	}
-	
-	private void updateOptions() {
-		for (int i = 0; i < 7; i++) {
-			if(showOptions[i]) {
-				lblOptions[i].setIcon(Images.get("options"));
-				for (int j = 0; j < 3; j++) {
-					if(showArrow[i][j]){
-						if(j == 2) lblArrow[i][j].setIcon(Images.get("arrow"+2));
-						else {
-							if(canDoAction[i][j] == 0) lblArrow[i][j].setIcon(Images.get("arrow"+0));
-							else if(canDoAction[i][j] == 1) lblArrow[i][j].setIcon(Images.get("arrow"+1));
-							else if(canDoAction[i][j] == 2) lblArrow[i][j].setIcon(Images.get("arrow"+2));
-							else lblArrow[i][j].setIcon(null);
-						}
-					} else lblArrow[i][j].setIcon(null);
+				
+				// Update locations
+				cardArr[i].setLocation(i*182 + ((7-cards.size()) * 91), 0);
+				lblArr[i].setLocation(10 + i*182 + ((7-cards.size()) * 91), 74);
+				lblBgArr[i].setLocation(8 + i*182 + ((7-cards.size()) * 91), 275 - lblBgArr[i].getHeight());
+				lblOptions[i].setLocation(26 + i*182 + ((7-cards.size()) * 91), 75);
+				for(int j = 0; j < 3; j++) lblArrow[i][j].setLocation(26 + i*182 + ((7-cards.size()) * 91), 80 + 63*j);
+				
+				// Update options
+				if(showOptions[i]) {
+					lblOptions[i].setIcon(Images.get("options"));
+					for (int j = 0; j < 3; j++) {
+						if(showArrow[i][j]){
+							if(j == 2) lblArrow[i][j].setIcon(Images.get("arrow"+2));
+							else {
+								if(canDoAction[i][j] == 0) lblArrow[i][j].setIcon(Images.get("arrow"+0));
+								else if(canDoAction[i][j] == 1) lblArrow[i][j].setIcon(Images.get("arrow"+1));
+								else if(canDoAction[i][j] == 2) lblArrow[i][j].setIcon(Images.get("arrow"+2));
+								else lblArrow[i][j].setIcon(null);
+							}
+						} else lblArrow[i][j].setIcon(null);
+					}
 				}
-			}
-			else {
-				lblOptions[i].setIcon(null);
-				for (int j = 0; j < 3; j++) {
-					lblArrow[i][j].setIcon(null);
+				else {
+					lblOptions[i].setIcon(null);
+					for (int j = 0; j < 3; j++) lblArrow[i][j].setIcon(null);
 				}
+			} else {
+				cardArr[i].setIcon(null);
+				lblArr[i].setText("");
+				lblBgArr[i].setIcon(null);
 			}
 		}
+		this.repaint();
 	}
 	
 	private MouseAdapter buildMouseAdapter() {
@@ -181,36 +162,26 @@ public class CardsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				for (int i = 0; i < cards.size(); i++) {
-					if (((JLabel)e.getComponent()) == cardArr[i]) {
+					if (((JLabel)e.getComponent()) == cardArr[i] && controller != null) {
 						if(showOptions[i]) {
 							for(int j = 0; j < 3; j++) {
 								if(e.getPoint().x > (26) && e.getPoint().y > (80 + 63*j)
-								   && e.getPoint().x < (26 + 150) && e.getPoint().y < (80 + 63*j + 57)){
-									if(controller != null) {
-										if(j == 0 && canDoAction[i][0] != 0) {
-											controller.buildStructure();
-											showOptions[i] = false;
-										}
-										else if (j == 1 && canDoAction[i][1] != 0) {
-											controller.buildWonderStage();
-											showOptions[i] = false;
-										}
-										else if (j == 2) {
-											controller.discardChosen();
-											showOptions[i] = false;
-										}
-									}
+								&& e.getPoint().x < (26 + 150) && e.getPoint().y < (80 + 63*j + 57)){
+									if(j == 0 && canDoAction[i][0] > 0) controller.buildStructure();
+									else if (j == 1 && canDoAction[i][1] > 0) controller.buildWonderStage();
+									else if (j == 2) controller.discardChosen();
+									showOptions[i] = false;
+									break;
 								}
 							}
 						} else {
 							Arrays.fill(showOptions, Boolean.FALSE);
 							for (int[] b : canDoAction) Arrays.fill(b, -1);
 							showOptions[i] = true;
-							if (controller != null) {
-								controller.chooseCard(cards.get(i));
-								canDoAction[i][0] = controller.canBuildStructure(cards.get(i));
-								canDoAction[i][1] = controller.canBuildWonderStage();
-							}
+							controller.chooseCard(cards.get(i));
+							fbp.chosenCard(cards.get(i));
+							canDoAction[i][0] = controller.canBuildStructure(cards.get(i));
+							canDoAction[i][1] = controller.canBuildWonderStage();
 						}
 						break;
 					}
@@ -249,5 +220,10 @@ public class CardsPanel extends JPanel {
 				update();
 			}
 		};
+	}
+	
+	public void hideAllOptions() {
+		Arrays.fill(showOptions, Boolean.FALSE);
+		update();
 	}
 }

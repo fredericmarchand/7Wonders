@@ -297,6 +297,7 @@ public class SevenWondersProtocol {
 	}
 	
 	//decode special effect from encoding and return it
+	@SuppressWarnings("unused")
 	public static SpecialEffect decodeEffect(ArrayList<Integer> encoding)
 	{
 		SpecialEffect sp = new SpecialEffect();
