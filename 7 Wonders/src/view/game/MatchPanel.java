@@ -1,4 +1,4 @@
-package view.game;
+package View.game;
 
 
 import image.Images;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import view.resources.JLabel2D;
+import View.resources.JLabel2D;
 
 import Structures.Structure;
 import Tokens.Resources;
@@ -106,7 +106,6 @@ public class MatchPanel extends JPanel implements Runnable {
 		n1 = new NearPanel(p3);
 		n1.setLocation(0, 150);
 		n1.addMouseListener(buildMouseAdapterNear());
-		
 		
 		Player.Player p4 = null;
 		Player.Player p5 = null;

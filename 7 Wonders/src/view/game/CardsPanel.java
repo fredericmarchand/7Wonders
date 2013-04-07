@@ -1,4 +1,4 @@
-package view.game;
+package View.game;
 
 
 import image.Images;
@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
-import view.resources.VerticalLabelUI;
+import View.resources.VerticalLabelUI;
 
 import Controls.Controller;
 import Structures.Structure;

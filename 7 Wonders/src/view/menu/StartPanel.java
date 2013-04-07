@@ -1,4 +1,4 @@
-package view.menu;
+package View.menu;
 
 
 import image.Images;

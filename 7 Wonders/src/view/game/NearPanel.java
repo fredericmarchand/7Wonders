@@ -1,11 +1,11 @@
-package view.game;
+package View.game;
 
 
 import image.Images;
 
 import javax.swing.*;
 
-import view.resources.JLabel2D;
+import View.resources.JLabel2D;
 
 import Player.Player;
 import WonderBoards.WonderBoardStage;

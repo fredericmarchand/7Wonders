@@ -1,4 +1,6 @@
-package view.resources;
+
+package View.resources;
+
 
 import java.awt.Color;
 import java.awt.Dimension;
