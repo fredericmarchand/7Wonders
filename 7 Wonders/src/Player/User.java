@@ -62,8 +62,7 @@ public class User {
 	public void sendCommandMessage()
 	{
 		if ( client != null && msg != null )
-			client.sendCommandMessage(msg);
-			//client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg));
+			client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg));
 		System.out.println("[CLIENT ------ USER] MClient : \t" + client );
 		System.out.println("Send Command Message: " + msg);
 	}
