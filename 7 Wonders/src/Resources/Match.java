@@ -10,11 +10,8 @@ import Controls.CommandMessage;
 import Controls.Match2;
 
 import Controls.SevenWondersProtocol;
-
-import Player.User;
 import Resources.Packet.Packet10EndMatch;
 import Resources.Packet.Packet7MatchFunction;
-import Resources.Packet.Packet8ClientResponse;
 import Resources.Packet.Packet9StartMatch;
 
 

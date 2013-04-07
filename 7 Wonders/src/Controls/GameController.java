@@ -2,6 +2,8 @@ package Controls;
 
 import java.util.ArrayList;
 
+import view.menu.MainFrame;
+
 import Player.Player;
 import Structures.Structure;
 import Structures.Cards.ScientistsGuild;
@@ -13,7 +15,6 @@ import Structures.Effects.ScientificSymbolBonus;
 import Structures.Effects.SpecialEffect;
 import Tokens.Resources;
 import Tokens.ScientificSymbols;
-import View.MainFrame;
 import WonderBoards.WonderBoardStage;
 import WonderBoards.Boards.TheHangingGardensOfBabylon;
 
@@ -43,7 +44,7 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 	public void run()
 	{
 		
-		frame = new MainFrame(this);
+		//frame = new MainFrame(this);
 		//frame.startMatch(match);
 		frame.setVisible(true);
 	}

@@ -1,9 +1,12 @@
-package View;
+package view.menu;
 
 import javax.swing.*;
 
-import Controls.Controller;
+import view.game.LoadingPanel;
+import view.game.MatchPanel;
+
 import Controls.Match2;
+import Controls.NetworkGameController;
 import Images.Images;
 
 import java.awt.*;
@@ -11,14 +14,15 @@ import java.awt.*;
 public class MainFrame extends JFrame implements Runnable {
 	private static final long serialVersionUID = 1L;
 	
-	private Controller controller;
+	private NetworkGameController controller;
 	private MatchPanel panel;
 	private LoadingPanel loading;
+	private StartPanel startMenu;
+	private CreateMatchPanel cmp;
 	
-	public MainFrame(Controller c) {
+	public MainFrame() {
 		setTitle("7 Wonders");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		controller = c;
 		
 		JFrame temp = new JFrame();
 		temp.pack();
@@ -32,6 +36,10 @@ public class MainFrame extends JFrame implements Runnable {
 		loading = new LoadingPanel();
 		loading.setVisible(true);
 		
+		startMenu = new StartPanel(this);
+		startMenu.setVisible(false);
+		
+		add(startMenu);
 		add(loading);
 		this.setVisible(true);
 		
@@ -45,6 +53,7 @@ public class MainFrame extends JFrame implements Runnable {
 	public void startMatch(Match2 m) {
 		panel = new MatchPanel(m, controller);
 		add(panel);
+		update();
 	}
 
 	@Override
@@ -52,9 +61,23 @@ public class MainFrame extends JFrame implements Runnable {
 		Images.setGUI(loading);
 		Images.run();
 		loading.setVisible(false);
+		startMenu.setVisible(true);
+		startMenu.run();
 	}
 
+	public void startController(NetworkGameController c) {
+		controller = c;
+		controller.setMainFrame(this);
+		controller.run();
+	}
+	
 	public static void main(String args[]) {
-		new MainFrame(null);
+		new MainFrame();
+	}
+
+	public void launchCreateMenu(CreateMatchPanel p) {
+		cmp = p;
+		cmp.setVisible(true);
+		add(cmp);
 	}
 }

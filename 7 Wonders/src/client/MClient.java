@@ -3,6 +3,8 @@ package client;
 import java.io.IOException;
 import java.util.*;
 
+import view.menu.MainFrame;
+
 import Controls.*;
 
 import Player.*;
@@ -30,7 +32,12 @@ public class MClient {
 	
 	private User user;
 
-	public MClient() {
+	private MainFrame mainframe;
+	
+	public MClient(MainFrame m) {
+		
+		mainframe = m;
+		
 		matchList = new ArrayList<Long>();
 		client = new Client(16382,16382);
 		NetworkListener nl = new NetworkListener(this);
@@ -106,6 +113,10 @@ public class MClient {
 		user = new Player(username, ID);
 		user.setClient(this);
 		System.out.println("[CLIENT] User MClient : \t"+ user.getClient());
+	}
+	
+	public MainFrame getMainFrame() {
+		return mainframe;
 	}
 
 	

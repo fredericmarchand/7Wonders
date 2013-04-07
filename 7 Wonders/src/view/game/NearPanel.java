@@ -1,8 +1,7 @@
-package View;
+package view.game;
 
 import javax.swing.*;
 
-import Controls.Controller;
 import Images.Images;
 import Player.Player;
 import WonderBoards.WonderBoardStage;
