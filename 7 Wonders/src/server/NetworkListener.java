@@ -1,5 +1,6 @@
 package server;
 
+import java.util.ArrayList;
 import java.util.ListIterator;
 
 import Controls.CommandMessage;
@@ -53,6 +54,7 @@ public class NetworkListener extends Listener {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void received(Connection c, Object o) {
 		System.out.println("[SERVER] Received packet");
@@ -126,7 +128,7 @@ public class NetworkListener extends Listener {
 								((Packet8ClientResponse) o).getMID() + "Found: \t "  + 
 								mserver.findMatch(((Packet8ClientResponse) o).getMID()));
 			(mserver.findMatch(((Packet8ClientResponse) o).getMID()))
-					.handOff(((Packet8ClientResponse) o));
+					.handOff((ArrayList<Integer>)((Packet8ClientResponse) o).getObject());
 		}
 
 		if (o instanceof Packet11ImmediateStart) {
