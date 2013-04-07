@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import client.MClient;
 
 import Player.Player;
-import Player.User;
 import Structures.Structure;
 import Structures.Effects.BuildDiscardedCard;
 import Structures.Effects.CopyGuild;

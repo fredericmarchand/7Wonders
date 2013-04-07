@@ -43,7 +43,7 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 	public void run()
 	{
 		
-		frame = new MainFrame(this);
+		//frame = new MainFrame(this);
 		//frame.startMatch(match);
 		frame.setVisible(true);
 	}
