@@ -86,6 +86,7 @@ public class User {
 	{
 		currentMatch = SevenWondersProtocol.decodeMatch(encoding);
 		SevenWondersProtocol.assignUsernamesAndIDs(currentMatch, names, ids);
+		currentMatch.setLocalPlayerID(ID);
 		NetworkGameController gc = new NetworkGameController(this, currentMatch);
 	}
 	
@@ -98,7 +99,7 @@ public class User {
 	{
 		//System.out.println("StartMatch Wonderboard?: " + match.getPlayers().get(0).getWonderBoard());
 		//currentMatch = match;
-		currentMatch.setLocalPlayerID(ID);
+		//currentMatch.setLocalPlayerID(ID);
 		//@SuppressWarnings("unused")
 		//NetworkGameController gc = new NetworkGameController(this, currentMatch);
 	}
