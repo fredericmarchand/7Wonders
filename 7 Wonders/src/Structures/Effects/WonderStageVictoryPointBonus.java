@@ -54,4 +54,15 @@ public class WonderStageVictoryPointBonus extends SpecialEffect {
 	}
 
 	
+	public int amountOfPoints()
+	{
+		return amountOfPoints();
+	}
+	
+	public int includeNeighbors()
+	{
+		return includeNeighbors ? 1 : 0;
+	}
+	
+	
 }

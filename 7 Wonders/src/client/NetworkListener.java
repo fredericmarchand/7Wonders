@@ -88,16 +88,17 @@ public class NetworkListener extends Listener{
 		if(o instanceof Packet7MatchFunction){
 			System.out.println("[CLIENT] Received Match 2 Chunk");
 			
-			++matchChunksReceived;
-			if(startMatchChunks<8)++startMatchChunks;
-			fredsShittyList.add(((Packet7MatchFunction)o).getObject());
-			if(matchChunksReceived==8){
-				//receive shitty list
-				mclient.getUser().receive(fredsShittyList);				
-				fredsShittyList.clear();
-				matchChunksReceived=0;
-				
-			}
+//			++matchChunksReceived;
+//			++startMatchChunks;
+//			fredsShittyList.add(((Packet7MatchFunction)o).getObject());
+//			if(matchChunksReceived==8){
+//				//receive shitty list
+//				mclient.getUser().receive(fredsShittyList);
+//				
+//				fredsShittyList.clear();
+//				matchChunksReceived=0;
+//				
+//			}
 			
 		}
 		if(o instanceof Packet8ClientResponse){
@@ -108,12 +109,8 @@ public class NetworkListener extends Listener{
 			
 			//if delay in network and chunks received later than start request, ensures
 			//chunks are received before start
-			while(true){
-				if(startMatchChunks==8){
-					mclient.startMatch();
-					break;
-				}
-			}
+			//mclient.startMatch();
+
 			//eliminate countdown causing so many god damn errors.
 			//mclient.getLink().getChat().run();
 		}
@@ -128,6 +125,14 @@ public class NetworkListener extends Listener{
 		if( o instanceof Packet15MatchDisconnect){
 			System.out.println("[CLIENT]  Graceful Disconnect");
 			mclient.getLink().killMainFrame();
+		}
+		if(o instanceof Packet17PlayerObject){
+			System.out.println("[CLIENT] Received Player Object");
+//			for(Object p : (ArrayList)((Packet17PlayerObject)o).getPlayer())
+//				System.out.println(p);
+		}
+		if(o instanceof Packet18DList){
+			System.out.println("[CLIENT] Received Discarded List");
 		}
 	}
 

@@ -20,4 +20,9 @@ public class ShieldBonus extends SpecialEffect {
 		usedUp = true;
 	}
 	
+	public int amountOfShields()
+	{
+		return amountOfShields;
+	}
+	
 }

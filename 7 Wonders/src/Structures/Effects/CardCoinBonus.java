@@ -85,6 +85,21 @@ public class CardCoinBonus extends SpecialEffect {
 		}
 	}
 	
+	
+	public int getAmountOfCoins()
+	{
+		return amountOfCoins;
+	}
+	
+	public int getCardColor()
+	{
+		return cardColor;
+	}
+	
+	public int includeNeighbors()
+	{
+		return (includeNeighbors ? 1 : 0);
+	}
 
 
 }

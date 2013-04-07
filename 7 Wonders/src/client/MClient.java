@@ -32,7 +32,7 @@ public class MClient {
 
 	public MClient() {
 		matchList = new ArrayList<Long>();
-		client = new Client();
+		client = new Client(16382,16382);
 		NetworkListener nl = new NetworkListener(this);
 		link = new linkNetworkView(this);
 
@@ -101,6 +101,7 @@ public class MClient {
 	}
 
 	public void createUser() {
+		System.out.println("[CLIENT] Creating user");
 		user = new Player(username, ID);
 		user.setClient(this);
 	}
@@ -240,6 +241,9 @@ public class MClient {
 		kryo.register(Packet14HostCreateMatch.class);
 		kryo.register(Packet15MatchDisconnect.class);
 		kryo.register(Packet16UserObject.class);
+		kryo.register(Packet17PlayerObject.class);
+		kryo.register(Packet18DList.class);
+		
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match1.class);	
 		kryo.register(Match2.class);

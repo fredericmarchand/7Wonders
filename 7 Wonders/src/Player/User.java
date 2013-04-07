@@ -106,6 +106,10 @@ public class User {
 				break;
 				
 			case 4:
+				currentMatch.setDiscardedDeck((ArrayList<Structure>)devonsShittyMatchInfo.get(i));
+				break;
+				
+			/*case 4:
 				currentMatch.setAge1Deck((ArrayList<Structure>)devonsShittyMatchInfo.get(i));
 				break;
 				
@@ -119,9 +123,10 @@ public class User {
 				
 			case 7:
 				currentMatch.setDiscardedDeck((ArrayList<Structure>)devonsShittyMatchInfo.get(i));
-				break;
+				break;*/
 			}
 		}
+		System.out.println("eureka");
 		
 	}
 	

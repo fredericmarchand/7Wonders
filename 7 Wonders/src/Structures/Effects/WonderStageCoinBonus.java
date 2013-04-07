@@ -28,4 +28,9 @@ public class WonderStageCoinBonus extends SpecialEffect {
 		usedUp = true;
 	}
 	
+	public int amountOfCoins()
+	{
+		return amountOfCoins;
+	}
+	
 }
