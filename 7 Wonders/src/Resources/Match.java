@@ -10,9 +10,11 @@ import Controls.CommandMessage;
 import Controls.Match2;
 
 import Controls.SevenWondersProtocol;
+import Player.Player;
 import Resources.Packet.Packet10EndMatch;
 import Resources.Packet.Packet7MatchFunction;
 import Resources.Packet.Packet9StartMatch;
+import Structures.Structure;
 
 
 import com.esotericsoftware.kryonet.Connection;
@@ -20,9 +22,7 @@ import com.esotericsoftware.kryonet.Connection;
 public class Match {
 
 	ArrayList<Connection> connected;
-	//ArrayList<User> userList;
 	ArrayList<CommandMessage> cmdMsgList;
-	
 	HashMap<Long, String> userMap;
 	private long match_id;
 	private static long counter = 1000;
@@ -33,7 +33,7 @@ public class Match {
 	private int nAI;
 
 	private boolean inProgress;
-	MServer server;
+	private MServer server;
 	private Match2 controller;
 
 	public Match(int h, int ai, MServer m) {
@@ -46,6 +46,7 @@ public class Match {
 		inProgress = false;
 		MAX_PLAYER_COUNT = h + ai;
 		connection_count += ai;
+		controller = new Match2();
 	}
 
 	public int getMaxPlayerCount() {
@@ -74,7 +75,6 @@ public class Match {
 		connected.add(c);
 		connection_count++;
 		human_connection_count++;
-		update();
 	}
 
 	public void removeConnection(Connection c, Object k) {
@@ -144,24 +144,34 @@ public class Match {
 		}
 	}
 	public void receiveEvent(CommandMessage m) {
+		System.out.println("[SERVER] Decoded command message received:  \t" + m);
 		cmdMsgList.add(m);
 		receivedEvents++;
 		if (receivedEvents == human_connection_count) {
+			for(Object o : cmdMsgList)
+				System.out.println("[SERVER] cmdMsgList \t " + o );
 			controller.dispatch(cmdMsgList);
 			cmdMsgList.clear();
 			receivedEvents = 0;
 			sendMatchInfo();			
 		}
+		for (Player p : controller.getPlayers()) {
+			System.out.print("player " + p + "  cards: [");
+			for (Structure s : p.getCards()) {
+				System.out.print(s.getName() + ", ");
+			}
+			System.out.println("]");
+		}
 	}
 
 	public void handOff(ArrayList<Integer> receivedPacket) {
 		CommandMessage msg = SevenWondersProtocol.decodeCommandMessage(receivedPacket);
-		
+
 		receiveEvent(msg);
 	}
 
 	public void startMatch() {
-		controller = new Match2();
+		//controller = new Match2();
 		generateAI();
 		for(Map.Entry<Long, String> e : userMap.entrySet()){
 			controller.addPlayer(e.getKey(),e.getValue());

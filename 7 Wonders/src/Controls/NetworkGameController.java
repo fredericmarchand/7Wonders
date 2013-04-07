@@ -62,10 +62,11 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		switch ( ans )
 		{
 		case 1:
-			match.initMove(user, 1, -1);
+			match.initMove(user, 1, 2);
 			break;
 		case 2:
-			match.initMove(user, 1, 2);
+			match.initMove(user, 1, -1);
+			break;
 		}
 		frame.update();
 	}
@@ -83,10 +84,11 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		switch ( ans )
 		{
 		case 1:
-			match.initMove(user, 2, -1);
+			match.initMove(user, 2, 2);
 			break;
 		case 2:
-			match.initMove(user, 2, 2);
+			match.initMove(user, 2, -1);
+			break;
 		}
 		frame.update();
 	}

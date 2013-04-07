@@ -112,9 +112,6 @@ public class Packet {
 		public int getAI(){return numAI;}
 		public long getCID(){return clientID;}
 		public void setCID(long id){clientID=id;}
-//		public User getUser(){return user;}
-//		public void setUser(User u){user = u;}
-		
 		public String getUName(){return username;}
 		public void setUName(String s){username = s;}
 		
@@ -126,14 +123,10 @@ public class Packet {
 		private long matchID;
 		private long cID;
 		private String username;
-//		private User user = new User();
 		public long getMID(){return matchID;}
 		public void setMID(long id){matchID = id;}
 		public long getCID(){ return cID;}
 		public void setCID(long i){cID= i;}
-//		public User getUser(){return user;}
-//		public void setUser(User u){user = u;}
-		
 		public String getUName(){return username;}
 		public void setUName(String s){username = s;}
 	}

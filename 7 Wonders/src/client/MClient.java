@@ -136,6 +136,8 @@ public class MClient {
 
 	public void sendCommandMessage(ArrayList<Integer> m){
 		System.out.println("[CLIENT] Sending command message \n\t" + m);
+		for(Integer i : m)
+			System.out.println(i);
 		Packet8ClientResponse packet = new Packet8ClientResponse();
 		packet.setCID(ID);
 		packet.setMID(matchID);

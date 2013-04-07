@@ -58,6 +58,7 @@ public class NetworkListener extends Listener {
 	@Override
 	public void received(Connection c, Object o) {
 		System.out.println("[SERVER] Received packet");
+		
 
 		if (o instanceof Packet0LoginRequest) {
 			// create response
@@ -125,10 +126,13 @@ public class NetworkListener extends Listener {
 			System.out.println("[SERVER] Received client command message \n\t"+
 			((Packet8ClientResponse)o).getObject());
 			System.out.println("[SERVER] Searching for match: \t" + 
-								((Packet8ClientResponse) o).getMID() + "Found: \t "  + 
+								((Packet8ClientResponse) o).getMID() + " Found: \t "  + 
 								mserver.findMatch(((Packet8ClientResponse) o).getMID()));
 			(mserver.findMatch(((Packet8ClientResponse) o).getMID()))
 					.handOff((ArrayList<Integer>)((Packet8ClientResponse) o).getObject());
+
+			for(Integer i : (ArrayList<Integer>)((Packet8ClientResponse) o).getObject())
+				System.out.println(i);
 		}
 
 		if (o instanceof Packet11ImmediateStart) {
@@ -143,7 +147,8 @@ public class NetworkListener extends Listener {
 			
 			System.out.println("[SERVER] New Match : \t " + matchID);
 			
-			
+			mserver.bridgeClient(c, matchID,((Packet12CreateMatch)o).getCID(),
+					((Packet12CreateMatch)o).getUName());
 			// adding client to match
 			// connection list
 
@@ -152,8 +157,7 @@ public class NetworkListener extends Listener {
 			packet.setnPlayer(((Packet12CreateMatch) o).getHuman()+((Packet12CreateMatch) o).getAI());
 			c.sendTCP(packet);
 			
-			mserver.bridgeClient(c, matchID,((Packet12CreateMatch)o).getCID(),
-					((Packet12CreateMatch)o).getUName());
+			mserver.updateMatch(matchID);
 		}
 		if (o instanceof Packet13MatchJoinRequest) {
 			Packet3Connection joinResponse = new Packet3Connection();
@@ -171,6 +175,9 @@ public class NetworkListener extends Listener {
 						.getMID());
 			}
 			c.sendTCP(joinResponse);
+			
+			mserver.updateMatch(((Packet13MatchJoinRequest) o).getMID());
+			
 		}
 		if(o instanceof Packet16UserObject){
 			System.out.println("[SERVER] RECEIVED USER OBJECT! WOOP!");
