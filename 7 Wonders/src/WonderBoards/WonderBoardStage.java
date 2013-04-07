@@ -9,7 +9,6 @@ import Tokens.Resources;
 public class WonderBoardStage {
 
 	private Resources resourceCost;
-	@SuppressWarnings("unused")
 	private Structure card;
 	private boolean built;
 	private ArrayList<SpecialEffect> effects;
