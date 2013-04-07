@@ -167,9 +167,15 @@ public class AIPlayer extends Player {
 			return leftNeighbor;
 	}
 	
+	public float militaryCoef(Player leftNeighbor, Player rightNeighbor){
+		float militaryCoef = (((float)leftNeighbor.getShields()  / (float)this.getShields()) + ((float)rightNeighbor.getShields() / (float)this.getShields())) / 2;
+		
+		return militaryCoef;
+	}
+	
 	//Computes a value for each card in the players hand and adds them to a list linked by the index to the card in the hand.
 	//The higher the number, the better a card is to play.
-	public ArrayList<Integer> cardSelectionNumbers(Player leftNeighbor, Player rightNeighbor)
+	public ArrayList<Integer> cardSelectionNumbers(Player leftNeighbor, Player rightNeighbor, float choiceCoef)
 	{
 		ArrayList<Integer> selectionNumbers = new ArrayList<Integer>();
 		
@@ -178,6 +184,14 @@ public class AIPlayer extends Player {
 			selectionNumbers.add(0);
 		}
 		
+		if (this.strategy instanceof Intermediate)
+		{
+			for(Integer i : getMilitaryIndexes())
+			{
+				selectionNumbers.set(i, (int) (selectionNumbers.get(i) + (Math.floor(this.militaryCoef(leftNeighbor, rightNeighbor)))));
+			}
+		}
+	
 		for(Integer i : getStrategicIndexes(this.favor))
 		{
 			selectionNumbers.set(i, (selectionNumbers.get(i) + 1));
@@ -198,12 +212,12 @@ public class AIPlayer extends Player {
 		
 		for(Integer i : getStrategicIndexes(nextPlayerStrat(getNextPlayer(leftNeighbor, rightNeighbor))))
 		{
-			selectionNumbers.set(i, (selectionNumbers.get(i) + 1));
+			selectionNumbers.set(i, (selectionNumbers.get(i) + (Math.round(1/choiceCoef))));
 		}
 		
 		for(Integer i : freeIndexes(getNextPlayer(leftNeighbor, rightNeighbor)))
 		{
-			selectionNumbers.set(i, (selectionNumbers.get(i) + 1));
+			selectionNumbers.set(i, (selectionNumbers.get(i) + (Math.round(1/choiceCoef))));
 		}
 		
 		return selectionNumbers;

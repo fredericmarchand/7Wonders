@@ -1,6 +1,7 @@
 package Player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import Structures.Structure;
 
@@ -14,14 +15,24 @@ public class Intermediate implements Strategy{
 	public void strategicPick(AIPlayer p, ArrayList<Structure> discarded, Player leftNeighbor, Player rightNeighbor)
 	{
 		boolean did = false;
+		float aiCoef = (float) p.calculateVictoryPoints();
+		float neighCoef = (float) p.getNextPlayer(leftNeighbor, rightNeighbor).calculateVictoryPoints();
+		float choiceCoef = aiCoef / neighCoef;
+		
+		ArrayList<Integer> selectionNumbers = p.cardSelectionNumbers(leftNeighbor, rightNeighbor, choiceCoef);
+		
 		for ( int index = 0; index < p.cards.size(); ++index )
 		{
+			if (Collections.max(selectionNumbers) == 0)
+				break;
 			int result;
-			p.chooseCard(index);
+			p.chooseCard(selectionNumbers.indexOf(Collections.max(selectionNumbers)));
 			result = p.canBuild(leftNeighbor, rightNeighbor);
 			switch ( result )
 			{
-			case 0: continue;
+			case 0: 
+				selectionNumbers.remove(Collections.max(selectionNumbers));
+				continue;
 			
 			case 1: 
 				p.buildStructure();
@@ -36,7 +47,7 @@ public class Intermediate implements Strategy{
 		}
 		if ( !did )
 		{
-			p.chooseCard(0);
+			p.chooseCard(Collections.max(p.blockSelectionNumbers(leftNeighbor, rightNeighbor)));
 			int result = p.canBuildStage(leftNeighbor, rightNeighbor);
 			switch ( result )
 			{
