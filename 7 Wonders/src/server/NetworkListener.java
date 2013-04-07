@@ -122,6 +122,9 @@ public class NetworkListener extends Listener {
 		if (o instanceof Packet8ClientResponse) {
 			System.out.println("[SERVER] Received client command message \n\t"+
 			((Packet8ClientResponse)o).getObject());
+			System.out.println("[SERVER] Searching for match: \t" + 
+								((Packet8ClientResponse) o).getMID() + "Found: \t "  + 
+								mserver.findMatch(((Packet8ClientResponse) o).getMID()));
 			(mserver.findMatch(((Packet8ClientResponse) o).getMID()))
 					.handOff(((Packet8ClientResponse) o));
 		}
@@ -136,8 +139,9 @@ public class NetworkListener extends Listener {
 					((Packet12CreateMatch) o).getHuman(),
 					((Packet12CreateMatch) o).getAI());
 			
-			mserver.bridgeClient(c, matchID,((Packet12CreateMatch)o).getCID(),
-					((Packet12CreateMatch)o).getUName());
+			System.out.println("[SERVER] New Match : \t " + matchID);
+			
+			
 			// adding client to match
 			// connection list
 
@@ -145,6 +149,9 @@ public class NetworkListener extends Listener {
 			packet.setMID(matchID);
 			packet.setnPlayer(((Packet12CreateMatch) o).getHuman()+((Packet12CreateMatch) o).getAI());
 			c.sendTCP(packet);
+			
+			mserver.bridgeClient(c, matchID,((Packet12CreateMatch)o).getCID(),
+					((Packet12CreateMatch)o).getUName());
 		}
 		if (o instanceof Packet13MatchJoinRequest) {
 			Packet3Connection joinResponse = new Packet3Connection();

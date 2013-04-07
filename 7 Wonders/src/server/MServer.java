@@ -49,7 +49,7 @@ public class MServer {
 	}
 
 	public long createMatch(int h, int ai) {
-		Match m = new Match(h, ai, this);
+		Match m = new Match(h, ai,this);
 		matchList.add(m);
 		return m.getMatch_ID();
 	}
