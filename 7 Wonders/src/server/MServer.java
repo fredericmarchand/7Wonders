@@ -49,16 +49,16 @@ public class MServer {
 	}
 
 	public long createMatch(int h, int ai) {
-		Match m = new Match(h, ai, this);
+		Match m = new Match(h, ai,this);
 		matchList.add(m);
 		return m.getMatch_ID();
 	}
 
-	public boolean bridgeClient(Connection c, long m_id, Object o) {
+	public boolean bridgeClient(Connection c, long m_id, Object k,Object v) {
 		for (Match m : matchList) {
 			if (m.getMatch_ID() == m_id) {
 				if (m.getConnectionCount() < m.getMaxPlayerCount()) {
-					m.addConnection(c, o);
+					m.addConnection(c, k, v);
 					return true;
 				}
 			}
@@ -66,10 +66,10 @@ public class MServer {
 		return false;
 	}
 
-	public boolean removeClient(Connection c, long m_id, Object o) {
+	public boolean removeClient(Connection c, long m_id, Object k) {
 		for (Match m : matchList) {
 			if (m.getMatch_ID() == m_id) {
-				m.removeConnection(c, o);
+				m.removeConnection(c, k);
 				if (m.getHumanConnectionCount() == 0) {
 					ListIterator<Match> it = getMatchList().listIterator();
 					while (it.hasNext()) {
@@ -149,7 +149,6 @@ public class MServer {
 		kryo.register(Packet15MatchDisconnect.class);
 		kryo.register(Packet16UserObject.class);
 		kryo.register(Packet17PlayerObject.class);
-		kryo.register(Packet18DList.class);
 		
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match1.class);
@@ -279,6 +278,7 @@ public class MServer {
 		kryo.register(java.util.Random.class);
 
 		kryo.register(java.util.concurrent.atomic.AtomicLong.class);
+
 
 	}
 

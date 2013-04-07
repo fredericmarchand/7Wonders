@@ -1,15 +1,18 @@
 package Resources;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import server.MServer;
 
 import Controls.CommandMessage;
 import Controls.Match2;
+
+import Controls.SevenWondersProtocol;
+
 import Player.User;
 import Resources.Packet.Packet10EndMatch;
-import Resources.Packet.Packet17PlayerObject;
-import Resources.Packet.Packet18DList;
 import Resources.Packet.Packet7MatchFunction;
 import Resources.Packet.Packet8ClientResponse;
 import Resources.Packet.Packet9StartMatch;
@@ -20,8 +23,10 @@ import com.esotericsoftware.kryonet.Connection;
 public class Match {
 
 	ArrayList<Connection> connected;
-	ArrayList<User> userList;
+	//ArrayList<User> userList;
 	ArrayList<CommandMessage> cmdMsgList;
+	
+	HashMap<Long, String> userMap;
 	private long match_id;
 	private static long counter = 1000;
 	private int MAX_PLAYER_COUNT = 7;
@@ -37,7 +42,7 @@ public class Match {
 	public Match(int h, int ai, MServer m) {
 		nAI = ai;
 		server = m;
-		userList = new ArrayList<User>();
+		userMap = new HashMap<Long,String>();
 		connected = new ArrayList<Connection>();
 		match_id = ++counter;
 		cmdMsgList = new ArrayList<CommandMessage>();
@@ -66,29 +71,26 @@ public class Match {
 		return connected;
 	}
 
-	public void addConnection(Connection c, Object o) {
-		User u = (User)o;
-		System.out.println("[SERVER - MATCH] User: \t" + u);
-		userList.add(u);
+	public void addConnection(Connection c, Object k,Object v) {
+		System.out.println("[SERVER - MATCH] User values : \t" + k + "\t" + v  );
+		userMap.put((Long)k,(String)v);
 		connected.add(c);
 		connection_count++;
 		human_connection_count++;
 		update();
 	}
 
-	public void removeConnection(Connection c, Object o) {
-		userList.remove((User) o);
+	public void removeConnection(Connection c, Object k) {
+		userMap.remove(k);
 		connected.remove(c);
 		connection_count--;
-		human_connection_count--;
-		
+		human_connection_count--;		
 	}
 
 	public void removeConnectionOnly(Connection c) {
 		connected.remove(c);
 		connection_count--;
-		human_connection_count--;
-		
+		human_connection_count--;		
 	}
 
 	public long getMatch_ID() {
@@ -123,42 +125,35 @@ public class Match {
 
 	// getters and setters for controller
 
-	public void sendMatchInfo() {		
-		Packet7MatchFunction packet1 = new Packet7MatchFunction();		
-		for(Object o : controller.getParameters()){
-			packet1.setObject(o);
-			System.out.println("[SERVER] Sending:\t" +o);
-			for (Connection c : connected) {
-				System.out.println("[SERVER] Sending Match 2 chunk to Client");
-				c.sendTCP(packet1);
-			}
+	public void sendMatchInfo() {	
+		int id = 0;
+		Packet7MatchFunction packet = new Packet7MatchFunction();		
+		packet.setObject(SevenWondersProtocol.encodeMatch(controller));
+		packet.setID(id);
+		for(Connection c: connected){
+			c.sendTCP(packet);
 		}
-		
-		//send players
-		Packet17PlayerObject packet2 = new Packet17PlayerObject();
-		for(Object  p : controller.getPlayers()){
-			packet2.setPlayer(p);
-			System.out.println("[SERVER] Sending:\t" +p);
-			for(Connection c : connected)
-				c.sendTCP(packet2);
-		}
-		
-		Packet18DList packet3 = new Packet18DList();
-		Object l = controller.getDiscardedCardIDs();
-		packet3.setObject(l);			
-		System.out.println("[SERVER] Sending:\t" +l);
-		for(Connection c : connected)
-			c.sendTCP(packet3);
-	}
 	
-
+		packet.setObject(SevenWondersProtocol.encodePlayerIDs(controller));
+		packet.setID(++id);
+		for(Connection c: connected){
+			c.sendTCP(packet);
+		}
+		
+		packet.setObject(SevenWondersProtocol.encodePlayerNames(controller));
+		packet.setID(++id);
+		for(Connection c: connected){
+			c.sendTCP(packet);
+		}
+	}
 	public void receiveEvent(CommandMessage m, long cID) {
 		cmdMsgList.add(m);
 		receivedEvents++;
 		if (receivedEvents == human_connection_count) {
 			controller.dispatch(cmdMsgList);
 			cmdMsgList.clear();
-			sendMatchInfo();
+			receivedEvents = 0;
+			sendMatchInfo();			
 		}
 	}
 
@@ -170,7 +165,11 @@ public class Match {
 	public void startMatch() {
 		controller = new Match2();
 		generateAI();
-		controller.addPlayers(userList);
+		for(Map.Entry<Long, String> e : userMap.entrySet()){
+			
+			controller.addPlayer(e.getKey(),e.getValue());
+		}
+		//controller.addPlayers(userList);
 		controller.init();
 		inProgress = true;
 		sendStartMatchRequest();

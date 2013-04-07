@@ -16,15 +16,16 @@ public class NetworkListener extends Listener{
 
 	private final boolean VERBOSE = true;
 	
-	Client c;
-	MClient mclient;
-	ArrayList<Match> list;
-	ArrayList<Object> fredsShittyList = new ArrayList<Object>();
-	int matchChunksReceived = 0;
-	int startMatchChunks = 0;
+	private Client c;
+	private MClient mclient;
+	private ArrayList<Match> list;
+	private int partials = 0;
+	private Object[] partialsArray;
+	private boolean gameStart = false;
 	
 	public NetworkListener(MClient m){
 		mclient = m;
+		partialsArray = new Object[3];
 	}
 	
 	public void init(Client c){
@@ -40,6 +41,7 @@ public class NetworkListener extends Listener{
 	@Override
 	public void disconnected(Connection arg0) {
 		System.out.println("[CLIENT] Disconnected");
+		gameStart = false;
 		System.exit(0);
 		//super.disconnected(arg0);
 	}
@@ -48,6 +50,7 @@ public class NetworkListener extends Listener{
 	@Override
 	public void received(Connection c, Object o) {
 		if(VERBOSE) System.out.println("[CLIENT] RECEIVED PACKET");
+		System.out.println("[CLIENT] MClient status: \t" + mclient);
 		if(o instanceof Packet1LoginAnswer){
 			if(!((Packet1LoginAnswer)o).getAccepted()){
 				c.close();
@@ -56,6 +59,7 @@ public class NetworkListener extends Listener{
 			mclient.setMatchList((ArrayList<Long>)((Packet1LoginAnswer)o).getObject());
 			mclient.setID(((Packet1LoginAnswer)o).getIDValue());
 			mclient.createUser();
+			System.out.println("[CLIENT] Client MCLIENT :  \t" + mclient);
 		}
 		//check if client has been able to join game
 		//if yes, join lobby
@@ -86,35 +90,32 @@ public class NetworkListener extends Listener{
 		}
 
 		if(o instanceof Packet7MatchFunction){
-			System.out.println("[CLIENT] Received Match 2 Chunk");
-			
-//			++matchChunksReceived;
-//			++startMatchChunks;
-//			fredsShittyList.add(((Packet7MatchFunction)o).getObject());
-//			if(matchChunksReceived==8){
-//				//receive shitty list
-//				mclient.getUser().receive(fredsShittyList);
-//				
-//				fredsShittyList.clear();
-//				matchChunksReceived=0;
-//				
-//			}
-			
+			System.out.println("[CLIENT] Received Match Function");
+			partialsArray[((Packet7MatchFunction)o).getID()] = ((Packet7MatchFunction)o).getObject();
+			++partials;
+			if(partials==3){
+				partials = 0;
+				gameStart = true;
+				pushMatchFunctions(partialsArray);
+			}			
 		}
 		if(o instanceof Packet8ClientResponse){
 			
 		}
 		if(o instanceof Packet9StartMatch){			
-			System.out.println("[CLIENT] Received start match request");
+			System.out.println("[CLIENT] Received start match request");	
 			
-			//if delay in network and chunks received later than start request, ensures
-			//chunks are received before start
-			//mclient.startMatch();
+				if(gameStart){
+					mclient.startMatch();
+					
+				}
+			
 
 			//eliminate countdown causing so many god damn errors.
 			//mclient.getLink().getChat().run();
 		}
 		if(o instanceof Packet14HostCreateMatch){
+			System.out.println("[CLIENT] Match set to: \t " + ((Packet14HostCreateMatch)o).getMID());
 			mclient.setMID(((Packet14HostCreateMatch)o).getMID());
 			mclient.setHost(true);
 			if(((Packet14HostCreateMatch)o).getnPlayer()>0){
@@ -125,15 +126,16 @@ public class NetworkListener extends Listener{
 		if( o instanceof Packet15MatchDisconnect){
 			System.out.println("[CLIENT]  Graceful Disconnect");
 			mclient.getLink().killMainFrame();
+			gameStart = false;
 		}
 		if(o instanceof Packet17PlayerObject){
 			System.out.println("[CLIENT] Received Player Object");
-//			for(Object p : (ArrayList)((Packet17PlayerObject)o).getPlayer())
-//				System.out.println(p);
 		}
-		if(o instanceof Packet18DList){
-			System.out.println("[CLIENT] Received Discarded List");
-		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void pushMatchFunctions(Object[] ary){
+		mclient.pushToUser((ArrayList<Integer>)ary[0],(ArrayList<Long>)ary[1],(ArrayList<String>)ary[2]);
 	}
 
 }

@@ -23,15 +23,11 @@ public class NearPanel extends JPanel {
 	
 	private JLabel wonderStage1, wonderStage2, wonderStage3, wonderStage4;
 	
-	@SuppressWarnings("unused")
-	private Controller controller;
-	
-	public NearPanel(Player p, Controller c) {
+	public NearPanel(Player p) {
 		player = p;
-		controller = c;
 		setLayout(null);
+		setOpaque(false);
 		setSize(478, 300);
-		setBackground(Color.WHITE);
 
 		wonderStage1 = new JLabel(Images.get("checkmarkBig"));
 		wonderStage1.setSize(34, 34);

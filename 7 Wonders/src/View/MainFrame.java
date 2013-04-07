@@ -54,4 +54,7 @@ public class MainFrame extends JFrame implements Runnable {
 		loading.setVisible(false);
 	}
 
+	public static void main(String args[]) {
+		new MainFrame(null);
+	}
 }
