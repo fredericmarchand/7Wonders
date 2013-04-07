@@ -322,7 +322,7 @@ public class Match2 {
 		}
 		
 		countPlayersVictoryPoints();
-		discardAllPlayersCards();
+		//discardAllPlayersCards();
 	}
 
 	public void addPointActivate(Structure s, Player p, ArrayList<CommandMessage> messages)

@@ -146,7 +146,6 @@ public class Match {
 	public void receiveEvent(CommandMessage m) {
 		System.out.println("[SERVER] Decoded command message received:  \t" + m);
 		cmdMsgList.add(m);
-	
 		receivedEvents++;
 		if (receivedEvents == human_connection_count) {
 			for(Object o : cmdMsgList)
@@ -156,15 +155,13 @@ public class Match {
 			receivedEvents = 0;
 			sendMatchInfo();			
 		}
-		 for ( Player p: controller.getPlayers() )
-		 {
-		 System.out.print("player i cards: [");
-		 for (Structure s: p.getCards())
-		 {
-		 System.out.print(s.getName() + ", ");
-		 }
-		 System.out.println("]");
-		 }
+		for (Player p : controller.getPlayers()) {
+			System.out.print("player " + p + "  cards: [");
+			for (Structure s : p.getCards()) {
+				System.out.print(s.getName() + ", ");
+			}
+			System.out.println("]");
+		}
 	}
 
 	public void handOff(ArrayList<Integer> receivedPacket) {

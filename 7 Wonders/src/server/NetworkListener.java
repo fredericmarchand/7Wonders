@@ -130,7 +130,7 @@ public class NetworkListener extends Listener {
 								mserver.findMatch(((Packet8ClientResponse) o).getMID()));
 			(mserver.findMatch(((Packet8ClientResponse) o).getMID()))
 					.handOff((ArrayList<Integer>)((Packet8ClientResponse) o).getObject());
-			
+
 			for(Integer i : (ArrayList<Integer>)((Packet8ClientResponse) o).getObject())
 				System.out.println(i);
 		}
