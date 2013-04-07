@@ -42,6 +42,10 @@ public interface Controller {
 	ArrayList<Structure> needToChooseDiscarded();
 	void chosenDiscarded(Structure g);
 	
+	// Can build for free
+	boolean canBuildForFree();
+	void buildForFree(Structure g);
+	
 	// Pass the last card 
 	Structure needToChooseLastCard();
 	// buildStructure, buildWonderStage or discard will be chosen

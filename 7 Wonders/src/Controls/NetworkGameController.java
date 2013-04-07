@@ -333,12 +333,24 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		frame.dispose();
 	}
 	
+	@Override
+	public boolean canBuildForFree() 
+	{
+		return user.freeBuild();
+	}
+
+	@Override
+	public void buildForFree(Structure g) 
+	{
+		
+	}
 	
 	public static void main(String args[])
 	{
 		//String name = JOptionPane.showInputDialog("What is your username? ");
-		
 		//NetworkGameController gc = new NetworkGameController(new Player(name, 0), new Match2());
 	}
+
+
 	
 }
