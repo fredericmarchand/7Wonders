@@ -141,8 +141,10 @@ public class MClient {
 	// any class type sent over the network must be registered to the kryo
 	// generic types are implicitly registered
 
-	public void pushToUser(ArrayList<Object> devonsShittyList){
-		user.receive(devonsShittyList);
+	public void pushToUser(ArrayList<Object> devonsShittyList1,
+						   ArrayList<Object> devonsShittyList2,
+						   ArrayList<Object> devonsShittyList3){
+		user.receive(devonsShittyList1,devonsShittyList2,devonsShittyList3);
 	}
 	
 	public void sendStartRequest() {

@@ -124,19 +124,23 @@ public class Match {
 
 	// getters and setters for controller
 
-	public void sendMatchInfo() {		
+	public void sendMatchInfo() {	
+		int id = 1;
 		Packet7MatchFunction packet = new Packet7MatchFunction();		
 		packet.setObject(SevenWondersProtocol.encodeMatch(controller));
+		packet.setID(id);
 		for(Connection c: connected){
 			c.sendTCP(packet);
 		}
 	
 		packet.setObject(SevenWondersProtocol.encodePlayerIDs(controller));
+		packet.setID(++id);
 		for(Connection c: connected){
 			c.sendTCP(packet);
 		}
 		
 		packet.setObject(SevenWondersProtocol.encodePlayerNames(controller));
+		packet.setID(++id);
 		for(Connection c: connected){
 			c.sendTCP(packet);
 		}
@@ -147,7 +151,8 @@ public class Match {
 		if (receivedEvents == human_connection_count) {
 			controller.dispatch(cmdMsgList);
 			cmdMsgList.clear();
-			sendMatchInfo();
+			receivedEvents = 0;
+			sendMatchInfo();			
 		}
 	}
 
