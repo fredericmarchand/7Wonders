@@ -19,9 +19,11 @@ public class NetworkListener extends Listener{
 	private Client c;
 	private MClient mclient;
 	private ArrayList<Match> list;
-	
+	private int partials = 0;
+	private Object[] partialsArray;
 	public NetworkListener(MClient m){
 		mclient = m;
+		partialsArray = new Object[3];
 	}
 	
 	public void init(Client c){
@@ -84,14 +86,19 @@ public class NetworkListener extends Listener{
 
 		if(o instanceof Packet7MatchFunction){
 			System.out.println("[CLIENT] Received Match Function");
-			mclient.pushToUser((ArrayList)((Packet7MatchFunction)o).getObject());
-			
+			partialsArray[((Packet7MatchFunction)o).getID()] = ((Packet7MatchFunction)o).getObject();
+			++partials;
+			if(partials==3){
+				partials = 0;
+				pushMatchFunctions(partialsArray);
+			}			
 		}
 		if(o instanceof Packet8ClientResponse){
 			
 		}
 		if(o instanceof Packet9StartMatch){			
-			System.out.println("[CLIENT] Received start match request");			
+			System.out.println("[CLIENT] Received start match request");	
+						
 			mclient.startMatch();
 
 			//eliminate countdown causing so many god damn errors.
@@ -112,6 +119,10 @@ public class NetworkListener extends Listener{
 		if(o instanceof Packet17PlayerObject){
 			System.out.println("[CLIENT] Received Player Object");
 		}
+	}
+	
+	public void pushMatchFunctions(Object[] ary){
+		mclient.pushToUser((ArrayList)ary[0],(ArrayList)ary[1],(ArrayList)ary[2]);
 	}
 
 }
