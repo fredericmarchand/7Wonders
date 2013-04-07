@@ -146,7 +146,7 @@ public class Match {
 			c.sendTCP(packet);
 		}
 	}
-	public void receiveEvent(CommandMessage m, long cID) {
+	public void receiveEvent(CommandMessage m) {
 		cmdMsgList.add(m);
 		receivedEvents++;
 		if (receivedEvents == human_connection_count) {
@@ -157,19 +157,18 @@ public class Match {
 		}
 	}
 
-	public void handOff(Packet8ClientResponse receivedPacket) {
-		receiveEvent((CommandMessage) receivedPacket.getObject(),
-				receivedPacket.getCID());
+	public void handOff(ArrayList<Integer> receivedPacket) {
+		CommandMessage msg = SevenWondersProtocol.decodeCommandMessage(receivedPacket);
+		
+		receiveEvent(msg);
 	}
 
 	public void startMatch() {
 		controller = new Match2();
 		generateAI();
 		for(Map.Entry<Long, String> e : userMap.entrySet()){
-			
 			controller.addPlayer(e.getKey(),e.getValue());
 		}
-		//controller.addPlayers(userList);
 		controller.init();
 		inProgress = true;
 		sendStartMatchRequest();
