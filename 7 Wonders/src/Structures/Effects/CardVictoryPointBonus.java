@@ -86,4 +86,20 @@ public class CardVictoryPointBonus extends SpecialEffect {
 		}
 	}
 	
+	
+	public int amountOfPoints()
+	{
+		return amountOfPoints;
+	}
+	public int onlyNeighbors()
+	{
+		return onlyNeighbors ? 1 : 0;
+	}
+	public int getCardColor()
+	{
+		return cardColor;
+	}
+	
+	
+	
 }

@@ -70,17 +70,18 @@ public class Match2 {
 	public ArrayList<Object> getParameters()
 	{
 		ArrayList<Object> params = new ArrayList<Object>();
-		params.add(players);
+		//params.add(players);
 		params.add(age);
 		params.add(turn);
 		params.add(numPlayers);
-		params.add(discarded);
+		//params.add(discarded);
 		return params;
 	}
 	 
 	public ArrayList<Integer> getDiscardedCardIDs()
 	{
 		ArrayList<Integer> ids = new ArrayList<Integer>();
+		ids.add(discarded.size());
 		for ( Structure s: discarded )
 		{
 			ids.add(s.getID());
@@ -101,6 +102,11 @@ public class Match2 {
 	public int getTurn()
 	{
 		return turn;
+	}
+	
+	public int getNumPlayers()
+	{
+		return numPlayers;
 	}
 	
 	public void setAge(int a)
@@ -556,6 +562,8 @@ public class Match2 {
 			p.discardHand(discarded);
 		}
 	}
+	
+	
 	
 
 

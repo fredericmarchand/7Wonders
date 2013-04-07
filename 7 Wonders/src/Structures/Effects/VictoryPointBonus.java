@@ -20,6 +20,11 @@ public class VictoryPointBonus extends SpecialEffect {
 		usedUp = true;
 	}
 	
+	public int amountOfPoints()
+	{
+		return amountOfPoints;
+	}
+	
 	/**
 	 * @param args
 	 */
