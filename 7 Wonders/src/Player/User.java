@@ -8,6 +8,7 @@ import client.MClient;
 import Controls.CommandMessage;
 import Controls.Match2;
 import Controls.NetworkGameController;
+import Controls.SevenWondersProtocol;
 
 public class User {
 
@@ -84,50 +85,9 @@ public class User {
 	@SuppressWarnings("unchecked")
 	public void receive(ArrayList<Object> encoding, ArrayList<Object> ids, ArrayList<Object> names)
 	{
-		/*currentMatch = new Match2();
-		for ( int i = 0; i < devonsShittyMatchInfo.size(); ++i )
-		{
-			switch ( i )
-			{
-			case 0:
-				currentMatch.setPlayers((ArrayList<Player>)devonsShittyMatchInfo.get(i));
-				break;
-				
-			case 1:
-				currentMatch.setAge((int)devonsShittyMatchInfo.get(i));
-				break;
-				
-			case 2:
-				currentMatch.setTurn((int)devonsShittyMatchInfo.get(i));
-				break;
-				
-			case 3:
-				currentMatch.setNumPlayers((int)devonsShittyMatchInfo.get(i));
-				break;
-				
-			case 4:
-				currentMatch.setDiscardedDeck((ArrayList<Structure>)devonsShittyMatchInfo.get(i));
-				break;
-				
-			/*case 4:
-				currentMatch.setAge1Deck((ArrayList<Structure>)devonsShittyMatchInfo.get(i));
-				break;
-				
-			case 5:
-				currentMatch.setAge2Deck((ArrayList<Structure>)devonsShittyMatchInfo.get(i));
-				break;
-				
-			case 6:
-				currentMatch.setAge3Deck((ArrayList<Structure>)devonsShittyMatchInfo.get(i));
-				break;
-				
-			case 7:
-				currentMatch.setDiscardedDeck((ArrayList<Structure>)devonsShittyMatchInfo.get(i));
-				break;*/
-			//}
-		//}
-		//System.out.println("eureka");
-		
+		currentMatch = SevenWondersProtocol.decodeMatch(encoding);
+		assignUsernamesAndIDs(currentMatch, names, ids);
+		NetworkGameController gc = new NetworkGameController(this, currentMatch);
 	}
 	
 	public void returnToLobby()
@@ -140,8 +100,8 @@ public class User {
 		//System.out.println("StartMatch Wonderboard?: " + match.getPlayers().get(0).getWonderBoard());
 		//currentMatch = match;
 		currentMatch.setLocalPlayerID(ID);
-		@SuppressWarnings("unused")
-		NetworkGameController gc = new NetworkGameController(this, currentMatch);
+		//@SuppressWarnings("unused")
+		//NetworkGameController gc = new NetworkGameController(this, currentMatch);
 	}
 	
 	

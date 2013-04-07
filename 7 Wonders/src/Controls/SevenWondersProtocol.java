@@ -216,6 +216,17 @@ public class SevenWondersProtocol {
 	
 	//////////////////DECODE SECTION/////////////////////////
 	
+	public static void assignUsernamesAndIDs(Match2 match, ArrayList<String> names, ArrayList<Long> ids)
+	{
+		int i = 0;
+		for ( Player p : match.getPlayers() )
+		{
+			p.setUsername(names.get(i));
+			p.setID(ids.get(i));
+			++i;
+		}
+	}
+	
 	//decode match function
 	public static Match2 decodeMatch(ArrayList<Integer> encoding)
 	{

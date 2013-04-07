@@ -30,7 +30,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	public NetworkGameController(User u, Match2 m)
 	{
 		user = new Player(u.getUsername(), u.getID());
-		//user.setClient(u.getClient());
+		user.setClient(u.getClient());
 		CommandMessage msg = new CommandMessage();
 		user.setCommand(msg);
 		user.sendCommandMessage();
