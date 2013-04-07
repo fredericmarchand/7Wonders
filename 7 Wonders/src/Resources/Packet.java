@@ -1,6 +1,5 @@
 package Resources;
 
-import Player.Player;
 import Player.User;
 
 //create packets to communicate from the server to anyone connected to the server
