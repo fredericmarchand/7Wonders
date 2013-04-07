@@ -61,8 +61,9 @@ public class User {
 	
 	public void sendCommandMessage()
 	{
-		if ( client != null )
+		if ( client != null && msg != null )
 			client.sendCommandMessage(msg);
+			//client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg));
 		System.out.println("[CLIENT ------ USER] MClient : \t" + client );
 		System.out.println("Send Command Message: " + msg);
 	}
@@ -84,8 +85,8 @@ public class User {
 		currentMatch = SevenWondersProtocol.decodeMatch(encoding);
 		SevenWondersProtocol.assignUsernamesAndIDs(currentMatch, names, ids);
 		currentMatch.setLocalPlayerID(ID);
-		@SuppressWarnings("unused")
-		NetworkGameController gc = new NetworkGameController(client, currentMatch);
+		//@SuppressWarnings("unused")
+		//NetworkGameController gc = new NetworkGameController(client, currentMatch);
 	}
 	
 	public void returnToLobby()
@@ -100,6 +101,7 @@ public class User {
 		//currentMatch.setLocalPlayerID(ID);
 		//@SuppressWarnings("unused")
 		//NetworkGameController gc = new NetworkGameController(this, currentMatch);
+		NetworkGameController gc = new NetworkGameController(client, currentMatch);
 	}
 	
 	
