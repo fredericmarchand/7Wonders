@@ -9,8 +9,8 @@ import Structures.Structure;
 public class Intermediate implements Strategy{
 	
 	/*
-	Follows a dynamic strategy that involves calculating neighbors victory points to determine the optimal choice of cards to 
-	gain victory points and deny the neighbor from gaining maximum points.
+	Follows a more dynamic strategy where the ai can calculate the other player's victory points and increase blocking selection numbers 
+	based on the the difference of victory points. Military
 	*/
 	public void strategicPick(AIPlayer p, ArrayList<Structure> discarded, Player leftNeighbor, Player rightNeighbor)
 	{
