@@ -38,6 +38,7 @@ public class Player extends User {
 		isAI = false;
 	}
 	
+	
 	public void resetPlayerStats()
 	{
 		wonderBoard = new WonderBoard();
@@ -486,5 +487,16 @@ public class Player extends User {
 				 && price <= resources.getCoins() )
 			return true;
 		return false;
+	}
+	public int calculateVictoryPoints()
+	{
+		int vpoints = 0;
+		
+		vpoints += victoryPoints;
+		vpoints += getConflictTokens().getVictoryPoints();
+		vpoints += (int)Math.floor(getResources().getCoins() / 3);
+		vpoints += getScientificSymbols().victoryPointsValue();
+		
+		return vpoints;
 	}
 }
