@@ -58,6 +58,7 @@ public class NetworkListener extends Listener {
 	@Override
 	public void received(Connection c, Object o) {
 		System.out.println("[SERVER] Received packet");
+		
 
 		if (o instanceof Packet0LoginRequest) {
 			// create response
@@ -125,10 +126,13 @@ public class NetworkListener extends Listener {
 			System.out.println("[SERVER] Received client command message \n\t"+
 			((Packet8ClientResponse)o).getObject());
 			System.out.println("[SERVER] Searching for match: \t" + 
-								((Packet8ClientResponse) o).getMID() + "Found: \t "  + 
+								((Packet8ClientResponse) o).getMID() + " Found: \t "  + 
 								mserver.findMatch(((Packet8ClientResponse) o).getMID()));
 			(mserver.findMatch(((Packet8ClientResponse) o).getMID()))
 					.handOff((ArrayList<Integer>)((Packet8ClientResponse) o).getObject());
+			
+			for(Integer i : (ArrayList<Integer>)((Packet8ClientResponse) o).getObject())
+				System.out.println(i);
 		}
 
 		if (o instanceof Packet11ImmediateStart) {
