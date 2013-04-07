@@ -102,8 +102,10 @@ public class MClient {
 
 	public void createUser() {
 		System.out.println("[CLIENT] Creating user");
+		System.out.println("[CLIENT] MClient : \t" + this);
 		user = new Player(username, ID);
 		user.setClient(this);
+		System.out.println("[CLIENT] User MClient : \t"+ user.getClient());
 	}
 	
 	public void sendCommandMessage(CommandMessage m){

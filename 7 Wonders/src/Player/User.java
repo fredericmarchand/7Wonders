@@ -63,7 +63,7 @@ public class User {
 	{
 		if ( client != null )
 			client.sendCommandMessage(msg);
-		System.out.println("Client: " + client);
+		System.out.println("[CLIENT ------ USER] MClient : \t" + client );
 		System.out.println("Send Command Message: " + msg);
 	}
 	

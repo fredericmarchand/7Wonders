@@ -50,6 +50,7 @@ public class NetworkListener extends Listener{
 	@Override
 	public void received(Connection c, Object o) {
 		if(VERBOSE) System.out.println("[CLIENT] RECEIVED PACKET");
+		System.out.println("[CLIENT] MClient status: \t" + mclient);
 		if(o instanceof Packet1LoginAnswer){
 			if(!((Packet1LoginAnswer)o).getAccepted()){
 				c.close();
@@ -58,6 +59,7 @@ public class NetworkListener extends Listener{
 			mclient.setMatchList((ArrayList<Long>)((Packet1LoginAnswer)o).getObject());
 			mclient.setID(((Packet1LoginAnswer)o).getIDValue());
 			mclient.createUser();
+			System.out.println("[CLIENT] Client MCLIENT :  \t" + mclient);
 		}
 		//check if client has been able to join game
 		//if yes, join lobby
