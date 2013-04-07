@@ -45,7 +45,7 @@ public class LoadingPanel extends JPanel implements ImageLoadingGUI {
 
 	@Override
 	public void startImage(int current, int total, String imagename) {
-		lblLoadingImages.setText("Loading image " + imagename);
+		lblLoadingImages.setText("Loading " + imagename);
 	}
 
 	@Override

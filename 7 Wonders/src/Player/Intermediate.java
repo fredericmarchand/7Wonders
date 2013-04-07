@@ -10,7 +10,7 @@ public class Intermediate implements Strategy{
 	
 	/*
 	Follows a more dynamic strategy where the ai can calculate the other player's victory points and increase blocking selection numbers 
-	based on the the difference of victory points. Military
+	based on the the difference of victory points. Military differences are used so the ai has a greater chance of keeping up with military. 
 	*/
 	public void strategicPick(AIPlayer p, ArrayList<Structure> discarded, Player leftNeighbor, Player rightNeighbor)
 	{
@@ -23,7 +23,7 @@ public class Intermediate implements Strategy{
 		
 		for ( int index = 0; index < p.cards.size(); ++index )
 		{
-			if (Collections.max(selectionNumbers) == 0)
+			if (Collections.max(selectionNumbers) <= (p.getAge() - 1))
 				break;
 			int result;
 			p.chooseCard(selectionNumbers.indexOf(Collections.max(selectionNumbers)));

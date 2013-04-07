@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import client.MClient;
 
 import Player.Player;
-import Player.User;
 import Structures.Structure;
 import Structures.Effects.BuildDiscardedCard;
 import Structures.Effects.CopyGuild;
@@ -24,7 +23,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	public static final int MOVE = 1;
 	public static final int ENDOFGAME = 2;
 
-
 	private Player user;
 	private Match2 match;
 	private MainFrame frame;
@@ -37,15 +35,15 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		//user.setCommand(msg);
 		//user.sendCommandMessage();
 		match = m;
-				
-		run();
+	}
+	
+	public void setMainFrame(MainFrame m) {
+		frame = m;
 	}
 		
 	public void run()
 	{
-		frame = new MainFrame(this);
 		frame.startMatch(match);
-		frame.setVisible(true);
 	}
 	
 
