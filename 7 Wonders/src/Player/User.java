@@ -66,7 +66,7 @@ public class User {
 	{
 		if ( client != null )
 			client.sendCommandMessage(msg);
-		
+		System.out.println("Client: " + client);
 		System.out.println("Send Command Message: " + msg);
 	}
 	
@@ -87,7 +87,7 @@ public class User {
 		currentMatch = SevenWondersProtocol.decodeMatch(encoding);
 		SevenWondersProtocol.assignUsernamesAndIDs(currentMatch, names, ids);
 		currentMatch.setLocalPlayerID(ID);
-		NetworkGameController gc = new NetworkGameController(this, currentMatch);
+		NetworkGameController gc = new NetworkGameController(client, currentMatch);
 	}
 	
 	public void returnToLobby()
