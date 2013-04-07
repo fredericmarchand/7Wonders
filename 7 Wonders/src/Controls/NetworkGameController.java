@@ -2,7 +2,7 @@ package Controls;
 
 import java.util.ArrayList;
 
-import view.menu.MainFrame;
+import View.menu.MainFrame;
 
 import client.MClient;
 
