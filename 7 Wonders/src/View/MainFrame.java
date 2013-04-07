@@ -52,7 +52,6 @@ public class MainFrame extends JFrame implements Runnable {
 		Images.setGUI(loading);
 		Images.run();
 		loading.setVisible(false);
-		startMatch(null);
 	}
 
 	public static void main(String args[]) {

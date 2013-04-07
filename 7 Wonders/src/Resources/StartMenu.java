@@ -23,7 +23,6 @@ public class StartMenu extends JFrame {
 	MClient mclient;
 
 	public StartMenu() {
-		setLayout(null);
 		setSize(300, 300);
 		
 		create = new JButton("CREATE");

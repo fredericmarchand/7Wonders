@@ -12,6 +12,7 @@ import Controls.Controller;
 import Controls.Match2;
 import Images.Images;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -32,7 +33,8 @@ public class MatchPanel extends JPanel implements Runnable {
 	private LocalPanel playerPanel;
 	private CardsPanel cardsPanel;
 	
-	private JLabel lblAge, lblTurn, closeButton;
+	private JLabel lblAge, closeButton;
+	private JLabel2D lblTurn;
 	
 	private JScrollPane scrollpane;
 	private FullscreenCardsPanel fcp;
@@ -54,10 +56,6 @@ public class MatchPanel extends JPanel implements Runnable {
 		setLayout(null);
 		setSize(1280, 860);
 		
-		JLabel bgimg = new JLabel(Images.get("bg"));
-		bgimg.setSize(1280, 860);
-		add(bgimg);
-		
 		match = m;
 		controller = c;
 		pickedResources = new ArrayList<Resources>();
@@ -67,7 +65,7 @@ public class MatchPanel extends JPanel implements Runnable {
 		pickedSciences = new ArrayList<ScientificSymbols>();
 		
 		// Start asynchronous part
-		if(m != null) run();
+		run();
 		
 		// Add solid white BG to fix background repaint issue with scrollpanes
 		BufferedImage bi = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -80,7 +78,7 @@ public class MatchPanel extends JPanel implements Runnable {
 		bg.setLocation(0, 0);
 		add(bg);
 		
-		if(m != null) update();
+		update();
 	}
 	
 	public void run(){
@@ -89,19 +87,19 @@ public class MatchPanel extends JPanel implements Runnable {
 		System.out.println("MatchPanel numplayers: " + numplayers);
 		// Local
 		Player.Player p1 = match.getLocalPlayer();
-		playerPanel = new LocalPanel(p1, controller);
+		playerPanel = new LocalPanel(p1);
 		playerPanel.addMouseListener(buildMouseAdapterLocal());
 		playerPanel.setLocation(401, 450);
 		
 		// Right Neighbor
 		Player.Player p2 = match.getRightNeighbor(p1);
-		n2 = new NearPanel(p2, controller);
+		n2 = new NearPanel(p2);
 		n2.setLocation(802, 150);
 		n2.addMouseListener(buildMouseAdapterNear());
 		
 		// Left Neighbor
 		Player.Player p3 = match.getLeftNeighbor(p1);
-		n1 = new NearPanel(p3, controller);
+		n1 = new NearPanel(p3);
 		n1.setLocation(0, 150);
 		n1.addMouseListener(buildMouseAdapterNear());
 		
@@ -154,9 +152,11 @@ public class MatchPanel extends JPanel implements Runnable {
 		lblAge.setForeground(Color.BLACK);
 		lblAge.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		
-		lblTurn = new JLabel("Round 1 of 6", SwingConstants.CENTER);
+		lblTurn = new JLabel2D("Round 1 of 6", SwingConstants.CENTER);
 		lblTurn.setBounds(576, 295, 128, 25);
-		lblTurn.setForeground(Color.BLACK);
+		lblTurn.setForeground(Color.WHITE);
+		lblTurn.setOutlineColor(Color.BLACK);
+		lblTurn.setStroke(new BasicStroke(2f));
 		lblTurn.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		fcp = new FullscreenCardsPanel(this);
@@ -203,6 +203,9 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(numplayers > 6) add(f4);
 		add(lblAge);
 		add(lblTurn);
+		JLabel bgimg = new JLabel(Images.get("bg"));
+		bgimg.setSize(1280, 860);
+		add(bgimg);
 	}
 	
 	public void update() {
