@@ -130,6 +130,7 @@ public class NetworkListener extends Listener{
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void pushMatchFunctions(Object[] ary){
 		mclient.pushToUser((ArrayList<Integer>)ary[0],(ArrayList<Long>)ary[1],(ArrayList<String>)ary[2]);
 	}
