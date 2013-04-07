@@ -81,7 +81,7 @@ public class StartMenu extends JFrame {
 			JOptionPane.showMessageDialog(null, "Incorrect Input");
 			System.exit(0);
 		}
-		mclient = new MClient();
+		//mclient = new MClient();
 		mclient.setUser_username(uname);
 		try{
 			mclient.serverConnect(ip, Integer.parseInt(port));

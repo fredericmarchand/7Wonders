@@ -22,7 +22,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	public static final int MOVE = 1;
 	public static final int ENDOFGAME = 2;
 
-
 	private Player user;
 	private Match2 match;
 	private MainFrame frame;
@@ -39,15 +38,15 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		//	System.out.println("derpidoo");
 		
 		//match.init();
-		
-		run();
+	}
+	
+	public void setMainFrame(MainFrame m) {
+		frame = m;
 	}
 	
 	public void run()
 	{
-		frame = new MainFrame(this);
 		frame.startMatch(match);
-		frame.setVisible(true);
 	}
 	
 

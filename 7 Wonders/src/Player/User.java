@@ -1,6 +1,8 @@
 package Player;
 
 import java.util.ArrayList;
+
+import View.MainFrame;
 import client.MClient;
 import Controls.CommandMessage;
 import Controls.Match2;
@@ -84,8 +86,7 @@ public class User {
 		currentMatch = SevenWondersProtocol.decodeMatch(encoding);
 		SevenWondersProtocol.assignUsernamesAndIDs(currentMatch, names, ids);
 		currentMatch.setLocalPlayerID(ID);
-		@SuppressWarnings("unused")
-		NetworkGameController gc = new NetworkGameController(this, currentMatch);
+		client.getMainFrame().startController(new NetworkGameController(this, currentMatch));
 	}
 	
 	public void returnToLobby()
@@ -101,9 +102,4 @@ public class User {
 		//@SuppressWarnings("unused")
 		//NetworkGameController gc = new NetworkGameController(this, currentMatch);
 	}
-	
-	
-	
-
-
 }

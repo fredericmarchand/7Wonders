@@ -9,6 +9,7 @@ import Player.*;
 
 import Resources.linkNetworkView;
 import Resources.Packet.*;
+import View.MainFrame;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.*;
@@ -30,7 +31,12 @@ public class MClient {
 	
 	private User user;
 
-	public MClient() {
+	private MainFrame mainframe;
+	
+	public MClient(MainFrame m) {
+		
+		mainframe = m;
+		
 		matchList = new ArrayList<Long>();
 		client = new Client(16382,16382);
 		NetworkListener nl = new NetworkListener(this);
@@ -106,6 +112,10 @@ public class MClient {
 		user = new Player(username, ID);
 		user.setClient(this);
 		System.out.println("[CLIENT] User MClient : \t"+ user.getClient());
+	}
+	
+	public MainFrame getMainFrame() {
+		return mainframe;
 	}
 	
 	public void sendCommandMessage(CommandMessage m){

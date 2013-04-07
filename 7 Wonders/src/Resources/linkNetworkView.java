@@ -30,43 +30,47 @@ public class linkNetworkView {
 	public void launchMainFrame(Match1 m, Player p){
 		 gc = new GameController(p,m);
 	}
-	public void killMainFrame(){
+	
+	public void killMainFrame() {
 		//close match
-		
 		lobby.showGUI();
 	}
-	public void launchLobby(){		
+	
+	public void launchLobby() {		
 		lobby.showGUI();
 		lobby.update(mclient.getMatchList());
 	}
 	
-	public void updateLobby(ArrayList<Long> list){
+	public void updateLobby(ArrayList<Long> list) {
 		lobby.update(list);
 	}
 	
-	public void launchMatchLobby(){		
+	public void launchMatchLobby() {		
 		matchLobby.showGUI();
 	}
 	
-	public void failedMatchLobby(){
+	public void failedMatchLobby() {
 		lobby.failedJoin();
 		lobby.showGUI();
 	}
 	
-	public void launchChatFrame(){		
+	public void launchChatFrame() {		
 		chat.launchChatFrame(mclient.getHost());
 	}
-	public void killChatFrame(){
+	
+	public void killChatFrame() {
 		chat.kill();
 	}
 	
-	public void launchCreateMenu(){
+	public void launchCreateMenu() {
 		createMenu.showGUI();
 	}
 	
-	public Chat getChat(){return chat;}
+	public Chat getChat() {
+		return chat;
+	}
 	
-	public void failConnect(){
+	public void failConnect() {
 		
 		int failJoin = JOptionPane.showConfirmDialog(null, 
 				"Failed to connect to server\nDo you wish to retry");
