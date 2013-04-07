@@ -70,11 +70,11 @@ public class Match2 {
 	public ArrayList<Object> getParameters()
 	{
 		ArrayList<Object> params = new ArrayList<Object>();
-		params.add(players);
+		//params.add(players);
 		params.add(age);
 		params.add(turn);
 		params.add(numPlayers);
-		params.add(discarded);
+		//params.add(discarded);
 		return params;
 	}
 	 

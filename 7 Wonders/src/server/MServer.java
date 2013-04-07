@@ -32,7 +32,7 @@ public class MServer {
 
 	public MServer() throws IOException {
 
-		server = new Server();
+		server = new Server(16382,16382);
 		
 		list = new ArrayList<Object>();
 		matchList = new ArrayList<Match>();
@@ -148,6 +148,9 @@ public class MServer {
 		kryo.register(Packet14HostCreateMatch.class);
 		kryo.register(Packet15MatchDisconnect.class);
 		kryo.register(Packet16UserObject.class);
+		kryo.register(Packet17PlayerObject.class);
+		kryo.register(Packet18DList.class);
+		
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match1.class);
 		kryo.register(Match2.class);
