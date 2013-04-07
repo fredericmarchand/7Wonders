@@ -104,17 +104,18 @@ public class NetworkListener extends Listener{
 		}
 		if(o instanceof Packet9StartMatch){			
 			System.out.println("[CLIENT] Received start match request");	
-			while(true)		{	
+			
 				if(gameStart){
 					mclient.startMatch();
-					break;
+					
 				}
-			}
+			
 
 			//eliminate countdown causing so many god damn errors.
 			//mclient.getLink().getChat().run();
 		}
 		if(o instanceof Packet14HostCreateMatch){
+			System.out.println("[CLIENT] Match set to: \t " + ((Packet14HostCreateMatch)o).getMID());
 			mclient.setMID(((Packet14HostCreateMatch)o).getMID());
 			mclient.setHost(true);
 			if(((Packet14HostCreateMatch)o).getnPlayer()>0){

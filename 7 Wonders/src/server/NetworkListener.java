@@ -1,5 +1,6 @@
 package server;
 
+import java.util.ArrayList;
 import java.util.ListIterator;
 
 import Controls.CommandMessage;
@@ -53,6 +54,7 @@ public class NetworkListener extends Listener {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void received(Connection c, Object o) {
 		System.out.println("[SERVER] Received packet");
@@ -96,7 +98,7 @@ public class NetworkListener extends Listener {
 			System.out
 					.println("[SERVER] CLIENT HAS BEEN REMOVED"
 							+ mserver.removeClient(c,
-									((Packet5Disconnect) o).getMID(),((Packet5Disconnect)o).getUser()));
+									((Packet5Disconnect) o).getMID(),((Packet5Disconnect)o).getCID()));
 
 		}
 		if (o instanceof Packet6ChatMsg) {
@@ -122,8 +124,11 @@ public class NetworkListener extends Listener {
 		if (o instanceof Packet8ClientResponse) {
 			System.out.println("[SERVER] Received client command message \n\t"+
 			((Packet8ClientResponse)o).getObject());
+			System.out.println("[SERVER] Searching for match: \t" + 
+								((Packet8ClientResponse) o).getMID() + "Found: \t "  + 
+								mserver.findMatch(((Packet8ClientResponse) o).getMID()));
 			(mserver.findMatch(((Packet8ClientResponse) o).getMID()))
-					.handOff(((Packet8ClientResponse) o));
+					.handOff((ArrayList<Integer>)((Packet8ClientResponse) o).getObject());
 		}
 
 		if (o instanceof Packet11ImmediateStart) {
@@ -136,13 +141,19 @@ public class NetworkListener extends Listener {
 					((Packet12CreateMatch) o).getHuman(),
 					((Packet12CreateMatch) o).getAI());
 			
-			mserver.bridgeClient(c, matchID,((Packet12CreateMatch)o).getUser());// adding client to match
-												// connection list
+			System.out.println("[SERVER] New Match : \t " + matchID);
+			
+			
+			// adding client to match
+			// connection list
 
 			Packet14HostCreateMatch packet = new Packet14HostCreateMatch();
 			packet.setMID(matchID);
 			packet.setnPlayer(((Packet12CreateMatch) o).getHuman()+((Packet12CreateMatch) o).getAI());
 			c.sendTCP(packet);
+			
+			mserver.bridgeClient(c, matchID,((Packet12CreateMatch)o).getCID(),
+					((Packet12CreateMatch)o).getUName());
 		}
 		if (o instanceof Packet13MatchJoinRequest) {
 			Packet3Connection joinResponse = new Packet3Connection();
@@ -153,7 +164,8 @@ public class NetworkListener extends Listener {
 				joinResponse.setIDValue(0);
 			} else {
 				join = mserver.bridgeClient(c, ((Packet13MatchJoinRequest) o)
-						.getMID(), ((Packet13MatchJoinRequest)o).getUser());
+						.getMID(), ((Packet13MatchJoinRequest)o).getCID(),
+						((Packet13MatchJoinRequest)o).getUName());
 				joinResponse.setAccepted(join);
 				joinResponse.setIDValue(((Packet13MatchJoinRequest) o)
 						.getMID());

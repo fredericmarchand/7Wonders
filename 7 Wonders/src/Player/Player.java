@@ -38,6 +38,7 @@ public class Player extends User {
 		isAI = false;
 	}
 	
+	
 	public void resetPlayerStats()
 	{
 		wonderBoard = new WonderBoard();
@@ -96,6 +97,16 @@ public class Player extends User {
 	public Structure getChosenCard()
 	{
 		return chosenCard;
+	}
+	
+	public int getChosenCardIndex()
+	{
+		return chosenCardIndex;
+	}
+	
+	public void setChosenCardIndex(int i)
+	{
+		chosenCardIndex = i;
 	}
 	
 	public void setChosenCard( Structure s )
@@ -486,5 +497,16 @@ public class Player extends User {
 				 && price <= resources.getCoins() )
 			return true;
 		return false;
+	}
+	public int calculateVictoryPoints()
+	{
+		int vpoints = 0;
+		
+		vpoints += victoryPoints;
+		vpoints += getConflictTokens().getVictoryPoints();
+		vpoints += (int)Math.floor(getResources().getCoins() / 3);
+		vpoints += getScientificSymbols().victoryPointsValue();
+		
+		return vpoints;
 	}
 }

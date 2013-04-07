@@ -5,6 +5,7 @@ import Player.Player;
 import Structures.Structure;
 import WonderBoards.*;
 import Tokens.Resources;
+import Tokens.ScientificSymbols;
 import Structures.Effects.*;
 
 public class SevenWondersProtocol {
@@ -40,6 +41,31 @@ public class SevenWondersProtocol {
 		return ids;
 	}
 	
+	public static ArrayList<Integer> encodeCommandMessage(CommandMessage msg)
+	{
+		ArrayList<Integer> encoding = new ArrayList<Integer>();
+		encoding.add((int)msg.getPlayerID()>>16);
+		encoding.add((int)msg.getPlayerID()&0xFFFF);
+		encoding.add(msg.getMsgType());
+		encoding.add(msg.getCardID());
+		encoding.add(msg.getAction());
+		encoding.add(msg.getPreference());
+		encoding.add(msg.getResourceChoices().size());
+		for ( Resources r: msg.getResourceChoices() )
+		{
+			encoding.addAll(encodeResource(r));
+		}
+		encoding.add(msg.getScientificSymbols().size());
+		for ( ScientificSymbols sc: msg.getScientificSymbols() )
+		{
+			encoding.add(sc.getCompass());
+			encoding.add(sc.getGears());
+			encoding.add(sc.getTablets());
+		}
+		return encoding;
+	}
+	
+	
 	//encode a match
 	public static ArrayList<Integer> encodeMatch(Match2 match)
 	{
@@ -60,6 +86,7 @@ public class SevenWondersProtocol {
 	public static ArrayList<Integer> encodePlayer(Player p)
 	{
 		ArrayList<Integer> playerStuff = new ArrayList<Integer>();
+		playerStuff.add(p.getChosenCardIndex());
 		playerStuff.add(p.getShields());
 		playerStuff.add(p.getVictoryPoints());
 		playerStuff.add(p.getConflictTokens().getFiveTokens());
@@ -227,6 +254,33 @@ public class SevenWondersProtocol {
 		}
 	}
 	
+	public static CommandMessage decodeCommandMessage(ArrayList<Integer> encoding)
+	{
+		CommandMessage msg = new CommandMessage();
+		index = 0;
+		long id = ((encoding.get(index)<<16) | encoding.get(index+1));
+		index += 2;
+		msg.setPlayerID(id);
+		msg.setMsgType(encoding.get(index++));
+		msg.setCardID(encoding.get(index++));
+		msg.setAction(encoding.get(index++));
+		msg.setPreference(encoding.get(index++));
+		int s = encoding.get(index++);
+		for ( int i = 0; i < s; ++ i )
+		{
+			msg.getResourceChoices().add(decodeResources(encoding));
+		}
+		s = encoding.get(index++);
+		for( int i = 0; i < s; ++i )
+		{
+			int comp = encoding.get(index++);
+			int gear = encoding.get(index++);
+			int tab = encoding.get(index++);
+			msg.getScientificSymbols().add(new ScientificSymbols(gear, tab, comp));
+		}
+		return msg;
+	}
+	
 	//decode match function
 	public static Match2 decodeMatch(ArrayList<Integer> encoding)
 	{
@@ -252,6 +306,7 @@ public class SevenWondersProtocol {
 	public static Player decodePlayer(ArrayList<Integer> encoding)
 	{
 		Player p = new Player();
+		p.setChosenCardIndex(encoding.get(index++));
 		p.addShields(encoding.get(index++));
 		p.addVictoryPoints(encoding.get(index++));
 		p.getConflictTokens().addFiveTokens(encoding.get(index++));

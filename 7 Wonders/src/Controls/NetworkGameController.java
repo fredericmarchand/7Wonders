@@ -2,6 +2,8 @@ package Controls;
 
 import java.util.ArrayList;
 
+import client.MClient;
+
 import Player.Player;
 import Player.User;
 import Structures.Structure;
@@ -26,24 +28,20 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	private Match2 match;
 	private MainFrame frame;
 	
-	public NetworkGameController(User u, Match2 m)
+	public NetworkGameController(MClient cl, Match2 m)
 	{
-		user = new Player(u.getUsername(), u.getID());
-		user.setClient(u.getClient());
-		CommandMessage msg = new CommandMessage();
-		user.setCommand(msg);
-		user.sendCommandMessage();
+		user = m.getLocalPlayer();
+		user.setClient(cl);
+		//CommandMessage msg = new CommandMessage();
+		//user.setCommand(msg);
+		//user.sendCommandMessage();
 		match = m;
-		//if ( m.getPlayers().get(0).getWonderBoard() != null )
-		//	System.out.println("derpidoo");
-		
-		//match.init();
 	}
 	
 	public void setMainFrame(MainFrame m) {
 		frame = m;
 	}
-	
+		
 	public void run()
 	{
 		frame.startMatch(match);
