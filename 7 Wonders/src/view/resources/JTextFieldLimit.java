@@ -12,7 +12,7 @@ public class JTextFieldLimit extends PlainDocument {
 	public static int NUMBER_ONLY = 0;
 	public static int ALL_TEXT = 1;
 
-	JTextFieldLimit(int l, int t) {
+	public JTextFieldLimit(int l, int t) {
 		super();
 		limit = l;
 		type = t;
@@ -20,14 +20,18 @@ public class JTextFieldLimit extends PlainDocument {
 
 	public void insertString( int offset, String str, AttributeSet attr ) throws BadLocationException {
 		if (str == null) return;
-		
-		if (type == NUMBER_ONLY) {
-			if(str == "0" || str == "1" || str == "2" || str == "3" || str == "4" || str == "5" || str == "6" || str == "7" || str == "8" || str == "9")
-				super.insertString(offset, str, attr);
-		}
-		
+
 		if ((getLength() + str.length()) <= limit) {
-			super.insertString(offset, str, attr);
+			if (type == NUMBER_ONLY) {
+				if(str.equals("0") || str.equals("1") || str.equals("2") || str.equals("3") 
+					|| str.equals("4") || str.equals("5") || str.equals("6") || str.equals("7") 
+					|| str.equals("8") || str.equals("9"))
+					super.insertString(offset, str, attr);
+				else
+					return;
+			} else {
+				super.insertString(offset, str, attr);
+			}
 		}
 	}
 }

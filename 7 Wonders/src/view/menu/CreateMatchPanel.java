@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import view.resources.JLabel2D;
+import view.resources.JTextFieldLimit;
 
 import client.MClient;
 
@@ -61,15 +62,17 @@ public class CreateMatchPanel extends JPanel {
 		humanNum = new JTextField(1);
 		humanNum.setHorizontalAlignment(JTextField.CENTER);
 		humanNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		humanNum.setDocument(new JTextFieldLimit(1, JTextFieldLimit.NUMBER_ONLY));
+		humanNum.setText("1");
 		humanNum.setBounds(736, 334, 49, 25);
 		
 		aiNum = new JTextField(1);
 		aiNum.setHorizontalAlignment(JTextField.CENTER);
 		aiNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		aiNum.setDocument(new JTextFieldLimit(1, JTextFieldLimit.NUMBER_ONLY));
+		aiNum.setText("2");
 		aiNum.setBounds(736, 370, 49, 25);
 		
-		
-
 		add(human);
 		add(humanNum);
 		add(ai);
@@ -87,22 +90,19 @@ public class CreateMatchPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// fix this code
 				try{
-					if (humanNum.getText().equals(""))
-						humanNum.setText("1");
-					if (aiNum.getText().equals(""))
-						aiNum.setText("0");
-					if (((Integer.parseInt(humanNum.getText()) <= 7 && Integer
-							.parseInt(humanNum.getText()) >= 1))
-							&& (Integer.parseInt(humanNum.getText()) + Integer
-									.parseInt(aiNum.getText())) > 0){
-						client.sendCreateMatchRequest(
-								Integer.parseInt(humanNum.getText()),
-								Integer.parseInt(aiNum.getText()));
-	
+					
+					
+					if (humanNum.getText().equals("")) humanNum.setText("1");
+					if (aiNum.getText().equals("")) aiNum.setText("0");
+					int human = Integer.parseInt(humanNum.getText());
+					int ai = Integer.parseInt(aiNum.getText());
+					
+					if(ai > 6) JOptionPane.showMessageDialog(null, "Too many AI players!", "Error", JOptionPane.ERROR_MESSAGE);
+					else if(human + ai > 7) JOptionPane.showMessageDialog(null, "Cannot have more than 7 total players!", "Error", JOptionPane.ERROR_MESSAGE);
+					else {
+						while(human + ai < 3) ai++;
+						client.sendCreateMatchRequest(human, ai);
 						setVisible(false);
-					} else{
-						JOptionPane.showMessageDialog(null,
-								"Must be 7 or less players or\n1 or more players!");
 					}
 				}
 				catch(Exception error){ 

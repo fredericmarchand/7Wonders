@@ -107,7 +107,6 @@ public class MatchPanel extends JPanel implements Runnable {
 		n1.setLocation(0, 150);
 		n1.addMouseListener(buildMouseAdapterNear());
 		
-		
 		Player.Player p4 = null;
 		Player.Player p5 = null;
 		Player.Player p6 = null;
