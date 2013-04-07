@@ -41,6 +41,7 @@ public class NetworkListener extends Listener{
 	@Override
 	public void disconnected(Connection arg0) {
 		System.out.println("[CLIENT] Disconnected");
+		gameStart = false;
 		System.exit(0);
 		//super.disconnected(arg0);
 	}
@@ -122,6 +123,7 @@ public class NetworkListener extends Listener{
 		if( o instanceof Packet15MatchDisconnect){
 			System.out.println("[CLIENT]  Graceful Disconnect");
 			mclient.getLink().killMainFrame();
+			gameStart = false;
 		}
 		if(o instanceof Packet17PlayerObject){
 			System.out.println("[CLIENT] Received Player Object");
