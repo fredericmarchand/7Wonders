@@ -1,5 +1,9 @@
 package View.game;
 
+
+import image.ImageLoadingGUI;
+import image.Images;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 
@@ -7,7 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import Images.*;
+import View.resources.JLabel2D;
+
 import java.awt.Font;
 
 public class LoadingPanel extends JPanel implements ImageLoadingGUI {

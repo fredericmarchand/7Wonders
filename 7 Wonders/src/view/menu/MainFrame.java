@@ -1,13 +1,15 @@
-package view.menu;
+package View.menu;
+
+
+import image.Images;
 
 import javax.swing.*;
 
-import view.game.LoadingPanel;
-import view.game.MatchPanel;
+import View.game.LoadingPanel;
+import View.game.MatchPanel;
 
 import Controls.Match2;
 import Controls.NetworkGameController;
-import Images.Images;
 
 import java.awt.*;
 

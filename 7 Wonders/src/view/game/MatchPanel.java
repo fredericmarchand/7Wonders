@@ -1,8 +1,13 @@
 package View.game;
 
+
+import image.Images;
+
 import java.util.ArrayList;
 
 import javax.swing.*;
+
+import View.resources.JLabel2D;
 
 import Structures.Structure;
 import Tokens.Resources;
@@ -10,7 +15,6 @@ import Tokens.ScientificSymbols;
 
 import Controls.Controller;
 import Controls.Match2;
-import Images.Images;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

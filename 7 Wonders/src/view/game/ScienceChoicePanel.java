@@ -1,10 +1,12 @@
 package View.game;
 
+
+import image.Images;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import Images.Images;
 import Tokens.ScientificSymbols;
 
 import java.awt.Color;

@@ -1,4 +1,6 @@
-package View.game;
+
+package View.resources;
+
 
 import java.awt.Color;
 import java.awt.Dimension;
