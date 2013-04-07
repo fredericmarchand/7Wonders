@@ -21,6 +21,8 @@ public class NetworkListener extends Listener{
 	private ArrayList<Match> list;
 	private int partials = 0;
 	private Object[] partialsArray;
+	private boolean gameStart = false;
+	
 	public NetworkListener(MClient m){
 		mclient = m;
 		partialsArray = new Object[3];
@@ -90,6 +92,7 @@ public class NetworkListener extends Listener{
 			++partials;
 			if(partials==3){
 				partials = 0;
+				gameStart = true;
 				pushMatchFunctions(partialsArray);
 			}			
 		}
@@ -98,8 +101,12 @@ public class NetworkListener extends Listener{
 		}
 		if(o instanceof Packet9StartMatch){			
 			System.out.println("[CLIENT] Received start match request");	
-						
-			mclient.startMatch();
+			while(true)		{	
+				if(gameStart){
+					mclient.startMatch();
+					break;
+				}
+			}
 
 			//eliminate countdown causing so many god damn errors.
 			//mclient.getLink().getChat().run();

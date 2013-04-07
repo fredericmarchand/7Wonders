@@ -143,8 +143,8 @@ public class MClient {
 
 	public void pushToUser(ArrayList<Integer> devonsShittyList1,
 						   ArrayList<Long> devonsShittyList2,
-						   ArrayList<String> devonsShittyList3){
-		//user.receive(devonsShittyList1,devonsShittyList2,devonsShittyList3);
+						   ArrayList<String	> devonsShittyList3){
+		user.receive(devonsShittyList1,devonsShittyList2,devonsShittyList3);
 	}
 	
 	public void sendStartRequest() {
