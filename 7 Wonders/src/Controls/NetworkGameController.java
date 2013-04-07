@@ -2,6 +2,8 @@ package Controls;
 
 import java.util.ArrayList;
 
+import view.menu.MainFrame;
+
 import client.MClient;
 
 import Player.Player;
@@ -14,7 +16,6 @@ import Structures.Effects.ScientificSymbolBonus;
 import Structures.Effects.SpecialEffect;
 import Tokens.Resources;
 import Tokens.ScientificSymbols;
-import View.MainFrame;
 import WonderBoards.WonderBoardStage;
 
 public class NetworkGameController extends java.lang.Thread implements Controller, Runnable {

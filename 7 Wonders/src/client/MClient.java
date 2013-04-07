@@ -3,13 +3,14 @@ package client;
 import java.io.IOException;
 import java.util.*;
 
+import view.menu.MainFrame;
+
 import Controls.*;
 
 import Player.*;
 
 import Resources.linkNetworkView;
 import Resources.Packet.*;
-import View.MainFrame;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.*;

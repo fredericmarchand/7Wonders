@@ -1,6 +1,9 @@
-package View;
+package view.menu;
 
 import javax.swing.*;
+
+import view.game.LoadingPanel;
+import view.game.MatchPanel;
 
 import Controls.Match2;
 import Controls.NetworkGameController;
@@ -15,6 +18,7 @@ public class MainFrame extends JFrame implements Runnable {
 	private MatchPanel panel;
 	private LoadingPanel loading;
 	private StartPanel startMenu;
+	private CreateMatchPanel cmp;
 	
 	public MainFrame() {
 		setTitle("7 Wonders");
@@ -49,6 +53,7 @@ public class MainFrame extends JFrame implements Runnable {
 	public void startMatch(Match2 m) {
 		panel = new MatchPanel(m, controller);
 		add(panel);
+		update();
 	}
 
 	@Override
@@ -68,5 +73,11 @@ public class MainFrame extends JFrame implements Runnable {
 	
 	public static void main(String args[]) {
 		new MainFrame();
+	}
+
+	public void launchCreateMenu(CreateMatchPanel p) {
+		cmp = p;
+		cmp.setVisible(true);
+		add(cmp);
 	}
 }

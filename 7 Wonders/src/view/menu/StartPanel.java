@@ -1,9 +1,10 @@
-package View;
+package view.menu;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 
 import client.MClient;
 
@@ -43,7 +44,7 @@ public class StartPanel extends JPanel {
 		
 		create.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mclient.getLink().launchCreateMenu();
+				mainframe.launchCreateMenu(mclient.getLink().launchCreateMenu());
 				setVisible(false);
 			}
 		});
