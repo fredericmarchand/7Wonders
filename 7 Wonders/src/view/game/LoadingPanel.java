@@ -1,4 +1,4 @@
-package View.game;
+package view.game;
 
 
 import image.ImageLoadingGUI;
@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import View.resources.JLabel2D;
+import view.resources.JLabel2D;
 
 import java.awt.Font;
 

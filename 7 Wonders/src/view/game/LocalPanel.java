@@ -1,4 +1,4 @@
-package View.game;
+package view.game;
 
 
 import image.Images;
@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import View.resources.JLabel2D;
+import view.resources.JLabel2D;
 
 import Player.Player;
 import WonderBoards.WonderBoardStage;

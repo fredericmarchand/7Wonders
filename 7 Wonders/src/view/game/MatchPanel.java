@@ -1,4 +1,4 @@
-package View.game;
+package view.game;
 
 
 import image.Images;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import View.resources.JLabel2D;
+import view.resources.JLabel2D;
 
 import Structures.Structure;
 import Tokens.Resources;

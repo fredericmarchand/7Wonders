@@ -1,5 +1,5 @@
 
-package View.resources;
+package view.resources;
 
 
 import java.awt.Color;

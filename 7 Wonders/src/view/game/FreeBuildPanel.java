@@ -1,4 +1,4 @@
-package View.game;
+package view.game;
 
 
 import image.Images;

@@ -3,7 +3,7 @@ package client;
 import java.io.IOException;
 import java.util.*;
 
-import View.menu.MainFrame;
+import view.menu.MainFrame;
 
 import Controls.*;
 

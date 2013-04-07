@@ -1,4 +1,4 @@
-package View.menu;
+package view.menu;
 
 import image.Images;
 
@@ -13,8 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 
-import View.resources.JLabel2D;
-import View.resources.JTextFieldLimit;
+import view.resources.JLabel2D;
+import view.resources.JTextFieldLimit;
 
 
 import client.MClient;

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import client.MClient;
-import View.menu.CreateMatchPanel;
-import View.menu.StartPanel;
+import view.menu.CreateMatchPanel;
+import view.menu.StartPanel;
 
 public class linkNetworkView {
 	Lobby lobby;

@@ -1,4 +1,4 @@
-package View.resources;
+package view.resources;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
