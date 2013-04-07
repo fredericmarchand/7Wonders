@@ -122,7 +122,7 @@ public class NetworkListener extends Listener{
 	}
 	
 	public void pushMatchFunctions(Object[] ary){
-		mclient.pushToUser((ArrayList)ary[0],(ArrayList)ary[1],(ArrayList)ary[2]);
+		mclient.pushToUser((ArrayList<Integer>)ary[0],(ArrayList<Integer>)ary[1],(ArrayList<Integer>)ary[2]);
 	}
 
 }
