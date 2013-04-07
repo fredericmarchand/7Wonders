@@ -82,11 +82,10 @@ public class User {
 //		}
 	}
 	
-	@SuppressWarnings("unchecked")
-	public void receive(ArrayList<Object> encoding, ArrayList<Object> ids, ArrayList<Object> names)
+	public void receive(ArrayList<Integer> encoding, ArrayList<Long> ids, ArrayList<String> names)
 	{
 		currentMatch = SevenWondersProtocol.decodeMatch(encoding);
-		assignUsernamesAndIDs(currentMatch, names, ids);
+		SevenWondersProtocol.assignUsernamesAndIDs(currentMatch, names, ids);
 		NetworkGameController gc = new NetworkGameController(this, currentMatch);
 	}
 	
