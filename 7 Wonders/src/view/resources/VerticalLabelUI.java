@@ -1,4 +1,6 @@
+
 package view.resources;
+
 
 import java.awt.Dimension;
 import java.awt.FontMetrics;

@@ -74,17 +74,31 @@ public class User {
 		currentMatch.setTurn(match.getTurn());
 		currentMatch.getDiscardedCards().clear();
 		currentMatch.getDiscardedCards().addAll(match.getDiscardedCards());
-//		for ( Player p: currentMatch.getPlayers() )
-//		{
-//			//fuck this shit
-//		}
+		currentMatch.setNumPlayers(match.getNumPlayers());
+		currentMatch.setLocalPlayerID(match.getLocalPlayerID());
+		for ( Player p: currentMatch.getPlayers() )
+		{
+			p.updatePlayer(match.getPlayerByID(p.getID()));
+		}
 	}
+	
+
 	
 	public void receive(ArrayList<Integer> encoding, ArrayList<Long> ids, ArrayList<String> names)
 	{
-		currentMatch = SevenWondersProtocol.decodeMatch(encoding);
-		SevenWondersProtocol.assignUsernamesAndIDs(currentMatch, names, ids);
-		currentMatch.setLocalPlayerID(ID);
+		if ( currentMatch == null )
+		{
+			currentMatch = SevenWondersProtocol.decodeMatch(encoding);
+			SevenWondersProtocol.assignUsernamesAndIDs(currentMatch, names, ids);
+			currentMatch.setLocalPlayerID(ID);
+		}
+		else
+		{
+			Match2 mat = SevenWondersProtocol.decodeMatch(encoding);
+			SevenWondersProtocol.assignUsernamesAndIDs(mat, names, ids);
+			mat.setLocalPlayerID(ID);
+			updateMatch(mat);
+		}
 	}
 	
 	public void returnToLobby()
@@ -94,11 +108,6 @@ public class User {
 	
 	public void startMatch()
 	{
-		//System.out.println("StartMatch Wonderboard?: " + match.getPlayers().get(0).getWonderBoard());
-		//currentMatch = match;
-		//currentMatch.setLocalPlayerID(ID);
-		//@SuppressWarnings("unused")
-		//NetworkGameController gc = new NetworkGameController(this, currentMatch);
 		client.getMainFrame().startController(new NetworkGameController(client, currentMatch));
 	}
 }

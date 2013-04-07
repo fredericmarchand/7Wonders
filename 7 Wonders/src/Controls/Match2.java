@@ -149,6 +149,10 @@ public class Match2 {
 		numPlayers = plrs;
 	}
 	
+	public long getLocalPlayerID()
+	{
+		return localPlayerID;
+	}
 	public void setLocalPlayerID(long id)
 	{
 		localPlayerID = id;
@@ -241,9 +245,19 @@ public class Match2 {
 	//server side run turns if message typeid == move
 	public void runTurns(ArrayList<CommandMessage> messages)
 	{		
+		for ( Player p: getPlayers() )
+		{
+			 System.out.print("player i cards: [");
+			 for (Structure s: p.getCards())
+			 {
+				 System.out.print(s.getName() + ", ");
+			 }
+			 System.out.println("]");
+		}
 		for ( CommandMessage msg: messages )
 		{
 			Player p = getPlayerByID(msg.getPlayerID());
+			p.chooseCardByID(msg.getCardID());
 			switch ( msg.getAction() )
 			{
 				case 1:
