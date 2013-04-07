@@ -141,6 +141,10 @@ public class MClient {
 	// any class type sent over the network must be registered to the kryo
 	// generic types are implicitly registered
 
+	public void pushToUser(ArrayList<Object> devonsShittyList){
+		user.receive(devonsShittyList);
+	}
+	
 	public void sendStartRequest() {
 		Packet11ImmediateStart packet = new Packet11ImmediateStart();
 		packet.setMID(matchID);
@@ -242,7 +246,6 @@ public class MClient {
 		kryo.register(Packet15MatchDisconnect.class);
 		kryo.register(Packet16UserObject.class);
 		kryo.register(Packet17PlayerObject.class);
-		kryo.register(Packet18DList.class);
 		
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match1.class);	

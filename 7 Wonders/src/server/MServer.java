@@ -149,7 +149,6 @@ public class MServer {
 		kryo.register(Packet15MatchDisconnect.class);
 		kryo.register(Packet16UserObject.class);
 		kryo.register(Packet17PlayerObject.class);
-		kryo.register(Packet18DList.class);
 		
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match1.class);

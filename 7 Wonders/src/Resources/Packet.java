@@ -143,10 +143,6 @@ public class Packet {
 		public Object getPlayer(){return p;}
 		public void setPlayer(Object pp){p = pp;}
 	}
-	public static class Packet18DList{
-		private Object o;
-		public Object getObject(){ return o;}
-		public void setObject(Object ob){ o = ob;}
-	}
+
 }
 
