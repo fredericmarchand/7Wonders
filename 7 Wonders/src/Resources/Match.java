@@ -6,11 +6,10 @@ import server.MServer;
 
 import Controls.CommandMessage;
 import Controls.Match2;
-<<<<<<< HEAD
+
 import Controls.SevenWondersProtocol;
 import Player.Player;
-=======
->>>>>>> 0c1acd3b17c886ca6b5195ec8ebfd1b8f3e84798
+
 import Player.User;
 import Resources.Packet.Packet10EndMatch;
 import Resources.Packet.Packet17PlayerObject;
