@@ -30,6 +30,12 @@ public class Simple implements Strategy{
 		}
 		if ( !did )
 		{
+			//System.out.print("Printing AI Player cards: [");
+			//for ( Structure s: p.getCards() )
+			//{
+			//	System.out.print(s.getName() + ", ");
+			//}
+			//System.out.println("]");
 			p.chooseCard(0);
 			int result = p.canBuildStage(leftNeighbor, rightNeighbor);
 			switch ( result )

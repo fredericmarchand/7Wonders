@@ -456,6 +456,7 @@ public class Match2 {
 	//handles all the moves received by the server
 	public Match2 dispatch(ArrayList<CommandMessage> messages)
 	{
+		
 		for ( CommandMessage msg: messages )
 		{
 			switch ( msg.getMsgType() )

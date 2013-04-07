@@ -1,19 +1,22 @@
-package View;
-
-import javax.swing.*;
-
-import Images.Images;
-import Player.Player;
-import WonderBoards.WonderBoardStage;
+package view.game;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 
-public class NearPanel extends JPanel {
-	private static final long serialVersionUID = 1L;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
+import Images.Images;
+import Player.Player;
+import WonderBoards.WonderBoardStage;
+
+// The client player's board
+public class LocalPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
+	
 	Player player;
 	private JLabel2D lblClay, lblTablets, lblRed, lblBlue, lblGrey, lblPurple, lblBrown, lblYellow, lblGreen, 
 					 lblGears, lblCompass, lblVictory, lblMilitary, lblNegConflict, lblPosConflict, 
@@ -22,7 +25,7 @@ public class NearPanel extends JPanel {
 	
 	private JLabel wonderStage1, wonderStage2, wonderStage3, wonderStage4;
 	
-	public NearPanel(Player p) {
+	public LocalPanel(Player p) {
 		player = p;
 		setLayout(null);
 		setOpaque(false);
@@ -61,7 +64,7 @@ public class NearPanel extends JPanel {
 		lblBrown.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblBrown.setOutlineColor(Color.BLACK);
 		lblBrown.setStroke(new BasicStroke(2f));
-		lblBrown.setBounds(16, 134, 44, 47);
+		lblBrown.setBounds(17, 134, 44, 47);
 		add(lblBrown);
 		
 		lblGrey = new JLabel2D("11", SwingConstants.CENTER);
@@ -69,7 +72,7 @@ public class NearPanel extends JPanel {
 		lblGrey.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblGrey.setOutlineColor(Color.BLACK);
 		lblGrey.setStroke(new BasicStroke(2f));
-		lblGrey.setBounds(73, 134, 44, 47);
+		lblGrey.setBounds(74, 134, 44, 47);
 		add(lblGrey);
 		
 		lblPurple = new JLabel2D("11", SwingConstants.CENTER);
@@ -77,7 +80,7 @@ public class NearPanel extends JPanel {
 		lblPurple.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblPurple.setOutlineColor(Color.BLACK);
 		lblPurple.setStroke(new BasicStroke(2f));
-		lblPurple.setBounds(128, 134, 44, 47);
+		lblPurple.setBounds(129, 134, 44, 47);
 		add(lblPurple);
 		
 		lblBlue = new JLabel2D("11", SwingConstants.CENTER);
@@ -85,7 +88,7 @@ public class NearPanel extends JPanel {
 		lblBlue.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblBlue.setOutlineColor(Color.BLACK);
 		lblBlue.setStroke(new BasicStroke(2f));
-		lblBlue.setBounds(183, 134, 44, 47);
+		lblBlue.setBounds(184, 134, 44, 47);
 		add(lblBlue);
 		
 		lblRed = new JLabel2D("11", SwingConstants.CENTER);
@@ -93,7 +96,7 @@ public class NearPanel extends JPanel {
 		lblRed.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblRed.setOutlineColor(Color.BLACK);
 		lblRed.setStroke(new BasicStroke(2f));
-		lblRed.setBounds(236, 134, 44, 47);
+		lblRed.setBounds(237, 134, 44, 47);
 		add(lblRed);
 		
 		lblYellow = new JLabel2D("11", SwingConstants.CENTER);
@@ -101,7 +104,7 @@ public class NearPanel extends JPanel {
 		lblYellow.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblYellow.setOutlineColor(Color.BLACK);
 		lblYellow.setStroke(new BasicStroke(2f));
-		lblYellow.setBounds(292, 134, 44, 47);
+		lblYellow.setBounds(293, 134, 44, 47);
 		add(lblYellow);
 		
 		lblGreen = new JLabel2D("11", SwingConstants.CENTER);
@@ -109,7 +112,7 @@ public class NearPanel extends JPanel {
 		lblGreen.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblGreen.setOutlineColor(Color.BLACK);
 		lblGreen.setStroke(new BasicStroke(2f));
-		lblGreen.setBounds(346, 134, 44, 47);
+		lblGreen.setBounds(347, 134, 44, 47);
 		add(lblGreen);
 		
 		lblGears = new JLabel2D("11", SwingConstants.CENTER);
