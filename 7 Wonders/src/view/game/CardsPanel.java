@@ -1,5 +1,8 @@
 package view.game;
 
+
+import image.Images;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -7,8 +10,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+import view.resources.VerticalLabelUI;
+
 import Controls.Controller;
-import Images.Images;
 import Structures.Structure;
 
 import java.awt.Font;

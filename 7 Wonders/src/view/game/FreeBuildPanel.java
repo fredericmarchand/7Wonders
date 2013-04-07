@@ -1,5 +1,8 @@
 package view.game;
 
+
+import image.Images;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -8,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Controls.Controller;
-import Images.Images;
 import Structures.Structure;
 
 public class FreeBuildPanel extends JPanel {

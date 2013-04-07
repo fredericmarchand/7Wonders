@@ -1,4 +1,4 @@
-package view.game;
+package view.resources;
 
 import java.awt.Dimension;
 import java.awt.FontMetrics;

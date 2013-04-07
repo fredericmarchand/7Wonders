@@ -1,5 +1,7 @@
 package view.menu;
 
+import image.Images;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,11 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import view.game.JLabel2D;
+import view.resources.JLabel2D;
 
 import client.MClient;
 
-import Images.Images;
 import Resources.Lobby;
 
 import java.awt.BasicStroke;
@@ -48,20 +49,22 @@ public class CreateMatchPanel extends JPanel {
 		human.setForeground(Color.WHITE);
 		human.setOutlineColor(Color.BLACK);
 		human.setStroke(new BasicStroke(2f));
-		human.setBounds(495, 334, 231, 25);
+		human.setBounds(527, 334, 199, 25);
 		
 		ai = new JLabel2D("A.I. player(s) : ", SwingConstants.CENTER);
 		ai.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		ai.setForeground(Color.WHITE);
 		ai.setOutlineColor(Color.BLACK);
 		ai.setStroke(new BasicStroke(2f));
-		ai.setBounds(534, 370, 192, 25);
+		ai.setBounds(565, 370, 161, 25);
 		
-		humanNum = new JTextField(5);
+		humanNum = new JTextField(1);
+		humanNum.setHorizontalAlignment(JTextField.CENTER);
 		humanNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		humanNum.setBounds(736, 334, 49, 25);
 		
-		aiNum = new JTextField(5);
+		aiNum = new JTextField(1);
+		aiNum.setHorizontalAlignment(JTextField.CENTER);
 		aiNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		aiNum.setBounds(736, 370, 49, 25);
 		

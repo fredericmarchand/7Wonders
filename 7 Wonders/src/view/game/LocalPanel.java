@@ -1,5 +1,8 @@
 package view.game;
 
+
+import image.Images;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -9,7 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import Images.Images;
+import view.resources.JLabel2D;
+
 import Player.Player;
 import WonderBoards.WonderBoardStage;
 

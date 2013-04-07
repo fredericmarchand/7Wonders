@@ -1,4 +1,4 @@
-package Images;
+package image;
 
 public interface ImageLoadingGUI {
 	void startImage(int current, int total, String imagename);
