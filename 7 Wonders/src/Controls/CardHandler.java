@@ -431,7 +431,7 @@ public class CardHandler {
 		}	
 	}
 	
-//	public static void main(String[] args) {
+	public static void main(String[] args) {
 //		ArrayList<Player> players = new ArrayList<Player>();
 //		players.add(new Player());
 //		players.add(new Player());
@@ -468,6 +468,13 @@ public class CardHandler {
 //			System.out.println(r.nextInt(2));
 //		}
 //		
-//	}
+		//long n = 235395830;
+		//System.out.println(n&0xFFFF);
+		CommandMessage msg = new CommandMessage();
+		msg.setPlayerID(654419);
+		CommandMessage g = SevenWondersProtocol.decodeCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg));
+		System.out.println(g.getPlayerID());
+		
+	}
 
 }

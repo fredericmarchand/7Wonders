@@ -85,7 +85,7 @@ public class User {
 		SevenWondersProtocol.assignUsernamesAndIDs(currentMatch, names, ids);
 		currentMatch.setLocalPlayerID(ID);
 		@SuppressWarnings("unused")
-		NetworkGameController gc = new NetworkGameController(this, currentMatch);
+		NetworkGameController gc = new NetworkGameController(client, currentMatch);
 	}
 	
 	public void returnToLobby()

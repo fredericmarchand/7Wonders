@@ -159,6 +159,11 @@ public class Match2 {
 		return players;
 	}
 	
+	public void addPlayer(long id, String s)
+	{
+		players.add(new Player(s, id));
+	}
+	
 	public void addPlayer(Player p)
 	{
 		players.add(p);
