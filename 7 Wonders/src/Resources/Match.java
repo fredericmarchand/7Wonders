@@ -166,9 +166,8 @@ public class Match {
 		controller = new Match2();
 		generateAI();
 		for(Map.Entry<Long, String> e : userMap.entrySet()){
-			long key = e.getKey();
-			String value = e.getValue();
-			controller.addPlayer(key,value);
+			
+			controller.addPlayer(e.getKey(),e.getValue());
 		}
 		//controller.addPlayers(userList);
 		controller.init();
