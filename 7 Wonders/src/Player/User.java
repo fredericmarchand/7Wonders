@@ -81,6 +81,7 @@ public class User {
 //		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void receive(ArrayList<Object> devonsShittyMatchInfo)
 	{
 		currentMatch = new Match2();
@@ -139,6 +140,7 @@ public class User {
 		//System.out.println("StartMatch Wonderboard?: " + match.getPlayers().get(0).getWonderBoard());
 		//currentMatch = match;
 		currentMatch.setLocalPlayerID(ID);
+		@SuppressWarnings("unused")
 		NetworkGameController gc = new NetworkGameController(this, currentMatch);
 	}
 	

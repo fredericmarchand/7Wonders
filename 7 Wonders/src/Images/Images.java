@@ -52,6 +52,8 @@ public class Images {
 		add("sciOverlay1", "/Images/Icons/scienceoverlay1.png");
 		add("sciOverlay2", "/Images/Icons/scienceoverlay2.png");
 		add("sciOverlay3", "/Images/Icons/scienceoverlay3.png");
+		add("freeBuild", "/Images/Icons/freebuild.png");
+		add("freeBuildOverlay", "/Images/Icons/freebuildoverlay.png");
 	}
 	
 	private static void add(String name, String path) {

@@ -70,8 +70,11 @@ public class Packet {
 	}
 	public static class Packet7MatchFunction{
 		private Object o;
+		private int id;
 		public Object getObject(){ return o;}
 		public void setObject(Object ob){ o = ob;}
+		public int getID(){return id;}
+		public void setID(int i){id = i;}
 	}
 	public static class Packet8ClientResponse{
 		private long matchID;
@@ -133,6 +136,16 @@ public class Packet {
 		User u;
 		public User getUser(){return u;}
 		public void setUser(User n){u = n;}
+	}
+	public static class Packet17PlayerObject{
+		private Object p;
+		public Object getPlayer(){return p;}
+		public void setPlayer(Object pp){p = pp;}
+	}
+	public static class Packet18DList{
+		private Object o;
+		public Object getObject(){ return o;}
+		public void setObject(Object ob){ o = ob;}
 	}
 }
 

@@ -20,6 +20,11 @@ public class CoinBonus extends SpecialEffect {
 		usedUp = true;
 	}
 	
+	public int amountOfCoins()
+	{
+		return amountOfCoins;
+	}
+	
 	/**
 	 * @param args
 	 */

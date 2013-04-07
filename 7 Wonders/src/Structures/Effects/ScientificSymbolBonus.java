@@ -69,4 +69,9 @@ public class ScientificSymbolBonus extends SpecialEffect {
 		return choose;
 	}
 	
+	public int getSymbolType()
+	{
+		return symbolType;
+	}
+	
 }

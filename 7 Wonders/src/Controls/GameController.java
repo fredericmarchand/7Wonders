@@ -356,6 +356,15 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 		frame.dispose();
 	}
 	
+	@Override
+	public boolean canBuildForFree() {
+		return false;
+	}
+
+	@Override
+	public void buildForFree(Structure g) {
+		
+	}
 	
 	public static void main(String args[])
 	{

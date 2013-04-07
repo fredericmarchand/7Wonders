@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import client.MClient;
-
+		
 @SuppressWarnings("serial")
 public class StartMenu extends JFrame {
 

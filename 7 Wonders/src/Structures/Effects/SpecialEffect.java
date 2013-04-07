@@ -65,4 +65,13 @@ public class SpecialEffect {
 		}
 	}
 	
+	
+	public void setters(int used, int typ, int act)
+	{
+		if ( used ==  1 ) usedUp = true;
+		else usedUp = false;
+		type = typ;
+		activation = act;
+	}
+	
 }

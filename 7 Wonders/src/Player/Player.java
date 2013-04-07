@@ -67,10 +67,21 @@ public class Player extends User {
 	{
 		currentAge = 1;
 	}
+	public void setAge(int age)
+	{
+		currentAge = age;
+	}
 	
 	public boolean ai()
 	{
 		return isAI;
+	}
+	
+	public void setAI(int c)
+	{
+		if ( c == 1 )
+			isAI = true;
+		else isAI = false;
 	}
 	
 	public ArrayList<Structure> getCards()
@@ -126,6 +137,26 @@ public class Player extends User {
 	public Resources getUnvResources()
 	{
 		return unavailableResources;
+	}
+	
+	public void setOwnedResources(Resources r)
+	{
+		resources = r;
+	}
+	
+	public void setExtraResources(Resources r)
+	{
+		extraResources = r;
+	}
+	
+	public void setPurchasedResources(Resources r)
+	{
+		purchased = r;
+	}
+	
+	public void setUnvResources(Resources r)
+	{
+		unavailableResources = r;
 	}
 	
 	public int getVictoryPoints()

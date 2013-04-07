@@ -107,6 +107,18 @@ public class ResourceChoice extends SpecialEffect {
 		return purchaseable;
 	}
 	
+	//dont call the following functions
+	public void setPossibilities(Resources r)
+	{
+		possible = r;
+	}
+	
+	public void setBuyable(int i)
+	{
+		if ( i == 1 )
+			purchaseable = true;
+		else purchaseable = false;
+	}
 	
 	public static void main(String args[])
 	{

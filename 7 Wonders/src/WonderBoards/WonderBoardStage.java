@@ -9,7 +9,6 @@ import Tokens.Resources;
 public class WonderBoardStage {
 
 	private Resources resourceCost;
-	@SuppressWarnings("unused")
 	private Structure card;
 	private boolean built;
 	private ArrayList<SpecialEffect> effects;
@@ -46,6 +45,13 @@ public class WonderBoardStage {
 		return built;
 	}
 	
+	public int getCardID()
+	{
+		if ( card != null )
+			return card.getID();
+		return -1;
+	}
+	
 	public boolean build(Structure card, Resources resources)
 	{
 		if ( resourceCost.canAfford(resources) )
@@ -57,6 +63,13 @@ public class WonderBoardStage {
 		return false;
 	}
 	
+	
+	//never EVER call this function
+	public void forceBuild(int i)
+	{
+		if ( i == 1 )
+			built = true;
+	}
 	
 
 

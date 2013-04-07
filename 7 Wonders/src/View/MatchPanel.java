@@ -26,7 +26,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	
 	private Match2 match;
 	
-	int numplayers;
+	private int numplayers;
 	private FarPanel f1, f2, f3, f4;
 	private NearPanel n1, n2;
 	private LocalPanel playerPanel;
@@ -39,6 +39,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	
 	private ResourceChoicePanel rcp;
 	private ScienceChoicePanel scp;
+	private FreeBuildPanel fbp;
 	
 	private Controller controller;
 	
@@ -64,20 +65,6 @@ public class MatchPanel extends JPanel implements Runnable {
 		
 		// Start asynchronous part
 		run();
-		
-		add(scp);
-		add(rcp);
-		add(scrollpane);
-		add(cardsPanel);
-		add(playerPanel);
-		add(n1);
-		add(n2);
-		if(numplayers > 3) add(f1);
-		if(numplayers > 4) add(f2);
-		if(numplayers > 5) add(f3);
-		if(numplayers > 6) add(f4);
-		add(lblAge);
-		add(lblTurn);
 		
 		// Add solid white BG to fix background repaint issue with scrollpanes
 		BufferedImage bi = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -150,10 +137,11 @@ public class MatchPanel extends JPanel implements Runnable {
 			f4.addMouseListener(buildMouseAdapterFar());
 		}
 		
+		fbp = new FreeBuildPanel(controller);
+		fbp.setLocation(296, 458);
 		
 		// Cards
-		cardsPanel = new CardsPanel(match.getLocalPlayer().getCards(), controller);
-		cardsPanel.setSize(1274, 280);
+		cardsPanel = new CardsPanel(match.getLocalPlayer().getCards(), controller, fbp);
 		cardsPanel.setLocation(3, 558);
 		cardsPanel.addMouseListener(buildMouseAdapterCards());
 		
@@ -197,6 +185,21 @@ public class MatchPanel extends JPanel implements Runnable {
 		
 		scp = new ScienceChoicePanel(this);
 		scp.setVisible(false);
+		
+		add(scp);
+		add(rcp);
+		add(scrollpane);
+		add(cardsPanel);
+		add(fbp);
+		add(playerPanel);
+		add(n1);
+		add(n2);
+		if(numplayers > 3) add(f1);
+		if(numplayers > 4) add(f2);
+		if(numplayers > 5) add(f3);
+		if(numplayers > 6) add(f4);
+		add(lblAge);
+		add(lblTurn);
 	}
 	
 	public void update() {
@@ -217,6 +220,7 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(f2 != null) f2.update();
 		if(f3 != null) f3.update();
 		if(f4 != null) f4.update();
+		fbp.update();
 		cardsPanel.update();
 		
 		// Choose resources
@@ -224,7 +228,6 @@ public class MatchPanel extends JPanel implements Runnable {
 		Resources next = nextResource();
 		rcp.setResource(next);
 		if(next != null) rcp.setVisible(true);
-		
 		
 		// Choose discarded
 		needDiscarded = controller.needToChooseDiscarded();
