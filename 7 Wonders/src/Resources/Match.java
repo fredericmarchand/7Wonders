@@ -125,7 +125,7 @@ public class Match {
 	// getters and setters for controller
 
 	public void sendMatchInfo() {	
-		int id = 1;
+		int id = 0;
 		Packet7MatchFunction packet = new Packet7MatchFunction();		
 		packet.setObject(SevenWondersProtocol.encodeMatch(controller));
 		packet.setID(id);

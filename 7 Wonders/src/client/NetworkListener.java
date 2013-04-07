@@ -86,13 +86,12 @@ public class NetworkListener extends Listener{
 
 		if(o instanceof Packet7MatchFunction){
 			System.out.println("[CLIENT] Received Match Function");
-			partialsArray[partials] = ((Packet7MatchFunction)o).getObject();
+			partialsArray[((Packet7MatchFunction)o).getID()] = ((Packet7MatchFunction)o).getObject();
 			++partials;
 			if(partials==3){
 				partials = 0;
 				pushMatchFunctions(partialsArray);
-			}
-			
+			}			
 		}
 		if(o instanceof Packet8ClientResponse){
 			
@@ -123,7 +122,7 @@ public class NetworkListener extends Listener{
 	}
 	
 	public void pushMatchFunctions(Object[] ary){
-		mclient.pushToUser(ary[0],ary[1],ary[2]);
+		mclient.pushToUser((ArrayList)ary[0],(ArrayList)ary[1],(ArrayList)ary[2]);
 	}
 
 }
