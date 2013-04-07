@@ -86,6 +86,7 @@ public class SevenWondersProtocol {
 	public static ArrayList<Integer> encodePlayer(Player p)
 	{
 		ArrayList<Integer> playerStuff = new ArrayList<Integer>();
+		playerStuff.add(p.getChosenCardIndex());
 		playerStuff.add(p.getShields());
 		playerStuff.add(p.getVictoryPoints());
 		playerStuff.add(p.getConflictTokens().getFiveTokens());
@@ -305,6 +306,7 @@ public class SevenWondersProtocol {
 	public static Player decodePlayer(ArrayList<Integer> encoding)
 	{
 		Player p = new Player();
+		p.setChosenCardIndex(encoding.get(index++));
 		p.addShields(encoding.get(index++));
 		p.addVictoryPoints(encoding.get(index++));
 		p.getConflictTokens().addFiveTokens(encoding.get(index++));

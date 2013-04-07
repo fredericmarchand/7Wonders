@@ -99,6 +99,16 @@ public class Player extends User {
 		return chosenCard;
 	}
 	
+	public int getChosenCardIndex()
+	{
+		return chosenCardIndex;
+	}
+	
+	public void setChosenCardIndex(int i)
+	{
+		chosenCardIndex = i;
+	}
+	
 	public void setChosenCard( Structure s )
 	{
 		chosenCard = s;
