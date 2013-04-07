@@ -23,6 +23,7 @@ public class Images {
 	// Sets up the array that will keep the data of all the images that require loading.
 	// Once the list is built, they will be batch-loaded into a HashMap.
 	private static void buildImageList() {
+		add("bg", "/Images/Icons/bg.jpg");
 		for(int i = 1; i < 4; i++) add("age"+i, "/Images/Icons/age"+i+".png");
 		add("X", "/Images/Icons/X.png");
 		for(int i = 1; i <= 75; i++) add("card"+i, "/Images/Cards/"+i+".jpg", 182, 280);
@@ -54,6 +55,9 @@ public class Images {
 		add("sciOverlay3", "/Images/Icons/scienceoverlay3.png");
 		add("freeBuild", "/Images/Icons/freebuild.png");
 		add("freeBuildOverlay", "/Images/Icons/freebuildoverlay.png");
+		add("tradingpref0", "/Images/Icons/arrow-left.png");
+		add("tradingpref1", "/Images/Icons/arrow-right.png");
+		add("tradingpref2", "/Images/Icons/random.png");
 	}
 	
 	private static void add(String name, String path) {
@@ -75,15 +79,20 @@ public class Images {
 	private static void loadImages() {
 		for (String s : stringList) {
 			String[] args = s.split(",");
+			startLoading(args[1]);
 			if(args[2].equals("0") || args[3].equals("0")) map.put(args[0], new ImageIcon(Images.class.getResource(args[1])));
 			else map.put(args[0], new ImageIcon(new ImageIcon(Images.class.getResource(args[1])).getImage().getScaledInstance(Integer.parseInt(args[2]), Integer.parseInt(args[3]), java.awt.Image.SCALE_SMOOTH)));
-			doneLoadingOne();
+			doneLoadingOne(args[1]);
 		}
 	}
 	
-	private static void doneLoadingOne() {
+	private static void startLoading(String imagename) {
+		if(callback != null) callback.startImage(current, total, imagename);
+	}
+	
+	private static void doneLoadingOne(String imagename) {
 		current++;
-		if(callback != null) callback.update(current, total);
+		if(callback != null) callback.endImage(current, total, imagename);
 		//System.out.println("Loaded image " + current + " of " + total + ".");
 	}
 	

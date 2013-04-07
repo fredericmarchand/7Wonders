@@ -3,11 +3,9 @@ package View;
 import java.awt.BasicStroke;
 import java.awt.Color;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.SwingConstants;
 
 import Images.*;
 import java.awt.Font;
@@ -15,20 +13,20 @@ import java.awt.Font;
 public class LoadingPanel extends JPanel implements ImageLoadingGUI {
 	private static final long serialVersionUID = 1L;
 
-	//private int total;
-	
+	private JLabel bgLabel;
+	private JLabel2D lblLoadingImages;
 	private JProgressBar progressBar;
 	
 	public LoadingPanel() {
 		setLayout(null);
 		setSize(1280, 860);
 		
-		JLabel2D lblLoadingImages = new JLabel2D("Loading images...", SwingConstants.CENTER);
+		lblLoadingImages = new JLabel2D("Loading images...");
 		lblLoadingImages.setForeground(Color.WHITE);
-		lblLoadingImages.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblLoadingImages.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblLoadingImages.setOutlineColor(Color.BLACK);
 		lblLoadingImages.setStroke(new BasicStroke(2f));
-		lblLoadingImages.setBounds(465, 377, 350, 20);
+		lblLoadingImages.setBounds(465, 377, 416, 20);
 		add(lblLoadingImages);
 		
 		progressBar = new JProgressBar(0, 100);
@@ -38,16 +36,21 @@ public class LoadingPanel extends JPanel implements ImageLoadingGUI {
 		progressBar.setForeground(new Color(205, 92, 92));
 		progressBar.setLocation(465, 405);
 		progressBar.setSize(350, 56);
-		
 		add(progressBar);
 		
-		JLabel bgLabel = new JLabel(new ImageIcon(LoadingPanel.class.getResource("/Images/Icons/loadingbg.jpg")));
+		bgLabel = new JLabel();
 		bgLabel.setSize(1280, 860);
         add(bgLabel);
 	}
 
 	@Override
-	public void update(int current, int total) {
+	public void startImage(int current, int total, String imagename) {
+		lblLoadingImages.setText("Loading image " + imagename);
+	}
+
+	@Override
+	public void endImage(int current, int total, String imagename) {
+		if(Images.get("bg") != null) bgLabel.setIcon(Images.get("bg"));
 		int percentage = (int)(((float)current/(float)total)*100);
 		progressBar.setValue(percentage);
 	}
