@@ -23,9 +23,7 @@ import com.esotericsoftware.kryonet.Connection;
 public class Match {
 
 	ArrayList<Connection> connected;
-	//ArrayList<User> userList;
 	ArrayList<CommandMessage> cmdMsgList;
-	
 	HashMap<Long, String> userMap;
 	private long match_id;
 	private static long counter = 1000;
@@ -36,7 +34,7 @@ public class Match {
 	private int nAI;
 
 	private boolean inProgress;
-	MServer server;
+	private MServer server;
 	private Match2 controller;
 
 	public Match(int h, int ai, MServer m) {
@@ -77,7 +75,6 @@ public class Match {
 		connected.add(c);
 		connection_count++;
 		human_connection_count++;
-		//update();
 	}
 
 	public void removeConnection(Connection c, Object k) {
@@ -147,6 +144,7 @@ public class Match {
 		}
 	}
 	public void receiveEvent(CommandMessage m) {
+		System.out.println("[SERVER] Decoded command message received:  \t" + m);
 		cmdMsgList.add(m);
 		receivedEvents++;
 		if (receivedEvents == human_connection_count) {

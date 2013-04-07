@@ -90,7 +90,7 @@ public class NetworkListener extends Listener{
 		}
 
 		if(o instanceof Packet7MatchFunction){
-			System.out.println("[CLIENT] Received Match Function");
+			System.out.println("[CLIENT] Received Match Function : \t " + partials);
 			partialsArray[((Packet7MatchFunction)o).getID()] = ((Packet7MatchFunction)o).getObject();
 			++partials;
 			if(partials==3){
@@ -99,19 +99,14 @@ public class NetworkListener extends Listener{
 				pushMatchFunctions(partialsArray);
 			}			
 		}
-		if(o instanceof Packet8ClientResponse){
-			
-		}
 		if(o instanceof Packet9StartMatch){			
 			System.out.println("[CLIENT] Received start match request");	
 			
 				while(true)
-				if(gameStart){
-					mclient.startMatch();
-					break;
-				}
-			
-
+					if(gameStart){
+						mclient.startMatch();
+						break;
+					}
 			//eliminate countdown causing so many god damn errors.
 			//mclient.getLink().getChat().run();
 		}
