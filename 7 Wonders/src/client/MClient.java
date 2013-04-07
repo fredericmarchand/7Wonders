@@ -142,8 +142,8 @@ public class MClient {
 	// generic types are implicitly registered
 
 	public void pushToUser(ArrayList<Integer> devonsShittyList1,
-						   ArrayList<Integer> devonsShittyList2,
-						   ArrayList<Integer> devonsShittyList3){
+						   ArrayList<Long> devonsShittyList2,
+						   ArrayList<String> devonsShittyList3){
 		//user.receive(devonsShittyList1,devonsShittyList2,devonsShittyList3);
 	}
 	
