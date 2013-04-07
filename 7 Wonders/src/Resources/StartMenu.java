@@ -12,18 +12,20 @@ import javax.swing.JPanel;
 
 import client.MClient;
 		
-@SuppressWarnings("serial")
 public class StartMenu extends JFrame {
+	private static final long serialVersionUID = 1L;
 
 	private final boolean DEBUG_MODE = true;
 	
 	private JPanel panel;
 	private JButton create, join, quit;
-	// private FlowLayout layout = new FlowLayout();
 	String uname, ip, port;
 	MClient mclient;
 
 	public StartMenu() {
+		setLayout(null);
+		setSize(300, 300);
+		
 		create = new JButton("CREATE");
 		join = new JButton("JOIN");
 		quit = new JButton("QUIT");
