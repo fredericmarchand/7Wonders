@@ -53,7 +53,10 @@ public class MatchPanel extends JPanel implements Runnable {
 	public MatchPanel(Match2 m, Controller c) {
 		setLayout(null);
 		setSize(1280, 860);
-		setBackground(Color.WHITE);
+		
+		JLabel bgimg = new JLabel(Images.get("bg"));
+		bgimg.setSize(1280, 860);
+		add(bgimg);
 		
 		match = m;
 		controller = c;
@@ -64,7 +67,7 @@ public class MatchPanel extends JPanel implements Runnable {
 		pickedSciences = new ArrayList<ScientificSymbols>();
 		
 		// Start asynchronous part
-		run();
+		if(m != null) run();
 		
 		// Add solid white BG to fix background repaint issue with scrollpanes
 		BufferedImage bi = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -77,7 +80,7 @@ public class MatchPanel extends JPanel implements Runnable {
 		bg.setLocation(0, 0);
 		add(bg);
 		
-		update();
+		if(m != null) update();
 	}
 	
 	public void run(){
