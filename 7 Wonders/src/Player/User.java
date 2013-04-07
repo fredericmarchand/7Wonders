@@ -82,9 +82,9 @@ public class User {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void receive(ArrayList<Object> devonsShittyMatchInfo)
+	public void receive(ArrayList<Object> encoding, ArrayList<Object> ids, ArrayList<Object> names)
 	{
-		currentMatch = new Match2();
+		/*currentMatch = new Match2();
 		for ( int i = 0; i < devonsShittyMatchInfo.size(); ++i )
 		{
 			switch ( i )
@@ -124,9 +124,9 @@ public class User {
 			case 7:
 				currentMatch.setDiscardedDeck((ArrayList<Structure>)devonsShittyMatchInfo.get(i));
 				break;*/
-			}
-		}
-		System.out.println("eureka");
+			//}
+		//}
+		//System.out.println("eureka");
 		
 	}
 	
