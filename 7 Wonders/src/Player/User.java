@@ -1,9 +1,6 @@
 package Player;
 
 import java.util.ArrayList;
-
-import Structures.Structure;
-
 import client.MClient;
 import Controls.CommandMessage;
 import Controls.Match2;
@@ -86,6 +83,7 @@ public class User {
 	{
 		currentMatch = SevenWondersProtocol.decodeMatch(encoding);
 		SevenWondersProtocol.assignUsernamesAndIDs(currentMatch, names, ids);
+		@SuppressWarnings("unused")
 		NetworkGameController gc = new NetworkGameController(this, currentMatch);
 	}
 	
