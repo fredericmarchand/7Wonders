@@ -129,7 +129,8 @@ public class NetworkListener extends Listener {
 								((Packet8ClientResponse) o).getMID() + " Found: \t "  + 
 								mserver.findMatch(((Packet8ClientResponse) o).getMID()));
 			(mserver.findMatch(((Packet8ClientResponse) o).getMID()))
-					.handOff((ArrayList<Integer>)((Packet8ClientResponse) o).getObject());
+					.handOff((ArrayList<Integer>)((Packet8ClientResponse) o).getObject(),
+							((Packet8ClientResponse) o).getCID());
 
 			for(Integer i : (ArrayList<Integer>)((Packet8ClientResponse) o).getObject())
 				System.out.println(i);
@@ -179,8 +180,16 @@ public class NetworkListener extends Listener {
 			}
 			c.sendTCP(joinResponse);
 			
-			if(join)
+			if(join){
 				mserver.updateMatch(((Packet13MatchJoinRequest) o).getMID());
+					Packet6ChatMsg msg = new Packet6ChatMsg();
+					msg.setCID(((Packet13MatchJoinRequest) o).getCID());
+					msg.setMsg(((Packet13MatchJoinRequest) o).getUName() + " has joined the match");
+					msg.setuName("[SYSTEM] ");
+					for (Connection x : mserver.findMatch(((Packet13MatchJoinRequest) o).getMID()).getConnections())
+						x.sendTCP(msg);
+				
+			}
 			
 		}
 		if(o instanceof Packet16UserObject){

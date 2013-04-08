@@ -24,7 +24,9 @@ public class Match {
 
 	ArrayList<Connection> connected;
 	ArrayList<CommandMessage> cmdMsgList;
+	ArrayList<Long> receivedClientCMD;
 	HashMap<Long, String> userMap;
+	
 	private long match_id;
 	private static long counter = 1000;
 	private int MAX_PLAYER_COUNT = 7;
@@ -45,6 +47,7 @@ public class Match {
 		hostName = uname;
 		userMap = new HashMap<Long,String>();
 		connected = new ArrayList<Connection>();
+		receivedClientCMD = new ArrayList<Long>();
 		match_id = ++counter;
 		cmdMsgList = new ArrayList<CommandMessage>();
 		inProgress = false;
@@ -150,20 +153,28 @@ public class Match {
 			c.sendTCP(packet);
 		}
 	}
-	public void receiveEvent(CommandMessage m) {
-		if(inProgress){
-		System.out.println("[SERVER] Decoded command message received:  \t" + m);
+
+	public void receiveEvent(CommandMessage m, long clientID) {
+
+		System.out
+				.println("[SERVER] Decoded command message received:  \t" + m);
 		cmdMsgList.add(m);
-		System.out.println("[SERVER] Event received from client \t" + (++receivedEvents));
-		System.out.println("[SERVER] Event status: \t" + receivedEvents + "/" + human_connection_count);
-		if (receivedEvents == human_connection_count) {
-			
-			for(Object o : cmdMsgList)
-				System.out.println("[SERVER] cmdMsgList \t " + o );
+		System.out.println("[SERVER] Event received from client \t"
+				+ (++receivedEvents));
+		System.out.println("[SERVER] Event status: \t" + receivedEvents + "/"
+				+ human_connection_count);
+		if (!receivedClientCMD.contains(clientID))
+			receivedClientCMD.add(clientID);
+
+		if (receivedClientCMD.size() == human_connection_count) {
+
+			for (Object o : cmdMsgList)
+				System.out.println("[SERVER] cmdMsgList \t " + o);
 			controller.dispatch(cmdMsgList);
 			cmdMsgList.clear();
+			receivedClientCMD.clear();
 			receivedEvents = 0;
-			sendMatchInfo();			
+			sendMatchInfo();
 		}
 		for (Player p : controller.getPlayers()) {
 			System.out.print("player " + p + "  cards: [");
@@ -172,13 +183,13 @@ public class Match {
 			}
 			System.out.println("]");
 		}
-		}
+		
 	}
 
-	public void handOff(ArrayList<Integer> receivedPacket) {
+	public void handOff(ArrayList<Integer> receivedPacket,long id) {
 		CommandMessage msg = SevenWondersProtocol.decodeCommandMessage(receivedPacket);
 
-		receiveEvent(msg);
+		receiveEvent(msg,id);
 	}
 
 	public void startMatch() {
