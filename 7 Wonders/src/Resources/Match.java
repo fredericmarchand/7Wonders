@@ -162,6 +162,7 @@ public class Match {
 				+ human_connection_count);
 
 		if(last)receivedEvents++;
+		System.out.println("[SERVER] Received event: \t " + receivedEvents);
 		if (receivedEvents == human_connection_count) {
 			for (Object o : cmdMsgList)
 				System.out.println("[SERVER] cmdMsgList \t " + o);
