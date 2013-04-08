@@ -92,7 +92,7 @@ public class NetworkListener extends Listener{
 		if(o instanceof Packet7MatchFunction){
 			System.out.println("[CLIENT] Received Match Function : \t " + partials);
 			partialsArray[((Packet7MatchFunction)o).getID()] = ((Packet7MatchFunction)o).getObject();
-			if(partials==2){
+			if(partials==2&&gameStart){
 				System.out.println("[CLIENT] Received 3 partials");
 				partials = 0;
 				pushMatchFunctions(partialsArray);
