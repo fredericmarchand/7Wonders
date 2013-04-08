@@ -59,7 +59,8 @@ public class User {
 	public void setCommand(CommandMessage msg)
 	{
 		this.msg = msg;
-		if ( (msg.getAction() == CommandMessage.MOVE_TYPE && currentMatch.getAge() != 4) || msg.getAction() == CommandMessage.SCIENTIFIC_SYMBOL_TYPE ) 
+		if ( this.msg == null || currentMatch == null ) return;
+		if ( (this.msg.getMsgType() == CommandMessage.MOVE_TYPE && currentMatch.getAge() != 4) || this.msg.getMsgType() == CommandMessage.SCIENTIFIC_SYMBOL_TYPE ) 
 			lastMessage = true;
 		else lastMessage = false;
 	}
