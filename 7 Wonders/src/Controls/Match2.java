@@ -493,6 +493,7 @@ public class Match2 {
 	//handles all the moves received by the server
 	public Match2 dispatch(ArrayList<CommandMessage> messages)
 	{
+		if ( messages == null ) return this;
 		
 		for ( CommandMessage msg: messages )
 		{
