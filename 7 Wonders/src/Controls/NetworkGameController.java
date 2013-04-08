@@ -69,7 +69,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	}
 
 	@Override
-	public int canBuildWonderStage() 
+	public int canBuildWonderStage(Structure s) 
 	{
 		user.chooseCard(s);
 		return user.canBuildStage(match.getLeftNeighbor(user), match.getRightNeighbor(user));
