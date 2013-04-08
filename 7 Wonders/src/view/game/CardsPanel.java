@@ -185,7 +185,7 @@ public class CardsPanel extends JPanel {
 							controller.chooseCard(cards.get(i));
 							fbp.chosenCard(cards.get(i));
 							canDoAction[i][0] = controller.canBuildStructure(cards.get(i));
-							canDoAction[i][1] = controller.canBuildWonderStage();
+							canDoAction[i][1] = controller.canBuildWonderStage(cards.get(i));
 						}
 						break;
 					}

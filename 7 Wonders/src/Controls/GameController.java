@@ -83,7 +83,7 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 	}
 
 	@Override
-	public int canBuildWonderStage() 
+	public int canBuildWonderStage(Structure s) 
 	{
 		return user.canBuildStage(match.getLeftNeighbor(user), match.getRightNeighbor(user));
 	}

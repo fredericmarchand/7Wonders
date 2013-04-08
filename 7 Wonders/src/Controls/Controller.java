@@ -16,7 +16,7 @@ public interface Controller {
 	void buildStructure();
 	
 	// int 0 = no, 1 = with trading, 2 = yes
-	int canBuildWonderStage();
+	int canBuildWonderStage(Structure s);
 	void buildWonderStage();
 	
 	// Discard to get 3 coins back
