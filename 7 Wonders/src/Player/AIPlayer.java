@@ -132,6 +132,20 @@ public class AIPlayer extends Player {
 		return resource;
 	}
 	
+	public ArrayList<Integer> getGreyIndexes()
+	{
+		ArrayList<Integer> resource = new ArrayList<Integer>();
+		
+		for ( int index = 0; index < cards.size(); ++index )
+		{
+			if (cards.get(index).getColor() == Structure.GREY_CARD)
+			{
+				resource.add(index);
+			}
+		} 
+		return resource;
+	}
+	
 	//Try to detect the next players basic strategy
 	public int nextPlayerStrat(Player p)
 	{
@@ -189,6 +203,14 @@ public class AIPlayer extends Player {
 			for(Integer i : getMilitaryIndexes())
 			{
 				selectionNumbers.set(i, (int) (selectionNumbers.get(i) + (Math.floor(this.militaryCoef(leftNeighbor, rightNeighbor)))));
+			}
+		}
+		
+		if (favor == SCIENCE)
+		{
+			for(Integer i : getGreyIndexes())
+			{
+				selectionNumbers.set(i, (selectionNumbers.get(i) + 2));
 			}
 		}
 	

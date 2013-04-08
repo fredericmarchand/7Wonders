@@ -38,7 +38,8 @@ public class Moderate implements Strategy{
 		}
 		if ( !did )
 		{
-			p.chooseCard(Collections.max(p.blockSelectionNumbers(leftNeighbor, rightNeighbor)));
+			ArrayList<Integer> blockNumbers = p.blockSelectionNumbers(leftNeighbor, rightNeighbor);
+			p.chooseCard(blockNumbers.indexOf(Collections.max(blockNumbers)));
 			int result = p.canBuildStage(leftNeighbor, rightNeighbor);
 			switch ( result )
 			{
