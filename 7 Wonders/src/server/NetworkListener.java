@@ -193,9 +193,7 @@ public class NetworkListener extends Listener {
 			}
 			
 		}
-		if(o instanceof Packet16UserObject){
-			System.out.println("[SERVER] RECEIVED USER OBJECT! WOOP!");
-		}
+
 	}
 
 }

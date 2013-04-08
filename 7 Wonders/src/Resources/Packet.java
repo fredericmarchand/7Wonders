@@ -137,16 +137,7 @@ public class Packet {
 		public int  getnPlayer(){return numPlayer;}
 	}
 	public static class Packet15MatchDisconnect{}
-	public static class Packet16UserObject{
-		User u;
-		public User getUser(){return u;}
-		public void setUser(User n){u = n;}
-	}
-	public static class Packet17PlayerObject{
-		private Object p;
-		public Object getPlayer(){return p;}
-		public void setPlayer(Object pp){p = pp;}
-	}
+
 
 }
 
