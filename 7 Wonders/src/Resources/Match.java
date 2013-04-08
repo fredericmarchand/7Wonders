@@ -162,11 +162,17 @@ public class Match {
 		System.out.println("[SERVER] Event status: \t" + receivedEvents + "/"
 				+ human_connection_count);
 
-		
-		
+		for(ArrayList<CommandMessage> o :  cmdMsgMatrix)
+				for(Object i : o )
+					System.out.println("[SERVER] LIST SIZE: \t " + i);
 		cmdMsgMatrix.get((m.getMsgType())).add(m);
 		if(cmdMsgMatrix.get((m.getMsgType())).size()==human_connection_count){
 			controller.dispatch(cmdMsgMatrix.get((m.getMsgType())));
+			System.out.println("[SERVER] LIST SIZE: \t " 
+			+ cmdMsgMatrix.get((m.getMsgType())).size());
+			for(Object o : cmdMsgMatrix.get((m.getMsgType())))
+				System.out.println("[SERVER] LIST CONTENTS: \t " + o);
+					
 			cmdMsgMatrix.get((m.getMsgType())).clear();
 			
 			sendMatchInfo();
