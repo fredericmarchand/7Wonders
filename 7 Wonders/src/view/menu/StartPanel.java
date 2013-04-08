@@ -53,7 +53,7 @@ public class StartPanel extends JPanel {
 
 		join.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mclient.getLink().launchLobby();
+				mainframe.launchLobby(mclient.getLink().launchLobby());;
 				setVisible(false);
 			}
 		});

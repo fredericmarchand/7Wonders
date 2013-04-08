@@ -6,10 +6,11 @@ import javax.swing.JOptionPane;
 
 import client.MClient;
 import view.menu.CreateMatchPanel;
+import view.menu.LobbyPanel;
 import view.menu.StartPanel;
 
 public class linkNetworkView {
-	Lobby lobby;
+	LobbyPanel lobby;
 	MatchLobby matchLobby;
 	Chat chat;
 	CreateMatchPanel createMenu;
@@ -18,7 +19,7 @@ public class linkNetworkView {
 	
 	public linkNetworkView(MClient c){
 		mclient = c;
-		lobby = new Lobby(mclient);
+		lobby = new LobbyPanel(mclient);
 		matchLobby = new MatchLobby(mclient);
 		chat = new Chat(mclient);
 		createMenu = new CreateMatchPanel(mclient);
@@ -30,12 +31,13 @@ public class linkNetworkView {
 		lobby.showGUI();
 	}
 	
-	public void launchLobby() {
+	public LobbyPanel launchLobby() {
 		lobby.showGUI();
 		lobby.update(mclient.getMatchList());
+		return lobby;
 	}
 	
-	public void updateLobby(ArrayList<Long> list) {
+	public void updateLobby(ArrayList<String> list) {
 		lobby.update(list);
 	}
 	

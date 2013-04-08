@@ -31,14 +31,17 @@ public class Match {
 	private int human_connection_count;
 	private int receivedEvents = 0;
 	private int nAI;
-
+	private String hostName;
+	private long hostID;
 	private boolean inProgress;
 	private MServer server;
 	private Match2 controller;
 
-	public Match(int h, int ai, MServer m) {
+	public Match(int h, int ai, MServer m,long id, String uname) {
 		nAI = ai;
 		server = m;
+		hostID = id;
+		hostName = uname;
 		userMap = new HashMap<Long,String>();
 		connected = new ArrayList<Connection>();
 		match_id = ++counter;
@@ -49,6 +52,9 @@ public class Match {
 		controller = new Match2();
 	}
 
+	public String getHostUName(){return hostName;}
+	public Long getHostID(){return hostID;}
+	
 	public int getMaxPlayerCount() {
 		return MAX_PLAYER_COUNT;
 	}
@@ -64,7 +70,7 @@ public class Match {
 	public int getHumanConnectionCount() {
 		return human_connection_count;
 	}
-
+	
 	public ArrayList<Connection> getConnections() {
 		return connected;
 	}

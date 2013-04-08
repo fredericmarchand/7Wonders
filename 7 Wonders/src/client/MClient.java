@@ -21,7 +21,7 @@ import com.esotericsoftware.minlog.Log;
 public class MClient {
 	private Client client;
 	private boolean host = false;
-	private ArrayList<Long> matchList;
+	private ArrayList<String> matchList;
 	// if client has yet to join a game
 	// match ID is 0
 	private long matchID = 0000;
@@ -38,7 +38,7 @@ public class MClient {
 		
 		mainframe = m;
 		
-		matchList = new ArrayList<Long>();
+		matchList = new ArrayList<String>();
 		client = new Client(16382,16382);
 		NetworkListener nl = new NetworkListener(this);
 		link = new linkNetworkView(this);
@@ -76,11 +76,11 @@ public class MClient {
 		return matchID;
 	}
 
-	public void setMatchList(ArrayList<Long> list) {
+	public void setMatchList(ArrayList<String> list) {
 		matchList = list;
 	}
 
-	public ArrayList<Long> getMatchList() {
+	public ArrayList<String> getMatchList() {
 		return matchList;
 	}
 	public linkNetworkView getLink() {
@@ -170,7 +170,7 @@ public class MClient {
 			quit.setUName(username);
 			client.sendTCP(quit);
 			matchID = 0000; // no longer in a game
-			link.launchLobby();
+			mainframe.launchLobby(link.launchLobby());
 		}
 	}
 
