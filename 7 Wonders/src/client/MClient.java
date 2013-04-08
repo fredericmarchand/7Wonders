@@ -132,7 +132,7 @@ public class MClient {
 	}
 
 
-	public void sendCommandMessage(ArrayList<Integer> m){
+	public void sendCommandMessage(ArrayList<Integer> m, boolean last){
 		System.out.println("[CLIENT] Sending command message \n\t" + m);
 		for(Integer i : m)
 			System.out.println(i);
@@ -140,6 +140,7 @@ public class MClient {
 		packet.setCID(ID);
 		packet.setMID(matchID);
 		packet.setObject(m);
+		packet.setBoolean(last);
 		client.sendTCP(packet);
 	}
 

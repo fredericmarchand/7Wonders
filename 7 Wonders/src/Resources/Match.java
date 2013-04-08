@@ -7,7 +7,6 @@ import java.util.Map;
 import server.MServer;
 
 import Controls.CommandMessage;
-import Controls.GameController;
 import Controls.Match2;
 
 import Controls.SevenWondersProtocol;
@@ -24,7 +23,6 @@ public class Match {
 
 	ArrayList<Connection> connected;
 	ArrayList<CommandMessage> cmdMsgList;
-	ArrayList<Long> receivedClientCMD;
 	HashMap<Long, String> userMap;
 	
 	private long match_id;
@@ -47,7 +45,6 @@ public class Match {
 		hostName = uname;
 		userMap = new HashMap<Long,String>();
 		connected = new ArrayList<Connection>();
-		receivedClientCMD = new ArrayList<Long>();
 		match_id = ++counter;
 		cmdMsgList = new ArrayList<CommandMessage>();
 		inProgress = false;
@@ -154,7 +151,7 @@ public class Match {
 		}
 	}
 
-	public void receiveEvent(CommandMessage m, long clientID) {
+	public void receiveEvent(CommandMessage m, long clientID,boolean last) {
 
 		System.out
 				.println("[SERVER] Decoded command message received:  \t" + m);
@@ -163,33 +160,30 @@ public class Match {
 				+ (++receivedEvents));
 		System.out.println("[SERVER] Event status: \t" + receivedEvents + "/"
 				+ human_connection_count);
-		if (!receivedClientCMD.contains(clientID))
-			receivedClientCMD.add(clientID);
 
-		if (receivedClientCMD.size() == human_connection_count) {
-
+		if(last)receivedEvents++;
+		if (receivedEvents == human_connection_count) {
 			for (Object o : cmdMsgList)
 				System.out.println("[SERVER] cmdMsgList \t " + o);
 			controller.dispatch(cmdMsgList);
 			cmdMsgList.clear();
-			receivedClientCMD.clear();
 			receivedEvents = 0;
 			sendMatchInfo();
 		}
-		for (Player p : controller.getPlayers()) {
-			System.out.print("player " + p + "  cards: [");
-			for (Structure s : p.getCards()) {
-				System.out.print(s.getName() + ", ");
-			}
-			System.out.println("]");
-		}
+//		for (Player p : controller.getPlayers()) {
+//			System.out.print("player " + p + "  cards: [");
+//			for (Structure s : p.getCards()) {
+//				System.out.print(s.getName() + ", ");
+//			}
+//			System.out.println("]");
+//		}
 		
 	}
 
-	public void handOff(ArrayList<Integer> receivedPacket,long id) {
+	public void handOff(ArrayList<Integer> receivedPacket,long id,boolean last) {
 		CommandMessage msg = SevenWondersProtocol.decodeCommandMessage(receivedPacket);
 
-		receiveEvent(msg,id);
+		receiveEvent(msg,id,last);
 	}
 
 	public void startMatch() {

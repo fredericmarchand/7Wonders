@@ -47,15 +47,12 @@ public class Packet {
 		private long matchID;
 		private long cID;
 		private String username;
-//		private User user;
 		public long getMID(){return matchID;}
 		public void setMID(long id){matchID = id;}		
 		public long getCID(){ return cID;}
 		public void setCID(long i){cID= i;}
 		public String getUName(){return username;}
 		public void setUName(String s){username = s;}
-//		public User getUser(){return user;}
-//		public void setUser(User u){user = u;}
 	}
 	public static class Packet6ChatMsg{
 		private String msg;
@@ -83,12 +80,15 @@ public class Packet {
 		private long matchID;
 		private long clientID;
 		private Object o;
+		private boolean last;
 		public long getMID(){return matchID;}
 		public void setMID(long id){matchID = id;}
 		public long getCID(){return clientID;}
 		public void setCID(long id){clientID=id;}
 		public Object getObject(){ return o;}
 		public void setObject(Object ob){ o = ob;}
+		public boolean getBoolean(){return last;}
+		public void setBoolean(boolean b){ last = b;}
 	}
 	public static class Packet9StartMatch{}
 	public static class Packet10EndMatch{}
@@ -104,8 +104,6 @@ public class Packet {
 		private int numHuman,numAI;
 		private long clientID;
 		private String username;
-		
-//		private User user = new User();
 		public void setHuman(int x){numHuman = x;}
 		public int getHuman(){return numHuman;}
 		public void setAI(int x){numAI = x;}
