@@ -255,19 +255,10 @@ public class Match2 {
 		}
 	}
 	
-	
 	//server side run turns if message typeid == move
 	public void runTurns(ArrayList<CommandMessage> messages)
 	{		
-		/*for ( Player p: getPlayers() )
-		{
-			 System.out.print("player i cards: [");
-			 for (Structure s: p.getCards())
-			 {
-				 System.out.print(s.getName() + ", ");
-			 }
-			 System.out.println("]");
-		}*/
+
 		for ( CommandMessage msg: messages )
 		{
 			Player p = getPlayerByID(msg.getPlayerID());
@@ -275,10 +266,22 @@ public class Match2 {
 		}
 
 		handleAIPlayerMoves();
+		/*for ( Player p: getPlayers() )
+		{
+			 System.out.print("player i cards: [");
+			 System.out.print(p.getChosenCard().getName());
+			 //for (Structure s: p.getCards())
+			 //{
+			//	 System.out.print(s.getName() + ", ");
+			 //}
+			 System.out.println("]");
+		}*/
+		int i = 0;
 		for ( CommandMessage msg: messages )
 		{
 			Player p = getPlayerByID(msg.getPlayerID());
 			p.chooseCardByID(msg.getCardID());
+			System.out.println("=================================================== " + i++ + "================================");
 			switch ( msg.getAction() )
 			{
 				case 1:
@@ -495,9 +498,10 @@ public class Match2 {
 	{
 		if ( messages == null ) return this;
 		
-		for ( CommandMessage msg: messages )
-		{
-			switch ( msg.getMsgType() )
+		int type = messages.get(0).getMsgType();
+		//for ( CommandMessage msg: messages )
+		//{
+			switch ( type )
 			{
 				case CommandMessage.RESOURCE_CHOICE_TYPE:
 					beginningOfTurnEffects(messages);
@@ -511,7 +515,7 @@ public class Match2 {
 					endOfGameSpecialEffects(messages);
 					break;
 			}
-		}
+		//}
 		return this;
 	}
 	
