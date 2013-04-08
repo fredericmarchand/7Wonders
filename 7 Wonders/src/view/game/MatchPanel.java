@@ -263,6 +263,30 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(nextScience() != null) scp.setVisible(true);
 	}
 	
+	//update function that wont cause an infinite loop on receive
+	public void updateValues() {
+		cardsPanel.setCards(match.getLocalPlayer().getCards());
+		if(match.getAge() == 4) {
+			lblAge.setIcon(null);
+			lblAge.setText("GAME OVER!");
+			lblTurn.setText(null);
+		} else {
+			lblAge.setIcon(Images.get("age"+match.getAge()));
+			lblAge.setText(null);
+			lblTurn.setText("Round "+ match.getTurn() +" of 6");
+		}
+		playerPanel.update();
+		n1.update();
+		n2.update();
+		if(f1 != null) f1.update();
+		if(f2 != null) f2.update();
+		if(f3 != null) f3.update();
+		if(f4 != null) f4.update();
+		fbp.update();
+		cardsPanel.update();
+		
+	}
+	
 	public Resources nextResource() {
 		if(needResources.size() > 0)
 			return needResources.remove(0);
