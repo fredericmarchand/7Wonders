@@ -195,9 +195,14 @@ public class Match2 {
 		return null;
 	}
 	
-	public void addAIPlayer(long id, String name)
+	public void addAIPlayer(long id, String name, int strategy)
 	{
-		players.add(new AIPlayer(id, name, new Intermediate()));
+		if (strategy == 0)
+			players.add(new AIPlayer(id, name, new Simple()));
+		else if (strategy == 1)
+			players.add(new AIPlayer(id, name, new Moderate()));
+		else
+			players.add(new AIPlayer(id, name, new Intermediate()));
 	}
 	
 	//server side
