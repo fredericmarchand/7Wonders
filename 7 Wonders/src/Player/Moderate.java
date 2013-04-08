@@ -57,7 +57,7 @@ public class Moderate implements Strategy{
 		}
 		if ( !did )
 		{
-			p.getOwnedResources().addCoins(3);
+			p.discard(discarded);
 		}
 		p.cards.remove(p.chosenCardIndex);
 	}

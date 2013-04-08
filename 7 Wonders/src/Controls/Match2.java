@@ -197,7 +197,7 @@ public class Match2 {
 	
 	public void addAIPlayer(long id, String name)
 	{
-		players.add(new AIPlayer(id, name, new Intermediate()));
+		players.add(new AIPlayer(id, name, new Simple()));
 	}
 	
 	//server side
