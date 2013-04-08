@@ -10,11 +10,9 @@ import Controls.CommandMessage;
 import Controls.Match2;
 
 import Controls.SevenWondersProtocol;
-import Player.Player;
 import Resources.Packet.Packet10EndMatch;
 import Resources.Packet.Packet7MatchFunction;
 import Resources.Packet.Packet9StartMatch;
-import Structures.Structure;
 
 
 import com.esotericsoftware.kryonet.Connection;
@@ -24,7 +22,7 @@ public class Match {
 	ArrayList<Connection> connected;
 	ArrayList<CommandMessage> cmdMsgList;
 	HashMap<Long, String> userMap;
-	
+	ArrayList< ArrayList<CommandMessage>> cmdMsgMatrix;
 	private long match_id;
 	private static long counter = 1000;
 	private int MAX_PLAYER_COUNT = 7;
@@ -45,6 +43,9 @@ public class Match {
 		hostName = uname;
 		userMap = new HashMap<Long,String>();
 		connected = new ArrayList<Connection>();
+		cmdMsgMatrix = new ArrayList<ArrayList<CommandMessage>>();
+		for(int i = 0; i<10;i++)
+			cmdMsgMatrix.add(new ArrayList<CommandMessage>());
 		match_id = ++counter;
 		cmdMsgList = new ArrayList<CommandMessage>();
 		inProgress = false;
@@ -161,24 +162,25 @@ public class Match {
 		System.out.println("[SERVER] Event status: \t" + receivedEvents + "/"
 				+ human_connection_count);
 
-		if(last)receivedEvents++;
-		System.out.println("[SERVER] Received event: \t " + receivedEvents);
-		if (receivedEvents == human_connection_count) {
-			for (Object o : cmdMsgList)
-				System.out.println("[SERVER] cmdMsgList \t " + o);
-			controller.dispatch(cmdMsgList);
-			cmdMsgList.clear();
-			receivedEvents = 0;
+		
+		
+		cmdMsgMatrix.get((m.getMsgType())).add(m);
+		if(cmdMsgMatrix.get((m.getMsgType())).size()==human_connection_count){
+			controller.dispatch(cmdMsgMatrix.get((m.getMsgType())));
+			cmdMsgMatrix.get((m.getMsgType())).clear();
+			
 			sendMatchInfo();
 		}
-//		for (Player p : controller.getPlayers()) {
-//			System.out.print("player " + p + "  cards: [");
-//			for (Structure s : p.getCards()) {
-//				System.out.print(s.getName() + ", ");
-//			}
-//			System.out.println("]");
+//		
+//		System.out.println("[SERVER] Received event: \t " + receivedEvents);
+//		if (receivedEvents == human_connection_count) {
+//			for (Object o : cmdMsgList)
+//				System.out.println("[SERVER] cmdMsgList \t " + o);
+//			controller.dispatch(cmdMsgList);
+//			cmdMsgList.clear();
+//			receivedEvents = 0;
+//			sendMatchInfo();
 //		}
-		
 	}
 
 	public void handOff(ArrayList<Integer> receivedPacket,long id,boolean last) {
