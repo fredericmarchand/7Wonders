@@ -71,7 +71,7 @@ public class MainFrame extends JFrame implements Runnable {
 		loading.setVisible(false);
 		startMenu.setVisible(true);
 		startMenu.run();
-	}
+	}	
 
 	public void startController(NetworkGameController c) {
 		controller = c;
