@@ -349,7 +349,7 @@ public class Match2 {
 				addPointActivate(s, p, messages);
 		}
 		
-		countPlayersVictoryPoints();
+		//countPlayersVictoryPoints();
 		//discardAllPlayersCards();
 	}
 
@@ -421,12 +421,15 @@ public class Match2 {
 		
 	public void initScienceChoice(Player p, ArrayList<ScientificSymbols> symbs)
 	{
-		CommandMessage msg = new CommandMessage();
-		msg.setPlayerID(p.getID());
-		msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE);
-		msg.setScientificSymbol(symbs);
-		p.setCommand(msg);
-		p.sendCommandMessage();
+		if ( age == 3 && turn  == 6 )
+		{
+			CommandMessage msg = new CommandMessage();
+			msg.setPlayerID(p.getID());
+			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE);
+			msg.setScientificSymbol(symbs);
+			p.setCommand(msg);
+			p.sendCommandMessage();
+		}
 	}
 	//client moves
 	
@@ -530,7 +533,7 @@ public class Match2 {
 		}
 		endOfTurnSpecialEffects(players);
 		CardHandler.PassCardsToNeighbors(getPlayers(), getAge());
-		if ( getTurn() == 6 )
+		if ( turn == 6 )
 		{
 			for ( Player p: players )
 			{

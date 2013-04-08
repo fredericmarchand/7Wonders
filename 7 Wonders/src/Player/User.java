@@ -15,6 +15,7 @@ public class User {
 	private Match2 currentMatch;
 	private CommandMessage msg;
 	private MClient client;
+	//private NetworkGameController gnc;
 	
 	//default constructor
 	public User(){}
@@ -82,10 +83,9 @@ public class User {
 		}
 	}
 	
-
-	
 	public void receive(ArrayList<Integer> encoding, ArrayList<Long> ids, ArrayList<String> names)
 	{
+		if ( encoding.size() == 0 ) return;
 		if ( currentMatch == null )
 		{
 			currentMatch = SevenWondersProtocol.decodeMatch(encoding);
@@ -98,6 +98,8 @@ public class User {
 			SevenWondersProtocol.assignUsernamesAndIDs(mat, names, ids);
 			mat.setLocalPlayerID(ID);
 			updateMatch(mat);
+			//if ( gnc != null )
+			//	gnc.updateFrame();
 		}
 	}
 	
