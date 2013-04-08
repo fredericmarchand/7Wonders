@@ -179,6 +179,10 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 				}
 			}
 		}
+		//for ( Resources r: resources )
+	//	{
+	//		System.out.println(r.toString());
+	//	}
 		return resources;
 	}
 
@@ -316,13 +320,13 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 			}
 		}
 		//System.out.println(user.getTotalResources().toString());*/
-		if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
-			frame.update();
+		//if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
+		//	frame.update();
 		if ( resources == null )
 			resources = new ArrayList<Resources>();
 		match.initResourceChoice(user, resources);
-		//if ( !(match.getAge() == 1 && match.getTurn() == 1) )
-		//	frame.update();
+		if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
+					frame.update();
 		
 	}
 	
@@ -350,7 +354,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		//String name = JOptionPane.showInputDialog("What is your username? ");
 		//NetworkGameController gc = new NetworkGameController(new Player(name, 0), new Match2());
 	}
-
 
 	
 }
