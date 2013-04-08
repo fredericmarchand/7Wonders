@@ -167,6 +167,7 @@ public class NetworkListener extends Listener {
 			if ((mserver.findMatch(((Packet13MatchJoinRequest) o)
 					.getMID()).get_inProgress()) == true) {
 				joinResponse.setAccepted(false);
+				join = false;
 				joinResponse.setIDValue(0);
 			} else {
 				join = mserver.bridgeClient(c, ((Packet13MatchJoinRequest) o)
@@ -178,7 +179,8 @@ public class NetworkListener extends Listener {
 			}
 			c.sendTCP(joinResponse);
 			
-			mserver.updateMatch(((Packet13MatchJoinRequest) o).getMID());
+			if(join)
+				mserver.updateMatch(((Packet13MatchJoinRequest) o).getMID());
 			
 		}
 		if(o instanceof Packet16UserObject){

@@ -50,7 +50,7 @@ public class NetworkListener extends Listener{
 	@Override
 	public void received(Connection c, Object o) {
 		if(VERBOSE) System.out.println("[CLIENT] RECEIVED PACKET");
-		System.out.println("[CLIENT] MClient status: \t" + mclient);
+		//System.out.println("[CLIENT] MClient status: \t" + mclient);
 		if(o instanceof Packet1LoginAnswer){
 			if(!((Packet1LoginAnswer)o).getAccepted()){
 				c.close();
@@ -92,21 +92,20 @@ public class NetworkListener extends Listener{
 		if(o instanceof Packet7MatchFunction){
 			System.out.println("[CLIENT] Received Match Function : \t " + partials);
 			partialsArray[((Packet7MatchFunction)o).getID()] = ((Packet7MatchFunction)o).getObject();
-			++partials;
-			if(partials==3){
+			if(partials==2){
+				System.out.println("[CLIENT] Received 3 partials");
 				partials = 0;
-				gameStart = true;
 				pushMatchFunctions(partialsArray);
-			}			
+			}	
+			else
+				partials++;
 		}
 		if(o instanceof Packet9StartMatch){			
-			System.out.println("[CLIENT] Received start match request");	
+			System.out.println("[CLIENT] Received start match request");
+			gameStart = true;
+			pushMatchFunctions(partialsArray);
+			mclient.startMatch();
 			
-				while(true)
-					if(gameStart){
-						mclient.startMatch();
-						break;
-					}
 		}
 		if(o instanceof Packet14HostCreateMatch){
 			System.out.println("[CLIENT] Match set to: \t " + ((Packet14HostCreateMatch)o).getMID());

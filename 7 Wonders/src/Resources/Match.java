@@ -7,6 +7,7 @@ import java.util.Map;
 import server.MServer;
 
 import Controls.CommandMessage;
+import Controls.GameController;
 import Controls.Match2;
 
 import Controls.SevenWondersProtocol;
@@ -150,10 +151,13 @@ public class Match {
 		}
 	}
 	public void receiveEvent(CommandMessage m) {
+		if(inProgress){
 		System.out.println("[SERVER] Decoded command message received:  \t" + m);
 		cmdMsgList.add(m);
-		receivedEvents++;
+		System.out.println("[SERVER] Event received from client \t" + (++receivedEvents));
+		System.out.println("[SERVER] Event status: \t" + receivedEvents + "/" + human_connection_count);
 		if (receivedEvents == human_connection_count) {
+			
 			for(Object o : cmdMsgList)
 				System.out.println("[SERVER] cmdMsgList \t " + o );
 			controller.dispatch(cmdMsgList);
@@ -167,6 +171,7 @@ public class Match {
 				System.out.print(s.getName() + ", ");
 			}
 			System.out.println("]");
+		}
 		}
 	}
 

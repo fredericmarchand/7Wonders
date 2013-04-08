@@ -52,8 +52,8 @@ public class MServer {
 		ArrayList<String> lobbyList = new ArrayList<String>();
 		String matchName;
 		for(Match e : matchList){
-			matchName = (e.getMatch_ID() + " | " + e.getHostUName() + "." 
-					+ e.getHostID() + " 's match  | " + e.getConnectionCount() +
+			matchName = (e.getMatch_ID() + " | " + e.getHostUName()  
+					+ " 's match  | " + e.getConnectionCount() +
 					"/" + e.getMaxPlayerCount() + " players");
 			lobbyList.add(matchName);
 		}
