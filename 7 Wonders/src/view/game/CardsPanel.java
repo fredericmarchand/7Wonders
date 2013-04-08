@@ -156,6 +156,8 @@ public class CardsPanel extends JPanel {
 				cardArr[i].setIcon(null);
 				lblArr[i].setText("");
 				lblBgArr[i].setIcon(null);
+				lblOptions[i].setIcon(null);
+				for (int j = 0; j < 3; j++) lblArrow[i][j].setIcon(null);
 			}
 		}
 		this.repaint();
