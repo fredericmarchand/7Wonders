@@ -363,14 +363,12 @@ public class WonderBoard {
 		redCards.clear();
 		blueCards.clear();
 		greenCards.clear();
-		blueCards.clear(); 
 		yellowCards.clear(); 
 		purpleCards.clear(); 
 		brownGreyCards.clear();
 		redCards.addAll(wb.redCards);
 		blueCards.addAll(wb.blueCards);
 		greenCards.addAll(wb.greenCards);
-		blueCards.addAll(wb.blueCards); 
 		yellowCards.addAll(wb.yellowCards); 
 		purpleCards.addAll(wb.purpleCards); 
 		brownGreyCards.addAll(wb.brownGreyCards);

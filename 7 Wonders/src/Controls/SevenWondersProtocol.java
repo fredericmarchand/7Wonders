@@ -337,7 +337,7 @@ public class SevenWondersProtocol {
 	public static Structure decodeStructure(ArrayList<Integer> encoding)
 	{
 		Structure s = CardHandler.getCardByID(encoding.get(index++));
-		
+		s.getEffects().clear();
 		int effectSize = encoding.get(index++);
 		for ( int i = 0; i < effectSize; ++i )
 		{
