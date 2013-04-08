@@ -21,6 +21,7 @@ public class MainFrame extends JFrame implements Runnable {
 	private LoadingPanel loading;
 	private StartPanel startMenu;
 	private CreateMatchPanel cmp;
+	private LobbyPanel lp;
 	
 	public MainFrame() {
 		setTitle("7 Wonders");
@@ -73,13 +74,20 @@ public class MainFrame extends JFrame implements Runnable {
 		controller.run();
 	}
 	
-	public static void main(String args[]) {
-		new MainFrame();
-	}
-
 	public void launchCreateMenu(CreateMatchPanel p) {
 		cmp = p;
 		cmp.setVisible(true);
 		add(cmp);
+	}
+	
+	public void launchLobby(LobbyPanel p) {
+		lp = p;
+		lp.setVisible(true);
+		startMenu.setVisible(false);
+		add(lp);
+	}
+	
+	public static void main(String args[]) {
+		new MainFrame();
 	}
 }

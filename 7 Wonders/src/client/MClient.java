@@ -170,7 +170,7 @@ public class MClient {
 			quit.setUName(username);
 			client.sendTCP(quit);
 			matchID = 0000; // no longer in a game
-			link.launchLobby();
+			mainframe.launchLobby(link.launchLobby());
 		}
 	}
 

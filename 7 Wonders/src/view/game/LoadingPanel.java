@@ -1,6 +1,5 @@
 package view.game;
 
-
 import image.ImageLoadingGUI;
 import image.Images;
 
