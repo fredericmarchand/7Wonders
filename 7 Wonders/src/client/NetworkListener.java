@@ -120,9 +120,6 @@ public class NetworkListener extends Listener{
 			mclient.getLink().killMainFrame();
 			gameStart = false;
 		}
-		if(o instanceof Packet17PlayerObject){
-			System.out.println("[CLIENT] Received Player Object");
-		}
 	}
 	
 	@SuppressWarnings("unchecked")
