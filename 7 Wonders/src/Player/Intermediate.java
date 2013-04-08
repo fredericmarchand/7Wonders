@@ -23,7 +23,7 @@ public class Intermediate implements Strategy{
 		
 		for ( int index = 0; index < p.cards.size(); ++index )
 		{
-			if (Collections.max(selectionNumbers) <= (p.getAge() - 1))
+			if (Collections.max(selectionNumbers) <= 0)
 				break;
 			int result;
 			p.chooseCard(selectionNumbers.indexOf(Collections.max(selectionNumbers)));
@@ -47,7 +47,8 @@ public class Intermediate implements Strategy{
 		}
 		if ( !did )
 		{
-			p.chooseCard(Collections.max(p.blockSelectionNumbers(leftNeighbor, rightNeighbor)));
+			ArrayList<Integer> blockNumbers = p.blockSelectionNumbers(leftNeighbor, rightNeighbor);
+			p.chooseCard(blockNumbers.indexOf(Collections.max(blockNumbers)));
 			int result = p.canBuildStage(leftNeighbor, rightNeighbor);
 			switch ( result )
 			{
@@ -66,7 +67,7 @@ public class Intermediate implements Strategy{
 		}
 		if ( !did )
 		{
-			p.getOwnedResources().addCoins(3);
+			p.discard(discarded);
 		}
 		p.cards.remove(p.chosenCardIndex);
 	}

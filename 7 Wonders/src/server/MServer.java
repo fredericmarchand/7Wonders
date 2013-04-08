@@ -60,8 +60,8 @@ public class MServer {
 		return lobbyList;		
 	}
 
-	public long createMatch(int h, int ai, long hid, String hname ) {
-		Match m = new Match(h, ai,this,hid,hname);
+	public long createMatch(int h, int ai, long hid, String hname, int aiDiff) {
+		Match m = new Match(h, ai,this,hid,hname,aiDiff);
 		matchList.add(m);
 		return m.getMatch_ID();
 	}

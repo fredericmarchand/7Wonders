@@ -58,6 +58,11 @@ public class MainFrame extends JFrame implements Runnable {
 		panel.updateValues();
 	}
 	
+	public void updateChooseScience()
+	{
+		panel.updateChooseScience();
+	}
+	
 	public void startMatch(Match2 m) {
 		panel = new MatchPanel(m, controller);
 		add(panel);
@@ -71,7 +76,7 @@ public class MainFrame extends JFrame implements Runnable {
 		loading.setVisible(false);
 		startMenu.setVisible(true);
 		startMenu.run();
-	}
+	}	
 
 	public void startController(NetworkGameController c) {
 		controller = c;

@@ -95,6 +95,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	public ArrayList<ScientificSymbols> needToChooseScienceSymbol() 
 	{
 		ArrayList<ScientificSymbols> symbs = new ArrayList<ScientificSymbols>();
+		if ( match.getAge() != 4 ) return symbs;
 		for ( Structure s: user.getWonderBoard().getPurpleCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
@@ -139,15 +140,16 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 //		{
 //			user.getScientificSymbols().addScientifcSymbols(sy);
 //		}
-		match.initScienceChoice(user, symbs);
+		if ( match.getAge() == 4 && match.getTurn() == 1 )
+			match.initScienceChoice(user, symbs);
 
-		
 	}
 
 	@Override
 	public ArrayList<Resources> needToChooseResources() 
 	{
 		ArrayList<Resources> resources = new ArrayList<Resources>();
+		if ( match.getAge() == 4 ) return resources;
 		for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
@@ -181,10 +183,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 				}
 			}
 		}
-		//for ( Resources r: resources )
-	//	{
-	//		System.out.println(r.toString());
-	//	}
 		return resources;
 	}
 
@@ -203,16 +201,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public boolean chooseCard(Structure s) 
 	{
-		//System.out.println("chooseCard: " + user.getCards());
-		/*
-		for ( int i = 0; i < user.getCards().size(); ++i )
-		{
-			if ( user.getCards().get(i).getID() == s.getID() )
-			{
-				user.chooseCard(i);
-				break;
-			}
-		}*/
 		user.chooseCard(s);
 		return true;
 	}
@@ -302,8 +290,10 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void resourceChosen(ArrayList<Resources> resources) 
 	{
+		if ( resources == null )
+			return;
 		int i = 0;
-		for ( Structure s: user.getWonderBoard().getYellowCards() )
+		/*for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
 			{
@@ -322,14 +312,14 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 					user.getExtraResources().addResources(resources.get(i++));
 				}
 			}
-		}
+		}*/
 		//System.out.println(user.getTotalResources().toString());*/
 		//if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
 		//	frame.update();
-		if ( resources == null )
-			resources = new ArrayList<Resources>();
+		//if ( resources == null )
+		//	resources = new ArrayList<Resources>();
 		match.initResourceChoice(user, resources);
-		if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
+		if ( !(match.getAge() == 1 && match.getTurn() == 1) && !(match.getAge() == 4) && i != 0 )
 			frame.update();
 		
 	}
@@ -359,10 +349,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		//NetworkGameController gc = new NetworkGameController(new Player(name, 0), new Match2());
 	}
 	
-	public void updateFrame()
-	{
-		frame.update();
-	}
 
 	
 }

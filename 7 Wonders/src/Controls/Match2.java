@@ -195,9 +195,14 @@ public class Match2 {
 		return null;
 	}
 	
-	public void addAIPlayer(long id, String name)
+	public void addAIPlayer(long id, String name, int strategy)
 	{
-		players.add(new AIPlayer(id, name, new Simple()));
+		if (strategy == 0)
+			players.add(new AIPlayer(id, name, new Simple()));
+		else if (strategy == 1)
+			players.add(new AIPlayer(id, name, new Moderate()));
+		else
+			players.add(new AIPlayer(id, name, new Intermediate()));
 	}
 	
 	//server side
@@ -212,18 +217,47 @@ public class Match2 {
 	//beginning of turn effects
 	public void beginningOfTurnEffects(ArrayList<CommandMessage> messages)
 	{
-		int index = 0;
 		for ( CommandMessage msg: messages)
 		{
 			Player p = getPlayerByID(msg.getPlayerID());
+			ArrayList<Boolean> list = new ArrayList<Boolean>();
 			for ( Structure s : p.getWonderBoard().getYellowCards() )
 			{
 				for ( SpecialEffect se: s.getEffects() )
 				{
 					if ( se.getID() == ResourceChoice.ResourceChoiceID )
 					{
-						p.getUnvResources().addResources(msg.getResourceChoices().get(index));
-						++index;
+						list.add(true);
+					}
+				}
+			}
+								
+			for ( Structure s : p.getWonderBoard().getBrownGreyCards() )
+			{
+				for ( SpecialEffect se: s.getEffects() )
+				{
+					if ( se.getID() == ResourceChoice.ResourceChoiceID )
+					{
+						list.add(false);
+					}
+				}
+			}
+			
+			int index = 0;
+			for ( Resources r : msg.getResourceChoices() )
+			{
+				if ( list.get(index++) )
+					p.getUnvResources().addResources(r);
+				else
+					p.getExtraResources().addResources(r);
+			}
+			/*for ( Structure s : p.getWonderBoard().getYellowCards() )
+			{
+				for ( SpecialEffect se: s.getEffects() )
+				{
+					if ( se.getID() == ResourceChoice.ResourceChoiceID )
+					{
+						p.getUnvResources().addResources(msg.getResourceChoices().get(index++));
 					}
 				}
 			}
@@ -234,15 +268,14 @@ public class Match2 {
 				{
 					if ( se.getID() == ResourceChoice.ResourceChoiceID )
 					{
-						p.getExtraResources().addResources(msg.getResourceChoices().get(index));
-						++index;
+						p.getExtraResources().addResources(msg.getResourceChoices().get(index++));
 					}
 				}
-			}
+			}*/
 		}		
 	}
 	
-	public void serverHandleBeginningOfTurnEffects(Resources r, Structure s, CommandMessage msg)
+	/*public void serverHandleBeginningOfTurnEffects(Resources r, Structure s, CommandMessage msg)
 	{
 		int index = 0;
 		for ( SpecialEffect se: s.getEffects() )
@@ -253,7 +286,7 @@ public class Match2 {
 				++index;
 			}
 		}
-	}
+	}*/
 	
 	//server side run turns if message typeid == move
 	public void runTurns(ArrayList<CommandMessage> messages)
@@ -276,12 +309,11 @@ public class Match2 {
 			 //}
 			 System.out.println("]");
 		}*/
-		int i = 0;
 		for ( CommandMessage msg: messages )
 		{
 			Player p = getPlayerByID(msg.getPlayerID());
 			p.chooseCardByID(msg.getCardID());
-			System.out.println("=================================================== " + i++ + "================================");
+			//System.out.println("=================================================== " + i++ + "================================");
 			switch ( msg.getAction() )
 			{
 				case 1:
@@ -358,8 +390,7 @@ public class Match2 {
 				addPointActivate(s, p, messages);
 		}
 		
-		//countPlayersVictoryPoints();
-		//discardAllPlayersCards();
+		countPlayersVictoryPoints();
 	}
 
 	public void addPointActivate(Structure s, Player p, ArrayList<CommandMessage> messages)
@@ -408,29 +439,35 @@ public class Match2 {
 		
 	public void initMove(Player p, int move, int neib)
 	{
-		CommandMessage msg = new CommandMessage();
-		msg.setPlayerID(p.getID());
-		msg.setMsgType(CommandMessage.MOVE_TYPE);
-		msg.setAction(move);
-		msg.setCardID(p.getChosenCard().getID());
-		msg.setPreference(neib);	
-		p.setCommand(msg);
-		p.sendCommandMessage();
+		if ( age != 4 )
+		{
+			CommandMessage msg = new CommandMessage();
+			msg.setPlayerID(p.getID());
+			msg.setMsgType(CommandMessage.MOVE_TYPE);
+			msg.setAction(move);
+			msg.setCardID(p.getChosenCard().getID());
+			msg.setPreference(neib);	
+			p.setCommand(msg);
+			p.sendCommandMessage();
+		}
 	}
 	
 	public void initResourceChoice(Player p, ArrayList<Resources> resChoices)
 	{
-		CommandMessage msg = new CommandMessage();
-		msg.setPlayerID(p.getID());
-		msg.setMsgType(CommandMessage.RESOURCE_CHOICE_TYPE);
-		msg.setResourceChoices(resChoices);
-		p.setCommand(msg);
-		p.sendCommandMessage();
+		if ( age != 4 )
+		{
+			CommandMessage msg = new CommandMessage();
+			msg.setPlayerID(p.getID());
+			msg.setMsgType(CommandMessage.RESOURCE_CHOICE_TYPE);
+			msg.setResourceChoices(resChoices);
+			p.setCommand(msg);
+			p.sendCommandMessage();
+		}
 	}
 		
 	public void initScienceChoice(Player p, ArrayList<ScientificSymbols> symbs)
 	{
-		if ( age == 3 && turn  == 6 )
+		if ( age == 4 )
 		{
 			CommandMessage msg = new CommandMessage();
 			msg.setPlayerID(p.getID());
@@ -497,25 +534,26 @@ public class Match2 {
 	public Match2 dispatch(ArrayList<CommandMessage> messages)
 	{
 		if ( messages == null ) return this;
-		
+		for ( Player p : players )
+		{
+			System.out.println(p.getUsername() + " has " + p.getResources().getCoins() + " coins.");
+		}
 		int type = messages.get(0).getMsgType();
-		//for ( CommandMessage msg: messages )
-		//{
-			switch ( type )
-			{
-				case CommandMessage.RESOURCE_CHOICE_TYPE:
-					beginningOfTurnEffects(messages);
-					break;
+		switch ( type )
+		{
+			case CommandMessage.RESOURCE_CHOICE_TYPE:
+				beginningOfTurnEffects(messages);
+				break;
 					
-				case CommandMessage.MOVE_TYPE:
-					runTurns(messages);
-					break;
+			case CommandMessage.MOVE_TYPE:
+				runTurns(messages);
+				break;
 					
-				case CommandMessage.SCIENTIFIC_SYMBOL_TYPE:
-					endOfGameSpecialEffects(messages);
-					break;
-			}
-		//}
+			case CommandMessage.SCIENTIFIC_SYMBOL_TYPE:
+				endOfGameSpecialEffects(messages);
+				turn = 2;
+				break;
+		}
 		return this;
 	}
 	
@@ -573,7 +611,7 @@ public class Match2 {
 			{
 				//endOfGameSpecialEffects(players, messages);
 				//countPlayersVictoryPoints();
-				//discardAllPlayersCards();
+				discardAllPlayersCards();
 			}
 		}
 		else 
