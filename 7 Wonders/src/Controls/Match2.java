@@ -195,7 +195,7 @@ public class Match2 {
 		return null;
 	}
 	
-	public void addAIPlayer(long id, String name)
+	public void addAIPlayer(long id, String name, int aidif)
 	{
 		players.add(new AIPlayer(id, name, new Intermediate()));
 	}
