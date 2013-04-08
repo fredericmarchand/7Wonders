@@ -71,6 +71,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public int canBuildWonderStage(Structure s) 
 	{
+		user.chooseCard(s);
 		return user.canBuildStage(match.getLeftNeighbor(user), match.getRightNeighbor(user));
 	}
 
@@ -139,6 +140,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 //			user.getScientificSymbols().addScientifcSymbols(sy);
 //		}
 		match.initScienceChoice(user, symbs);
+
 		
 	}
 
@@ -201,7 +203,8 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public boolean chooseCard(Structure s) 
 	{
-		System.out.println("chooseCard: " + user.getCards());
+		//System.out.println("chooseCard: " + user.getCards());
+		/*
 		for ( int i = 0; i < user.getCards().size(); ++i )
 		{
 			if ( user.getCards().get(i).getID() == s.getID() )
@@ -209,7 +212,8 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 				user.chooseCard(i);
 				break;
 			}
-		}
+		}*/
+		user.chooseCard(s);
 		return true;
 	}
 
@@ -326,7 +330,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 			resources = new ArrayList<Resources>();
 		match.initResourceChoice(user, resources);
 		if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
-					frame.update();
+			frame.update();
 		
 	}
 	
@@ -353,6 +357,11 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	{
 		//String name = JOptionPane.showInputDialog("What is your username? ");
 		//NetworkGameController gc = new NetworkGameController(new Player(name, 0), new Match2());
+	}
+	
+	public void updateFrame()
+	{
+		frame.update();
 	}
 
 	

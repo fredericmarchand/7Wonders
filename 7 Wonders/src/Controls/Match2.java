@@ -259,7 +259,7 @@ public class Match2 {
 	//server side run turns if message typeid == move
 	public void runTurns(ArrayList<CommandMessage> messages)
 	{		
-		for ( Player p: getPlayers() )
+		/*for ( Player p: getPlayers() )
 		{
 			 System.out.print("player i cards: [");
 			 for (Structure s: p.getCards())
@@ -267,7 +267,7 @@ public class Match2 {
 				 System.out.print(s.getName() + ", ");
 			 }
 			 System.out.println("]");
-		}
+		}*/
 		for ( CommandMessage msg: messages )
 		{
 			Player p = getPlayerByID(msg.getPlayerID());
@@ -349,7 +349,7 @@ public class Match2 {
 				addPointActivate(s, p, messages);
 		}
 		
-		countPlayersVictoryPoints();
+		//countPlayersVictoryPoints();
 		//discardAllPlayersCards();
 	}
 
@@ -421,12 +421,15 @@ public class Match2 {
 		
 	public void initScienceChoice(Player p, ArrayList<ScientificSymbols> symbs)
 	{
-		CommandMessage msg = new CommandMessage();
-		msg.setPlayerID(p.getID());
-		msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE);
-		msg.setScientificSymbol(symbs);
-		p.setCommand(msg);
-		p.sendCommandMessage();
+		if ( age == 3 && turn  == 6 )
+		{
+			CommandMessage msg = new CommandMessage();
+			msg.setPlayerID(p.getID());
+			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE);
+			msg.setScientificSymbol(symbs);
+			p.setCommand(msg);
+			p.sendCommandMessage();
+		}
 	}
 	//client moves
 	
@@ -530,7 +533,7 @@ public class Match2 {
 		}
 		endOfTurnSpecialEffects(players);
 		CardHandler.PassCardsToNeighbors(getPlayers(), getAge());
-		if ( getTurn() == 6 )
+		if ( turn == 6 )
 		{
 			for ( Player p: players )
 			{

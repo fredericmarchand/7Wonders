@@ -221,7 +221,7 @@ public class SevenWondersProtocol {
 				break;
 			case 10: //MilitaryDefeat Bonus, nothing to copy
 				break;
-			case 11: 
+			case 11: //wonderstage victorypointbonus
 				spStuff.add(((WonderStageVictoryPointBonus)sp).amountOfPoints());
 				spStuff.add(((WonderStageVictoryPointBonus)sp).includeNeighbors());
 				break;
@@ -478,6 +478,7 @@ public class SevenWondersProtocol {
 			wb.buildStructure(decodeStructure(encoding));
 		}
 		
+		wb.getStages().clear();
 		int stageSize = encoding.get(index++);
 		for ( int i = 0; i < stageSize; ++i )
 		{
