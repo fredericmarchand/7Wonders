@@ -129,6 +129,8 @@ public class NetworkListener extends Listener{
 	
 	@SuppressWarnings("unchecked")
 	public void pushMatchFunctions(Object[] ary){
+		for(int i = 0 ;i<3;i++)
+			System.out.println("[CLIENT] partials content" + ary[i]);
 		mclient.pushToUser((ArrayList<Integer>)ary[0],(ArrayList<Long>)ary[1],(ArrayList<String>)ary[2]);
 	}
 
