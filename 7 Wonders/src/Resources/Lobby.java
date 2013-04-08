@@ -16,17 +16,17 @@ import client.MClient;
 
 @SuppressWarnings("serial")
 public class Lobby extends JFrame implements ListSelectionListener {
-	private JList<Long> list;
+	private JList<String> list;
 	private JButton create,join,quit,refresh;
 	JPanel buttonPanel;
 	private int index = 0;
 	private MClient mclient;
-	private DefaultListModel<Long> listModel;
+	private DefaultListModel<String> listModel;
 	
 	public Lobby(MClient c){
 		setLayout(new BorderLayout());
-		listModel = new DefaultListModel<Long>();
-		list = new JList<Long>(listModel);
+		listModel = new DefaultListModel<String>();
+		list = new JList<String>(listModel);
 		create = new JButton("CREATE");
 		refresh = new JButton("REFRESH");
 		join = new JButton("JOIN");
@@ -96,18 +96,18 @@ public class Lobby extends JFrame implements ListSelectionListener {
 		
 	}
 
-	public void populate(){
-		for(Long id: mclient.getMatchList()){
-			System.out.println("Lobby populate: " + id);
-			listModel.insertElementAt(id, index);
-			index++;
-		}
-	}
+//	public void populate(){
+//		for(Long id: mclient.getMatchList()){
+//			System.out.println("Lobby populate: " + id);
+//			listModel.insertElementAt(id, index);
+//			index++;
+//		}
+//	}
 	
-	public void update(ArrayList<Long> list){
+	public void update(ArrayList<String> list){
 		listModel.clear();
-		for(Long id: list){
-			listModel.insertElementAt(id, index++);
+		for(String  s: list){
+			listModel.insertElementAt(s, index++);
 		}
 		index = 0;
 	}

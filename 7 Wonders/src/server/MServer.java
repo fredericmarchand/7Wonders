@@ -47,9 +47,21 @@ public class MServer {
 		server.start();
 
 	}
+	
+	public ArrayList<String> getLobbyList(){
+		ArrayList<String> lobbyList = new ArrayList<String>();
+		String matchName;
+		for(Match e : matchList){
+			matchName = (e.getMatch_ID() + " | " + e.getHostUName() + "." 
+					+ e.getHostID() + " 's match  | " + e.getConnectionCount() +
+					"/" + e.getMaxPlayerCount() + " players");
+			lobbyList.add(matchName);
+		}
+		return lobbyList;		
+	}
 
-	public long createMatch(int h, int ai) {
-		Match m = new Match(h, ai,this);
+	public long createMatch(int h, int ai, long hid, String hname ) {
+		Match m = new Match(h, ai,this,hid,hname);
 		matchList.add(m);
 		return m.getMatch_ID();
 	}

@@ -35,7 +35,7 @@ public class linkNetworkView {
 		lobby.update(mclient.getMatchList());
 	}
 	
-	public void updateLobby(ArrayList<Long> list) {
+	public void updateLobby(ArrayList<String> list) {
 		lobby.update(list);
 	}
 	
