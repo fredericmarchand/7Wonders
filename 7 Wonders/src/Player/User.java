@@ -15,7 +15,7 @@ public class User {
 	private Match2 currentMatch;
 	private CommandMessage msg;
 	private MClient client;
-	private NetworkGameController gnc;
+	private boolean lastMessage;
 	
 	//default constructor
 	public User(){}
@@ -59,12 +59,15 @@ public class User {
 	public void setCommand(CommandMessage msg)
 	{
 		this.msg = msg;
+		if ( (msg.getAction() == CommandMessage.MOVE_TYPE && currentMatch.getAge() != 4) || msg.getAction() == CommandMessage.SCIENTIFIC_SYMBOL_TYPE ) 
+			lastMessage = true;
+		else lastMessage = false;
 	}
 	
 	public void sendCommandMessage()
 	{
 		if ( client != null && msg != null )
-			client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg));
+			client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
 		System.out.println("[CLIENT ------ USER] MClient : \t" + client );
 		System.out.println("Send Command Message: " + msg);
 	}
@@ -98,8 +101,8 @@ public class User {
 			SevenWondersProtocol.assignUsernamesAndIDs(mat, names, ids);
 			mat.setLocalPlayerID(ID);
 			updateMatch(mat);
-			//if ( gnc != null )
-				//gnc.updateFrame();
+			if ( client != null && client.getMainFrame() != null )
+				client.getMainFrame().updateValues();
 		}
 	}
 	
@@ -110,6 +113,6 @@ public class User {
 	
 	public void startMatch()
 	{
-		client.getMainFrame().startController(gnc = new NetworkGameController(client, currentMatch));
+		client.getMainFrame().startController(new NetworkGameController(client, currentMatch));
 	}
 }
