@@ -125,8 +125,6 @@ public class MClient {
 		try {
 			client.connect(5000, ip, port);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
 			client.stop();
 			link.failConnect();
 		}
@@ -197,7 +195,7 @@ public class MClient {
 	public void sendMatchRequest(String mname) {
 		Packet13MatchJoinRequest rPacket = new Packet13MatchJoinRequest();
 		rPacket.setCID(ID);
-		rPacket.setMID(Long.parseLong(mname));
+		rPacket.setMID(Long.parseLong((mname.split(" | " ))[0]));
 		rPacket.setUName(username);
 
 		client.sendTCP(rPacket);

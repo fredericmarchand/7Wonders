@@ -37,7 +37,7 @@ public class Match {
 	private MServer server;
 	private Match2 controller;
 
-	public Match(int h, int ai, MServer m,long id, String uname) {
+	public Match(int h, int ai, MServer m,long id, String uname){
 		nAI = ai;
 		server = m;
 		hostID = id;
