@@ -46,6 +46,9 @@ public class Chat implements Runnable {
 		chatFrame.clear();
 		chatFrame.setVisible(false);
 	}
+	public void setStart(boolean b){
+		chatFrame.setStart(b);
+	}
 	public void run(){
 		countdown();
 	}

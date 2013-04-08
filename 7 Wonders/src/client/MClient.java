@@ -211,7 +211,7 @@ public class MClient {
 	//signal user
 
 	public void startMatch() {
-		//link.getChat().countdown();
+		link.getChat().setStart(false);
 		user.startMatch();
 	}
 	
