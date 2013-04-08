@@ -15,7 +15,7 @@ public class User {
 	private Match2 currentMatch;
 	private CommandMessage msg;
 	private MClient client;
-	//private NetworkGameController gnc;
+	private NetworkGameController gnc;
 	
 	//default constructor
 	public User(){}
@@ -99,7 +99,7 @@ public class User {
 			mat.setLocalPlayerID(ID);
 			updateMatch(mat);
 			//if ( gnc != null )
-			//	gnc.updateFrame();
+				//gnc.updateFrame();
 		}
 	}
 	
@@ -110,6 +110,6 @@ public class User {
 	
 	public void startMatch()
 	{
-		client.getMainFrame().startController(new NetworkGameController(client, currentMatch));
+		client.getMainFrame().startController(gnc = new NetworkGameController(client, currentMatch));
 	}
 }

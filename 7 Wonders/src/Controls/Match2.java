@@ -272,6 +272,13 @@ public class Match2 {
 		{
 			Player p = getPlayerByID(msg.getPlayerID());
 			p.chooseCardByID(msg.getCardID());
+		}
+
+		handleAIPlayerMoves();
+		for ( CommandMessage msg: messages )
+		{
+			Player p = getPlayerByID(msg.getPlayerID());
+			p.chooseCardByID(msg.getCardID());
 			switch ( msg.getAction() )
 			{
 				case 1:
@@ -288,7 +295,6 @@ public class Match2 {
 			}
 		}
 		
-		handleAIPlayerMoves();
 		endOfTurn();			
 	}
 	
