@@ -23,18 +23,18 @@ import java.awt.Font;
 public class LobbyPanel extends JPanel implements ListSelectionListener {
 	private static final long serialVersionUID = 1L;
 
-	private JList<Long> list;
+	private JList<String> list;
 	private JLabel bgimg;
 	private JButton create, join, quit, refresh;
 	private int index = 0;
 	private MClient mclient;
-	private DefaultListModel<Long> listModel;
+	private DefaultListModel<String> listModel;
 	
 	public LobbyPanel(MClient c) {
 		setLayout(null);
 		setSize(1280, 860);
 		
-		listModel = new DefaultListModel<Long>();
+		listModel = new DefaultListModel<String>();
 		
 		create = new JButton("Create");
 		create.setLocation(278, 231);
@@ -56,7 +56,7 @@ public class LobbyPanel extends JPanel implements ListSelectionListener {
 		quit.setLocation(278, 525);
 		quit.setFont(new Font("Tahoma", Font.BOLD, 22));
 		
-		list = new JList<Long>(listModel);
+		list = new JList<String>(listModel);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setSelectedIndex(0);
 		list.addListSelectionListener(this);
@@ -118,9 +118,9 @@ public class LobbyPanel extends JPanel implements ListSelectionListener {
 		setVisible(true);
 	}
 	
-	public void update(ArrayList<Long> list){
+	public void update(ArrayList<String> list){
 		listModel.clear();
-		for(Long id: list) listModel.insertElementAt(id, index++);
+		for(String id: list) listModel.insertElementAt(id, index++);
 		index = 0;
 	}
 	

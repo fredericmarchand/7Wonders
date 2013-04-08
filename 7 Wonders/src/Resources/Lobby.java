@@ -14,18 +14,18 @@ import client.MClient;
 
 public class Lobby extends JFrame implements ListSelectionListener {
 	private static final long serialVersionUID = 1L;
+	private JList<String> list;
 	
-	private JList<Long> list;
 	private JButton create, join, quit, refresh;
 	JPanel buttonPanel;
 	private int index = 0;
 	private MClient mclient;
-	private DefaultListModel<Long> listModel;
+	private DefaultListModel<String> listModel;
 	
 	public Lobby(MClient c){
 		getContentPane().setLayout(new BorderLayout());
-		listModel = new DefaultListModel<Long>();
-		list = new JList<Long>(listModel);
+		listModel = new DefaultListModel<String>();
+		list = new JList<String>(listModel);
 		create = new JButton("CREATE");
 		refresh = new JButton("REFRESH");
 		join = new JButton("JOIN");
@@ -88,10 +88,10 @@ public class Lobby extends JFrame implements ListSelectionListener {
 	
 	public void valueChanged(ListSelectionEvent e) {}
 	
-	public void update(ArrayList<Long> list){
+	public void update(ArrayList<String> list){
 		listModel.clear();
-		for(Long id: list){
-			listModel.insertElementAt(id, index++);
+		for(String  s: list){
+			listModel.insertElementAt(s, index++);
 		}
 		index = 0;
 	}

@@ -69,7 +69,7 @@ public class NetworkListener extends Listener {
 			loginAnswer.setAccepted(true);
 			loginAnswer.setIDValue(mserver.getID());
 			mserver.incID();
-			loginAnswer.setObject(mserver.getMatchID_List());
+			loginAnswer.setObject(mserver.getLobbyList());
 			c.sendTCP(loginAnswer);
 		}
 		// modify to handle objects from game
@@ -79,7 +79,7 @@ public class NetworkListener extends Listener {
 				System.out.println("[SERVER ---------- LIST Received packet");
 				Packet4Object l = new Packet4Object();
 				// l.setID(1);
-				l.setObject(mserver.getMatchID_List());
+				l.setObject(mserver.getLobbyList());
 				c.sendTCP(l);
 			}
 
@@ -142,8 +142,10 @@ public class NetworkListener extends Listener {
 		if (o instanceof Packet12CreateMatch) {
 			System.out.println("[SERVER ---------- CREATE Received packet");
 			long matchID = mserver.createMatch(
-					((Packet12CreateMatch) o).getHuman(),
-					((Packet12CreateMatch) o).getAI());
+					((Packet12CreateMatch)o).getHuman(),
+					((Packet12CreateMatch)o).getAI(),
+					((Packet12CreateMatch)o).getCID(),
+					((Packet12CreateMatch)o).getUName());
 			
 			System.out.println("[SERVER] New Match : \t " + matchID);
 			

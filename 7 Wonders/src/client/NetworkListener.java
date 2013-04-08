@@ -56,7 +56,7 @@ public class NetworkListener extends Listener{
 				c.close();
 				
 			}
-			mclient.setMatchList((ArrayList<Long>)((Packet1LoginAnswer)o).getObject());
+			mclient.setMatchList((ArrayList<String>)((Packet1LoginAnswer)o).getObject());
 			mclient.setID(((Packet1LoginAnswer)o).getIDValue());
 			mclient.createUser();
 			System.out.println("[CLIENT] Client MCLIENT :  \t" + mclient);
@@ -81,7 +81,7 @@ public class NetworkListener extends Listener{
 			}
 		}
 		if(o instanceof Packet4Object){			
-			mclient.getLink().updateLobby((ArrayList<Long>)((Packet4Object)o).getObject());
+			mclient.getLink().updateLobby((ArrayList<String>)((Packet4Object)o).getObject());
 		}
 		if(o instanceof Packet6ChatMsg){
 			System.out.println("[CLIENT] Received msg packet");
@@ -107,8 +107,6 @@ public class NetworkListener extends Listener{
 						mclient.startMatch();
 						break;
 					}
-			//eliminate countdown causing so many god damn errors.
-			//mclient.getLink().getChat().run();
 		}
 		if(o instanceof Packet14HostCreateMatch){
 			System.out.println("[CLIENT] Match set to: \t " + ((Packet14HostCreateMatch)o).getMID());
@@ -131,6 +129,8 @@ public class NetworkListener extends Listener{
 	
 	@SuppressWarnings("unchecked")
 	public void pushMatchFunctions(Object[] ary){
+		for(int i = 0 ;i<3;i++)
+			System.out.println("[CLIENT] partials content" + ary[i]);
 		mclient.pushToUser((ArrayList<Integer>)ary[0],(ArrayList<Long>)ary[1],(ArrayList<String>)ary[2]);
 	}
 

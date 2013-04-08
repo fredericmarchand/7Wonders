@@ -37,7 +37,7 @@ public class linkNetworkView {
 		return lobby;
 	}
 	
-	public void updateLobby(ArrayList<Long> list) {
+	public void updateLobby(ArrayList<String> list) {
 		lobby.update(list);
 	}
 	
