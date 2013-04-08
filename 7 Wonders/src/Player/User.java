@@ -104,7 +104,11 @@ public class User {
 			mat.setLocalPlayerID(ID);
 			updateMatch(mat);
 			if ( client != null && client.getMainFrame() != null )
+			{
 				client.getMainFrame().updateValues();
+				if ( currentMatch.getAge() == 4 && currentMatch.getTurn() == 1 )
+					client.getMainFrame().updateChooseScience();
+			}
 		}
 	}
 	

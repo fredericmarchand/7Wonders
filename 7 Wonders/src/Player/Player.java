@@ -300,7 +300,7 @@ public class Player extends User {
 					|| chosenCard.canBuildForFree(wonderBoard)))  )
 			{
 				wonderBoard.buildStructure(chosenCard);
-				resources.addCoins(-1*chosenCard.getResourceCost().getCoins());
+				resources.deductCoins(chosenCard.getResourceCost().getCoins());
 				for ( SpecialEffect se : chosenCard.getEffects() )
 				{				
 					activateBuildEffect(se);
@@ -467,7 +467,7 @@ public class Player extends User {
 		leftNeighbor.getOwnedResources().addCoins((int)revenue.get(0));
 		rightNeighbor.getOwnedResources().addCoins((int)revenue.get(1));
 		resources.deductCoins((int)revenue.get(0) + (int)revenue.get(1));
-		purchased.deductCoins(purchased.getCoins());
+		//purchased.deductCoins(purchased.getCoins());
 		
 		return true;
 	}
