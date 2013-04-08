@@ -194,7 +194,7 @@ public class AIPlayer extends Player {
 	
 		for(Integer i : getStrategicIndexes(this.favor))
 		{
-			selectionNumbers.set(i, (selectionNumbers.get(i) + 1));
+			selectionNumbers.set(i, (selectionNumbers.get(i) + 2));
 		}
 		
 		for(Integer i : freeIndexes(this))
@@ -206,8 +206,13 @@ public class AIPlayer extends Player {
 		{
 			for(Integer i : getResourceIndexes())
 			{
-				selectionNumbers.set(i, (selectionNumbers.get(i) + 2));
+				selectionNumbers.set(i, (selectionNumbers.get(i) + 1));
 			}
+		}
+		
+		for(Integer i : getResourceIndexes())
+		{
+			selectionNumbers.set(i, (selectionNumbers.get(i) + 1));
 		}
 		
 		for(Integer i : getStrategicIndexes(nextPlayerStrat(getNextPlayer(leftNeighbor, rightNeighbor))))
