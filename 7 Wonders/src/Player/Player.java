@@ -505,7 +505,7 @@ public class Player extends User {
 		
 		int price = sumup.bulkPrice(missing, leftNeighbor.getResources(), rightNeighbor.getResources());
 		
-		if ( Resources.addResources(leftNeighbor.getResources(), rightNeighbor.getResources()).hasRequiredResources(missing) 
+		if ( Resources.addResources(leftNeighbor.getResources(), rightNeighbor.getResources()).clearCoins().hasRequiredResources(missing)
 				 && price <= resources.getCoins() )
 			return true;
 		return false;
