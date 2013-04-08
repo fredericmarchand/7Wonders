@@ -104,6 +104,7 @@ public class Packet {
 		private int numHuman,numAI;
 		private long clientID;
 		private String username;
+		private int aiDifficulty;
 		public void setHuman(int x){numHuman = x;}
 		public int getHuman(){return numHuman;}
 		public void setAI(int x){numAI = x;}
@@ -112,10 +113,8 @@ public class Packet {
 		public void setCID(long id){clientID=id;}
 		public String getUName(){return username;}
 		public void setUName(String s){username = s;}
-		
-		
-		
-		
+		public int getAIDiff(){return aiDifficulty;}
+		public void setAIDiff(int i){aiDifficulty = i;}		
 	}
 	public static class Packet13MatchJoinRequest{
 		private long matchID;
