@@ -82,6 +82,8 @@ public class Resources {
 			return false;
 		if ( required.wood > wood )
 			return false;
+		if ( required.getCoins() > coins )
+			return false;
 
 		//otherwise return true;
 		return true;
@@ -186,6 +188,12 @@ public class Resources {
 	public void addPapyrus(int papyrus)
 	{
 		this.papyrus += papyrus;
+	}
+	
+	public Resources clearCoins()
+	{
+		coins = 0;
+		return this;
 	}
 	
 	

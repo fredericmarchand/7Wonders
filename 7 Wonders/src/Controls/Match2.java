@@ -462,7 +462,7 @@ public class Match2 {
 		
 	public void initScienceChoice(Player p, ArrayList<ScientificSymbols> symbs)
 	{
-		if ( age == 3 && turn  == 6 || age == 4 )
+		if ( age == 4 )
 		{
 			CommandMessage msg = new CommandMessage();
 			msg.setPlayerID(p.getID());
