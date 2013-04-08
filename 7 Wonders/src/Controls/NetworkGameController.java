@@ -71,6 +71,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public int canBuildWonderStage() 
 	{
+		user.chooseCard(s);
 		return user.canBuildStage(match.getLeftNeighbor(user), match.getRightNeighbor(user));
 	}
 
@@ -201,7 +202,8 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public boolean chooseCard(Structure s) 
 	{
-		System.out.println("chooseCard: " + user.getCards());
+		//System.out.println("chooseCard: " + user.getCards());
+		/*
 		for ( int i = 0; i < user.getCards().size(); ++i )
 		{
 			if ( user.getCards().get(i).getID() == s.getID() )
@@ -209,7 +211,8 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 				user.chooseCard(i);
 				break;
 			}
-		}
+		}*/
+		user.chooseCard(s);
 		return true;
 	}
 

@@ -259,7 +259,7 @@ public class Match2 {
 	//server side run turns if message typeid == move
 	public void runTurns(ArrayList<CommandMessage> messages)
 	{		
-		for ( Player p: getPlayers() )
+		/*for ( Player p: getPlayers() )
 		{
 			 System.out.print("player i cards: [");
 			 for (Structure s: p.getCards())
@@ -267,7 +267,7 @@ public class Match2 {
 				 System.out.print(s.getName() + ", ");
 			 }
 			 System.out.println("]");
-		}
+		}*/
 		for ( CommandMessage msg: messages )
 		{
 			Player p = getPlayerByID(msg.getPlayerID());
