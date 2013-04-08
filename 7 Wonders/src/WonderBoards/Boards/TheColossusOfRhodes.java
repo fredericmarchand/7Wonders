@@ -69,7 +69,7 @@ public class TheColossusOfRhodes extends WonderBoard {
 	{
 		for (WonderBoardStage s : stages)
 		{
-			if (!s.isBuilt())
+			if ( !s.isBuilt() )
 			{
 				return s.build(card, funds);
 			}

@@ -80,6 +80,11 @@ public class WonderBoardStage {
 		effects.addAll(stg.effects);
 	}
 	
+	public void setResourceCost(Resources r)
+	{
+		resourceCost = r;
+	}
+	
 
 
 }

@@ -139,6 +139,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 //		{
 //			user.getScientificSymbols().addScientifcSymbols(sy);
 //		}
+		if ( match.getAge() != 4 ) return;
 		match.initScienceChoice(user, symbs);
 
 		
@@ -181,10 +182,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 				}
 			}
 		}
-		//for ( Resources r: resources )
-	//	{
-	//		System.out.println(r.toString());
-	//	}
 		return resources;
 	}
 
@@ -359,10 +356,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		//NetworkGameController gc = new NetworkGameController(new Player(name, 0), new Match2());
 	}
 	
-	public void updateFrame()
-	{
-		frame.update();
-	}
 
 	
 }

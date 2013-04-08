@@ -136,6 +136,7 @@ public class SevenWondersProtocol {
 	{
 		ArrayList<Integer> stageStuff = new ArrayList<Integer>();
 		stageStuff.add(stage.isBuilt() ? 1 : 0);
+		stageStuff.addAll(encodeResource(stage.getResourceCost()));
 		stageStuff.add(stage.getEffects().size());
 		for ( SpecialEffect sp: stage.getEffects() )
 		{
@@ -491,6 +492,7 @@ public class SevenWondersProtocol {
 	{
 		WonderBoardStage stg = new WonderBoardStage();
 		stg.forceBuild(encoding.get(index++));
+		stg.setResourceCost(decodeResources(encoding));
 		int spSize = encoding.get(index++);
 		for ( int i = 0; i < spSize; ++i )
 		{
