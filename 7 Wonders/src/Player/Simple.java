@@ -36,7 +36,13 @@ public class Simple implements Strategy{
 			//	System.out.print(s.getName() + ", ");
 			//}
 			//System.out.println("]");
-			p.chooseCard(0);
+			if (p.cards != null)
+				p.chooseCard(0);
+			else{
+				System.out.println("*****Deck Empty!*****");
+				return;
+			}
+				
 			int result = p.canBuildStage(leftNeighbor, rightNeighbor);
 			switch ( result )
 			{
@@ -57,7 +63,9 @@ public class Simple implements Strategy{
 		{
 			p.discard(discarded);
 		}
-		else
+		else if (p.cards != null)
 			p.cards.remove(p.chosenCardIndex);
+		else
+			System.out.println("*****Deck Empty!*****");	
 	}
 }
