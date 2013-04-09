@@ -60,6 +60,7 @@ public class Moderate implements Strategy{
 		{
 			p.discard(discarded);
 		}
-		p.cards.remove(p.chosenCardIndex);
+		else
+			p.cards.remove(p.chosenCardIndex);
 	}
 }
