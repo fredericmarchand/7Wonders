@@ -101,12 +101,14 @@ public class Match {
 		AI_Names.add("Javaris Jamar Javarison-Lamar");
 		AI_Names.add("X-wing @aliciousness");
 		AI_Names.add("Johny Whiplash");
+		AI_Names.add("MaxGhost");
+		AI_Names.add("Deedee Muffmuncher");
 	}
 
 	public String randomName(ArrayList<String> list){
 		String name;
 		r = new Random();
-		int index =  r.nextInt(list.size())-1;
+		int index =  r.nextInt(list.size());
 		name = list.get(index);
 		list.remove(name);
 		return name;
