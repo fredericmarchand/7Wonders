@@ -32,7 +32,7 @@ public class MServer {
 
 	public MServer() throws IOException {
 
-		server = new Server(16382,16382);
+		server = new Server(16382, 16382);
 		
 		list = new ArrayList<Object>();
 		matchList = new ArrayList<Match>();

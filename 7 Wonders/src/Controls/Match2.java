@@ -539,6 +539,15 @@ public class Match2 {
 		{
 			System.out.println(p.getUsername() + " has " + p.getResources().getCoins() + " coins.");
 		}
+		for ( Player p : players )
+		{
+			System.out.print(p.getUsername() + "[");
+			for ( Structure s: p.getCards() )
+			{
+				System.out.print(s.getName()+ ", ");
+			}
+			System.out.println("]");
+		}
 		int type = messages.get(0).getMsgType();
 		switch ( type )
 		{
