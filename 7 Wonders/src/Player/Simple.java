@@ -8,6 +8,7 @@ public class Simple implements Strategy{
 	//Tries to build a random card with takes priority, if it cant it builds a stage, if it cant build a stage it discards the card.
 	public void strategicPick(AIPlayer p, ArrayList<Structure> discarded, Player leftNeighbor, Player rightNeighbor){
 		boolean did = false;
+		p.resourceChoice();
 		for ( int index = 0; index < p.cards.size(); ++index )
 		{
 			int result;

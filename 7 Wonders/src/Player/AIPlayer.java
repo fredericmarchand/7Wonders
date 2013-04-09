@@ -1,6 +1,10 @@
 package Player;
 
 import Structures.Structure;
+import Structures.Effects.ResourceChoice;
+import Structures.Effects.SpecialEffect;
+import Tokens.Resources;
+import WonderBoards.WonderBoardStage;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -282,5 +286,69 @@ public class AIPlayer extends Player {
 			return getVictoryIndexes();
 	}
 	
+	//Handle Resource choice cards
+	public void resourceChoice()
+	{
+		
+		Random r = new Random();
+		for ( Structure s: this.getWonderBoard().getYellowCards() )
+		{
+			for ( SpecialEffect se: s.getEffects() )
+			{
+				if ( se.getID() == ResourceChoice.ResourceChoiceID )
+				{
+					ArrayList<Integer> list = new ArrayList<Integer>();
+					if ( ((ResourceChoice) se).getPossibilities().getOre() > 0 ) list.add(Resources.ORE_ID);
+					if ( ((ResourceChoice) se).getPossibilities().getStone() > 0 ) list.add(Resources.STONE_ID);
+					if ( ((ResourceChoice) se).getPossibilities().getWood() > 0 ) list.add(Resources.WOOD_ID);
+					if ( ((ResourceChoice) se).getPossibilities().getClay() > 0 ) list.add(Resources.CLAY_ID);
+					if ( ((ResourceChoice) se).getPossibilities().getGlass() > 0 ) list.add(Resources.GLASS_ID);
+					if ( ((ResourceChoice) se).getPossibilities().getLoom() > 0 ) list.add(Resources.LOOM_ID);
+					if ( ((ResourceChoice) se).getPossibilities().getPapyrus() > 0 ) list.add(Resources.PAPYRUS_ID);
+					((ResourceChoice) se).chooseResource(list.get(r.nextInt(list.size())), this);
+				}
+			}
+		}
+		
+		for ( Structure s: this.getWonderBoard().getBrownGreyCards() )
+		{
+			for ( SpecialEffect se: s.getEffects() )
+			{
+				if ( se.getID() == ResourceChoice.ResourceChoiceID )
+				{
+					ArrayList<Integer> list = new ArrayList<Integer>();
+					if ( ((ResourceChoice) se).getPossibilities().getOre() > 0 ) list.add(Resources.ORE_ID);
+					if ( ((ResourceChoice) se).getPossibilities().getStone() > 0 ) list.add(Resources.STONE_ID);
+					if ( ((ResourceChoice) se).getPossibilities().getWood() > 0 ) list.add(Resources.WOOD_ID);
+					if ( ((ResourceChoice) se).getPossibilities().getClay() > 0 ) list.add(Resources.CLAY_ID);
+					if ( ((ResourceChoice) se).getPossibilities().getGlass() > 0 ) list.add(Resources.GLASS_ID);
+					if ( ((ResourceChoice) se).getPossibilities().getLoom() > 0 ) list.add(Resources.LOOM_ID);
+					if ( ((ResourceChoice) se).getPossibilities().getPapyrus() > 0 ) list.add(Resources.PAPYRUS_ID);
+					((ResourceChoice) se).chooseResource(list.get(r.nextInt(list.size())), this);
+				}
+			}
+		}
+		for ( WonderBoardStage stg: this.getWonderBoard().getStages() )
+		{
+			if ( stg.isBuilt() )
+			{
+				for ( SpecialEffect se: stg.getEffects() )
+				{
+					if ( se.getID() == ResourceChoice.ResourceChoiceID )
+					{
+						ArrayList<Integer> list = new ArrayList<Integer>();
+						if ( ((ResourceChoice) se).getPossibilities().getOre() > 0 ) list.add(Resources.ORE_ID);
+						if ( ((ResourceChoice) se).getPossibilities().getStone() > 0 ) list.add(Resources.STONE_ID);
+						if ( ((ResourceChoice) se).getPossibilities().getWood() > 0 ) list.add(Resources.WOOD_ID);
+						if ( ((ResourceChoice) se).getPossibilities().getClay() > 0 ) list.add(Resources.CLAY_ID);
+						if ( ((ResourceChoice) se).getPossibilities().getGlass() > 0 ) list.add(Resources.GLASS_ID);
+						if ( ((ResourceChoice) se).getPossibilities().getLoom() > 0 ) list.add(Resources.LOOM_ID);
+						if ( ((ResourceChoice) se).getPossibilities().getPapyrus() > 0 ) list.add(Resources.PAPYRUS_ID);
+						((ResourceChoice) se).chooseResource(list.get(r.nextInt(list.size())), this);
+					}
+				}
+			}
+		}
+	}
 
 }
