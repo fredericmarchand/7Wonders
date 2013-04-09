@@ -33,6 +33,8 @@ public class CardsPanel extends JPanel {
 	private boolean showOptions[], showArrow[][];
 	private int canDoAction[][];
 	
+	private JLabel pausedLabel;
+	
 	private Controller controller;
 	private FreeBuildPanel fbp;
 	
@@ -59,6 +61,14 @@ public class CardsPanel extends JPanel {
 		cards = ca;
 		fbp = f;
 		fbp.setCardsPanel(this);
+		
+		pausedLabel = new JLabel("");
+		pausedLabel.setSize(1274, 280);
+		pausedLabel.setLocation(0, 0);
+		pausedLabel.setOpaque(false);
+		pausedLabel.setBackground(new Color(50, 50, 50, 200));
+		pausedLabel.setVisible(false);
+		add(pausedLabel);
 		
 		for (int i = 0; i < 7; i++) {
 			cardArr[i] = new JLabel();
@@ -177,6 +187,7 @@ public class CardsPanel extends JPanel {
 									else if (j == 1 && canDoAction[i][1] > 0) controller.buildWonderStage();
 									else if (j == 2) controller.discardChosen();
 									showOptions[i] = false;
+									//pausedLabel.setVisible(true);
 									break;
 								}
 							}
@@ -226,6 +237,10 @@ public class CardsPanel extends JPanel {
 				update();
 			}
 		};
+	}
+	
+	public void unpause() {
+		pausedLabel.setVisible(false);
 	}
 	
 	public void hideAllOptions() {
