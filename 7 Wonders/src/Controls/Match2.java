@@ -299,6 +299,7 @@ public class Match2 {
 		}
 
 		handleAIPlayerMoves();
+		
 		/*for ( Player p: getPlayers() )
 		{
 			 System.out.print("player i cards: [");
@@ -312,7 +313,7 @@ public class Match2 {
 		for ( CommandMessage msg: messages )
 		{
 			Player p = getPlayerByID(msg.getPlayerID());
-			p.chooseCardByID(msg.getCardID());
+			//p.chooseCardByID(msg.getCardID());
 			//System.out.println("=================================================== " + i++ + "================================");
 			switch ( msg.getAction() )
 			{
@@ -449,6 +450,7 @@ public class Match2 {
 			msg.setPreference(neib);	
 			p.setCommand(msg);
 			p.sendCommandMessage();
+			p.pause();
 		}
 	}
 	
@@ -462,6 +464,7 @@ public class Match2 {
 			msg.setResourceChoices(resChoices);
 			p.setCommand(msg);
 			p.sendCommandMessage();
+			p.pause();
 		}
 	}
 		
@@ -475,6 +478,7 @@ public class Match2 {
 			msg.setScientificSymbol(symbs);
 			p.setCommand(msg);
 			p.sendCommandMessage();
+			p.pause();
 		}
 	}
 	//client moves
@@ -534,20 +538,21 @@ public class Match2 {
 	public Match2 dispatch(ArrayList<CommandMessage> messages)
 	{
 		if ( messages == null ) return this;
-		System.out.println("====================================Message type: " + messages.get(0).getMsgType());
+		System.out.println("===============BEFORE=====================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
+		//for ( Player p : players )
+		//{
+		//	System.out.println(p.getUsername() + " has " + p.getResources().getCoins() + " coins.");
+		//}
 		for ( Player p : players )
 		{
-			System.out.println(p.getUsername() + " has " + p.getResources().getCoins() + " coins.");
-		}
-		for ( Player p : players )
-		{
-			System.out.print(p.getUsername() + "[");
+			System.out.print(p.getUsername() + " amount of cards : " + p.getCards().size() + " [");
 			for ( Structure s: p.getCards() )
 			{
 				System.out.print(s.getName()+ ", ");
 			}
 			System.out.println("]");
 		}
+		System.out.println("\n\n\n\n====================================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
 		int type = messages.get(0).getMsgType();
 		switch ( type )
 		{
@@ -564,6 +569,22 @@ public class Match2 {
 				countPlayersVictoryPoints();
 				break;
 		}
+		
+		System.out.println("=================AFTER===================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
+		//for ( Player p : players )
+		//{
+		//	System.out.println(p.getUsername() + " has " + p.getResources().getCoins() + " coins.");
+		//}
+		for ( Player p : players )
+		{
+			System.out.print(p.getUsername() + " amount of cards : " + p.getCards().size() + " [");
+			for ( Structure s: p.getCards() )
+			{
+				System.out.print(s.getName()+ ", ");
+			}
+			System.out.println("]");
+		}
+		System.out.println("\n\n\n\n====================================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
 		return this;
 	}
 	
@@ -585,11 +606,11 @@ public class Match2 {
 	
 	public void endOfTurn()
 	{
-		for ( Player p: players )
-		{
-			p.getCards().remove(p.getChosenCard());
-			p.chooseCard(null);
-		}
+		//for ( Player p: players )
+		//{
+			//p.getCards().remove(p.getChosenCard());
+			//p.chooseCard(null);
+		//}
 		endOfTurnSpecialEffects(players);
 		CardHandler.PassCardsToNeighbors(getPlayers(), getAge());
 		if ( turn == 6 )
@@ -643,7 +664,8 @@ public class Match2 {
 		{
 			if ( p.ai() )
 			{
-				((AIPlayer)p).pickCard(discarded, getLeftNeighbor(p), getRightNeighbor(p));
+				//((AIPlayer)p).pickCard(discarded, getLeftNeighbor(p), getRightNeighbor(p));
+				((AIPlayer)p).discard(discarded);
 			}
 
 		}

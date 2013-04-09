@@ -232,6 +232,14 @@ public class Player extends User {
 	public void chooseCard(Structure s)
 	{
 		chosenCard = s;
+		for ( int i = 0; i < cards.size(); ++i )
+		{
+			if ( s.getID() == cards.get(i).getID() )
+			{
+				chosenCardIndex = i;
+				break;
+			}
+		}
 	}
 	
 	public void addShields(int s)
@@ -299,6 +307,7 @@ public class Player extends User {
 					|| chosenCard.canBuildForFree(wonderBoard)))  )
 			{
 				wonderBoard.buildStructure(chosenCard);
+				cards.remove(chosenCardIndex);
 				resources.deductCoins(chosenCard.getResourceCost().getCoins());
 				for ( SpecialEffect se : chosenCard.getEffects() )
 				{				
@@ -318,6 +327,7 @@ public class Player extends User {
 	{
 		buyResources(leftNeighbor, rightNeighbor, chosenCard.getResourceCost(), preference);	
 		wonderBoard.buildStructure(chosenCard);
+		cards.remove(chosenCardIndex);
 		purchased = new Resources();
 		unavailableResources = new Resources();
 		extraResources = new Resources();
@@ -332,6 +342,7 @@ public class Player extends User {
 	{
 		WonderBoardStage stg = wonderBoard.getNextStage();
 		wonderBoard.buildStage(chosenCard, getTotalResources());
+		cards.remove(chosenCardIndex);
 		unavailableResources = new Resources();
 		extraResources = new Resources();
 		for ( SpecialEffect se : stg.getEffects() )
@@ -352,6 +363,7 @@ public class Player extends User {
 		buyResources(leftNeighbor, rightNeighbor, wonderBoard.getNextStageCost(), preference);
 			
 		wonderBoard.buildStage(chosenCard, Resources.addResources(purchased, Resources.addResources(unavailableResources, getResources())));
+		cards.remove(chosenCardIndex);
 		purchased = new Resources();
 		unavailableResources = new Resources();
 		extraResources = new Resources();

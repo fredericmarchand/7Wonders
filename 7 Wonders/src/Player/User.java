@@ -16,6 +16,7 @@ public class User {
 	private CommandMessage msg;
 	private MClient client;
 	private boolean lastMessage;
+	private boolean pause;
 	
 	//default constructor
 	public User(){}
@@ -23,11 +24,18 @@ public class User {
 	{
 		ID = id;
 		username = name;
+		pause = false;
 	}
 	
 	public String getUsername()
 	{
 		return username;
+	}
+	
+	public void pause()
+	{
+		if ( currentMatch != null )
+			pause = true;
 	}
 	
 	public long getID()
@@ -68,8 +76,10 @@ public class User {
 	
 	public void sendCommandMessage()
 	{
-		if ( client != null && msg != null )
+		if ( client != null && msg != null && !pause )
+		{
 			client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
+		}
 		System.out.println("[CLIENT ------ USER] MClient : \t" + client );
 		System.out.println("Send Command Message: " + msg);
 	}
@@ -96,6 +106,7 @@ public class User {
 			currentMatch = SevenWondersProtocol.decodeMatch(encoding);
 			SevenWondersProtocol.assignUsernamesAndIDs(currentMatch, names, ids);
 			currentMatch.setLocalPlayerID(ID);
+			pause = false;
 		}
 		else
 		{
@@ -103,6 +114,8 @@ public class User {
 			SevenWondersProtocol.assignUsernamesAndIDs(mat, names, ids);
 			mat.setLocalPlayerID(ID);
 			updateMatch(mat);
+			System.out.println("===================Current Age: " + currentMatch.getAge());
+			pause = false;
 			if ( client != null && client.getMainFrame() != null )
 			{
 				client.getMainFrame().updateValues();
