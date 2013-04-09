@@ -82,7 +82,7 @@ public class Match {
 		return connected;
 	}
 	public void genAI_Names(){
-		AI_Names.add("JP the Evil Frenchmen");
+		AI_Names.add("JP the Evil Frenchman");
 		AI_Names.add("Fred the French nightmare");
 		AI_Names.add("Danny Fingerbanging Lu");
 		AI_Names.add("Tyler the manchild");
@@ -93,9 +93,9 @@ public class Match {
 		AI_Names.add("Jay On'Rait");
 		AI_Names.add("DeeMoney");
 		AI_Names.add("Derp Tacos");
-		AI_Names.add("Scoish velociraptor maloish");
+		AI_Names.add("Scoish Velociraptor Maloish");
 		AI_Names.add("Hingle McCringleberry");
-		AI_Names.add("L'Carpetron OOKMARIAT");
+		AI_Names.add("L'Carpetron Dookmarriot");
 		AI_Names.add("Jackmerius Tacktheritrix");
 		AI_Names.add("SEQUESTER GRUNDELPLITH");
 		AI_Names.add("Javaris Jamar Javarison-Lamar");
