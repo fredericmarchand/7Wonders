@@ -212,11 +212,12 @@ public class MClient {
 
 
 	// return to lobby
-	
+	public void returnToLobby(){};
 	public void pushUserQuit(){
 		link.killChatFrame();
 		link.killMainFrame();
 	}
+	
 
 
 	// any class type sent over the network must be registered to the kryo
