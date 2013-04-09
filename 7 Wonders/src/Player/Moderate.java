@@ -10,6 +10,7 @@ public class Moderate implements Strategy{
 	//Follows a specific structure strategy while also blocking neighbors
 	public void strategicPick(AIPlayer p, ArrayList<Structure> discarded, Player leftNeighbor, Player rightNeighbor){
 		boolean did = false;
+		p.resourceChoice();
 		ArrayList<Integer> selectionNumbers = p.cardSelectionNumbers(leftNeighbor, rightNeighbor, 1);
 		
 		for ( int i = 0; i < p.cards.size(); ++i )
@@ -23,15 +24,15 @@ public class Moderate implements Strategy{
 			{
 			case 0: 
 				selectionNumbers.remove(Collections.max(selectionNumbers));
-				continue;
+				break;
 			
 			case 1: 
-				p.buildStructure();
+				p.buildStructure(leftNeighbor, rightNeighbor, 2);
 				did = true;
 				break;
 			case 2:
+				p.buildStructure();
 				did = true;
-				p.buildStructure(leftNeighbor, rightNeighbor, 2);
 				break;
 			}
 			if ( result != 0 ) break;
@@ -58,7 +59,7 @@ public class Moderate implements Strategy{
 				
 			case 2:
 				did = true;
-				p.buildStage(leftNeighbor, rightNeighbor, 2);
+				p.buildStage();
 				break;
 			}
 		}
@@ -66,8 +67,6 @@ public class Moderate implements Strategy{
 		{
 			p.discard(discarded);
 		}
-		else if (!p.cards.isEmpty())
-			p.cards.remove(p.chosenCardIndex);
 		else
 			System.out.println("*****Deck Empty!*****");	
 	}

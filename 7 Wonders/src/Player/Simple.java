@@ -8,6 +8,7 @@ public class Simple implements Strategy{
 	//Tries to build a random card with takes priority, if it cant it builds a stage, if it cant build a stage it discards the card.
 	public void strategicPick(AIPlayer p, ArrayList<Structure> discarded, Player leftNeighbor, Player rightNeighbor){
 		boolean did = false;
+		p.resourceChoice();
 		for ( int index = 0; index < p.cards.size(); ++index )
 		{
 			int result;
@@ -15,27 +16,21 @@ public class Simple implements Strategy{
 			result = p.canBuild(leftNeighbor, rightNeighbor);
 			switch ( result )
 			{
-			case 0: continue;
-			
+			case 0: 
+				break;
 			case 1: 
-				p.buildStructure();
+				p.buildStructure(leftNeighbor, rightNeighbor, 2);
 				did = true;
 				break;
 			case 2:
+				p.buildStructure();
 				did = true;
-				p.buildStructure(leftNeighbor, rightNeighbor, 2);
 				break;
 			}
 			if ( result != 0 ) break;
 		}
 		if ( !did )
 		{
-			//System.out.print("Printing AI Player cards: [");
-			//for ( Structure s: p.getCards() )
-			//{
-			//	System.out.print(s.getName() + ", ");
-			//}
-			//System.out.println("]");
 			if (!p.cards.isEmpty())
 				p.chooseCard(0);
 			else{
@@ -55,7 +50,7 @@ public class Simple implements Strategy{
 				
 			case 2:
 				did = true;
-				p.buildStage(leftNeighbor, rightNeighbor, 2);
+				p.buildStage();
 				break;
 			}
 		}
@@ -63,8 +58,6 @@ public class Simple implements Strategy{
 		{
 			p.discard(discarded);
 		}
-		else if (!p.cards.isEmpty())
-			p.cards.remove(p.chosenCardIndex);
 		else
 			System.out.println("*****Deck Empty!*****");	
 	}

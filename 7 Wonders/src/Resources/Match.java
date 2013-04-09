@@ -202,8 +202,8 @@ public class Match {
 			controller.dispatch(cmdMsgMatrix.get((m.getMsgType())));
 			System.out.println("[SERVER] LIST SIZE: \t " 
 			+ cmdMsgMatrix.get((m.getMsgType())).size());
-			for(Object o : cmdMsgMatrix.get((m.getMsgType())))
-				System.out.println("[SERVER] LIST CONTENTS: \t " + o);
+			//for(Object o : cmdMsgMatrix.get((m.getMsgType())))
+			//	System.out.println("[SERVER] LIST CONTENTS: \t " + o);
 					
 			cmdMsgMatrix.get((m.getMsgType())).clear();
 			
