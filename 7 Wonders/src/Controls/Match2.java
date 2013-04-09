@@ -534,6 +534,7 @@ public class Match2 {
 	public Match2 dispatch(ArrayList<CommandMessage> messages)
 	{
 		if ( messages == null ) return this;
+		System.out.println("====================================Message type: " + messages.get(0).getMsgType());
 		for ( Player p : players )
 		{
 			System.out.println(p.getUsername() + " has " + p.getResources().getCoins() + " coins.");
@@ -551,7 +552,7 @@ public class Match2 {
 					
 			case CommandMessage.SCIENTIFIC_SYMBOL_TYPE:
 				endOfGameSpecialEffects(messages);
-				turn = 2;
+				countPlayersVictoryPoints();
 				break;
 		}
 		return this;
@@ -602,15 +603,13 @@ public class Match2 {
 			}
 			
 			PlayerInteraction.SettleMilitaryConflicts(getPlayers(), getAge());
-			setAge(getAge()+1);
+			age += 1;
 			incPlayerAges();
 			turn = 1;
 			if ( getAge() == 2 ) CardHandler.DistributeCards(getPlayers(), getDeck());
 			if ( getAge() == 3 ) CardHandler.DistributeCards(getPlayers(), getDeck());
 			if ( getAge() == 4 ) 
 			{
-				//endOfGameSpecialEffects(players, messages);
-				//countPlayersVictoryPoints();
 				discardAllPlayersCards();
 			}
 		}

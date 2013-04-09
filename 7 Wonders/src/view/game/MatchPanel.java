@@ -287,13 +287,6 @@ public class MatchPanel extends JPanel implements Runnable {
 		
 	}
 	
-	public void updateChooseScience()
-	{
-		// Choose Science
-		needScience = controller.needToChooseScienceSymbol();
-		if(nextScience() != null) scp.setVisible(true);
-	}
-	
 	public Resources nextResource() {
 		if(needResources.size() > 0)
 			return needResources.remove(0);

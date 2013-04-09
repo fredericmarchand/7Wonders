@@ -105,8 +105,6 @@ public class User {
 			updateMatch(mat);
 			if ( client != null && client.getMainFrame() != null )
 			{
-				if ( currentMatch.getAge() == 4 && currentMatch.getTurn() == 1 )
-					client.getMainFrame().updateChooseScience();
 				client.getMainFrame().updateValues();
 			}
 		}
