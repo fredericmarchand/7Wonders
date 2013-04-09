@@ -17,6 +17,7 @@ public class User {
 	private MClient client;
 	private boolean lastMessage;
 	private boolean pause;
+	private int lastMessageID;
 	
 	//default constructor
 	public User(){}
@@ -41,6 +42,11 @@ public class User {
 	{
 		if ( currentMatch != null )
 			pause = true;
+	}
+	
+	public int getLastMsgID()
+	{
+		return lastMessageID;
 	}
 	
 	public long getID()
@@ -76,13 +82,14 @@ public class User {
 		//if ( (this.msg.getMsgType() == CommandMessage.MOVE_TYPE && currentMatch.getAge() != 4) || this.msg.getMsgType() == CommandMessage.SCIENTIFIC_SYMBOL_TYPE ) 
 		//	lastMessage = true;
 		//else 
-			lastMessage = false;
+		lastMessage = false;
 	}
 	
 	public void sendCommandMessage()
 	{
-		if ( client != null && msg != null && !pause )
+		if ( client != null && msg != null && !pause && lastMessageID != msg.getMsgType() )
 		{
+			lastMessageID = msg.getMsgType();
 			client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
 		}
 		//System.out.println("[CLIENT ------ USER] MClient : \t" + client );
@@ -123,15 +130,15 @@ public class User {
 			pause = false;
 			if ( client != null && client.getMainFrame() != null )
 			{
-				client.getMainFrame().updateValues();
+				client.getMainFrame().update();
 			}
 		}
 	}
 	
-	public void returnToLobby()
-	{
-		client.returnToLobby();
-	}
+	//public void returnToLobby()
+	//{
+	//	client.returnToLobby();
+	//}
 	
 	public void startMatch()
 	{

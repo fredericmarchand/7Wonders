@@ -517,7 +517,7 @@ public class Match2 {
 	{
 		CommandMessage msg = new CommandMessage();
 		msg.setPlayerID(p.getID());
-		if ( age == 4 ) 
+		if ( age > 3 ) 
 			msg.setMsgType(4);
 		else msg.setMsgType(CommandMessage.MOVE_TYPE);
 		msg.setAction(move);
@@ -530,7 +530,7 @@ public class Match2 {
 	
 	public void initResourceChoice(Player p, ArrayList<Resources> resChoices)
 	{
-		if ( age == 4 ) resChoices.clear();
+		if ( age > 3 ) resChoices.clear();
 		CommandMessage msg = new CommandMessage();
 		msg.setPlayerID(p.getID());
 		msg.setMsgType(CommandMessage.RESOURCE_CHOICE_TYPE);
@@ -640,6 +640,7 @@ public class Match2 {
 			case CommandMessage.SCIENTIFIC_SYMBOL_TYPE:
 				endOfGameSpecialEffects(messages);
 				countPlayersVictoryPoints();
+				age += 1;
 				break;
 		}
 		
