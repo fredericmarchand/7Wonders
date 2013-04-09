@@ -32,6 +32,11 @@ public class User {
 		return username;
 	}
 	
+	public boolean isPaused()
+	{
+		return pause;
+	}
+	
 	public void pause()
 	{
 		if ( currentMatch != null )
@@ -60,7 +65,7 @@ public class User {
 	
 	public void setClient(MClient cl)
 	{
-		System.out.println("setClient: " + cl);
+		//System.out.println("setClient: " + cl);
 		client = cl;
 	}
 	
@@ -80,8 +85,8 @@ public class User {
 		{
 			client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
 		}
-		System.out.println("[CLIENT ------ USER] MClient : \t" + client );
-		System.out.println("Send Command Message: " + msg);
+		//System.out.println("[CLIENT ------ USER] MClient : \t" + client );
+		//System.out.println("Send Command Message: " + msg);
 	}
 	
 	public void updateMatch(Match2 match)
@@ -114,7 +119,7 @@ public class User {
 			SevenWondersProtocol.assignUsernamesAndIDs(mat, names, ids);
 			mat.setLocalPlayerID(ID);
 			updateMatch(mat);
-			System.out.println("===================Current Age: " + currentMatch.getAge());
+			//System.out.println("===================Current Age: " + currentMatch.getAge());
 			pause = false;
 			if ( client != null && client.getMainFrame() != null )
 			{

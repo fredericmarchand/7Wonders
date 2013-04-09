@@ -544,7 +544,7 @@ public class Match2 {
 	{
 		if ( age == 4 )
 		{
-			System.out.println("========================================Im IN!");
+			//System.out.println("========================================Im IN!");
 			CommandMessage msg = new CommandMessage();
 			msg.setPlayerID(p.getID());
 			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE);
@@ -611,7 +611,7 @@ public class Match2 {
 	public Match2 dispatch(ArrayList<CommandMessage> messages)
 	{
 		if ( messages == null ) return this;
-		System.out.println("===============BEFORE=====================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
+		//System.out.println("===============BEFORE=====================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
 		//for ( Player p : players )
 		//{
 		//	System.out.println(p.getUsername() + " has " + p.getResources().getCoins() + " coins.");
@@ -733,7 +733,6 @@ public class Match2 {
 			if ( p.ai() )
 			{
 				((AIPlayer)p).pickCard(discarded, getLeftNeighbor(p), getRightNeighbor(p));
-				//((AIPlayer)p).discard(discarded);
 			}
 
 		}

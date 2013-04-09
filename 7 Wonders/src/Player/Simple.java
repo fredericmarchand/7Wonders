@@ -34,7 +34,7 @@ public class Simple implements Strategy{
 			if (!p.cards.isEmpty())
 				p.chooseCard(0);
 			else{
-				System.out.println("*****Deck Empty!*****");
+				//System.out.println("*****Deck Empty!*****");
 				return;
 			}
 				
@@ -58,7 +58,7 @@ public class Simple implements Strategy{
 		{
 			p.discard(discarded);
 		}
-		else
-			System.out.println("*****Deck Empty!*****");	
+		//else
+			//System.out.println("*****Deck Empty!*****");	
 	}
 }
