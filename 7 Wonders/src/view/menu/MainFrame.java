@@ -58,11 +58,6 @@ public class MainFrame extends JFrame implements Runnable {
 		panel.updateValues();
 	}
 	
-	public void updateChooseScience()
-	{
-		panel.updateChooseScience();
-	}
-	
 	public void startMatch(Match2 m) {
 		panel = new MatchPanel(m, controller);
 		add(panel);
