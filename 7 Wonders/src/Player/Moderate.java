@@ -10,6 +10,7 @@ public class Moderate implements Strategy{
 	//Follows a specific structure strategy while also blocking neighbors
 	public void strategicPick(AIPlayer p, ArrayList<Structure> discarded, Player leftNeighbor, Player rightNeighbor){
 		boolean did = false;
+		p.resourceChoice();
 		ArrayList<Integer> selectionNumbers = p.cardSelectionNumbers(leftNeighbor, rightNeighbor, 1);
 		
 		for ( int i = 0; i < p.cards.size(); ++i )
