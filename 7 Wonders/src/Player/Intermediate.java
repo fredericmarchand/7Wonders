@@ -32,7 +32,7 @@ public class Intermediate implements Strategy{
 			{
 			case 0: 
 				selectionNumbers.remove(Collections.max(selectionNumbers));
-				continue;
+				break;
 			
 			case 1: 
 				p.buildStructure();
