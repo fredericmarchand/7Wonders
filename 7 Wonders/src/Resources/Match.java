@@ -101,6 +101,8 @@ public class Match {
 		AI_Names.add("Javaris Jamar Javarison-Lamar");
 		AI_Names.add("X-wing @aliciousness");
 		AI_Names.add("Johny Whiplash");
+		AI_Names.add("MaxGhost");
+		AI_Names.add("Deedee Muffmuncher");
 	}
 
 	public String randomName(ArrayList<String> list){
