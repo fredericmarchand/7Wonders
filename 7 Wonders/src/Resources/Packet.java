@@ -1,7 +1,5 @@
 package Resources;
 
-import Player.User;
-
 //create packets to communicate from the server to anyone connected to the server
 //EACH packet represents a different type of communication
 //Packet4Object is the most complex and should be used for sending playing moves to the 
