@@ -26,12 +26,12 @@ public class Moderate implements Strategy{
 				break;
 			
 			case 1: 
-				p.buildStructure();
+				p.buildStructure(leftNeighbor, rightNeighbor, 2);
 				did = true;
 				break;
 			case 2:
+				p.buildStructure();
 				did = true;
-				p.buildStructure(leftNeighbor, rightNeighbor, 2);
 				break;
 			}
 			if ( result != 0 ) break;
@@ -58,7 +58,7 @@ public class Moderate implements Strategy{
 				
 			case 2:
 				did = true;
-				p.buildStage(leftNeighbor, rightNeighbor, 2);
+				p.buildStage();
 				break;
 			}
 		}
