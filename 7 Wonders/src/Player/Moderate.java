@@ -39,7 +39,13 @@ public class Moderate implements Strategy{
 		if ( !did )
 		{
 			ArrayList<Integer> blockNumbers = p.blockSelectionNumbers(leftNeighbor, rightNeighbor);
-			p.chooseCard(blockNumbers.indexOf(Collections.max(blockNumbers)));
+			if (p.cards != null)
+				p.chooseCard(blockNumbers.indexOf(Collections.max(blockNumbers)));
+			
+			else{
+				System.out.println("*****Deck Empty!*****");
+				return;
+			}
 			int result = p.canBuildStage(leftNeighbor, rightNeighbor);
 			switch ( result )
 			{
@@ -60,6 +66,9 @@ public class Moderate implements Strategy{
 		{
 			p.discard(discarded);
 		}
-		p.cards.remove(p.chosenCardIndex);
+		else if (p.cards != null)
+			p.cards.remove(p.chosenCardIndex);
+		else
+			System.out.println("*****Deck Empty!*****");	
 	}
 }

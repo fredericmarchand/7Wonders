@@ -215,7 +215,6 @@ public class Player extends User {
 	{
 		chosenCard = cards.get(index);
 		chosenCardIndex = index;
-		//chosenCard = cards.remove(index);
 	}
 	
 	public void chooseCardByID(int id)
