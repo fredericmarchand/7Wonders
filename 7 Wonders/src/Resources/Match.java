@@ -108,7 +108,7 @@ public class Match {
 	public String randomName(ArrayList<String> list){
 		String name;
 		r = new Random();
-		int index =  r.nextInt(list.size())-1;
+		int index =  r.nextInt(list.size());
 		name = list.get(index);
 		list.remove(name);
 		return name;
