@@ -15,8 +15,8 @@ public class Simple implements Strategy{
 			result = p.canBuild(leftNeighbor, rightNeighbor);
 			switch ( result )
 			{
-			case 0: continue;
-			
+			case 0: 
+				break;
 			case 1: 
 				p.buildStructure();
 				did = true;
