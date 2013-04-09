@@ -664,7 +664,7 @@ public class Match2 {
 		{
 			if ( p.ai() )
 			{
-				////((AIPlayer)p).pickCard(discarded, getLeftNeighbor(p), getRightNeighbor(p));
+				((AIPlayer)p).pickCard(discarded, getLeftNeighbor(p), getRightNeighbor(p));
 				//((AIPlayer)p).discard(discarded);
 			}
 
