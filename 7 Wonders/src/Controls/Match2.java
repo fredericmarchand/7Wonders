@@ -245,6 +245,20 @@ public class Match2 {
 				}
 			}
 			
+			for ( WonderBoardStage stg: p.getWonderBoard().getStages() )
+			{
+				if ( stg.isBuilt() )
+				{
+					for ( SpecialEffect se: stg.getEffects() )
+					{
+						if ( se.getID() == ResourceChoice.ResourceChoiceID )
+						{
+							list.add(true);
+						}
+					}
+				}
+			}
+			
 			int index = 0;
 			for ( Resources r : msg.getResourceChoices() )
 			{
@@ -253,42 +267,8 @@ public class Match2 {
 				else
 					p.getExtraResources().addResources(r);
 			}
-			/*for ( Structure s : p.getWonderBoard().getYellowCards() )
-			{
-				for ( SpecialEffect se: s.getEffects() )
-				{
-					if ( se.getID() == ResourceChoice.ResourceChoiceID )
-					{
-						p.getUnvResources().addResources(msg.getResourceChoices().get(index++));
-					}
-				}
-			}
-							
-			for ( Structure s : p.getWonderBoard().getBrownGreyCards() )
-			{
-				for ( SpecialEffect se: s.getEffects() )
-				{
-					if ( se.getID() == ResourceChoice.ResourceChoiceID )
-					{
-						p.getExtraResources().addResources(msg.getResourceChoices().get(index++));
-					}
-				}
-			}*/
 		}		
 	}
-	
-	/*public void serverHandleBeginningOfTurnEffects(Resources r, Structure s, CommandMessage msg)
-	{
-		int index = 0;
-		for ( SpecialEffect se: s.getEffects() )
-		{
-			if ( se.getID() == ResourceChoice.ResourceChoiceID )
-			{
-				r.addResources(msg.getResourceChoices().get(index));
-				++index;
-			}
-		}
-	}*/
 	
 	//server side run turns if message typeid == move
 	public void runTurns(ArrayList<CommandMessage> messages)
@@ -543,7 +523,7 @@ public class Match2 {
 		//{
 		//	System.out.println(p.getUsername() + " has " + p.getResources().getCoins() + " coins.");
 		//}
-		for ( Player p : players )
+		/*for ( Player p : players )
 		{
 			System.out.print(p.getUsername() + " amount of cards : " + p.getCards().size() + " [");
 			for ( Structure s: p.getCards() )
@@ -552,7 +532,7 @@ public class Match2 {
 			}
 			System.out.println("]");
 		}
-		System.out.println("\n\n\n\n====================================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
+		System.out.println("\n\n\n\n====================================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");*/
 		int type = messages.get(0).getMsgType();
 		switch ( type )
 		{
@@ -570,7 +550,7 @@ public class Match2 {
 				break;
 		}
 		
-		System.out.println("=================AFTER===================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
+		/*System.out.println("=================AFTER===================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
 		//for ( Player p : players )
 		//{
 		//	System.out.println(p.getUsername() + " has " + p.getResources().getCoins() + " coins.");
@@ -584,7 +564,7 @@ public class Match2 {
 			}
 			System.out.println("]");
 		}
-		System.out.println("\n\n\n\n====================================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
+		System.out.println("\n\n\n\n====================================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");*/
 		return this;
 	}
 	
@@ -606,11 +586,6 @@ public class Match2 {
 	
 	public void endOfTurn()
 	{
-		//for ( Player p: players )
-		//{
-			//p.getCards().remove(p.getChosenCard());
-			//p.chooseCard(null);
-		//}
 		endOfTurnSpecialEffects(players);
 		CardHandler.PassCardsToNeighbors(getPlayers(), getAge());
 		if ( turn == 6 )
