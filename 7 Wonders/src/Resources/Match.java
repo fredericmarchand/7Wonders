@@ -195,9 +195,9 @@ public class Match {
 				.println("[SERVER] Decoded command message received:  \t" + m);
 		cmdMsgList.add(m);
 
-		for(ArrayList<CommandMessage> o :  cmdMsgMatrix)
-				for(Object i : o )
-					System.out.println("[SERVER] Command Msg Matrix: \t " + i);
+//		for(ArrayList<CommandMessage> o :  cmdMsgMatrix)
+//				for(Object i : o )
+//					System.out.println("[SERVER] Command Msg Matrix: \t " + i);
 		cmdMsgMatrix.get((m.getMsgType())).add(m);
 		if(cmdMsgMatrix.get((m.getMsgType())).size()==human_connection_count){
 			controller.dispatch(cmdMsgMatrix.get((m.getMsgType())));
