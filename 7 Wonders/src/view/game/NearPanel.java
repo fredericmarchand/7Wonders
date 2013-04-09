@@ -57,7 +57,7 @@ public class NearPanel extends JPanel {
 		lblPlayerName.setFont(new Font("Arial Black", Font.PLAIN, 20));
 		lblPlayerName.setOutlineColor(Color.BLACK);
 		lblPlayerName.setStroke(new BasicStroke(2f));
-		lblPlayerName.setBounds(103, 84, 272, 47);
+		lblPlayerName.setBounds(29, 84, 428, 47);
 		add(lblPlayerName);
 		
 		lblBrown = new JLabel2D("11", SwingConstants.CENTER);
