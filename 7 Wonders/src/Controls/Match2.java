@@ -2,6 +2,7 @@ package Controls;
 
 import java.util.ArrayList;
 
+import Structures.Cards.ScientistsGuild;
 import Structures.Effects.*;
 import Structures.Structure;
 import Tokens.Resources;
@@ -60,6 +61,7 @@ public class Match2 {
 		for ( Player p: players ) p.getOwnedResources().addCoins(3);
 		CardHandler.DistributeCards(players, age1Deck);
 		addInitialResources(players);
+		for ( Player p: players ) p.getWonderBoard().buildStructure(new ScientistsGuild());
 		//Added to give players knowledge of the current age for AI choices
 //		for (Player p : players)
 //		{
@@ -338,7 +340,7 @@ public class Match2 {
 	{
 		for ( SpecialEffect se: s.getEffects() )
 		{
-			if ( se.getID() == CardCoinBonus.CardCoinBonusID )
+			if ( se.getID() == CardCoinBonus.CardCoinBonusID && !se.isUsedUp() )
 				((CardCoinBonus)se).acquireCoins(p, getLeftNeighbor(p), getRightNeighbor(p));
 		}
 	}
@@ -440,38 +442,36 @@ public class Match2 {
 		
 	public void initMove(Player p, int move, int neib)
 	{
-		if ( age != 4 )
-		{
-			CommandMessage msg = new CommandMessage();
-			msg.setPlayerID(p.getID());
-			msg.setMsgType(CommandMessage.MOVE_TYPE);
-			msg.setAction(move);
-			msg.setCardID(p.getChosenCard().getID());
-			msg.setPreference(neib);	
-			p.setCommand(msg);
-			p.sendCommandMessage();
-			p.pause();
-		}
+		CommandMessage msg = new CommandMessage();
+		msg.setPlayerID(p.getID());
+		if ( age == 4 ) 
+			msg.setMsgType(4);
+		else msg.setMsgType(CommandMessage.MOVE_TYPE);
+		msg.setAction(move);
+		msg.setCardID(p.getChosenCard().getID());
+		msg.setPreference(neib);	
+		p.setCommand(msg);
+		p.sendCommandMessage();
+		p.pause();
 	}
 	
 	public void initResourceChoice(Player p, ArrayList<Resources> resChoices)
 	{
-		if ( age != 4 )
-		{
-			CommandMessage msg = new CommandMessage();
-			msg.setPlayerID(p.getID());
-			msg.setMsgType(CommandMessage.RESOURCE_CHOICE_TYPE);
-			msg.setResourceChoices(resChoices);
-			p.setCommand(msg);
-			p.sendCommandMessage();
-			p.pause();
-		}
+		if ( age == 4 ) resChoices.clear();
+		CommandMessage msg = new CommandMessage();
+		msg.setPlayerID(p.getID());
+		msg.setMsgType(CommandMessage.RESOURCE_CHOICE_TYPE);
+		msg.setResourceChoices(resChoices);
+		p.setCommand(msg);
+		p.sendCommandMessage();
+		p.pause();
 	}
 		
 	public void initScienceChoice(Player p, ArrayList<ScientificSymbols> symbs)
 	{
 		if ( age == 4 )
 		{
+			System.out.println("========================================Im IN!");
 			CommandMessage msg = new CommandMessage();
 			msg.setPlayerID(p.getID());
 			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE);
@@ -664,8 +664,8 @@ public class Match2 {
 		{
 			if ( p.ai() )
 			{
-				((AIPlayer)p).pickCard(discarded, getLeftNeighbor(p), getRightNeighbor(p));
-				//((AIPlayer)p).discard(discarded);
+				//((AIPlayer)p).pickCard(discarded, getLeftNeighbor(p), getRightNeighbor(p));
+				((AIPlayer)p).discard(discarded);
 			}
 
 		}

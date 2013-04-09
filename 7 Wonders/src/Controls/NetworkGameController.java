@@ -120,9 +120,10 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 				}
 			}
 		}
+		System.out.println("===========================SCIENCE --   AGE-> " + match.getAge());
 		if ( match.getAge() == 4 )
 			return symbs;
-		else return new ArrayList<ScientificSymbols>();
+		return new ArrayList<ScientificSymbols>();
 	}
 
 	@Override
@@ -146,6 +147,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		{
 			System.out.println(s.getCompass() + " " + s.getGears() + " " + s.getTablets() );
 		}
+		
 		if ( match.getAge() == 4 )
 			match.initScienceChoice(user, symbs);
 
@@ -189,7 +191,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 				}
 			}
 		}
-
 		return resources;
 	}
 
@@ -297,8 +298,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void resourceChosen(ArrayList<Resources> resources) 
 	{
-		if ( resources == null )
-			return;
 		/*for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
@@ -319,15 +318,8 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 				}
 			}
 		}*/
-		//System.out.println(user.getTotalResources().toString());*/
-		//if ( !(match.getAge() == 1 && match.getTurn() == 1) && i != 0 )
-		//	frame.update();
-		//if ( resources == null )
-		//	resources = new ArrayList<Resources>();
+
 		match.initResourceChoice(user, resources);
-//		if ( !(match.getAge() == 1 && match.getTurn() == 1) && (match.getAge() != 4) )
-//			frame.update();
-		
 	}
 	
 	public void callGarbageTruck()
