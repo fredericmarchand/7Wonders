@@ -137,12 +137,13 @@ public class MClient {
 	}
 
 
-	public void sendCreateMatchRequest(int human, int ai) {
+	public void sendCreateMatchRequest(int human, int ai, int dif) {
 		System.out.println("[CLIENT]Sending Create request" );
 		Packet12CreateMatch packet = new Packet12CreateMatch();
 		packet.setHuman(human);
 		packet.setAI(ai);
 		packet.setUName(username);
+		packet.setAIDiff(dif);
 		packet.setCID(ID);
 		client.sendTCP(packet);
 	}
