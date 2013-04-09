@@ -19,7 +19,6 @@ public class ResourceChoice extends SpecialEffect {
 	
 	public boolean chooseResource(int id, Player p)
 	{
-		if ( usedUp ) return false;
 		switch ( id )
 		{
 			case Resources.ORE_ID:
