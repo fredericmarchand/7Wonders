@@ -1,6 +1,7 @@
 package Controls;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import Structures.Cards.ScientistsGuild;
 import Structures.Effects.*;
@@ -371,13 +372,33 @@ public class Match2 {
 			
 			for ( Structure s : p.getWonderBoard().getBrownGreyCards() )
 				addPointActivate(s, p, messages);
+			
+			for ( WonderBoardStage stg: p.getWonderBoard().getStages() )
+				addPointActivate(stg, p, messages);
+			
+			for ( CommandMessage msg: messages )
+			{
+				if ( msg.getPlayerID() == p.getID() )
+				{
+					for ( ScientificSymbols sc: msg.getScientificSymbols() )
+					{
+						p.getScientificSymbols().addScientifcSymbols(sc);
+					}
+				}
+			}
+			if ( p.ai() )
+			{
+				
+			}
+			
 		}
 		
 		countPlayersVictoryPoints();
 	}
 
-	public void addPointActivate(Structure s, Player p, ArrayList<CommandMessage> messages)
+	public void addPointActivate(WonderBoardStage s, Player p, ArrayList<CommandMessage> messages)
 	{
+		Random r = new Random();
 		for ( SpecialEffect se: s.getEffects() )
 		{
 			switch ( se.getID() )
@@ -397,7 +418,7 @@ public class Match2 {
 				case ScientificSymbolBonus.ScientificSymbolBonusID:
 					if ( ((ScientificSymbolBonus)se).canChoose() )
 					{
-						for ( CommandMessage msg: messages )
+						/*for ( CommandMessage msg: messages )
 						{
 							if ( p.getID() == msg.getPlayerID() )
 							{
@@ -406,12 +427,84 @@ public class Match2 {
 									p.getScientificSymbols().addScientifcSymbols(sc);
 								}
 							}
+						}*/
+						if ( p.ai() )
+						{
+							int ch = r.nextInt(3);
+							switch ( ch )
+							{
+							case 0:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(1, 0, 0));
+								break;
+							case 1:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(0, 1, 0));
+								break;
+							case 2:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(0, 0, 1));
+								break;
+							}
 						}
 					}
 					break;
 			}
 		}
 	}
+	
+	public void addPointActivate(Structure s, Player p, ArrayList<CommandMessage> messages)
+	{
+		Random r = new Random();
+		for ( SpecialEffect se: s.getEffects() )
+		{
+			switch ( se.getID() )
+			{
+				case CardVictoryPointBonus.CardVictoryPointBonusID:
+				((CardVictoryPointBonus)se).acquireVictoryPoints(p, getLeftNeighbor(p), getRightNeighbor(p));
+				break;
+				
+				case WonderStageVictoryPointBonus.WonderStageVictoryPointBonusID:
+				((WonderStageVictoryPointBonus)se).acquirePoints(p, getLeftNeighbor(p), getRightNeighbor(p));
+				break;
+				
+				case MilitaryDefeatBonus.MilitaryDefeatBonusID:
+				((MilitaryDefeatBonus)se).acquireVictoryPoints(p, getLeftNeighbor(p), getRightNeighbor(p));
+				break;
+			
+				case ScientificSymbolBonus.ScientificSymbolBonusID:
+					if ( ((ScientificSymbolBonus)se).canChoose() )
+					{
+						/*for ( CommandMessage msg: messages )
+						{
+							if ( p.getID() == msg.getPlayerID() )
+							{
+								for ( ScientificSymbols sc: msg.getScientificSymbols() )
+								{
+									p.getScientificSymbols().addScientifcSymbols(sc);
+								}
+							}
+						}*/
+						if ( p.ai() )
+						{
+							int ch = r.nextInt(3);
+							switch ( ch )
+							{
+							case 0:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(1, 0, 0));
+								break;
+							case 1:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(0, 1, 0));
+								break;
+							case 2:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(0, 0, 1));
+								break;
+							}
+						}
+					}
+					break;
+			}
+		}
+	}
+	
+
 	
 	//server side endof game effects
 	//server methods
@@ -424,7 +517,7 @@ public class Match2 {
 	{
 		CommandMessage msg = new CommandMessage();
 		msg.setPlayerID(p.getID());
-		if ( age == 4 ) 
+		if ( age > 3 ) 
 			msg.setMsgType(4);
 		else msg.setMsgType(CommandMessage.MOVE_TYPE);
 		msg.setAction(move);
@@ -437,7 +530,7 @@ public class Match2 {
 	
 	public void initResourceChoice(Player p, ArrayList<Resources> resChoices)
 	{
-		if ( age == 4 ) resChoices.clear();
+		if ( age > 3 ) resChoices.clear();
 		CommandMessage msg = new CommandMessage();
 		msg.setPlayerID(p.getID());
 		msg.setMsgType(CommandMessage.RESOURCE_CHOICE_TYPE);
@@ -451,7 +544,7 @@ public class Match2 {
 	{
 		if ( age == 4 )
 		{
-			System.out.println("========================================Im IN!");
+			//System.out.println("========================================Im IN!");
 			CommandMessage msg = new CommandMessage();
 			msg.setPlayerID(p.getID());
 			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE);
@@ -518,7 +611,7 @@ public class Match2 {
 	public Match2 dispatch(ArrayList<CommandMessage> messages)
 	{
 		if ( messages == null ) return this;
-		System.out.println("===============BEFORE=====================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
+		//System.out.println("===============BEFORE=====================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
 		//for ( Player p : players )
 		//{
 		//	System.out.println(p.getUsername() + " has " + p.getResources().getCoins() + " coins.");
@@ -547,6 +640,7 @@ public class Match2 {
 			case CommandMessage.SCIENTIFIC_SYMBOL_TYPE:
 				endOfGameSpecialEffects(messages);
 				countPlayersVictoryPoints();
+				age += 1;
 				break;
 		}
 		
@@ -640,7 +734,6 @@ public class Match2 {
 			if ( p.ai() )
 			{
 				((AIPlayer)p).pickCard(discarded, getLeftNeighbor(p), getRightNeighbor(p));
-				//((AIPlayer)p).discard(discarded);
 			}
 
 		}

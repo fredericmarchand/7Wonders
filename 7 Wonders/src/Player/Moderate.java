@@ -44,7 +44,7 @@ public class Moderate implements Strategy{
 				p.chooseCard(blockNumbers.indexOf(Collections.max(blockNumbers)));
 			
 			else{
-				System.out.println("*****Deck Empty!*****");
+				//System.out.println("*****Deck Empty!*****");
 				return;
 			}
 			int result = p.canBuildStage(leftNeighbor, rightNeighbor);
@@ -67,7 +67,7 @@ public class Moderate implements Strategy{
 		{
 			p.discard(discarded);
 		}
-		else
-			System.out.println("*****Deck Empty!*****");	
+		//else
+			//System.out.println("*****Deck Empty!*****");	
 	}
 }
