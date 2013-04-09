@@ -142,7 +142,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 //		{
 //			user.getScientificSymbols().addScientifcSymbols(sy);
 //		}
-		System.out.println("============================SCIENCE CHOSEN WAS CALLED==================================");
+		System.out.print("============================SCIENCE CHOSEN WAS CALLED==================================\n===========Displaying sciences picked: ");
 		for ( ScientificSymbols s: symbs )
 		{
 			System.out.println(s.getCompass() + " " + s.getGears() + " " + s.getTablets() );

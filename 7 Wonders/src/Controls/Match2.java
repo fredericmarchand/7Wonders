@@ -1,6 +1,7 @@
 package Controls;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import Structures.Cards.ScientistsGuild;
 import Structures.Effects.*;
@@ -371,13 +372,33 @@ public class Match2 {
 			
 			for ( Structure s : p.getWonderBoard().getBrownGreyCards() )
 				addPointActivate(s, p, messages);
+			
+			for ( WonderBoardStage stg: p.getWonderBoard().getStages() )
+				addPointActivate(stg, p, messages);
+			
+			for ( CommandMessage msg: messages )
+			{
+				if ( msg.getPlayerID() == p.getID() )
+				{
+					for ( ScientificSymbols sc: msg.getScientificSymbols() )
+					{
+						p.getScientificSymbols().addScientifcSymbols(sc);
+					}
+				}
+			}
+			if ( p.ai() )
+			{
+				
+			}
+			
 		}
 		
 		countPlayersVictoryPoints();
 	}
 
-	public void addPointActivate(Structure s, Player p, ArrayList<CommandMessage> messages)
+	public void addPointActivate(WonderBoardStage s, Player p, ArrayList<CommandMessage> messages)
 	{
+		Random r = new Random();
 		for ( SpecialEffect se: s.getEffects() )
 		{
 			switch ( se.getID() )
@@ -397,7 +418,7 @@ public class Match2 {
 				case ScientificSymbolBonus.ScientificSymbolBonusID:
 					if ( ((ScientificSymbolBonus)se).canChoose() )
 					{
-						for ( CommandMessage msg: messages )
+						/*for ( CommandMessage msg: messages )
 						{
 							if ( p.getID() == msg.getPlayerID() )
 							{
@@ -406,12 +427,84 @@ public class Match2 {
 									p.getScientificSymbols().addScientifcSymbols(sc);
 								}
 							}
+						}*/
+						if ( p.ai() )
+						{
+							int ch = r.nextInt(3);
+							switch ( ch )
+							{
+							case 0:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(1, 0, 0));
+								break;
+							case 1:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(0, 1, 0));
+								break;
+							case 2:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(0, 0, 1));
+								break;
+							}
 						}
 					}
 					break;
 			}
 		}
 	}
+	
+	public void addPointActivate(Structure s, Player p, ArrayList<CommandMessage> messages)
+	{
+		Random r = new Random();
+		for ( SpecialEffect se: s.getEffects() )
+		{
+			switch ( se.getID() )
+			{
+				case CardVictoryPointBonus.CardVictoryPointBonusID:
+				((CardVictoryPointBonus)se).acquireVictoryPoints(p, getLeftNeighbor(p), getRightNeighbor(p));
+				break;
+				
+				case WonderStageVictoryPointBonus.WonderStageVictoryPointBonusID:
+				((WonderStageVictoryPointBonus)se).acquirePoints(p, getLeftNeighbor(p), getRightNeighbor(p));
+				break;
+				
+				case MilitaryDefeatBonus.MilitaryDefeatBonusID:
+				((MilitaryDefeatBonus)se).acquireVictoryPoints(p, getLeftNeighbor(p), getRightNeighbor(p));
+				break;
+			
+				case ScientificSymbolBonus.ScientificSymbolBonusID:
+					if ( ((ScientificSymbolBonus)se).canChoose() )
+					{
+						/*for ( CommandMessage msg: messages )
+						{
+							if ( p.getID() == msg.getPlayerID() )
+							{
+								for ( ScientificSymbols sc: msg.getScientificSymbols() )
+								{
+									p.getScientificSymbols().addScientifcSymbols(sc);
+								}
+							}
+						}*/
+						if ( p.ai() )
+						{
+							int ch = r.nextInt(3);
+							switch ( ch )
+							{
+							case 0:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(1, 0, 0));
+								break;
+							case 1:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(0, 1, 0));
+								break;
+							case 2:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(0, 0, 1));
+								break;
+							}
+						}
+					}
+					break;
+			}
+		}
+	}
+	
+
 	
 	//server side endof game effects
 	//server methods
