@@ -216,10 +216,10 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(match.getAge() == 4) {
 			lblAge.setIcon(null);
 			lblAge.setText("GAME OVER!");
-			lblTurn.setText(null);
+			lblTurn.setText("");
 		} else {
 			lblAge.setIcon(Images.get("age"+match.getAge()));
-			lblAge.setText(null);
+			lblAge.setText("");
 			lblTurn.setText("Round "+ match.getTurn() +" of 6");
 		}
 		playerPanel.update();
@@ -285,6 +285,13 @@ public class MatchPanel extends JPanel implements Runnable {
 		fbp.update();
 		cardsPanel.update();
 		
+	}
+	
+	public void updateChooseScience()
+	{
+		// Choose Science
+		needScience = controller.needToChooseScienceSymbol();
+		if(nextScience() != null) scp.setVisible(true);
 	}
 	
 	public Resources nextResource() {

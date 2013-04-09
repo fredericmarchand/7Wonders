@@ -3,6 +3,7 @@ package Resources;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import server.MServer;
 
@@ -28,15 +29,17 @@ public class Match {
 	private int MAX_PLAYER_COUNT = 7;
 	private int connection_count;
 	private int human_connection_count;
-	private int receivedEvents = 0;
 	private int nAI;
 	private String hostName;
 	private long hostID;
 	private boolean inProgress;
 	private MServer server;
 	private Match2 controller;
+	private int AI_difficulty = 0;
+	private ArrayList<String> AI_Names;
+	Random r;
 
-	public Match(int h, int ai, MServer m,long id, String uname){
+	public Match(int h, int ai, MServer m,long id, String uname,int aiDiff){
 		nAI = ai;
 		server = m;
 		hostID = id;
@@ -52,6 +55,8 @@ public class Match {
 		MAX_PLAYER_COUNT = h + ai;
 		connection_count += ai;
 		controller = new Match2();
+		AI_difficulty = aiDiff;
+		AI_Names = new ArrayList<String>();
 	}
 
 	public String getHostUName(){return hostName;}
@@ -76,7 +81,36 @@ public class Match {
 	public ArrayList<Connection> getConnections() {
 		return connected;
 	}
+	public void genAI_Names(){
+		AI_Names.add("JP the Evil Frenchmen");
+		AI_Names.add("Fred the French nightmare");
+		AI_Names.add("Danny Fingerbanging Lu");
+		AI_Names.add("Tyler the manchild");
+		AI_Names.add("Christine 'Gandalf' Laurendeau");
+		AI_Names.add("Phillip High on Expectations");
+		AI_Names.add("Try Hard McGee");
+		AI_Names.add("Joffrey");
+		AI_Names.add("Jay On'Rait");
+		AI_Names.add("DeeMoney");
+		AI_Names.add("Derp Tacos");
+		AI_Names.add("Scoish velociraptor maloish");
+		AI_Names.add("Hingle McCringleberry");
+		AI_Names.add("L'Carpetron OOKMARIAT");
+		AI_Names.add("Jackmerius Tacktheritrix");
+		AI_Names.add("SEQUESTER GRUNDELPLITH");
+		AI_Names.add("Javaris Jamar Javarison-Lamar");
+		AI_Names.add("X-wing @aliciousness");
+		AI_Names.add("Johny Whiplash");
+	}
 
+	public String randomName(ArrayList<String> list){
+		String name;
+		r = new Random();
+		int index =  r.nextInt(list.size())-1;
+		name = list.get(index);
+		list.remove(name);
+		return name;
+	}
 	public void addConnection(Connection c, Object k,Object v) {
 		System.out.println("[SERVER - MATCH] User values : \t" + k + "\t" + v  );
 		userMap.put((Long)k,(String)v);
@@ -111,14 +145,15 @@ public class Match {
 	}
 
 	public void generateAI() {
+		genAI_Names();
 		long idAI;
 		System.out.println("Number of AI: " + nAI);
 		String usernameAI;
 		for (int i = 0; i < nAI; i++) {
 			idAI = server.getID();
 			server.incID();
-			usernameAI = "JP the evil frenchman";
-			controller.addAIPlayer(idAI, usernameAI);
+			usernameAI = randomName(AI_Names);
+			controller.addAIPlayer(idAI, usernameAI,AI_difficulty);
 		}
 	}
 
@@ -157,10 +192,6 @@ public class Match {
 		System.out
 				.println("[SERVER] Decoded command message received:  \t" + m);
 		cmdMsgList.add(m);
-		System.out.println("[SERVER] Event received from client \t"
-				+ (++receivedEvents));
-		System.out.println("[SERVER] Event status: \t" + receivedEvents + "/"
-				+ human_connection_count);
 
 		for(ArrayList<CommandMessage> o :  cmdMsgMatrix)
 				for(Object i : o )

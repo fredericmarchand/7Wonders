@@ -147,7 +147,8 @@ public class NetworkListener extends Listener {
 					((Packet12CreateMatch)o).getHuman(),
 					((Packet12CreateMatch)o).getAI(),
 					((Packet12CreateMatch)o).getCID(),
-					((Packet12CreateMatch)o).getUName());
+					((Packet12CreateMatch)o).getUName(),
+					((Packet12CreateMatch)o).getAIDiff());
 			
 			System.out.println("[SERVER] New Match : \t " + matchID);
 			

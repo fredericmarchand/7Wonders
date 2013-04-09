@@ -534,7 +534,10 @@ public class Match2 {
 	public Match2 dispatch(ArrayList<CommandMessage> messages)
 	{
 		if ( messages == null ) return this;
-		
+		for ( Player p : players )
+		{
+			System.out.println(p.getUsername() + " has " + p.getResources().getCoins() + " coins.");
+		}
 		int type = messages.get(0).getMsgType();
 		switch ( type )
 		{
@@ -548,6 +551,7 @@ public class Match2 {
 					
 			case CommandMessage.SCIENTIFIC_SYMBOL_TYPE:
 				endOfGameSpecialEffects(messages);
+				turn = 2;
 				break;
 		}
 		return this;

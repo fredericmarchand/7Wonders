@@ -1,7 +1,5 @@
 package Resources;
 
-import Player.User;
-
 //create packets to communicate from the server to anyone connected to the server
 //EACH packet represents a different type of communication
 //Packet4Object is the most complex and should be used for sending playing moves to the 
@@ -104,6 +102,7 @@ public class Packet {
 		private int numHuman,numAI;
 		private long clientID;
 		private String username;
+		private int aiDifficulty;
 		public void setHuman(int x){numHuman = x;}
 		public int getHuman(){return numHuman;}
 		public void setAI(int x){numAI = x;}
@@ -112,10 +111,8 @@ public class Packet {
 		public void setCID(long id){clientID=id;}
 		public String getUName(){return username;}
 		public void setUName(String s){username = s;}
-		
-		
-		
-		
+		public int getAIDiff(){return aiDifficulty;}
+		public void setAIDiff(int i){aiDifficulty = i;}		
 	}
 	public static class Packet13MatchJoinRequest{
 		private long matchID;
