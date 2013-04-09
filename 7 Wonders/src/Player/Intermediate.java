@@ -74,8 +74,6 @@ public class Intermediate implements Strategy{
 		{
 			p.discard(discarded);
 		}
-		//else if (!p.cards.isEmpty())
-		//	p.cards.remove(p.chosenCardIndex);
 		else
 			System.out.println("*****Deck Empty!*****");	
 	}
