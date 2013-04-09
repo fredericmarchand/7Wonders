@@ -544,7 +544,7 @@ public class Match2 {
 	{
 		if ( age == 4 )
 		{
-			//System.out.println("========================================Im IN!");
+			System.out.println("========================================Im IN!");
 			CommandMessage msg = new CommandMessage();
 			msg.setPlayerID(p.getID());
 			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE);
@@ -610,7 +610,7 @@ public class Match2 {
 	//handles all the moves received by the server
 	public Match2 dispatch(ArrayList<CommandMessage> messages)
 	{
-		if ( messages == null ) return this;
+		if ( messages == null || age == 5 ) return this;
 		//System.out.println("===============BEFORE=====================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
 		//for ( Player p : players )
 		//{

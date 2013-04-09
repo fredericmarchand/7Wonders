@@ -123,7 +123,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		}
 		//System.out.println("===========================SCIENCE --   AGE-> " + match.getAge());
 		
-		return new ArrayList<ScientificSymbols>();
+		return symbs;
 	}
 
 	@Override
@@ -138,10 +138,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 //			}
 //		
 //		}
-//		for ( ScientificSymbols sy : symbs )
-//		{
-//			user.getScientificSymbols().addScientifcSymbols(sy);
-//		}
+
 		//System.out.print("============================SCIENCE CHOSEN WAS CALLED==================================\n===========Displaying sciences picked: ");
 		//for ( ScientificSymbols s: symbs )
 		//{
