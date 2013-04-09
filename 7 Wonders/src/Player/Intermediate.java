@@ -48,7 +48,7 @@ public class Intermediate implements Strategy{
 		if ( !did )
 		{
 			ArrayList<Integer> blockNumbers = p.blockSelectionNumbers(leftNeighbor, rightNeighbor);
-			if (p.cards != null)
+			if (!p.cards.isEmpty())
 				p.chooseCard(blockNumbers.indexOf(Collections.max(blockNumbers)));
 			else{
 				System.out.println("*****Deck Empty!*****");
@@ -74,7 +74,7 @@ public class Intermediate implements Strategy{
 		{
 			p.discard(discarded);
 		}
-		else if (p.cards != null)
+		else if (!p.cards.isEmpty())
 			p.cards.remove(p.chosenCardIndex);
 		else
 			System.out.println("*****Deck Empty!*****");	
