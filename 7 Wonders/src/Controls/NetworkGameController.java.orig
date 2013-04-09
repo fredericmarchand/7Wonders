@@ -319,8 +319,13 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		//if ( resources == null )
 		//	resources = new ArrayList<Resources>();
 		match.initResourceChoice(user, resources);
+<<<<<<< HEAD
+		//if ( !(match.getAge() == 1 && match.getTurn() == 1) && !(match.getAge() == 4) && i != 0 )
+		//	frame.update();
+=======
 //		if ( !(match.getAge() == 1 && match.getTurn() == 1) && (match.getAge() != 4) )
 //			frame.update();
+>>>>>>> f9b1e6e334f83298282b1cc9ec357e4b14fc6e88
 		
 	}
 	

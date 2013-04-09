@@ -189,12 +189,11 @@ public class Match {
 		}
 	}
 
-	public void receiveEvent(CommandMessage m, long clientID,boolean last) {
+	public void receiveEvent(CommandMessage m, long cliebntID,boolean last) {
 
 		System.out
 				.println("[SERVER] Decoded command message received:  \t" + m);
 		cmdMsgList.add(m);
-
 //		for(ArrayList<CommandMessage> o :  cmdMsgMatrix)
 //				for(Object i : o )
 //					System.out.println("[SERVER] Command Msg Matrix: \t " + i);
