@@ -213,6 +213,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	
 	public void update() {
 		updateValues();
+		cardsPanel.unpause();
 		
 		// Choose resources
 		needResources = controller.needToChooseResources();
@@ -380,5 +381,9 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(numplayers == 6) return 160 + 320*index;
 		if(numplayers == 7) return 320*index;
 		return 0;
+	}
+	
+	public void hideMatchPanel(){
+		setVisible(false);
 	}
 }
