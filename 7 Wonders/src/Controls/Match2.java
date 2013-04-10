@@ -1,6 +1,7 @@
 package Controls;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import Structures.Effects.*;
@@ -67,18 +68,15 @@ public class Match2 {
 	public ArrayList<Object> getParameters()
 	{
 		ArrayList<Object> params = new ArrayList<Object>();
-		//params.add(players);
 		params.add(age);
 		params.add(turn);
 		params.add(numPlayers);
-		//params.add(discarded);
 		return params;
 	}
 	 
 	public ArrayList<Integer> getDiscardedCardIDs()
 	{
 		ArrayList<Integer> ids = new ArrayList<Integer>();
-		//ids.add(discarded.size());
 		for ( Structure s: discarded )
 		{
 			ids.add(s.getID());
@@ -488,18 +486,33 @@ public class Match2 {
 				for ( SpecialEffect se : s.getEffects() ) p.activateBuildEffect(se);
 			}
 		}
-		/*for ( Player p: players )
+		
+		//doing it for AI
+		ArrayList<Structure> guilds = new ArrayList<Structure>();
+		Structure s;
+		for ( Player p: players )
 		{
 			if ( p.ai() )
 			{
-				Structure s;
-				for ( WonderBoardStage stg: )
+				for ( WonderBoardStage stg: p.getWonderBoard().getStages() )
 				{
-					p.getWonderBoard().buildStructure(s = CardHandler.getCardByID(msg.getCardID()));
-					for ( SpecialEffect se : s.getEffects() ) p.activateBuildEffect(se);
+					if ( stg.isBuilt() )
+					{
+						for ( SpecialEffect sp: stg.getEffects() )
+						{
+							if ( sp.getID() == CopyGuild.CopyGuildID  )
+							{
+								guilds.addAll(((CopyGuild)sp).getGuilds(getLeftNeighbor(p), getRightNeighbor(p)));
+								if ( guilds.isEmpty() ) continue;
+								Collections.shuffle(guilds);
+								p.getWonderBoard().buildStructure(s = guilds.get(0));
+								for ( SpecialEffect se : s.getEffects() ) p.activateBuildEffect(se);
+							}
+						}
+					}
 				}
 			}
-		}*/
+		}
 	}
 	
 	public void serverHandleDiscardedChoice(ArrayList<CommandMessage> messages)
