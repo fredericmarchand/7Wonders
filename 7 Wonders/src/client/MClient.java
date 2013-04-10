@@ -81,17 +81,19 @@ public class MClient {
 	}
 
 	public void waiting(){
-		if(inMatch==false&&inWait==false){
+		if(inMatch == false && inWait == false){
 			inWait = true;
-			//mainframe.launchWaiting(link.
-		}else if(inMatch==false){
-			//just update wait
+			mainframe.launchWaiting(link.launchWaiting());
+			link.updateWaiting(0, 0);
+		} else if(inMatch==false){
+			link.updateWaiting(0, 0);
 		}
 	}
 	
 	public ArrayList<String> getMatchList() {
 		return matchList;
 	}
+	
 	public linkNetworkView getLink() {
 		return link;
 	}
@@ -222,11 +224,6 @@ public class MClient {
 	//signal user
 
 	public void startMatch() {
-		if(inWait){
-			//kill the waitpanel
-		}
-		
-		
 		link.getChat().setStart(false);
 		inMatch = true;
 		inWait = false;

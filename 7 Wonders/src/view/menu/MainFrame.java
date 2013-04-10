@@ -59,6 +59,7 @@ public class MainFrame extends JFrame implements Runnable {
 	}
 	
 	public void startMatch(Match2 m) {
+		if(wp != null) remove(wp);
 		panel = new MatchPanel(m, controller);
 		add(panel);
 		update();
