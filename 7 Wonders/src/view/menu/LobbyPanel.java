@@ -98,7 +98,6 @@ public class LobbyPanel extends JPanel implements ListSelectionListener {
 			}
 		});
 		
-		
 		add(create);
 		add(join);
 		add(refresh);
@@ -109,8 +108,6 @@ public class LobbyPanel extends JPanel implements ListSelectionListener {
 		bgimg.setLocation(0, 0);
 		bgimg.setSize(1280, 860);
 		add(bgimg);
-		
-
 	}
 	
 	public void showGUI() {
@@ -120,9 +117,16 @@ public class LobbyPanel extends JPanel implements ListSelectionListener {
 	
 	public void update(ArrayList<String> l){
 		listModel.clear();
-		for(String id: l) listModel.insertElementAt(id, index++);
-		index = 0;
-		list.setSelectedIndex(0);
+		if(l.size() > 0) {
+			for(String id: l) 
+				listModel.insertElementAt(id, index++);
+			index = 0;
+			list.setSelectedIndex(0);
+			join.setEnabled(true);
+		} else {
+			listModel.insertElementAt("No matches are currently running on this server.", 0);
+			join.setEnabled(false);
+		}
 	}
 	
 	public void failedJoin(){
