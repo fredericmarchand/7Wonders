@@ -260,7 +260,9 @@ public class MatchPanel extends JPanel implements Runnable {
 		} else {
 			lblAge.setIcon(Images.get("age"+match.getAge()));
 			lblAge.setText(" ");
-			lblTurn.setText("Round "+ match.getTurn() +" of 6");
+			int t = match.getTurn();
+			if ( t > 6 ) t = 6;
+			lblTurn.setText("Round "+ t +" of 6");
 		}
 		playerPanel.update();
 		n1.update();

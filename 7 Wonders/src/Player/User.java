@@ -137,6 +137,15 @@ public class User {
 			pause = false;
 			if ( client != null && client.getMainFrame() != null )
 			{
+				Player p = currentMatch.getLocalPlayer();
+				if ( p.getCards().isEmpty() && currentMatch.getAge() < 4 ) 
+				{
+					msg = new CommandMessage();
+					msg.setPlayerID(ID);
+					msg.setCardID(0);
+					msg.setMsgType(CommandMessage.MOVE_TYPE);
+					client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
+				}
 				if ( lastMessageID == CommandMessage.RESOURCE_CHOICE_TYPE )
 				//{
 					client.getMainFrame().update();
