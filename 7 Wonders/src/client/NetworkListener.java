@@ -70,7 +70,7 @@ public class NetworkListener extends Listener{
 			if(((Packet3Connection)o).getAccepted()){
 				//join match lobby
 				mclient.setMID(((Packet3Connection)o).getIDValue());
-				
+				mclient.waiting();
 				mclient.getLink().launchChatFrame();
 				System.out.println("[CLIENT] JOINED GAME SUCCESSFULLY");
 			}
@@ -123,6 +123,12 @@ public class NetworkListener extends Listener{
 		if( o instanceof Packet16ForcefulDisconnect){
 			mclient.getLink().otherClientDisconnect();
 			mclient.quitMatch();
+		}
+		if(o instanceof Packet17ConnectionCount){
+			if(gameStart==false){
+				int n = ((Packet17ConnectionCount)o).getConCount();
+				
+			}
 		}
 	}
 	
