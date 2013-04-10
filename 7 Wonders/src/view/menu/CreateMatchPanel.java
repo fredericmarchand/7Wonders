@@ -12,14 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-
 import view.resources.JLabel2D;
 import view.resources.JTextFieldLimit;
 
-
 import client.MClient;
-
-import Resources.Lobby;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -136,8 +132,7 @@ public class CreateMatchPanel extends JPanel {
 		});
 		cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Lobby l = new Lobby(client);
-				l.showGUI();
+				client.getMainFrame().launchLobby(client.getLink().launchLobby());
 				setVisible(false);
 			}
 		});

@@ -11,7 +11,6 @@ import view.menu.StartPanel;
 
 public class linkNetworkView {
 	LobbyPanel lobby;
-	MatchLobby matchLobby;
 	Chat chat;
 	CreateMatchPanel createMenu;
 	MClient mclient;
@@ -20,7 +19,6 @@ public class linkNetworkView {
 	public linkNetworkView(MClient c){
 		mclient = c;
 		lobby = new LobbyPanel(mclient);
-		matchLobby = new MatchLobby(mclient);
 		chat = new Chat(mclient);
 		createMenu = new CreateMatchPanel(mclient);
 		
@@ -35,10 +33,6 @@ public class linkNetworkView {
 	
 	public void updateLobby(ArrayList<String> list) {
 		lobby.update(list);
-	}
-	
-	public void launchMatchLobby() {
-		matchLobby.showGUI();
 	}
 	
 	public void failedMatchLobby() {
