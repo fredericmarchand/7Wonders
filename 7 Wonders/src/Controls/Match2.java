@@ -9,6 +9,7 @@ import Tokens.Resources;
 import Tokens.ScientificSymbols;
 import WonderBoards.WonderBoardStage;
 import Player.*;
+
 public class Match2 {
 	
 	private ArrayList<Player> players;
@@ -56,7 +57,7 @@ public class Match2 {
 		CardHandler.DistributeCards(players, age1Deck);
 		addInitialResources(players);
 		calcCalled = false;
-		//for ( Player p: players ) p.getWonderBoard().buildStructure(new ScientistsGuild());
+		
 		//Added to give players knowledge of the current age for AI choices
 //		for (Player p : players)
 //		{
@@ -488,6 +489,18 @@ public class Match2 {
 				for ( SpecialEffect se : s.getEffects() ) p.activateBuildEffect(se);
 			}
 		}
+		/*for ( Player p: players )
+		{
+			if ( p.ai() )
+			{
+				Structure s;
+				for ( WonderBoardStage stg: )
+				{
+					p.getWonderBoard().buildStructure(s = CardHandler.getCardByID(msg.getCardID()));
+					for ( SpecialEffect se : s.getEffects() ) p.activateBuildEffect(se);
+				}
+			}
+		}*/
 	}
 	
 	public void serverHandleDiscardedChoice(ArrayList<CommandMessage> messages)
