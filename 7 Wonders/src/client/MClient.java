@@ -3,7 +3,6 @@ package client;
 import java.io.IOException;
 import java.util.*;
 
-import view.menu.LobbyPanel;
 import view.menu.MainFrame;
 
 import Controls.*;
@@ -15,7 +14,7 @@ import Resources.Packet.*;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.*;
-import com.esotericsoftware.minlog.Log;
+//import com.esotericsoftware.minlog.Log;
 
 
 //kill mclient once frames have been closed.
@@ -218,7 +217,7 @@ public class MClient {
 	public void pushUserQuit(){
 		link.killChatFrame();
 		mainframe.hideMatchPanel();
-		mainframe.launchLobby((new LobbyPanel(this)));
+		mainframe.launchLobby(link.launchLobby());
 		link.updateLobby(matchList);
 	}
 	
@@ -377,10 +376,10 @@ public class MClient {
 		
 	}
 
-	public static void main(String[] args) {
-
-		Log.set(Log.LEVEL_TRACE);
-		
-	}
+//	public static void main(String[] args) {
+//
+//		Log.set(Log.LEVEL_TRACE);
+//		
+//	}
 
 }
