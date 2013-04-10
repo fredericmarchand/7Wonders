@@ -218,7 +218,7 @@ public class MClient {
 		link.killChatFrame();
 		mainframe.hideMatchPanel();
 		mainframe.launchLobby((new LobbyPanel(this)));
-		//user.killMatchPAnel
+		link.updateLobby(matchList);
 	}
 	
 

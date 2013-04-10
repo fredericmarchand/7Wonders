@@ -81,6 +81,9 @@ public class NetworkListener extends Listener {
 				// l.setID(1);
 				l.setObject(mserver.getLobbyList());
 				c.sendTCP(l);
+				
+				for(Object s : mserver.getLobbyList())
+					System.out.println("[SERVER] Match List:\t" + s);
 			}
 
 		}
@@ -103,6 +106,8 @@ public class NetworkListener extends Listener {
 			
 			Packet4Object l = new Packet4Object();
 			l.setObject(mserver.getLobbyList());
+			for(Object s : mserver.getLobbyList())
+				System.out.println("[SERVER] Match List:\t" + s);
 			c.sendTCP(l);
 			Packet15MatchDisconnect packet = new Packet15MatchDisconnect();
 			c.sendTCP(packet);
