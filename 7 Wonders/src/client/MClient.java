@@ -220,7 +220,7 @@ public class MClient {
 		for(String s : matchList)
 			System.out.println("[CLIENT] MATCH LIST:\t" + s);
 		link.killChatFrame();
-		mainframe.hideMatchPanel();
+		//mainframe.hideMatchPanel();
 		mainframe.launchLobby((link.launchLobby()));
 		link.updateLobby(matchList);
 	}

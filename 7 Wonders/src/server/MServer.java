@@ -44,6 +44,9 @@ public class MServer {
 	public ArrayList<String> getLobbyList(){
 		ArrayList<String> lobbyList = new ArrayList<String>();
 		String matchName;
+		for(Object i : matchList)
+			System.out.println("[SERVER] MATCHLIST" + i);
+		
 		for(Match e : matchList){
 			matchName = (e.getMatch_ID() + " | " + e.getHostUName()  
 					+ " 's match  | " + e.getConnectionCount() +
@@ -80,7 +83,7 @@ public class MServer {
 					while (it.hasNext()) {
 						@SuppressWarnings("unused")
 						Match match = it.next();
-						if (m.getHumanConnectionCount() == 0) {
+						if (match.getHumanConnectionCount() == 0) {
 							it.remove();
 							System.out.println("[SERVER] No one in match  - DELETED ");
 						}
