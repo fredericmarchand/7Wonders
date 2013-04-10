@@ -220,6 +220,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override//have to check if not null
 	public ArrayList<Structure> needToChooseCopyGuild() 
 	{
+		System.out.println("==============================needToChooseCopyGuild");
 		for ( WonderBoardStage stg: user.getWonderBoard().getStages() )
 		{
 			if ( stg.isBuilt() )
@@ -239,9 +240,11 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void chosenGuild(Structure g) 
 	{
-		user.getWonderBoard().buildStructure(g);
-		for ( SpecialEffect se: g.getEffects() )
-			user.activateBuildEffect(se);
+		System.out.println("==============================chosenGuild");
+		match.initGuildChoice(user, g);
+		//user.getWonderBoard().buildStructure(g);
+		//for ( SpecialEffect se: g.getEffects() )
+		//	user.activateBuildEffect(se);
 	}
 
 	@Override //have to check if empty

@@ -505,7 +505,20 @@ public class Match2 {
 		}
 	}
 	
-
+	public void serverHandleChosenGuids(ArrayList<CommandMessage> messages)
+	{
+		for ( CommandMessage msg: messages )
+		{
+			Structure s;
+			Player p = getPlayerByID(msg.getPlayerID());
+			if ( msg.getCardID() != -1 )
+			{
+				p.getWonderBoard().buildStructure(s = CardHandler.getCardByID(msg.getCardID()));
+				for ( SpecialEffect se : s.getEffects() ) p.activateBuildEffect(se);
+			}
+		}
+	}
+	
 	
 	//server side endof game effects
 	//server methods
@@ -551,6 +564,21 @@ public class Match2 {
 			msg.setPlayerID(p.getID());
 			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE);
 			msg.setScientificSymbol(symbs);
+			p.setCommand(msg);
+			p.sendCommandMessage();
+			p.pause();
+		}
+	}
+	
+	public void initGuildChoice(Player p, Structure s)
+	{
+		if ( age == 4 )
+		{
+			CommandMessage msg = new CommandMessage();
+			msg.setPlayerID(p.getID());
+			msg.setMsgType(CommandMessage.CHOSEN_GUILD_TYPE);
+			if ( s == null ) msg.setCardID(-1);
+			else msg.setCardID(s.getID());
 			p.setCommand(msg);
 			p.sendCommandMessage();
 			p.pause();
@@ -641,6 +669,10 @@ public class Match2 {
 					
 			case CommandMessage.MOVE_TYPE:
 				runTurns(messages);
+				break;
+				
+			case CommandMessage.CHOSEN_GUILD_TYPE:
+				serverHandleChosenGuids(messages);
 				break;
 					
 			case CommandMessage.SCIENTIFIC_SYMBOL_TYPE:
