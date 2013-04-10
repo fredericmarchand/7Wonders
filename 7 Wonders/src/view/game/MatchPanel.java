@@ -145,7 +145,7 @@ public class MatchPanel extends JPanel implements Runnable {
 		fbp.setLocation(296, 458);
 		
 		// Cards
-		cardsPanel = new CardsPanel(match.getLocalPlayer().getCards(), controller, fbp);
+		cardsPanel = new CardsPanel(match.getLocalPlayer().getCards(), controller);
 		cardsPanel.setLocation(3, 558);
 		cardsPanel.addMouseListener(buildMouseAdapterCards());
 		
