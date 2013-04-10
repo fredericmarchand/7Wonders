@@ -320,7 +320,7 @@ public class SevenWondersProtocol {
 		p.getScientificSymbols().addGears(encoding.get(index++));
 		p.getScientificSymbols().addTablets(encoding.get(index++));
 		p.setAge(encoding.get(index++));
-		p.setAI(index++);
+		p.setAI(encoding.get(index++));
 		p.setFreePermission(encoding.get(index++) == 1 ? true : false);
 		p.setOwnedResources(decodeResources(encoding));
 		p.setExtraResources(decodeResources(encoding));
@@ -457,7 +457,7 @@ public class SevenWondersProtocol {
 				sp.setters(spused, sptype, spact);
 				break;
 			case 15: //FreeConstruction nothing to copy
-				int chacha = encoding.get(index++);
+				//int chacha = encoding.get(index++);
 				sp = new FreeConstruction();
 				//((FreeConstruction)sp).setUsedThisTurn(chacha == 1 ? true : false);
 				sp.setters(spused, sptype, spact);
