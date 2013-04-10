@@ -285,6 +285,7 @@ public class Match2 {
 		for ( CommandMessage msg: messages )
 		{
 			Player p = getPlayerByID(msg.getPlayerID());
+			if ( msg.getCardID() == 0 ) continue;
 			p.chooseCardByID(msg.getCardID());
 		}
 
@@ -293,6 +294,7 @@ public class Match2 {
 		for ( CommandMessage msg: messages )
 		{
 			Player p = getPlayerByID(msg.getPlayerID());
+			if ( msg.getCardID() == 0 ) continue;
 			p.setFreePermission(msg.getFree() == 1 ? true : false);
 			switch ( msg.getAction() )
 			{
@@ -497,9 +499,10 @@ public class Match2 {
 			Player p = getPlayerByID(msg.getPlayerID());
 			if ( msg.getCardID() != 0 )
 			{
-				p.getWonderBoard().buildStructure(s = getDiscardedCardByID(msg.getCardID()));
+				s = getDiscardedCardByID(msg.getCardID());
 				if ( s.getID() != 0 )
 				{
+					p.getWonderBoard().buildStructure(s);
 					for ( SpecialEffect se : s.getEffects() ) p.activateBuildEffect(se);
 					for ( WonderBoardStage stg: p.getWonderBoard().getStages() )
 					{
@@ -524,8 +527,7 @@ public class Match2 {
 	}
 	
 	//server methods
-	
-		
+			
 		
 	//client moves
 		
@@ -534,7 +536,7 @@ public class Match2 {
 		CommandMessage msg = new CommandMessage();
 		msg.setPlayerID(p.getID());
 		if ( age > 3 ) 
-			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE+1);
+			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE + 1);
 		else msg.setMsgType(CommandMessage.MOVE_TYPE);
 		msg.setAction(move);
 		msg.setCardID(p.getChosenCard().getID());
@@ -666,7 +668,7 @@ public class Match2 {
 				break;
 				
 			case CommandMessage.CHOSEN_GUILD_TYPE:
-				System.out.println("=======================GUILD");
+				//System.out.println("=======================GUILD");
 				if ( age == 4 )
 				{
 					serverHandleChosenGuilds(messages);
@@ -675,13 +677,13 @@ public class Match2 {
 				break;
 				
 			case CommandMessage.CHOSEN_DISCARDED_TYPE:
-				System.out.println("=======================GUILD");
+				//System.out.println("=======================GUILD");
 				if ( age < 4 )
 					serverHandleDiscardedChoice(messages);
 				break;
 					
 			case CommandMessage.SCIENTIFIC_SYMBOL_TYPE:
-				System.out.println("=======================SCIENCE");
+				//System.out.println("=======================SCIENCE");
 				if ( age == 5 )
 				{
 					endOfGameSpecialEffects(messages);
@@ -709,7 +711,7 @@ public class Match2 {
 				
 				//Scientific
 				p.addVictoryPoints(p.getScientificSymbols().victoryPointsValue());
-				System.out.println("======================Science vicpts: " + p.getScientificSymbols().victoryPointsValue());
+				//System.out.println("======================Science vicpts: " + p.getScientificSymbols().victoryPointsValue());
 			}
 		}
 	}
@@ -717,8 +719,11 @@ public class Match2 {
 	public void endOfTurn()
 	{
 		endOfTurnSpecialEffects(players);
-		CardHandler.PassCardsToNeighbors(getPlayers(), getAge());
 		if ( turn == 6 )
+			discardAllPlayersCards();
+		if ( turn < 6 )
+			CardHandler.PassCardsToNeighbors(getPlayers(), getAge());
+		if ( turn == 7 )
 		{
 			for ( Player p: players )
 			{
@@ -732,6 +737,10 @@ public class Match2 {
 							{
 								se.reset();
 							}
+							else if ( se.getID() == PlayLastCard.PlayLastCardID )
+							{
+								se.reset();
+							}
 						}
 					}
 				}
@@ -741,12 +750,17 @@ public class Match2 {
 			age += 1;
 			incPlayerAges();
 			turn = 1;
-			if ( getAge() == 2 ) CardHandler.DistributeCards(getPlayers(), getDeck());
-			if ( getAge() == 3 ) CardHandler.DistributeCards(getPlayers(), getDeck());
-			if ( getAge() == 4 ) 
-			{
-				discardAllPlayersCards();
-			}
+			discardAllPlayersCards();
+			//if ( getAge() == 2 ) 
+			//{
+			if ( age < 4 )
+				CardHandler.DistributeCards(getPlayers(), getDeck());
+			//}
+			//if ( getAge() == 3 ) CardHandler.DistributeCards(getPlayers(), getDeck());
+			//if ( getAge() == 4 ) 
+			//{
+				//discardAllPlayersCards();
+			//}
 		}
 		else 
 		{
@@ -779,7 +793,8 @@ public class Match2 {
 	{
 		for ( Player p : players )
 		{
-			p.discardHand(discarded);
+			if ( !p.canPlayLastCard() )
+				p.discardHand(discarded);
 		}
 	}
 	

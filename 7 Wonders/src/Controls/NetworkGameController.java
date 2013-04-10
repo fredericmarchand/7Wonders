@@ -44,7 +44,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		frame.startMatch(match);
 	}
 	
-
 	@Override
 	public int canBuildStructure(Structure s) 
 	{
@@ -234,12 +233,16 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	{
 		for ( WonderBoardStage stg: user.getWonderBoard().getStages() )
 		{
+			//System.out.println("===for each stage");
 			if ( stg.isBuilt() )
 			{
+				//System.out.println("===if its built");
 				for ( SpecialEffect se: stg.getEffects() )
 				{
+					//System.out.println("===effect id " + se.getID());
 					if ( se.getID() == BuildDiscardedCard.BuildDiscardedCardID )
 					{
+						//System.out.println("===" + se.isUsedUp());
 						if ( !se.isUsedUp() )
 						{
 							return match.getDiscardedCards();
@@ -254,8 +257,10 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void chosenDiscarded(Structure g) 
 	{
-		//match.initChosenDiscarded(user, g);
-	}
+		//System.out.println("================="+ user.getLastMsgID());
+		if ( user.getLastMsgID() == CommandMessage.MOVE_TYPE )
+			match.initChosenDiscarded(user, g);
+	}	
 
 	@Override//have to check if null 
 	public Structure needToChooseLastCard() 
@@ -276,7 +281,8 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void resourceChosen(ArrayList<Resources> resources) 
 	{
-		match.initResourceChoice(user, resources);
+		if ( user.getLastMsgID() == CommandMessage.CHOSEN_DISCARDED_TYPE )
+			match.initResourceChoice(user, resources);
 	}
 	
 	public void callGarbageTruck()

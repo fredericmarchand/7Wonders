@@ -39,13 +39,12 @@ public class Player extends User {
 		isAI = false;
 	}
 	
-	
 	public void resetPlayerStats()
 	{
 		wonderBoard = new WonderBoard();
 		cards = new ArrayList<Structure>();
 		chosenCard = new Structure();
-		resources = new Resources(5, 5, 5, 5, 5, 5, 5, 5);
+		resources = new Resources();
 		resetResources();
 		conflictTokens = new ConflictTokens();
 		shields = 0;
@@ -565,6 +564,27 @@ public class Player extends User {
 		vpoints += getScientificSymbols().victoryPointsValue();
 		
 		return vpoints;
+	}
+	
+	public boolean canPlayLastCard()
+	{
+		for ( WonderBoardStage stg: wonderBoard.getStages() )
+		{
+			if ( stg.isBuilt() )
+			{
+				for ( SpecialEffect se: stg.getEffects() )
+				{
+					if ( se.getID() == PlayLastCard.PlayLastCardID )
+					{
+						if ( !se.isUsedUp() )
+						{
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
 	}
 	
 	public void updatePlayer(Player p)

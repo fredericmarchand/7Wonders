@@ -236,7 +236,6 @@ public class SevenWondersProtocol {
 			case 14: //BuildDiscardedCard nothing to copy
 				break;
 			case 15: //FreeConstruction nothing to copy
-				//spStuff.add(((FreeConstruction)sp).hasBeenUsed() ? 1 : 0);
 				break;
 			case 16: //copy guild nothing to copy
 				break;
