@@ -65,7 +65,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 			match.initMove(user, 1, -1);
 			break;
 		}
-		frame.update();
+		frame.updateValues();
 	}
 
 	@Override
@@ -88,13 +88,14 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 			match.initMove(user, 2, -1);
 			break;
 		}
-		frame.update();
+		frame.updateValues();
 	}
 
 	@Override
 	public ArrayList<ScientificSymbols> needToChooseScienceSymbol() 
 	{
 		ArrayList<ScientificSymbols> symbs = new ArrayList<ScientificSymbols>();
+		if ( match.getAge() != 4 ) return symbs;
 		for ( Structure s: user.getWonderBoard().getPurpleCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
@@ -120,10 +121,9 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 				}
 			}
 		}
-		System.out.println("===========================SCIENCE --   AGE-> " + match.getAge());
-		if ( match.getAge() == 4 )
-			return symbs;
-		return new ArrayList<ScientificSymbols>();
+		//System.out.println("===========================SCIENCE --   AGE-> " + match.getAge());
+		
+		return symbs;
 	}
 
 	@Override
@@ -138,15 +138,12 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 //			}
 //		
 //		}
-//		for ( ScientificSymbols sy : symbs )
-//		{
-//			user.getScientificSymbols().addScientifcSymbols(sy);
-//		}
-		System.out.println("============================SCIENCE CHOSEN WAS CALLED==================================");
-		for ( ScientificSymbols s: symbs )
-		{
-			System.out.println(s.getCompass() + " " + s.getGears() + " " + s.getTablets() );
-		}
+
+		//System.out.print("============================SCIENCE CHOSEN WAS CALLED==================================\n===========Displaying sciences picked: ");
+		//for ( ScientificSymbols s: symbs )
+		//{
+		//	System.out.println(s.getCompass() + " " + s.getGears() + " " + s.getTablets() );
+		//}
 		
 		if ( match.getAge() == 4 )
 			match.initScienceChoice(user, symbs);
@@ -157,7 +154,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	public ArrayList<Resources> needToChooseResources() 
 	{
 		ArrayList<Resources> resources = new ArrayList<Resources>();
-		if ( match.getAge() == 4 ) return resources;
+		if ( match.getAge() > 3 || user.getLastMsgID() != CommandMessage.RESOURCE_CHOICE_TYPE ) return resources;
 		for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
@@ -217,7 +214,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	public void discardChosen() 
 	{
 		match.initMove(user, 3, 2);
-		frame.update();
+		frame.updateValues();
 	}
 
 	@Override//have to check if not null

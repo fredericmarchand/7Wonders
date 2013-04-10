@@ -9,12 +9,14 @@ import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import view.resources.VerticalLabelUI;
 
 import Controls.Controller;
 import Structures.Structure;
 
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -32,6 +34,8 @@ public class CardsPanel extends JPanel {
 	private MouseMotionListener mml[];
 	private boolean showOptions[], showArrow[][];
 	private int canDoAction[][];
+	
+	private JPanel pausedPanel;
 	
 	private Controller controller;
 	private FreeBuildPanel fbp;
@@ -59,6 +63,22 @@ public class CardsPanel extends JPanel {
 		cards = ca;
 		fbp = f;
 		fbp.setCardsPanel(this);
+		
+		pausedPanel = new JPanel();
+		pausedPanel.setLayout(new BorderLayout());
+		pausedPanel.setOpaque(true);
+		pausedPanel.setSize(1274, 280);
+		pausedPanel.setLocation(0, 0);
+		pausedPanel.setBackground(new Color(50, 50, 50, 200));
+		pausedPanel.setVisible(false);
+		pausedPanel.addMouseListener(new MouseAdapter() { @Override public void mousePressed(MouseEvent e) {}});
+		pausedPanel.addMouseMotionListener(new MouseMotionAdapter() { @Override public void mouseMoved(MouseEvent e) {}});
+		JLabel panellabel = new JLabel("Waiting for other users to make their move");
+		panellabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		panellabel.setForeground(Color.WHITE);
+		panellabel.setHorizontalAlignment(SwingConstants.CENTER);
+		pausedPanel.add(panellabel, BorderLayout.CENTER);
+		add(pausedPanel);
 		
 		for (int i = 0; i < 7; i++) {
 			cardArr[i] = new JLabel();
@@ -160,6 +180,8 @@ public class CardsPanel extends JPanel {
 				for (int j = 0; j < 3; j++) lblArrow[i][j].setIcon(null);
 			}
 		}
+		pausedPanel.setSize(1274 - (2*((7-cards.size()) * 91)), 280);
+		pausedPanel.setLocation(((7-cards.size()) * 91), 0);
 		this.repaint();
 	}
 	
@@ -173,9 +195,16 @@ public class CardsPanel extends JPanel {
 							for(int j = 0; j < 3; j++) {
 								if(e.getPoint().x > (26) && e.getPoint().y > (80 + 63*j)
 								&& e.getPoint().x < (26 + 150) && e.getPoint().y < (80 + 63*j + 57)){
-									if(j == 0 && canDoAction[i][0] > 0) controller.buildStructure();
-									else if (j == 1 && canDoAction[i][1] > 0) controller.buildWonderStage();
-									else if (j == 2) controller.discardChosen();
+									if(j == 0 && canDoAction[i][0] > 0) {
+										controller.buildStructure();
+										pausedPanel.setVisible(true);
+									} else if (j == 1 && canDoAction[i][1] > 0) {
+										controller.buildWonderStage();
+										pausedPanel.setVisible(true);
+									} else if (j == 2) {
+										controller.discardChosen();
+										pausedPanel.setVisible(true);
+									}
 									showOptions[i] = false;
 									break;
 								}
@@ -226,6 +255,10 @@ public class CardsPanel extends JPanel {
 				update();
 			}
 		};
+	}
+	
+	public void unpause() {
+		pausedPanel.setVisible(false);
 	}
 	
 	public void hideAllOptions() {

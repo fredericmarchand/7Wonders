@@ -17,6 +17,7 @@ public class User {
 	private MClient client;
 	private boolean lastMessage;
 	private boolean pause;
+	private int lastMessageID;
 	
 	//default constructor
 	public User(){}
@@ -32,10 +33,20 @@ public class User {
 		return username;
 	}
 	
+	public boolean isPaused()
+	{
+		return pause;
+	}
+	
 	public void pause()
 	{
 		if ( currentMatch != null )
 			pause = true;
+	}
+	
+	public int getLastMsgID()
+	{
+		return lastMessageID;
 	}
 	
 	public long getID()
@@ -60,7 +71,7 @@ public class User {
 	
 	public void setClient(MClient cl)
 	{
-		System.out.println("setClient: " + cl);
+		//System.out.println("setClient: " + cl);
 		client = cl;
 	}
 	
@@ -71,17 +82,18 @@ public class User {
 		//if ( (this.msg.getMsgType() == CommandMessage.MOVE_TYPE && currentMatch.getAge() != 4) || this.msg.getMsgType() == CommandMessage.SCIENTIFIC_SYMBOL_TYPE ) 
 		//	lastMessage = true;
 		//else 
-			lastMessage = false;
+		lastMessage = false;
 	}
 	
 	public void sendCommandMessage()
 	{
-		if ( client != null && msg != null && !pause )
+		if ( client != null && msg != null && !pause && lastMessageID != msg.getMsgType() )
 		{
+			lastMessageID = msg.getMsgType();
 			client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
 		}
-		System.out.println("[CLIENT ------ USER] MClient : \t" + client );
-		System.out.println("Send Command Message: " + msg);
+		//System.out.println("[CLIENT ------ USER] MClient : \t" + client );
+		//System.out.println("Send Command Message: " + msg);
 	}
 	
 	public void updateMatch(Match2 match)
@@ -114,19 +126,19 @@ public class User {
 			SevenWondersProtocol.assignUsernamesAndIDs(mat, names, ids);
 			mat.setLocalPlayerID(ID);
 			updateMatch(mat);
-			System.out.println("===================Current Age: " + currentMatch.getAge());
+			//System.out.println("===================Current Age: " + currentMatch.getAge());
 			pause = false;
 			if ( client != null && client.getMainFrame() != null )
 			{
-				client.getMainFrame().updateValues();
+				client.getMainFrame().update();
 			}
 		}
 	}
 	
-	public void returnToLobby()
-	{
-		client.returnToLobby();
-	}
+	//public void returnToLobby()
+	//{
+	//	client.returnToLobby();
+	//}
 	
 	public void startMatch()
 	{

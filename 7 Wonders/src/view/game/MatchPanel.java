@@ -213,6 +213,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	
 	public void update() {
 		updateValues();
+		cardsPanel.unpause();
 		
 		// Choose resources
 		needResources = controller.needToChooseResources();
@@ -248,7 +249,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	//update function that wont cause an infinite loop on receive
 	public void updateValues() {
 		cardsPanel.setCards(match.getLocalPlayer().getCards());
-		if(match.getAge() == 4) {
+		if(match.getAge() > 3) {
 			lblAge.setIcon(null);
 			lblAge.setText("GAME OVER!");
 			lblTurn.setText(" ");
