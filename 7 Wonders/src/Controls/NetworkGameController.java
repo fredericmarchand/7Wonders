@@ -215,7 +215,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	public ArrayList<Structure> needToChooseCopyGuild() 
 	{
 		if ( match.getAge() != 4 ) return new ArrayList<Structure>();
-		System.out.println("==============================needToChooseCopyGuild");
+		//System.out.println("==============================needToChooseCopyGuild");
 		for ( WonderBoardStage stg: user.getWonderBoard().getStages() )
 		{
 			if ( stg.isBuilt() )
@@ -255,7 +255,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 					{
 						if ( !se.isUsedUp() )
 						{
-							se.use();
+							//se.use();
 							return match.getDiscardedCards();
 						}
 					}
