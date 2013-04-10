@@ -1,8 +1,8 @@
 package Structures.Effects;
 
-import java.util.ArrayList;
-import Player.Player;
-import Structures.Structure;
+//import java.util.ArrayList;
+//import Player.Player;
+//import Structures.Structure;
 
 public class BuildDiscardedCard extends SpecialEffect{
 	
@@ -14,7 +14,7 @@ public class BuildDiscardedCard extends SpecialEffect{
 	}
 	
 	//handled in the controller too specific to put in here
-	public void playDiscardedCard(Player p, ArrayList<Structure> s, int index)
+	/*public void playDiscardedCard(Player p, ArrayList<Structure> s, int index)
 	{
 		if ( !usedUp )
 		{
@@ -24,6 +24,6 @@ public class BuildDiscardedCard extends SpecialEffect{
 			//p.getWonderBoard().buildStructure(p.getChosenCard());
 			//usedUp = true;
 		}
-	}
+	}*/
 	
 }

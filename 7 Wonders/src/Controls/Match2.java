@@ -497,9 +497,10 @@ public class Match2 {
 			Player p = getPlayerByID(msg.getPlayerID());
 			if ( msg.getCardID() != 0 )
 			{
-				p.getWonderBoard().buildStructure(s = getDiscardedCardByID(msg.getCardID()));
+				s = getDiscardedCardByID(msg.getCardID());
 				if ( s.getID() != 0 )
 				{
+					p.getWonderBoard().buildStructure(s);
 					for ( SpecialEffect se : s.getEffects() ) p.activateBuildEffect(se);
 					for ( WonderBoardStage stg: p.getWonderBoard().getStages() )
 					{
