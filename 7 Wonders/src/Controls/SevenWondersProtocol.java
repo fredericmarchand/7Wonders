@@ -50,6 +50,7 @@ public class SevenWondersProtocol {
 		encoding.add(msg.getCardID());
 		encoding.add(msg.getAction());
 		encoding.add(msg.getPreference());
+		encoding.add(msg.getFree());
 		encoding.add(msg.getResourceChoices().size());
 		for ( Resources r: msg.getResourceChoices() )
 		{
@@ -268,6 +269,7 @@ public class SevenWondersProtocol {
 		msg.setCardID(encoding.get(index++));
 		msg.setAction(encoding.get(index++));
 		msg.setPreference(encoding.get(index++));
+		msg.setFree(encoding.get(index++));
 		int s = encoding.get(index++);
 		for ( int i = 0; i < s; ++ i )
 		{

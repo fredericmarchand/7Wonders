@@ -332,9 +332,9 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	}
 
 	@Override
-	public void buildForFree(Structure g) 
+	public void buildForFree(boolean b) 
 	{
-		user.setFreePermission(true);
+		user.setFreePermission(val);
 	}
 	
 	public static void main(String args[])

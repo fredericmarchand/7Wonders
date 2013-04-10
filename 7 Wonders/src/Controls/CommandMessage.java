@@ -20,6 +20,7 @@ public class CommandMessage {
 	private int action;
 	private int preference;
 	private ArrayList<ScientificSymbols> symbolChoice;
+	private int free;
 	
 	public CommandMessage()
 	{
@@ -30,6 +31,7 @@ public class CommandMessage {
 		action = 0;
 		preference = 0;
 		symbolChoice = new ArrayList<ScientificSymbols>();
+		free = 0;
 	}
 	
 	public CommandMessage(long pid, int type, int cardid, int actionchoice, int tradepreference, ArrayList<ScientificSymbols> scientificSymbols, ArrayList<Resources> reschoice)
@@ -106,6 +108,15 @@ public class CommandMessage {
 		resourceChoice = choices;
 	}
 
+	public int getFree()
+	{
+		return free;
+	}
+	
+	public void setFree(int val)
+	{
+		free = val;
+	}
 	
 
 

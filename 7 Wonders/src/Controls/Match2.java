@@ -296,6 +296,7 @@ public class Match2 {
 		for ( CommandMessage msg: messages )
 		{
 			Player p = getPlayerByID(msg.getPlayerID());
+			p.setFreePermission(msg.getFree() == 1 ? true : false);
 			//p.chooseCardByID(msg.getCardID());
 			//System.out.println("=================================================== " + i++ + "================================");
 			switch ( msg.getAction() )
@@ -523,6 +524,7 @@ public class Match2 {
 		msg.setAction(move);
 		msg.setCardID(p.getChosenCard().getID());
 		msg.setPreference(neib);	
+		msg.setFree(p.getFreePermission() ? 1 : 0);
 		p.setCommand(msg);
 		p.sendCommandMessage();
 		p.pause();
