@@ -49,7 +49,7 @@ public class MServer {
 		
 		for(Match e : matchList){
 			matchName = (e.getMatch_ID() + " | " + e.getHostUName()  
-					+ " 's match  | " + e.getConnectionCount() +
+					+ "'s match  | " + e.getConnectionCount() +
 					"/" + e.getMaxPlayerCount() + " players");
 			lobbyList.add(matchName);
 		}

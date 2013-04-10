@@ -626,6 +626,10 @@ public class Match2 {
 			System.out.println("]");
 		}
 		System.out.println("\n\n\n\n====================================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");*/
+		/*for ( Player p: players )
+		{
+			System.out.println("==========="+ p.getUsername() + " : " + p.getTotalResources().toString() );
+		}*/
 		int type = messages.get(0).getMsgType();
 		switch ( type )
 		{
@@ -638,6 +642,7 @@ public class Match2 {
 				break;
 					
 			case CommandMessage.SCIENTIFIC_SYMBOL_TYPE:
+				System.out.println("================================================================");
 				endOfGameSpecialEffects(messages);
 				countPlayersVictoryPoints();
 				age += 1;
