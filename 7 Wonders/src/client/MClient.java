@@ -82,10 +82,10 @@ public class MClient {
 
 	public void waiting(){
 		if(inMatch==false&&inWait==false){
-			inWait = true
-			mainframe.launchWaiting(link.
+			inWait = true;
+			//mainframe.launchWaiting(link.
 		}else if(inMatch==false){
-			
+			//just update wait
 		}
 	}
 	
@@ -222,6 +222,11 @@ public class MClient {
 	//signal user
 
 	public void startMatch() {
+		if(inWait){
+			//kill the waitpanel
+		}
+		
+		
 		link.getChat().setStart(false);
 		inMatch = true;
 		inWait = false;
