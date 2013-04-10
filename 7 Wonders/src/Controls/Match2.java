@@ -18,27 +18,20 @@ public class Match2 {
 	private long localPlayerID;
 	private boolean calcCalled;
 
-	//server side constructor
+	//unused constructor
 	public Match2(ArrayList<User> users)
 	{
 		players = new ArrayList<Player>();
+		discarded = new ArrayList<Structure>();
+		age1Deck = null;
+		age2Deck = null;
+		age3Deck = null;
 		for ( User u: users )
 		{
 			players.add(new Player(u.getUsername(), u.getID()));
 		}
 		age = 1;
 		turn = 1;
-		//numPlayers = players.size();
-		//age1Deck = CardHandler.BuildAge1Deck(numPlayers);
-		//age2Deck = CardHandler.BuildAge2Deck(numPlayers);
-		//age3Deck = CardHandler.BuildAge3Deck(numPlayers);
-		//discarded = new ArrayList<Structure>();
-		
-		//CardHandler.DistributeRandomWonderBoards(players);
-		//for ( Player p: players )
-		//	p.getOwnedResources().addCoins(3);
-		//addInitialResources(players);
-		//CardHandler.DistributeCards(players, age1Deck);
 	}
 	
 	//client side constructor
@@ -86,12 +79,24 @@ public class Match2 {
 	public ArrayList<Integer> getDiscardedCardIDs()
 	{
 		ArrayList<Integer> ids = new ArrayList<Integer>();
-		ids.add(discarded.size());
+		//ids.add(discarded.size());
 		for ( Structure s: discarded )
 		{
 			ids.add(s.getID());
 		}
 		return ids;
+	}
+	
+	public Structure getDiscardedCardByID(int id)
+	{
+		for ( int i = 0; i < discarded.size(); ++i )
+		{
+			if ( discarded.get(i).getID() == id )
+			{
+				return discarded.remove(i);
+			}
+		}
+		return new Structure();
 	}
 	
 	public ArrayList<Structure> getDiscardedCards()
@@ -285,22 +290,10 @@ public class Match2 {
 
 		handleAIPlayerMoves();
 		
-		/*for ( Player p: getPlayers() )
-		{
-			 System.out.print("player i cards: [");
-			 System.out.print(p.getChosenCard().getName());
-			 //for (Structure s: p.getCards())
-			 //{
-			//	 System.out.print(s.getName() + ", ");
-			 //}
-			 System.out.println("]");
-		}*/
 		for ( CommandMessage msg: messages )
 		{
 			Player p = getPlayerByID(msg.getPlayerID());
 			p.setFreePermission(msg.getFree() == 1 ? true : false);
-			//p.chooseCardByID(msg.getCardID());
-			//System.out.println("=================================================== " + i++ + "================================");
 			switch ( msg.getAction() )
 			{
 				case 1:
@@ -482,7 +475,7 @@ public class Match2 {
 		}
 	}
 	
-	public void serverHandleChosenGuids(ArrayList<CommandMessage> messages)
+	public void serverHandleChosenGuilds(ArrayList<CommandMessage> messages)
 	{
 		for ( CommandMessage msg: messages )
 		{
@@ -496,8 +489,40 @@ public class Match2 {
 		}
 	}
 	
+	public void serverHandleDiscardedChoice(ArrayList<CommandMessage> messages)
+	{
+		for ( CommandMessage msg: messages )
+		{
+			Structure s;
+			Player p = getPlayerByID(msg.getPlayerID());
+			if ( msg.getCardID() != 0 )
+			{
+				p.getWonderBoard().buildStructure(s = getDiscardedCardByID(msg.getCardID()));
+				if ( s.getID() != 0 )
+				{
+					for ( SpecialEffect se : s.getEffects() ) p.activateBuildEffect(se);
+					for ( WonderBoardStage stg: p.getWonderBoard().getStages() )
+					{
+						if ( stg.isBuilt() )
+						{
+							for ( SpecialEffect sp: stg.getEffects() )
+							{
+								if ( sp.getID() == BuildDiscardedCard.BuildDiscardedCardID )
+								{
+									if ( !sp.isUsedUp() )
+									{
+										sp.use();
+										return;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 	
-	//server side endof game effects
 	//server methods
 	
 		
@@ -559,6 +584,17 @@ public class Match2 {
 			p.sendCommandMessage();
 			p.pause();
 		}
+	}
+	
+	public void initChosenDiscarded(Player p, Structure s)
+	{
+		CommandMessage msg = new CommandMessage();
+		msg.setPlayerID(p.getID());
+		msg.setMsgType(CommandMessage.CHOSEN_DISCARDED_TYPE);
+		msg.setCardID(s.getID());
+		p.setCommand(msg);
+		p.sendCommandMessage();
+		p.pause();
 	}
 	//client moves
 	
@@ -633,9 +669,15 @@ public class Match2 {
 				System.out.println("=======================GUILD");
 				if ( age == 4 )
 				{
-					serverHandleChosenGuids(messages);
+					serverHandleChosenGuilds(messages);
 					age += 1;
 				}
+				break;
+				
+			case CommandMessage.CHOSEN_DISCARDED_TYPE:
+				System.out.println("=======================GUILD");
+				if ( age < 4 )
+					serverHandleDiscardedChoice(messages);
 				break;
 					
 			case CommandMessage.SCIENTIFIC_SYMBOL_TYPE:

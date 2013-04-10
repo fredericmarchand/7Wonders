@@ -11,9 +11,10 @@ public class CommandMessage {
 	public static final int RESOURCE_CHOICE_TYPE = 0;
 	public static final int MOVE_TYPE = 1;
 	public static final int CHOSEN_GUILD_TYPE = 2;
+	public static final int CHOSEN_DISCARDED_TYPE = 3;
 	
 	//add more here and increment the value of SCIENTIFIC_SYMBOL_TYPE
-	public static final int SCIENTIFIC_SYMBOL_TYPE = 3;
+	public static final int SCIENTIFIC_SYMBOL_TYPE = 4;
 	
 
 	private long playerID; 

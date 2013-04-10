@@ -98,7 +98,7 @@ public class Match {
 		AI_Names.add("L'Carpetron Dookmarriot");
 		AI_Names.add("Jackmerius Tacktheritrix");
 		AI_Names.add("SEQUESTER GRUNDELPLITH");
-		AI_Names.add("Javaris Jamar Javarison-Lamar");
+		AI_Names.add("Javaris Javar Javarison-Lamar");
 		AI_Names.add("X-wing @aliciousness");
 		AI_Names.add("Johny Whiplash");
 		AI_Names.add("MaxGhost");

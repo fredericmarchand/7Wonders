@@ -2,6 +2,8 @@ package Player;
 
 import java.util.ArrayList;
 
+import Structures.Structure;
+
 import client.MClient;
 import Controls.CommandMessage;
 import Controls.Match2;
@@ -71,17 +73,12 @@ public class User {
 	
 	public void setClient(MClient cl)
 	{
-		//System.out.println("setClient: " + cl);
 		client = cl;
 	}
 	
 	public void setCommand(CommandMessage msg)
 	{
 		this.msg = msg;
-		//if ( this.msg == null || currentMatch == null ) return;
-		//if ( (this.msg.getMsgType() == CommandMessage.MOVE_TYPE && currentMatch.getAge() != 4) || this.msg.getMsgType() == CommandMessage.SCIENTIFIC_SYMBOL_TYPE ) 
-		//	lastMessage = true;
-		//else 
 		lastMessage = false;
 	}
 	
@@ -102,6 +99,9 @@ public class User {
 		currentMatch.setTurn(match.getTurn());
 		currentMatch.getDiscardedCards().clear();
 		currentMatch.getDiscardedCards().addAll(match.getDiscardedCards());
+		System.out.println(match.getDiscardedCards().size());
+		for ( Structure s: match.getDiscardedCards() )
+			System.out.println(s.getName());
 		currentMatch.setNumPlayers(match.getNumPlayers());
 		currentMatch.setLocalPlayerID(match.getLocalPlayerID());
 		for ( Player p: currentMatch.getPlayers() )
@@ -126,12 +126,15 @@ public class User {
 			SevenWondersProtocol.assignUsernamesAndIDs(mat, names, ids);
 			mat.setLocalPlayerID(ID);
 			updateMatch(mat);
-			//System.out.println("===================Current Age: " + currentMatch.getAge());
 			pause = false;
 			if ( client != null && client.getMainFrame() != null )
 			{
-				client.getMainFrame().update();
-				client.getMainFrame().updateValues();
+				if ( lastMessageID != CommandMessage.CHOSEN_DISCARDED_TYPE )
+				{
+					client.getMainFrame().update();
+					client.getMainFrame().updateValues();
+				}
+				
 			}
 		}
 	}

@@ -128,17 +128,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 
 	@Override
 	public void scienceChosen(ArrayList<ScientificSymbols> symbs) 
-	{
-//		for ( Structure st: user.getWonderBoard().getPurpleCards() )
-//		{
-//			for ( SpecialEffect se: st.getEffects() )
-//			{
-//				if ( se.getID() == ScientificSymbolBonus.ScientificSymbolBonusID && se.activateTime() == SpecialEffect.END_OF_GAME )
-//					((ScientificSymbolBonus)se).chooseSymbol(user, s);		
-//			}
-//		
-//		}
-		
+	{		
 		if ( match.getAge() == 5 )
 			match.initScienceChoice(user, symbs);
 
@@ -235,11 +225,8 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void chosenGuild(Structure g) 
 	{
-		//System.out.println("==============================chosenGuild");
 		match.initGuildChoice(user, g);
-		//user.getWonderBoard().buildStructure(g);
-		//for ( SpecialEffect se: g.getEffects() )
-		//	user.activateBuildEffect(se);
+		//System.out.println("==============================chosenGuild");
 	}
 
 	@Override //have to check if empty
@@ -255,7 +242,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 					{
 						if ( !se.isUsedUp() )
 						{
-							//se.use();
 							return match.getDiscardedCards();
 						}
 					}
@@ -268,10 +254,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void chosenDiscarded(Structure g) 
 	{
-		user.getWonderBoard().buildStructure(g);
-		match.getDiscardedCards().remove(g);
-		for ( SpecialEffect se: g.getEffects() )
-			user.activateBuildEffect(se);
+		//match.initChosenDiscarded(user, g);
 	}
 
 	@Override//have to check if null 
@@ -293,27 +276,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void resourceChosen(ArrayList<Resources> resources) 
 	{
-		/*for ( Structure s: user.getWonderBoard().getYellowCards() )
-		{
-			for ( SpecialEffect se: s.getEffects() )
-			{
-				if ( se.getID() == ResourceChoice.ResourceChoiceID )
-				{
-					user.getUnvResources().addResources(resources.get(i++));
-				}
-			}
-		}
-		for ( Structure s: user.getWonderBoard().getBrownGreyCards() )
-		{
-			for ( SpecialEffect se: s.getEffects() )
-			{
-				if ( se.getID() == ResourceChoice.ResourceChoiceID )
-				{
-					user.getExtraResources().addResources(resources.get(i++));
-				}
-			}
-		}*/
-
 		match.initResourceChoice(user, resources);
 	}
 	
@@ -337,8 +299,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	
 	public static void main(String args[])
 	{
-		//String name = JOptionPane.showInputDialog("What is your username? ");
-		//NetworkGameController gc = new NetworkGameController(new Player(name, 0), new Match2());
+		
 	}
 	
 
