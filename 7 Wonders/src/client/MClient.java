@@ -159,20 +159,22 @@ public class MClient {
 	}
 
 	public void quitMatch() {
-		if (matchID > 0) {
+		
 			Packet5Disconnect quit = new Packet5Disconnect();
 			quit.setMID(matchID);
 			quit.setCID(ID);
 			quit.setUName(username);
 			client.sendTCP(quit);
 			matchID = 0000; // no longer in a game
+			createUser();
+			host=false;
 			sendMatchListRequest();
 			if(inMatch)
 				mainframe.hideMatchPanel();
-			inMatch = !inMatch;
+			inMatch = false;
 			mainframe.launchLobby(link.launchLobby());
 			
-		}
+		
 	}
 
 	public void sendChat(String s) {
@@ -212,6 +214,7 @@ public class MClient {
 	public void startMatch() {
 		link.getChat().setStart(false);
 		inMatch = true;
+		if(user==null)System.out.println("[CLIENT] User is null");
 		user.startMatch();
 		mainframe.updateMatchPanel();
 		
