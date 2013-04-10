@@ -42,6 +42,8 @@ public class FreeBuildPanel extends JPanel {
 				if(enabled) {
 					controller.buildForFree(chosen);
 					cp.hideAllOptions();
+					lblFreeOverlay.setVisible(false);
+					update();
 				}
 			}
 			

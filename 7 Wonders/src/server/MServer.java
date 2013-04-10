@@ -81,7 +81,6 @@ public class MServer {
 				if (m.getHumanConnectionCount() == 0) {
 					ListIterator<Match> it = getMatchList().listIterator();
 					while (it.hasNext()) {
-						@SuppressWarnings("unused")
 						Match match = it.next();
 						if (match.getHumanConnectionCount() == 0) {
 							it.remove();
