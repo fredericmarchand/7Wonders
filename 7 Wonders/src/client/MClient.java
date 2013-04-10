@@ -113,14 +113,18 @@ public class MClient {
 
 	
 	//transmission methods///
-	public void serverConnect(String ip, int port) {
+	public boolean serverConnect(String ip, int port) {
+		boolean connect = false;
 		try {
+			connect= true;
 			client.connect(5000, ip, port);
+			
 		} catch (IOException e) {
-			client.stop();
-			link.failConnect();
+
+			return false;
 		}
 		client.sendTCP(new Packet0LoginRequest());
+		return connect;
 	}
 
 

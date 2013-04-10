@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 public class StartPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
-	private final boolean DEBUG_MODE = true;
+	private final boolean DEBUG_MODE = false;
 	
 	private JButton create, join, quit;
 	private MClient mclient;
@@ -95,16 +95,22 @@ public class StartPanel extends JPanel {
 			JOptionPane.showMessageDialog(null, "Incorrect Input");
 			System.exit(0);
 		}
+		
 		mclient = new MClient(mainframe);
 		mclient.setUser_username(uname);
+
 		try {
-			mclient.serverConnect(ip, Integer.parseInt(port));
-		} catch(Exception e) {
-			setVisible(false);
-			JOptionPane.showMessageDialog(null, "Incorrect Input");
-			run();
-			System.exit(0);
+			while (!mclient.serverConnect(ip, Integer.parseInt(port))) {
+				//mclient.getLink().failConnect();
+				ip = JOptionPane.showInputDialog("IP: ");
+				port = JOptionPane.showInputDialog("Port: ");
+			}
+		} catch (Exception e) {
+			
+			//JOptionPane.showMessageDialog(null, "Incorrect Input");
 		}
+			
+
 		setVisible(true);
 	}
 
