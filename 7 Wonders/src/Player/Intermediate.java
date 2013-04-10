@@ -14,6 +14,8 @@ public class Intermediate implements Strategy{
 	*/
 	public void strategicPick(AIPlayer p, ArrayList<Structure> discarded, Player leftNeighbor, Player rightNeighbor)
 	{
+		if (p.cards.isEmpty())
+			return;
 		boolean did = false;
 		p.resourceChoice();
 		float aiCoef = (float) p.calculateVictoryPoints();
