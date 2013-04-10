@@ -81,17 +81,16 @@ public class StartPanel extends JPanel {
 		String port = "";
 		try {
 			if(DEBUG_MODE) {
-				uname = "DEBUGNAME";
 				ip = "127.0.0.1";
 				port = "60001";
 			} else {
-				while(uname.isEmpty())
-					uname = JOptionPane.showInputDialog("What is your username? ");
 				while(ip.isEmpty())
 					ip= JOptionPane.showInputDialog("IP: ");
 				while(port.isEmpty())
 					port = JOptionPane.showInputDialog("Port: ");
 			}
+			while(uname.isEmpty())
+				uname = JOptionPane.showInputDialog("What is your username? ");
 		} catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "Incorrect Input");
 			System.exit(0);
