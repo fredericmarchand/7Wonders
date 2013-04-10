@@ -93,6 +93,12 @@ public class MainFrame extends JFrame implements Runnable {
 		add(lp);
 	}
 	
+	public void hideMatchPanel(){
+		panel.hideMatchPanel();
+		panel = null;
+	}
+	
+	
 	public static void main(String args[]) {
 		new MainFrame();
 	}

@@ -382,4 +382,8 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(numplayers == 7) return 320*index;
 		return 0;
 	}
+	
+	public void hideMatchPanel(){
+		setVisible(false);
+	}
 }

@@ -3,6 +3,7 @@ package client;
 import java.io.IOException;
 import java.util.*;
 
+import view.menu.LobbyPanel;
 import view.menu.MainFrame;
 
 import Controls.*;
@@ -213,11 +214,14 @@ public class MClient {
 
 
 	// return to lobby
-	
+	public void returnToLobby(){};
 	public void pushUserQuit(){
 		link.killChatFrame();
-		link.killMainFrame();
+		mainframe.hideMatchPanel();
+		mainframe.launchLobby((new LobbyPanel(this)));
+		//user.killMatchPAnel
 	}
+	
 
 
 	// any class type sent over the network must be registered to the kryo
