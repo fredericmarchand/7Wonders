@@ -102,12 +102,6 @@ public class NetworkListener extends Listener {
 					.println("[SERVER] CLIENT HAS BEEN REMOVED"
 							+ mserver.removeClient(c,
 									((Packet5Disconnect) o).getMID(),((Packet5Disconnect)o).getCID()));
-//			
-//			Packet4Object l = new Packet4Object();
-//			l.setObject(mserver.getLobbyList());
-//			for(Object s : mserver.getLobbyList())
-//				System.out.println("[SERVER] Match List:\t" + s);
-//			c.sendTCP(l);
 			Packet15MatchDisconnect packet = new Packet15MatchDisconnect();
 			c.sendTCP(packet);
 			
@@ -212,6 +206,7 @@ public class NetworkListener extends Listener {
 							x.sendTCP(msg);
 					
 				}
+			
 			
 		}
 

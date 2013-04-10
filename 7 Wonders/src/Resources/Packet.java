@@ -134,7 +134,7 @@ public class Packet {
 		public int  getnPlayer(){return numPlayer;}
 	}
 	public static class Packet15MatchDisconnect{}
-
+	public static class Packet16ForcefulDisconnect{}
 
 }
 
