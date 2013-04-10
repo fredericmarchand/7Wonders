@@ -400,10 +400,13 @@ public class Player extends User {
 	{
 		for ( WonderBoardStage stg: wonderBoard.getStages() )
 		{
+			System.out.println("====stage i====");
 			if ( stg.isBuilt() )
 			{
+				System.out.println("====stage is built====");
 				for ( SpecialEffect se: stg.getEffects() )
 				{
+					System.out.println("====an effect====");
 					if ( se.getID() == FreeConstruction.FreeConstructionID )
 					{
 						return ((FreeConstruction)se).canBuildForFree();

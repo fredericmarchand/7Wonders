@@ -9,10 +9,12 @@ public class FreeConstruction extends SpecialEffect{
 	public FreeConstruction()
 	{
 		super(FreeConstructionID, false, RELOAD_EVERY_AGE, START_OF_TURN);
+		System.out.println("==============================BUILDING FREE CONSTRUCTION EFFECT================+++++");
 	}
 	
 	public boolean canBuildForFree()
 	{
+		System.out.println("================FreeBuild ==> " + usedUp);
 		if ( !usedUp )
 			return true;
 		return false;

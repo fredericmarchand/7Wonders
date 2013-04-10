@@ -626,10 +626,10 @@ public class Match2 {
 			System.out.println("]");
 		}
 		System.out.println("\n\n\n\n====================================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");*/
-		for ( Player p: players )
+		/*for ( Player p: players )
 		{
 			System.out.println("==========="+ p.getUsername() + " : " + p.getTotalResources().toString() );
-		}
+		}*/
 		int type = messages.get(0).getMsgType();
 		switch ( type )
 		{
