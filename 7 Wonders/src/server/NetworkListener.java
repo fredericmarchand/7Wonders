@@ -196,20 +196,25 @@ public class NetworkListener extends Listener {
 			}
 				c.sendTCP(joinResponse);
 				
-				if(join){
-					mserver.updateMatch(((Packet13MatchJoinRequest) o).getMID());
-						Packet6ChatMsg msg = new Packet6ChatMsg();
-						msg.setCID(((Packet13MatchJoinRequest) o).getCID());
-						msg.setMsg(((Packet13MatchJoinRequest) o).getUName() + " has joined the match");
-						msg.setuName("[SYSTEM] ");
-						for (Connection x : mserver.findMatch(((Packet13MatchJoinRequest) o).getMID()).getConnections())
-							x.sendTCP(msg);
-					
-				}
+			if (join) {
+				mserver.updateMatch(((Packet13MatchJoinRequest) o).getMID());
+				Packet6ChatMsg msg = new Packet6ChatMsg();
+				msg.setCID(((Packet13MatchJoinRequest) o).getCID());
+				msg.setMsg(((Packet13MatchJoinRequest) o).getUName()
+						+ " has joined the match");
+				msg.setuName("[SYSTEM] ");
+				for (Connection x : mserver.findMatch(
+						((Packet13MatchJoinRequest) o).getMID())
+						.getConnections())
+					x.sendTCP(msg);
+				mserver.updateMatchCount(((Packet13MatchJoinRequest) o).getMID());
+			}
 			
 			
 		}
 
 	}
+	
+
 
 }

@@ -27,6 +27,7 @@ public class MClient {
 	private long ID = 0000;
 	private String username;
 	private boolean inMatch = false;
+	private boolean inWait = false;
 	private linkNetworkView link;
 	
 	private User user;
@@ -79,6 +80,15 @@ public class MClient {
 		matchList = list;
 	}
 
+	public void waiting(){
+		if(inMatch==false&&inWait==false){
+			inWait = true
+			mainframe.launchWaiting(link.
+		}else if(inMatch==false){
+			
+		}
+	}
+	
 	public ArrayList<String> getMatchList() {
 		return matchList;
 	}
@@ -171,6 +181,7 @@ public class MClient {
 			if(inMatch)
 				mainframe.hideMatchPanel();
 			inMatch = false;
+			inWait = false;
 			mainframe.launchLobby(link.launchLobby());
 			
 		
@@ -213,6 +224,7 @@ public class MClient {
 	public void startMatch() {
 		link.getChat().setStart(false);
 		inMatch = true;
+		inWait = false;
 		if(user==null)System.out.println("[CLIENT] User is null");
 		user.startMatch();
 		mainframe.updateMatchPanel();
@@ -265,6 +277,7 @@ public class MClient {
 		kryo.register(Packet14HostCreateMatch.class);
 		kryo.register(Packet15MatchDisconnect.class);
 		kryo.register(Packet16ForcefulDisconnect.class);
+		kryo.register(Packet17ConnectionCount.class);
 		
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match1.class);	

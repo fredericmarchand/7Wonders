@@ -87,7 +87,8 @@ public class MServer {
 					for(Connection cc : m.getConnections())
 						cc.sendTCP(packet);
 					//insert code to remove everyone from the game if someone has disconnected from an in progress match
-				}
+				}else	updateMatchCount(m_id);
+					
 				return true;
 			}
 		}
@@ -138,6 +139,14 @@ public class MServer {
 		findMatch(mid).update();
 	}
 
+	public void updateMatchCount(Long mid){
+		Packet17ConnectionCount cPacket = new Packet17ConnectionCount();
+		cPacket.setConCount(findMatch(mid).getConnectionCount());
+		for (Connection x : findMatch(mid).getConnections())
+			x.sendTCP(cPacket);
+	}
+	
+	
 	// any class type sent over the network must be registered to the kryo
 	// generic types are implicitly registered
 	public void registerPackets() throws IOException {
@@ -159,7 +168,8 @@ public class MServer {
 		kryo.register(Packet14HostCreateMatch.class);
 		kryo.register(Packet15MatchDisconnect.class);
 		kryo.register(Packet16ForcefulDisconnect.class);
-	
+		kryo.register(Packet17ConnectionCount.class);
+		
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match1.class);
 		kryo.register(Match2.class);
