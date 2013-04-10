@@ -130,7 +130,7 @@ public class LobbyPanel extends JPanel implements ListSelectionListener {
 	}
 	
 	public void failedJoin(){
-		JOptionPane.showMessageDialog(null, "Match is full or in progress.\nTry another one!");
+		JOptionPane.showMessageDialog(null, "Match is full, in progress or no longer exists.\nTry another one!\nOr Create one!");
 	}
 	
 	@Override

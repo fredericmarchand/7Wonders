@@ -27,7 +27,7 @@ public class MClient {
 	private long matchID = 0000;
 	private long ID = 0000;
 	private String username;
-	
+	private boolean inMatch = false;
 	private linkNetworkView link;
 	
 	private User user;
@@ -113,14 +113,18 @@ public class MClient {
 
 	
 	//transmission methods///
-	public void serverConnect(String ip, int port) {
+	public boolean serverConnect(String ip, int port) {
+		boolean connect = false;
 		try {
+			connect= true;
 			client.connect(5000, ip, port);
-		} catch (IOException e) {
-			client.stop();
-			link.failConnect();
+			
+		} catch (Exception e) {
+			System.out.println("[CLIENT] FAIL CONNECT");
+			return false;
 		}
 		client.sendTCP(new Packet0LoginRequest());
+		return connect;
 	}
 
 
@@ -155,16 +159,22 @@ public class MClient {
 	}
 
 	public void quitMatch() {
-		if (matchID > 0) {
+		
 			Packet5Disconnect quit = new Packet5Disconnect();
 			quit.setMID(matchID);
 			quit.setCID(ID);
 			quit.setUName(username);
 			client.sendTCP(quit);
 			matchID = 0000; // no longer in a game
+			createUser();
+			host=false;
 			sendMatchListRequest();
+			if(inMatch)
+				mainframe.hideMatchPanel();
+			inMatch = false;
 			mainframe.launchLobby(link.launchLobby());
-		}
+			
+		
 	}
 
 	public void sendChat(String s) {
@@ -190,6 +200,7 @@ public class MClient {
 	//request to join match
 	public void sendMatchRequest(String mname) {
 		Packet13MatchJoinRequest rPacket = new Packet13MatchJoinRequest();
+
 		rPacket.setCID(ID);
 		rPacket.setMID(Long.parseLong((mname.split(" | " ))[0]));
 		rPacket.setUName(username);
@@ -202,7 +213,11 @@ public class MClient {
 
 	public void startMatch() {
 		link.getChat().setStart(false);
+		inMatch = true;
+		if(user==null)System.out.println("[CLIENT] User is null");
 		user.startMatch();
+		mainframe.updateMatchPanel();
+		
 	}
 	
 	public void pushToUser(ArrayList<Integer> devonsShittyList1,
@@ -220,8 +235,11 @@ public class MClient {
 			System.out.println("[CLIENT] MATCH LIST:\t" + s);
 		link.killChatFrame();
 		//mainframe.hideMatchPanel();
-		mainframe.hideMatchPanel();
-		mainframe.launchLobby(link.launchLobby());
+		
+		//if user has not joined a game
+		//error going from match lobby to game lobby
+		//mainframe.hideMatchPanel();
+		//mainframe.launchLobby(link.launchLobby());
 		link.updateLobby(matchList);
 	}
 	

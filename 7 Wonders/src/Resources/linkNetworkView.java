@@ -61,7 +61,7 @@ public class linkNetworkView {
 		
 		int failJoin = JOptionPane.showConfirmDialog(null, "Failed to connect to the server.\nDo you wish to retry?");
 		if(failJoin == JOptionPane.OK_OPTION){
-			startMenu.run();
+			//startMenu.run();
 		}
 		else{ 
 			System.exit(0);
