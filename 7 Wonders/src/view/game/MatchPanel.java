@@ -229,6 +229,8 @@ public class MatchPanel extends JPanel implements Runnable {
 			closeButton.setVisible(false);
 			scrollpane.revalidate();
 			scrollpane.setVisible(true);
+		} else {
+			controller.chosenDiscarded(null);
 		}
 		
 		// Choose guild to copy
@@ -239,6 +241,8 @@ public class MatchPanel extends JPanel implements Runnable {
 			closeButton.setVisible(false);
 			scrollpane.revalidate();
 			scrollpane.setVisible(true);
+		} else {
+			controller.chosenGuild(null);
 		}
 		
 		// Choose Science
