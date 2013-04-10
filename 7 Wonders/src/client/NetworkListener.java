@@ -120,6 +120,10 @@ public class NetworkListener extends Listener{
 			mclient.pushUserQuit();
 			gameStart = false;
 		}
+		if( o instanceof Packet16ForcefulDisconnect){
+			mclient.getLink().otherClientDisconnect();
+			mclient.quitMatch();
+		}
 	}
 	
 	@SuppressWarnings("unchecked")

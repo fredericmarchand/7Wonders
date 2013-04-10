@@ -84,10 +84,8 @@ public class Match {
 	public void genAI_Names(){
 		AI_Names.add("JP the Evil Frenchman");
 		AI_Names.add("Fred the French nightmare");
-		AI_Names.add("Danny Fingerbanging Lu");
 		AI_Names.add("Tyler the manchild");
 		AI_Names.add("Christine 'Gandalf' Laurendeau");
-		AI_Names.add("Phillip High on Expectations");
 		AI_Names.add("Try Hard McGee");
 		AI_Names.add("Joffrey");
 		AI_Names.add("Jay On'Rait");
@@ -102,7 +100,6 @@ public class Match {
 		AI_Names.add("X-wing @aliciousness");
 		AI_Names.add("Johny Whiplash");
 		AI_Names.add("MaxGhost");
-		AI_Names.add("Deedee Muffmuncher");
 	}
 
 	public String randomName(ArrayList<String> list){

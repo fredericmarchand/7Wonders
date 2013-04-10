@@ -24,21 +24,16 @@ public class MServer {
 	Scanner scanner = new Scanner(System.in);
 
 	public MServer() throws IOException {
-
-		server = new Server(16382, 16382);
-		
+		server = new Server(16382, 16382);		
 		list = new ArrayList<Object>();
 		matchList = new ArrayList<Match>();
-
 		registerPackets();
-
 		NetworkListener nl = new NetworkListener();
 		nl.init(server, this);
 		server.addListener(nl);
 		System.out.println("Input server port (60001 recommended): ");
 		server.bind(Integer.parseInt((scanner.next())));
 		server.start();
-
 	}
 	
 	public ArrayList<String> getLobbyList(){
@@ -87,6 +82,11 @@ public class MServer {
 							System.out.println("[SERVER] No one in match  - DELETED ");
 						}
 					}
+				}else if(m.get_inProgress()){
+					Packet16ForcefulDisconnect packet = new Packet16ForcefulDisconnect();
+					for(Connection cc : m.getConnections())
+						cc.sendTCP(packet);
+					//insert code to remove everyone from the game if someone has disconnected from an in progress match
 				}
 				return true;
 			}
@@ -158,6 +158,7 @@ public class MServer {
 		kryo.register(Packet13MatchJoinRequest.class);
 		kryo.register(Packet14HostCreateMatch.class);
 		kryo.register(Packet15MatchDisconnect.class);
+		kryo.register(Packet16ForcefulDisconnect.class);
 	
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match1.class);

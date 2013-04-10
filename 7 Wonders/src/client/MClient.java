@@ -264,7 +264,7 @@ public class MClient {
 		kryo.register(Packet13MatchJoinRequest.class);
 		kryo.register(Packet14HostCreateMatch.class);
 		kryo.register(Packet15MatchDisconnect.class);
-
+		kryo.register(Packet16ForcefulDisconnect.class);
 		
 		kryo.register(java.util.ArrayList.class);
 		kryo.register(Match1.class);	

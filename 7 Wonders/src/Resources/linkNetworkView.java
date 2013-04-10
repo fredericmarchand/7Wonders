@@ -67,5 +67,10 @@ public class linkNetworkView {
 			System.exit(0);
 		}		
 	}
+
+
+	public void otherClientDisconnect() {
+		JOptionPane.showConfirmDialog(null, "A player has left the match :(\nBeing moved to lobby");
+	}
 	
 }
