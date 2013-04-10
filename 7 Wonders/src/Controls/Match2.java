@@ -567,7 +567,7 @@ public class Match2 {
 								{
 									Collections.shuffle(discarded);
 									p.getWonderBoard().buildStructure(s = discarded.remove(0));
-									for ( SpecialEffect sp : s.getEffects() ) p.activateBuildEffect(se);
+									for ( SpecialEffect sp : s.getEffects() ) p.activateBuildEffect(sp);
 									se.use();
 								}
 							}
