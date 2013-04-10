@@ -169,7 +169,8 @@ public class MClient {
 
 	public void sendChat(String s) {
 		Packet6ChatMsg msg = new Packet6ChatMsg();
-		String _msg = ("[" + username + "." + ID + "]" + " " + s);
+		//String _msg = ("[" + username + "." + ID + "]" + " " + s);
+		String _msg = ("[" + username + "]: " + s);
 		msg.setMsg(_msg);
 		msg.setCID(ID);
 		msg.setuName(username);

@@ -7,11 +7,6 @@ import java.util.Scanner;
 
 import Controls.Match1;
 import Controls.Match2;
-import Player.AIPlayer;
-import Player.Intermediate;
-import Player.Moderate;
-import Player.Simple;
-import Player.Strategy;
 import Player.User;
 import Resources.Match;
 import Resources.Packet.*;
@@ -19,9 +14,7 @@ import Resources.Packet.*;
 import com.esotericsoftware.kryo.Kryo;
 
 import com.esotericsoftware.kryonet.*;
-import com.esotericsoftware.minlog.Log;
 
-@SuppressWarnings("unused")
 public class MServer {
 
 	private Server server;
@@ -85,11 +78,11 @@ public class MServer {
 				if (m.getHumanConnectionCount() == 0) {
 					ListIterator<Match> it = getMatchList().listIterator();
 					while (it.hasNext()) {
+						@SuppressWarnings("unused")
 						Match match = it.next();
 						if (m.getHumanConnectionCount() == 0) {
 							it.remove();
-							System.out
-									.println("[SERVER] No one in match  - DELETED ");
+							System.out.println("[SERVER] No one in match  - DELETED ");
 						}
 					}
 				}
