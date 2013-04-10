@@ -549,6 +549,33 @@ public class Match2 {
 				}
 			}
 		}
+		
+		Structure s;
+		for ( Player p : players )
+		{
+			if ( p.ai() )
+			{
+				for ( WonderBoardStage stg: p.getWonderBoard().getStages() )
+				{
+					if ( stg.isBuilt() )
+					{
+						for ( SpecialEffect se: stg.getEffects() )
+						{
+							if ( se.getID() == BuildDiscardedCard.BuildDiscardedCardID )
+							{
+								if ( !se.isUsedUp() )
+								{
+									Collections.shuffle(discarded);
+									p.getWonderBoard().buildStructure(s = discarded.remove(0));
+									for ( SpecialEffect sp : s.getEffects() ) p.activateBuildEffect(sp);
+									se.use();
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	//server methods
