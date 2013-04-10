@@ -81,8 +81,10 @@ public class StartPanel extends JPanel {
 		String port = "";
 
 		boolean connected = false;
-		while (uname.isEmpty())
+		while (uname.isEmpty()){
 			uname = JOptionPane.showInputDialog("What is your username? ");
+			if(uname == null) System.exit(0);
+		}
 
 		mclient = new MClient(mainframe);
 		mclient.setUser_username(uname);
@@ -93,7 +95,9 @@ public class StartPanel extends JPanel {
 				port = "60001";
 			} else {
 				ip = JOptionPane.showInputDialog("IP: ");
+				if(ip == null) System.exit(0);
 				port = JOptionPane.showInputDialog("Port: ");
+				if(port == null) System.exit(0);
 			}
 			try {
 				connected = mclient.serverConnect(ip, Integer.parseInt(port));
