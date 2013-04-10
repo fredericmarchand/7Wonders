@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 public class StartPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
-	private final boolean DEBUG_MODE = true;
+	private final boolean DEBUG_MODE = false;
 	
 	private JButton create, join, quit;
 	private MClient mclient;
