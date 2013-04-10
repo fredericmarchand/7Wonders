@@ -3,13 +3,13 @@ package Controls;
 import java.util.ArrayList;
 import java.util.Random;
 
-import Structures.Cards.ScientistsGuild;
 import Structures.Effects.*;
 import Structures.Structure;
 import Tokens.Resources;
 import Tokens.ScientificSymbols;
 import WonderBoards.WonderBoardStage;
 import Player.*;
+
 public class Match2 {
 	
 	private ArrayList<Player> players;
