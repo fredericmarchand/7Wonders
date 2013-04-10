@@ -118,10 +118,11 @@ public class LobbyPanel extends JPanel implements ListSelectionListener {
 		setVisible(true);
 	}
 	
-	public void update(ArrayList<String> list){
+	public void update(ArrayList<String> l){
 		listModel.clear();
-		for(String id: list) listModel.insertElementAt(id, index++);
+		for(String id: l) listModel.insertElementAt(id, index++);
 		index = 0;
+		list.setSelectedIndex(0);
 	}
 	
 	public void failedJoin(){
