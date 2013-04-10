@@ -90,10 +90,10 @@ public class Resources {
 	}
 	
 	//returns the total amount of resources of every type
-	public int getCount()
-	{
-		return (ore + stone + wood + clay + glass + loom + papyrus);
-	}
+	//public int getCount()
+	//{
+	//	return (ore + stone + wood + clay + glass + loom + papyrus);
+	//}
 	
 	public int getPrimaryCount()
 	{
