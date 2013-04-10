@@ -98,6 +98,10 @@ public class MainFrame extends JFrame implements Runnable {
 		panel = null;
 	}
 	
+	public void updateMatchPanel(){
+		panel.repaint();
+	}
+	
 	
 	public static void main(String args[]) {
 		new MainFrame();

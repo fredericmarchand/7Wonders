@@ -194,6 +194,7 @@ public class MClient {
 	//request to join match
 	public void sendMatchRequest(String mname) {
 		Packet13MatchJoinRequest rPacket = new Packet13MatchJoinRequest();
+
 		rPacket.setCID(ID);
 		rPacket.setMID(Long.parseLong((mname.split(" | " ))[0]));
 		rPacket.setUName(username);
@@ -208,6 +209,8 @@ public class MClient {
 		link.getChat().setStart(false);
 		inMatch = true;
 		user.startMatch();
+		mainframe.updateMatchPanel();
+		
 	}
 	
 	public void pushToUser(ArrayList<Integer> devonsShittyList1,
