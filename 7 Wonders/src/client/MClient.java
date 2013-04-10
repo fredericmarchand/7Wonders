@@ -27,7 +27,7 @@ public class MClient {
 	private long matchID = 0000;
 	private long ID = 0000;
 	private String username;
-	
+	private boolean inMatch = false;
 	private linkNetworkView link;
 	
 	private User user;
@@ -163,7 +163,11 @@ public class MClient {
 			client.sendTCP(quit);
 			matchID = 0000; // no longer in a game
 			sendMatchListRequest();
+			if(inMatch)
+				mainframe.hideMatchPanel();
+			inMatch = !inMatch;
 			mainframe.launchLobby(link.launchLobby());
+			
 		}
 	}
 
@@ -202,6 +206,7 @@ public class MClient {
 
 	public void startMatch() {
 		link.getChat().setStart(false);
+		inMatch = true;
 		user.startMatch();
 	}
 	
@@ -220,8 +225,11 @@ public class MClient {
 			System.out.println("[CLIENT] MATCH LIST:\t" + s);
 		link.killChatFrame();
 		//mainframe.hideMatchPanel();
-		mainframe.hideMatchPanel();
-		mainframe.launchLobby(link.launchLobby());
+		
+		//if user has not joined a game
+		//error going from match lobby to game lobby
+		//mainframe.hideMatchPanel();
+		//mainframe.launchLobby(link.launchLobby());
 		link.updateLobby(matchList);
 	}
 	
