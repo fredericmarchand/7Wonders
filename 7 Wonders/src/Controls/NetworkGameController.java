@@ -154,7 +154,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	public ArrayList<Resources> needToChooseResources() 
 	{
 		ArrayList<Resources> resources = new ArrayList<Resources>();
-		if ( match.getAge() > 3 || user.getLastMsgID() != CommandMessage.RESOURCE_CHOICE_TYPE ) return resources;
+		if ( match.getAge() > 3 || user.getLastMsgID() == CommandMessage.RESOURCE_CHOICE_TYPE ) return resources;
 		for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
@@ -327,6 +327,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public boolean canBuildForFree() 
 	{
+		System.out.println("============Can Build For Free==============");
 		return user.freeBuild();
 	}
 

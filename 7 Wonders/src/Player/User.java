@@ -131,6 +131,7 @@ public class User {
 			if ( client != null && client.getMainFrame() != null )
 			{
 				client.getMainFrame().update();
+				client.getMainFrame().updateValues();
 			}
 		}
 	}
