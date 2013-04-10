@@ -327,16 +327,14 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public boolean canBuildForFree() 
 	{
-		System.out.println("============Can Build For Free==============");
+		//System.out.println("============Can Build For Free==============");
 		return user.freeBuild();
 	}
 
 	@Override
 	public void buildForFree(Structure g) 
 	{
-		user.getWonderBoard().buildStructure(g);
-		for ( SpecialEffect sp: g.getEffects() )
-			user.activateBuildEffect(sp);
+		user.setFreePermission(true);
 	}
 	
 	public static void main(String args[])

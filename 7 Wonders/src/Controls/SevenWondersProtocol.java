@@ -98,6 +98,7 @@ public class SevenWondersProtocol {
 		playerStuff.add(p.getScientificSymbols().getTablets());
 		playerStuff.add(p.getAge());
 		playerStuff.add(p.ai() ? 1 : 0);
+		playerStuff.add(p.getFreePermission() ? 1 : 0);
 		playerStuff.addAll(encodeResource(p.getOwnedResources()));		
 		playerStuff.addAll(encodeResource(p.getExtraResources()));
 		playerStuff.addAll(encodeResource(p.getPurchasedResources()));
@@ -234,6 +235,7 @@ public class SevenWondersProtocol {
 			case 14: //BuildDiscardedCard nothing to copy
 				break;
 			case 15: //FreeConstruction nothing to copy
+				//spStuff.add(((FreeConstruction)sp).hasBeenUsed() ? 1 : 0);
 				break;
 			case 16: //copy guild nothing to copy
 				break;
@@ -319,6 +321,7 @@ public class SevenWondersProtocol {
 		p.getScientificSymbols().addTablets(encoding.get(index++));
 		p.setAge(encoding.get(index++));
 		p.setAI(index++);
+		p.setFreePermission(encoding.get(index++) == 1 ? true : false);
 		p.setOwnedResources(decodeResources(encoding));
 		p.setExtraResources(decodeResources(encoding));
 		p.setPurchasedResources(decodeResources(encoding));
@@ -454,7 +457,9 @@ public class SevenWondersProtocol {
 				sp.setters(spused, sptype, spact);
 				break;
 			case 15: //FreeConstruction nothing to copy
+				int chacha = encoding.get(index++);
 				sp = new FreeConstruction();
+				//((FreeConstruction)sp).setUsedThisTurn(chacha == 1 ? true : false);
 				sp.setters(spused, sptype, spact);
 				break;
 			case 16: //copy guild nothing to copy
