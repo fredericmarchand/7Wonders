@@ -51,7 +51,7 @@ public class FreeBuildPanel extends JPanel {
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				lblFreeOverlay.setVisible(true);
+				if(can) lblFreeOverlay.setVisible(true);
 			}
 		});
 
@@ -69,10 +69,12 @@ public class FreeBuildPanel extends JPanel {
 	public void update() {
 		if(controller.canBuildForFree()) {
 			lblFree.setVisible(true);
+			lblFreeOverlay.setVisible(false);
 			can = true;
 		} else {
 			can = false;
 			lblFree.setVisible(false);
+			lblFreeOverlay.setVisible(false);
 		}
 		toggle = false;
 	}
