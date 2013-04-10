@@ -95,7 +95,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	public ArrayList<ScientificSymbols> needToChooseScienceSymbol() 
 	{
 		ArrayList<ScientificSymbols> symbs = new ArrayList<ScientificSymbols>();
-		if ( match.getAge() != 4 ) return symbs;
+		if ( match.getAge() != 5 ) return symbs;
 		for ( Structure s: user.getWonderBoard().getPurpleCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
@@ -138,14 +138,8 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 //			}
 //		
 //		}
-
-		//System.out.print("============================SCIENCE CHOSEN WAS CALLED==================================\n===========Displaying sciences picked: ");
-		//for ( ScientificSymbols s: symbs )
-		//{
-		//	System.out.println(s.getCompass() + " " + s.getGears() + " " + s.getTablets() );
-		//}
 		
-		if ( match.getAge() == 4 )
+		if ( match.getAge() == 5 )
 			match.initScienceChoice(user, symbs);
 
 	}
@@ -220,6 +214,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override//have to check if not null
 	public ArrayList<Structure> needToChooseCopyGuild() 
 	{
+		if ( match.getAge() != 4 ) return new ArrayList<Structure>();
 		System.out.println("==============================needToChooseCopyGuild");
 		for ( WonderBoardStage stg: user.getWonderBoard().getStages() )
 		{
@@ -240,7 +235,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void chosenGuild(Structure g) 
 	{
-		System.out.println("==============================chosenGuild");
+		//System.out.println("==============================chosenGuild");
 		match.initGuildChoice(user, g);
 		//user.getWonderBoard().buildStructure(g);
 		//for ( SpecialEffect se: g.getEffects() )
