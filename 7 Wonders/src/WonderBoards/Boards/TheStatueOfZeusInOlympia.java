@@ -46,6 +46,20 @@ public class TheStatueOfZeusInOlympia extends WonderBoard {
 		WonderBoardStage stage1 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 0, 2, 0, 0, 0, 0, 0) : new Resources(0, 0, 2, 0, 0, 0, 0, 0)));
 		WonderBoardStage stage2 = new WonderBoardStage((side == SIDE_A ? new Resources(0, 2, 0, 0, 0, 0, 0, 0) : new Resources(0, 2, 0, 0, 0, 0, 0, 0)));
 		WonderBoardStage stage3 = new WonderBoardStage((side == SIDE_A ? new Resources(2, 0, 0, 0, 0, 0, 0, 0) : new Resources(2, 0, 0, 0, 0, 1, 0, 0)));
+		
+		if ( side == SIDE_A )
+		{
+			stage1.getEffects().add(new VictoryPointBonus(3));
+			stage2.getEffects().add(new FreeConstruction());
+			stage3.getEffects().add(new VictoryPointBonus(7));
+		}
+		else
+		{
+			stage1.getEffects().add(new TradingPerks(3, 0));
+			stage2.getEffects().add(new VictoryPointBonus(5));
+			stage3.getEffects().add(new CopyGuild());
+		}
+		
 		stages.add(stage1);
 		stages.add(stage2);
 		stages.add(stage3);

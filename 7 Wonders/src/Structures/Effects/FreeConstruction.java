@@ -6,13 +6,17 @@ public class FreeConstruction extends SpecialEffect{
 
 	public static final int FreeConstructionID = 0x0F;
 	
+	//private boolean usedThisTurn;
+	
 	public FreeConstruction()
 	{
 		super(FreeConstructionID, false, RELOAD_EVERY_AGE, START_OF_TURN);
+		//usedThisTurn = false;
 	}
 	
 	public boolean canBuildForFree()
 	{
+		//System.out.println("================FreeBuild ==> " + usedUp);
 		if ( !usedUp )
 			return true;
 		return false;
@@ -30,5 +34,15 @@ public class FreeConstruction extends SpecialEffect{
 			}
 		}
 	}
+	
+	/*public void setUsedThisTurn(boolean b)
+	{
+		usedThisTurn = b;
+	}
+	
+	public boolean hasBeenUsed()
+	{
+		return usedThisTurn;
+	}*/
 	
 }

@@ -62,9 +62,8 @@ public class ConflictTokens {
 	}
     
 	public int getVictoryPoints(){
-		int sum = 0;
-		sum += ((1 * getOneTokens()) + (3 * getThreeTokens()) + (5 * getFiveTokens()) - (1 * getMinusOneTokens()));
-		return sum;
+		if ( getTotal() < 0 ) return 0;
+		return getTotal();
 	}
 	
 

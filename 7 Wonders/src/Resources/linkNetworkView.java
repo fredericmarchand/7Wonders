@@ -11,7 +11,6 @@ import view.menu.StartPanel;
 
 public class linkNetworkView {
 	LobbyPanel lobby;
-	MatchLobby matchLobby;
 	Chat chat;
 	CreateMatchPanel createMenu;
 	MClient mclient;
@@ -20,16 +19,11 @@ public class linkNetworkView {
 	public linkNetworkView(MClient c){
 		mclient = c;
 		lobby = new LobbyPanel(mclient);
-		matchLobby = new MatchLobby(mclient);
 		chat = new Chat(mclient);
 		createMenu = new CreateMatchPanel(mclient);
 		
 	}
 	
-	public void killMainFrame() {
-		//close match
-		lobby.showGUI();
-	}
 	
 	public LobbyPanel launchLobby() {
 		lobby.showGUI();
@@ -39,10 +33,6 @@ public class linkNetworkView {
 	
 	public void updateLobby(ArrayList<String> list) {
 		lobby.update(list);
-	}
-	
-	public void launchMatchLobby() {
-		matchLobby.showGUI();
 	}
 	
 	public void failedMatchLobby() {
@@ -71,7 +61,7 @@ public class linkNetworkView {
 		
 		int failJoin = JOptionPane.showConfirmDialog(null, "Failed to connect to the server.\nDo you wish to retry?");
 		if(failJoin == JOptionPane.OK_OPTION){
-			startMenu.run();
+			//startMenu.run();
 		}
 		else{ 
 			System.exit(0);

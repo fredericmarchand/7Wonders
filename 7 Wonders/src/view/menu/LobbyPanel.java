@@ -98,7 +98,6 @@ public class LobbyPanel extends JPanel implements ListSelectionListener {
 			}
 		});
 		
-		
 		add(create);
 		add(join);
 		add(refresh);
@@ -109,8 +108,6 @@ public class LobbyPanel extends JPanel implements ListSelectionListener {
 		bgimg.setLocation(0, 0);
 		bgimg.setSize(1280, 860);
 		add(bgimg);
-		
-
 	}
 	
 	public void showGUI() {
@@ -118,14 +115,22 @@ public class LobbyPanel extends JPanel implements ListSelectionListener {
 		setVisible(true);
 	}
 	
-	public void update(ArrayList<String> list){
+	public void update(ArrayList<String> l){
 		listModel.clear();
-		for(String id: list) listModel.insertElementAt(id, index++);
-		index = 0;
+		if(l.size() > 0) {
+			for(String id: l) 
+				listModel.insertElementAt(id, index++);
+			index = 0;
+			list.setSelectedIndex(0);
+			join.setEnabled(true);
+		} else {
+			listModel.insertElementAt("No matches are currently running on this server.", 0);
+			join.setEnabled(false);
+		}
 	}
 	
 	public void failedJoin(){
-		JOptionPane.showMessageDialog(null, "Match is full or in progress.\nTry another one!");
+		JOptionPane.showMessageDialog(null, "Match is full, in progress or no longer exists.\nTry another one!\nOr Create one!");
 	}
 	
 	@Override

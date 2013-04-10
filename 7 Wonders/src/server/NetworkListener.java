@@ -78,9 +78,11 @@ public class NetworkListener extends Listener {
 			if (message.equals("LIST")) {
 				System.out.println("[SERVER ---------- LIST Received packet");
 				Packet4Object l = new Packet4Object();
-				// l.setID(1);
 				l.setObject(mserver.getLobbyList());
 				c.sendTCP(l);
+				
+				for(Object s : mserver.getLobbyList())
+					System.out.println("[SERVER] Match List:\t" + s);
 			}
 
 		}
@@ -100,10 +102,12 @@ public class NetworkListener extends Listener {
 					.println("[SERVER] CLIENT HAS BEEN REMOVED"
 							+ mserver.removeClient(c,
 									((Packet5Disconnect) o).getMID(),((Packet5Disconnect)o).getCID()));
-			
-			Packet4Object l = new Packet4Object();
-			l.setObject(mserver.getLobbyList());
-			c.sendTCP(l);
+//			
+//			Packet4Object l = new Packet4Object();
+//			l.setObject(mserver.getLobbyList());
+//			for(Object s : mserver.getLobbyList())
+//				System.out.println("[SERVER] Match List:\t" + s);
+//			c.sendTCP(l);
 			Packet15MatchDisconnect packet = new Packet15MatchDisconnect();
 			c.sendTCP(packet);
 			
@@ -172,32 +176,42 @@ public class NetworkListener extends Listener {
 		}
 		if (o instanceof Packet13MatchJoinRequest) {
 			Packet3Connection joinResponse = new Packet3Connection();
-			boolean join;
-			if ((mserver.findMatch(((Packet13MatchJoinRequest) o)
-					.getMID()).get_inProgress()) == true) {
+			boolean join = false;
+			if(!mserver.containsMatch(((Packet13MatchJoinRequest) o).getMID())){
 				joinResponse.setAccepted(false);
 				join = false;
 				joinResponse.setIDValue(0);
-			} else {
-				join = mserver.bridgeClient(c, ((Packet13MatchJoinRequest) o)
-						.getMID(), ((Packet13MatchJoinRequest)o).getCID(),
-						((Packet13MatchJoinRequest)o).getUName());
-				joinResponse.setAccepted(join);
-				joinResponse.setIDValue(((Packet13MatchJoinRequest) o)
-						.getMID());
+				Packet4Object l = new Packet4Object();
+				l.setObject(mserver.getLobbyList());
+				c.sendTCP(l);
+				//for reset of match list
+			}else{
+				if ((mserver.findMatch(((Packet13MatchJoinRequest) o)
+						.getMID()).get_inProgress()) == true) {
+					joinResponse.setAccepted(false);
+					join = false;
+					joinResponse.setIDValue(0);
+				} else {
+					join = mserver.bridgeClient(c, ((Packet13MatchJoinRequest) o)
+							.getMID(), ((Packet13MatchJoinRequest)o).getCID(),
+							((Packet13MatchJoinRequest)o).getUName());
+					joinResponse.setAccepted(join);
+					joinResponse.setIDValue(((Packet13MatchJoinRequest) o)
+							.getMID());
+				}
 			}
-			c.sendTCP(joinResponse);
-			
-			if(join){
-				mserver.updateMatch(((Packet13MatchJoinRequest) o).getMID());
-					Packet6ChatMsg msg = new Packet6ChatMsg();
-					msg.setCID(((Packet13MatchJoinRequest) o).getCID());
-					msg.setMsg(((Packet13MatchJoinRequest) o).getUName() + " has joined the match");
-					msg.setuName("[SYSTEM] ");
-					for (Connection x : mserver.findMatch(((Packet13MatchJoinRequest) o).getMID()).getConnections())
-						x.sendTCP(msg);
+				c.sendTCP(joinResponse);
 				
-			}
+				if(join){
+					mserver.updateMatch(((Packet13MatchJoinRequest) o).getMID());
+						Packet6ChatMsg msg = new Packet6ChatMsg();
+						msg.setCID(((Packet13MatchJoinRequest) o).getCID());
+						msg.setMsg(((Packet13MatchJoinRequest) o).getUName() + " has joined the match");
+						msg.setuName("[SYSTEM] ");
+						for (Connection x : mserver.findMatch(((Packet13MatchJoinRequest) o).getMID()).getConnections())
+							x.sendTCP(msg);
+					
+				}
 			
 		}
 

@@ -16,28 +16,22 @@ public class Match2 {
 	private int age, turn, numPlayers;
 	private ArrayList<Structure> age1Deck, age2Deck, age3Deck, discarded;
 	private long localPlayerID;
+	private boolean calcCalled;
 
-	//server side constructor
+	//unused constructor
 	public Match2(ArrayList<User> users)
 	{
 		players = new ArrayList<Player>();
+		discarded = new ArrayList<Structure>();
+		age1Deck = null;
+		age2Deck = null;
+		age3Deck = null;
 		for ( User u: users )
 		{
 			players.add(new Player(u.getUsername(), u.getID()));
 		}
 		age = 1;
 		turn = 1;
-		//numPlayers = players.size();
-		//age1Deck = CardHandler.BuildAge1Deck(numPlayers);
-		//age2Deck = CardHandler.BuildAge2Deck(numPlayers);
-		//age3Deck = CardHandler.BuildAge3Deck(numPlayers);
-		//discarded = new ArrayList<Structure>();
-		
-		//CardHandler.DistributeRandomWonderBoards(players);
-		//for ( Player p: players )
-		//	p.getOwnedResources().addCoins(3);
-		//addInitialResources(players);
-		//CardHandler.DistributeCards(players, age1Deck);
 	}
 	
 	//client side constructor
@@ -62,7 +56,8 @@ public class Match2 {
 		for ( Player p: players ) p.getOwnedResources().addCoins(3);
 		CardHandler.DistributeCards(players, age1Deck);
 		addInitialResources(players);
-		for ( Player p: players ) p.getWonderBoard().buildStructure(new ScientistsGuild());
+		calcCalled = false;
+		//for ( Player p: players ) p.getWonderBoard().buildStructure(new ScientistsGuild());
 		//Added to give players knowledge of the current age for AI choices
 //		for (Player p : players)
 //		{
@@ -84,12 +79,24 @@ public class Match2 {
 	public ArrayList<Integer> getDiscardedCardIDs()
 	{
 		ArrayList<Integer> ids = new ArrayList<Integer>();
-		ids.add(discarded.size());
+		//ids.add(discarded.size());
 		for ( Structure s: discarded )
 		{
 			ids.add(s.getID());
 		}
 		return ids;
+	}
+	
+	public Structure getDiscardedCardByID(int id)
+	{
+		for ( int i = 0; i < discarded.size(); ++i )
+		{
+			if ( discarded.get(i).getID() == id )
+			{
+				return discarded.remove(i);
+			}
+		}
+		return new Structure();
 	}
 	
 	public ArrayList<Structure> getDiscardedCards()
@@ -283,21 +290,10 @@ public class Match2 {
 
 		handleAIPlayerMoves();
 		
-		/*for ( Player p: getPlayers() )
-		{
-			 System.out.print("player i cards: [");
-			 System.out.print(p.getChosenCard().getName());
-			 //for (Structure s: p.getCards())
-			 //{
-			//	 System.out.print(s.getName() + ", ");
-			 //}
-			 System.out.println("]");
-		}*/
 		for ( CommandMessage msg: messages )
 		{
 			Player p = getPlayerByID(msg.getPlayerID());
-			//p.chooseCardByID(msg.getCardID());
-			//System.out.println("=================================================== " + i++ + "================================");
+			p.setFreePermission(msg.getFree() == 1 ? true : false);
 			switch ( msg.getAction() )
 			{
 				case 1:
@@ -386,11 +382,6 @@ public class Match2 {
 					}
 				}
 			}
-			if ( p.ai() )
-			{
-				
-			}
-			
 		}
 		
 		countPlayersVictoryPoints();
@@ -418,16 +409,6 @@ public class Match2 {
 				case ScientificSymbolBonus.ScientificSymbolBonusID:
 					if ( ((ScientificSymbolBonus)se).canChoose() )
 					{
-						/*for ( CommandMessage msg: messages )
-						{
-							if ( p.getID() == msg.getPlayerID() )
-							{
-								for ( ScientificSymbols sc: msg.getScientificSymbols() )
-								{
-									p.getScientificSymbols().addScientifcSymbols(sc);
-								}
-							}
-						}*/
 						if ( p.ai() )
 						{
 							int ch = r.nextInt(3);
@@ -472,16 +453,6 @@ public class Match2 {
 				case ScientificSymbolBonus.ScientificSymbolBonusID:
 					if ( ((ScientificSymbolBonus)se).canChoose() )
 					{
-						/*for ( CommandMessage msg: messages )
-						{
-							if ( p.getID() == msg.getPlayerID() )
-							{
-								for ( ScientificSymbols sc: msg.getScientificSymbols() )
-								{
-									p.getScientificSymbols().addScientifcSymbols(sc);
-								}
-							}
-						}*/
 						if ( p.ai() )
 						{
 							int ch = r.nextInt(3);
@@ -504,9 +475,55 @@ public class Match2 {
 		}
 	}
 	
-
+	public void serverHandleChosenGuilds(ArrayList<CommandMessage> messages)
+	{
+		for ( CommandMessage msg: messages )
+		{
+			Structure s;
+			Player p = getPlayerByID(msg.getPlayerID());
+			if ( msg.getCardID() != 0 )
+			{
+				p.getWonderBoard().buildStructure(s = CardHandler.getCardByID(msg.getCardID()));
+				for ( SpecialEffect se : s.getEffects() ) p.activateBuildEffect(se);
+			}
+		}
+	}
 	
-	//server side endof game effects
+	public void serverHandleDiscardedChoice(ArrayList<CommandMessage> messages)
+	{
+		for ( CommandMessage msg: messages )
+		{
+			Structure s;
+			Player p = getPlayerByID(msg.getPlayerID());
+			if ( msg.getCardID() != 0 )
+			{
+				s = getDiscardedCardByID(msg.getCardID());
+				if ( s.getID() != 0 )
+				{
+					p.getWonderBoard().buildStructure(s);
+					for ( SpecialEffect se : s.getEffects() ) p.activateBuildEffect(se);
+					for ( WonderBoardStage stg: p.getWonderBoard().getStages() )
+					{
+						if ( stg.isBuilt() )
+						{
+							for ( SpecialEffect sp: stg.getEffects() )
+							{
+								if ( sp.getID() == BuildDiscardedCard.BuildDiscardedCardID )
+								{
+									if ( !sp.isUsedUp() )
+									{
+										sp.use();
+										return;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	//server methods
 	
 		
@@ -518,11 +535,12 @@ public class Match2 {
 		CommandMessage msg = new CommandMessage();
 		msg.setPlayerID(p.getID());
 		if ( age > 3 ) 
-			msg.setMsgType(4);
+			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE+1);
 		else msg.setMsgType(CommandMessage.MOVE_TYPE);
 		msg.setAction(move);
 		msg.setCardID(p.getChosenCard().getID());
 		msg.setPreference(neib);	
+		msg.setFree(p.getFreePermission() ? 1 : 0);
 		p.setCommand(msg);
 		p.sendCommandMessage();
 		p.pause();
@@ -530,7 +548,7 @@ public class Match2 {
 	
 	public void initResourceChoice(Player p, ArrayList<Resources> resChoices)
 	{
-		if ( age > 3 ) resChoices.clear();
+		if ( age > 3 ) return;//resChoices.clear();
 		CommandMessage msg = new CommandMessage();
 		msg.setPlayerID(p.getID());
 		msg.setMsgType(CommandMessage.RESOURCE_CHOICE_TYPE);
@@ -542,7 +560,7 @@ public class Match2 {
 		
 	public void initScienceChoice(Player p, ArrayList<ScientificSymbols> symbs)
 	{
-		if ( age == 4 )
+		if ( age == 5 )
 		{
 			System.out.println("========================================Im IN!");
 			CommandMessage msg = new CommandMessage();
@@ -553,6 +571,31 @@ public class Match2 {
 			p.sendCommandMessage();
 			p.pause();
 		}
+	}
+	
+	public void initGuildChoice(Player p, Structure s)
+	{
+		if ( age == 4 )
+		{
+			CommandMessage msg = new CommandMessage();
+			msg.setPlayerID(p.getID());
+			msg.setMsgType(CommandMessage.CHOSEN_GUILD_TYPE);
+			msg.setCardID(s.getID());
+			p.setCommand(msg);
+			p.sendCommandMessage();
+			p.pause();
+		}
+	}
+	
+	public void initChosenDiscarded(Player p, Structure s)
+	{
+		CommandMessage msg = new CommandMessage();
+		msg.setPlayerID(p.getID());
+		msg.setMsgType(CommandMessage.CHOSEN_DISCARDED_TYPE);
+		msg.setCardID(s.getID());
+		p.setCommand(msg);
+		p.sendCommandMessage();
+		p.pause();
 	}
 	//client moves
 	
@@ -610,22 +653,8 @@ public class Match2 {
 	//handles all the moves received by the server
 	public Match2 dispatch(ArrayList<CommandMessage> messages)
 	{
-		if ( messages == null || age == 5 ) return this;
-		//System.out.println("===============BEFORE=====================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
-		//for ( Player p : players )
-		//{
-		//	System.out.println(p.getUsername() + " has " + p.getResources().getCoins() + " coins.");
-		//}
-		/*for ( Player p : players )
-		{
-			System.out.print(p.getUsername() + " amount of cards : " + p.getCards().size() + " [");
-			for ( Structure s: p.getCards() )
-			{
-				System.out.print(s.getName()+ ", ");
-			}
-			System.out.println("]");
-		}
-		System.out.println("\n\n\n\n====================================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");*/
+		if ( messages == null || age == 6 ) return this;
+
 		int type = messages.get(0).getMsgType();
 		switch ( type )
 		{
@@ -636,46 +665,54 @@ public class Match2 {
 			case CommandMessage.MOVE_TYPE:
 				runTurns(messages);
 				break;
+				
+			case CommandMessage.CHOSEN_GUILD_TYPE:
+				System.out.println("=======================GUILD");
+				if ( age == 4 )
+				{
+					serverHandleChosenGuilds(messages);
+					age += 1;
+				}
+				break;
+				
+			case CommandMessage.CHOSEN_DISCARDED_TYPE:
+				System.out.println("=======================GUILD");
+				if ( age < 4 )
+					serverHandleDiscardedChoice(messages);
+				break;
 					
 			case CommandMessage.SCIENTIFIC_SYMBOL_TYPE:
-				endOfGameSpecialEffects(messages);
-				countPlayersVictoryPoints();
-				age += 1;
+				System.out.println("=======================SCIENCE");
+				if ( age == 5 )
+				{
+					endOfGameSpecialEffects(messages);
+					countPlayersVictoryPoints();
+					age += 1;
+				}
 				break;
 		}
 		
-		/*System.out.println("=================AFTER===================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
-		//for ( Player p : players )
-		//{
-		//	System.out.println(p.getUsername() + " has " + p.getResources().getCoins() + " coins.");
-		//}
-		for ( Player p : players )
-		{
-			System.out.print(p.getUsername() + " amount of cards : " + p.getCards().size() + " [");
-			for ( Structure s: p.getCards() )
-			{
-				System.out.print(s.getName()+ ", ");
-			}
-			System.out.println("]");
-		}
-		System.out.println("\n\n\n\n====================================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");*/
 		return this;
 	}
 	
 	public void countPlayersVictoryPoints()
 	{	
-		for (Player p : players){
-			
-			//Conflict Tokens
-			p.addVictoryPoints(p.getConflictTokens().getVictoryPoints());
-			
-			//Coins
-			p.addVictoryPoints((int)Math.floor(p.getResources().getCoins() / 3));
-			
-			//Scientific
-			p.addVictoryPoints(p.getScientificSymbols().victoryPointsValue());
+		if ( !calcCalled )
+		{
+			calcCalled = true;
+			for (Player p : players){
+				
+				//Conflict Tokens
+				p.addVictoryPoints(p.getConflictTokens().getVictoryPoints());
+				
+				//Coins
+				p.addVictoryPoints((int)Math.floor(p.getResources().getCoins() / 3));
+				
+				//Scientific
+				p.addVictoryPoints(p.getScientificSymbols().victoryPointsValue());
+				System.out.println("======================Science vicpts: " + p.getScientificSymbols().victoryPointsValue());
+			}
 		}
-		
 	}
 	
 	public void endOfTurn()

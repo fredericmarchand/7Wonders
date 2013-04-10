@@ -145,7 +145,7 @@ public class MatchPanel extends JPanel implements Runnable {
 		fbp.setLocation(296, 458);
 		
 		// Cards
-		cardsPanel = new CardsPanel(match.getLocalPlayer().getCards(), controller, fbp);
+		cardsPanel = new CardsPanel(match.getLocalPlayer().getCards(), controller);
 		cardsPanel.setLocation(3, 558);
 		cardsPanel.addMouseListener(buildMouseAdapterCards());
 		
@@ -229,6 +229,8 @@ public class MatchPanel extends JPanel implements Runnable {
 			closeButton.setVisible(false);
 			scrollpane.revalidate();
 			scrollpane.setVisible(true);
+		} else {
+			controller.chosenDiscarded(new Structure());
 		}
 		
 		// Choose guild to copy
@@ -239,6 +241,8 @@ public class MatchPanel extends JPanel implements Runnable {
 			closeButton.setVisible(false);
 			scrollpane.revalidate();
 			scrollpane.setVisible(true);
+		} else {
+			controller.chosenGuild(new Structure());
 		}
 		
 		// Choose Science
@@ -381,5 +385,9 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(numplayers == 6) return 160 + 320*index;
 		if(numplayers == 7) return 320*index;
 		return 0;
+	}
+	
+	public void hideMatchPanel(){
+		setVisible(false);
 	}
 }

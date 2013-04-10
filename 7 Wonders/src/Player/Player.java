@@ -22,6 +22,7 @@ public class Player extends User {
 	protected ScientificSymbols scientificSymbols;
 	protected boolean isAI;
 	protected int currentAge;
+	protected boolean freeConstructionPermission;
 	
 	//constructors
 	public Player()
@@ -44,13 +45,14 @@ public class Player extends User {
 		wonderBoard = new WonderBoard();
 		cards = new ArrayList<Structure>();
 		chosenCard = new Structure();
-		resources = new Resources();
+		resources = new Resources(5, 5, 5, 5, 5, 5, 5, 5);
 		resetResources();
 		conflictTokens = new ConflictTokens();
 		shields = 0;
 		victoryPoints = 0;
 		scientificSymbols = new ScientificSymbols();
 		currentAge = 1;
+		freeConstructionPermission = false;
 	}
 
 	public int getAge()
@@ -70,6 +72,16 @@ public class Player extends User {
 	public void setAge(int age)
 	{
 		currentAge = age;
+	}
+	
+	public void setFreePermission(boolean val)
+	{
+		freeConstructionPermission = val;
+	}
+	
+	public boolean getFreePermission()
+	{
+		return freeConstructionPermission;
 	}
 	
 	public boolean ai()
@@ -266,7 +278,7 @@ public class Player extends User {
 		if ( chosenCard != null && !wonderBoard.containsCard(chosenCard.getID()) )
 		{
 			if ( ((chosenCard.getResourceCost().canAfford(getTotalResources())) 
-					|| chosenCard.canBuildForFree(wonderBoard))	)
+					|| chosenCard.canBuildForFree(wonderBoard)) || freeConstructionPermission )
 			{
 				return 2;
 			}
@@ -304,8 +316,13 @@ public class Player extends User {
 		if ( !wonderBoard.containsCard(chosenCard.getID()) )
 		{
 			if ( ((chosenCard.getResourceCost().canAfford(Resources.addResources(extraResources, resources, unavailableResources)) 
-					|| chosenCard.canBuildForFree(wonderBoard)))  )
+					|| chosenCard.canBuildForFree(wonderBoard))) || freeConstructionPermission  )
 			{
+				if ( freeConstructionPermission )
+				{
+					useFreeBuild();
+				}
+				freeConstructionPermission = false;
 				wonderBoard.buildStructure(chosenCard);
 				cards.remove(chosenCardIndex);
 				resources.deductCoins(chosenCard.getResourceCost().getCoins());
@@ -414,6 +431,22 @@ public class Player extends User {
 		return false;
 	}
 	
+	public void useFreeBuild()
+	{
+		for ( WonderBoardStage stg: wonderBoard.getStages() )
+		{
+			if ( stg.isBuilt() )
+			{
+				for ( SpecialEffect se: stg.getEffects() )
+				{
+					if ( se.getID() == FreeConstruction.FreeConstructionID )
+					{
+						se.use();
+					}
+				}
+			}
+		}
+	}
 	
 	public void activateBuildEffect(SpecialEffect se)
 	{

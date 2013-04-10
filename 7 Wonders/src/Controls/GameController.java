@@ -363,7 +363,7 @@ public class GameController extends java.lang.Thread implements Controller, Runn
 	}
 
 	@Override
-	public void buildForFree(Structure g) {
+	public void buildForFree(boolean b) {
 		
 	}
 	
