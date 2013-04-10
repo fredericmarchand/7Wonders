@@ -53,7 +53,7 @@ public class FreeBuildPanel extends JPanel {
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				lblFreeOverlay.setVisible(true);
+				if(enabled) lblFreeOverlay.setVisible(true);
 			}
 		});
 

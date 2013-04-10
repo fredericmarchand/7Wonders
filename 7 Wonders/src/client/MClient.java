@@ -126,8 +126,8 @@ public class MClient {
 
 	public void sendCommandMessage(ArrayList<Integer> m, boolean last){
 		System.out.println("[CLIENT] Sending command message \n\t" + m);
-		for(Integer i : m)
-			System.out.println(i);
+		//for(Integer i : m)
+		//	System.out.println(i);
 		Packet8ClientResponse packet = new Packet8ClientResponse();
 		packet.setCID(ID);
 		packet.setMID(matchID);
@@ -162,6 +162,7 @@ public class MClient {
 			quit.setUName(username);
 			client.sendTCP(quit);
 			matchID = 0000; // no longer in a game
+			sendMatchListRequest();
 			mainframe.launchLobby(link.launchLobby());
 		}
 	}
@@ -212,11 +213,11 @@ public class MClient {
 
 	// return to lobby
 	
-	
-	public void returnToLobby() {
-		quitMatch();
-
+	public void pushUserQuit(){
+		link.killChatFrame();
+		link.killMainFrame();
 	}
+
 
 	// any class type sent over the network must be registered to the kryo
 	// generic types are implicitly registered

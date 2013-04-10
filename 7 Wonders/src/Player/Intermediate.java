@@ -54,7 +54,7 @@ public class Intermediate implements Strategy{
 			if (!p.cards.isEmpty())
 				p.chooseCard(blockNumbers.indexOf(Collections.max(blockNumbers)));
 			else{
-				System.out.println("*****Deck Empty!*****");
+				//System.out.println("*****Deck Empty!*****");
 				return;
 			}
 			int result = p.canBuildStage(leftNeighbor, rightNeighbor);
@@ -77,7 +77,7 @@ public class Intermediate implements Strategy{
 		{
 			p.discard(discarded);
 		}
-		else
-			System.out.println("*****Deck Empty!*****");	
+		//else
+			//System.out.println("*****Deck Empty!*****");	
 	}
 }

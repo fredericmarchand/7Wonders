@@ -200,8 +200,8 @@ public class Match {
 		cmdMsgMatrix.get((m.getMsgType())).add(m);
 		if(cmdMsgMatrix.get((m.getMsgType())).size()==human_connection_count){
 			controller.dispatch(cmdMsgMatrix.get((m.getMsgType())));
-			System.out.println("[SERVER] LIST SIZE: \t " 
-			+ cmdMsgMatrix.get((m.getMsgType())).size());
+			//System.out.println("[SERVER] LIST SIZE: \t " 
+			//+ cmdMsgMatrix.get((m.getMsgType())).size());
 			//for(Object o : cmdMsgMatrix.get((m.getMsgType())))
 			//	System.out.println("[SERVER] LIST CONTENTS: \t " + o);
 					

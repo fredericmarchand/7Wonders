@@ -93,18 +93,18 @@ public class MatchPanel extends JPanel implements Runnable {
 		Player.Player p1 = match.getLocalPlayer();
 		playerPanel = new LocalPanel(p1);
 		playerPanel.addMouseListener(buildMouseAdapterLocal());
-		playerPanel.setLocation(401, 450);
+		playerPanel.setLocation(401, (numplayers > 3) ? 450 : 300);
 		
 		// Right Neighbor
 		Player.Player p2 = match.getRightNeighbor(p1);
 		n2 = new NearPanel(p2);
-		n2.setLocation(802, 150);
+		n2.setLocation(802, (numplayers > 3) ? 150 : 0);
 		n2.addMouseListener(buildMouseAdapterNear());
 		
 		// Left Neighbor
 		Player.Player p3 = match.getLeftNeighbor(p1);
 		n1 = new NearPanel(p3);
-		n1.setLocation(0, 150);
+		n1.setLocation(0, (numplayers > 3) ? 150 : 0);
 		n1.addMouseListener(buildMouseAdapterNear());
 		
 		Player.Player p4 = null;
@@ -151,12 +151,12 @@ public class MatchPanel extends JPanel implements Runnable {
 		
 		// Other
 		lblAge = new JLabel(Images.get("age0"), SwingConstants.CENTER);
-		lblAge.setBounds(512, 161, 256, 128);
+		lblAge.setBounds(512, (numplayers > 3) ? 161 : 141, 256, 128);
 		lblAge.setForeground(Color.BLACK);
 		lblAge.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		
 		lblTurn = new JLabel2D("Round 1 of 6", SwingConstants.CENTER);
-		lblTurn.setBounds(576, 295, 128, 25);
+		lblTurn.setBounds(576, (numplayers > 3) ? 295 : 275, 128, 25);
 		lblTurn.setForeground(Color.WHITE);
 		lblTurn.setOutlineColor(Color.BLACK);
 		lblTurn.setStroke(new BasicStroke(2f));
@@ -213,6 +213,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	
 	public void update() {
 		updateValues();
+		cardsPanel.unpause();
 		
 		// Choose resources
 		needResources = controller.needToChooseResources();
@@ -248,7 +249,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	//update function that wont cause an infinite loop on receive
 	public void updateValues() {
 		cardsPanel.setCards(match.getLocalPlayer().getCards());
-		if(match.getAge() == 4) {
+		if(match.getAge() > 3) {
 			lblAge.setIcon(null);
 			lblAge.setText("GAME OVER!");
 			lblTurn.setText(" ");
@@ -350,7 +351,7 @@ public class MatchPanel extends JPanel implements Runnable {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if(cardsPanel.getY() == 558) {
-					cardsPanel.setLocation(cardsPanel.getX(), 750);
+					cardsPanel.setLocation(cardsPanel.getX(), (numplayers > 3) ? 750 : 600);
 					cardsPanel.removeMouseListeners();
 				} else {
 					fcp.setCards(playerPanel.player.getWonderBoard().getAllCards());
@@ -366,7 +367,7 @@ public class MatchPanel extends JPanel implements Runnable {
 		return new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if(cardsPanel.getY() == 750) {
+				if(cardsPanel.getY() == ((numplayers > 3) ? 750 : 600)) {
 					cardsPanel.setLocation(cardsPanel.getX(), 558);
 					cardsPanel.addMouseListeners();
 				}

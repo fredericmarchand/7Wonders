@@ -73,15 +73,18 @@ public class ScienceChoicePanel extends JPanel {
 				if(e.getPoint().x > 556 && e.getPoint().y > 403
 				&& e.getPoint().x < 606 && e.getPoint().y < 453) {
 					matchPanel.scienceChosen(new ScientificSymbols(1, 0, 0));
-					thisPanel.setVisible(false);
+					ScientificSymbols next = matchPanel.nextScience();
+					if(next == null) thisPanel.setVisible(false);
 				} else if(e.getPoint().x > 619 && e.getPoint().y > 402
 					   && e.getPoint().x < 663 && e.getPoint().y < 452) {
 					matchPanel.scienceChosen(new ScientificSymbols(0, 1, 0));
-					thisPanel.setVisible(false);
+					ScientificSymbols next = matchPanel.nextScience();
+					if(next == null) thisPanel.setVisible(false);
 				} else if(e.getPoint().x > 664 && e.getPoint().y > 402
 					   && e.getPoint().x < 714 && e.getPoint().y < 453) {
 					matchPanel.scienceChosen(new ScientificSymbols(0, 0, 1));
-					thisPanel.setVisible(false);
+					ScientificSymbols next = matchPanel.nextScience();
+					if(next == null) thisPanel.setVisible(false);
 				} else {
 					
 				}

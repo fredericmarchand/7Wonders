@@ -1,7 +1,9 @@
 package Controls;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import Structures.Cards.ScientistsGuild;
 import Structures.Effects.*;
 import Structures.Structure;
 import Tokens.Resources;
@@ -60,6 +62,7 @@ public class Match2 {
 		for ( Player p: players ) p.getOwnedResources().addCoins(3);
 		CardHandler.DistributeCards(players, age1Deck);
 		addInitialResources(players);
+		for ( Player p: players ) p.getWonderBoard().buildStructure(new ScientistsGuild());
 		//Added to give players knowledge of the current age for AI choices
 //		for (Player p : players)
 //		{
@@ -243,6 +246,20 @@ public class Match2 {
 				}
 			}
 			
+			for ( WonderBoardStage stg: p.getWonderBoard().getStages() )
+			{
+				if ( stg.isBuilt() )
+				{
+					for ( SpecialEffect se: stg.getEffects() )
+					{
+						if ( se.getID() == ResourceChoice.ResourceChoiceID )
+						{
+							list.add(true);
+						}
+					}
+				}
+			}
+			
 			int index = 0;
 			for ( Resources r : msg.getResourceChoices() )
 			{
@@ -251,42 +268,8 @@ public class Match2 {
 				else
 					p.getExtraResources().addResources(r);
 			}
-			/*for ( Structure s : p.getWonderBoard().getYellowCards() )
-			{
-				for ( SpecialEffect se: s.getEffects() )
-				{
-					if ( se.getID() == ResourceChoice.ResourceChoiceID )
-					{
-						p.getUnvResources().addResources(msg.getResourceChoices().get(index++));
-					}
-				}
-			}
-							
-			for ( Structure s : p.getWonderBoard().getBrownGreyCards() )
-			{
-				for ( SpecialEffect se: s.getEffects() )
-				{
-					if ( se.getID() == ResourceChoice.ResourceChoiceID )
-					{
-						p.getExtraResources().addResources(msg.getResourceChoices().get(index++));
-					}
-				}
-			}*/
 		}		
 	}
-	
-	/*public void serverHandleBeginningOfTurnEffects(Resources r, Structure s, CommandMessage msg)
-	{
-		int index = 0;
-		for ( SpecialEffect se: s.getEffects() )
-		{
-			if ( se.getID() == ResourceChoice.ResourceChoiceID )
-			{
-				r.addResources(msg.getResourceChoices().get(index));
-				++index;
-			}
-		}
-	}*/
 	
 	//server side run turns if message typeid == move
 	public void runTurns(ArrayList<CommandMessage> messages)
@@ -338,7 +321,7 @@ public class Match2 {
 	{
 		for ( SpecialEffect se: s.getEffects() )
 		{
-			if ( se.getID() == CardCoinBonus.CardCoinBonusID )
+			if ( se.getID() == CardCoinBonus.CardCoinBonusID && !se.isUsedUp() )
 				((CardCoinBonus)se).acquireCoins(p, getLeftNeighbor(p), getRightNeighbor(p));
 		}
 	}
@@ -389,13 +372,33 @@ public class Match2 {
 			
 			for ( Structure s : p.getWonderBoard().getBrownGreyCards() )
 				addPointActivate(s, p, messages);
+			
+			for ( WonderBoardStage stg: p.getWonderBoard().getStages() )
+				addPointActivate(stg, p, messages);
+			
+			for ( CommandMessage msg: messages )
+			{
+				if ( msg.getPlayerID() == p.getID() )
+				{
+					for ( ScientificSymbols sc: msg.getScientificSymbols() )
+					{
+						p.getScientificSymbols().addScientifcSymbols(sc);
+					}
+				}
+			}
+			if ( p.ai() )
+			{
+				
+			}
+			
 		}
 		
 		countPlayersVictoryPoints();
 	}
 
-	public void addPointActivate(Structure s, Player p, ArrayList<CommandMessage> messages)
+	public void addPointActivate(WonderBoardStage s, Player p, ArrayList<CommandMessage> messages)
 	{
+		Random r = new Random();
 		for ( SpecialEffect se: s.getEffects() )
 		{
 			switch ( se.getID() )
@@ -415,7 +418,7 @@ public class Match2 {
 				case ScientificSymbolBonus.ScientificSymbolBonusID:
 					if ( ((ScientificSymbolBonus)se).canChoose() )
 					{
-						for ( CommandMessage msg: messages )
+						/*for ( CommandMessage msg: messages )
 						{
 							if ( p.getID() == msg.getPlayerID() )
 							{
@@ -424,12 +427,84 @@ public class Match2 {
 									p.getScientificSymbols().addScientifcSymbols(sc);
 								}
 							}
+						}*/
+						if ( p.ai() )
+						{
+							int ch = r.nextInt(3);
+							switch ( ch )
+							{
+							case 0:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(1, 0, 0));
+								break;
+							case 1:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(0, 1, 0));
+								break;
+							case 2:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(0, 0, 1));
+								break;
+							}
 						}
 					}
 					break;
 			}
 		}
 	}
+	
+	public void addPointActivate(Structure s, Player p, ArrayList<CommandMessage> messages)
+	{
+		Random r = new Random();
+		for ( SpecialEffect se: s.getEffects() )
+		{
+			switch ( se.getID() )
+			{
+				case CardVictoryPointBonus.CardVictoryPointBonusID:
+				((CardVictoryPointBonus)se).acquireVictoryPoints(p, getLeftNeighbor(p), getRightNeighbor(p));
+				break;
+				
+				case WonderStageVictoryPointBonus.WonderStageVictoryPointBonusID:
+				((WonderStageVictoryPointBonus)se).acquirePoints(p, getLeftNeighbor(p), getRightNeighbor(p));
+				break;
+				
+				case MilitaryDefeatBonus.MilitaryDefeatBonusID:
+				((MilitaryDefeatBonus)se).acquireVictoryPoints(p, getLeftNeighbor(p), getRightNeighbor(p));
+				break;
+			
+				case ScientificSymbolBonus.ScientificSymbolBonusID:
+					if ( ((ScientificSymbolBonus)se).canChoose() )
+					{
+						/*for ( CommandMessage msg: messages )
+						{
+							if ( p.getID() == msg.getPlayerID() )
+							{
+								for ( ScientificSymbols sc: msg.getScientificSymbols() )
+								{
+									p.getScientificSymbols().addScientifcSymbols(sc);
+								}
+							}
+						}*/
+						if ( p.ai() )
+						{
+							int ch = r.nextInt(3);
+							switch ( ch )
+							{
+							case 0:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(1, 0, 0));
+								break;
+							case 1:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(0, 1, 0));
+								break;
+							case 2:
+								p.getScientificSymbols().addScientifcSymbols(new ScientificSymbols(0, 0, 1));
+								break;
+							}
+						}
+					}
+					break;
+			}
+		}
+	}
+	
+
 	
 	//server side endof game effects
 	//server methods
@@ -440,38 +515,36 @@ public class Match2 {
 		
 	public void initMove(Player p, int move, int neib)
 	{
-		if ( age != 4 )
-		{
-			CommandMessage msg = new CommandMessage();
-			msg.setPlayerID(p.getID());
-			msg.setMsgType(CommandMessage.MOVE_TYPE);
-			msg.setAction(move);
-			msg.setCardID(p.getChosenCard().getID());
-			msg.setPreference(neib);	
-			p.setCommand(msg);
-			p.sendCommandMessage();
-			p.pause();
-		}
+		CommandMessage msg = new CommandMessage();
+		msg.setPlayerID(p.getID());
+		if ( age > 3 ) 
+			msg.setMsgType(4);
+		else msg.setMsgType(CommandMessage.MOVE_TYPE);
+		msg.setAction(move);
+		msg.setCardID(p.getChosenCard().getID());
+		msg.setPreference(neib);	
+		p.setCommand(msg);
+		p.sendCommandMessage();
+		p.pause();
 	}
 	
 	public void initResourceChoice(Player p, ArrayList<Resources> resChoices)
 	{
-		if ( age != 4 )
-		{
-			CommandMessage msg = new CommandMessage();
-			msg.setPlayerID(p.getID());
-			msg.setMsgType(CommandMessage.RESOURCE_CHOICE_TYPE);
-			msg.setResourceChoices(resChoices);
-			p.setCommand(msg);
-			p.sendCommandMessage();
-			p.pause();
-		}
+		if ( age > 3 ) resChoices.clear();
+		CommandMessage msg = new CommandMessage();
+		msg.setPlayerID(p.getID());
+		msg.setMsgType(CommandMessage.RESOURCE_CHOICE_TYPE);
+		msg.setResourceChoices(resChoices);
+		p.setCommand(msg);
+		p.sendCommandMessage();
+		p.pause();
 	}
 		
 	public void initScienceChoice(Player p, ArrayList<ScientificSymbols> symbs)
 	{
 		if ( age == 4 )
 		{
+			System.out.println("========================================Im IN!");
 			CommandMessage msg = new CommandMessage();
 			msg.setPlayerID(p.getID());
 			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE);
@@ -537,13 +610,13 @@ public class Match2 {
 	//handles all the moves received by the server
 	public Match2 dispatch(ArrayList<CommandMessage> messages)
 	{
-		if ( messages == null ) return this;
-		System.out.println("===============BEFORE=====================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
+		if ( messages == null || age == 5 ) return this;
+		//System.out.println("===============BEFORE=====================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
 		//for ( Player p : players )
 		//{
 		//	System.out.println(p.getUsername() + " has " + p.getResources().getCoins() + " coins.");
 		//}
-		for ( Player p : players )
+		/*for ( Player p : players )
 		{
 			System.out.print(p.getUsername() + " amount of cards : " + p.getCards().size() + " [");
 			for ( Structure s: p.getCards() )
@@ -552,7 +625,7 @@ public class Match2 {
 			}
 			System.out.println("]");
 		}
-		System.out.println("\n\n\n\n====================================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
+		System.out.println("\n\n\n\n====================================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");*/
 		int type = messages.get(0).getMsgType();
 		switch ( type )
 		{
@@ -567,10 +640,11 @@ public class Match2 {
 			case CommandMessage.SCIENTIFIC_SYMBOL_TYPE:
 				endOfGameSpecialEffects(messages);
 				countPlayersVictoryPoints();
+				age += 1;
 				break;
 		}
 		
-		System.out.println("=================AFTER===================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
+		/*System.out.println("=================AFTER===================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
 		//for ( Player p : players )
 		//{
 		//	System.out.println(p.getUsername() + " has " + p.getResources().getCoins() + " coins.");
@@ -584,7 +658,7 @@ public class Match2 {
 			}
 			System.out.println("]");
 		}
-		System.out.println("\n\n\n\n====================================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");
+		System.out.println("\n\n\n\n====================================Message type: " + messages.get(0).getMsgType() + "\n\n\n\n");*/
 		return this;
 	}
 	
@@ -606,11 +680,6 @@ public class Match2 {
 	
 	public void endOfTurn()
 	{
-		//for ( Player p: players )
-		//{
-			//p.getCards().remove(p.getChosenCard());
-			//p.chooseCard(null);
-		//}
 		endOfTurnSpecialEffects(players);
 		CardHandler.PassCardsToNeighbors(getPlayers(), getAge());
 		if ( turn == 6 )
@@ -665,7 +734,6 @@ public class Match2 {
 			if ( p.ai() )
 			{
 				((AIPlayer)p).pickCard(discarded, getLeftNeighbor(p), getRightNeighbor(p));
-				//((AIPlayer)p).discard(discarded);
 			}
 
 		}
