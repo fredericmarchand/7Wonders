@@ -54,11 +54,9 @@ public class MainFrame extends JFrame implements Runnable {
 		panel.update();
 	}
 	
-	public void updateValues()
-	{
+	public void updateValues() {
 		panel.updateValues();
 	}
-	
 	
 	public void startMatch(Match2 m) {
 		panel = new MatchPanel(m, controller);
@@ -82,21 +80,21 @@ public class MainFrame extends JFrame implements Runnable {
 	}
 	
 	public void launchWaiting(WaitingPanel p) {
-		remove(wp);
+		if(wp != null) remove(wp);
 		wp = p;
 		wp.setVisible(true);
 		add(wp);
 	}
 	
 	public void launchCreateMenu(CreateMatchPanel p) {
-		remove(cmp);
+		if(cmp != null) remove(cmp);
 		cmp = p;
 		cmp.setVisible(true);
 		add(cmp);
 	}
 	
 	public void launchLobby(LobbyPanel p) {
-		remove(lp);
+		if(lp != null) remove(lp);
 		lp = p;
 		lp.setVisible(true);
 		startMenu.setVisible(false);
@@ -104,7 +102,7 @@ public class MainFrame extends JFrame implements Runnable {
 	}
 	
 	public void hideMatchPanel(){
-		remove(panel);
+		if(panel != null) remove(panel);
 	}
 	
 	public void updateMatchPanel(){

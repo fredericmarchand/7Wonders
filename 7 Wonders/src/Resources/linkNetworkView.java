@@ -24,7 +24,6 @@ public class linkNetworkView {
 		
 	}
 	
-	
 	public LobbyPanel launchLobby() {
 		lobby.showGUI();
 		lobby.update(mclient.getMatchList());
