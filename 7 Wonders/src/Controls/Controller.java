@@ -44,7 +44,7 @@ public interface Controller {
 	
 	// Can build for free
 	boolean canBuildForFree();
-	void buildForFree(Structure g);
+	void buildForFree(boolean b);
 	
 	// Pass the last card 
 	Structure needToChooseLastCard();

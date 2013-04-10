@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Controls.Controller;
-import Structures.Structure;
 
 public class FreeBuildPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -19,10 +18,9 @@ public class FreeBuildPanel extends JPanel {
 	private JLabel lblFree, lblFreeOverlay;
 	
 	private Controller controller;
-	private CardsPanel cp;
 	
-	private boolean enabled = false;
-	private Structure chosen;
+	private boolean can = false;
+	private boolean toggle = false;
 	
 	public FreeBuildPanel (Controller c) {
 		setLayout(null);
@@ -30,7 +28,6 @@ public class FreeBuildPanel extends JPanel {
 		setSize(80, 87);
 		
 		controller = c;
-		chosen = null;
 		
 		// Free build structure
 		lblFree = new JLabel(Images.get("freeBuild"));
@@ -39,23 +36,22 @@ public class FreeBuildPanel extends JPanel {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if(enabled) {
-					controller.buildForFree(chosen);
-					cp.hideAllOptions();
-					lblFreeOverlay.setVisible(false);
-					update();
+				if(can) {
+					toggle = !toggle;
+					controller.buildForFree(toggle);
+					lblFreeOverlay.setVisible(toggle);
 				}
 			}
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblFreeOverlay.setVisible(false);
+				lblFreeOverlay.setVisible(toggle);
 			}
 		});
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				if(enabled) lblFreeOverlay.setVisible(true);
+				if(can) lblFreeOverlay.setVisible(true);
 			}
 		});
 
@@ -70,21 +66,16 @@ public class FreeBuildPanel extends JPanel {
 		update();
 	}
 	
-	public void setCardsPanel(CardsPanel c) {
-		cp = c;
-	}
-	
-	public void chosenCard(Structure s) {
-		chosen = s;
-	}
-	
 	public void update() {
 		if(controller.canBuildForFree()) {
 			lblFree.setVisible(true);
-			enabled = true;
+			lblFreeOverlay.setVisible(false);
+			can = true;
 		} else {
-			enabled = false;
+			can = false;
 			lblFree.setVisible(false);
+			lblFreeOverlay.setVisible(false);
 		}
+		toggle = false;
 	}
 }

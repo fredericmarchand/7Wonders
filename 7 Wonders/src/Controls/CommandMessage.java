@@ -10,7 +10,11 @@ public class CommandMessage {
 	//type id's
 	public static final int RESOURCE_CHOICE_TYPE = 0;
 	public static final int MOVE_TYPE = 1;
-	public static final int SCIENTIFIC_SYMBOL_TYPE = 2;
+	public static final int CHOSEN_GUILD_TYPE = 2;
+	public static final int CHOSEN_DISCARDED_TYPE = 3;
+	
+	//add more here and increment the value of SCIENTIFIC_SYMBOL_TYPE
+	public static final int SCIENTIFIC_SYMBOL_TYPE = 4;
 	
 
 	private long playerID; 
@@ -20,6 +24,7 @@ public class CommandMessage {
 	private int action;
 	private int preference;
 	private ArrayList<ScientificSymbols> symbolChoice;
+	private int free;
 	
 	public CommandMessage()
 	{
@@ -30,6 +35,7 @@ public class CommandMessage {
 		action = 0;
 		preference = 0;
 		symbolChoice = new ArrayList<ScientificSymbols>();
+		free = 0;
 	}
 	
 	public CommandMessage(long pid, int type, int cardid, int actionchoice, int tradepreference, ArrayList<ScientificSymbols> scientificSymbols, ArrayList<Resources> reschoice)
@@ -106,6 +112,15 @@ public class CommandMessage {
 		resourceChoice = choices;
 	}
 
+	public int getFree()
+	{
+		return free;
+	}
+	
+	public void setFree(int val)
+	{
+		free = val;
+	}
 	
 
 

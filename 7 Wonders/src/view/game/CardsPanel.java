@@ -38,9 +38,8 @@ public class CardsPanel extends JPanel {
 	private JPanel pausedPanel;
 	
 	private Controller controller;
-	private FreeBuildPanel fbp;
 	
-	public CardsPanel(ArrayList<Structure> ca, Controller c, FreeBuildPanel f) {
+	public CardsPanel(ArrayList<Structure> ca, Controller c) {
 		setLayout(null);
 		setOpaque(false);
 		setSize(1274, 280);
@@ -61,8 +60,6 @@ public class CardsPanel extends JPanel {
 		
 		controller = c;
 		cards = ca;
-		fbp = f;
-		fbp.setCardsPanel(this);
 		
 		pausedPanel = new JPanel();
 		pausedPanel.setLayout(new BorderLayout());
@@ -214,7 +211,6 @@ public class CardsPanel extends JPanel {
 							for (int[] b : canDoAction) Arrays.fill(b, -1);
 							showOptions[i] = true;
 							controller.chooseCard(cards.get(i));
-							fbp.chosenCard(cards.get(i));
 							canDoAction[i][0] = controller.canBuildStructure(cards.get(i));
 							canDoAction[i][1] = controller.canBuildWonderStage(cards.get(i));
 						}
