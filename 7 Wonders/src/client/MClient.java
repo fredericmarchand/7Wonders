@@ -119,8 +119,8 @@ public class MClient {
 			connect= true;
 			client.connect(5000, ip, port);
 			
-		} catch (IOException e) {
-
+		} catch (Exception e) {
+			System.out.println("[CLIENT] FAIL CONNECT");
 			return false;
 		}
 		client.sendTCP(new Packet0LoginRequest());

@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 public class StartPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
-	private final boolean DEBUG_MODE = true;
+	private final boolean DEBUG_MODE = false;
 	
 	private JButton create, join, quit;
 	private MClient mclient;
@@ -75,41 +75,33 @@ public class StartPanel extends JPanel {
 	
 	public void run() {
 		bgimg.setIcon(Images.get("bg"));
-		
+
 		String uname = "";
 		String ip = "";
 		String port = "";
-		try {
-			if(DEBUG_MODE) {
-				ip = "127.0.0.1";
-				port = "60001";
-			} else {
-				while(ip.isEmpty())
-					ip= JOptionPane.showInputDialog("IP: ");
-				while(port.isEmpty())
-					port = JOptionPane.showInputDialog("Port: ");
-			}
-			while(uname.isEmpty())
-				uname = JOptionPane.showInputDialog("What is your username? ");
-		} catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "Incorrect Input");
-			System.exit(0);
-		}
-		
+
+		boolean connected = false;
+		while (uname.isEmpty())
+			uname = JOptionPane.showInputDialog("What is your username? ");
+
 		mclient = new MClient(mainframe);
 		mclient.setUser_username(uname);
 
-		try {
-			while (!mclient.serverConnect(ip, Integer.parseInt(port))) {
-				//mclient.getLink().failConnect();
+		while (connected == false) {
+			if (DEBUG_MODE) {
+				ip = "127.0.0.1";
+				port = "60001";
+			} else {
 				ip = JOptionPane.showInputDialog("IP: ");
 				port = JOptionPane.showInputDialog("Port: ");
 			}
-		} catch (Exception e) {
-			
-			//JOptionPane.showMessageDialog(null, "Incorrect Input");
+			try {
+				connected = mclient.serverConnect(ip, Integer.parseInt(port));
+			} catch (Exception e) {
+				connected = false;
+				System.out.println("[CLIENT] BAD INPUT");
+			}
 		}
-			
 
 		setVisible(true);
 	}
