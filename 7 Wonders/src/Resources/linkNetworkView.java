@@ -26,10 +26,6 @@ public class linkNetworkView {
 		
 	}
 	
-	public void killMainFrame() {
-		//close match
-		lobby.showGUI();
-	}
 	
 	public LobbyPanel launchLobby() {
 		lobby.showGUI();

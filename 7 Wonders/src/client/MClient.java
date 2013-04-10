@@ -3,6 +3,7 @@ package client;
 import java.io.IOException;
 import java.util.*;
 
+import view.menu.LobbyPanel;
 import view.menu.MainFrame;
 
 import Controls.*;
@@ -215,7 +216,9 @@ public class MClient {
 	public void returnToLobby(){};
 	public void pushUserQuit(){
 		link.killChatFrame();
-		link.killMainFrame();
+		mainframe.hideMatchPanel();
+		mainframe.launchLobby((new LobbyPanel(this)));
+		//user.killMatchPAnel
 	}
 	
 
