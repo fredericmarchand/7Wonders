@@ -396,7 +396,7 @@ public class CardHandler {
 		boards.add(new TheTempleOfArtemisInEphesus(r.nextInt(2)));
 		boards.add(new ThePyramidsOfGiza(r.nextInt(2)));
 		
-		//Collections.shuffle(boards);
+		Collections.shuffle(boards);
 		int index = 0;
 		
 		for ( Player p: players )
