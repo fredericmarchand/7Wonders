@@ -95,7 +95,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	public ArrayList<ScientificSymbols> needToChooseScienceSymbol() 
 	{
 		ArrayList<ScientificSymbols> symbs = new ArrayList<ScientificSymbols>();
-		if ( match.getAge() != 6 ) return symbs;
+		if ( match.getAge() != 5 ) return symbs;
 		for ( Structure s: user.getWonderBoard().getPurpleCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
@@ -128,7 +128,9 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void scienceChosen(ArrayList<ScientificSymbols> symbs) 
 	{		
-		match.initScienceChoice(user, symbs);
+		if ( match.getAge() == 5 )
+			match.initScienceChoice(user, symbs);
+
 	}
 
 	@Override
@@ -206,7 +208,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override//have to check if not null
 	public ArrayList<Structure> needToChooseCopyGuild() 
 	{
-		if ( match.getAge() != 5 ) return new ArrayList<Structure>();
+		if ( match.getAge() != 4 ) return new ArrayList<Structure>();
 		for ( WonderBoardStage stg: user.getWonderBoard().getStages() )
 		{
 			if ( stg.isBuilt() )
