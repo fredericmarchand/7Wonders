@@ -204,7 +204,7 @@ public class NetworkListener extends Listener {
 				msg.setCID(((Packet13MatchJoinRequest) o).getCID());
 				msg.setMsg(((Packet13MatchJoinRequest) o).getUName()
 						+ " has joined the match");
-				msg.setuName("[SYSTEM] ");
+				msg.setuName("SYSTEM");
 				for (Connection x : mserver.findMatch(
 						((Packet13MatchJoinRequest) o).getMID())
 						.getConnections())
