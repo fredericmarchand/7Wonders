@@ -35,7 +35,8 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		match = m;
 	}
 	
-	public void setMainFrame(MainFrame m) {
+	public void setMainFrame(MainFrame m) 
+	{
 		frame = m;
 	}
 		
@@ -120,7 +121,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 				}
 			}
 		}
-		//System.out.println("===========================SCIENCE --   AGE-> " + match.getAge());
 		
 		return symbs;
 	}
@@ -137,7 +137,9 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	public ArrayList<Resources> needToChooseResources() 
 	{
 		ArrayList<Resources> resources = new ArrayList<Resources>();
-		if ( match.getAge() > 3 || user.getLastMsgID() == CommandMessage.RESOURCE_CHOICE_TYPE ) return resources;
+		if ( match.getAge() > 3 || 
+				(match.getTurn() == 7 && user.getCards().isEmpty()) || 
+				user.getLastMsgID() == CommandMessage.RESOURCE_CHOICE_TYPE ) return resources;
 		for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
@@ -293,14 +295,16 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public boolean canBuildForFree() 
 	{
-		System.out.println("============Can Build For Free==============");
-		return user.canFreeBuild();
+		//System.out.println("============Can Build For Free==============");
+		if ( match.getAge() < 4 )
+			return user.canFreeBuild();
+		return false;
 	}
 
 	@Override
 	public void buildForFree(boolean b) 
 	{
-		System.out.println("=============================================" + b);
+		//System.out.println("=============================================" + b);
 		user.setFreePermission(b);
 	}
 	
