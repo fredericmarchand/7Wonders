@@ -57,6 +57,10 @@ public class MainFrame extends JFrame implements Runnable {
 		panel.updateValues();
 	}
 	
+	public boolean isPaused() {
+		return panel.isPaused();
+	}
+	
 	public void pause() {
 		panel.pause();
 	}
