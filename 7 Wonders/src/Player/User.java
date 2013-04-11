@@ -147,10 +147,8 @@ public class User {
 					client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
 				}
 				if ( lastMessageID == CommandMessage.RESOURCE_CHOICE_TYPE )
-				//{
 					client.getMainFrame().update();
-					client.getMainFrame().updateValues();
-				//}
+				else client.getMainFrame().updateValues();
 				
 			}
 		}

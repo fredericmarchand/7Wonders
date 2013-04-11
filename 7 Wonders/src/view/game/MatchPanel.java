@@ -297,6 +297,7 @@ public class MatchPanel extends JPanel implements Runnable {
 			return needResources.remove(0);
 		else {
 			controller.resourceChosen(pickedResources);
+			cardsPanel.pause();
 			pickedResources.clear();
 			return null;
 		}
