@@ -581,10 +581,11 @@ public class Match2 {
 		
 	public void initMove(Player p, int move, int neib)
 	{
+
+		if ( age > 3 ) return;
 		CommandMessage msg = new CommandMessage();
 		msg.setPlayerID(p.getID());
-		if ( age > 3 ) return;
-		else msg.setMsgType(CommandMessage.MOVE_TYPE);
+		msg.setMsgType(CommandMessage.MOVE_TYPE);
 		msg.setAction(move);
 		msg.setCardID(p.getChosenCard().getID());
 		msg.setPreference(neib);	
@@ -610,7 +611,6 @@ public class Match2 {
 	{
 		if ( age == 5 )
 		{
-			//System.out.println("========================================Im IN!");
 			CommandMessage msg = new CommandMessage();
 			msg.setPlayerID(p.getID());
 			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE);
@@ -702,6 +702,14 @@ public class Match2 {
 	public Match2 dispatch(ArrayList<CommandMessage> messages)
 	{
 		if ( messages == null || age == 6 ) return this;
+		
+		for ( Player p: players )
+		{
+			System.out.print(p.getUsername() + "has " + p.getCards().size() + " cards: [");
+			for ( Structure s: p.getCards() )
+				System.out.println(s.getName() + ", ");
+			System.out.println("]");
+		}
 
 		int type = messages.get(0).getMsgType();
 		switch ( type )
@@ -738,6 +746,13 @@ public class Match2 {
 					age += 1;
 				}
 				break;
+		}
+		for ( Player p: players )
+		{
+			System.out.print(p.getUsername() + "has " + p.getCards().size() + " cards: [");
+			for ( Structure s: p.getCards() )
+				System.out.println(s.getName() + ", ");
+			System.out.println("]");
 		}
 		
 		return this;

@@ -65,7 +65,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 			match.initMove(user, 1, -1);
 			break;
 		}
-		//frame.updateValues();
+		frame.updateValues();
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 			match.initMove(user, 2, -1);
 			break;
 		}
-		//frame.updateValues();
+		frame.updateValues();
 	}
 
 	@Override
@@ -187,14 +187,13 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	public void discardChosen() 
 	{
 		match.initMove(user, 3, 2);
-		//frame.updateValues();
+		frame.updateValues();
 	}
 
 	@Override//have to check if not null
 	public ArrayList<Structure> needToChooseCopyGuild() 
 	{
 		if ( match.getAge() != 4 ) return new ArrayList<Structure>();
-		//System.out.println("==============================needToChooseCopyGuild");
 		for ( WonderBoardStage stg: user.getWonderBoard().getStages() )
 		{
 			if ( stg.isBuilt() )

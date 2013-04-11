@@ -86,11 +86,10 @@ public class User {
 	{		
 		if ( client != null && msg != null/* && !pause*/ && msg.getMsgType() != lastMessageID )
 		{
+			
 			lastMessageID = msg.getMsgType();
 			client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
 		}
-		//System.out.println("[CLIENT ------ USER] MClient : \t" + client );
-		//System.out.println("Send Command Message: " + msg);
 	}
 	
 	public void updateMatch(Match2 match)
@@ -113,6 +112,7 @@ public class User {
 	public void receive(ArrayList<Integer> encoding, ArrayList<Long> ids, ArrayList<String> names)
 	{
 		if ( encoding.size() == 0 ) return;
+		System.out.println("[RECEIVING COMMAND MESSAGE] ===== \t" + msg.getMsgType());
 		if ( currentMatch == null )
 		{
 			currentMatch = SevenWondersProtocol.decodeMatch(encoding);
