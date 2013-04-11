@@ -15,6 +15,11 @@ public class Simple implements Strategy{
 		{
 			int result;
 			p.chooseCard(index);
+			if ( p.canFreeBuild() ) 
+			{
+				p.setFreePermission(true);
+				p.useFreeBuild();
+			}
 			result = p.canBuild(leftNeighbor, rightNeighbor);
 			switch ( result )
 			{

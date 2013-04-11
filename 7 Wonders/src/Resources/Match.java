@@ -148,6 +148,8 @@ public class Match {
 		long idAI;
 		System.out.println("Number of AI: " + nAI);
 		String usernameAI;
+		if((human_connection_count+nAI)<MAX_PLAYER_COUNT) 
+			nAI = MAX_PLAYER_COUNT-human_connection_count;
 		for (int i = 0; i < nAI; i++) {
 			idAI = server.getID();
 			server.incID();
