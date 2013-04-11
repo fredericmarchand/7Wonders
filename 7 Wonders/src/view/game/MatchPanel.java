@@ -32,6 +32,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	private Match2 match;
 	
 	private int numplayers;
+	
 	private FarPanel f1, f2, f3, f4;
 	private NearPanel n1, n2;
 	private LocalPanel playerPanel;
@@ -46,6 +47,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	private ResourceChoicePanel rcp;
 	private ScienceChoicePanel scp;
 	private FreeBuildPanel fbp;
+	private TradingChoicePanel tcp;
 	
 	private Controller controller;
 	
@@ -145,9 +147,10 @@ public class MatchPanel extends JPanel implements Runnable {
 		fbp.setLocation(296, 458);
 		
 		// Cards
-		cardsPanel = new CardsPanel(match.getLocalPlayer().getCards(), controller);
+		cardsPanel = new CardsPanel(this, controller);
 		cardsPanel.setLocation(3, 558);
 		cardsPanel.addMouseListener(buildMouseAdapterCards());
+		cardsPanel.update(match.getLocalPlayer().getCards());
 		
 		// Other
 		lblAge = new JLabel(Images.get("age0"), SwingConstants.CENTER);
@@ -192,6 +195,10 @@ public class MatchPanel extends JPanel implements Runnable {
 		scp = new ScienceChoicePanel(this);
 		scp.setVisible(false);
 		
+		tcp = new TradingChoicePanel(this);
+		tcp.setVisible(false);
+		
+		add(tcp);
 		add(scp);
 		add(rcp);
 		add(scrollpane);
@@ -252,7 +259,6 @@ public class MatchPanel extends JPanel implements Runnable {
 	
 	//update function that wont cause an infinite loop on receive
 	public void updateValues() {
-		cardsPanel.setCards(match.getLocalPlayer().getCards());
 		if(match.getAge() > 3) {
 			lblAge.setIcon(null);
 			lblAge.setText("GAME OVER!");
@@ -272,8 +278,18 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(f3 != null) f3.update();
 		if(f4 != null) f4.update();
 		fbp.update();
-		cardsPanel.update();
-		
+		cardsPanel.update(match.getLocalPlayer().getCards());
+	}
+	
+	public void buildStructure(int type) {
+		if(type == 0) return;
+		cardsPanel.pause();
+	}
+	
+	public void buildWonderStage(int type) {
+		if(type == 0) return;
+		if(type == 1) controller.buildWonderStage(-1);
+		cardsPanel.pause();
 	}
 	
 	public Resources nextResource() {

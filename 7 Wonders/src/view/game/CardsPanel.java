@@ -37,9 +37,10 @@ public class CardsPanel extends JPanel {
 	
 	private JPanel pausedPanel;
 	
+	private MatchPanel matchpanel;
 	private Controller controller;
 	
-	public CardsPanel(ArrayList<Structure> ca, Controller c) {
+	public CardsPanel(MatchPanel m, Controller c) {
 		setLayout(null);
 		setOpaque(false);
 		setSize(1274, 280);
@@ -58,8 +59,8 @@ public class CardsPanel extends JPanel {
 		for (boolean[] b : showArrow) Arrays.fill(b, Boolean.FALSE);
 		Arrays.fill(showOptions, Boolean.FALSE);
 		
+		matchpanel = m; 
 		controller = c;
-		cards = ca;
 		
 		pausedPanel = new JPanel();
 		pausedPanel.setLayout(new BorderLayout());
@@ -109,7 +110,6 @@ public class CardsPanel extends JPanel {
 		}
 		
 		addMouseListeners();
-		update();
 	}
 	
 	public void addMouseListeners() {
@@ -125,12 +125,9 @@ public class CardsPanel extends JPanel {
 			cardArr[i].removeMouseMotionListener(mml[i]);
 		}
 	}
-	
-	public void setCards(ArrayList<Structure> c) {
-		cards = c;
-	}
 
-	public void update() {
+	public void update(ArrayList<Structure> c) {
+		cards = c;
 		for (int i = 0; i < 7; i++) {
 			if(cards.size() > i) {
 				
@@ -192,16 +189,9 @@ public class CardsPanel extends JPanel {
 							for(int j = 0; j < 3; j++) {
 								if(e.getPoint().x > (26) && e.getPoint().y > (80 + 63*j)
 								&& e.getPoint().x < (26 + 150) && e.getPoint().y < (80 + 63*j + 57)){
-									if(j == 0 && canDoAction[i][0] > 0) {
-										controller.buildStructure();
-										pausedPanel.setVisible(true);
-									} else if (j == 1 && canDoAction[i][1] > 0) {
-										controller.buildWonderStage();
-										pausedPanel.setVisible(true);
-									} else if (j == 2) {
-										controller.discardChosen();
-										pausedPanel.setVisible(true);
-									}
+									if(j == 0) matchpanel.buildStructure(canDoAction[i][0]);
+									else if (j == 1) matchpanel.buildWonderStage(canDoAction[i][1]);
+									else if (j == 2) controller.discardChosen();
 									showOptions[i] = false;
 									break;
 								}
@@ -217,7 +207,7 @@ public class CardsPanel extends JPanel {
 						break;
 					}
 				}
-				update();
+				update(cards);
 			}
 			
 			@Override
@@ -228,7 +218,7 @@ public class CardsPanel extends JPanel {
 						break;
 					}
 				}
-				update();
+				update(cards);
 			}
 		};
 	}
@@ -248,9 +238,15 @@ public class CardsPanel extends JPanel {
 						break;
 					}
 				}
-				update();
+				update(cards);
 			}
 		};
+	}
+	
+	public void pause() {
+		pausedPanel.setSize(1274 - (2*((7-cards.size()) * 91)), 280);
+		pausedPanel.setLocation(((7-cards.size()) * 91), 0);
+		pausedPanel.setVisible(true);
 	}
 	
 	public void unpause() {
@@ -259,6 +255,6 @@ public class CardsPanel extends JPanel {
 	
 	public void hideAllOptions() {
 		Arrays.fill(showOptions, Boolean.FALSE);
-		update();
+		update(cards);
 	}
 }

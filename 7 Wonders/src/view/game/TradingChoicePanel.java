@@ -17,9 +17,9 @@ import java.awt.event.MouseMotionAdapter;
 public class TradingChoicePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	JLabel lblLeft, lblRight, lblRandom;
+	private JLabel lblLeft, lblRight, lblRandom, lblLeftOver, lblRightOver, lblRandomOver;
 	
-	MatchPanel matchPanel;
+	private MatchPanel matchPanel;
 	
 	public TradingChoicePanel(MatchPanel m) {
 		setLayout(null);
@@ -34,13 +34,25 @@ public class TradingChoicePanel extends JPanel {
 		lblDesc.setBounds(390, 413, 500, 33);
 		add(lblDesc);
 		
+		lblLeftOver = new JLabel(Images.get("tradingpref0Over"));
+		lblLeftOver.setBounds(516, 456, 48, 48);
+		add(lblLeftOver);
+		
 		lblLeft = new JLabel(Images.get("tradingpref0"));
 		lblLeft.setBounds(516, 456, 48, 48);
 		add(lblLeft);
 		
+		lblRightOver = new JLabel(Images.get("tradingpref1Over"));
+		lblRightOver.setBounds(716, 456, 48, 48);
+		add(lblRightOver);
+		
 		lblRight = new JLabel(Images.get("tradingpref1"));
 		lblRight.setBounds(716, 456, 48, 48);
 		add(lblRight);
+		
+		lblRandomOver = new JLabel(Images.get("tradingpref2Over"));
+		lblRandomOver.setBounds(616, 506, 48, 48);
+		add(lblRandomOver);
 		
 		lblRandom = new JLabel(Images.get("tradingpref2"));
 		lblRandom.setBounds(616, 506, 48, 48);
@@ -55,15 +67,15 @@ public class TradingChoicePanel extends JPanel {
 		return new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if(e.getPoint().x > 556 && e.getPoint().y > 403
-				&& e.getPoint().x < 606 && e.getPoint().y < 453) {
-
-				} else if(e.getPoint().x > 619 && e.getPoint().y > 402
-					   && e.getPoint().x < 663 && e.getPoint().y < 452) {
-
-				} else if(e.getPoint().x > 664 && e.getPoint().y > 402
-					   && e.getPoint().x < 714 && e.getPoint().y < 453) {
-
+				if(e.getPoint().x > 516 && e.getPoint().y > 456
+				&& e.getPoint().x < 564 && e.getPoint().y < 504) {
+					
+				} else if(e.getPoint().x > 716 && e.getPoint().y > 456
+					   && e.getPoint().x < 764 && e.getPoint().y < 504) {
+					
+				} else if(e.getPoint().x > 616 && e.getPoint().y > 506
+					   && e.getPoint().x < 664 && e.getPoint().y < 554) {
+					
 				} else {
 					
 				}
@@ -76,17 +88,25 @@ public class TradingChoicePanel extends JPanel {
 		return new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				if(e.getPoint().x > 556 && e.getPoint().y > 403
-				&& e.getPoint().x < 606 && e.getPoint().y < 453) {
-
-				} else if(e.getPoint().x > 619 && e.getPoint().y > 402
-					   && e.getPoint().x < 663 && e.getPoint().y < 452) {
-
-				} else if(e.getPoint().x > 664 && e.getPoint().y > 402
-					   && e.getPoint().x < 714 && e.getPoint().y < 453) {
-
+				if(e.getPoint().x > 516 && e.getPoint().y > 456
+				&& e.getPoint().x < 564 && e.getPoint().y < 504) {
+					lblLeftOver.setVisible(true);
+					lblRightOver.setVisible(false);
+					lblRandomOver.setVisible(false);
+				} else if(e.getPoint().x > 716 && e.getPoint().y > 456
+					   && e.getPoint().x < 764 && e.getPoint().y < 504) {
+					lblLeftOver.setVisible(false);
+					lblRightOver.setVisible(true);
+					lblRandomOver.setVisible(false);
+				} else if(e.getPoint().x > 616 && e.getPoint().y > 506
+					   && e.getPoint().x < 664 && e.getPoint().y < 554) {
+					lblLeftOver.setVisible(false);
+					lblRightOver.setVisible(false);
+					lblRandomOver.setVisible(true);
 				} else {
-
+					lblLeftOver.setVisible(false);
+					lblRightOver.setVisible(false);
+					lblRandomOver.setVisible(false);
 				}
 				matchPanel.repaint();
 			}

@@ -133,12 +133,8 @@ public class FarPanel extends JPanel {
 		
 		update();
 	}
-
-	public void update() {
-		updateLabels();
-	}
 	
-	public void updateLabels() {
+	public void update() {
 		lblPlayerName.setText("" + player.getUsername());
 		lblGears.setText("" + player.getScientificSymbols().getGears());
 		lblTablets.setText("" + player.getScientificSymbols().getTablets());

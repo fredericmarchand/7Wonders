@@ -256,10 +256,6 @@ public class NearPanel extends JPanel {
 	}
 	
 	public void update() {
-		updateLabels();
-	}
-	
-	public void updateLabels() {
 		lblPlayerName.setText("" + player.getUsername());
 		lblOre.setText("" + player.getTotalResources().getOre());
 		lblStone.setText("" + player.getTotalResources().getStone());
