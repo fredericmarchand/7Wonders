@@ -336,6 +336,10 @@ public class MatchPanel extends JPanel implements Runnable {
 		closeButton.setVisible(true);
 	}
 	
+	public boolean isPaused() {
+		return cardsPanel.isPaused();
+	}
+	
 	public void pause() {
 		cardsPanel.pause();
 	}

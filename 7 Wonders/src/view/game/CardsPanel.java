@@ -40,6 +40,8 @@ public class CardsPanel extends JPanel {
 	private MatchPanel matchpanel;
 	private Controller controller;
 	
+	private boolean ispaused;
+	
 	public CardsPanel(MatchPanel m, Controller c) {
 		setLayout(null);
 		setOpaque(false);
@@ -243,14 +245,20 @@ public class CardsPanel extends JPanel {
 		};
 	}
 	
+	public boolean isPaused() {
+		return ispaused;
+	}
+	
 	public void pause() {
 		pausedPanel.setSize(1274 - (2*((7-cards.size()) * 91)), 280);
 		pausedPanel.setLocation(((7-cards.size()) * 91), 0);
 		pausedPanel.setVisible(true);
+		ispaused = true;
 	}
 	
 	public void unpause() {
 		pausedPanel.setVisible(false);
+		ispaused = false;
 	}
 	
 	public void hideAllOptions() {
