@@ -136,6 +136,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public ArrayList<Resources> needToChooseResources() 
 	{
+		System.out.println("=====================================need");
 		ArrayList<Resources> resources = new ArrayList<Resources>();
 		if ( match.getAge() > 3 || 
 				(match.getTurn() == 7 && user.getCards().isEmpty()) || 
@@ -283,6 +284,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void resourceChosen(ArrayList<Resources> resources) 
 	{
+		System.out.println("=====================================chosen");
 		if ( user.getLastMsgID() == CommandMessage.CHOSEN_DISCARDED_TYPE )
 			match.initResourceChoice(user, resources);
 	}
