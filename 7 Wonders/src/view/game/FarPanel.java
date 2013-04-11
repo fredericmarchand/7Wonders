@@ -103,7 +103,7 @@ public class FarPanel extends JPanel {
 		lblNegConflict.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNegConflict.setOutlineColor(Color.BLACK);
 		lblNegConflict.setStroke(new BasicStroke(2f));
-		lblNegConflict.setBounds(58, 10, 44, 47);
+		lblNegConflict.setBounds(9, 6, 44, 47);
 		add(lblNegConflict);
 		
 		lblPosConflict = new JLabel2D("11", SwingConstants.CENTER);
@@ -111,7 +111,7 @@ public class FarPanel extends JPanel {
 		lblPosConflict.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPosConflict.setOutlineColor(Color.BLACK);
 		lblPosConflict.setStroke(new BasicStroke(2f));
-		lblPosConflict.setBounds(265, 62, 44, 47);
+		lblPosConflict.setBounds(58, 10, 44, 47);
 		add(lblPosConflict);
 		
 		lblCoin = new JLabel2D("11", SwingConstants.CENTER);
@@ -120,7 +120,7 @@ public class FarPanel extends JPanel {
 		lblCoin.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblCoin.setOutlineColor(Color.BLACK);
 		lblCoin.setStroke(new BasicStroke(2f));
-		lblCoin.setBounds(9, 6, 44, 47);
+		lblCoin.setBounds(265, 62, 44, 47);
 		add(lblCoin);
 		
 		JLabel overlayLabel = new JLabel(Images.get("overlayFar"));
