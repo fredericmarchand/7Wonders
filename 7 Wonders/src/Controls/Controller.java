@@ -13,11 +13,11 @@ public interface Controller {
 	
 	// int 0 = no, 1 = with trading, 2 = yes
 	int canBuildStructure(Structure s);
-	void buildStructure();
+	void buildStructure(int s);
 	
 	// int 0 = no, 1 = with trading, 2 = yes
 	int canBuildWonderStage(Structure s);
-	void buildWonderStage();
+	void buildWonderStage(int s);
 	
 	// Discard to get 3 coins back
 	void discardChosen();

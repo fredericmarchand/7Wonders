@@ -79,8 +79,6 @@ public class ScienceChoicePanel extends JPanel {
 					matchPanel.scienceChosen(new ScientificSymbols(0, 0, 1));
 					ScientificSymbols next = matchPanel.nextScience();
 					if(next == null) thisPanel.setVisible(false);
-				} else {
-					
 				}
 				matchPanel.repaint();
 			}
