@@ -65,7 +65,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 			match.initMove(user, 1, -1);
 			break;
 		}
-		frame.updateValues();
+		//frame.updateValues();
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 			match.initMove(user, 2, -1);
 			break;
 		}
-		frame.updateValues();
+		//frame.updateValues();
 	}
 
 	@Override
@@ -130,7 +130,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	{		
 		if ( match.getAge() == 5 )
 			match.initScienceChoice(user, symbs);
-
 	}
 
 	@Override
@@ -178,18 +177,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	}
 
 	@Override
-	public void needToChooseTradingPref() 
-	{
-		
-	}
-
-	@Override
-	public void chosenTradingPref(int t) 
-	{
-		
-	}
-
-	@Override
 	public boolean chooseCard(Structure s) 
 	{
 		user.chooseCard(s);
@@ -200,7 +187,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	public void discardChosen() 
 	{
 		match.initMove(user, 3, 2);
-		frame.updateValues();
+		//frame.updateValues();
 	}
 
 	@Override//have to check if not null
@@ -287,11 +274,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		System.out.println("=====================================chosen");
 		//if ( user.getLastMsgID() == CommandMessage.CHOSEN_DISCARDED_TYPE )
 			match.initResourceChoice(user, resources);
-	}
-	
-	public void callGarbageTruck()
-	{
-		frame.dispose();
 	}
 	
 	@Override
