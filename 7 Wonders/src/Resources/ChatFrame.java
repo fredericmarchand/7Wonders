@@ -34,6 +34,8 @@ public class ChatFrame extends JFrame {
 	private JMenuItem start, quit;
 	private JMenuBar menuBar;
 	private String username;
+	
+	private SimpleAttributeSet me, them, server;
 
 	public ChatFrame(Chat ch, String uname) {
 		username = uname;
@@ -44,8 +46,22 @@ public class ChatFrame extends JFrame {
 		panel = new JPanel();
 		panel.setLayout(null);
 		panel.setSize(280, 600);
-		
 		chatHub = ch;
+		
+		me = new SimpleAttributeSet();
+		StyleConstants.setForeground(me, Color.RED);
+		StyleConstants.setBackground(me, Color.LIGHT_GRAY);
+		
+		them = new SimpleAttributeSet();
+		StyleConstants.setForeground(them, Color.BLUE);
+		StyleConstants.setBackground(them, Color.LIGHT_GRAY);
+		
+		server = new SimpleAttributeSet();
+		StyleConstants.setForeground(server, new Color(0, 150, 0));
+		StyleConstants.setBackground(server, Color.LIGHT_GRAY);
+		StyleConstants.setBold(server, true);
+		
+		
 		txtField = new JTextField();
 		txtField.setDocument(new JTextFieldLimit(200, JTextFieldLimit.ALL_TEXT));
 		txtField.setBounds(0, 0, 263, 21);
@@ -113,16 +129,12 @@ public class ChatFrame extends JFrame {
 	}
 
 	public void appendChat(String u, String m) {
-		SimpleAttributeSet me = new SimpleAttributeSet();
-		StyleConstants.setForeground(me, Color.RED);
-		StyleConstants.setBackground(me, Color.LIGHT_GRAY);
-		
-		SimpleAttributeSet them = new SimpleAttributeSet();
-		StyleConstants.setForeground(them, Color.BLUE);
-		StyleConstants.setBackground(them, Color.LIGHT_GRAY);
-		
 		try {
-			doc.insertString(doc.getLength(), "[" + u + "]", u.equals(username) ? me : them);
+			SimpleAttributeSet sas = null;
+			if(u.equals("SYSTEM")) sas = server;
+			else if(u.equals(username)) sas = me;
+			else sas = them;
+			doc.insertString(doc.getLength(), "[" + u + "]", sas);
 			doc.insertString(doc.getLength(), ": " + m + newline, null);
 		} catch (BadLocationException e) {
 			System.out.println(e);

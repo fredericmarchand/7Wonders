@@ -84,10 +84,11 @@ public class User {
 	
 	public void sendCommandMessage()
 	{		
-		if ( client != null && msg != null && !pause && msg.getMsgType() != lastMessageID )
+		if ( client != null && msg != null && client.getMainFrame()!=null && !client.getMainFrame().isPaused() && msg.getMsgType() != lastMessageID )
 		{
 			lastMessageID = msg.getMsgType();
 			client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
+			if ( client.getMainFrame() != null ) client.getMainFrame().pause();
 		}
 		//System.out.println("[CLIENT ------ USER] MClient : \t" + client );
 		//System.out.println("Send Command Message: " + msg);
@@ -95,6 +96,7 @@ public class User {
 	
 	public void updateMatch(Match2 match)
 	{
+		currentMatch.setState(match.getState());
 		currentMatch.setAge(match.getAge());
 		currentMatch.setTurn(match.getTurn());
 		currentMatch.getDiscardedCards().clear();
@@ -113,6 +115,8 @@ public class User {
 	public void receive(ArrayList<Integer> encoding, ArrayList<Long> ids, ArrayList<String> names)
 	{
 		if ( encoding.size() == 0 ) return;
+		System.out.println("====================================================RECEIVE");
+		
 		if ( currentMatch == null )
 		{
 			currentMatch = SevenWondersProtocol.decodeMatch(encoding);
@@ -126,11 +130,13 @@ public class User {
 			SevenWondersProtocol.assignUsernamesAndIDs(mat, names, ids);
 			mat.setLocalPlayerID(ID);
 			updateMatch(mat);
+			if ( client.getMainFrame() != null )
+				client.getMainFrame().unpause();
 			pause = false;
 			if ( client != null && client.getMainFrame() != null )
 			{
 				Player p = currentMatch.getLocalPlayer();
-				if ( p.getCards().isEmpty() && currentMatch.getAge() < 4 ) 
+				if ( p.getCards().isEmpty() && currentMatch.getAge() < 4 && currentMatch.getTurn() == 7 && currentMatch.getState() == CommandMessage.MOVE_TYPE ) 
 				{
 					msg = new CommandMessage();
 					msg.setPlayerID(ID);
@@ -138,18 +144,11 @@ public class User {
 					msg.setMsgType(CommandMessage.MOVE_TYPE);
 					client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
 				}
-				if ( lastMessageID == CommandMessage.RESOURCE_CHOICE_TYPE )
-					client.getMainFrame().update();
-				else client.getMainFrame().updateValues();
+				client.getMainFrame().update(currentMatch.getState());
 				
 			}
 		}
 	}
-	
-	//public void returnToLobby()
-	//{
-	//	client.returnToLobby();
-	//}
 	
 	public void startMatch()
 	{

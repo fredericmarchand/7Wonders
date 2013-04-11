@@ -23,7 +23,7 @@ public class Match {
 	ArrayList<Connection> connected;
 	ArrayList<CommandMessage> cmdMsgList;
 	HashMap<Long, String> userMap;
-	ArrayList< ArrayList<CommandMessage>> cmdMsgMatrix;
+	ArrayList<HashMap<Integer, CommandMessage>> cmdMsgMatrix;
 	private long match_id;
 	private static long counter = 1000;
 	private int MAX_PLAYER_COUNT = 7;
@@ -46,9 +46,9 @@ public class Match {
 		hostName = uname;
 		userMap = new HashMap<Long,String>();
 		connected = new ArrayList<Connection>();
-		cmdMsgMatrix = new ArrayList<ArrayList<CommandMessage>>();
+		cmdMsgMatrix = new ArrayList<HashMap<Integer, CommandMessage>>();
 		for(int i = 0; i<10;i++)
-			cmdMsgMatrix.add(new ArrayList<CommandMessage>());
+			cmdMsgMatrix.add(new HashMap<Integer, CommandMessage>());
 		match_id = ++counter;
 		cmdMsgList = new ArrayList<CommandMessage>();
 		inProgress = false;
@@ -188,17 +188,23 @@ public class Match {
 		}
 	}
 
-	public void receiveEvent(CommandMessage m, long cliebntID,boolean last) {
+	public void receiveEvent(CommandMessage m, long cliebntID, boolean last) {
 
 		System.out
 				.println("[SERVER] Decoded command message received:  \t" + m);
 		cmdMsgList.add(m);
+		int index = controller.getIndexOfPlayer(m.getPlayerID());
 //		for(ArrayList<CommandMessage> o :  cmdMsgMatrix)
 //				for(Object i : o )
 //					System.out.println("[SERVER] Command Msg Matrix: \t " + i);
-		cmdMsgMatrix.get((m.getMsgType())).add(m);
-		if(cmdMsgMatrix.get((m.getMsgType())).size()==human_connection_count){
-			controller.dispatch(cmdMsgMatrix.get((m.getMsgType())));
+		cmdMsgMatrix.get((m.getMsgType())).put(index, m);
+		if(cmdMsgMatrix.get((m.getMsgType())).values().size()==human_connection_count){
+			ArrayList<CommandMessage> ar = new ArrayList<CommandMessage>();
+			for ( CommandMessage msg: cmdMsgMatrix.get((m.getMsgType())).values() )
+			{
+				ar.add(msg);
+			}
+			controller.dispatch(ar);
 			//System.out.println("[SERVER] LIST SIZE: \t " 
 			//+ cmdMsgMatrix.get((m.getMsgType())).size());
 			//for(Object o : cmdMsgMatrix.get((m.getMsgType())))

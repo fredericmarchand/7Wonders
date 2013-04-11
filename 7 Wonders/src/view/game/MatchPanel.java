@@ -13,6 +13,7 @@ import Structures.Structure;
 import Tokens.Resources;
 import Tokens.ScientificSymbols;
 
+import Controls.CommandMessage;
 import Controls.Controller;
 import Controls.Match2;
 
@@ -84,7 +85,7 @@ public class MatchPanel extends JPanel implements Runnable {
 		bg.setLocation(0, 0);
 		add(bg);
 		
-		update();
+		update(-1);
 	}
 	
 	public void run(){
@@ -218,43 +219,51 @@ public class MatchPanel extends JPanel implements Runnable {
 		add(bgimg);
 	}
 	
-	public void update() {
-		updateValues();
-		
-		// Choose resources
-		needResources = controller.needToChooseResources();
-		Resources next = nextResource();
-		rcp.setResource(next);
-		if(next != null) rcp.setVisible(true);
-		
-		// Choose discarded
-		needDiscarded = controller.needToChooseDiscarded();
-		if(!needDiscarded.isEmpty()) {
-			fcp.setCards(needDiscarded);
-			fcp.setMode(FullscreenCardsPanel.DISCARDED);
-			closeButton.setVisible(false);
-			scrollpane.revalidate();
-			scrollpane.setVisible(true);
-		} else {
-			controller.chosenDiscarded(new Structure());
-		}
-		
-		// Choose guild to copy
-		needGuild = controller.needToChooseCopyGuild();
-		if(!needGuild.isEmpty()) {
-			fcp.setCards(needGuild);
-			fcp.setMode(FullscreenCardsPanel.GUILD);
-			closeButton.setVisible(false);
-			scrollpane.revalidate();
-			scrollpane.setVisible(true);
-		} else {
-			controller.chosenGuild(new Structure());
-		}
-		
-		// Choose Science
-		needScience = controller.needToChooseScienceSymbol();
-		if(nextScience() != null) scp.setVisible(true);
-	}
+	 public void update(int state) {
+		  updateValues();
+		  
+		  if(state == CommandMessage.RESOURCE_CHOICE_TYPE) {
+			  // Choose resources
+			  needResources = controller.needToChooseResources();
+			  Resources next = nextResource();
+			  rcp.setResource(next);
+			  if(next != null) rcp.setVisible(true);
+		  }
+
+		  if(state == CommandMessage.CHOSEN_DISCARDED_TYPE) {
+			  // Choose discarded
+			  needDiscarded = controller.needToChooseDiscarded();
+			  if(!needDiscarded.isEmpty()) {
+				  fcp.setCards(needDiscarded);
+				  fcp.setMode(FullscreenCardsPanel.DISCARDED);
+				  closeButton.setVisible(false);
+				  scrollpane.revalidate();
+				  scrollpane.setVisible(true);
+			  } else {
+				  controller.chosenDiscarded(new Structure());
+			  }
+		  }
+
+		  //if(state == CommandMessage.CHOSEN_GUILD_TYPE) {
+			  // Choose guild to copy
+			  needGuild = controller.needToChooseCopyGuild();
+			  if(!needGuild.isEmpty()) {
+				  fcp.setCards(needGuild);
+				  fcp.setMode(FullscreenCardsPanel.GUILD);
+				  closeButton.setVisible(false);
+				  scrollpane.revalidate();
+				  scrollpane.setVisible(true);
+			  } else {
+				  controller.chosenGuild(new Structure());
+			  }
+		  //}
+
+		  //if(state == CommandMessage.SCIENTIFIC_SYMBOL_TYPE) {
+			  // Choose Science
+			  needScience = controller.needToChooseScienceSymbol();
+			  if(nextScience() != null) scp.setVisible(true);
+		 // }
+	 }
 	
 	//update function that wont cause an infinite loop on receive
 	public void updateValues() {
@@ -278,7 +287,6 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(f4 != null) f4.update();
 		fbp.update();
 		cardsPanel.update(match.getLocalPlayer().getCards());
-		cardsPanel.unpause();
 	}
 	
 	public void buildStructure(int type) {
@@ -286,7 +294,6 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(type == 2) controller.buildStructure(-1);
 		if(type == 1) tcp.showGUI(1);
 		if(type >= 10) controller.buildStructure(type - 10);
-		cardsPanel.pause();
 	}
 	
 	public void buildWonderStage(int type) {
@@ -294,18 +301,18 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(type == 2) controller.buildWonderStage(-1);
 		if(type == 1) tcp.showGUI(2);
 		if(type >= 10) controller.buildWonderStage(type - 10);
-		cardsPanel.pause();
 	}
 	
-	public Resources nextResource() {
-		if(needResources.size() > 0)
-			return needResources.remove(0);
-		else {
-			controller.resourceChosen(pickedResources);
-			if(!pickedResources.isEmpty()) cardsPanel.pause();
-			pickedResources.clear();
-			return null;
-		}
+	 public Resources nextResource() {
+		 if(needResources.size() > 0)
+		 return needResources.remove(0);
+		 else {
+			 //if(!pickedResources.isEmpty()) {
+				 controller.resourceChosen(pickedResources);
+				 pickedResources.clear();
+			// }
+			 return null;
+		 }
 	}
 	
 	public void resourceChosen(Resources r) {
@@ -336,6 +343,18 @@ public class MatchPanel extends JPanel implements Runnable {
 		controller.chosenGuild(s);
 		scrollpane.setVisible(false);
 		closeButton.setVisible(true);
+	}
+	
+	public boolean isPaused() {
+		return cardsPanel.isPaused();
+	}
+	
+	public void pause() {
+		cardsPanel.pause();
+	}
+	
+	public void unpause() {
+		cardsPanel.unpause();
 	}
 	
 	public MouseAdapter buildMouseAdapterNear() {

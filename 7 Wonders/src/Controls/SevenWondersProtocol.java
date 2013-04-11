@@ -71,6 +71,7 @@ public class SevenWondersProtocol {
 	public static ArrayList<Integer> encodeMatch(Match2 match)
 	{
 		ArrayList<Integer> playerStuff = new ArrayList<Integer>();
+		playerStuff.add(match.getState());
 		playerStuff.add(match.getAge());
 		playerStuff.add(match.getTurn());
 		playerStuff.add(match.getPlayers().size());
@@ -290,6 +291,7 @@ public class SevenWondersProtocol {
 	{
 		Match2 match = new Match2();
 		index = 0;
+		match.setState(encoding.get(index++));
 		match.setAge(encoding.get(index++));
 		match.setTurn(encoding.get(index++));
 		match.setNumPlayers(encoding.get(index++));

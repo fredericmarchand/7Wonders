@@ -49,19 +49,32 @@ public class MainFrame extends JFrame implements Runnable {
 		run();
 	}
 	
-	public void update() {
-		panel.update();
+	public void update(int state) {
+		panel.update(state);
 	}
 	
 	public void updateValues() {
 		panel.updateValues();
 	}
 	
+	public boolean isPaused() {
+		if(panel != null) return panel.isPaused();
+		else return true;
+	}
+	
+	public void pause() {
+		if(panel != null) panel.pause();
+	}
+	
+	public void unpause() {
+		if(panel != null) panel.unpause();
+	}
+	
 	public void startMatch(Match2 m) {
 		if(wp != null) remove(wp);
 		panel = new MatchPanel(m, controller);
 		add(panel);
-		update();
+		update(-1);
 	}
 
 	@Override

@@ -18,6 +18,7 @@ public class Match2 {
 	private ArrayList<Structure> age1Deck, age2Deck, age3Deck, discarded;
 	private long localPlayerID;
 	private boolean calcCalled;
+	private int state;
 
 	//unused constructor
 	public Match2(ArrayList<User> users)
@@ -33,6 +34,7 @@ public class Match2 {
 		}
 		age = 1;
 		turn = 1;
+		state = 0;
 	}
 	
 	//client side constructor
@@ -58,12 +60,16 @@ public class Match2 {
 		CardHandler.DistributeCards(players, age1Deck);
 		addInitialResources(players);
 		calcCalled = false;
-		
-		//Added to give players knowledge of the current age for AI choices
-//		for (Player p : players)
-//		{
-//			p.initAge();
-//		}
+	}
+	
+	public int getState()
+	{
+		return state;
+	}
+	
+	public void setState(int s)
+	{
+		state = s;
 	}
 	
 	public ArrayList<Object> getParameters()
@@ -169,6 +175,16 @@ public class Match2 {
 	public ArrayList<Player> getPlayers()
 	{
 		return players;
+	}
+	
+	public int getIndexOfPlayer(long id)
+	{
+		for ( int i = 0; i < players.size(); ++i )
+		{
+			if ( id == players.get(i).getID() )
+				return i;
+		}
+		return -1;
 	}
 	
 	public void addPlayer(long id, String s)
@@ -616,7 +632,6 @@ public class Match2 {
 	{
 		if ( age == 5 )
 		{
-			//System.out.println("========================================Im IN!");
 			CommandMessage msg = new CommandMessage();
 			msg.setPlayerID(p.getID());
 			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE);
@@ -713,35 +728,44 @@ public class Match2 {
 		switch ( type )
 		{
 			case CommandMessage.RESOURCE_CHOICE_TYPE:
+				//System.out.println("==========================================="+ state + "==========="+age+ "==========="+turn);
 				beginningOfTurnEffects(messages);
+				state = CommandMessage.MOVE_TYPE;
 				break;
 					
 			case CommandMessage.MOVE_TYPE:
+				//System.out.println("==========================================="+ state + "==========="+age+ "==========="+turn);
+				state = CommandMessage.CHOSEN_DISCARDED_TYPE;
 				runTurns(messages);
 				break;
 				
 			case CommandMessage.CHOSEN_GUILD_TYPE:
-				//System.out.println("=======================GUILD");
 				if ( age == 4 )
 				{
 					serverHandleChosenGuilds(messages);
+					state = CommandMessage.SCIENTIFIC_SYMBOL_TYPE;
 					age += 1;
 				}
 				break;
 				
 			case CommandMessage.CHOSEN_DISCARDED_TYPE:
-				//System.out.println("=======================GUILD");
 				if ( age < 4 )
+				{
+					//System.out.println("==========================================="+ state + "==========="+age+ "==========="+turn);
 					serverHandleDiscardedChoice(messages);
+					state = CommandMessage.RESOURCE_CHOICE_TYPE;
+					if ( turn == 7 )
+						age += 1;
+				}
 				break;
 					
 			case CommandMessage.SCIENTIFIC_SYMBOL_TYPE:
-				//System.out.println("=======================SCIENCE");
 				if ( age == 5 )
 				{
 					endOfGameSpecialEffects(messages);
 					countPlayersVictoryPoints();
 					age += 1;
+					state = CommandMessage.END_GAME;
 				}
 				break;
 		}
@@ -764,7 +788,6 @@ public class Match2 {
 				
 				//Scientific
 				p.addVictoryPoints(p.getScientificSymbols().victoryPointsValue());
-				//System.out.println("======================Science vicpts: " + p.getScientificSymbols().victoryPointsValue());
 			}
 		}
 	}
@@ -800,20 +823,10 @@ public class Match2 {
 			}
 			
 			PlayerInteraction.SettleMilitaryConflicts(getPlayers(), getAge());
-			age += 1;
 			incPlayerAges();
 			turn = 1;
 			discardAllPlayersCards();
-			//if ( getAge() == 2 ) 
-			//{
-			if ( age < 4 )
-				CardHandler.DistributeCards(getPlayers(), getDeck());
-			//}
-			//if ( getAge() == 3 ) CardHandler.DistributeCards(getPlayers(), getDeck());
-			//if ( getAge() == 4 ) 
-			//{
-				//discardAllPlayersCards();
-			//}
+			if ( age < 4 ) CardHandler.DistributeCards(getPlayers(), getDeck());
 		}
 		else 
 		{
@@ -846,7 +859,7 @@ public class Match2 {
 	{
 		for ( Player p : players )
 		{
-			if ( !p.canPlayLastCard() )
+			if ( !p.canPlayLastCard() || (turn == 6 && age == 3) )
 				p.discardHand(discarded);
 		}
 	}

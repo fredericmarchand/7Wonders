@@ -389,14 +389,14 @@ public class CardHandler {
 		Random r =  new Random();
 		ArrayList<WonderBoard> boards = new ArrayList<WonderBoard>();
 		boards.add(new TheColossusOfRhodes(r.nextInt(2)));
-		boards.add(new TheLighthouseOfAlexandria(r.nextInt(2)));
+		boards.add(new TheHangingGardensOfBabylon(1));
+		boards.add(new TheMausoleumOfHalicarnassus(1));
 		boards.add(new TheStatueOfZeusInOlympia(r.nextInt(2)));
-		boards.add(new TheHangingGardensOfBabylon(r.nextInt(2)));
-		boards.add(new TheMausoleumOfHalicarnassus(r.nextInt(2)));
+		boards.add(new TheLighthouseOfAlexandria(r.nextInt(2)));
 		boards.add(new TheTempleOfArtemisInEphesus(r.nextInt(2)));
 		boards.add(new ThePyramidsOfGiza(r.nextInt(2)));
 		
-		Collections.shuffle(boards);
+		//Collections.shuffle(boards);
 		int index = 0;
 		
 		for ( Player p: players )
@@ -470,10 +470,18 @@ public class CardHandler {
 //		
 		//long n = 235395830;
 		//System.out.println(n&0xFFFF);
-		CommandMessage msg = new CommandMessage();
-		msg.setPlayerID(654419);
-		CommandMessage g = SevenWondersProtocol.decodeCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg));
-		System.out.println(g.getPlayerID());
+		//CommandMessage msg = new CommandMessage();
+		//msg.setPlayerID(654419);
+		//CommandMessage g = SevenWondersProtocol.decodeCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg));
+		//System.out.println(g.getPlayerID());
+
+		ArrayList< ArrayList<Integer>> cmdMsgMatrix;
+		cmdMsgMatrix = new ArrayList<ArrayList<Integer>>();
+		for(int i = 0; i<10;i++)
+			cmdMsgMatrix.add(new ArrayList<Integer>());
+		cmdMsgMatrix.get(0).add(1, 0);
+		System.out.println(cmdMsgMatrix.get(0).size());
+		
 		
 	}
 
