@@ -15,6 +15,7 @@ public class CommandMessage {
 	
 	//add more here and increment the value of SCIENTIFIC_SYMBOL_TYPE
 	public static final int SCIENTIFIC_SYMBOL_TYPE = 4;
+	public static final int END_GAME = 5;
 	
 
 	private long playerID; 

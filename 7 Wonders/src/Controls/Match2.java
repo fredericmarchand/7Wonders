@@ -739,7 +739,6 @@ public class Match2 {
 				break;
 				
 			case CommandMessage.CHOSEN_GUILD_TYPE:
-				//System.out.println("=======================GUILD");
 				if ( age == 4 )
 				{
 					serverHandleChosenGuilds(messages);
@@ -749,19 +748,18 @@ public class Match2 {
 				break;
 				
 			case CommandMessage.CHOSEN_DISCARDED_TYPE:
-				//System.out.println("=======================GUILD");
 				if ( age < 4 )
 					serverHandleDiscardedChoice(messages);
 					state = CommandMessage.RESOURCE_CHOICE_TYPE;
 				break;
 					
 			case CommandMessage.SCIENTIFIC_SYMBOL_TYPE:
-				//System.out.println("=======================SCIENCE");
 				if ( age == 5 )
 				{
 					endOfGameSpecialEffects(messages);
 					countPlayersVictoryPoints();
 					age += 1;
+					state = CommandMessage.END_GAME;
 				}
 				break;
 		}

@@ -142,7 +142,7 @@ public class User {
 			if ( client != null && client.getMainFrame() != null )
 			{
 				Player p = currentMatch.getLocalPlayer();
-				if ( p.getCards().isEmpty() && currentMatch.getAge() < 4 ) 
+				if ( p.getCards().isEmpty() && currentMatch.getAge() < 4 && currentMatch.getTurn() == 7 ) 
 				{
 					msg = new CommandMessage();
 					msg.setPlayerID(ID);
