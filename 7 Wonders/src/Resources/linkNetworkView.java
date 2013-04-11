@@ -80,7 +80,7 @@ public class linkNetworkView {
 
 
 	public void otherClientDisconnect() {
-		JOptionPane.showConfirmDialog(null, "A player has left the match :(\nBeing moved to lobby");
+		JOptionPane.showMessageDialog(null, "A player has left the match :(\nBeing moved to lobby");
 	}
 	
 }
