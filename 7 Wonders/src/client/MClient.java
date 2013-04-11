@@ -29,6 +29,8 @@ public class MClient {
 	private boolean inMatch = false;
 	private boolean inWait = false;
 	private linkNetworkView link;
+	private int curr = 0;
+	private int total = 0;
 	
 	private User user;
 
@@ -75,23 +77,32 @@ public class MClient {
 	public long getMID() {
 		return matchID;
 	}
+	
+	public void setCurr(int c){
+		curr = c;
+	}
+	public void setTotal(int t){
+		total = t;
+	}
 
 	public void setMatchList(ArrayList<String> list) {
 		matchList = list;
 	}
 
 	public void waiting(){
-		if(inMatch==false&&inWait==false){
+		if(inMatch == false && inWait == false){
 			inWait = true;
-			//mainframe.launchWaiting(link.
-		}else if(inMatch==false){
-			//just update wait
+			mainframe.launchWaiting(link.launchWaiting());
+			link.updateWaiting(curr, total);
+		} else if(inMatch==false){
+			link.updateWaiting(curr, total);
 		}
 	}
 	
 	public ArrayList<String> getMatchList() {
 		return matchList;
 	}
+	
 	public linkNetworkView getLink() {
 		return link;
 	}
@@ -182,7 +193,9 @@ public class MClient {
 				mainframe.hideMatchPanel();
 			inMatch = false;
 			inWait = false;
+			mainframe.hideWaiting();
 			mainframe.launchLobby(link.launchLobby());
+			mainframe.updateLobbyPanel();
 			
 		
 	}
@@ -222,11 +235,6 @@ public class MClient {
 	//signal user
 
 	public void startMatch() {
-		if(inWait){
-			//kill the waitpanel
-		}
-		
-		
 		link.getChat().setStart(false);
 		inMatch = true;
 		inWait = false;
@@ -256,7 +264,9 @@ public class MClient {
 		//error going from match lobby to game lobby
 		//mainframe.hideMatchPanel();
 		//mainframe.launchLobby(link.launchLobby());
+		
 		link.updateLobby(matchList);
+		
 	}
 	
 

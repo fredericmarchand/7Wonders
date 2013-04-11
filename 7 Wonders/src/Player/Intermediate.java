@@ -30,6 +30,11 @@ public class Intermediate implements Strategy{
 				break;
 			int result;
 			p.chooseCard(selectionNumbers.indexOf(Collections.max(selectionNumbers)));
+			if ( p.canFreeBuild() ) 
+			{
+				p.setFreePermission(true);
+				p.useFreeBuild();
+			}
 			result = p.canBuild(leftNeighbor, rightNeighbor);
 			switch ( result )
 			{
