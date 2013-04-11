@@ -278,7 +278,6 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(f4 != null) f4.update();
 		fbp.update();
 		cardsPanel.update(match.getLocalPlayer().getCards());
-		cardsPanel.unpause();
 	}
 	
 	public void buildStructure(int type) {
@@ -286,7 +285,6 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(type == 2) controller.buildStructure(-1);
 		if(type == 1) tcp.showGUI(1);
 		if(type >= 10) controller.buildStructure(type - 10);
-		cardsPanel.pause();
 	}
 	
 	public void buildWonderStage(int type) {
@@ -294,7 +292,6 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(type == 2) controller.buildWonderStage(-1);
 		if(type == 1) tcp.showGUI(2);
 		if(type >= 10) controller.buildWonderStage(type - 10);
-		cardsPanel.pause();
 	}
 	
 	 public Resources nextResource() {
@@ -303,7 +300,6 @@ public class MatchPanel extends JPanel implements Runnable {
 		 else {
 			 if(!pickedResources.isEmpty()) {
 				 controller.resourceChosen(pickedResources);
-				 cardsPanel.pause();
 				 pickedResources.clear();
 			 }
 			 return null;
@@ -338,6 +334,14 @@ public class MatchPanel extends JPanel implements Runnable {
 		controller.chosenGuild(s);
 		scrollpane.setVisible(false);
 		closeButton.setVisible(true);
+	}
+	
+	public void pause() {
+		cardsPanel.pause();
+	}
+	
+	public void unpause() {
+		cardsPanel.unpause();
 	}
 	
 	public MouseAdapter buildMouseAdapterNear() {
