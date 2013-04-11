@@ -114,8 +114,7 @@ public class NetworkListener extends Listener {
 				// sending chat packet without notification
 				// if clients have the same match id as the chat sender
 				// send the chat packet to all clients of that unique
-				// instance
-				// of the match
+				// instance of the match
 				for (Connection x : m.getConnections())
 					x.sendTCP(o);
 
