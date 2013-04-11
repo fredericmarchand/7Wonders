@@ -20,7 +20,6 @@ public class User {
 	private boolean lastMessage;
 	private boolean pause;
 	private int lastMessageID;
-	private boolean callupdate;
 	
 	//default constructor
 	public User(){}
@@ -29,7 +28,6 @@ public class User {
 		ID = id;
 		username = name;
 		pause = false;
-		callupdate = true;
 	}
 	
 	public String getUsername()
@@ -91,7 +89,6 @@ public class User {
 			lastMessageID = msg.getMsgType();
 			if (msg.getMsgType() == 0)
 				System.out.println("==================================================================MSGID " + msg.getMsgType());
-			if ( msg.getMsgType() == CommandMessage.CHOSEN_DISCARDED_TYPE ) callupdate = true;
 			client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
 			if ( client.getMainFrame() != null )
 				client.getMainFrame().pause();
