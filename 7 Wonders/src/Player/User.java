@@ -93,7 +93,7 @@ public class User {
 				System.out.println("==================================================================MSGID " + msg.getMsgType());
 			if ( msg.getMsgType() == CommandMessage.CHOSEN_DISCARDED_TYPE ) callupdate = true;
 			client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
-			if ( client.getMainFrame() != null && msg.getMsgType() != CommandMessage.RESOURCE_CHOICE_TYPE )
+			if ( client.getMainFrame() != null )
 				client.getMainFrame().pause();
 		}
 		//System.out.println("[CLIENT ------ USER] MClient : \t" + client );

@@ -389,14 +389,14 @@ public class CardHandler {
 		Random r =  new Random();
 		ArrayList<WonderBoard> boards = new ArrayList<WonderBoard>();
 		boards.add(new TheColossusOfRhodes(r.nextInt(2)));
+		boards.add(new TheHangingGardensOfBabylon(0));
+		boards.add(new TheStatueOfZeusInOlympia(1));
 		boards.add(new TheLighthouseOfAlexandria(r.nextInt(2)));
-		boards.add(new TheStatueOfZeusInOlympia(r.nextInt(2)));
-		boards.add(new TheHangingGardensOfBabylon(r.nextInt(2)));
 		boards.add(new TheMausoleumOfHalicarnassus(r.nextInt(2)));
 		boards.add(new TheTempleOfArtemisInEphesus(r.nextInt(2)));
 		boards.add(new ThePyramidsOfGiza(r.nextInt(2)));
 		
-		Collections.shuffle(boards);
+		//Collections.shuffle(boards);
 		int index = 0;
 		
 		for ( Player p: players )

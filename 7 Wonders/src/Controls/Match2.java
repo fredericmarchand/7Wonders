@@ -60,12 +60,6 @@ public class Match2 {
 		CardHandler.DistributeCards(players, age1Deck);
 		addInitialResources(players);
 		calcCalled = false;
-		
-		//Added to give players knowledge of the current age for AI choices
-//		for (Player p : players)
-//		{
-//			p.initAge();
-//		}
 	}
 	
 	public int getState()

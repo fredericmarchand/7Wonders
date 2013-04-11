@@ -138,11 +138,11 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	{
 		ArrayList<Resources> resources = new ArrayList<Resources>();
 		if ( match.getAge() > 3 || 
-				(match.getTurn() == 7 && user.getCards().isEmpty()) )//|| user.getLastMsgID() != CommandMessage.CHOSEN_DISCARDED_TYPE ) 
+				(match.getTurn() == 7 && user.getCards().isEmpty()) ) 
 		{
 			return resources;
 		}
-		System.out.println("=====================================need");
+		//System.out.println("=====================================need");
 		for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
@@ -283,7 +283,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void resourceChosen(ArrayList<Resources> resources) 
 	{
-		System.out.println("=====================================chosen");
+		//System.out.println("=====================================chosen");
 		//if ( user.getLastMsgID() == CommandMessage.CHOSEN_DISCARDED_TYPE )
 			match.initResourceChoice(user, resources);
 	}
