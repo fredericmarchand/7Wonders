@@ -658,7 +658,6 @@ public class Match2 {
 	
 	public void initChosenDiscarded(Player p, Structure s)
 	{
-		//if ( turn == 7 ) return;
 		CommandMessage msg = new CommandMessage();
 		msg.setPlayerID(p.getID());
 		msg.setMsgType(CommandMessage.CHOSEN_DISCARDED_TYPE);
@@ -755,8 +754,8 @@ public class Match2 {
 					System.out.println("==========================================="+ state + "==========="+age+ "==========="+turn);
 					serverHandleDiscardedChoice(messages);
 					state = CommandMessage.RESOURCE_CHOICE_TYPE;
-					if ( age < 3 )
-						age+=1;
+					if ( age < 3 && turn == 7 )
+						age += 1;
 				}
 				break;
 					
