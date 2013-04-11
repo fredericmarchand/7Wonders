@@ -632,7 +632,6 @@ public class Match2 {
 	{
 		if ( age == 5 )
 		{
-			//System.out.println("========================================Im IN!");
 			CommandMessage msg = new CommandMessage();
 			msg.setPlayerID(p.getID());
 			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE);
@@ -729,13 +728,13 @@ public class Match2 {
 		switch ( type )
 		{
 			case CommandMessage.RESOURCE_CHOICE_TYPE:
-				System.out.println("==========================================="+ state + "==========="+age);
+				System.out.println("==========================================="+ state + "==========="+age+ "==========="+turn);
 				beginningOfTurnEffects(messages);
 				state = CommandMessage.MOVE_TYPE;
 				break;
 					
 			case CommandMessage.MOVE_TYPE:
-				System.out.println("==========================================="+ state + "==========="+age);
+				System.out.println("==========================================="+ state + "==========="+age+ "==========="+turn);
 				if ( turn == 7 ) state = CommandMessage.RESOURCE_CHOICE_TYPE;
 				else state = CommandMessage.CHOSEN_DISCARDED_TYPE;
 				runTurns(messages);
@@ -753,7 +752,7 @@ public class Match2 {
 			case CommandMessage.CHOSEN_DISCARDED_TYPE:
 				if ( age < 4 )
 				{
-					System.out.println("==========================================="+ state + "==========="+age);
+					System.out.println("==========================================="+ state + "==========="+age+ "==========="+turn);
 					serverHandleDiscardedChoice(messages);
 					state = CommandMessage.RESOURCE_CHOICE_TYPE;
 				}
