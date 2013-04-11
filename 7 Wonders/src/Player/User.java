@@ -2,8 +2,6 @@ package Player;
 
 import java.util.ArrayList;
 
-import Structures.Structure;
-
 import client.MClient;
 import Controls.CommandMessage;
 import Controls.Match2;
@@ -18,7 +16,7 @@ public class User {
 	private CommandMessage msg;
 	private MClient client;
 	private boolean lastMessage;
-	//private boolean pause;
+	private boolean pause;
 	private int lastMessageID;
 	
 	//default constructor
@@ -27,7 +25,7 @@ public class User {
 	{
 		ID = id;
 		username = name;
-		//pause = false;
+		pause = false;
 	}
 	
 	public String getUsername()
@@ -35,15 +33,15 @@ public class User {
 		return username;
 	}
 	
-	//public boolean isPaused()
-	//{
-	//	return pause;
-	//}
+	public boolean isPaused()
+	{
+		return pause;
+	}
 	
 	public void pause()
 	{
-		//if ( currentMatch != null )
-		//	pause = true;
+		if ( currentMatch != null )
+			pause = true;
 	}
 	
 	public int getLastMsgID()
@@ -84,10 +82,11 @@ public class User {
 	
 	public void sendCommandMessage()
 	{		
-		if ( client != null && msg != null/* && !pause*/ && msg.getMsgType() != lastMessageID )
+		if ( client != null && msg != null && !pause && msg.getMsgType() != lastMessageID )
 		{
-			
+			System.out.println("=====================[SENDING COMMAND MESSAGE] ===== \t" + (msg != null ? msg.getMsgType() : ""));
 			lastMessageID = msg.getMsgType();
+			pause = true;
 			client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
 		}
 	}
@@ -98,9 +97,6 @@ public class User {
 		currentMatch.setTurn(match.getTurn());
 		currentMatch.getDiscardedCards().clear();
 		currentMatch.getDiscardedCards().addAll(match.getDiscardedCards());
-		System.out.println(match.getDiscardedCards().size());
-		for ( Structure s: match.getDiscardedCards() )
-			System.out.println(s.getName());
 		currentMatch.setNumPlayers(match.getNumPlayers());
 		currentMatch.setLocalPlayerID(match.getLocalPlayerID());
 		for ( Player p: currentMatch.getPlayers() )
@@ -112,13 +108,13 @@ public class User {
 	public void receive(ArrayList<Integer> encoding, ArrayList<Long> ids, ArrayList<String> names)
 	{
 		if ( encoding.size() == 0 ) return;
-		System.out.println("[RECEIVING COMMAND MESSAGE] ===== \t" + msg.getMsgType());
+		System.out.println("=====================[RECEIVING COMMAND MESSAGE] ===== \t" + lastMessageID);
 		if ( currentMatch == null )
 		{
 			currentMatch = SevenWondersProtocol.decodeMatch(encoding);
 			SevenWondersProtocol.assignUsernamesAndIDs(currentMatch, names, ids);
 			currentMatch.setLocalPlayerID(ID);
-			//pause = false;
+			pause = false;
 		}
 		else
 		{
@@ -126,20 +122,24 @@ public class User {
 			SevenWondersProtocol.assignUsernamesAndIDs(mat, names, ids);
 			mat.setLocalPlayerID(ID);
 			updateMatch(mat);
-			//pause = false;
+			pause = false;
 			if ( client != null && client.getMainFrame() != null )
 			{
 				Player p = currentMatch.getLocalPlayer();
-				if ( p.getCards().isEmpty() && currentMatch.getAge() < 4 ) 
+				if ( p.getCards().isEmpty() && currentMatch.getAge() < 4 && currentMatch.getTurn() == 7 ) 
 				{
 					msg = new CommandMessage();
 					msg.setPlayerID(ID);
 					msg.setCardID(0);
 					msg.setMsgType(CommandMessage.MOVE_TYPE);
-					client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
+					//client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
+					sendCommandMessage();
 				}
 				if ( lastMessageID == CommandMessage.RESOURCE_CHOICE_TYPE )
+				{
+					System.out.println("=================================UPDATE");
 					client.getMainFrame().update();
+				}
 				else client.getMainFrame().updateValues();
 				
 			}

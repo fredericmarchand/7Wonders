@@ -597,7 +597,8 @@ public class Match2 {
 	
 	public void initResourceChoice(Player p, ArrayList<Resources> resChoices)
 	{
-		if ( age > 3 ) return;
+		if ( age > 3 || (turn == 7 && p.getCards().isEmpty()) || p.getLastMsgID() == CommandMessage.RESOURCE_CHOICE_TYPE )
+			return;
 		CommandMessage msg = new CommandMessage();
 		msg.setPlayerID(p.getID());
 		msg.setMsgType(CommandMessage.RESOURCE_CHOICE_TYPE);
@@ -707,7 +708,7 @@ public class Match2 {
 		{
 			System.out.print(p.getUsername() + "has " + p.getCards().size() + " cards: [");
 			for ( Structure s: p.getCards() )
-				System.out.println(s.getName() + ", ");
+				System.out.print(s.getName() + ", ");
 			System.out.println("]");
 		}
 
@@ -723,7 +724,6 @@ public class Match2 {
 				break;
 				
 			case CommandMessage.CHOSEN_GUILD_TYPE:
-				//System.out.println("=======================GUILD");
 				if ( age == 4 )
 				{
 					serverHandleChosenGuilds(messages);
@@ -751,7 +751,7 @@ public class Match2 {
 		{
 			System.out.print(p.getUsername() + "has " + p.getCards().size() + " cards: [");
 			for ( Structure s: p.getCards() )
-				System.out.println(s.getName() + ", ");
+				System.out.print(s.getName() + ", ");
 			System.out.println("]");
 		}
 		

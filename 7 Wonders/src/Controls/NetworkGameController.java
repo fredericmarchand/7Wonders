@@ -139,7 +139,9 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		ArrayList<Resources> resources = new ArrayList<Resources>();
 		if ( match.getAge() > 3 || 
 				(match.getTurn() == 7 && user.getCards().isEmpty()) || 
-				user.getLastMsgID() == CommandMessage.RESOURCE_CHOICE_TYPE ) return resources;
+				user.getLastMsgID() == CommandMessage.RESOURCE_CHOICE_TYPE ) 
+			return resources;
+		
 		for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
@@ -214,7 +216,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	public void chosenGuild(Structure g) 
 	{
 		match.initGuildChoice(user, g);
-		//System.out.println("==============================chosenGuild");
 	}
 
 	@Override //have to check if empty
@@ -222,16 +223,12 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	{
 		for ( WonderBoardStage stg: user.getWonderBoard().getStages() )
 		{
-			//System.out.println("===for each stage");
 			if ( stg.isBuilt() )
 			{
-				//System.out.println("===if its built");
 				for ( SpecialEffect se: stg.getEffects() )
 				{
-					//System.out.println("===effect id " + se.getID());
 					if ( se.getID() == BuildDiscardedCard.BuildDiscardedCardID )
 					{
-						//System.out.println("===" + se.isUsedUp());
 						if ( !se.isUsedUp() )
 						{
 							return match.getDiscardedCards();
@@ -246,7 +243,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void chosenDiscarded(Structure g) 
 	{
-		//System.out.println("================="+ user.getLastMsgID());
 		if ( user.getLastMsgID() == CommandMessage.MOVE_TYPE )
 			match.initChosenDiscarded(user, g);
 	}	
@@ -272,13 +268,12 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	{
 		System.out.println("=====================================chosen");
 		//if ( user.getLastMsgID() == CommandMessage.CHOSEN_DISCARDED_TYPE )
-			match.initResourceChoice(user, resources);
+		match.initResourceChoice(user, resources);
 	}
 	
 	@Override
 	public boolean canBuildForFree() 
 	{
-		//System.out.println("============Can Build For Free==============");
 		if ( match.getAge() < 4 )
 			return user.canFreeBuild();
 		return false;
@@ -287,7 +282,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void buildForFree(boolean b) 
 	{
-		//System.out.println("=============================================" + b);
 		user.setFreePermission(b);
 	}
 	
