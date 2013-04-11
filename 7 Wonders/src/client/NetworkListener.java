@@ -86,9 +86,7 @@ public class NetworkListener extends Listener{
 		if(o instanceof Packet6ChatMsg){
 			System.out.println("[CLIENT] Received msg packet");
 			mclient.getLink().getChat().addChat(((Packet6ChatMsg)o).getMsg());
-			//mclient.updateChat(((Packet6ChatMsg)o).getMsg());
 		}
-
 		if(o instanceof Packet7MatchFunction){
 			System.out.println("[CLIENT] Received Match Function : \t " + partials);
 			partialsArray[((Packet7MatchFunction)o).getID()] = ((Packet7MatchFunction)o).getObject();

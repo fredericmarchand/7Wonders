@@ -85,6 +85,7 @@ public class MainFrame extends JFrame implements Runnable {
 		wp = p;
 		wp.setVisible(true);
 		add(wp);
+		wp.repaint();
 	}
 	
 	public void hideWaiting() {

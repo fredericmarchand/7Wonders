@@ -91,6 +91,7 @@ public class ChatFrame extends JFrame {
 					//CLIENT KILL CONNECTION CLOSE EXTERNAL CONNECTIONS
 					chatHub.getClient().quitMatch();
 				}
+			
 			}
 		});	
 
