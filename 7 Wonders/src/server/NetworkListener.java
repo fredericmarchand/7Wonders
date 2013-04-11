@@ -160,13 +160,16 @@ public class NetworkListener extends Listener {
 					((Packet12CreateMatch)o).getUName());
 			// adding client to match
 			// connection list
-
+			
 			Packet14HostCreateMatch packet = new Packet14HostCreateMatch();
 			packet.setMID(matchID);
 			packet.setnPlayer(((Packet12CreateMatch) o).getHuman()+((Packet12CreateMatch) o).getAI());
 			c.sendTCP(packet);
 			
 			mserver.updateMatch(matchID);
+			
+			
+			mserver.updateMatchCount(matchID);
 		}
 		if (o instanceof Packet13MatchJoinRequest) {
 			Packet3Connection joinResponse = new Packet3Connection();

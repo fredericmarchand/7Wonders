@@ -125,9 +125,11 @@ public class NetworkListener extends Listener{
 			mclient.quitMatch();
 		}
 		if(o instanceof Packet17ConnectionCount){
+			System.out.println("[CLIENT] Received match info");
 			if(gameStart==false){
-				int n = ((Packet17ConnectionCount)o).getConCount();
-				
+				mclient.setCurr(((Packet17ConnectionCount)o).getConCount());
+				mclient.setTotal(((Packet17ConnectionCount)o).getMaxCount());
+				mclient.waiting();
 			}
 		}
 	}
