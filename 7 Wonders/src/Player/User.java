@@ -83,15 +83,7 @@ public class User {
 	}
 	
 	public void sendCommandMessage()
-	{
-		/*boolean choice = false;
-		if ( msg.getMsgType() == CommandMessage.RESOURCE_CHOICE_TYPE && lastMessageID == CommandMessage.CHOSEN_DISCARDED_TYPE )
-			choice = true;
-		else if ( (msg.getMsgType() == CommandMessage.CHOSEN_GUILD_TYPE && lastMessageID != CommandMessage.CHOSEN_GUILD_TYPE) 
-				|| (msg.getMsgType() == CommandMessage.SCIENTIFIC_SYMBOL_TYPE && lastMessageID != CommandMessage.SCIENTIFIC_SYMBOL_TYPE) )
-			choice = true;
-		else if ( msg.getMsgType() != lastMessageID ) choice = true;*/
-		
+	{		
 		if ( client != null && msg != null && !pause && msg.getMsgType() != lastMessageID )
 		{
 			lastMessageID = msg.getMsgType();

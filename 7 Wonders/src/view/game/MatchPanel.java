@@ -220,7 +220,6 @@ public class MatchPanel extends JPanel implements Runnable {
 	
 	public void update() {
 		updateValues();
-		cardsPanel.unpause();
 		
 		// Choose resources
 		needResources = controller.needToChooseResources();
@@ -279,13 +278,14 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(f4 != null) f4.update();
 		fbp.update();
 		cardsPanel.update(match.getLocalPlayer().getCards());
+		cardsPanel.unpause();
 	}
 	
 	public void buildStructure(int type) {
 		if(type == 0) return;
 		if(type == 1) controller.buildStructure(-1);
 		if(type == 2) tcp.showGUI(1);
-		if(type > 10) {
+		if(type >= 10) {
 			controller.buildStructure(type - 10);
 		}
 		cardsPanel.pause();
@@ -295,7 +295,7 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(type == 0) return;
 		if(type == 1) controller.buildWonderStage(-1);
 		if(type == 2) tcp.showGUI(2);
-		if(type > 10) {
+		if(type >= 10) {
 			controller.buildWonderStage(type - 10);
 		}
 		cardsPanel.pause();
@@ -306,7 +306,7 @@ public class MatchPanel extends JPanel implements Runnable {
 			return needResources.remove(0);
 		else {
 			controller.resourceChosen(pickedResources);
-			cardsPanel.pause();
+			if(!pickedResources.isEmpty()) cardsPanel.pause();
 			pickedResources.clear();
 			return null;
 		}
