@@ -49,8 +49,8 @@ public class MainFrame extends JFrame implements Runnable {
 		run();
 	}
 	
-	public void update() {
-		panel.update();
+	public void update(int state) {
+		panel.update(state);
 	}
 	
 	public void updateValues() {
@@ -74,7 +74,7 @@ public class MainFrame extends JFrame implements Runnable {
 		if(wp != null) remove(wp);
 		panel = new MatchPanel(m, controller);
 		add(panel);
-		update();
+		update(-1);
 	}
 
 	@Override

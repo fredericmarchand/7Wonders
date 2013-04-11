@@ -136,14 +136,13 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public ArrayList<Resources> needToChooseResources() 
 	{
-		System.out.println("=====================================need");
 		ArrayList<Resources> resources = new ArrayList<Resources>();
 		if ( match.getAge() > 3 || 
-				(match.getTurn() == 7 && user.getCards().isEmpty())  ) 
+				(match.getTurn() == 7 && user.getCards().isEmpty()) )//|| user.getLastMsgID() != CommandMessage.CHOSEN_DISCARDED_TYPE ) 
 		{
-			System.out.println("=============================================================rejecting chhose reoasurecw");
 			return resources;
 		}
+		System.out.println("=====================================need");
 		for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )

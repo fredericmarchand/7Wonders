@@ -93,7 +93,7 @@ public class User {
 				System.out.println("==================================================================MSGID " + msg.getMsgType());
 			if ( msg.getMsgType() == CommandMessage.CHOSEN_DISCARDED_TYPE ) callupdate = true;
 			client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
-			if ( client.getMainFrame() != null )
+			if ( client.getMainFrame() != null && msg.getMsgType() != CommandMessage.RESOURCE_CHOICE_TYPE )
 				client.getMainFrame().pause();
 		}
 		//System.out.println("[CLIENT ------ USER] MClient : \t" + client );
@@ -102,6 +102,7 @@ public class User {
 	
 	public void updateMatch(Match2 match)
 	{
+		currentMatch.setState(match.getState());
 		currentMatch.setAge(match.getAge());
 		currentMatch.setTurn(match.getTurn());
 		currentMatch.getDiscardedCards().clear();
@@ -150,7 +151,7 @@ public class User {
 					client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
 				}
 				if ( callupdate )
-					client.getMainFrame().update();
+					client.getMainFrame().update(currentMatch.getState());
 				else client.getMainFrame().updateValues();
 				
 			}

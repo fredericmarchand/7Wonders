@@ -18,6 +18,7 @@ public class Match2 {
 	private ArrayList<Structure> age1Deck, age2Deck, age3Deck, discarded;
 	private long localPlayerID;
 	private boolean calcCalled;
+	private int state;
 
 	//unused constructor
 	public Match2(ArrayList<User> users)
@@ -33,6 +34,7 @@ public class Match2 {
 		}
 		age = 1;
 		turn = 1;
+		state = 0;
 	}
 	
 	//client side constructor
@@ -64,6 +66,16 @@ public class Match2 {
 //		{
 //			p.initAge();
 //		}
+	}
+	
+	public int getState()
+	{
+		return state;
+	}
+	
+	public void setState(int s)
+	{
+		state = s;
 	}
 	
 	public ArrayList<Object> getParameters()
@@ -724,10 +736,12 @@ public class Match2 {
 		{
 			case CommandMessage.RESOURCE_CHOICE_TYPE:
 				beginningOfTurnEffects(messages);
+				state = CommandMessage.MOVE_TYPE;
 				break;
 					
 			case CommandMessage.MOVE_TYPE:
 				runTurns(messages);
+				state = CommandMessage.CHOSEN_DISCARDED_TYPE;
 				break;
 				
 			case CommandMessage.CHOSEN_GUILD_TYPE:
@@ -735,6 +749,7 @@ public class Match2 {
 				if ( age == 4 )
 				{
 					serverHandleChosenGuilds(messages);
+					state = CommandMessage.SCIENTIFIC_SYMBOL_TYPE;
 					age += 1;
 				}
 				break;
@@ -743,6 +758,7 @@ public class Match2 {
 				//System.out.println("=======================GUILD");
 				if ( age < 4 )
 					serverHandleDiscardedChoice(messages);
+					state = CommandMessage.RESOURCE_CHOICE_TYPE;
 				break;
 					
 			case CommandMessage.SCIENTIFIC_SYMBOL_TYPE:

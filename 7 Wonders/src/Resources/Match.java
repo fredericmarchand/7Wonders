@@ -198,8 +198,13 @@ public class Match {
 //				for(Object i : o )
 //					System.out.println("[SERVER] Command Msg Matrix: \t " + i);
 		cmdMsgMatrix.get((m.getMsgType())).put(index, m);
-		if(cmdMsgMatrix.get((m.getMsgType())).size()==human_connection_count){
-			controller.dispatch((ArrayList<CommandMessage>)cmdMsgMatrix.get((m.getMsgType())).values());
+		if(cmdMsgMatrix.get((m.getMsgType())).values().size()==human_connection_count){
+			ArrayList<CommandMessage> ar = new ArrayList<CommandMessage>();
+			for ( CommandMessage msg: cmdMsgMatrix.get((m.getMsgType())).values() )
+			{
+				ar.add(msg);
+			}
+			controller.dispatch(ar);
 			//System.out.println("[SERVER] LIST SIZE: \t " 
 			//+ cmdMsgMatrix.get((m.getMsgType())).size());
 			//for(Object o : cmdMsgMatrix.get((m.getMsgType())))
