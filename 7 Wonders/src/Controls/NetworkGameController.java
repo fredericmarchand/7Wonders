@@ -140,7 +140,11 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		ArrayList<Resources> resources = new ArrayList<Resources>();
 		if ( match.getAge() > 3 || 
 				(match.getTurn() == 7 && user.getCards().isEmpty()) || 
-				user.getLastMsgID() == CommandMessage.RESOURCE_CHOICE_TYPE ) return resources;
+				user.getLastMsgID() == CommandMessage.RESOURCE_CHOICE_TYPE ) 
+		{
+			System.out.println("=============================================================rejecting chhose reoasurecw");
+			return resources;
+		}
 		for ( Structure s: user.getWonderBoard().getYellowCards() )
 		{
 			for ( SpecialEffect se: s.getEffects() )
@@ -234,18 +238,15 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override //have to check if empty
 	public ArrayList<Structure> needToChooseDiscarded() 
 	{
+		if ( user.getLastMsgID() != CommandMessage.MOVE_TYPE ) return new ArrayList<Structure>();
 		for ( WonderBoardStage stg: user.getWonderBoard().getStages() )
 		{
-			//System.out.println("===for each stage");
 			if ( stg.isBuilt() )
 			{
-				//System.out.println("===if its built");
 				for ( SpecialEffect se: stg.getEffects() )
 				{
-					//System.out.println("===effect id " + se.getID());
 					if ( se.getID() == BuildDiscardedCard.BuildDiscardedCardID )
 					{
-						//System.out.println("===" + se.isUsedUp());
 						if ( !se.isUsedUp() )
 						{
 							return match.getDiscardedCards();

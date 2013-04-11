@@ -297,15 +297,17 @@ public class MatchPanel extends JPanel implements Runnable {
 		cardsPanel.pause();
 	}
 	
-	public Resources nextResource() {
-		if(needResources.size() > 0)
-			return needResources.remove(0);
-		else {
-			controller.resourceChosen(pickedResources);
-			if(!pickedResources.isEmpty()) cardsPanel.pause();
-			pickedResources.clear();
-			return null;
-		}
+	 public Resources nextResource() {
+		 if(needResources.size() > 0)
+		 return needResources.remove(0);
+		 else {
+			 if(!pickedResources.isEmpty()) {
+				 controller.resourceChosen(pickedResources);
+				 cardsPanel.pause();
+				 pickedResources.clear();
+			 }
+			 return null;
+		 }
 	}
 	
 	public void resourceChosen(Resources r) {
