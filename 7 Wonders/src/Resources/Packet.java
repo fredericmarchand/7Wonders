@@ -32,7 +32,8 @@ public class Packet {
 		public boolean getAccepted(){return accepted;}
 		public void setAccepted(boolean b){accepted = b;}
 		public void setIDValue(long id){idvalue = id;}
-		public long getIDValue(){return idvalue;}				
+		public long getIDValue(){return idvalue;}
+
 	}
 	public static class Packet4Object{
 		private Object o;
@@ -135,6 +136,11 @@ public class Packet {
 	}
 	public static class Packet15MatchDisconnect{}
 	public static class Packet16ForcefulDisconnect{}
+	public static class Packet17ConnectionCount{
+		private int connectedCount = 0;
+		public int getConCount(){return connectedCount;}
+		public void setConCount(int n){connectedCount = n;}
+	}
 
 }
 

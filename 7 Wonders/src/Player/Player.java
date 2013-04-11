@@ -320,8 +320,8 @@ public class Player extends User {
 				if ( freeConstructionPermission )
 				{
 					useFreeBuild();
+					freeConstructionPermission = false;
 				}
-				freeConstructionPermission = false;
 				wonderBoard.buildStructure(chosenCard);
 				cards.remove(chosenCardIndex);
 				resources.deductCoins(chosenCard.getResourceCost().getCoins());
@@ -412,7 +412,7 @@ public class Player extends User {
 	}
 	
 	
-	public boolean freeBuild()
+	public boolean canFreeBuild()
 	{
 		for ( WonderBoardStage stg: wonderBoard.getStages() )
 		{
@@ -440,6 +440,7 @@ public class Player extends User {
 				{
 					if ( se.getID() == FreeConstruction.FreeConstructionID )
 					{
+						System.out.println("=====================USE FREE BUILD=====");
 						se.use();
 					}
 				}
@@ -518,7 +519,7 @@ public class Player extends User {
 	//checks if his neighbors have enough resources to fulfill the missing ones and if the player can afford to pay for them
 	public boolean neighborsHaveResources(Player leftNeighbor, Player rightNeighbor, Resources required)
 	{
-		if ( required.getCoins() == required.getCount() ) return false;
+		//if ( required.getCoins() == required.getCount() ) return false;
 		
 		TradingPerks sumup;
 		ArrayList<TradingPerks> perks = new ArrayList<TradingPerks>();
@@ -601,6 +602,7 @@ public class Player extends User {
 		unavailableResources = p.unavailableResources;
 		chosenCard = p.chosenCard;
 		chosenCardIndex = p.chosenCardIndex;
+		freeConstructionPermission = p.freeConstructionPermission;
 		cards.clear();
 		cards.addAll(p.getCards());
 		wonderBoard.updateWonderBoard(p.getWonderBoard());
