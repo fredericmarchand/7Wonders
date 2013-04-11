@@ -86,7 +86,7 @@ public class User {
 	
 	public void sendCommandMessage()
 	{		
-		if ( client != null && msg != null && !pause && msg.getMsgType() != lastMessageID )
+		if ( client != null && msg != null && client.getMainFrame()!=null && !client.getMainFrame().isPaused() && msg.getMsgType() != lastMessageID )
 		{
 			lastMessageID = msg.getMsgType();
 			System.out.println("==================================================================MSGID " + msg.getMsgType());
@@ -120,8 +120,7 @@ public class User {
 	{
 		if ( encoding.size() == 0 ) return;
 		System.out.println("====================================================RECEIVE");
-		if ( client.getMainFrame() != null )
-			client.getMainFrame().unpause();
+		
 		if ( currentMatch == null )
 		{
 			currentMatch = SevenWondersProtocol.decodeMatch(encoding);
@@ -135,6 +134,8 @@ public class User {
 			SevenWondersProtocol.assignUsernamesAndIDs(mat, names, ids);
 			mat.setLocalPlayerID(ID);
 			updateMatch(mat);
+			if ( client.getMainFrame() != null )
+				client.getMainFrame().unpause();
 			pause = false;
 			if ( client != null && client.getMainFrame() != null )
 			{
