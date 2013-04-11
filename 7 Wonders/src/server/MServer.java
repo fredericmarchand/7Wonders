@@ -82,7 +82,7 @@ public class MServer {
 							System.out.println("[SERVER] No one in match  - DELETED ");
 						}
 					}
-				}else if(m.get_inProgress()){
+				}else if(m.get_inProgress()||((long)k)==m.getHostID()){
 					Packet16ForcefulDisconnect packet = new Packet16ForcefulDisconnect();
 					for(Connection cc : m.getConnections())
 						cc.sendTCP(packet);
