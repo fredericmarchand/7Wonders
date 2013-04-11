@@ -1,6 +1,5 @@
 package view.menu;
 
-
 import image.Images;
 
 import javax.swing.*;

@@ -253,6 +253,12 @@ public class CardsPanel extends JPanel {
 		};
 	}
 	
+	 public void pause() {
+		 pausedPanel.setSize(1274 - (2*((7-cards.size()) * 91)), 280);
+		 pausedPanel.setLocation(((7-cards.size()) * 91), 0);
+		 pausedPanel.setVisible(true);
+	}
+	
 	public void unpause() {
 		pausedPanel.setVisible(false);
 	}

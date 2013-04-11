@@ -53,13 +53,13 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	}
 
 	@Override
-	public void buildStructure() 
+	public void buildStructure(int choice) 
 	{
 		int ans = user.canBuild(match.getLeftNeighbor(user), match.getRightNeighbor(user));
 		switch ( ans )
 		{
 		case 1:
-			match.initMove(user, 1, 2);
+			match.initMove(user, 1, choice);
 			break;
 		case 2:
 			match.initMove(user, 1, -1);
@@ -76,13 +76,13 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	}
 
 	@Override
-	public void buildWonderStage() 
+	public void buildWonderStage(int choice) 
 	{
 		int ans = user.canBuildStage(match.getLeftNeighbor(user), match.getRightNeighbor(user));
 		switch ( ans )
 		{
 		case 1:
-			match.initMove(user, 2, 2);
+			match.initMove(user, 2, choice);
 			break;
 		case 2:
 			match.initMove(user, 2, -1);
