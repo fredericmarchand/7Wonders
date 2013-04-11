@@ -244,7 +244,7 @@ public class MatchPanel extends JPanel implements Runnable {
 			  }
 		  }
 
-		  if(state == CommandMessage.CHOSEN_GUILD_TYPE) {
+		  //if(state == CommandMessage.CHOSEN_GUILD_TYPE) {
 			  // Choose guild to copy
 			  needGuild = controller.needToChooseCopyGuild();
 			  if(!needGuild.isEmpty()) {
@@ -256,13 +256,13 @@ public class MatchPanel extends JPanel implements Runnable {
 			  } else {
 				  controller.chosenGuild(new Structure());
 			  }
-		  }
+		  //}
 
-		  if(state == CommandMessage.SCIENTIFIC_SYMBOL_TYPE) {
+		  //if(state == CommandMessage.SCIENTIFIC_SYMBOL_TYPE) {
 			  // Choose Science
 			  needScience = controller.needToChooseScienceSymbol();
 			  if(nextScience() != null) scp.setVisible(true);
-		  }
+		 // }
 	 }
 	
 	//update function that wont cause an infinite loop on receive
