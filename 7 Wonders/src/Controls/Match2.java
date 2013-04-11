@@ -588,8 +588,7 @@ public class Match2 {
 	{
 		CommandMessage msg = new CommandMessage();
 		msg.setPlayerID(p.getID());
-		if ( age > 3 ) 
-			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE + 1);
+		if ( age > 3 ) return;
 		else msg.setMsgType(CommandMessage.MOVE_TYPE);
 		msg.setAction(move);
 		msg.setCardID(p.getChosenCard().getID());
