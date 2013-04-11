@@ -58,12 +58,6 @@ public class ScienceChoicePanel extends JPanel {
 		
 		addMouseListener(buildMouseAdapter());
 		addMouseMotionListener(buildMouseMotionAdapter());
-		
-		update();
-	}
-	
-	public void update() {
-		
 	}
 
 	private MouseAdapter buildMouseAdapter() {

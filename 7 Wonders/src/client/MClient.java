@@ -89,16 +89,6 @@ public class MClient {
 		matchList = list;
 	}
 
-	public void waiting(){
-		if(inMatch == false && inWait == false){
-			inWait = true;
-			mainframe.launchWaiting(link.launchWaiting());
-			link.updateWaiting(curr, total);
-		} else if(inMatch==false){
-			link.updateWaiting(curr, total);
-		}
-	}
-	
 	public ArrayList<String> getMatchList() {
 		return matchList;
 	}
@@ -150,8 +140,6 @@ public class MClient {
 
 	public void sendCommandMessage(ArrayList<Integer> m, boolean last){
 		System.out.println("[CLIENT] Sending command message \n\t" + m);
-		//for(Integer i : m)
-		//	System.out.println(i);
 		Packet8ClientResponse packet = new Packet8ClientResponse();
 		packet.setCID(ID);
 		packet.setMID(matchID);
@@ -186,25 +174,21 @@ public class MClient {
 			quit.setUName(username);
 			client.sendTCP(quit);
 			matchID = 0000; // no longer in a game
+			inWait = false;
 			createUser();
 			host=false;
 			sendMatchListRequest();
 			if(inMatch)
 				mainframe.hideMatchPanel();
-			inMatch = false;
-			inWait = false;
+			inMatch = false;		
 			mainframe.hideWaiting();
 			mainframe.launchLobby(link.launchLobby());
-			mainframe.updateLobbyPanel();
-			
-		
+			mainframe.updateLobbyPanel();		
 	}
 
 	public void sendChat(String s) {
 		Packet6ChatMsg msg = new Packet6ChatMsg();
-		//String _msg = ("[" + username + "." + ID + "]" + " " + s);
-		String _msg = ("[" + username + "]: " + s);
-		msg.setMsg(_msg);
+		msg.setMsg(s);
 		msg.setCID(ID);
 		msg.setuName(username);
 		msg.setMID(matchID);
@@ -232,6 +216,18 @@ public class MClient {
 
 	}
 	
+
+	public void waiting(){
+		if(inMatch == false && inWait == false){
+			inWait = true;
+			mainframe.launchWaiting(link.launchWaiting());
+			link.updateWaiting(curr, total);
+		} else if(inMatch==false){
+			link.updateWaiting(curr, total);
+		}
+	}
+	
+	
 	//signal user
 
 	public void startMatch() {
@@ -240,8 +236,7 @@ public class MClient {
 		inWait = false;
 		if(user==null)System.out.println("[CLIENT] User is null");
 		user.startMatch();
-		mainframe.updateMatchPanel();
-		
+		mainframe.updateMatchPanel();		
 	}
 	
 	public void pushToUser(ArrayList<Integer> devonsShittyList1,
@@ -254,19 +249,10 @@ public class MClient {
 	// return to lobby
 	public void returnToLobby(){};
 	public void pushUserQuit(){
-		
 		for(String s : matchList)
 			System.out.println("[CLIENT] MATCH LIST:\t" + s);
 		link.killChatFrame();
-		//mainframe.hideMatchPanel();
-		
-		//if user has not joined a game
-		//error going from match lobby to game lobby
-		//mainframe.hideMatchPanel();
-		//mainframe.launchLobby(link.launchLobby());
-		
 		link.updateLobby(matchList);
-		
 	}
 	
 

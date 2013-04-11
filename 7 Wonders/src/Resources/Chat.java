@@ -15,8 +15,8 @@ public class Chat {
 		return client;
 	}
 	
-	public void addChat(String s){
-		chatFrame.appendChat(s);
+	public void addChat(String u, String m){
+		chatFrame.appendChat(u, m);
 	}
 	
 	public void launchChatFrame(boolean b){

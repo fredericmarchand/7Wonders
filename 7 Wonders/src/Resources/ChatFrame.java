@@ -91,6 +91,7 @@ public class ChatFrame extends JFrame {
 					//CLIENT KILL CONNECTION CLOSE EXTERNAL CONNECTIONS
 					chatHub.getClient().quitMatch();
 				}
+			
 			}
 		});	
 
@@ -108,7 +109,7 @@ public class ChatFrame extends JFrame {
 		
 	}
 
-	public void appendChat(String c) {
+	public void appendChat(String u, String m) {
 		SimpleAttributeSet me = new SimpleAttributeSet();
 		StyleConstants.setForeground(me, Color.RED);
 		StyleConstants.setBackground(me, Color.LIGHT_GRAY);
@@ -118,9 +119,8 @@ public class ChatFrame extends JFrame {
 		StyleConstants.setBackground(them, Color.LIGHT_GRAY);
 		
 		try {
-		    int pos = c.indexOf(']', 0);
-			doc.insertString(doc.getLength(), c.substring(0, pos+1), c.substring(1, username.length()+1).equals(username) ? me : them);
-			doc.insertString(doc.getLength(), c.substring(pos+1) + newline, null);
+			doc.insertString(doc.getLength(), "[" + u + "]", u.equals(username) ? me : them);
+			doc.insertString(doc.getLength(), ": " + m + newline, null);
 		} catch (BadLocationException e) {
 			System.out.println(e);
 		}
