@@ -281,7 +281,6 @@ public class MClient {
 		kryo.register(Packet17ConnectionCount.class);
 		
 		kryo.register(java.util.ArrayList.class);
-		kryo.register(Match1.class);	
 		kryo.register(Match2.class);
 		kryo.register(User.class);
 
