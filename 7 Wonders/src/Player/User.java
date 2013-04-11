@@ -101,9 +101,9 @@ public class User {
 		currentMatch.setTurn(match.getTurn());
 		currentMatch.getDiscardedCards().clear();
 		currentMatch.getDiscardedCards().addAll(match.getDiscardedCards());
-		System.out.println(match.getDiscardedCards().size());
-		for ( Structure s: match.getDiscardedCards() )
-			System.out.println(s.getName());
+		//System.out.println(match.getDiscardedCards().size());
+		//for ( Structure s: match.getDiscardedCards() )
+		//	System.out.print(s.getName());
 		currentMatch.setNumPlayers(match.getNumPlayers());
 		currentMatch.setLocalPlayerID(match.getLocalPlayerID());
 		for ( Player p: currentMatch.getPlayers() )
@@ -115,7 +115,6 @@ public class User {
 	public void receive(ArrayList<Integer> encoding, ArrayList<Long> ids, ArrayList<String> names)
 	{
 		if ( encoding.size() == 0 ) return;
-		System.out.println("====================================================RECEIVE");
 		
 		if ( currentMatch == null )
 		{
