@@ -470,10 +470,18 @@ public class CardHandler {
 //		
 		//long n = 235395830;
 		//System.out.println(n&0xFFFF);
-		CommandMessage msg = new CommandMessage();
-		msg.setPlayerID(654419);
-		CommandMessage g = SevenWondersProtocol.decodeCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg));
-		System.out.println(g.getPlayerID());
+		//CommandMessage msg = new CommandMessage();
+		//msg.setPlayerID(654419);
+		//CommandMessage g = SevenWondersProtocol.decodeCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg));
+		//System.out.println(g.getPlayerID());
+
+		ArrayList< ArrayList<Integer>> cmdMsgMatrix;
+		cmdMsgMatrix = new ArrayList<ArrayList<Integer>>();
+		for(int i = 0; i<10;i++)
+			cmdMsgMatrix.add(new ArrayList<Integer>());
+		cmdMsgMatrix.get(0).add(1, 0);
+		System.out.println(cmdMsgMatrix.get(0).size());
+		
 		
 	}
 

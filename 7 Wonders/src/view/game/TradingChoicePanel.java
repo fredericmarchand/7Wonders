@@ -77,17 +77,17 @@ public class TradingChoicePanel extends JPanel {
 				if(e.getPoint().x > 516 && e.getPoint().y > 456
 				&& e.getPoint().x < 564 && e.getPoint().y < 504) {
 					if(type == 1) matchPanel.buildStructure(10);
-					if(type == 2) matchPanel.buildStructure(10);
+					if(type == 2) matchPanel.buildWonderStage(10);
 					setVisible(false);
 				} else if(e.getPoint().x > 716 && e.getPoint().y > 456
 					   && e.getPoint().x < 764 && e.getPoint().y < 504) {
 					if(type == 1) matchPanel.buildStructure(11);
-					if(type == 2) matchPanel.buildStructure(11);
+					if(type == 2) matchPanel.buildWonderStage(11);
 					setVisible(false);
 				} else if(e.getPoint().x > 616 && e.getPoint().y > 506
 					   && e.getPoint().x < 664 && e.getPoint().y < 554) {
 					if(type == 1) matchPanel.buildStructure(12);
-					if(type == 2) matchPanel.buildStructure(12);
+					if(type == 2) matchPanel.buildWonderStage(12);
 					setVisible(false);
 				}
 				matchPanel.repaint();

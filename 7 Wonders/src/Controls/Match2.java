@@ -171,6 +171,16 @@ public class Match2 {
 		return players;
 	}
 	
+	public int getIndexOfPlayer(long id)
+	{
+		for ( int i = 0; i < players.size(); ++i )
+		{
+			if ( id == players.get(i).getID() )
+				return i;
+		}
+		return -1;
+	}
+	
 	public void addPlayer(long id, String s)
 	{
 		players.add(new Player(s, id));

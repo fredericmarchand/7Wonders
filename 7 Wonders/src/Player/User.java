@@ -89,7 +89,8 @@ public class User {
 		if ( client != null && msg != null && client.getMainFrame()!=null && !client.getMainFrame().isPaused() && msg.getMsgType() != lastMessageID )
 		{
 			lastMessageID = msg.getMsgType();
-			System.out.println("==================================================================MSGID " + msg.getMsgType());
+			if (msg.getMsgType() == 0)
+				System.out.println("==================================================================MSGID " + msg.getMsgType());
 			if ( msg.getMsgType() == CommandMessage.CHOSEN_DISCARDED_TYPE ) callupdate = true;
 			client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
 			if ( client.getMainFrame() != null )

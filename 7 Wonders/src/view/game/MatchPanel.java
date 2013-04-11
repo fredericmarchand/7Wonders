@@ -298,10 +298,10 @@ public class MatchPanel extends JPanel implements Runnable {
 		 if(needResources.size() > 0)
 		 return needResources.remove(0);
 		 else {
-			 if(!pickedResources.isEmpty()) {
+			 //if(!pickedResources.isEmpty()) {
 				 controller.resourceChosen(pickedResources);
 				 pickedResources.clear();
-			 }
+			// }
 			 return null;
 		 }
 	}
