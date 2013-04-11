@@ -310,7 +310,7 @@ public class Match2 {
 			}
 		}
 		
-		endOfTurn();			
+		endOfTurn();	
 	}
 	
 	public void cardCoinBonusActivation(Structure s, Player p)
@@ -326,6 +326,7 @@ public class Match2 {
 	{
 		for ( Player p: plyrs )
 		{
+			p.setFreePermission(false);
 			for ( Structure s : p.getWonderBoard().getRedCards() )
 				cardCoinBonusActivation(s, p);
 			

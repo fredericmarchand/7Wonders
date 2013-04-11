@@ -440,7 +440,7 @@ public class Player extends User {
 				{
 					if ( se.getID() == FreeConstruction.FreeConstructionID )
 					{
-						System.out.println("=====================USE FREE BUILD=====");
+						//System.out.println("=====================USE FREE BUILD=====");
 						se.use();
 					}
 				}
