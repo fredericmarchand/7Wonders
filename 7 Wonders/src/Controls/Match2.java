@@ -729,13 +729,16 @@ public class Match2 {
 		switch ( type )
 		{
 			case CommandMessage.RESOURCE_CHOICE_TYPE:
+				System.out.println("==========================================="+ state + "==========="+age);
 				beginningOfTurnEffects(messages);
 				state = CommandMessage.MOVE_TYPE;
 				break;
 					
 			case CommandMessage.MOVE_TYPE:
+				System.out.println("==========================================="+ state + "==========="+age);
+				if ( turn == 7 ) state = CommandMessage.RESOURCE_CHOICE_TYPE;
+				else state = CommandMessage.CHOSEN_DISCARDED_TYPE;
 				runTurns(messages);
-				state = CommandMessage.CHOSEN_DISCARDED_TYPE;
 				break;
 				
 			case CommandMessage.CHOSEN_GUILD_TYPE:
@@ -749,8 +752,11 @@ public class Match2 {
 				
 			case CommandMessage.CHOSEN_DISCARDED_TYPE:
 				if ( age < 4 )
+				{
+					System.out.println("==========================================="+ state + "==========="+age);
 					serverHandleDiscardedChoice(messages);
 					state = CommandMessage.RESOURCE_CHOICE_TYPE;
+				}
 				break;
 					
 			case CommandMessage.SCIENTIFIC_SYMBOL_TYPE:
@@ -822,16 +828,7 @@ public class Match2 {
 			incPlayerAges();
 			turn = 1;
 			discardAllPlayersCards();
-			//if ( getAge() == 2 ) 
-			//{
-			if ( age < 4 )
-				CardHandler.DistributeCards(getPlayers(), getDeck());
-			//}
-			//if ( getAge() == 3 ) CardHandler.DistributeCards(getPlayers(), getDeck());
-			//if ( getAge() == 4 ) 
-			//{
-				//discardAllPlayersCards();
-			//}
+			if ( age < 4 ) CardHandler.DistributeCards(getPlayers(), getDeck());
 		}
 		else 
 		{

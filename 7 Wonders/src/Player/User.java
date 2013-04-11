@@ -150,9 +150,9 @@ public class User {
 					msg.setMsgType(CommandMessage.MOVE_TYPE);
 					client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
 				}
-				if ( callupdate )
+				//if ( callupdate )
 					client.getMainFrame().update(currentMatch.getState());
-				else client.getMainFrame().updateValues();
+				//else client.getMainFrame().updateValues();
 				
 			}
 		}
