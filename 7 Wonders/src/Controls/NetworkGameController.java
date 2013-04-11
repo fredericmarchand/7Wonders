@@ -139,8 +139,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		System.out.println("=====================================need");
 		ArrayList<Resources> resources = new ArrayList<Resources>();
 		if ( match.getAge() > 3 || 
-				(match.getTurn() == 7 && user.getCards().isEmpty()) || 
-				user.getLastMsgID() == CommandMessage.RESOURCE_CHOICE_TYPE ) 
+				(match.getTurn() == 7 && user.getCards().isEmpty())  ) 
 		{
 			System.out.println("=============================================================rejecting chhose reoasurecw");
 			return resources;
