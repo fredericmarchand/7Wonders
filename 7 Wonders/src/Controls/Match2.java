@@ -602,11 +602,13 @@ public class Match2 {
 		
 	public void initMove(Player p, int move, int neib)
 	{
+		if ( age == 3 ) return;
 		CommandMessage msg = new CommandMessage();
 		msg.setPlayerID(p.getID());
-		if ( age > 3 ) 
-			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE + 1);
-		else msg.setMsgType(CommandMessage.MOVE_TYPE);
+		//if ( age > 3 ) 
+		//	msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE + 1);
+		//else 
+		msg.setMsgType(CommandMessage.MOVE_TYPE);
 		msg.setAction(move);
 		msg.setCardID(p.getChosenCard().getID());
 		msg.setPreference(neib);	
@@ -630,7 +632,7 @@ public class Match2 {
 		
 	public void initScienceChoice(Player p, ArrayList<ScientificSymbols> symbs)
 	{
-		if ( age == 5 )
+		if ( age == 6 )
 		{
 			CommandMessage msg = new CommandMessage();
 			msg.setPlayerID(p.getID());
@@ -644,7 +646,7 @@ public class Match2 {
 	
 	public void initGuildChoice(Player p, Structure s)
 	{
-		if ( age == 4 )
+		if ( age == 5 )
 		{
 			CommandMessage msg = new CommandMessage();
 			msg.setPlayerID(p.getID());
