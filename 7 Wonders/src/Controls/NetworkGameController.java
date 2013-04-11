@@ -257,7 +257,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	@Override
 	public void chosenDiscarded(Structure g) 
 	{
-		//if ( user.getLastMsgID() == CommandMessage.MOVE_TYPE )
 		match.initChosenDiscarded(user, g);
 	}	
 
