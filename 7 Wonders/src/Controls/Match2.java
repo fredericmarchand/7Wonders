@@ -728,13 +728,13 @@ public class Match2 {
 		switch ( type )
 		{
 			case CommandMessage.RESOURCE_CHOICE_TYPE:
-				System.out.println("==========================================="+ state + "==========="+age+ "==========="+turn);
+				//System.out.println("==========================================="+ state + "==========="+age+ "==========="+turn);
 				beginningOfTurnEffects(messages);
 				state = CommandMessage.MOVE_TYPE;
 				break;
 					
 			case CommandMessage.MOVE_TYPE:
-				System.out.println("==========================================="+ state + "==========="+age+ "==========="+turn);
+				//System.out.println("==========================================="+ state + "==========="+age+ "==========="+turn);
 				state = CommandMessage.CHOSEN_DISCARDED_TYPE;
 				runTurns(messages);
 				break;
@@ -751,7 +751,7 @@ public class Match2 {
 			case CommandMessage.CHOSEN_DISCARDED_TYPE:
 				if ( age < 4 )
 				{
-					System.out.println("==========================================="+ state + "==========="+age+ "==========="+turn);
+					//System.out.println("==========================================="+ state + "==========="+age+ "==========="+turn);
 					serverHandleDiscardedChoice(messages);
 					state = CommandMessage.RESOURCE_CHOICE_TYPE;
 					if ( turn == 7 )
@@ -788,7 +788,6 @@ public class Match2 {
 				
 				//Scientific
 				p.addVictoryPoints(p.getScientificSymbols().victoryPointsValue());
-				//System.out.println("======================Science vicpts: " + p.getScientificSymbols().victoryPointsValue());
 			}
 		}
 	}
@@ -824,8 +823,6 @@ public class Match2 {
 			}
 			
 			PlayerInteraction.SettleMilitaryConflicts(getPlayers(), getAge());
-			//if ( age == 3 )
-			//	age += 1;
 			incPlayerAges();
 			turn = 1;
 			discardAllPlayersCards();
@@ -862,7 +859,7 @@ public class Match2 {
 	{
 		for ( Player p : players )
 		{
-			if ( !p.canPlayLastCard() )
+			if ( !p.canPlayLastCard() || (turn == 6 && age == 3) )
 				p.discardHand(discarded);
 		}
 	}

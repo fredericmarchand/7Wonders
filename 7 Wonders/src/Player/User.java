@@ -20,7 +20,6 @@ public class User {
 	private boolean lastMessage;
 	private boolean pause;
 	private int lastMessageID;
-	private boolean callupdate;
 	
 	//default constructor
 	public User(){}
@@ -29,7 +28,6 @@ public class User {
 		ID = id;
 		username = name;
 		pause = false;
-		callupdate = true;
 	}
 	
 	public String getUsername()
@@ -89,12 +87,8 @@ public class User {
 		if ( client != null && msg != null && client.getMainFrame()!=null && !client.getMainFrame().isPaused() && msg.getMsgType() != lastMessageID )
 		{
 			lastMessageID = msg.getMsgType();
-			if (msg.getMsgType() == 0)
-				System.out.println("==================================================================MSGID " + msg.getMsgType());
-			if ( msg.getMsgType() == CommandMessage.CHOSEN_DISCARDED_TYPE ) callupdate = true;
 			client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
-			if ( client.getMainFrame() != null )
-				client.getMainFrame().pause();
+			if ( client.getMainFrame() != null ) client.getMainFrame().pause();
 		}
 		//System.out.println("[CLIENT ------ USER] MClient : \t" + client );
 		//System.out.println("Send Command Message: " + msg);
@@ -150,18 +144,11 @@ public class User {
 					msg.setMsgType(CommandMessage.MOVE_TYPE);
 					client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
 				}
-				//if ( callupdate )
-					client.getMainFrame().update(currentMatch.getState());
-				//else client.getMainFrame().updateValues();
+				client.getMainFrame().update(currentMatch.getState());
 				
 			}
 		}
 	}
-	
-	//public void returnToLobby()
-	//{
-	//	client.returnToLobby();
-	//}
 	
 	public void startMatch()
 	{

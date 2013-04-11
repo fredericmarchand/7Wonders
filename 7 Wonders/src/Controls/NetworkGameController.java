@@ -282,11 +282,6 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 		match.initResourceChoice(user, resources);
 	}
 	
-	public void callGarbageTruck()
-	{
-		frame.dispose();
-	}
-	
 	@Override
 	public boolean canBuildForFree() 
 	{
