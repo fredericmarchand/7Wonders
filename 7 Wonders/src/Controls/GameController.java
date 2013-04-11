@@ -206,6 +206,17 @@
 //		return resources;
 //	}
 //
+//	@Override
+//	public void needToChooseTradingPref() 
+//	{
+//		
+//	}
+//
+//	@Override
+//	public void chosenTradingPref(int t) 
+//	{
+//		
+//	}
 //
 //	@Override
 //	public boolean chooseCard(Structure s) 

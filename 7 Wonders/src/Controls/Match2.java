@@ -57,8 +57,13 @@ public class Match2 {
 		for ( Player p: players ) p.getOwnedResources().addCoins(3);
 		CardHandler.DistributeCards(players, age1Deck);
 		addInitialResources(players);
-		Collections.shuffle(players);
 		calcCalled = false;
+		
+		//Added to give players knowledge of the current age for AI choices
+//		for (Player p : players)
+//		{
+//			p.initAge();
+//		}
 	}
 	
 	public ArrayList<Object> getParameters()

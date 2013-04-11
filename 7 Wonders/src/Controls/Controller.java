@@ -30,6 +30,10 @@ public interface Controller {
 	ArrayList<Resources> needToChooseResources();
 	void resourceChosen(ArrayList<Resources> r);
 	
+	// int 0 = left, 1 = right, 2 = random
+	void needToChooseTradingPref();
+	void chosenTradingPref(int t);
+	
 	// Pass list of all guilds that can be selected
 	ArrayList<Structure> needToChooseCopyGuild();
 	void chosenGuild(Structure g);
