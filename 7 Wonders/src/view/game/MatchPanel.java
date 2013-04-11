@@ -283,21 +283,17 @@ public class MatchPanel extends JPanel implements Runnable {
 	
 	public void buildStructure(int type) {
 		if(type == 0) return;
-		if(type == 1) controller.buildStructure(-1);
-		if(type == 2) tcp.showGUI(1);
-		if(type >= 10) {
-			controller.buildStructure(type - 10);
-		}
+		if(type == 2) controller.buildStructure(-1);
+		if(type == 1) tcp.showGUI(1);
+		if(type >= 10) controller.buildStructure(type - 10);
 		cardsPanel.pause();
 	}
 	
 	public void buildWonderStage(int type) {
 		if(type == 0) return;
-		if(type == 1) controller.buildWonderStage(-1);
-		if(type == 2) tcp.showGUI(2);
-		if(type >= 10) {
-			controller.buildWonderStage(type - 10);
-		}
+		if(type == 2) controller.buildWonderStage(-1);
+		if(type == 1) tcp.showGUI(2);
+		if(type >= 10) controller.buildWonderStage(type - 10);
 		cardsPanel.pause();
 	}
 	
