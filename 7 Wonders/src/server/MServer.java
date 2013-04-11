@@ -46,7 +46,7 @@ public class MServer {
 			matchName = (e.getMatch_ID() + " | " + e.getHostUName()  
 					+ "'s match  | " + e.getConnectionCount() +
 					"/" + e.getMaxPlayerCount() + " players");
-			lobbyList.add(matchName);
+			if(e.get_inProgress()==false)lobbyList.add(matchName);
 		}
 		return lobbyList;		
 	}
