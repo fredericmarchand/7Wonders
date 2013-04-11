@@ -37,6 +37,7 @@ public class Chat {
 	
 	public void setStart(boolean b){
 		chatFrame.setStart(b);
+		
 	}
 
 }
