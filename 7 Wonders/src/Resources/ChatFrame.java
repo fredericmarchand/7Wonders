@@ -59,6 +59,7 @@ public class ChatFrame extends JFrame {
 		server = new SimpleAttributeSet();
 		StyleConstants.setForeground(server, new Color(0, 150, 0));
 		StyleConstants.setBackground(server, Color.LIGHT_GRAY);
+		StyleConstants.setBold(server, true);
 		
 		
 		txtField = new JTextField();
