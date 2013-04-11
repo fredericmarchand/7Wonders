@@ -285,7 +285,7 @@ public class NetworkGameController extends java.lang.Thread implements Controlle
 	public void resourceChosen(ArrayList<Resources> resources) 
 	{
 		System.out.println("=====================================chosen");
-		if ( user.getLastMsgID() == CommandMessage.CHOSEN_DISCARDED_TYPE )
+		//if ( user.getLastMsgID() == CommandMessage.CHOSEN_DISCARDED_TYPE )
 			match.initResourceChoice(user, resources);
 	}
 	

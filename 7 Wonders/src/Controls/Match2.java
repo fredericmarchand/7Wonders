@@ -616,7 +616,7 @@ public class Match2 {
 	{
 		if ( age == 5 )
 		{
-			System.out.println("========================================Im IN!");
+			//System.out.println("========================================Im IN!");
 			CommandMessage msg = new CommandMessage();
 			msg.setPlayerID(p.getID());
 			msg.setMsgType(CommandMessage.SCIENTIFIC_SYMBOL_TYPE);
