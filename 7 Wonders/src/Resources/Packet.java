@@ -138,8 +138,11 @@ public class Packet {
 	public static class Packet16ForcefulDisconnect{}
 	public static class Packet17ConnectionCount{
 		private int connectedCount = 0;
+		private int total = 0;
 		public int getConCount(){return connectedCount;}
 		public void setConCount(int n){connectedCount = n;}
+		public int getMaxCount(){return total;}
+		public void setMaxCount(int n){total = n;}
 	}
 
 }

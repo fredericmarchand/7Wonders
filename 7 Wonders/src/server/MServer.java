@@ -140,8 +140,10 @@ public class MServer {
 	}
 
 	public void updateMatchCount(Long mid){
+		System.out.println("[SYSTEM] sending match count");
 		Packet17ConnectionCount cPacket = new Packet17ConnectionCount();
 		cPacket.setConCount(findMatch(mid).getConnectionCount());
+		cPacket.setMaxCount(findMatch(mid).getMaxPlayerCount());
 		for (Connection x : findMatch(mid).getConnections())
 			x.sendTCP(cPacket);
 	}

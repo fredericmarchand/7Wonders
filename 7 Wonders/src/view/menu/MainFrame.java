@@ -87,6 +87,10 @@ public class MainFrame extends JFrame implements Runnable {
 		add(wp);
 	}
 	
+	public void hideWaiting() {
+		if(wp != null) remove(wp);
+	}
+	
 	public void launchCreateMenu(CreateMatchPanel p) {
 		if(cmp != null) remove(cmp);
 		cmp = p;
@@ -109,7 +113,9 @@ public class MainFrame extends JFrame implements Runnable {
 	public void updateMatchPanel(){
 		if(panel != null) panel.repaint();
 	}
-	
+	public void updateLobbyPanel(){
+		if(lp!=null) lp.repaint();
+	}
 	
 	public static void main(String args[]) {
 		new MainFrame();
