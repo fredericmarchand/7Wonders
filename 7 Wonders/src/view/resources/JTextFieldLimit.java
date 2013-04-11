@@ -24,8 +24,8 @@ public class JTextFieldLimit extends PlainDocument {
 		if ((getLength() + str.length()) <= limit) {
 			if (type == NUMBER_ONLY) {
 				if(str.equals("0") || str.equals("1") || str.equals("2") || str.equals("3") 
-					|| str.equals("4") || str.equals("5") || str.equals("6") || str.equals("7") 
-					|| str.equals("8") || str.equals("9"))
+			    || str.equals("4") || str.equals("5") || str.equals("6") || str.equals("7") 
+				|| str.equals("8") || str.equals("9"))
 					super.insertString(offset, str, attr);
 				else
 					return;
