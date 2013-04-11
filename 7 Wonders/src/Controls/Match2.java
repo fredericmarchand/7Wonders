@@ -592,7 +592,7 @@ public class Match2 {
 		msg.setFree(p.getFreePermission() ? 1 : 0);
 		p.setCommand(msg);
 		p.sendCommandMessage();
-		p.pause();
+		//p.pause();
 	}
 	
 	public void initResourceChoice(Player p, ArrayList<Resources> resChoices)
@@ -605,7 +605,7 @@ public class Match2 {
 		msg.setResourceChoices(resChoices);
 		p.setCommand(msg);
 		p.sendCommandMessage();
-		p.pause();
+		//p.pause();
 	}
 		
 	public void initScienceChoice(Player p, ArrayList<ScientificSymbols> symbs)
@@ -618,7 +618,7 @@ public class Match2 {
 			msg.setScientificSymbol(symbs);
 			p.setCommand(msg);
 			p.sendCommandMessage();
-			p.pause();
+			//p.pause();
 		}
 	}
 	
@@ -632,7 +632,7 @@ public class Match2 {
 			msg.setCardID(s.getID());
 			p.setCommand(msg);
 			p.sendCommandMessage();
-			p.pause();
+			//p.pause();
 		}
 	}
 	
@@ -644,7 +644,7 @@ public class Match2 {
 		msg.setCardID(s.getID());
 		p.setCommand(msg);
 		p.sendCommandMessage();
-		p.pause();
+		//p.pause();
 	}
 	//client moves
 	
