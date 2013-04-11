@@ -83,6 +83,7 @@ public class MServer {
 						}
 					}
 				}else if(m.get_inProgress()||((long)k)==m.getHostID()){
+					if(((long)k)==m.getHostID()) m.set_inProgress(true);
 					Packet16ForcefulDisconnect packet = new Packet16ForcefulDisconnect();
 					for(Connection cc : m.getConnections())
 						cc.sendTCP(packet);

@@ -65,6 +65,10 @@ public class Match {
 	public int getMaxPlayerCount() {
 		return MAX_PLAYER_COUNT;
 	}
+	
+	public void set_inProgress(boolean b) {
+		inProgress = b;
+	}
 
 	public boolean get_inProgress() {
 		return inProgress;
