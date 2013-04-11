@@ -92,7 +92,8 @@ public class User {
 			System.out.println("==================================================================MSGID " + msg.getMsgType());
 			if ( msg.getMsgType() == CommandMessage.CHOSEN_DISCARDED_TYPE ) callupdate = true;
 			client.sendCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg), lastMessage);
-			client.getMainFrame().pause();
+			if ( client.getMainFrame() != null )
+				client.getMainFrame().pause();
 		}
 		//System.out.println("[CLIENT ------ USER] MClient : \t" + client );
 		//System.out.println("Send Command Message: " + msg);
@@ -119,7 +120,8 @@ public class User {
 	{
 		if ( encoding.size() == 0 ) return;
 		System.out.println("====================================================RECEIVE");
-		client.getMainFrame().unpause();
+		if ( client.getMainFrame() != null )
+			client.getMainFrame().unpause();
 		if ( currentMatch == null )
 		{
 			currentMatch = SevenWondersProtocol.decodeMatch(encoding);
