@@ -796,7 +796,7 @@ public class Match2 {
 			discardAllPlayersCards();
 		if ( turn < 6 )
 			CardHandler.PassCardsToNeighbors(getPlayers(), getAge());
-		if ( turn == 7 )
+		if ( turn == 7 || age > 3 )
 		{
 			for ( Player p: players )
 			{
@@ -819,7 +819,7 @@ public class Match2 {
 				}
 			}
 			
-			PlayerInteraction.SettleMilitaryConflicts(getPlayers(), getAge());
+			PlayerInteraction.SettleMilitaryConflicts(getPlayers(), getAge()-1);
 			incPlayerAges();
 			turn = 1;
 			discardAllPlayersCards();
