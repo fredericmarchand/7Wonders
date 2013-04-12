@@ -135,9 +135,6 @@ public class NetworkListener extends Listener {
 					.handOff((ArrayList<Integer>)((Packet8ClientResponse) o).getObject(),
 							((Packet8ClientResponse) o).getCID(),
 							((Packet8ClientResponse) o).getBoolean());
-
-			for(Integer i : (ArrayList<Integer>)((Packet8ClientResponse) o).getObject())
-				System.out.println(i);
 		}
 
 		if (o instanceof Packet11ImmediateStart) {
