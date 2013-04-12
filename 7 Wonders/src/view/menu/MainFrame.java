@@ -4,7 +4,6 @@ import image.Images;
 
 import javax.swing.*;
 
-import view.game.LoadingPanel;
 import view.game.MatchPanel;
 
 import Controls.Match2;

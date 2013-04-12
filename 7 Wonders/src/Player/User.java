@@ -2,8 +2,6 @@ package Player;
 
 import java.util.ArrayList;
 
-import Structures.Structure;
-
 import client.MClient;
 import Controls.CommandMessage;
 import Controls.Match2;

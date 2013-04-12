@@ -49,6 +49,7 @@ public class MatchPanel extends JPanel implements Runnable {
 	private ScienceChoicePanel scp;
 	private FreeBuildPanel fbp;
 	private TradingChoicePanel tcp;
+	private GameOverPanel gop;
 	
 	private Controller controller;
 	
@@ -199,6 +200,10 @@ public class MatchPanel extends JPanel implements Runnable {
 		tcp = new TradingChoicePanel(this);
 		tcp.setVisible(false);
 		
+		gop = new GameOverPanel();
+		gop.setVisible(false);
+		
+		add(gop);
 		add(tcp);
 		add(scp);
 		add(rcp);
@@ -244,25 +249,26 @@ public class MatchPanel extends JPanel implements Runnable {
 			  }
 		  }
 
-		  //if(state == CommandMessage.CHOSEN_GUILD_TYPE) {
-			  // Choose guild to copy
-			  needGuild = controller.needToChooseCopyGuild();
-			  if(!needGuild.isEmpty()) {
-				  fcp.setCards(needGuild);
-				  fcp.setMode(FullscreenCardsPanel.GUILD);
-				  closeButton.setVisible(false);
-				  scrollpane.revalidate();
-				  scrollpane.setVisible(true);
-			  } else {
-				  controller.chosenGuild(new Structure());
-			  }
-		  //}
+		  // Choose guild to copy
+		  needGuild = controller.needToChooseCopyGuild();
+		  if(!needGuild.isEmpty()) {
+			  fcp.setCards(needGuild);
+			  fcp.setMode(FullscreenCardsPanel.GUILD);
+			  closeButton.setVisible(false);
+			  scrollpane.revalidate();
+			  scrollpane.setVisible(true);
+		  } else {
+			  controller.chosenGuild(new Structure());
+		  }
 
-		  //if(state == CommandMessage.SCIENTIFIC_SYMBOL_TYPE) {
-			  // Choose Science
-			  needScience = controller.needToChooseScienceSymbol();
-			  if(nextScience() != null) scp.setVisible(true);
-		 // }
+		  // Choose Science
+		  needScience = controller.needToChooseScienceSymbol();
+		  if(nextScience() != null) scp.setVisible(true);
+		  
+		  if(state == CommandMessage.END_GAME) {
+			  System.out.println("[VIEW] " + match.getPlayers());
+			  gop.showGUI(match.getPlayers());
+		  }
 	 }
 	
 	//update function that wont cause an infinite loop on receive
@@ -307,10 +313,8 @@ public class MatchPanel extends JPanel implements Runnable {
 		 if(needResources.size() > 0)
 		 return needResources.remove(0);
 		 else {
-			 //if(!pickedResources.isEmpty()) {
-				 controller.resourceChosen(pickedResources);
-				 pickedResources.clear();
-			// }
+			 controller.resourceChosen(pickedResources);
+			 pickedResources.clear();
 			 return null;
 		 }
 	}

@@ -1,4 +1,4 @@
-package view.game;
+package view.menu;
 
 import image.ImageLoadingGUI;
 import image.Images;

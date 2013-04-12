@@ -61,6 +61,7 @@ public class Images {
 		add("tradingpref0Over", "/image/icons/arrow-leftOverlay.png");
 		add("tradingpref1Over", "/image/icons/arrow-rightOverlay.png");
 		add("tradingpref2Over", "/image/icons/randomOverlay.png");
+		add("victory", "/image/icons/victory.png");
 	}
 	
 	private static void add(String name, String path) {
