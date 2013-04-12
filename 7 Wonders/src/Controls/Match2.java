@@ -761,8 +761,8 @@ public class Match2 {
 				if ( age == 5 )
 				{
 					endOfGameSpecialEffects(messages);
-					PlayerInteraction.SettleMilitaryConflicts(getPlayers(), 3);
 					countPlayersVictoryPoints();
+					
 					age += 1;
 					state = CommandMessage.END_GAME;
 				}
@@ -776,17 +776,20 @@ public class Match2 {
 	{	
 		if ( !calcCalled )
 		{
+			PlayerInteraction.SettleMilitaryConflicts(getPlayers(), 3);
 			calcCalled = true;
 			for (Player p : players){
 				
 				//Conflict Tokens
-				p.addVictoryPoints(p.getConflictTokens().getVictoryPoints());
+				p.addVictoryPoints(p.getConflictTokens().getTotalPositive() - p.getConflictTokens().getMinusOneTokens());
 				
 				//Coins
 				p.addVictoryPoints((int)Math.floor(p.getResources().getCoins() / 3));
 				
 				//Scientific
 				p.addVictoryPoints(p.getScientificSymbols().victoryPointsValue());
+				
+				
 			}
 		}
 	}
@@ -798,7 +801,7 @@ public class Match2 {
 			discardAllPlayersCards();
 		if ( turn < 6 )
 			CardHandler.PassCardsToNeighbors(getPlayers(), getAge());
-		if ( turn == 7 || age > 3 )
+		if ( turn == 7 )
 		{
 			for ( Player p: players )
 			{

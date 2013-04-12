@@ -34,11 +34,11 @@ public class ConflictTokens {
 	
 	public int getTotal()
 	{
-		return (1*oneTokens + 3*threeTokens + 5*fiveTokens + -1*minusOneTokens);
+		return (getOneTokens() + (3*getThreeTokens()) + (5*getFiveTokens()) - getMinusOneTokens());
 	}
 	
 	public int getTotalPositive() {
-		return (1*oneTokens + 3*threeTokens + 5*fiveTokens);
+		return (getOneTokens() + (3*getThreeTokens()) + (5*getFiveTokens()));
 	}
 	
 	public void addOneTokens(int amount)

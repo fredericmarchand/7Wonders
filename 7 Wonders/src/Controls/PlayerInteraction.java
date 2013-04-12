@@ -17,13 +17,15 @@ public class PlayerInteraction {
 				if ( age == 1 ) p1.getConflictTokens().addOneTokens(1);
 				if ( age == 2 ) p1.getConflictTokens().addThreeTokens(1);
 				if ( age == 3 ) p1.getConflictTokens().addFiveTokens(1);
+				System.out.println(p1.getUsername() + " " + p1.getConflictTokens().getFiveTokens());
 				p2.getConflictTokens().addMinusOneTokens(1);
 			}
 			else if ( p1.getShields() < p2.getShields() )
 			{
 				if ( age == 1 ) p2.getConflictTokens().addOneTokens(1);
 				if ( age == 2 ) p2.getConflictTokens().addThreeTokens(1);
-				if ( age == 3 ) p2.getConflictTokens().addFiveTokens(1);				
+				if ( age == 3 ) p2.getConflictTokens().addFiveTokens(1);
+				System.out.println(p2.getUsername() + " " + p2.getConflictTokens().getFiveTokens());
 				p1.getConflictTokens().addMinusOneTokens(1);
 			}
 	}
