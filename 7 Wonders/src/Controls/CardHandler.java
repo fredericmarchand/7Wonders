@@ -389,14 +389,14 @@ public class CardHandler {
 		Random r =  new Random();
 		ArrayList<WonderBoard> boards = new ArrayList<WonderBoard>();
 		boards.add(new TheColossusOfRhodes(r.nextInt(2)));
-		boards.add(new TheHangingGardensOfBabylon(1));
-		boards.add(new TheMausoleumOfHalicarnassus(1));
+		boards.add(new TheHangingGardensOfBabylon(r.nextInt(2)));
+		boards.add(new TheMausoleumOfHalicarnassus(r.nextInt(2)));
 		boards.add(new TheStatueOfZeusInOlympia(r.nextInt(2)));
 		boards.add(new TheLighthouseOfAlexandria(r.nextInt(2)));
 		boards.add(new TheTempleOfArtemisInEphesus(r.nextInt(2)));
 		boards.add(new ThePyramidsOfGiza(r.nextInt(2)));
 		
-		//Collections.shuffle(boards);
+		Collections.shuffle(boards);
 		int index = 0;
 		
 		for ( Player p: players )
@@ -432,56 +432,6 @@ public class CardHandler {
 	}
 	
 	public static void main(String[] args) {
-//		ArrayList<Player> players = new ArrayList<Player>();
-//		players.add(new Player());
-//		players.add(new Player());
-//		players.add(new Player());
-//		players.add(new Player());
-//		players.add(new Player());
-//		players.add(new Player());
-//		players.add(new Player());
-//		ArrayList<Structure> deck = BuildAge1Deck(7);
-//		DistributeRandomWonderBoards(players, 1);
-//		DistributeCards(players, deck);
-//		for ( Player p : players )
-//		{
-//			System.out.println("\n" + p.getWonderBoard().getBoardName());
-//			for ( Structure s: p.getCards() )
-//			{
-//				System.out.println(s.getName());
-//			}
-//		}
-//		
-//		PassCardsToNeighbors(players, 2);
-//		
-//		for ( Player p : players )
-//		{
-//			System.out.println("\n" + p.getWonderBoard().getBoardName());
-//			for ( Structure s: p.getCards() )
-//			{
-//				System.out.println(s.getName());
-//			}
-//		}
-//		Random r = new Random();
-//		for ( int i = 0; i<10; ++i )
-//		{
-//			System.out.println(r.nextInt(2));
-//		}
-//		
-		//long n = 235395830;
-		//System.out.println(n&0xFFFF);
-		//CommandMessage msg = new CommandMessage();
-		//msg.setPlayerID(654419);
-		//CommandMessage g = SevenWondersProtocol.decodeCommandMessage(SevenWondersProtocol.encodeCommandMessage(msg));
-		//System.out.println(g.getPlayerID());
-
-		ArrayList< ArrayList<Integer>> cmdMsgMatrix;
-		cmdMsgMatrix = new ArrayList<ArrayList<Integer>>();
-		for(int i = 0; i<10;i++)
-			cmdMsgMatrix.add(new ArrayList<Integer>());
-		cmdMsgMatrix.get(0).add(1, 0);
-		System.out.println(cmdMsgMatrix.get(0).size());
-		
 		
 	}
 
