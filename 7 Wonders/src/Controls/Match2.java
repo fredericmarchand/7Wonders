@@ -761,6 +761,7 @@ public class Match2 {
 				if ( age == 5 )
 				{
 					endOfGameSpecialEffects(messages);
+					PlayerInteraction.SettleMilitaryConflicts(getPlayers(), 3);
 					countPlayersVictoryPoints();
 					age += 1;
 					state = CommandMessage.END_GAME;
