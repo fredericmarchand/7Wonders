@@ -148,8 +148,14 @@ public class ChatFrame extends JFrame {
 	}
 	
 	public void setStart(boolean b){
-		if(b) start.setEnabled(true);
-		else start.setEnabled(false);
+		if(b){
+			start.setEnabled(true);
+			quit.setEnabled(false);
+		}
+		else{
+			start.setEnabled(false);
+			quit.setEnabled(true);
+		}
 	}
 	
 	public void clear(){

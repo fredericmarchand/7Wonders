@@ -119,8 +119,9 @@ public class NetworkListener extends Listener{
 			gameStart = false;
 		}
 		if( o instanceof Packet16ForcefulDisconnect){
-			mclient.getLink().otherClientDisconnect();
 			mclient.quitMatch();
+			mclient.getLink().otherClientDisconnect();
+			
 		}
 		if(o instanceof Packet17ConnectionCount){
 			System.out.println("[CLIENT] Received match info");

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Scanner;
 
-import Controls.Match1;
 import Controls.Match2;
 import Player.User;
 import Resources.Match;
@@ -46,7 +45,7 @@ public class MServer {
 			matchName = (e.getMatch_ID() + " | " + e.getHostUName()  
 					+ "'s match  | " + e.getConnectionCount() +
 					"/" + e.getMaxPlayerCount() + " players");
-			lobbyList.add(matchName);
+			if(e.get_inProgress()==false)lobbyList.add(matchName);
 		}
 		return lobbyList;		
 	}
@@ -174,7 +173,6 @@ public class MServer {
 		kryo.register(Packet17ConnectionCount.class);
 		
 		kryo.register(java.util.ArrayList.class);
-		kryo.register(Match1.class);
 		kryo.register(Match2.class);
 		kryo.register(User.class);
 
