@@ -60,6 +60,7 @@ public class Match2 {
 		CardHandler.DistributeCards(players, age1Deck);
 		addInitialResources(players);
 		calcCalled = false;
+		Collections.shuffle(players);
 	}
 	
 	public int getState()
