@@ -580,7 +580,7 @@ public class Match2 {
 						{
 							if ( se.getID() == BuildDiscardedCard.BuildDiscardedCardID )
 							{
-								if ( !se.isUsedUp() )
+								if ( !se.isUsedUp() && discarded.size() != 0 )
 								{
 									Collections.shuffle(discarded);
 									p.getWonderBoard().buildStructure(s = discarded.remove(0));
