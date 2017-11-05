@@ -40,7 +40,7 @@ public class GameOverPanel extends JPanel {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				
+		               setVisible(false);
 			}
 		});
 	}

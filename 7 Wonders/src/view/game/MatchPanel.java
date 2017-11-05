@@ -123,25 +123,25 @@ public class MatchPanel extends JPanel implements Runnable {
 		if(numplayers > 3) {
 			p4 = match.getRightNeighbor(p2);
 			f1 = new FarPanel(p4);
-			f1.setLocation(getForeignPos(numplayers, 0), 0);
+			f1.setLocation(getForeignPos(numplayers, 4), 0);
 			f1.addMouseListener(buildMouseAdapterFar());
 		}
 		if(numplayers > 4) {
 			p5 = match.getRightNeighbor(p4);
 			f2 = new FarPanel(p5);
-			f2.setLocation(getForeignPos(numplayers, 1), 0);
+			f2.setLocation(getForeignPos(numplayers, 5), 0);
 			f2.addMouseListener(buildMouseAdapterFar());
 		}
 		if(numplayers > 5) {
 			p6 = match.getRightNeighbor(p5);
 			f3 = new FarPanel(p6);
-			f3.setLocation(getForeignPos(numplayers, 2), 0);
+			f3.setLocation(getForeignPos(numplayers, 6), 0);
 			f3.addMouseListener(buildMouseAdapterFar());
 		}
 		if(numplayers > 6) {
 			p7 = match.getRightNeighbor(p6);
 			f4 = new FarPanel(p7);
-			f4.setLocation(getForeignPos(numplayers, 3), 0);
+			f4.setLocation(getForeignPos(numplayers, 7), 0);
 			f4.addMouseListener(buildMouseAdapterFar());
 		}
 		
@@ -426,11 +426,11 @@ public class MatchPanel extends JPanel implements Runnable {
 		};
 	}
 	
-	private int getForeignPos(int numplayers, int index){
+	private int getForeignPos(int numplayers, int index) {
 		if(numplayers == 4) return 480;
-		if(numplayers == 5) return 320 + 320*index;
-		if(numplayers == 6) return 160 + 320*index;
-		if(numplayers == 7) return 320*index;
+		if(numplayers == 5) return 320 + 320 * (numplayers - index);
+		if(numplayers == 6) return 160 + 320 * (numplayers - index);
+		if(numplayers == 7) return 320 * (numplayers - index);
 		return 0;
 	}
 	

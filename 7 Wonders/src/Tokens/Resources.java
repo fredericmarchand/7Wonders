@@ -228,10 +228,10 @@ public class Resources {
 		Resources r = new Resources();
 		r.clay    = a.clay + b.clay + c.clay;
 		r.coins   = a.coins + b.coins + c.coins;
-		r.ore     = a.ore + b.ore + c.coins;
+		r.ore     = a.ore + b.ore + c.ore;
 		r.stone   = a.stone + b.stone + c.stone;
 		r.wood    = a.wood + b.wood + c.wood;
-		r.glass   = a.glass + b.glass + b.glass;
+		r.glass   = a.glass + b.glass + c.glass;
 		r.loom    = a.loom + b.loom + c.loom;
 		r.papyrus = a.papyrus + b.papyrus + c.papyrus;
 		return r;
